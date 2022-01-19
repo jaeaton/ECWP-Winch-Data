@@ -91,17 +91,17 @@
             get => _usecomputertimecheckbox;
             set { _usecomputertimecheckbox = value; OnPropertyChanged(nameof(useComputerTimeCheckBox)); }
         }
-        private bool _unolswirelogbutton;
-        public bool unolsWireLogButton
+        private bool _unolsUDPstringbutton;
+        public bool unolsUDPStringButton
         {
-            get => _unolswirelogbutton;
-            set { _unolswirelogbutton = value; OnPropertyChanged(nameof(unolsWireLogButton)); }
+            get => _unolsUDPstringbutton;
+            set { _unolsUDPstringbutton = value; OnPropertyChanged(nameof(unolsUDPStringButton)); }
         }
-        private bool _mtnwwirelogbutton;
-        public bool mtnwWireLogButton
+        private bool _mtnUDPstringbutton;
+        public bool mtnwUDPStringButton
         {
-            get => _mtnwwirelogbutton;
-            set { _mtnwwirelogbutton = value; OnPropertyChanged(nameof(mtnwWireLogButton)); }
+            get => _mtnUDPstringbutton;
+            set { _mtnUDPstringbutton = value; OnPropertyChanged(nameof(mtnwUDPStringButton)); }
         }
         private string? _directorylabel;
         public string directoryLabel
@@ -109,5 +109,18 @@
             get => _directorylabel;
             set { _directorylabel = value; OnPropertyChanged(nameof(directoryLabel)); }
         }
+        private bool _unolsWireLogButton;
+        public bool unolsWireLogButton
+        {
+            get => _unolsWireLogButton;
+            set { _unolsWireLogButton = value; OnPropertyChanged(nameof(unolsWireLogButton)); }
+        }
+        private bool _mtnwWireLogButton;
+        public bool mtnwWireLogButton
+        {
+            get => _mtnwWireLogButton;
+            set { _mtnwWireLogButton = value; OnPropertyChanged(nameof(mtnwWireLogButton)); }
+        }
+
     }
 }

@@ -83,7 +83,7 @@
         /// <param name="inCheckSum"></param>
         /// <param name="tMWarnings"></param>
         /// <param name="tMAlarms"></param>
-        public DataPointModel(string inID, string inDate, string inTime, string inTension, string inSpeed, string inPayout, string inCheckSum, string tMWarnings, string tMAlarms)
+        public DataPointModel(string inID, string inDate, string inTime, string inTension, string inSpeed, string inPayout, string tMWarnings, string tMAlarms, string inCheckSum)
         {
             StringID = inID;
 

@@ -74,19 +74,18 @@
             //UNOLS String input
             if (strIn[0].Contains("%WIR"))
             {
-                latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6], strIn[7], strIn[8]);
                 if (globalConfig.Log20HzSwitch)
                 {
-                    Write20HzData(latest, globalConfig);
+                    Write20HzDataHeader(data, globalConfig);
                 }
             }
             else if (strIn[0].Contains("%WNC"))
             {
-                
+                WriteWinchLog(data, globalConfig);
             }
             else if (strIn[0].Contains("$WNC"))
             {
-
+                WriteWinchLog(data, globalConfig);
             }
             else
             {
@@ -150,31 +149,60 @@
         private static void Write20HzData(DataPointModel data, GlobalConfigModel globalConfig)
         {
             // Write Data to files
-            string fileName = globalConfig.Minimal20HzLogFileName;
-            string destPath = Path.Combine(globalConfig.SaveDirectory, fileName);
-            string line = $"{ data.Date }, { data.Time }, { data.Tension }, { data.Speed }, { data.Payout }";
+            string line;
+            string destPath;
+            string fileName;
+            if (!globalConfig.LogUnolsSwitch)
+            {
+                fileName = globalConfig.Minimal20HzLogFileName;
+                destPath = Path.Combine(globalConfig.SaveDirectory, fileName);
+                line = $"{ data.Date }, { data.Time }, { data.Tension }, { data.Speed }, { data.Payout }";
+            }
+            else
+            {
+                fileName = globalConfig.UnolsWireLogName;
+                destPath = Path.Combine(globalConfig.SaveDirectory, fileName);
+                line = $"{ data.StringID }, { data.Date }, { data.Time }, { data.Tension }, { data.Speed }, { data.Payout }, { data.TMWarnings }, { data.TMAlarms }, { data.CheckSum }";
+            }
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
             {
                 stream.WriteLine(line);
             }
+
         }
-        private static void WriteWinchLog()
+        private static void Write20HzDataHeader(string data, GlobalConfigModel globalConfig)
         {
             // Write Data to files
-            //string fileName = globalConfig.Minimal20HzLogFileName;
-            //string destPath = Path.Combine(globalConfig.SaveDirectory, fileName);
-            //string line = $"{ data.Date }, { data.Time }, { data.Tension }, { data.Speed }, { data.Payout }";
-            //using (StreamWriter stream = new StreamWriter(destPath, append: true))
-            //{
-            //    stream.WriteLine(line);
-            //}
+            string line;
+            string destPath;
+            string fileName;
+                fileName = globalConfig.UnolsWireLogName;
+                destPath = Path.Combine(globalConfig.SaveDirectory, fileName);
+                line = data;
+            
+            using (StreamWriter stream = new StreamWriter(destPath, append: true))
+            {
+                stream.WriteLine(line);
+            }
+
+        }
+        private static void WriteWinchLog(string data, GlobalConfigModel globalConfig)
+        {
+            //Write Data to files
+            string fileName = globalConfig.Minimal20HzLogFileName;
+            string destPath = Path.Combine(globalConfig.SaveDirectory, fileName);
+            string line = data;
+            using (StreamWriter stream = new StreamWriter(destPath, append: true))
+            {
+                stream.WriteLine(line);
+            }
         }
         private static void Send20HzData(DataPointModel data, GlobalConfigModel globalConfig)
         {
             //Format string based on format selection
             string line;
             //If UNOLS Format
-            if (globalConfig.UNOLSLogFormatSet)
+            if (globalConfig.UnolsUdpFormatSet)
             {
                 line = $"WIR,{ data.Date },{ data.Time },{ data.Tension },{ data.Speed },{ data.Payout },{ data.TMWarnings},{data.TMAlarms},";
             }

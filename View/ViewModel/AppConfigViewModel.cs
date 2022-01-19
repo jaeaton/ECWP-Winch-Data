@@ -60,15 +60,22 @@
                 globalConfig.SaveDirectorySet = true;
                 FileOperationsViewModel.SetFileNames(globalConfig);
             }
+            if ((bool)_configDataStore.unolsUDPStringButton)
+            {
+                globalConfig.UnolsUdpFormatSet = true;
+            }
+            if ((bool)_configDataStore.mtnwUDPStringButton)
+            {
+                globalConfig.UnolsUdpFormatSet = false;
+            }
             if ((bool)_configDataStore.unolsWireLogButton)
             {
-                globalConfig.UNOLSLogFormatSet = true;
+                globalConfig.LogUnolsSwitch = true;
             }
             if ((bool)_configDataStore.mtnwWireLogButton)
             {
-                globalConfig.UNOLSLogFormatSet = false;
+                globalConfig.LogUnolsSwitch = false;
             }
-
             return globalConfig;
 
         }

@@ -8,7 +8,10 @@
             DateTime dateTime = DateTime.Now;
             //string stringDateTime = dateTime.ToString("yyyyMMddTHHmmssfff");
             string dateAndHour = dateTime.ToString("yyyyMMddHH");
-            globalConfig.Minimal20HzLogFileName = $"{ dateAndHour }_{ globalConfig.CruiseInformation.CruiseName }_cast_{ globalConfig.CruiseInformation.CastNumber }.log";
+            string dateOnly = dateTime.ToString("yyyyMMdd");
+            globalConfig.Minimal20HzLogFileName = $"{ dateAndHour }_{ globalConfig.CruiseInformation.CruiseName }_cast_{ globalConfig.CruiseInformation.CastNumber }_short.log";
+            globalConfig.UnolsWireLogName = $"{ dateAndHour }_{ globalConfig.CruiseInformation.CruiseName }_cast_{ globalConfig.CruiseInformation.CastNumber }_UNOLS.log";
+            globalConfig.UnolsWinchLogName = $"{ dateOnly }_Winch.log";
             globalConfig.MaxLogFileName = $"{ dateTime.ToString("yyyy") }_{ globalConfig.CruiseInformation.CruiseName }.log";
             return globalConfig;
         }
@@ -33,7 +36,8 @@
                 $"Log Max Values,{ globalConfig.LogMaxValuesSwitch }",
                 $"Use Computer Time,{ globalConfig.UseComputerTimeSwitch }",
                 $"Save Location,{ globalConfig.SaveDirectory }",
-                $"UNOLS String, { globalConfig.UNOLSLogFormatSet }"
+                $"UNOLS String, { globalConfig.UnolsUdpFormatSet }",
+                $"UNOLS File Format, {globalConfig.LogUnolsSwitch }"
                 };
             //Write each line of array using stream writer
             using (StreamWriter stream = new StreamWriter(destPath))
@@ -110,6 +114,22 @@
                         }
                         if (line.Substring(0, delim) == "UNOLS String")
                         {
+                            _configDataStore.unolsUDPStringButton = bool.Parse(line.Substring(delim + 1));
+                            if (!(bool)_configDataStore.unolsUDPStringButton)
+                            {
+                                //if UNOLS format is not selected, select MTNW formate
+                                _configDataStore.unolsUDPStringButton = false;
+                                _configDataStore.mtnwUDPStringButton = true;
+                            }
+                            if ((bool)_configDataStore.unolsUDPStringButton)
+                            {
+                                //Select UNOLS format
+                                _configDataStore.mtnwUDPStringButton = false;
+                                _configDataStore.unolsUDPStringButton = true;
+                            }
+                        }
+                        if (line.Substring(0, delim) == "UNOLS File Format")
+                        {
                             _configDataStore.unolsWireLogButton = bool.Parse(line.Substring(delim + 1));
                             if (!(bool)_configDataStore.unolsWireLogButton)
                             {
@@ -124,6 +144,7 @@
                                 _configDataStore.unolsWireLogButton = true;
                             }
                         }
+
                     }
                     GlobalConfigModel globalConfig = new GlobalConfigModel();
                     //update global config to the parameters loaded

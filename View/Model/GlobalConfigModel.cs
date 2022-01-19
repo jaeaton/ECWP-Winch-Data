@@ -18,11 +18,12 @@ namespace Model
         public bool UDPSwitch { get; set; } = new bool();
         public bool Log20HzSwitch { get; set; } = new bool();
         public bool LogUnolsSwitch { get; set; } = new bool();
+        //public bool LogShortSwitch { get; set; } = new bool();
         public bool LogMaxValuesSwitch { get; set; } = new bool();
         public bool UseComputerTimeSwitch { get; set; } = new bool();
         public string? SaveDirectory { get; set; }
         public bool SaveDirectorySet { get; set; } = new bool();
-        public bool UNOLSLogFormatSet { get; set; } = new bool();
+        public bool UnolsUdpFormatSet { get; set; } = new bool();
 
     }
 }
