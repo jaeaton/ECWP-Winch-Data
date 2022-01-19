@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="Views.UserControl1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Views"
+             Loaded="UserControl_Loaded"
+             mc:Ignorable="d" 
+             d:DesignHeight="420" d:DesignWidth="210">
+    <Grid Focusable="True" >
+        
+        <StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="2" Background="AliceBlue">
+            <Label Content="Data Source" Width="100"></Label>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="2" Background="AliceBlue">
+            <Label Content="IP Address" Width="100" ></Label>
+                <TextBox Text="{ Binding Path=ipAddressInputSourceBox,FallbackValue='192.168.140.210',Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,PresentationTraceSources.TraceLevel=High}" Width="100" VerticalAlignment="Center"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="2" Background="AliceBlue">
+            <Label Content="Port Number" Width="100" ></Label>
+                <TextBox x:Name="TextBoxSourcePort" Text="{Binding Path=portInputSourceBox,FallbackValue='50505',Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="100" VerticalAlignment="Center"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="2" Background="LavenderBlush">
+            <Label Content="Data Destination" Width="100"></Label>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="2" Background="LavenderBlush">
+            <Label Content="IP Address" Width="100" ></Label>
+                <TextBox x:Name="TextBoxDestinationIPAdress" Text="{Binding Path=ipAddressInputDestinationBox,FallbackValue='192.168.1.121',Mode=TwoWay}" Width="100" VerticalAlignment="Center"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="2" Background="LavenderBlush">
+            <Label Content="Port Number" Width="100" ></Label>
+                <TextBox x:Name="TextBoxDestinationPort" Text="{Binding Path=portInputDestinationBox,FallbackValue='50000',Mode=TwoWay}" Width="100" VerticalAlignment="Center"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="2" Background="MintCream">
+            <Label Content="Cruise Info" Width="100"></Label>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="2" Background="MintCream">
+            <Label Content="Cruise Name" Width="100" ></Label>
+            <TextBox x:Name="TextBoxCruiseName" Text="{Binding Path=cruiseNameBox,FallbackValue=OC123,Mode=TwoWay}" Width="100" VerticalAlignment="Center"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="2" Background="MintCream">
+            <Label Content="Cast Number" Width="100" ></Label>
+            <TextBox x:Name="TextBoxCastNumber" Text="{Binding Path=castNumberBox,FallbackValue=1,Mode=TwoWay}" Width="100" VerticalAlignment="Center"></TextBox>
+        </StackPanel>
+            <CheckBox x:Name="CheckBoxUseComputerTime" Content="Use Computer Time" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,0,50,0" IsChecked="{Binding Path=useComputerTimeCheckBox,FallbackValue='False',Mode=TwoWay}">
+            <CheckBox.Resources>
+                <Style TargetType="{x:Type Path}">
+                    <Setter Property="FlowDirection" Value="LeftToRight"/>
+                </Style>
+            </CheckBox.Resources>
+        </CheckBox>
+        <CheckBox x:Name="CheckBoxSendUDP" Content="Send UDP Data" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding Path=sendDataCheckBox,FallbackValue='False'}">
+            <CheckBox.Resources>
+                <Style TargetType="{x:Type Path}">
+                    <Setter Property="FlowDirection" Value="LeftToRight"/>
+                </Style>
+            </CheckBox.Resources>
+        </CheckBox>
+        <CheckBox x:Name="CheckBoxLogMax" Content="Log Max Data" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding Path=logMaxDataCheckBox, FallbackValue='True'}">
+            <CheckBox.Resources>
+                <Style TargetType="{x:Type Path}">
+                    <Setter Property="FlowDirection" Value="LeftToRight"/>
+                </Style>
+            </CheckBox.Resources>
+        </CheckBox>
+        <CheckBox x:Name="CheckBoxLog20Hz" Content="Log 20Hz Data" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding Path=log20HzDataCheckBox,FallbackValue='False'}">
+            <CheckBox.Resources>
+                <Style TargetType="{x:Type Path}">
+                    <Setter Property="FlowDirection" Value="LeftToRight"/>
+                </Style>
+            </CheckBox.Resources>
+        </CheckBox>
+            <RadioButton Content="MTNW Format"  FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,15,50,0" GroupName="logFormat"  IsChecked="{Binding Path=mtnwWireLogButton, FallbackValue='False'}"></RadioButton>
+            <RadioButton Content="UNOLS Format" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,2,50,0" GroupName="logFormat" IsChecked="{Binding Path=unolsWireLogButton, FallbackValue='True'}"></RadioButton>
+        <StackPanel Orientation="Horizontal" Margin="2">
+            <Label Width="100"></Label>
+            <Button Content="Save Parameters" Width="100" Click="Button_Click"></Button>
+        </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

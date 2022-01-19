@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="Views.DataDisplay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Views"
+             xmlns:lc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF" 
+             xmlns:controls="clr-namespace:Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="FloralWhite">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="25"/>
+        </Grid.RowDefinitions>
+        <controls:ChartView/>
+        <!--<lc:CartesianChart x:Name="Chart"  Series="{ Binding Path=Series }"/>-->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+            <Label Content="Tension" FontSize="18"></Label>
+            <Label Content="{Binding Path=tension, FallbackValue=00000}" HorizontalContentAlignment="Right" FontSize="18" Width="70"></Label>
+            <Label Content="LBF" FontSize="18"></Label>
+            <Label Content="Speed" FontSize="18"></Label>
+            <Label Content="{Binding Path=speed, FallbackValue=000}" HorizontalContentAlignment="Right" Width="50" FontSize="18"></Label>
+            <Label Content="M/S" FontSize="18"></Label>
+            <Label Content="Payout" FontSize="18"></Label>
+            <Label Content="{Binding Path=payout, FallbackValue=0000}" HorizontalContentAlignment="Right" Width="60" FontSize="18"></Label>
+            <Label Content="M" FontSize="18"></Label>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2">
+            <Label Content="Max Tension"></Label>
+            <Label Content="{Binding Path=maxTension, FallbackValue=00000}" Width="50" HorizontalContentAlignment="Right"></Label>
+            <Label Content="LBF"></Label>
+            <Label Content="Max Speed"></Label>
+            <Label Content="{Binding Path=maxSpeed, FallbackValue=000}" Width="35" HorizontalContentAlignment="Right"></Label>
+            <Label Content="M/S"></Label>
+            <Label Content="Max Payout"></Label>
+            <Label Content="{Binding Path=maxPayout, FallbackValue=0000}" Width="40" HorizontalContentAlignment="Right"></Label>
+            <Label Content="M"></Label>
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

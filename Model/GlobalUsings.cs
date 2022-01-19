@@ -1,0 +1,19 @@
+﻿global using System;
+global using System.Collections.Generic;
+global using System.Collections.ObjectModel;
+global using System.Linq;
+global using System.Text;
+global using System.Threading.Tasks;
+global using System.Windows;
+global using System.IO;
+global using System.Net;
+global using System.Net.Sockets;
+global using System.Threading;
+global using Microsoft.Win32;
+global using LiveChartsCore;
+global using LiveChartsCore.Defaults;
+global using LiveChartsCore.SkiaSharpView;
+
+global using Model;
+global using View;
+global using ViewModel;
