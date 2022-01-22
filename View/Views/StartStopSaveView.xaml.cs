@@ -52,8 +52,6 @@
                     {
                         try
                         {
-
-
                             //Set cancellation token to cancel to stop data collection
                             _canceller.Cancel();
                         }
