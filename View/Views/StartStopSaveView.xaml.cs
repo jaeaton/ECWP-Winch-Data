@@ -49,9 +49,18 @@
             switch (StartStopButton.Content)
             {
                 case "Stop Log":
-                    {;
-                        //Set cancellation token to cancel to stop data collection
-                        _canceller.Cancel();
+                    {
+                        try
+                        {
+
+
+                            //Set cancellation token to cancel to stop data collection
+                            _canceller.Cancel();
+                        }
+                        catch (ObjectDisposedException ex)
+                        {
+
+                        }
                         //Change button text
                         StartStopButton.Content = "Start Log";
                         

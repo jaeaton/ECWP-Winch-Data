@@ -11,19 +11,49 @@
             
             string dataIn;
             TcpClient client = new TcpClient();
+            //client.ReceiveTimeout = 20000;
             //Check to see if TCP client is connected and if not connect
-            if (!client.Connected)
+            try
             {
-                client.Connect(IPAddress.Parse(globalConfig.ReceiveCommunication.IPAddress), int.Parse(globalConfig.ReceiveCommunication.PortNumber));
+
+
+                if (!client.Connected)
+                {
+                    if (!client.ConnectAsync(IPAddress.Parse(globalConfig.ReceiveCommunication.IPAddress), int.Parse(globalConfig.ReceiveCommunication.PortNumber)).Wait(5000))
+                    {
+                        // connection failure
+                        MessageBox.Show("Failed to connect to TCP Server");
+                    }
+                    //client.Connect(IPAddress.Parse(globalConfig.ReceiveCommunication.IPAddress), int.Parse(globalConfig.ReceiveCommunication.PortNumber));
+                }
+            }
+            //catch (IOException e)
+            //{
+            //    MessageBox.Show($"IOException: { e.Message }");
+            //}
+            catch (ArgumentNullException e)
+            {
+                MessageBox.Show($"ArgumentNullException: { e.Message }");
+            }
+            catch (SocketException e)
+            {
+                MessageBox.Show($"SocketException: { e.Message }");
+            }
+            catch (ObjectDisposedException e)
+            {
+                MessageBox.Show($"ObjectDisposeException: { e.Message }");
             }
             //Looks for cancellation token to stop data collection
-            while (!StartStopSaveView._canceller.Token.IsCancellationRequested)
+            if (client.Connected)
             {
-                //Asynchronious read of data to allow for other operations to occur
-                dataIn = await Task.Run(() => ReadTCPData(client));
-                //read data
-                ParseData(dataIn, globalConfig);
+                while (!StartStopSaveView._canceller.Token.IsCancellationRequested)
+                {
+                    //Asynchronious read of data to allow for other operations to occur
+                    dataIn = await Task.Run(() => ReadTCPData(client));
+                    //read data
+                    ParseData(dataIn, globalConfig);
 
+                }
             }
             //Close TCP client
             client.Close();
