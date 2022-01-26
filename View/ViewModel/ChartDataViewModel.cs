@@ -43,6 +43,7 @@
                 {
                     //MinLimit = 0,
                     //MaxLimit = (DataHandlingViewModel.maxData.MaxTension.Tension + 100)
+                    //MaxLimit = 6000
                 }
             };
         }
