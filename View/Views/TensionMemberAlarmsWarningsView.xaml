@@ -1,0 +1,106 @@
+﻿<UserControl x:Class="Views.TensionMemberAlarmsWarningsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ViewModel"
+             xmlns:app="clr-namespace:Winch_Data"
+             mc:Ignorable="d" 
+             d:DesignHeight="325" d:DesignWidth="100">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="local:LedControl">
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="BorderBrush" Value="Black"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="local:LedControl">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid Background="Transparent" Name="grd"
+                            Margin="{TemplateBinding Padding}"
+                            VerticalAlignment="Stretch" 
+                            Width="{Binding Path=ActualHeight, Mode=OneWay, RelativeSource={RelativeSource Self}}">
+
+                                    <Ellipse x:Name="LedBorder" 
+                                    Fill="{TemplateBinding Background}"
+                                    Stroke="{TemplateBinding BorderBrush}"
+                                    StrokeThickness="2"
+                                    Stretch="Uniform"/>
+
+                                    <Ellipse x:Name="CenterGlow" Stretch="Uniform">
+                                        <Ellipse.Fill>
+                                            <RadialGradientBrush>
+                                                <GradientStop Color="White" Offset="-0.25"/>
+                                                <GradientStop Color="Transparent" Offset="0.91"/>
+                                            </RadialGradientBrush>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+
+                                    <Ellipse x:Name="CornerLight" Stretch="Uniform" Margin="2">
+                                        <Ellipse.Fill>
+                                            <RadialGradientBrush Center="0.15 0.15" RadiusX="0.5" RadiusY="0.5">
+                                                <GradientStop Color="White" Offset="0"/>
+                                                <GradientStop Color="Transparent" Offset="1"/>
+                                            </RadialGradientBrush>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                </Grid>
+
+                                <ContentPresenter x:Name="content" Grid.Column="1" Margin="4,0,0,0"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            RecognizesAccessKey="True"/>
+
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="true">
+                                    <Setter TargetName="LedBorder" Property="Fill" Value="{Binding Path=OnColor, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    <Setter TargetName="content" Property="TextElement.Foreground" Value="{Binding Path=OnColor, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                </Trigger>
+
+                                <Trigger Property="IsChecked" Value="false">
+                                    <Setter TargetName="LedBorder" Property="Fill" Value="{Binding Path=OffColor, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                    <Setter TargetName="content" Property="TextElement.Foreground" Value="{Binding Path=OffColor, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                </Trigger>
+
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter TargetName="CenterGlow" Property="Fill">
+                                        <Setter.Value>
+                                            <RadialGradientBrush Opacity="1">
+                                                <GradientStop Color="Transparent" Offset="-0.5" />
+                                                <GradientStop Color="#888" Offset="1" />
+                                            </RadialGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Setter TargetName="content" Property="TextElement.Foreground" Value="#888"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Background="White">
+        <StackPanel>
+            <Label Content="Warnings"/>
+            <local:LedControl Content="Tension" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" IsEnabled="False" IsChecked="False"/>
+            <local:LedControl Content="Payout" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" IsEnabled="False" IsChecked="False"/>
+            <local:LedControl Content="Speed" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" IsEnabled="False" IsChecked="False"/>
+            <local:LedControl Content="Event" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" IsEnabled="False" IsChecked="False"/>
+            <local:LedControl Content="Render" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" IsEnabled="False" IsChecked="False"/>
+            <Label Content="Alarms"/>
+            <local:LedControl Content="Tension" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" IsEnabled="False" IsChecked="False"/>
+            <local:LedControl Content="Payout" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" IsEnabled="False" IsChecked="False"/>
+            <local:LedControl Content="Speed" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" IsEnabled="False" IsChecked="False"/>
+            <local:LedControl Content="Load Pin" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" IsEnabled="False" IsChecked="False"/>
+            <local:LedControl Content="Counter" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" IsEnabled="False" IsChecked="False"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

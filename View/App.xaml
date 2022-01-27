@@ -5,5 +5,7 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
+        
+        
     </Application.Resources>
 </Application>
