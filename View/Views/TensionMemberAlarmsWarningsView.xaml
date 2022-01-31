@@ -89,13 +89,13 @@
     </UserControl.Resources>
     <Grid Background="White">
         <StackPanel>
-            <Label Content="Warnings"/>
+            <Label Content="Warnings" FontWeight="Bold"/>
             <local:LedControl Content="Tension" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" IsEnabled="False" IsChecked="False"/>
             <local:LedControl Content="Payout" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" IsEnabled="False" IsChecked="False"/>
             <local:LedControl Content="Speed" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" IsEnabled="False" IsChecked="False"/>
             <local:LedControl Content="Event" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" IsEnabled="False" IsChecked="False"/>
             <local:LedControl Content="Render" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" IsEnabled="False" IsChecked="False"/>
-            <Label Content="Alarms"/>
+            <Label Content="Alarms" FontWeight="Bold"/>
             <local:LedControl Content="Tension" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" IsEnabled="False" IsChecked="False"/>
             <local:LedControl Content="Payout" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" IsEnabled="False" IsChecked="False"/>
             <local:LedControl Content="Speed" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" IsEnabled="False" IsChecked="False"/>
