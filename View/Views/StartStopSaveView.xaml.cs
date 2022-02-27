@@ -61,23 +61,31 @@
                         }
                         //Change button text
                         UserInputsView._configDataStore.startStopButtonText = "Start Log";
+                        UserInputsView._configDataStore.userInputsEnable = true;
                         break;
                     }
                 default:
                     {
-                        //If the save directory is not set show popup
-                        if (UserInputsView.globalConfig.SaveDirectorySet == false)
+                        if (UserInputsView._configDataStore.log20HzDataCheckBox ||  UserInputsView._configDataStore.logMaxDataCheckBox)
                         {
-                            MessageBox.Show("Set save location before colecting data");
-                            break;
+                            //If the save directory is not set show popup
+                            if (UserInputsView.globalConfig.SaveDirectorySet == false )
+                            {
+                                MessageBox.Show("Set save location before colecting data");
+                                break;
+                            }
+
                         }
+                        
+                        
                         //Create new cancellation token at start of data collection
                         _canceller = new CancellationTokenSource();
                         //Starts Data collection on first press
                         DataHandlingViewModel.GetDataAsync(UserInputsView.globalConfig);
                         //change button text
                         UserInputsView._configDataStore.startStopButtonText =  "Stop Log";
-                        
+                        UserInputsView._configDataStore.userInputsEnable = false;
+
                         break;
                     }
             }
@@ -85,42 +93,7 @@
         private void ButtonStartLog_Click(object sender, RoutedEventArgs e)
         {
             StartStop();
-            ////Write Start and Stop Logic
-            //switch (StartStopButton.Content)
-            //{
-            //    case "Stop Log":
-            //        {
-            //            try
-            //            {
-            //                //Set cancellation token to cancel to stop data collection
-            //                _canceller.Cancel();
-            //            }
-            //            catch (ObjectDisposedException ex)
-            //            {
-
-            //            }
-            //            //Change button text
-            //            StartStopButton.Content = "Start Log";
-                        
-            //            break;
-            //        }
-            //    default:
-            //        {
-            //            //If the save directory is not set show popup
-            //            if (UserInputsView.globalConfig.SaveDirectorySet == false)
-            //            {
-            //                MessageBox.Show("Set save location before colecting data");
-            //                break;
-            //            }
-            //            //Create new cancellation token at start of data collection
-            //            _canceller = new CancellationTokenSource();
-            //            //Starts Data collection on first press
-            //            DataHandlingViewModel.GetDataAsync(UserInputsView.globalConfig);
-            //            //change button text
-            //            StartStopButton.Content = "Stop Log";
-            //            break;
-            //        }
-            //}
+            
         }
     }
 }

@@ -127,6 +127,13 @@
             get => _startStopButtonText;
             set { _startStopButtonText = value; OnPropertyChanged(nameof(startStopButtonText)); }
         }
+        
+        private bool _userInputsEnable;
+        public bool userInputsEnable
+        {
+            get => _userInputsEnable;
+            set { _userInputsEnable = value; OnPropertyChanged(nameof(userInputsEnable)); }
+        }
 
     }
 }

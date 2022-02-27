@@ -14,6 +14,8 @@
             _configDataStore = new ConfigDataStore();
             
             this.DataContext = _configDataStore;
+            _configDataStore.userInputsEnable = true;
+            _configDataStore.startStopButtonText = "Start Log";
             
             
         }
