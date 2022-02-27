@@ -121,6 +121,12 @@
             get => _mtnwWireLogButton;
             set { _mtnwWireLogButton = value; OnPropertyChanged(nameof(mtnwWireLogButton)); }
         }
+        private string? _startStopButtonText;
+        public string? startStopButtonText
+        {
+            get => _startStopButtonText;
+            set { _startStopButtonText = value; OnPropertyChanged(nameof(startStopButtonText)); }
+        }
 
     }
 }

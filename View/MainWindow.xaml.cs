@@ -9,7 +9,7 @@
         {
             InitializeComponent();
             //Set the windows data context for data binding
-            this.DataContext = UserControl1._configDataStore;
+            this.DataContext = UserInputsView._configDataStore;
         }
     }
 }

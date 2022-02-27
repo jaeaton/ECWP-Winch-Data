@@ -40,7 +40,7 @@
             <Label Content="m"></Label>
 
         </StackPanel>
-        <Label Grid.Row="3" Content="{Binding Path=rawData, FallbackValue='Received String'}" HorizontalAlignment="Center"/>
+        <Label Grid.Row="3" Content="{Binding Path=rawWireData, FallbackValue='Received String'}" HorizontalAlignment="Center"/>
 
     </Grid>
 </UserControl>

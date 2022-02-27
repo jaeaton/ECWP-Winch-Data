@@ -14,7 +14,9 @@
         public string payout { get { return _payout; } set { _payout = value;OnPropertyChanged(nameof(payout)); } }
         private string _maxPayout;
         public string maxPayout { get { return _maxPayout; } set { _maxPayout = value; OnPropertyChanged(nameof(maxPayout)); } }
-        private string _rawData;
-        public string rawData { get { return _rawData; } set { _rawData = value;OnPropertyChanged(nameof(rawData)); } }
+        private string _rawWireData;
+        public string rawWireData { get { return _rawWireData; } set { _rawWireData = value;OnPropertyChanged(nameof(rawWireData)); } }
+        private string _rawWinchData;
+        public string rawWinchData { get { return _rawWinchData; } set { _rawWinchData = value; OnPropertyChanged(nameof(rawWinchData)); } }
     }
 }

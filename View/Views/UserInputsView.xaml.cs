@@ -1,13 +1,13 @@
 ﻿namespace Views
 {
     /// <summary>
-    /// Interaction logic for UserControl1.xaml
+    /// Interaction logic for UserInputsView.xaml
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class UserInputsView : UserControl
     {
         public static ConfigDataStore _configDataStore;
         public static GlobalConfigModel globalConfig = new GlobalConfigModel();
-        public UserControl1()
+        public UserInputsView()
         {
             
             InitializeComponent();
@@ -39,7 +39,7 @@
             //Check for valid filename constructor
             // Show the save file dialog
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            //ConfigDataStore _configDataStore = UserControl1._configDataStore;
+            //ConfigDataStore _configDataStore = UserInputsView._configDataStore;
             //build the save file name
             //DateTime dateTime = DateTime.Now;
             //string stringDateTime = dateTime.ToString("yyyyMMddTHHmmssfff");

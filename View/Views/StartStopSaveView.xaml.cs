@@ -23,28 +23,28 @@
                 "1) The program saves a config file and loads it on start up. This can speed up the set up process after it has been set for a cruise. It is a human readable text file in the program's directory.\n" +
                 "2) Max log file should be continuos for a given cruise. Each time the Log Max button is pressed a new entry is added. If the cast number is changed to a lower number it will not overwrite the previous entry.\n" +
                 "3) \n\n" +
-                "V1.0");
+                "V1.4");
         }
 
         private void ButtonSaveLocation_Click(object sender, RoutedEventArgs e)
         {
 
-            UserControl1.SetFileNames();
+            UserInputsView.SetFileNames();
 
         }
 
         private void ButtonLogMax_Click(object sender, RoutedEventArgs e)
         {
             //Write the max data for the cast
-            DataHandlingViewModel.WriteMaxData(UserControl1.globalConfig);
+            DataHandlingViewModel.WriteMaxData(UserInputsView.globalConfig);
             //Increase the cast count
-            UserControl1._configDataStore.castNumberBox = (int.Parse(UserControl1._configDataStore.castNumberBox)+1).ToString();
-            UserControl1.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(UserControl1._configDataStore);
+            UserInputsView._configDataStore.castNumberBox = (int.Parse(UserInputsView._configDataStore.castNumberBox)+1).ToString();
+            UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(UserInputsView._configDataStore);
             
         }
-
-        private void ButtonStartLog_Click(object sender, RoutedEventArgs e)
+        public void StartStop()
         {
+
             //Write Start and Stop Logic
             switch (StartStopButton.Content)
             {
@@ -60,14 +60,13 @@
 
                         }
                         //Change button text
-                        StartStopButton.Content = "Start Log";
-                        
+                        UserInputsView._configDataStore.startStopButtonText = "Start Log";
                         break;
                     }
                 default:
                     {
                         //If the save directory is not set show popup
-                        if (UserControl1.globalConfig.SaveDirectorySet == false)
+                        if (UserInputsView.globalConfig.SaveDirectorySet == false)
                         {
                             MessageBox.Show("Set save location before colecting data");
                             break;
@@ -75,12 +74,53 @@
                         //Create new cancellation token at start of data collection
                         _canceller = new CancellationTokenSource();
                         //Starts Data collection on first press
-                        DataHandlingViewModel.GetDataAsync(UserControl1.globalConfig);
+                        DataHandlingViewModel.GetDataAsync(UserInputsView.globalConfig);
                         //change button text
-                        StartStopButton.Content = "Stop Log";
+                        UserInputsView._configDataStore.startStopButtonText =  = "Stop Log";
+                        
                         break;
                     }
             }
+        }
+        private void ButtonStartLog_Click(object sender, RoutedEventArgs e)
+        {
+            StartStop();
+            ////Write Start and Stop Logic
+            //switch (StartStopButton.Content)
+            //{
+            //    case "Stop Log":
+            //        {
+            //            try
+            //            {
+            //                //Set cancellation token to cancel to stop data collection
+            //                _canceller.Cancel();
+            //            }
+            //            catch (ObjectDisposedException ex)
+            //            {
+
+            //            }
+            //            //Change button text
+            //            StartStopButton.Content = "Start Log";
+                        
+            //            break;
+            //        }
+            //    default:
+            //        {
+            //            //If the save directory is not set show popup
+            //            if (UserInputsView.globalConfig.SaveDirectorySet == false)
+            //            {
+            //                MessageBox.Show("Set save location before colecting data");
+            //                break;
+            //            }
+            //            //Create new cancellation token at start of data collection
+            //            _canceller = new CancellationTokenSource();
+            //            //Starts Data collection on first press
+            //            DataHandlingViewModel.GetDataAsync(UserInputsView.globalConfig);
+            //            //change button text
+            //            StartStopButton.Content = "Stop Log";
+            //            break;
+            //        }
+            //}
         }
     }
 }
