@@ -50,6 +50,7 @@
                 {
                     //Asynchronious read of data to allow for other operations to occur
                     dataIn = await Task.Run(() => ReadTCPData(client));
+                    //_liveData.rawData = dataIn;
                     //read data
                     ParseData(dataIn, globalConfig);
 
@@ -121,17 +122,20 @@
             {
                 if (strIn.Length == 9 && strIn[0].Contains("$WIR"))
                 {
+                    _liveData.rawData = data;
                     latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6], strIn[7], strIn[8]);
                 }
                 //MTNW Legacy input (does not include date and time)
                 else if (strIn.Length == 5 && strIn[0].Contains("RD"))
                 {
                     getTime = true;
+                    _liveData.rawData = data;
                     latest = new DataPointModel(strIn[0], "", "", strIn[1], strIn[2], strIn[3], strIn[4]);
                 }
                 //MTNW 1 input  (Includes date and time)
                 else if (strIn.Length == 7 && strIn.Contains("RD"))
                 {
+                    _liveData.rawData = data;
                     latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);
                 }
                 //DataPointModel latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);
@@ -219,7 +223,7 @@
         private static void WriteWinchLog(string data, GlobalConfigModel globalConfig)
         {
             //Write Data to files
-            string fileName = globalConfig.Minimal20HzLogFileName;
+            string fileName = globalConfig.UnolsWinchLogName;
             string destPath = Path.Combine(globalConfig.SaveDirectory, fileName);
             string line = data;
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
