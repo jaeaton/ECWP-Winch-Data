@@ -76,7 +76,7 @@
                         //Starts Data collection on first press
                         DataHandlingViewModel.GetDataAsync(UserInputsView.globalConfig);
                         //change button text
-                        UserInputsView._configDataStore.startStopButtonText =  = "Stop Log";
+                        UserInputsView._configDataStore.startStopButtonText =  "Stop Log";
                         
                         break;
                     }
