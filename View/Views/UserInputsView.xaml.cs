@@ -17,7 +17,7 @@
             _configDataStore.userInputsEnable = true;
             _configDataStore.startStopButtonText = "Start Log";
             
-            
+
         }
 
         public void Button_Click(object sender, RoutedEventArgs e)
