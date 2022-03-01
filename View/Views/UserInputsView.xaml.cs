@@ -53,13 +53,20 @@
             globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(_configDataStore);
             globalConfig = (GlobalConfigModel)FileOperationsViewModel.SetFileNames(globalConfig);
             FileOperationsViewModel.SetFileNames(globalConfig);
-            if ((bool)globalConfig.LogMaxValuesSwitch)
+            if (globalConfig.LogMaxValuesSwitch)
             {
                 saveFileDialog.FileName = globalConfig.MaxLogFileName;
             }
-            if ((bool)globalConfig.Log20HzSwitch)
+            if (globalConfig.Log20HzSwitch)
             {
-                saveFileDialog.FileName = globalConfig.Minimal20HzLogFileName;
+                if (!globalConfig.LogUnolsSwitch)
+                {
+                    saveFileDialog.FileName = globalConfig.Minimal20HzLogFileName;
+                }
+                else
+                {
+                    saveFileDialog.FileName = globalConfig.UnolsWireLogName;
+                }
             }
 
             if (saveFileDialog.ShowDialog() == true)
