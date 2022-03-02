@@ -12,9 +12,15 @@
         <Grid.DataContext>
             <vm:ChartDataViewModel/>
         </Grid.DataContext>
-        <lc:CartesianChart x:Name="Chart"  Series="{ Binding Path=Series }" 
+        <lc:CartesianChart x:Name="Chart"  
+                           Series="{ Binding Path=Series }" 
                            XAxes="{Binding XAxes}"  
                            YAxes="{Binding YAxes}"
                            EasingFunction="{x:Null}" />
+        <!--<lc:CartesianChart x:Name="Chart2"  
+                           Series="{ Binding Path=SeriesZero }" 
+                           XAxes="{Binding XAxes}"  
+                           YAxes="{Binding YAxes}"
+                           EasingFunction="{x:Null}" />-->
     </Grid>
 </UserControl>
