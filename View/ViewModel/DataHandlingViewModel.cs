@@ -92,94 +92,107 @@
             // Read the first batch of the TcpServer response bytes.
             Int32 bytes = stream.Read(data, 0, data.Length);
             responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-
+            //Uncomment to show all data in Wire Data Field
+            _liveData.rawWireData = responseData;
+            
             return responseData;
             
         }
-        private static void ParseData(string data, GlobalConfigModel globalConfig)
+        private static void ParseData(string lines, GlobalConfigModel globalConfig)
         {
             //Parse incoming data function and store in DataPointModel
             bool maxChange = false;
             bool getTime = false;
-            string[] strIn = data.Split(',', 'T');
-            DataPointModel latest = new DataPointModel();
-            //UNOLS String input
-            if (strIn[0].Contains("%WIR"))
+            string[] strings = lines.Split(Environment.NewLine,
+                            StringSplitOptions.RemoveEmptyEntries);
+            foreach (var line in strings)
             {
-                if (globalConfig.Log20HzSwitch)
-                {
-                    Write20HzDataHeader(data, globalConfig);
-                }
-            }
-            else if (strIn[0].Contains("%WNC"))
-            {
-                WriteWinchLog(data, globalConfig);
-            }
-            else if (strIn[0].Contains("$WNC"))
-            {
-                _liveData.rawWinchData = data;
-                WriteWinchLog(data, globalConfig);
-            }
-            else
-            {
-                if (strIn.Length == 9 && strIn[0].Contains("$WIR"))
-                {
-                    _liveData.rawWireData = data;
-                    latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6], strIn[7], strIn[8]);
-                }
-                //MTNW Legacy input (does not include date and time)
-                else if (strIn.Length == 5 && strIn[0].Contains("RD"))
-                {
-                    getTime = true;
-                    _liveData.rawWireData = data;
-                    latest = new DataPointModel(strIn[0], "", "", strIn[1], strIn[2], strIn[3], strIn[4]);
-                }
-                //MTNW 1 input  (Includes date and time)
-                else if (strIn.Length == 7 && strIn.Contains("RD"))
-                {
-                    _liveData.rawWireData = data;
-                    latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);
-                }
-                //DataPointModel latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);
-                //If needed changes data and time stamp to local machine
-                if (globalConfig.UseComputerTimeSwitch || getTime)
-                {
-                    DateTime dateTime = DateTime.Now;
-                    latest.Date = dateTime.ToString("yyyyMMdd");
-                    latest.Time = dateTime.ToString("HH:mm:ss.fff");
-                    getTime = false;
-                }
-                //Check for max value change
-                if (maxData.MaxTension.Tension < latest.Tension)
-                {
-                    maxData.MaxTension = latest;
-                    maxChange = true;
-                }
-                if (Math.Abs(maxData.MaxSpeed.Speed) < latest.Speed)
-                {
-                    maxData.MaxSpeed = latest;
-                    maxChange = true;
-                }
-                if (maxData.MaxPayout.Payout < latest.Payout)
-                {
-                    maxData.MaxPayout = latest;
-                    maxChange = true;
-                }
-                if (maxChange)
-                {
-                    MaxValues();
-                }
-                //Write data to logfile
-                if (globalConfig.Log20HzSwitch)
-                {
-                    Write20HzData(latest, globalConfig);
-                }
-                if (globalConfig.UDPSwitch)
-                {
-                    Send20HzData(latest, globalConfig);
-                }
 
-                DisplayData(latest);
+                string data = line.Replace("\0", string.Empty);
+                string[] strIn = data.Split(',', 'T');
+                DataPointModel latest = new DataPointModel();
+                //Uncomment to log all data coming in
+                WriteRawLog(data, globalConfig);
+                //UNOLS String input
+
+                if (strIn[0].Contains("%WIR"))
+                {
+                    if (globalConfig.Log20HzSwitch)
+                    {
+                        Write20HzDataHeader(data, globalConfig);
+                    }
+                }
+                else if (strIn[0].Contains("%WNC"))
+                {
+                    WriteWinchLog(data, globalConfig);
+                }
+                else if (strIn[0].Contains("$WNC"))
+                {
+                    _liveData.rawWinchData = data;
+                    WriteWinchLog(data, globalConfig);
+                }
+                else
+                {
+                    //_liveData.rawWireData = data;
+                    if (strIn.Length == 9 && strIn[0].Contains("$WIR"))
+                    {
+
+                        latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6], strIn[7], strIn[8]);
+                    }
+                    //MTNW Legacy input (does not include date and time)
+                    else if (strIn.Length == 5 && strIn[0].Contains("RD"))
+                    {
+                        getTime = true;
+
+                        latest = new DataPointModel(strIn[0], "", "", strIn[1], strIn[2], strIn[3], strIn[4]);
+                    }
+                    //MTNW 1 input  (Includes date and time)
+                    else if (strIn.Length == 7 && strIn.Contains("RD"))
+                    {
+
+                        latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);
+                    }
+                    //DataPointModel latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);
+                    //If needed changes data and time stamp to local machine
+                    if (globalConfig.UseComputerTimeSwitch || getTime)
+                    {
+                        DateTime dateTime = DateTime.Now;
+                        latest.Date = dateTime.ToString("yyyyMMdd");
+                        latest.Time = dateTime.ToString("HH:mm:ss.fff");
+                        getTime = false;
+                    }
+                    //Check for max value change
+                    if (maxData.MaxTension.Tension < latest.Tension)
+                    {
+                        maxData.MaxTension = latest;
+                        maxChange = true;
+                    }
+                    if (Math.Abs(maxData.MaxSpeed.Speed) < latest.Speed)
+                    {
+                        maxData.MaxSpeed = latest;
+                        maxChange = true;
+                    }
+                    if (maxData.MaxPayout.Payout < latest.Payout)
+                    {
+                        maxData.MaxPayout = latest;
+                        maxChange = true;
+                    }
+                    if (maxChange)
+                    {
+                        MaxValues();
+                    }
+                    //Write data to logfile
+                    if (globalConfig.Log20HzSwitch)
+                    {
+                        Write20HzData(latest, globalConfig);
+                    }
+                    if (globalConfig.UDPSwitch)
+                    {
+                        Send20HzData(latest, globalConfig);
+                    }
+
+                    DisplayData(latest);
+                }
             }
         }
         private static void Write20HzData(DataPointModel data, GlobalConfigModel globalConfig)
@@ -228,6 +241,17 @@
             string fileName = globalConfig.UnolsWinchLogName;
             string destPath = Path.Combine(globalConfig.SaveDirectory, fileName);
             string line = data;
+            using (StreamWriter stream = new StreamWriter(destPath, append: true))
+            {
+                stream.WriteLine(line);
+            }
+        }
+        private static void WriteRawLog(string data, GlobalConfigModel globalConfig)
+        {
+            //Write Data to files
+            string fileName = $"raw1.log";
+            string destPath = Path.Combine(globalConfig.SaveDirectory, fileName);
+            string line = $"{data}";
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
             {
                 stream.WriteLine(line);
