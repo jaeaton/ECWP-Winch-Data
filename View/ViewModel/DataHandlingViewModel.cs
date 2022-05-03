@@ -103,6 +103,7 @@
             //Parse incoming data function and store in DataPointModel
             bool maxChange = false;
             bool getTime = false;
+            lines = lines.Replace("$WIR", Environment.NewLine + "$WIR");
             string[] strings = lines.Split(Environment.NewLine,
                             StringSplitOptions.RemoveEmptyEntries);
             foreach (var line in strings)
@@ -151,6 +152,10 @@
                     {
 
                         latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);
+                    }
+                    else
+                    {
+                        return;
                     }
                     //DataPointModel latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);
                     //If needed changes data and time stamp to local machine
