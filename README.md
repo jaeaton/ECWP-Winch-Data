@@ -10,3 +10,4 @@ To Do:
 - [ ] Display UNOLS Winch string statuses
 - [ ] Add LCI-90i data reception
 - [ ] Add Hawboldt Data reception
+- [ ] Move to .Net MAUI for Cross platform application
