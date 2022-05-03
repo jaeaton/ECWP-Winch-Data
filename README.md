@@ -8,3 +8,5 @@ To Do:
 - [ ] Display Tension Member Alarms and Warning
 - [x] ~~Record the UNOLS Winch string~~
 - [ ] Display UNOLS Winch string statuses
+- [ ] Add LCI-90i data reception
+- [ ] Add Hawboldt Data reception
