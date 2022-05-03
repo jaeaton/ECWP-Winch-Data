@@ -4,7 +4,7 @@ This program was written to move data between and ECWP winch with a Remote VPN r
 The current configuration can read MTNW Legacy, MTNW 1, and the UNOLS Wire String.
 
 To Do:
-1) Add cast processing
-2) Display Tension Member Alarms and Warning
-3) Record the UNOLS Winch string
-4) Display UNOLS Winch string statuses
+- [ ] Add cast processing
+- [ ] Display Tension Member Alarms and Warning
+- [x] ~~Record the UNOLS Winch string~~
+- [ ] Display UNOLS Winch string statuses
