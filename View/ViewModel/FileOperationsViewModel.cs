@@ -37,7 +37,8 @@
                 $"Use Computer Time,{ globalConfig.UseComputerTimeSwitch }",
                 $"Save Location,{ globalConfig.SaveDirectory }",
                 $"UNOLS String, { globalConfig.UnolsUdpFormatSet }",
-                $"UNOLS File Format, {globalConfig.LogUnolsSwitch }"
+                $"UNOLS File Format, { globalConfig.LogUnolsSwitch }",
+                $"Selected Communication, { globalConfig.DeviceSelection }"
                 };
             //Write each line of array using stream writer
             using (StreamWriter stream = new StreamWriter(destPath))
@@ -144,7 +145,10 @@
                                 _configDataStore.unolsWireLogButton = true;
                             }
                         }
-
+                        if (line.Substring(0, delim) == "Selected Communication")
+                        {
+                            _configDataStore.deviceSelection = int.Parse(line.Substring(delim + 1));
+                        }
                     }
                     GlobalConfigModel globalConfig = new GlobalConfigModel();
                     //update global config to the parameters loaded

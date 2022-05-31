@@ -55,6 +55,7 @@
             globalConfig.UseComputerTimeSwitch = _configDataStore.useComputerTimeCheckBox;
             globalConfig.UDPSwitch = _configDataStore.sendDataCheckBox;
             globalConfig.SaveDirectory = _configDataStore.directoryLabel;
+            globalConfig.DeviceSelection = _configDataStore.deviceSelection;
             if (globalConfig.SaveDirectory != null)
             {
                 globalConfig.SaveDirectorySet = true;

@@ -24,6 +24,7 @@ namespace Model
         public string? SaveDirectory { get; set; }
         public bool SaveDirectorySet { get; set; } = new bool();
         public bool UnolsUdpFormatSet { get; set; } = new bool();
+        public int DeviceSelection { get; set; }
 
     }
 }

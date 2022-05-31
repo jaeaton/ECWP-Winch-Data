@@ -81,6 +81,28 @@
             }
 
         }
-        
+
+        private void comboBoxDeviceSelect_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            globalConfig = (GlobalConfigModel)FileOperationsViewModel.ReadConfig(_configDataStore);
+            //device selected determines communication type, 0 = ECWP design (TCP Client based), 1 = Hawboldt design (UDP Based), 2 = LCI Design (TCP Server)
+            int deviceSelected = 0;
+            string deviceName = comboBoxDeviceSelect.SelectedValue.ToString();
+            if (deviceName == "Godzilla")
+            {
+                //Select UDP stream & Hawboldt Format
+                globalConfig.DeviceSelection = 1;
+            }
+            else if (deviceName == "LCI-90i")
+            {
+                //Select TCP Server mode
+                globalConfig.DeviceSelection = 2;
+            }
+            else
+            {
+                //Select TCP Client mode
+                globalConfig.DeviceSelection = 0;
+            }
+        }
     }
 }

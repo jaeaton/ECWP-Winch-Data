@@ -12,6 +12,13 @@
         <StackPanel>
             <StackPanel Orientation="Horizontal" Margin="2" Background="AliceBlue">
                 <Label Content="Data Source" Width="100"></Label>
+                <ComboBox x:Name="comboBoxDeviceSelect"  Width="100" SelectedValuePath="Content" SelectionChanged="comboBoxDeviceSelect_SelectionChanged">
+                    <ComboBoxItem Content= "MASH" />
+                    <ComboBoxItem Content= "Gloria" />
+                    <ComboBoxItem Content= "LCI-90i" />
+                    <ComboBoxItem Content= "Godzilla" />
+                </ComboBox>
+
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="2" Background="AliceBlue">
                 <Label Content="IP Address" Width="100" ></Label>

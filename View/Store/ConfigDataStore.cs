@@ -134,6 +134,11 @@
             get => _userInputsEnable;
             set { _userInputsEnable = value; OnPropertyChanged(nameof(userInputsEnable)); }
         }
-
+        private int _deviceSelection;
+        public int deviceSelection
+        {
+            get => _deviceSelection;
+            set { _deviceSelection = value; OnPropertyChanged(nameof(deviceSelection)); }
+        }
     }
 }
