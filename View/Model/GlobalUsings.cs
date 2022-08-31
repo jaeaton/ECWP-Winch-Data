@@ -19,8 +19,8 @@ global using LiveChartsCore.SkiaSharpView;
 global using LiveChartsCore.SkiaSharpView.Painting;
 global using LiveChartsCore.Kernel.Sketches;
 global using SkiaSharp;
-global using Microsoft.Toolkit.Mvvm;
-global using Microsoft.Toolkit.Mvvm.ComponentModel;
+global using CommunityToolkit.Mvvm;
+global using CommunityToolkit.Mvvm.ComponentModel;
 
 global using Model;
 global using Views;
