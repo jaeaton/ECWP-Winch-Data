@@ -59,6 +59,16 @@
                         {
 
                         }
+                        if (UserInputsView._configDataStore.logMaxDataCheckBox == true)
+                        {
+                            //Write the max data for the cast
+                            DataHandlingViewModel.WriteMaxData(UserInputsView.globalConfig);
+                            //Increase the cast count
+                            UserInputsView._configDataStore.castNumberBox = (int.Parse(UserInputsView._configDataStore.castNumberBox) + 1).ToString();
+                            UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(UserInputsView._configDataStore);
+
+                        }
+                        
                         //Change button text
                         UserInputsView._configDataStore.startStopButtonText = "Start Log";
                         UserInputsView._configDataStore.userInputsEnable = true;
