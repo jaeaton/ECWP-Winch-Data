@@ -113,7 +113,7 @@
                 string[] strIn = data.Split(',', 'T');
                 DataPointModel latest = new DataPointModel();
                 //Uncomment to log all data coming in
-                WriteRawLog(data, globalConfig);
+                //WriteRawLog(data, globalConfig);
                 //UNOLS String input
 
                 if (strIn[0].Contains("%WIR"))
@@ -143,9 +143,13 @@
                     //MTNW Legacy input (does not include date and time)
                     else if (strIn.Length == 5 && strIn[0].Contains("RD"))
                     {
-                        getTime = true;
 
-                        latest = new DataPointModel(strIn[0], "", "", strIn[1], strIn[2], strIn[3], strIn[4]);
+                        if ()
+                        {
+                            getTime = true;
+                            latest = new DataPointModel(strIn[0], "", "", strIn[1], strIn[2], strIn[3], strIn[4]);
+                        }
+                        
                     }
                     //MTNW 1 input  (Includes date and time)
                     else if (strIn.Length == 7 && strIn.Contains("RD"))

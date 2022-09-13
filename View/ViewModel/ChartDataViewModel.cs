@@ -1,4 +1,6 @@
-﻿namespace ViewModel
+﻿using System.Globalization;
+
+namespace ViewModel
 {
     public class ChartDataViewModel
     {
@@ -73,13 +75,17 @@
         {
             
             System.Globalization.CultureInfo provider = System.Globalization.CultureInfo.InvariantCulture;
-            if(latest.Date == null || latest.Time == null )
+            DateTimeStyles styles = DateTimeStyles.AssumeLocal;
+            if (latest.Date == null || latest.Time == null )
             {
                 return;
             }
-            DateTime dateTime = DateTime.ParseExact($"{ latest.Date } { latest.Time }","yyyyMMdd HH:mm:ss.fff", provider);
+            if( DateTime.TryParseExact($"{ latest.Date } { latest.Time }","yyyyMMdd HH:mm:ss.fff", provider, styles, out DateTime dateTime))
+            {
+                _observableValues.Add(new DateTimePoint { DateTime = dateTime, Value = latest.Tension });
+            }
             //double.TryParse(latest.Tension, out double Tension);
-            _observableValues.Add(new DateTimePoint { DateTime = dateTime, Value = latest.Tension });
+            
             //uncomment for windowing of plot
             //_observableValuesZero.Add(new DateTimePoint { DateTime = dateTime, Value = 0 });
             //_observableValuesMax.Add(new DateTimePoint { DateTime = dateTime, Value = Double.Parse(DataHandlingViewModel._liveData.maxTension)*1.05 });
