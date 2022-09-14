@@ -87,6 +87,35 @@
                 <RadioButton Content="MTNW Format"  IsEnabled="{Binding Path=userInputsEnable}" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,15,50,0" GroupName="udpFormat"  IsChecked="{Binding Path=mtnwUDPStringButton, FallbackValue='False'}" Visibility="{ Binding ElementName=CheckBoxSendUDP,Path=IsChecked,Converter={StaticResource VisibilityConverter } }"></RadioButton>
                 <RadioButton Content="UNOLS Format" IsEnabled="{Binding Path=userInputsEnable}" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,2,50,0" GroupName="udpFormat" IsChecked="{Binding Path=unolsUDPStringButton, FallbackValue='True'}" Visibility="{ Binding ElementName=CheckBoxSendUDP,Path=IsChecked,Converter={StaticResource VisibilityConverter } }"></RadioButton>
             </Grid>
+            <Grid Background="Cornsilk">
+                <CheckBox x:Name="CheckBoxSendSerial" IsEnabled="{Binding Path=userInputsEnable}" Content="Send Serial Data" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding Path=sendSerialDataCheckBox,FallbackValue='True'}">
+                    <CheckBox.Resources>
+                        <Style TargetType="{x:Type Path}">
+                            <Setter Property="FlowDirection" Value="LeftToRight"/>
+                        </Style>
+                    </CheckBox.Resources>
+                </CheckBox>
+            </Grid>
+            <StackPanel Orientation="Horizontal" Margin="2" Background="Cornsilk" Visibility="{ Binding ElementName=CheckBoxSendSerial,Path=IsChecked,Converter={StaticResource VisibilityConverter } }">
+                <Label Content="Serial Port" Width="100"></Label>   
+                <ComboBox Width="100" Height="20"></ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="2" Background="Cornsilk" Visibility="{ Binding ElementName=CheckBoxSendSerial,Path=IsChecked,Converter={StaticResource VisibilityConverter } }">
+                <Label Content="Baud Rate" Width="100" ></Label>
+                <ComboBox Width="100" Height="20" Text="{Binding Path=baudRate}">
+                    <ComboBoxItem Content="115200" IsSelected="True"/>
+                    <ComboBoxItem Content="57600"/>
+                    <ComboBoxItem Content="38400"/>
+                    <ComboBoxItem Content="19200"/>
+                    <ComboBoxItem Content="9600"/>
+                    <ComboBoxItem Content="4800"/>
+                </ComboBox>
+            </StackPanel>
+            <Grid Background="Cornsilk">
+                <RadioButton Content="MTNW Format"  IsEnabled="{Binding Path=userInputsEnable}" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,15,50,0" GroupName="serialFormat"  IsChecked="{Binding Path=mtnwSerialStringButton, FallbackValue='False'}" Visibility="{ Binding ElementName=CheckBoxSendSerial,Path=IsChecked,Converter={StaticResource VisibilityConverter } }"></RadioButton>
+                <RadioButton Content="UNOLS Format" IsEnabled="{Binding Path=userInputsEnable}" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,2,50,0" GroupName="serialFormat" IsChecked="{Binding Path=unolsSerialStringButton, FallbackValue='True'}" Visibility="{ Binding ElementName=CheckBoxSendSerial,Path=IsChecked,Converter={StaticResource VisibilityConverter } }"></RadioButton>
+            </Grid>
+
 
             <StackPanel Orientation="Horizontal" Margin="2">
                 <Label Width="100"></Label>

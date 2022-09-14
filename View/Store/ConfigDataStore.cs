@@ -4,13 +4,13 @@
     public class ConfigDataStore : ViewModelBase
     {
         private string? _ipaddressinputsourcebox;
-        public string ipAddressInputSourceBox
+        public string? ipAddressInputSourceBox
         {
             get => _ipaddressinputsourcebox;
             set { _ipaddressinputsourcebox = value; OnPropertyChanged(nameof(ipAddressInputSourceBox)); }
         }
         private string? _portinputsourcebox;
-        public string portInputSourceBox
+        public string? portInputSourceBox
         {
             get => _portinputsourcebox;
             set
@@ -20,7 +20,7 @@
             }
         }
         private string? _ipaddressinputdestinationbox;
-        public string ipAddressInputDestinationBox
+        public string? ipAddressInputDestinationBox
         {
             get => _ipaddressinputdestinationbox;
             set
@@ -30,7 +30,7 @@
             }
         }
         private string? _portinputdestinationbox;
-        public string portInputDestinationBox
+        public string? portInputDestinationBox
         {
             get => _portinputdestinationbox;
             set
@@ -40,7 +40,7 @@
             }
         }
         private string? _cruisenamebox;
-        public string cruiseNameBox
+        public string? cruiseNameBox
         {
             get => _cruisenamebox;
             set
@@ -50,7 +50,7 @@
             }
         }
         private string? _castnumberbox;
-        public string castNumberBox
+        public string? castNumberBox
         {
             get => _castnumberbox;
             set
@@ -85,6 +85,12 @@
             get => _senddatacheckbox;
             set { _senddatacheckbox = value; OnPropertyChanged(nameof(sendDataCheckBox)); }
         }
+        private bool _sendserialdatacheckbox;
+        public bool sendSerialDataCheckBox
+        {
+            get => _sendserialdatacheckbox;
+            set { _senddatacheckbox = value; OnPropertyChanged(nameof(sendSerialDataCheckBox)); }
+        }
         private bool _usecomputertimecheckbox;
         public bool useComputerTimeCheckBox
         {
@@ -104,7 +110,7 @@
             set { _mtnUDPstringbutton = value; OnPropertyChanged(nameof(mtnwUDPStringButton)); }
         }
         private string? _directorylabel;
-        public string directoryLabel
+        public string? directoryLabel
         {
             get => _directorylabel;
             set { _directorylabel = value; OnPropertyChanged(nameof(directoryLabel)); }
@@ -134,6 +140,23 @@
             get => _userInputsEnable;
             set { _userInputsEnable = value; OnPropertyChanged(nameof(userInputsEnable)); }
         }
-
+        private string? _baudRate;
+        public string? baudRate
+        {
+            get => _baudRate;
+            set { _baudRate = value; OnPropertyChanged(nameof(baudRate)); }
+        }
+        private bool _unolsSerialStringButton;
+        public bool unolsSerialStringButton
+        {
+            get => _unolsSerialStringButton;
+            set { _unolsSerialStringButton = value; OnPropertyChanged(nameof(unolsSerialStringButton)); }
+        }
+        private bool _mtnwSerialStringButton;
+        public bool mtnwSerialStringButton
+        {
+            get => _mtnwSerialStringButton;
+            set { _mtnwSerialStringButton = value; OnPropertyChanged(nameof(mtnwSerialStringButton));}
+        }
     }
 }

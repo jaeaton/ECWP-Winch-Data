@@ -8,6 +8,7 @@ global using System.Text;
 global using System.Threading.Tasks;
 global using System.Windows;
 global using System.IO;
+global using System.IO.Ports;
 global using System.Net;
 global using System.Net.Sockets;
 global using System.Threading;
