@@ -55,6 +55,9 @@
             globalConfig.UseComputerTimeSwitch = _configDataStore.useComputerTimeCheckBox;
             globalConfig.UDPSwitch = _configDataStore.sendDataCheckBox;
             globalConfig.SaveDirectory = _configDataStore.directoryLabel;
+            globalConfig.SerialSwitch = _configDataStore.sendSerialDataCheckBox;
+            globalConfig.SerialPortName = _configDataStore.serialPortName;
+            globalConfig.SerialPortBaud = _configDataStore.baudRate;
             if (globalConfig.SaveDirectory != null)
             {
                 globalConfig.SaveDirectorySet = true;
@@ -75,6 +78,14 @@
             if ((bool)_configDataStore.mtnwWireLogButton)
             {
                 globalConfig.LogUnolsSwitch = false;
+            }
+            if ((bool)_configDataStore.unolsSerialStringButton)
+            {
+                globalConfig.UnolsSerialFormatSet = true;
+            }
+            if ((bool)_configDataStore.mtnwSerialStringButton)
+            {
+                globalConfig.UnolsSerialFormatSet = false;
             }
             return globalConfig;
 

@@ -85,11 +85,11 @@
             get => _senddatacheckbox;
             set { _senddatacheckbox = value; OnPropertyChanged(nameof(sendDataCheckBox)); }
         }
-        private bool _sendserialdatacheckbox;
+        private bool _sendSerialDataCheckBox;
         public bool sendSerialDataCheckBox
         {
-            get => _sendserialdatacheckbox;
-            set { _senddatacheckbox = value; OnPropertyChanged(nameof(sendSerialDataCheckBox)); }
+            get => _sendSerialDataCheckBox;
+            set { _sendSerialDataCheckBox = value; OnPropertyChanged(nameof(sendSerialDataCheckBox)); }
         }
         private bool _usecomputertimecheckbox;
         public bool useComputerTimeCheckBox
@@ -139,6 +139,12 @@
         {
             get => _userInputsEnable;
             set { _userInputsEnable = value; OnPropertyChanged(nameof(userInputsEnable)); }
+        }
+        private string? _serialPortName;
+        public string? serialPortName
+        {
+            get => _serialPortName;
+            set { _serialPortName = value; OnPropertyChanged(nameof(serialPortName)); }
         }
         private string? _baudRate;
         public string? baudRate

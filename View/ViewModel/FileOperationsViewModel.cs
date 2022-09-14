@@ -37,7 +37,11 @@
                 $"Use Computer Time,{ globalConfig.UseComputerTimeSwitch }",
                 $"Save Location,{ globalConfig.SaveDirectory }",
                 $"UNOLS String, { globalConfig.UnolsUdpFormatSet }",
-                $"UNOLS File Format, {globalConfig.LogUnolsSwitch }"
+                $"UNOLS File Format, {globalConfig.LogUnolsSwitch }",
+                $"Send Serial,{ globalConfig.SerialSwitch }",
+                $"UNOLS Serial String, { globalConfig.UnolsSerialFormatSet }",
+                $"Serial Port Name, {globalConfig.SerialPortName }",
+                $"Serial Baud Rate, {globalConfig.SerialPortBaud }"
                 };
             //Write each line of array using stream writer
             using (StreamWriter stream = new StreamWriter(destPath))
@@ -143,6 +147,34 @@
                                 _configDataStore.mtnwWireLogButton = false;
                                 _configDataStore.unolsWireLogButton = true;
                             }
+                        }
+                        if (line.Substring(0, delim) == "UNOLS Serial String")
+                        {
+                            _configDataStore.unolsSerialStringButton = bool.Parse(line.Substring(delim + 1));
+                            if (!(bool)_configDataStore.unolsSerialStringButton)
+                            {
+                                //if UNOLS format is not selected, select MTNW formate
+                                _configDataStore.unolsSerialStringButton = false;
+                                _configDataStore.mtnwSerialStringButton = true;
+                            }
+                            if ((bool)_configDataStore.unolsWireLogButton)
+                            {
+                                //Select UNOLS format
+                                _configDataStore.mtnwSerialStringButton = false;
+                                _configDataStore.unolsSerialStringButton = true;
+                            }
+                        }
+                        if (line.Substring(0, delim) == "Send Serial")
+                        {
+                            _configDataStore.sendSerialDataCheckBox = bool.Parse(line.Substring(delim + 1));
+                        }
+                        if (line.Substring(0, delim) == "Serial Port Name")
+                        {
+                            _configDataStore.serialPortName = line.Substring(delim + 1);
+                        }
+                        if (line.Substring(0, delim) == "Serial Baud Rate")
+                        {
+                            _configDataStore.baudRate = line.Substring(delim + 1);
                         }
 
                     }

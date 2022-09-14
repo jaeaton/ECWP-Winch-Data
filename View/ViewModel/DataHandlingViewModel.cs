@@ -5,10 +5,21 @@
         public static LiveDataDataStore _liveData = new();
         public static MaxDataPointModel maxData = new MaxDataPointModel();
         public static int i = 0;
+        public static SerialPort _serialPort = new SerialPort();
         //Asynchronious method to allow application to still respond to user interaction
         public static async void GetDataAsync(GlobalConfigModel globalConfig)
         {
-            
+            if(globalConfig.SerialSwitch)
+            {
+                int.TryParse(globalConfig.SerialPortBaud,out int serialBaudRate);
+                //_serialPort = new SerialPort(globalConfig.SerialPortName,serialBaudRate,Parity.None,8,StopBits.One);
+                _serialPort.PortName = globalConfig.SerialPortName;
+                _serialPort.BaudRate = serialBaudRate;
+                _serialPort.Parity = Parity.None;
+                _serialPort.DataBits = 8;
+                _serialPort.StopBits = StopBits.One;
+                _serialPort.Open();
+            }
             string dataIn;
             TcpClient client = new TcpClient();
             //client.ReceiveTimeout = 20000;
@@ -58,6 +69,11 @@
             }
             //Close TCP client
             client.Close();
+            //Close Serial port
+            if (_serialPort.IsOpen)
+            {
+                _serialPort.Close();
+            }            
             //free up canceller resources
             StartStopSaveView._canceller.Dispose();
             UserInputsView._configDataStore.startStopButtonText = "Start Log";
@@ -195,6 +211,10 @@
                     {
                         Send20HzData(latest, globalConfig);
                     }
+                    if (globalConfig.SerialSwitch)
+                    {
+                        SendSerialData(latest, globalConfig);
+                    }
 
                     DisplayData(latest);
                 }
@@ -210,13 +230,13 @@
             {
                 fileName = globalConfig.Minimal20HzLogFileName;
                 destPath = Path.Combine(globalConfig.SaveDirectory, fileName);
-                line = $"{ data.Date }, { data.Time }, { data.Tension }, { data.Speed }, { data.Payout }";
+                line = $"RD,{ data.Date }T{ data.Time },{ data.Tension },{ data.Speed },{ data.Payout }";
             }
             else
             {
                 fileName = globalConfig.UnolsWireLogName;
                 destPath = Path.Combine(globalConfig.SaveDirectory, fileName);
-                line = $"{ data.StringID }, { data.Date }, { data.Time }, { data.Tension }, { data.Speed }, { data.Payout }, { data.TMWarnings }, { data.TMAlarms }, { data.CheckSum }";
+                line = $"{ data.StringID },{ data.Date },{ data.Time },{ data.Tension },{ data.Speed },{ data.Payout },{ data.TMWarnings },{ data.TMAlarms },{ data.CheckSum }";
             }
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
             {
@@ -286,6 +306,33 @@
             udpClient.Connect(IPAddress.Parse( globalConfig.TransmitCommunication.IPAddress), int.Parse(globalConfig.TransmitCommunication.PortNumber));
             byte[] sendBytes = Encoding.ASCII.GetBytes(line);
             udpClient.Send(sendBytes, sendBytes.Length);
+        }
+        private static void SendSerialData(DataPointModel data, GlobalConfigModel globalConfig)
+        {
+            //Format string based on format selection
+            string line;
+            //If UNOLS Format
+            if (globalConfig.UnolsSerialFormatSet)
+            {
+                line = $"WIR,{data.Date},{data.Time},{data.Tension},{data.Speed},{data.Payout},{data.TMWarnings},{data.TMAlarms},";
+            }
+            //Not UNOLS Format (MTNW 1)
+            else
+            {
+                line = $"RD,{data.Date}T{data.Time},{data.Tension},{data.Speed},{data.Payout},";
+            }
+            //Add checksum
+            int checkSum = 0;
+            byte[] asciiBytes = Encoding.ASCII.GetBytes(line);
+            Array.ForEach(asciiBytes, delegate (byte i) { checkSum += i; });
+            line = $"{line}{checkSum}";
+            //Send UDP packet
+            //UdpClient udpClient = new UdpClient();
+            //udpClient.Connect(IPAddress.Parse(globalConfig.TransmitCommunication.IPAddress), int.Parse(globalConfig.TransmitCommunication.PortNumber));
+            //byte[] sendBytes = Encoding.ASCII.GetBytes(line);
+            //udpClient.Send(sendBytes, sendBytes.Length);
+            //Serial Port Transmit
+            _serialPort.WriteLine(line);
         }
         public static void WriteMaxData(GlobalConfigModel globalConfig)
         {

@@ -8,6 +8,7 @@
         public PlottingView()
         {
             InitializeComponent();
+
         }
     }
 }

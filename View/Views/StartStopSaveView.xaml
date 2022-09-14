@@ -15,7 +15,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="right">
                     <Button x:Name="ButtonHelp" Content="?" Width="25" Margin="5,0,5,0" Click="ButtonHelp_Click"></Button>
-                    <Button Content="Switch To Processing" Margin="5,0,5,0" Width="125"/>
+                    <Button Content="Switch To Processing" Margin="5,0,5,0" Width="125" IsEnabled="False"/>
                     <Button x:Name="ButtonLogMax" Content="Log Max Values" Width="125" Margin="5,0,5,0" Click="ButtonLogMax_Click" IsEnabled="{Binding Path=logMaxDataCheckBox}"></Button>
                     <Button x:Name="StartStopButton" Content="{ Binding Path=startStopButtonText,FallbackValue='Start Log'}" Width="125" HorizontalAlignment="Right" Margin="5,0,5,0" Click="ButtonStartLog_Click"></Button>
                 </StackPanel>
@@ -26,7 +26,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Label x:Name="TextBoxFileLocation" Content="{ Binding Path=directoryLabel,FallbackValue='Location of files'}" Grid.Column="0"></Label>
-                <Label x:Name="TextBoxRawWinchData" Content="{ Binding Path=rawWinchData,FallbackValue='Raw Winch String' }" Grid.Column="1"></Label>
+                <!--<Label x:Name="TextBoxRawWinchData" Content="{ Binding Path=rawWinchData,FallbackValue='Raw Winch String' }" Grid.Column="1"></Label>-->
             </Grid>
             
         </StackPanel>

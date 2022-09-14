@@ -24,6 +24,11 @@ namespace Model
         public string? SaveDirectory { get; set; }
         public bool SaveDirectorySet { get; set; } = new bool();
         public bool UnolsUdpFormatSet { get; set; } = new bool();
+        public string? SerialPortName { get; set; }
+        public string? SerialPortBaud { get; set; }
+        public bool SerialSwitch { get; set; } = new bool();
+        public bool UnolsSerialFormatSet { get; set; } = new bool();
+
 
     }
 }

@@ -11,6 +11,8 @@
         {
             
             InitializeComponent();
+            //static serialPort = new SerialPorts();
+            serialPorts.ItemsSource = SerialPort.GetPortNames(); ;
             _configDataStore = new ConfigDataStore();
             
             this.DataContext = _configDataStore;
