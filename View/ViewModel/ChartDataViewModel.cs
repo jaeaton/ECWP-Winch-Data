@@ -88,7 +88,7 @@ namespace ViewModel
             
             //uncomment for windowing of plot
             //_observableValuesZero.Add(new DateTimePoint { DateTime = dateTime, Value = 0 });
-            //_observableValuesMax.Add(new DateTimePoint { DateTime = dateTime, Value = Double.Parse(DataHandlingViewModel._liveData.maxTension)*1.05 });
+            //_observableValuesMax.Add(new DateTimePoint { DateTime = dateTime, Value = Double.Parse(DataHandlingViewModel._liveData.MaxTension)*1.05 });
             //_observableValues.Add(new ObservablePoint { X = i++, Y = latest.Tension });
             if (_observableValues.Count > 500)
             {

@@ -61,7 +61,7 @@
                 {
                     //Asynchronious read of data to allow for other operations to occur
                     dataIn = await Task.Run(() => ReadTCPData(client));
-                    //_liveData.rawWireData = dataIn;
+                    //_liveData.RawWireData = dataIn;
                     //read data
                     ParseData(dataIn, globalConfig);
 
@@ -83,17 +83,17 @@
         public static void DisplayData(DataPointModel latest)
         {
             //Write data to bound variables to display on UI
-            _liveData.tension = latest.Tension.ToString();
-            _liveData.payout = latest.Payout.ToString();
-            _liveData.speed = latest.Speed.ToString();
+            _liveData.Tension = latest.Tension.ToString();
+            _liveData.Payout = latest.Payout.ToString();
+            _liveData.Speed = latest.Speed.ToString();
             ChartDataViewModel.AddData(latest);
         }
         private static void MaxValues()
         {
             //Write max data to bound variables to display on UI
-            _liveData.maxSpeed = maxData.MaxSpeed.Speed.ToString();
-            _liveData.maxPayout = maxData.MaxPayout.Payout.ToString();
-            _liveData.maxTension = maxData.MaxTension.Tension.ToString();
+            _liveData.MaxSpeed = maxData.MaxSpeed.Speed.ToString();
+            _liveData.MaxPayout = maxData.MaxPayout.Payout.ToString();
+            _liveData.MaxTension = maxData.MaxTension.Tension.ToString();
         }
         private static string ReadTCPData(TcpClient client)//object tcpCom)
         {
@@ -109,7 +109,7 @@
             Int32 bytes = stream.Read(data, 0, data.Length);
             responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
             //Uncomment to show all data in Wire Data Field
-            _liveData.rawWireData = responseData;
+            _liveData.RawWireData = responseData;
             
             return responseData;
             
@@ -145,12 +145,12 @@
                 }
                 else if (strIn[0].Contains("$WNC"))
                 {
-                    _liveData.rawWinchData = data;
+                    _liveData.RawWinchData = data;
                     WriteWinchLog(data, globalConfig);
                 }
                 else
                 {
-                    //_liveData.rawWireData = data;
+                    //_liveData.RawWireData = data;
                     if (strIn.Length == 9 && strIn[0].Contains("$WIR"))
                     {
 

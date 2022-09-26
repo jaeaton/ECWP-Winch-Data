@@ -6,7 +6,7 @@
     public partial class UserInputsView : UserControl
     {
         public static ConfigDataStore _configDataStore;
-        public static GlobalConfigModel globalConfig = new GlobalConfigModel();
+        public static GlobalConfigModel globalConfig = new();
         public UserInputsView()
         {
             
@@ -42,7 +42,7 @@
         {
             //Check for valid filename constructor
             // Show the save file dialog
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            SaveFileDialog saveFileDialog = new();
             //ConfigDataStore _configDataStore = UserInputsView._configDataStore;
             //build the save file name
             //DateTime dateTime = DateTime.Now;
@@ -74,7 +74,7 @@
             if (saveFileDialog.ShowDialog() == true)
             {
                 //directoryLabel.Content = saveFileDialog.FileName;
-                FileInfo fileInfo = new FileInfo(saveFileDialog.FileName);
+                FileInfo fileInfo = new(saveFileDialog.FileName);
                 globalConfig.SaveDirectory = (string)fileInfo.DirectoryName;
                 _configDataStore.directoryLabel = globalConfig.SaveDirectory;
                 globalConfig.SaveDirectorySet = true;

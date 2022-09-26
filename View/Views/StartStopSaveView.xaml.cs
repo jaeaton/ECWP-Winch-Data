@@ -20,7 +20,7 @@
                 "Step 6: Start Capture. This connects to the winch and then processes the data as needed and saves, transmits, and displays the data.\n" +
                 "Step 7: Save Max Values. This button writes the max values to a file, zeros out the max values, and increments the cast number\n\n" +
                 "Notes\n" +
-                "1) The program saves a config file and loads it on start up. This can speed up the set up process after it has been set for a cruise. It is a human readable text file in the program's directory.\n" +
+                "1) The program saves a config file and loads it on start up. This can Speed up the set up process after it has been set for a cruise. It is a human readable text file in the program's directory.\n" +
                 "2) Max log file should be continuos for a given cruise. Each time the Log Max button is pressed a new entry is added. If the cast number is changed to a lower number it will not overwrite the previous entry.\n" +
                 "3) \n\n" +
                 "V3.0.0 beta");

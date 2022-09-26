@@ -9,15 +9,15 @@ namespace Model
     public class MaxDataPointModel
     {
         /// <summary>
-        /// Data associated with the maximum payout (tension, speed, payout, date, and time)
+        /// Data associated with the maximum Payout (Tension, Speed, Payout, date, and time)
         /// </summary>
         public DataPointModel MaxPayout { get; set; } = new DataPointModel();
         /// <summary>
-        /// Data associated with the maximum tension (tension, speed, payout, date, and time)
+        /// Data associated with the maximum Tension (Tension, Speed, Payout, date, and time)
         /// </summary>
         public DataPointModel MaxTension { get; set; } = new DataPointModel();
         /// <summary>
-        /// Data associated with the maximum speed (tension, speed, payout, date, and time)
+        /// Data associated with the maximum Speed (Tension, Speed, Payout, date, and time)
         /// </summary>
         public DataPointModel MaxSpeed { get; set; } = new DataPointModel();
 
