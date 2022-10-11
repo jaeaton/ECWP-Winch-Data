@@ -76,7 +76,7 @@
             }            
             //free up canceller resources
             StartStopSaveView._canceller.Dispose();
-            UserInputsView._configDataStore.startStopButtonText = "Start Log";
+            UserInputsView._configDataStore.StartStopButtonText = "Start Log";
 
 
         }

@@ -70,8 +70,8 @@
                         }
                         
                         //Change button text
-                        UserInputsView._configDataStore.startStopButtonText = "Start Log";
-                        UserInputsView._configDataStore.userInputsEnable = true;
+                        UserInputsView._configDataStore.StartStopButtonText = "Start Log";
+                        UserInputsView._configDataStore.UserInputsEnable = true;
                         break;
                     }
                 default:
@@ -93,8 +93,8 @@
                         //Starts Data collection on first press
                         DataHandlingViewModel.GetDataAsync(UserInputsView.globalConfig);
                         //change button text
-                        UserInputsView._configDataStore.startStopButtonText =  "Stop Log";
-                        UserInputsView._configDataStore.userInputsEnable = false;
+                        UserInputsView._configDataStore.StartStopButtonText =  "Stop Log";
+                        UserInputsView._configDataStore.UserInputsEnable = false;
 
                         break;
                     }

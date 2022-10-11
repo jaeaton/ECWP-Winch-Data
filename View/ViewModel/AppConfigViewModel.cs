@@ -1,6 +1,6 @@
 ﻿namespace ViewModel
 {
-    public class AppConfigViewModel : ViewModelBase
+    public class AppConfigViewModel 
     {
         /// <summary>
         /// Transforms the live displayed config data to the global config
@@ -17,7 +17,7 @@
                 MessageBox.Show("Data source IP address not valid");
                 return null;
             }
-            if (!ValidateIPViewModel.ValidateIPFunction(_configDataStore.IpAddressInputDestinationBox) && _configDataStore.sendDataCheckBox)
+            if (!ValidateIPViewModel.ValidateIPFunction(_configDataStore.IpAddressInputDestinationBox) && _configDataStore.SendDataCheckBox)
             {
                 MessageBox.Show("Data Destination IP address not valid");
                 return null;
@@ -27,7 +27,7 @@
                 MessageBox.Show("Data source port number not valid");
                 return null;
             }
-            if (!ValidateIPViewModel.ValidatePortFunction(_configDataStore.PortInputDestinationBox) && _configDataStore.sendDataCheckBox)
+            if (!ValidateIPViewModel.ValidatePortFunction(_configDataStore.PortInputDestinationBox) && _configDataStore.SendDataCheckBox)
             {
                 MessageBox.Show("Data Destination port number not valid");
                 return null;
@@ -52,38 +52,38 @@
             globalConfig.CruiseInformation = new CruiseModel(_configDataStore.CruiseNameBox, _configDataStore.CastNumberBox);
             globalConfig.Log20HzSwitch = _configDataStore.Log20HzDataCheckBox;
             globalConfig.LogMaxValuesSwitch = _configDataStore.LogMaxDataCheckBox;
-            globalConfig.UseComputerTimeSwitch = _configDataStore.useComputerTimeCheckBox;
-            globalConfig.UDPSwitch = _configDataStore.sendDataCheckBox;
-            globalConfig.SaveDirectory = _configDataStore.directoryLabel;
-            globalConfig.SerialSwitch = _configDataStore.sendSerialDataCheckBox;
-            globalConfig.SerialPortName = _configDataStore.serialPortName;
-            globalConfig.SerialPortBaud = _configDataStore.baudRate;
+            globalConfig.UseComputerTimeSwitch = _configDataStore.UseComputerTimeCheckBox;
+            globalConfig.UDPSwitch = _configDataStore.SendDataCheckBox;
+            globalConfig.SaveDirectory = _configDataStore.DirectoryLabel;
+            globalConfig.SerialSwitch = _configDataStore.SendSerialDataCheckBox;
+            globalConfig.SerialPortName = _configDataStore.SerialPortName;
+            globalConfig.SerialPortBaud = _configDataStore.BaudRate;
             if (globalConfig.SaveDirectory != null)
             {
                 globalConfig.SaveDirectorySet = true;
                 FileOperationsViewModel.SetFileNames(globalConfig);
             }
-            if ((bool)_configDataStore.unolsUDPStringButton)
+            if ((bool)_configDataStore.UnolsUDPStringButton)
             {
                 globalConfig.UnolsUdpFormatSet = true;
             }
-            if ((bool)_configDataStore.mtnwUDPStringButton)
+            if ((bool)_configDataStore.MtnwUDPStringButton)
             {
                 globalConfig.UnolsUdpFormatSet = false;
             }
-            if ((bool)_configDataStore.unolsWireLogButton)
+            if ((bool)_configDataStore.UnolsWireLogButton)
             {
                 globalConfig.LogUnolsSwitch = true;
             }
-            if ((bool)_configDataStore.mtnwWireLogButton)
+            if ((bool)_configDataStore.MtnwWireLogButton)
             {
                 globalConfig.LogUnolsSwitch = false;
             }
-            if ((bool)_configDataStore.unolsSerialStringButton)
+            if ((bool)_configDataStore.UnolsSerialStringButton)
             {
                 globalConfig.UnolsSerialFormatSet = true;
             }
-            if ((bool)_configDataStore.mtnwSerialStringButton)
+            if ((bool)_configDataStore.MtnwSerialStringButton)
             {
                 globalConfig.UnolsSerialFormatSet = false;
             }

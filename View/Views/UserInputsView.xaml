@@ -16,15 +16,15 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="2" Background="AliceBlue">
                     <Label Content="IP Address" Width="100" ></Label>
-                    <TextBox Text="{ Binding Path=IpAddressInputSourceBox,FallbackValue='192.168.140.210',Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,PresentationTraceSources.TraceLevel=High}" IsEnabled="{Binding Path=userInputsEnable}" Width="100" VerticalAlignment="Center"></TextBox>
+                    <TextBox Text="{ Binding Path=IpAddressInputSourceBox,FallbackValue='192.168.140.210',Mode=TwoWay,UpdateSourceTrigger=PropertyChanged,PresentationTraceSources.TraceLevel=High}" IsEnabled="{Binding Path=UserInputsEnable}" Width="100" VerticalAlignment="Center"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="2" Background="AliceBlue">
                     <Label Content="Port Number" Width="100" ></Label>
-                    <TextBox x:Name="TextBoxSourcePort" IsEnabled="{Binding Path=userInputsEnable}" Text="{Binding Path=PortInputSourceBox,FallbackValue='50505',Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="100" VerticalAlignment="Center"></TextBox>
+                    <TextBox x:Name="TextBoxSourcePort" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding Path=PortInputSourceBox,FallbackValue='50505',Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="100" VerticalAlignment="Center"></TextBox>
                 </StackPanel>
 
                 <StackPanel Background="AliceBlue">
-                    <CheckBox x:Name="CheckBoxUseComputerTime" IsEnabled="{Binding Path=userInputsEnable}" Content="Use Computer Time" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,0,50,0" IsChecked="{Binding Path=useComputerTimeCheckBox,FallbackValue='False',Mode=TwoWay}">
+                    <CheckBox x:Name="CheckBoxUseComputerTime" IsEnabled="{Binding Path=UserInputsEnable}" Content="Use Computer Time" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,0,50,0" IsChecked="{Binding Path=UseComputerTimeCheckBox,FallbackValue='False',Mode=TwoWay}">
                         <CheckBox.Resources>
                             <Style TargetType="{x:Type Path}">
                                 <Setter Property="FlowDirection" Value="LeftToRight"/>
@@ -33,18 +33,18 @@
                     </CheckBox>
 
 
-                    <CheckBox x:Name="CheckBoxLog20Hz" IsEnabled="{Binding Path=userInputsEnable}" Content="Log 20Hz Data" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding Path=Log20HzDataCheckBox,FallbackValue='False'}">
+                    <CheckBox x:Name="CheckBoxLog20Hz" IsEnabled="{Binding Path=UserInputsEnable}" Content="Log 20Hz Data" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding Path=Log20HzDataCheckBox,FallbackValue='False'}">
                         <CheckBox.Resources>
                             <Style TargetType="{x:Type Path}">
                                 <Setter Property="FlowDirection" Value="LeftToRight"/>
                             </Style>
                         </CheckBox.Resources>
                     </CheckBox>
-                    <RadioButton Content="MTNW Format"  IsEnabled="{Binding Path=userInputsEnable}" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="15,2,50,0" GroupName="logFormat"  IsChecked="{Binding Path=mtnwWireLogButton, FallbackValue='False'}" Visibility="{ Binding ElementName=CheckBoxLog20Hz,Path=IsChecked,Converter={StaticResource VisibilityConverter } }"></RadioButton>
-                    <RadioButton Content="UNOLS Format" IsEnabled="{Binding Path=userInputsEnable}" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="15,2,50,0" GroupName="logFormat" IsChecked="{Binding Path=unolsWireLogButton, FallbackValue='True'}" Visibility="{ Binding ElementName=CheckBoxLog20Hz,Path=IsChecked,Converter={StaticResource VisibilityConverter } }"></RadioButton>
+                    <RadioButton Content="MTNW Format"  IsEnabled="{Binding Path=UserInputsEnable}" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="15,2,50,0" GroupName="logFormat"  IsChecked="{Binding Path=MtnwWireLogButton, FallbackValue='False'}" Visibility="{ Binding ElementName=CheckBoxLog20Hz,Path=IsChecked,Converter={StaticResource VisibilityConverter } }"></RadioButton>
+                    <RadioButton Content="UNOLS Format" IsEnabled="{Binding Path=UserInputsEnable}" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="15,2,50,0" GroupName="logFormat" IsChecked="{Binding Path=UnolsWireLogButton, FallbackValue='True'}" Visibility="{ Binding ElementName=CheckBoxLog20Hz,Path=IsChecked,Converter={StaticResource VisibilityConverter } }"></RadioButton>
                 </StackPanel>
                 <Grid Background="MintCream">
-                    <CheckBox x:Name="CheckBoxLogMax" IsEnabled="{Binding Path=userInputsEnable}" Content="Log Max Data" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding Path=LogMaxDataCheckBox, FallbackValue='True'}" Background="MintCream">
+                    <CheckBox x:Name="CheckBoxLogMax" IsEnabled="{Binding Path=UserInputsEnable}" Content="Log Max Data" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding Path=LogMaxDataCheckBox, FallbackValue='True'}" Background="MintCream">
                         <CheckBox.Resources>
                             <Style TargetType="{x:Type Path}">
                                 <Setter Property="FlowDirection" Value="LeftToRight"/>
@@ -57,15 +57,15 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="2" Background="MintCream" Visibility="{ Binding ElementName=CheckBoxLogMax,Path=IsChecked,Converter={StaticResource VisibilityConverter } }">
                     <Label Content="Cruise Name" Width="100" ></Label>
-                    <TextBox x:Name="TextBoxCruiseName" IsEnabled="{Binding Path=userInputsEnable}" Text="{Binding Path=CruiseNameBox,FallbackValue=OC123,Mode=TwoWay}" Width="100" VerticalAlignment="Center"></TextBox>
+                    <TextBox x:Name="TextBoxCruiseName" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding Path=CruiseNameBox,FallbackValue=OC123,Mode=TwoWay}" Width="100" VerticalAlignment="Center"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="2" Background="MintCream" Visibility="{ Binding ElementName=CheckBoxLogMax,Path=IsChecked,Converter={StaticResource VisibilityConverter } }">
                     <Label Content="Cast Number" Width="100" ></Label>
-                    <TextBox x:Name="TextBoxCastNumber" IsEnabled="{Binding Path=userInputsEnable}" Text="{Binding Path=CastNumberBox,FallbackValue=1,Mode=TwoWay}" Width="100" VerticalAlignment="Center"></TextBox>
+                    <TextBox x:Name="TextBoxCastNumber" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding Path=CastNumberBox,FallbackValue=1,Mode=TwoWay}" Width="100" VerticalAlignment="Center"></TextBox>
                 </StackPanel>
 
                 <Grid Background="LavenderBlush">
-                    <CheckBox x:Name="CheckBoxSendUDP" IsEnabled="{Binding Path=userInputsEnable}" Content="Send UDP Data" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding Path=sendDataCheckBox,FallbackValue='False'}">
+                    <CheckBox x:Name="CheckBoxSendUDP" IsEnabled="{Binding Path=UserInputsEnable}" Content="Send UDP Data" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding Path=SendDataCheckBox,FallbackValue='False'}">
                         <CheckBox.Resources>
                             <Style TargetType="{x:Type Path}">
                                 <Setter Property="FlowDirection" Value="LeftToRight"/>
@@ -78,20 +78,20 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="2" Background="LavenderBlush" Visibility="{ Binding ElementName=CheckBoxSendUDP,Path=IsChecked,Converter={StaticResource VisibilityConverter } }">
                     <Label Content="IP Address" Width="100" ></Label>
-                    <TextBox x:Name="TextBoxDestinationIPAdress" IsEnabled="{Binding Path=userInputsEnable}" Text="{Binding Path=IpAddressInputDestinationBox,FallbackValue='192.168.1.121',Mode=TwoWay}" Width="100" VerticalAlignment="Center"></TextBox>
+                    <TextBox x:Name="TextBoxDestinationIPAdress" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding Path=IpAddressInputDestinationBox,FallbackValue='192.168.1.121',Mode=TwoWay}" Width="100" VerticalAlignment="Center"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="2" Background="LavenderBlush" Visibility="{ Binding ElementName=CheckBoxSendUDP,Path=IsChecked,Converter={StaticResource VisibilityConverter } }">
                     <Label Content="Port Number" Width="100" ></Label>
-                    <TextBox x:Name="TextBoxDestinationPort" IsEnabled="{Binding Path=userInputsEnable}" Text="{Binding Path=PortInputDestinationBox,FallbackValue='50000',Mode=TwoWay}" Width="100" VerticalAlignment="Center"></TextBox>
+                    <TextBox x:Name="TextBoxDestinationPort" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding Path=PortInputDestinationBox,FallbackValue='50000',Mode=TwoWay}" Width="100" VerticalAlignment="Center"></TextBox>
                 </StackPanel>
                 <Grid Background="LavenderBlush">
                     <StackPanel>
-                        <RadioButton Content="MTNW Format"  IsEnabled="{Binding Path=userInputsEnable}" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,0,50,0" GroupName="udpFormat"  IsChecked="{Binding Path=mtnwUDPStringButton, FallbackValue='False'}" Visibility="{ Binding ElementName=CheckBoxSendUDP,Path=IsChecked,Converter={StaticResource VisibilityConverter } }"></RadioButton>
-                        <RadioButton Content="UNOLS Format" IsEnabled="{Binding Path=userInputsEnable}" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,0,50,0" GroupName="udpFormat" IsChecked="{Binding Path=unolsUDPStringButton, FallbackValue='True'}" Visibility="{ Binding ElementName=CheckBoxSendUDP,Path=IsChecked,Converter={StaticResource VisibilityConverter } }"></RadioButton>
+                        <RadioButton Content="MTNW Format"  IsEnabled="{Binding Path=UserInputsEnable}" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,0,50,0" GroupName="udpFormat"  IsChecked="{Binding Path=MtnwUDPStringButton, FallbackValue='False'}" Visibility="{ Binding ElementName=CheckBoxSendUDP,Path=IsChecked,Converter={StaticResource VisibilityConverter } }"></RadioButton>
+                        <RadioButton Content="UNOLS Format" IsEnabled="{Binding Path=UserInputsEnable}" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,0,50,0" GroupName="udpFormat" IsChecked="{Binding Path=UnolsUDPStringButton, FallbackValue='True'}" Visibility="{ Binding ElementName=CheckBoxSendUDP,Path=IsChecked,Converter={StaticResource VisibilityConverter } }"></RadioButton>
                     </StackPanel>
                 </Grid>
                 <Grid Background="Cornsilk">
-                    <CheckBox x:Name="CheckBoxSendSerial" IsEnabled="{Binding Path=userInputsEnable}" Content="Send Serial Data" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding Path=sendSerialDataCheckBox,FallbackValue='True'}">
+                    <CheckBox x:Name="CheckBoxSendSerial" IsEnabled="{Binding Path=UserInputsEnable}" Content="Send Serial Data" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding Path=SendSerialDataCheckBox,FallbackValue='True'}">
                         <CheckBox.Resources>
                             <Style TargetType="{x:Type Path}">
                                 <Setter Property="FlowDirection" Value="LeftToRight"/>
@@ -101,11 +101,11 @@
                 </Grid>
                 <StackPanel Orientation="Horizontal" Margin="2" Background="Cornsilk" Visibility="{ Binding ElementName=CheckBoxSendSerial,Path=IsChecked,Converter={StaticResource VisibilityConverter } }">
                     <Label Content="Serial Port" Width="100"></Label>
-                    <ComboBox Name="serialPorts" Width="100" Height="20" Text="{Binding Path=serialPortName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+                    <ComboBox Name="serialPorts" Width="100" Height="20" Text="{Binding Path=SerialPortName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="2" Background="Cornsilk" Visibility="{ Binding ElementName=CheckBoxSendSerial,Path=IsChecked,Converter={StaticResource VisibilityConverter } }">
                     <Label Content="Baud Rate" Width="100" ></Label>
-                    <ComboBox Width="100" Height="20" Text="{Binding Path=baudRate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                    <ComboBox Width="100" Height="20" Text="{Binding Path=BaudRate,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                         <ComboBoxItem Content="115200" IsSelected="True"/>
                         <ComboBoxItem Content="57600"/>
                         <ComboBoxItem Content="38400"/>
@@ -116,15 +116,15 @@
                 </StackPanel>
                 <Grid Background="Cornsilk">
                     <StackPanel>
-                        <RadioButton Content="MTNW Format"  IsEnabled="{Binding Path=userInputsEnable}" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,0,50,0" GroupName="serialFormat"  IsChecked="{Binding Path=mtnwSerialStringButton, FallbackValue='False'}" Visibility="{ Binding ElementName=CheckBoxSendSerial,Path=IsChecked,Converter={StaticResource VisibilityConverter } }"></RadioButton>
-                        <RadioButton Content="UNOLS Format" IsEnabled="{Binding Path=userInputsEnable}" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,0,50,0" GroupName="serialFormat" IsChecked="{Binding Path=unolsSerialStringButton, FallbackValue='True'}" Visibility="{ Binding ElementName=CheckBoxSendSerial,Path=IsChecked,Converter={StaticResource VisibilityConverter } }"></RadioButton>
+                        <RadioButton Content="MTNW Format"  IsEnabled="{Binding Path=UserInputsEnable}" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,0,50,0" GroupName="serialFormat"  IsChecked="{Binding Path=MtnwSerialStringButton, FallbackValue='False'}" Visibility="{ Binding ElementName=CheckBoxSendSerial,Path=IsChecked,Converter={StaticResource VisibilityConverter } }"></RadioButton>
+                        <RadioButton Content="UNOLS Format" IsEnabled="{Binding Path=UserInputsEnable}" FlowDirection="RightToLeft" HorizontalContentAlignment="Right" Margin="6,0,50,0" GroupName="serialFormat" IsChecked="{Binding Path=UnolsSerialStringButton, FallbackValue='True'}" Visibility="{ Binding ElementName=CheckBoxSendSerial,Path=IsChecked,Converter={StaticResource VisibilityConverter } }"></RadioButton>
                     </StackPanel>
                 </Grid>
 
 
                 <StackPanel Orientation="Horizontal" Margin="2">
                     <Label Width="100"></Label>
-                    <Button Content="Save Parameters" IsEnabled="{Binding Path=userInputsEnable}" Width="100" Click="Button_Click"></Button>
+                    <Button Content="Save Parameters" IsEnabled="{Binding Path=UserInputsEnable}" Width="100" Click="Button_Click"></Button>
                 </StackPanel>
             </StackPanel>
 

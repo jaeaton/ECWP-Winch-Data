@@ -98,7 +98,7 @@
                         }
                         if (line.Substring(0, delim) == "Send UDP")
                         {
-                            _configDataStore.sendDataCheckBox = bool.Parse(line.Substring(delim + 1));
+                            _configDataStore.SendDataCheckBox = bool.Parse(line.Substring(delim + 1));
                         }
                         if (line.Substring(0, delim) == "Save 20 Hz Data")
                         {
@@ -110,71 +110,71 @@
                         }
                         if (line.Substring(0, delim) == "Use Computer Time")
                         {
-                            _configDataStore.useComputerTimeCheckBox = bool.Parse(line.Substring(delim + 1));
+                            _configDataStore.UseComputerTimeCheckBox = bool.Parse(line.Substring(delim + 1));
                         }
                         if (line.Substring(0, delim) == "Save Location")
                         {
-                            _configDataStore.directoryLabel = line.Substring(delim + 1);
+                            _configDataStore.DirectoryLabel = line.Substring(delim + 1);
                         }
                         if (line.Substring(0, delim) == "UNOLS String")
                         {
-                            _configDataStore.unolsUDPStringButton = bool.Parse(line.Substring(delim + 1));
-                            if (!(bool)_configDataStore.unolsUDPStringButton)
+                            _configDataStore.UnolsUDPStringButton = bool.Parse(line.Substring(delim + 1));
+                            if (!(bool)_configDataStore.UnolsUDPStringButton)
                             {
                                 //if UNOLS format is not selected, select MTNW formate
-                                _configDataStore.unolsUDPStringButton = false;
-                                _configDataStore.mtnwUDPStringButton = true;
+                                _configDataStore.UnolsUDPStringButton = false;
+                                _configDataStore.MtnwUDPStringButton = true;
                             }
-                            if ((bool)_configDataStore.unolsUDPStringButton)
+                            if ((bool)_configDataStore.UnolsUDPStringButton)
                             {
                                 //Select UNOLS format
-                                _configDataStore.mtnwUDPStringButton = false;
-                                _configDataStore.unolsUDPStringButton = true;
+                                _configDataStore.MtnwUDPStringButton = false;
+                                _configDataStore.UnolsUDPStringButton = true;
                             }
                         }
                         if (line.Substring(0, delim) == "UNOLS File Format")
                         {
-                            _configDataStore.unolsWireLogButton = bool.Parse(line.Substring(delim + 1));
-                            if (!(bool)_configDataStore.unolsWireLogButton)
+                            _configDataStore.UnolsWireLogButton = bool.Parse(line.Substring(delim + 1));
+                            if (!(bool)_configDataStore.UnolsWireLogButton)
                             {
                                 //if UNOLS format is not selected, select MTNW formate
-                                _configDataStore.unolsWireLogButton = false;
-                                _configDataStore.mtnwWireLogButton = true;
+                                _configDataStore.UnolsWireLogButton = false;
+                                _configDataStore.MtnwWireLogButton = true;
                             }
-                            if ((bool)_configDataStore.unolsWireLogButton)
+                            if ((bool)_configDataStore.UnolsWireLogButton)
                             {
                                 //Select UNOLS format
-                                _configDataStore.mtnwWireLogButton = false;
-                                _configDataStore.unolsWireLogButton = true;
+                                _configDataStore.MtnwWireLogButton = false;
+                                _configDataStore.UnolsWireLogButton = true;
                             }
                         }
                         if (line.Substring(0, delim) == "UNOLS Serial String")
                         {
-                            _configDataStore.unolsSerialStringButton = bool.Parse(line.Substring(delim + 1));
-                            if (!(bool)_configDataStore.unolsSerialStringButton)
+                            _configDataStore.UnolsSerialStringButton = bool.Parse(line.Substring(delim + 1));
+                            if (!(bool)_configDataStore.UnolsSerialStringButton)
                             {
                                 //if UNOLS format is not selected, select MTNW formate
-                                _configDataStore.unolsSerialStringButton = false;
-                                _configDataStore.mtnwSerialStringButton = true;
+                                _configDataStore.UnolsSerialStringButton = false;
+                                _configDataStore.MtnwSerialStringButton = true;
                             }
-                            if ((bool)_configDataStore.unolsWireLogButton)
+                            if ((bool)_configDataStore.UnolsWireLogButton)
                             {
                                 //Select UNOLS format
-                                _configDataStore.mtnwSerialStringButton = false;
-                                _configDataStore.unolsSerialStringButton = true;
+                                _configDataStore.MtnwSerialStringButton = false;
+                                _configDataStore.UnolsSerialStringButton = true;
                             }
                         }
                         if (line.Substring(0, delim) == "Send Serial")
                         {
-                            _configDataStore.sendSerialDataCheckBox = bool.Parse(line.Substring(delim + 1));
+                            _configDataStore.SendSerialDataCheckBox = bool.Parse(line.Substring(delim + 1));
                         }
                         if (line.Substring(0, delim) == "Serial Port Name")
                         {
-                            _configDataStore.serialPortName = line.Substring(delim + 1);
+                            _configDataStore.SerialPortName = line.Substring(delim + 1);
                         }
                         if (line.Substring(0, delim) == "Serial Baud Rate")
                         {
-                            _configDataStore.baudRate = line.Substring(delim + 1);
+                            _configDataStore.BaudRate = line.Substring(delim + 1);
                         }
 
                     }

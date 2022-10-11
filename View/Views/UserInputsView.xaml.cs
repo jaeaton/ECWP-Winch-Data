@@ -16,8 +16,8 @@
             _configDataStore = new ConfigDataStore();
             
             this.DataContext = _configDataStore;
-            _configDataStore.userInputsEnable = true;
-            _configDataStore.startStopButtonText = "Start Log";
+            _configDataStore.UserInputsEnable = true;
+            _configDataStore.StartStopButtonText = "Start Log";
             
 
         }
@@ -73,10 +73,10 @@
 
             if (saveFileDialog.ShowDialog() == true)
             {
-                //directoryLabel.Content = saveFileDialog.FileName;
+                //DirectoryLabel.Content = saveFileDialog.FileName;
                 FileInfo fileInfo = new(saveFileDialog.FileName);
                 globalConfig.SaveDirectory = (string)fileInfo.DirectoryName;
-                _configDataStore.directoryLabel = globalConfig.SaveDirectory;
+                _configDataStore.DirectoryLabel = globalConfig.SaveDirectory;
                 globalConfig.SaveDirectorySet = true;
                 
 
