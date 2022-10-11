@@ -19,28 +19,28 @@
         <!--<lc:CartesianChart x:Name="Chart"  Series="{ Binding Path=Series }"/>-->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
             <Label Content="Tension" FontSize="18"></Label>
-            <Label Content="{Binding Path=tension, FallbackValue=00000}" HorizontalContentAlignment="Right" FontSize="18" Width="70"></Label>
+            <Label Content="{Binding Path=Tension, FallbackValue=00000}" HorizontalContentAlignment="Right" FontSize="18" Width="70"></Label>
             <Label Content="lbf" FontSize="18"></Label>
             <Label Content="Speed" FontSize="18"></Label>
-            <Label Content="{Binding Path=speed, FallbackValue=000}" HorizontalContentAlignment="Right" Width="50" FontSize="18"></Label>
+            <Label Content="{Binding Path=Speed, FallbackValue=000}" HorizontalContentAlignment="Right" Width="50" FontSize="18"></Label>
             <Label Content="m/min" FontSize="18"></Label>
             <Label Content="Payout" FontSize="18"></Label>
-            <Label Content="{Binding Path=payout, FallbackValue=0000}" HorizontalContentAlignment="Right" Width="60" FontSize="18"></Label>
+            <Label Content="{Binding Path=Payout, FallbackValue=0000}" HorizontalContentAlignment="Right" Width="60" FontSize="18"></Label>
             <Label Content="m" FontSize="18"></Label>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2">
             <Label Content="Max Tension"></Label>
-            <Label Content="{Binding Path=maxTension, FallbackValue=00000}" Width="50" HorizontalContentAlignment="Right"></Label>
+            <Label Content="{Binding Path=MaxTension, FallbackValue=00000}" Width="50" HorizontalContentAlignment="Right"></Label>
             <Label Content="lbf"></Label>
             <Label Content="Max Speed"></Label>
-            <Label Content="{Binding Path=maxSpeed, FallbackValue=000}" Width="35" HorizontalContentAlignment="Right"></Label>
+            <Label Content="{Binding Path=MaxSpeed, FallbackValue=000}" Width="35" HorizontalContentAlignment="Right"></Label>
             <Label Content="m/min"></Label>
             <Label Content="Max Payout"></Label>
-            <Label Content="{Binding Path=maxPayout, FallbackValue=0000}" Width="40" HorizontalContentAlignment="Right"></Label>
+            <Label Content="{Binding Path=MaxPayout, FallbackValue=0000}" Width="40" HorizontalContentAlignment="Right"></Label>
             <Label Content="m"></Label>
 
         </StackPanel>
-        <Label Grid.Row="3" Content="{Binding Path=rawWireData, FallbackValue='Received String'}" HorizontalAlignment="Center"/>
+        <Label Grid.Row="3" Content="{Binding Path=RawWireData, FallbackValue='Received String'}" HorizontalAlignment="Center"/>
 
     </Grid>
 </UserControl>
