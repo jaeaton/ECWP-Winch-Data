@@ -73,28 +73,28 @@
                         int delim = line.IndexOf(",");
                         if (line.Substring(0, delim) == "Receive IP")
                         {
-                            _configDataStore.ipAddressInputSourceBox = line.Substring(delim + 1);
+                            _configDataStore.IpAddressInputSourceBox = line.Substring(delim + 1);
                         }
                         if (line.Substring(0, delim) == "Receive Port")
                         {
-                            _configDataStore.portInputSourceBox = line.Substring(delim + 1);
+                            _configDataStore.PortInputSourceBox = line.Substring(delim + 1);
                         }
                         if (line.Substring(0, delim) == "Transmit IP")
                         {
-                            _configDataStore.ipAddressInputDestinationBox = line.Substring(delim + 1);
+                            _configDataStore.IpAddressInputDestinationBox = line.Substring(delim + 1);
                         }
                         if (line.Substring(0, delim) == "Transmit Port")
                         {
-                            _configDataStore.portInputDestinationBox = line.Substring(delim + 1);
+                            _configDataStore.PortInputDestinationBox = line.Substring(delim + 1);
                         }
                         if (line.Substring(0, delim) == "Cruise Name")
                         {
-                            _configDataStore.cruiseNameBox = line.Substring(delim + 1);
+                            _configDataStore.CruiseNameBox = line.Substring(delim + 1);
                         }
                         if (line.Substring(0, delim) == "Cast Number")
                         {
                             int castCount = int.Parse(line.Substring(delim + 1));// + 1;
-                            _configDataStore.castNumberBox = castCount.ToString();
+                            _configDataStore.CastNumberBox = castCount.ToString();
                         }
                         if (line.Substring(0, delim) == "Send UDP")
                         {
@@ -102,11 +102,11 @@
                         }
                         if (line.Substring(0, delim) == "Save 20 Hz Data")
                         {
-                            _configDataStore.log20HzDataCheckBox = bool.Parse(line.Substring(delim + 1));
+                            _configDataStore.Log20HzDataCheckBox = bool.Parse(line.Substring(delim + 1));
                         }
                         if (line.Substring(0, delim) == "Log Max Values")
                         {
-                            _configDataStore.logMaxDataCheckBox = bool.Parse(line.Substring(delim + 1));
+                            _configDataStore.LogMaxDataCheckBox = bool.Parse(line.Substring(delim + 1));
                         }
                         if (line.Substring(0, delim) == "Use Computer Time")
                         {

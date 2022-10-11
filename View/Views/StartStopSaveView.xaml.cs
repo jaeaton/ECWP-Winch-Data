@@ -38,7 +38,7 @@
             //Write the max data for the cast
             DataHandlingViewModel.WriteMaxData(UserInputsView.globalConfig);
             //Increase the cast count
-            UserInputsView._configDataStore.castNumberBox = (int.Parse(UserInputsView._configDataStore.castNumberBox)+1).ToString();
+            UserInputsView._configDataStore.CastNumberBox = (int.Parse(UserInputsView._configDataStore.CastNumberBox)+1).ToString();
             UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(UserInputsView._configDataStore);
             
         }
@@ -59,12 +59,12 @@
                         {
 
                         }
-                        if (UserInputsView._configDataStore.logMaxDataCheckBox == true)
+                        if (UserInputsView._configDataStore.LogMaxDataCheckBox == true)
                         {
                             //Write the max data for the cast
                             DataHandlingViewModel.WriteMaxData(UserInputsView.globalConfig);
                             //Increase the cast count
-                            UserInputsView._configDataStore.castNumberBox = (int.Parse(UserInputsView._configDataStore.castNumberBox) + 1).ToString();
+                            UserInputsView._configDataStore.CastNumberBox = (int.Parse(UserInputsView._configDataStore.CastNumberBox) + 1).ToString();
                             UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(UserInputsView._configDataStore);
 
                         }
@@ -76,7 +76,7 @@
                     }
                 default:
                     {
-                        if (UserInputsView._configDataStore.log20HzDataCheckBox ||  UserInputsView._configDataStore.logMaxDataCheckBox)
+                        if (UserInputsView._configDataStore.Log20HzDataCheckBox ||  UserInputsView._configDataStore.LogMaxDataCheckBox)
                         {
                             //If the save directory is not set show popup
                             if (UserInputsView.globalConfig.SaveDirectorySet == false )

@@ -48,7 +48,7 @@
             //DateTime dateTime = DateTime.Now;
             //string stringDateTime = dateTime.ToString("yyyyMMddTHHmmssfff");
             //string dateAndHour = dateTime.ToString("yyyyMMddHH");
-            //string filename = $"{ dateAndHour } { _configDataStore.cruiseNameBox } cast { _configDataStore.castNumberBox }.Log";
+            //string filename = $"{ dateAndHour } { _configDataStore.CruiseNameBox } cast { _configDataStore.CastNumberBox }.Log";
             //GlobalConfigModel globalConfig = new GlobalConfigModel();
             //var anInstanceofMyClass = new AppConfigViewModel();
             //var instanceofFileOperationsViewModel = new FileOperationsViewModel();
