@@ -22,8 +22,8 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0" />
-    <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-beta.400" />
-    <PackageReference Include="System.IO.Ports" Version="7.0.0-rc.1.22426.10" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.WPF" Version="2.0.0-beta.501" />
+    <PackageReference Include="System.IO.Ports" Version="7.0.0-rc.2.22472.3" />
   </ItemGroup>
 
   <ItemGroup>
