@@ -5,7 +5,7 @@
     /// </summary>
     public partial class UserInputsView : UserControl
     {
-        public static ConfigDataStore _configDataStore;
+        public static ConfigDataStore? _configDataStore;
         public static GlobalConfigModel globalConfig = new();
         public UserInputsView()
         {
@@ -21,7 +21,7 @@
             
 
         }
-
+        
         public void Button_Click(object sender, RoutedEventArgs e)
         {
             globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(_configDataStore);

@@ -22,6 +22,7 @@ global using LiveChartsCore.Kernel.Sketches;
 global using SkiaSharp;
 global using CommunityToolkit.Mvvm;
 global using CommunityToolkit.Mvvm.ComponentModel;
+global using CommunityToolkit.Mvvm.Input;
 
 global using Model;
 global using Views;
