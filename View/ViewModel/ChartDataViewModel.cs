@@ -104,6 +104,9 @@ namespace ViewModel
 
             //}
         }
-
+        public static void ResetData()
+        {
+            _observableValues.Clear();
+        }
     }
 }
