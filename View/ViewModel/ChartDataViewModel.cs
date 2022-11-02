@@ -106,7 +106,11 @@ namespace ViewModel
         }
         public static void ResetData()
         {
-            _observableValues.Clear();
+            //if( _observableValues.Count != 0)
+            //{
+            //    _observableValues.Clear();
+            //}
+            
         }
     }
 }

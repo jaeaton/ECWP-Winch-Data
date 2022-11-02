@@ -9,7 +9,6 @@
         //Asynchronious method to allow application to still respond to user interaction
         public static async void GetDataAsync(GlobalConfigModel globalConfig)
         {
-            ChartDataViewModel.ResetData();
             if(globalConfig.SerialSwitch)
             {
                 int.TryParse(globalConfig.SerialPortBaud,out int serialBaudRate);

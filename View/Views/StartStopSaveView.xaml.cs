@@ -86,8 +86,8 @@
                             }
 
                         }
-                        
-                        
+
+                        //ChartDataViewModel.ResetData();
                         //Create new cancellation token at start of data collection
                         _canceller = new CancellationTokenSource();
                         //Starts Data collection on first press
