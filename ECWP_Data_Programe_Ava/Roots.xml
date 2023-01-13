@@ -1,0 +1,5 @@
+﻿<linker>
+  <!-- Can be removed if CompiledBinding and no reflection are used -->
+  <assembly fullname="ECWP_Data_Programe_Ava" preserve="All" />
+  <assembly fullname="Avalonia.Themes.Fluent" preserve="All" />
+</linker>

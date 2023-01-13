@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "ECWP_Data_Programe_Ava": {
+      "commandName": "Project"
+    },
+    "WSL": {
+      "commandName": "WSL",
+      
+      "distributionName": "Ubuntu-20.04"
+    }
+  }
+}
