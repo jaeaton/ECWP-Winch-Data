@@ -12,7 +12,7 @@
             globalConfig.Minimal20HzLogFileName = $"{ dateAndHour }_{ globalConfig.CruiseInformation.CruiseName }_cast_{ globalConfig.CruiseInformation.CastNumber }_short.log";
             globalConfig.UnolsWireLogName = $"{ dateAndHour }_{ globalConfig.CruiseInformation.CruiseName }_cast_{ globalConfig.CruiseInformation.CastNumber }_UNOLS.log";
             globalConfig.UnolsWinchLogName = $"{ dateOnly }_Winch.log";
-            globalConfig.MaxLogFileName = $"{ dateTime.ToString("yyyy") }_{ globalConfig.CruiseInformation.CruiseName }.log";
+            globalConfig.MaxLogFileName = $"{ dateTime.ToString("yyyyMM") }_{ globalConfig.CruiseInformation.CruiseName }.log";
             return globalConfig;
         }
         public static void WriteConfig(GlobalConfigModel globalConfig)
