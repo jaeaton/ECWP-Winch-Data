@@ -16,24 +16,24 @@
 		<controls:ChartView/>
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
 			<Label Content="Tension" FontSize="18"></Label>
-			<Label Content="{Binding Path=Tension, FallbackValue=00000}" HorizontalContentAlignment="Right" FontSize="18" Width="70"></Label>
+			<Label Content="{Binding Path=Tension, FallbackValue=00000}" HorizontalContentAlignment="Right" FontSize="18" MinWidth="70"></Label>
 			<Label Content="lbf" FontSize="18"></Label>
 			<Label Content="Speed" FontSize="18"></Label>
-			<Label Content="{Binding Path=Speed, FallbackValue=000}" HorizontalContentAlignment="Right" Width="50" FontSize="18"></Label>
+			<Label Content="{Binding Path=Speed, FallbackValue=000}" HorizontalContentAlignment="Right" MinWidth="50" FontSize="18"></Label>
 			<Label Content="m/min" FontSize="18"></Label>
 			<Label Content="Payout" FontSize="18"></Label>
-			<Label Content="{Binding Path=Payout, FallbackValue=0000}" HorizontalContentAlignment="Right" Width="60" FontSize="18"></Label>
+			<Label Content="{Binding Path=Payout, FallbackValue=0000}" HorizontalContentAlignment="Right" MinWidth="60" FontSize="18"></Label>
 			<Label Content="m" FontSize="18"></Label>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2">
 			<Label Content="Max Tension"></Label>
-			<Label Content="{Binding Path=MaxTension, FallbackValue=00000}" Width="50" HorizontalContentAlignment="Right"></Label>
+			<Label Content="{Binding Path=MaxTension, FallbackValue=00000}" MinWidth="50" HorizontalContentAlignment="Right"></Label>
 			<Label Content="lbf"></Label>
 			<Label Content="Max Speed"></Label>
-			<Label Content="{Binding Path=MaxSpeed, FallbackValue=000}" Width="35" HorizontalContentAlignment="Right"></Label>
+			<Label Content="{Binding Path=MaxSpeed, FallbackValue=000}" MinWidth="35" HorizontalContentAlignment="Right"></Label>
 			<Label Content="m/min"></Label>
 			<Label Content="Max Payout"></Label>
-			<Label Content="{Binding Path=MaxPayout, FallbackValue=0000}" Width="40" HorizontalContentAlignment="Right"></Label>
+			<Label Content="{Binding Path=MaxPayout, FallbackValue=0000}" MinWidth="40" HorizontalContentAlignment="Right"></Label>
 			<Label Content="m"></Label>
 
 		</StackPanel>
