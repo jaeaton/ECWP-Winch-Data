@@ -6,7 +6,7 @@ namespace Views
         {
             InitializeComponent();
             //Set the data context for binding variables
-            this.DataContext = this;
+            this.DataContext = DataHandlingViewModel._liveData;
         }
     }
 }
