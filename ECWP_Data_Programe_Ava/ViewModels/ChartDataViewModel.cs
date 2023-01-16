@@ -6,8 +6,8 @@
         public static ObservableCollection<DateTimePoint> _observableValues = new ObservableCollection<DateTimePoint>();
         public static ObservableCollection<ISeries> Series { get; set; }
         //Uncomment to allow for windowing of plot
-        //public static ObservableCollection<DateTimePoint> _observableValuesZero = new ObservableCollection<DateTimePoint>();
-        //public static ObservableCollection<DateTimePoint> _observableValuesMax = new ObservableCollection<DateTimePoint>();
+        public static ObservableCollection<DateTimePoint> _observableValuesZero = new ObservableCollection<DateTimePoint>();
+        public static ObservableCollection<DateTimePoint> _observableValuesMax = new ObservableCollection<DateTimePoint>();
         public static IEnumerable<ICartesianAxis> XAxes { get; set; }
         public static IEnumerable<ICartesianAxis> YAxes { get; set; }
 
@@ -26,24 +26,24 @@
                     GeometrySize = 0,
                     LineSmoothness = 0,
                     Stroke = new SolidColorPaint(SKColors.CornflowerBlue, 1)
-                }//,
+                },                
                 //Uncomment to add invisible series for windowing plot
-                //new LineSeries<DateTimePoint>
-                //{
-                //    Values = _observableValuesZero,
-                //    Fill = null,
-                //    GeometrySize = 0,
-                //    LineSmoothness = 0,
-                //    Stroke = new SolidColorPaint(SKColors.Empty, 1),
-                //},
-                //new LineSeries<DateTimePoint>
-                //{
-                //    Values = _observableValuesMax,
-                //    Fill = null,
-                //    GeometrySize = 0,
-                //    LineSmoothness = 0,
-                //    Stroke = new SolidColorPaint(SKColors.Empty, 1),
-                //}
+                new LineSeries<DateTimePoint>
+                {
+                    Values = _observableValuesZero,
+                    Fill = null,
+                    GeometrySize = 0,
+                    LineSmoothness = 0,
+                    Stroke = new SolidColorPaint(SKColors.Empty, 1),
+                },
+                new LineSeries<DateTimePoint>
+                {
+                    Values = _observableValuesMax,
+                    Fill = null,
+                    GeometrySize = 0,
+                    LineSmoothness = 0,
+                    Stroke = new SolidColorPaint(SKColors.Empty, 1),
+                }
 
             };
 
@@ -87,23 +87,24 @@
                 _observableValues.Add(new DateTimePoint { DateTime = dateTime, Value = latest.Tension });
             }
             //double.TryParse(latest.Tension, out double Tension);
-            
+
             //uncomment for windowing of plot
-            //_observableValuesZero.Add(new DateTimePoint { DateTime = dateTime, Value = 0 });
-            //_observableValuesMax.Add(new DateTimePoint { DateTime = dateTime, Value = Double.Parse(DataHandlingViewModel._liveData.MaxTension)*1.05 });
+            _observableValuesZero.Add(new DateTimePoint { DateTime = dateTime, Value = 0 });
+            _observableValuesMax.Add(new DateTimePoint { DateTime = dateTime, Value = Double.Parse(DataHandlingViewModel._liveData.MaxTension) * 1.05 });
             //_observableValues.Add(new ObservablePoint { X = i++, Y = latest.Tension });
+            
             if (_observableValues.Count > 500)
             {
                 _observableValues.RemoveAt(0);
                 
             }
             //uncomment for windowing of plot Keeps zero series and max series small
-            //if (_observableValuesZero.Count > 10)
-            //{
-            //    _observableValuesZero.RemoveAt(0);
-            //    _observableValuesMax.RemoveAt(0);
+            if (_observableValuesZero.Count > 10)
+                {
+                    _observableValuesZero.RemoveAt(0);
+                    _observableValuesMax.RemoveAt(0);
 
-            //}
+                }
         }
         public static void ResetData()
         {
