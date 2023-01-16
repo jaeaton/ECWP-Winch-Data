@@ -10,4 +10,6 @@ To Do:
 - [ ] Display UNOLS Winch string statuses
 - [ ] Add LCI-90i data reception
 - [ ] Add Hawboldt Data reception
-- [ ] Move to .Net MAUI for Cross platform application
+- [ ]~~ Move to .Net MAUI for Cross platform application~~ No Linux Support
+- [x] ~~Move to Avalonia UI for Cross Platform Application~~
+- [ ] Add in detection and themeing for darkmode
