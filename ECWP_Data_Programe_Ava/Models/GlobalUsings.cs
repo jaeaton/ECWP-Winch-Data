@@ -25,6 +25,7 @@ global using CommunityToolkit.Mvvm;
 global using CommunityToolkit.Mvvm.ComponentModel;
 global using Avalonia.Controls;
 global using Avalonia.Interactivity;
+global using Avalonia.Controls.Templates;
 global using MessageBox;
 global using MessageBox.Avalonia;
 global using MessageBox.Avalonia.DTO;

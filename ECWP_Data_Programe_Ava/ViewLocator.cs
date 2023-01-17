@@ -1,8 +1,3 @@
-using Avalonia.Controls;
-using Avalonia.Controls.Templates;
-using System;
-using System.ComponentModel;
-
 namespace ECWP_Data_Programe_Ava
 {
     public class ViewLocator : IDataTemplate

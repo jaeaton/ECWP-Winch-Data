@@ -5,15 +5,15 @@
         /// <summary>
         /// Name of the cruise as a string
         /// </summary>
-        public string CruiseName { get; set; }
+        public string? CruiseName { get; set; }
         /// <summary>
         /// Number of casts on a cruise
         /// </summary>
-        public int CastNumber { get; set; }
+        public int? CastNumber { get; set; }
         /// <summary>
         /// Has the cruise name been validated?
         /// </summary>
-        public bool CruiseValid { get; set; }
+        public bool? CruiseValid { get; set; }
         public CruiseModel() { }
         public CruiseModel(string cruiseName, string castNumber)//, bool cruiseValid)
         {

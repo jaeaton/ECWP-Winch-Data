@@ -31,10 +31,7 @@ namespace Views
                 FileOperationsViewModel.WriteConfig(globalConfig);
         }
 
-        public void Initialized(object sender, RoutedEventArgs e)
-        {
-            globalConfig = (GlobalConfigModel)FileOperationsViewModel.ReadConfig(_configDataStore);
-        }
+        
         //Moved to StartStoSaveView
         //public async static void SaveFileNames()
         //{

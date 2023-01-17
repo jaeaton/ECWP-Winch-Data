@@ -3,39 +3,39 @@
     public class DataPointModel
     {
 
-        public string StringID { get; set; }
+        public string? StringID { get; set; }
         /// <summary>
         /// Date value from data source
         /// </summary>
-        public string Date { get; set; }
+        public string? Date { get; set; }
         /// <summary>
         /// Time from data source
         /// </summary>
-        public string Time { get; set; }
+        public string? Time { get; set; }
         /// <summary>
         /// Tension value
         /// </summary>
-        public float Tension { get; set; }
+        public float? Tension { get; set; }
         /// <summary>
         /// Payout value
         /// </summary>
-        public float Payout { get; set; }
+        public float? Payout { get; set; }
         /// <summary>
         /// Speed value
         /// </summary>
-        public float Speed { get; set; }
+        public float? Speed { get; set; }
         /// <summary>
         /// Check Sum Value
         /// </summary>
-        public string CheckSum { get; set; }
+        public string? CheckSum { get; set; }
         /// <summary>
         /// Tension Member Warning (8 bits)
         /// </summary>
-        public string TMWarnings { get; set; }
+        public string? TMWarnings { get; set; }
         /// <summary>
         /// Tension member alarms(8 bits)
         /// </summary>
-        public string TMAlarms { get; set; }
+        public string? TMAlarms { get; set; }
         public DataPointModel()
         {
 
