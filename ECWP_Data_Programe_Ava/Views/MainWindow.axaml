@@ -6,7 +6,7 @@
         x:Class="Views.MainWindow"
 		xmlns:controls="clr-namespace:Views"
         Title="ECWP Winch Data Collection">
-	<Grid>
+	<Panel>
 		<controls:PlottingView/>
-	</Grid>
+	</Panel>
 </Window>

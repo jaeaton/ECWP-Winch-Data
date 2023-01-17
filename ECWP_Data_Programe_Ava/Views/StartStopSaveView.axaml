@@ -6,24 +6,26 @@
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="80"
              x:Class="Views.StartStopSaveView">
 	
-	<Grid>
-		<StackPanel Grid.Row="1" Background="WhiteSmoke" Margin="2">
-			<Grid>
+	<Panel>
+		<StackPanel Background="WhiteSmoke" Margin="2">
+			<Grid RowDefinitions="Auto,Auto">
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="Set Save Location" Width="125" VerticalAlignment="Center"></TextBlock>
 					<Button x:Name="ButtonSaveLocation" IsEnabled="{Binding Path=UserInputsEnable}" Content="Save Location"  Margin="5,0,5,0"  Click="ButtonSaveLocation_Click"></Button>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 					<Button x:Name="ButtonHelp" Content="?" Width="25" Margin="5,0,5,0" Click="ButtonHelp_Click"></Button>
 					<Button Content="Switch To Processing" Margin="5,0,5,0" IsEnabled="False"/>
 					<Button x:Name="ButtonLogMax" Content="Log Max Values" Margin="5,0,5,0" Click="ButtonLogMax_Click" IsEnabled="{Binding Path=logMaxDataCheckBox}"></Button>
-					<Button x:Name="StartStopButton" Content="{ Binding Path=StartStopButtonText,FallbackValue='Start Log'}" HorizontalAlignment="Right" Margin="5,0,5,0" Click="ButtonStartLog_Click"></Button>
+					<Button x:Name="StartStopButton" Content="{ Binding Path=StartStopButtonText,FallbackValue='Start Log'}"  HorizontalAlignment="Right" Margin="5,0,5,0" Click="ButtonStartLog_Click"></Button>
 				</StackPanel>
-			</Grid>
-			<StackPanel Orientation="Horizontal">
-				<TextBlock Text="Path: " VerticalAlignment="Center"/>
-				<TextBlock x:Name="TextBoxFileLocation" Text="{ Binding Path=DirectoryLabel }"  VerticalAlignment="Center"></TextBlock>
+				<StackPanel Orientation="Horizontal" Grid.Row="1">
+					<TextBlock Text="Path: " VerticalAlignment="Center"/>
+					<TextBlock x:Name="TextBoxFileLocation" Text="{ Binding Path=DirectoryLabel }"  VerticalAlignment="Center"></TextBlock>
+
+				</StackPanel>
+			</Grid>	
 				
-			</StackPanel>
-			
 		</StackPanel>
-	</Grid>
+	</Panel>
 </UserControl>

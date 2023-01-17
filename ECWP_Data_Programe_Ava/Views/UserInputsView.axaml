@@ -6,7 +6,7 @@
 			 x:Class="Views.UserInputsView">
 
 	<ScrollViewer>
-		<Grid Background="WhiteSmoke" >
+		<Panel Background="WhiteSmoke" >
 			<StackPanel>
 				<StackPanel Background="AliceBlue">
 					<StackPanel Orientation="Horizontal" Margin="5">
@@ -118,6 +118,6 @@
 					
 				</StackPanel>
 			</StackPanel>
-		</Grid>
+		</Panel>
 	</ScrollViewer>
 </UserControl>
