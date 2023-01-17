@@ -14,3 +14,7 @@ To Do:
 - [i] ~~Move to Avalonia UI for Cross Platform Application~~
 - [i] ~~Record the UNOLS Winch string~~
 - [c] ~~Move to .Net MAUI for Cross platform application~~  No Linux support
+
+Systems Supported:
+ECWP MASH Winches: Moe, Larry, Curly, Shemp
+ECWP 0.322 Hawboldt: Gloria
