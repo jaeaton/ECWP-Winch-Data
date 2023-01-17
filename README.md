@@ -6,10 +6,11 @@ The current configuration can read MTNW Legacy, MTNW 1, and the UNOLS Wire Strin
 To Do:
 - [ ] Add cast processing
 - [ ] Display Tension Member Alarms and Warning
-- [x] ~~Record the UNOLS Winch string~~
 - [ ] Display UNOLS Winch string statuses
 - [ ] Add LCI-90i data reception
 - [ ] Add Hawboldt Data reception
-- [ ] ~~Move to .Net MAUI for Cross platform application~~  No Linux support
-- [x] ~~Move to Avalonia UI for Cross Platform Application~~
 - [ ] Add in detection and themeing for darkmode
+- [i] ~~Add Serial Data Output~~
+- [i] ~~Move to Avalonia UI for Cross Platform Application~~
+- [i] ~~Record the UNOLS Winch string~~
+- [c] ~~Move to .Net MAUI for Cross platform application~~  No Linux support
