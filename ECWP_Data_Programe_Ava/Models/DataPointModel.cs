@@ -15,15 +15,15 @@
         /// <summary>
         /// Tension value
         /// </summary>
-        public float? Tension { get; set; }
+        public float Tension { get; set; }
         /// <summary>
         /// Payout value
         /// </summary>
-        public float? Payout { get; set; }
+        public float Payout { get; set; }
         /// <summary>
         /// Speed value
         /// </summary>
-        public float? Speed { get; set; }
+        public float Speed { get; set; }
         /// <summary>
         /// Check Sum Value
         /// </summary>
