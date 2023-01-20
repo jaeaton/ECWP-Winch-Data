@@ -3,61 +3,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:Views"
-			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
              x:Class="Views.ProcessingView">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
-			<RowDefinition Height="30"/>
+			<RowDefinition Height="50"/>
 		</Grid.RowDefinitions>
 		<Grid Grid.Row="0">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
-			<TreeView Grid.Column="0"/>
-			<StackPanel Grid.Column="1" Background="BlanchedAlmond">
-				<StackPanel Orientation="Horizontal">
-					<Label Content="Cruise Name:" Width="125"/>
-					<TextBox Text="Cruise Name"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<Label Content="Processed Filename:" Width="125"></Label>
-					<Label Content="Processed Filename"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<Label Content="Combined Filename:" Width="125"/>
-					<Label Content="Combined Filename"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<Label Content="Minimum Payout:" Width="125"/>
-					<ComboBox Width="50"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<Label Content="Minimum Tension:" Width="125"/>
-					<ComboBox Width="50"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<Label Content="Processing File:" Width="125"/>
-					<Label Content="Filename"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<Label Content="Processing Line:" Width="125"/>
-					<Label Content="Data"/>
-				</StackPanel>
-			</StackPanel>
+			<local:ProcessingInputsView Grid.Column="0"/>
+			<local:ProcessingPlotView Grid.Column="1"/>
+			
 		</Grid>
-		<StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,5,10,5" HorizontalAlignment="Right">
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-				<Button Content="Select File" Width="150"/>
-			</StackPanel>
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-				<Button Content="?" Width="25"/>
-				<Button Content="Combine Files" Width="150"/>
-				<Button Content="Process Combined File" Width="150"/>
-				<Button Content="Switch To Plotting" Width="150"/>
-			</StackPanel>
-
-		</StackPanel>
+		<local:ProcessingControlsView Grid.Row="1"/>
 	</Grid>
 </UserControl>

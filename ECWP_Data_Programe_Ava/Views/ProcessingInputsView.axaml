@@ -1,0 +1,70 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="600"
+             x:Class="Views.ProcessingInputsView">
+
+	<StackPanel Background="BlanchedAlmond">
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Select Winch:" VerticalAlignment="Center" Width="130"/>
+			<ComboBox Width="150">
+				<ComboBoxItem Content="MASH Winch" IsSelected="True"/>
+				<ComboBoxItem Content="SIO Traction Winch"/>
+				<ComboBoxItem Content="Armstrong CAST 6"/>
+				<ComboBoxItem Content="UNOLS String"/>
+			</ComboBox>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Cruise Name:" VerticalAlignment="Center" Width="130"/>
+			<TextBox Text="Cruise Name"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Processed Filename:" Width="130"/>
+			<Label Content="Processed Filename"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Combined Filename:" Width="130"/>
+			<Label Content="Combined Filename"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Path:" Width="125"/>
+			<Label Content="Path"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Number of Files:" Width="125"/>
+			<Label Content="Quantity"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Processing File:" Width="125"/>
+			<Label Content="Filename"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Processing Line:" Width="125"/>
+			<Label Content="Data"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Minimum Payout:" VerticalAlignment="Center" Width="140"/>
+			<ComboBox>
+				<ComboBoxItem Content="-10"/>
+				<ComboBoxItem Content="0"/>
+				<ComboBoxItem Content="12"/>
+				<ComboBoxItem Content="25"/>
+				<ComboBoxItem Content="50"/>
+			</ComboBox>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Minimum Tension:" VerticalAlignment="Center" Width="140"/>
+			<ComboBox>
+				<ComboBoxItem Content="-100"/>
+				<ComboBoxItem Content="0"/>
+				<ComboBoxItem Content="100"/>
+				<ComboBoxItem Content="250"/>
+				<ComboBoxItem Content="500"/>
+			</ComboBox>
+		</StackPanel>
+		<Button Content="File Location" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+		<Button Content="Save Settings" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+	</StackPanel>
+	
+</UserControl>
