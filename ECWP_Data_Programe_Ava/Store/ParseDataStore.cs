@@ -37,5 +37,8 @@
 
         [ObservableProperty]
         private string? readingLine;
+
+        [ObservableProperty]
+        private int? numberOfFiles;
     }
 }

@@ -8,7 +8,7 @@
 	<StackPanel Background="BlanchedAlmond">
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Select Winch:" VerticalAlignment="Center" Width="130"/>
-			<ComboBox Width="150">
+			<ComboBox SelectedItem="{ Binding Path=SelectedWinch }" Width="150">
 				<ComboBoxItem Content="MASH Winch" IsSelected="True"/>
 				<ComboBoxItem Content="SIO Traction Winch"/>
 				<ComboBoxItem Content="Armstrong CAST 6"/>
@@ -17,35 +17,35 @@
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Cruise Name:" VerticalAlignment="Center" Width="130"/>
-			<TextBox Text="Cruise Name"/>
+			<TextBox Text="{ Binding CruiseName, FallbackValue=Enter Cruise Name}" Width="150"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
-			<Label Content="Processed Filename:" Width="130"/>
-			<Label Content="Processed Filename"/>
+			<Label Content="Processed Filename:" Width="140"/>
+			<Label Content="{ Binding ProcessedFileName, FallbackValue=Filename } "/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
-			<Label Content="Combined Filename:" Width="130"/>
-			<Label Content="Combined Filename"/>
+			<Label Content="Combined Filename:" Width="140"/>
+			<Label Content="{ Binding CombinedFileName,FallbackValue=Combo Filename }"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
-			<Label Content="Path:" Width="125"/>
-			<Label Content="Path"/>
+			<Label Content="Directory:" Width="125"/>
+			<Label Content="{ Binding Directory, FallbackValue=Path }"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Number of Files:" Width="125"/>
-			<Label Content="Quantity"/>
+			<Label Content="{ Binding NumberOfFiles, FallbackValue=Quantity}"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Processing File:" Width="125"/>
-			<Label Content="Filename"/>
+			<Label Content="{ Binding ReadingFileName, FallbackValue=Reading File }"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Processing Line:" Width="125"/>
-			<Label Content="Data"/>
+			<Label Content="{ Binding ReadingLine, FallbackValue=Data}"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Minimum Payout:" VerticalAlignment="Center" Width="140"/>
-			<ComboBox>
+			<ComboBox SelectedItem="{ Binding MinPayout}">
 				<ComboBoxItem Content="-10"/>
 				<ComboBoxItem Content="0"/>
 				<ComboBoxItem Content="12"/>
@@ -55,7 +55,7 @@
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Minimum Tension:" VerticalAlignment="Center" Width="140"/>
-			<ComboBox>
+			<ComboBox SelectedItem="{ Binding MinTension }">
 				<ComboBoxItem Content="-100"/>
 				<ComboBoxItem Content="0"/>
 				<ComboBoxItem Content="100"/>
