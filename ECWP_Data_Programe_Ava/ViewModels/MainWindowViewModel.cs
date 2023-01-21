@@ -1,6 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-
-namespace ViewModels
+﻿namespace ViewModels
 {
     public class MainWindowViewModel : ObservableObject
     {

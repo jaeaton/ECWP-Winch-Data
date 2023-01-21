@@ -17,7 +17,6 @@
 			</Grid.ColumnDefinitions>
 			<local:ProcessingInputsView Grid.Column="0"/>
 			<local:ProcessingPlotView Grid.Column="1"/>
-			
 		</Grid>
 		<local:ProcessingControlsView Grid.Row="1"/>
 	</Grid>
