@@ -107,6 +107,16 @@
             TMAlarms = tMAlarms;
 
         }
-        
+
+        public DataPointModel(string SID, string Ten, string Sp, string Pay)
+        {
+            StringID = SID;
+            Tension = float.Parse(Ten);
+            Speed = float.Parse(Sp);
+            Payout = float.Parse(Pay);
+            TMWarnings = "00000000";
+            TMAlarms = "00000000";
+        }
+
     }
 }
