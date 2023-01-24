@@ -1,44 +1,45 @@
 ﻿namespace Store
 {
+    //Data store for parse data
     public partial class ParseDataStore : ObservableObject
     {
         [ObservableProperty]
-        private string? directory;
+        private string? _directory;
 
         [ObservableProperty]
-        private string? cruiseName;
+        private string? _cruiseName;
 
         [ObservableProperty]
-        private string? combinedFileName;
+        private string? _combinedFileName;
 
         [ObservableProperty]
-        private string? processedFileName;
+        private string? _processedFileName;
 
         [ObservableProperty]
-        private string? winchSelection;
+        private string? _winchSelection;
 
         [ObservableProperty]
-        private float? minTension;
+        private float? _minTension;
 
         [ObservableProperty]
-        private float? minPayout;
+        private float? _minPayout;
 
         [ObservableProperty]
-        private string? selectedWinch;
+        private string? _selectedWinch;
 
         [ObservableProperty]
-        private string? selectedWinchEnabled;
+        private string? _selectedWinchEnabled;
 
         [ObservableProperty]
-        private string? fileList;
+        private string? _fileList;
 
         [ObservableProperty]
-        private string? readingFileName;
+        private string? _readingFileName;
 
         [ObservableProperty]
-        private string? readingLine;
+        private string? _readingLine;
 
         [ObservableProperty]
-        private int? numberOfFiles;
+        private int? _numberOfFiles;
     }
 }

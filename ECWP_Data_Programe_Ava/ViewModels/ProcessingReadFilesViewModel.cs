@@ -10,7 +10,7 @@
             string filePath = _settingsStore.Directory;
             foreach (var fin in _settingsStore.FileList)
             {
-                var fileRead = fin;
+                var fileRead = fin.ToString();
                 MainProcessingViewModel.parseData.ReadingFileName = fileRead;
                 System.IO.StreamReader file = new System.IO.StreamReader(fileRead); //Setup stream reader to read file
                 string line;

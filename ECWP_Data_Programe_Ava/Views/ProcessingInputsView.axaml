@@ -63,8 +63,9 @@
 				<ComboBoxItem Content="500"/>
 			</ComboBox>
 		</StackPanel>
+
 		<Button Content="File Location" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
-		<Button Content="Save Settings" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+		<Button Content="Save Settings" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
 	</StackPanel>
 	
 </UserControl>

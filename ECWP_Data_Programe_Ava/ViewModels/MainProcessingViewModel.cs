@@ -1,8 +1,22 @@
-﻿namespace ViewModels
+﻿using CommunityToolkit.Mvvm.Input;
+
+namespace ViewModels
 {
-    public class MainProcessingViewModel : ObservableObject
+    public partial class MainProcessingViewModel : ObservableObject
     {
         public static ParseDataStore? parseData = new ParseDataStore();
 
+        //[RelayCommand]
+        //void File_Location()
+        //{
+
+        //}
+        //[RelayCommand]
+        //void Save_Config()
+        //{
+
+        //}
     }
+
+    
 }

@@ -8,13 +8,13 @@
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(MainProcessingViewModel.parseData.Directory + '\\' + MainProcessingViewModel.parseData.CombinedFileName, true))    //Write Combined Log file
             {
 
-                string date = "yyyy/MM/dd";
-                string time = "HH:mm:ss.fff";
+                string? dateFormat = "yyyy/MM/dd";
+                string? timeFormat = "HH:mm:ss.fff";
 
                 for (int j = 0; j < Data.Count; j++)
                 {
                     DataPointModel lineData = Data[j];
-                    file.WriteLine(lineData.StringID + "," + lineData.DateAndTime.ToString(date) + "," + lineData.DateAndTime.ToString(time) + "," + lineData.Tension + "," + lineData.Speed + "," + lineData.Payout + "," + lineData.TMWarnings + "," + lineData.TMAlarms + "," + lineData.Checksum);
+                    file.WriteLine(lineData.StringID + "," + lineData.DateAndTime.ToString(dateFormat) + "," + lineData.DateAndTime.ToString(timeFormat) + "," + lineData.Tension + "," + lineData.Speed + "," + lineData.Payout + "," + lineData.TMWarnings + "," + lineData.TMAlarms + "," + lineData.CheckSum);
 
                 }
 

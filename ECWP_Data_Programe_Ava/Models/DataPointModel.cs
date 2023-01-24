@@ -13,6 +13,10 @@
         /// </summary>
         public string? Time { get; set; }
         /// <summary>
+        /// Combined Date and Time
+        /// </summary>
+        public DateTime DateAndTime { get; set; }
+        /// <summary>
         /// Tension value
         /// </summary>
         public float Tension { get; set; }
