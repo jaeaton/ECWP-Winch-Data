@@ -17,6 +17,21 @@ namespace Views
             _configDataStore.UserInputsEnable = true;
             _configDataStore.StartStopButtonText = "Start Log";
             _configDataStore.AvailableSerialPorts = ViewModels.GetSerialPorts.FindSerialPorts();
+            _configDataStore.AvailableBaudRates = new List<string> 
+                                                            { 
+                                                                "57600",
+                                                                "38400",
+                                                                "19200",
+                                                                "9600",
+                                                                "4800"
+                                                            };
+            _configDataStore.AvailableWinches = new List<string>
+                                                            {
+                                                                "Gloria/Mash Winches",
+                                                                "LCI-90i",
+                                                                "Hawboldt Protocol"                                                                
+                                                            };
+
         }
        
         public void Button_Click(object sender, RoutedEventArgs e)

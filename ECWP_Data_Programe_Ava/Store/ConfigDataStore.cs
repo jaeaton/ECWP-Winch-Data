@@ -71,6 +71,14 @@
 
         [ObservableProperty]
         private List<string>? availableSerialPorts;
-        
+
+        [ObservableProperty]
+        private List<string>? availableBaudRates;
+
+        [ObservableProperty]
+        private string? winchSelection;
+
+        [ObservableProperty]
+        private List<string>? availableWinches;
     }
 }

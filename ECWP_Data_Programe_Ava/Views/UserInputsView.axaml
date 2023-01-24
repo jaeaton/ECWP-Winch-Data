@@ -9,12 +9,12 @@
 		<Panel Background="WhiteSmoke" >
 			<StackPanel>
 				<StackPanel Background="AliceBlue">
-					<StackPanel Orientation="Horizontal" Margin="5">
-						<TextBlock Text="Data Source" Width="100"></TextBlock>
-					</StackPanel>
+					
+						<TextBlock Text="Data Source" Width="100" HorizontalAlignment="Left" Margin="5"/>
+						<ComboBox MinWidth="130" Margin="5" SelectedItem="{ Binding Path=WinchSelection, Mode=TwoWay }" Items="{ Binding Path=AvailableWinches }" SelectedIndex="0"/>
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Text="IP Address" Width="90" VerticalAlignment="Center" ></TextBlock>
-						<TextBox Watermark="192.168.103.217" Text="{ Binding Path=IpAddressInputSourceBox}" IsEnabled="{Binding Path=UserInputsEnable}" Width="130" VerticalAlignment="Center"></TextBox>
+						<TextBox Watermark="192.168.103.217" Text="{ Binding Path=IpAddressInputSourceBox}" IsEnabled="{Binding Path=UserInputsEnable}" Width="130" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBox>
 					</StackPanel>
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Text="Port Number" Width="90" VerticalAlignment="Center" ></TextBlock>
@@ -94,29 +94,22 @@
 					<StackPanel IsVisible="{ Binding ElementName=CheckBoxSendSerial,Path=IsChecked }">
 							<StackPanel  Margin="5" Orientation="Horizontal">
 								<TextBlock Text="Serial Port" Width="100" VerticalAlignment="Center"/>
-								<ComboBox Name="serialPorts" Width="100" SelectedItem="{Binding Path=SerialPortName,Mode=TwoWay}" Items="{Binding Path=AvailableSerialPorts}" />
+								<ComboBox Name="serialPorts" Width="100" SelectedItem="{Binding Path=SerialPortName,Mode=TwoWay}" Items="{ Binding Path=AvailableSerialPorts }" />
 							</StackPanel>
 							<StackPanel  Margin="5" Orientation="Horizontal">
 								<TextBlock Text="Baud Rate" Width="100" VerticalAlignment="Center" />
-								<ComboBox Width="100" SelectedItem="{ Binding Path=BaudRate,Mode=TwoWay }">
-									<ComboBoxItem Content="115200" IsSelected="True"/>
-									<ComboBoxItem Content="57600"/>
-									<ComboBoxItem Content="38400"/>
-									<ComboBoxItem Content="19200"/>
-									<ComboBoxItem Content="9600"/>
-									<ComboBoxItem Content="4800"/>
-								</ComboBox>
-							</StackPanel>
+								<ComboBox Width="100" SelectedItem="{ Binding Path=BaudRate,Mode=TwoWay }" Items="{ Binding Path=AvailableBaudRates }" SelectedIndex="0"/>
+								</StackPanel>
 							<StackPanel>
 								<RadioButton Content="MTNW Format"  IsEnabled="{Binding Path=UserInputsEnable}" HorizontalContentAlignment="Right" Margin="6,0,50,0" GroupName="serialFormat"  IsChecked="{Binding Path=MtnwSerialStringButton, FallbackValue='False'}" />
 								<RadioButton Content="UNOLS Format" IsEnabled="{Binding Path=UserInputsEnable}" HorizontalContentAlignment="Right" Margin="6,0,50,0" GroupName="serialFormat" IsChecked="{Binding Path=UnolsSerialStringButton, FallbackValue='True'}" />
 							</StackPanel>
 						</StackPanel>															
 				</StackPanel>
-				<StackPanel Orientation="Horizontal" Margin="5">
-					<Button Content="Save Parameters" IsEnabled="{Binding Path=UserInputsEnable}" Click="Button_Click"></Button>
+				
+					<Button Content="Save Parameters" Margin="5" IsEnabled="{Binding Path=UserInputsEnable}" Click="Button_Click"></Button>
 					
-				</StackPanel>
+				
 			</StackPanel>
 		</Panel>
 	</ScrollViewer>

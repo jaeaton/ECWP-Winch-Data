@@ -42,8 +42,9 @@ namespace ViewModels
                 $"UNOLS File Format, {globalConfig.LogUnolsSwitch }",
                 $"Send Serial,{ globalConfig.SerialSwitch }",
                 $"UNOLS Serial String, { globalConfig.UnolsSerialFormatSet }",
-                $"Serial Port Name, {globalConfig.SerialPortName }",
-                $"Serial Baud Rate, {globalConfig.SerialPortBaud }"
+                $"Serial Port Name, { globalConfig.SerialPortName }",
+                $"Serial Baud Rate, { globalConfig.SerialPortBaud }",
+                $"Selected Winch, { globalConfig.WinchSelection }"
                 };
             //Write each line of array using stream writer
             using (StreamWriter stream = new StreamWriter(destPath))
@@ -178,7 +179,10 @@ namespace ViewModels
                         {
                             _configDataStore.BaudRate = line.Substring(delim + 1);
                         }
-
+                        if (line.Substring(0, delim) == "Selected Winch")
+                        {
+                            _configDataStore.WinchSelection = line.Substring(delim + 1);
+                        }
                     }
                     GlobalConfigModel globalConfig = new GlobalConfigModel();
                     //update global config to the parameters loaded
