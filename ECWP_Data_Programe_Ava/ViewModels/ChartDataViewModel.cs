@@ -42,7 +42,7 @@
                     Fill = null,
                     GeometrySize = 0,
                     LineSmoothness = 0,
-                    Stroke = new SolidColorPaint(SKColors.Empty, 1),
+                    Stroke = new SolidColorPaint(SKColors.Red, 1),
                 }
 
             };
@@ -90,19 +90,19 @@
 
             //uncomment for windowing of plot
             _observableValuesZero.Add(new DateTimePoint { DateTime = dateTime, Value = 0 });
-            _observableValuesMax.Add(new DateTimePoint { DateTime = dateTime, Value = Double.Parse(DataHandlingViewModel._liveData.MaxTension) * 1.05 });
+            _observableValuesMax.Add(new DateTimePoint { DateTime = dateTime, Value = Double.Parse(DataHandlingViewModel._liveData.MaxTension)  });
             //_observableValues.Add(new ObservablePoint { X = i++, Y = latest.Tension });
             
             if (_observableValues.Count > 500)
             {
                 _observableValues.RemoveAt(0);
-                
+                _observableValuesMax.RemoveAt(0);
             }
             //uncomment for windowing of plot Keeps zero series and max series small
             if (_observableValuesZero.Count > 10)
                 {
                     _observableValuesZero.RemoveAt(0);
-                    _observableValuesMax.RemoveAt(0);
+                    //_observableValuesMax.RemoveAt(0);
 
                 }
         }

@@ -38,13 +38,13 @@ namespace ViewModels
                 $"Log Max Values,{ globalConfig.LogMaxValuesSwitch }",
                 $"Use Computer Time,{ globalConfig.UseComputerTimeSwitch }",
                 $"Save Location,{ globalConfig.SaveDirectory }",
-                $"UNOLS String, { globalConfig.UnolsUdpFormatSet }",
+                $"UNOLS String,{ globalConfig.UnolsUdpFormatSet }",
                 $"UNOLS File Format, {globalConfig.LogUnolsSwitch }",
                 $"Send Serial,{ globalConfig.SerialSwitch }",
-                $"UNOLS Serial String, { globalConfig.UnolsSerialFormatSet }",
-                $"Serial Port Name, { globalConfig.SerialPortName }",
-                $"Serial Baud Rate, { globalConfig.SerialPortBaud }",
-                $"Selected Winch, { globalConfig.WinchSelection }"
+                $"UNOLS Serial String,{ globalConfig.UnolsSerialFormatSet }",
+                $"Serial Port Name,{ globalConfig.SerialPortName }",
+                $"Serial Baud Rate,{ globalConfig.SerialPortBaud }",
+                $"Selected Winch,{ globalConfig.WinchSelection }"
                 };
             //Write each line of array using stream writer
             using (StreamWriter stream = new StreamWriter(destPath))

@@ -11,7 +11,7 @@
 				<StackPanel Background="AliceBlue">
 					
 						<TextBlock Text="Data Source" Width="100" HorizontalAlignment="Left" Margin="5"/>
-						<ComboBox MinWidth="130" Margin="5" SelectedItem="{ Binding Path=WinchSelection, Mode=TwoWay }" Items="{ Binding Path=AvailableWinches }" SelectedIndex="0"/>
+						<ComboBox MinWidth="130" Margin="5" SelectedItem="{ Binding Path=WinchSelection, Mode=TwoWay }" Items="{ Binding Path=AvailableWinches }" SelectedIndex="1"/>
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Text="IP Address" Width="90" VerticalAlignment="Center" ></TextBlock>
 						<TextBox Watermark="192.168.103.217" Text="{ Binding Path=IpAddressInputSourceBox}" IsEnabled="{Binding Path=UserInputsEnable}" Width="130" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBox>

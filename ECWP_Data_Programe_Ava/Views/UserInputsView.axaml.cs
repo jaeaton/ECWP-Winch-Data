@@ -9,16 +9,16 @@ namespace Views
         public UserInputsView()
         {
             //Initialized += OnInitialized;
-            InitializeComponent();
+            //InitializeComponent();
             _configDataStore = new ConfigDataStore();
             
             this.DataContext = _configDataStore;
-            globalConfig = (GlobalConfigModel)FileOperationsViewModel.ReadConfig(_configDataStore);
+            
             _configDataStore.UserInputsEnable = true;
             _configDataStore.StartStopButtonText = "Start Log";
             _configDataStore.AvailableSerialPorts = ViewModels.GetSerialPorts.FindSerialPorts();
-            _configDataStore.AvailableBaudRates = new List<string> 
-                                                            { 
+            _configDataStore.AvailableBaudRates = new List<string>
+                                                            {
                                                                 "57600",
                                                                 "38400",
                                                                 "19200",
@@ -29,8 +29,11 @@ namespace Views
                                                             {
                                                                 "Gloria/Mash Winches",
                                                                 "LCI-90i",
-                                                                "Hawboldt Protocol"                                                                
+                                                                "Hawboldt Protocol"
                                                             };
+            globalConfig = (GlobalConfigModel)FileOperationsViewModel.ReadConfig(_configDataStore);
+            InitializeComponent();
+            //FileOperationsViewModel.WriteConfig(globalConfig);
 
         }
        

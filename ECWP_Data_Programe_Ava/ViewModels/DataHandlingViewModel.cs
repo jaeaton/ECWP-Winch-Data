@@ -21,58 +21,109 @@
                 _serialPort.Open();
             }
             string dataIn;
-            TcpClient client = new TcpClient();
-            //client.ReceiveTimeout = 20000;
-            //Check to see if TCP client is connected and if not connect
-            try
+            if (globalConfig.WinchSelection == "LCI-90i") 
             {
-
-
-                if (!client.Connected)
+                TcpListener server = null;
+                TcpClient client = null;
+                try
                 {
-                    if (!client.ConnectAsync(IPAddress.Parse(globalConfig.ReceiveCommunication.IPAddress), int.Parse(globalConfig.ReceiveCommunication.PortNumber)).Wait(5000))
+                    // Set the TcpListener to selected port 
+                    Int32 port = int.Parse(globalConfig.ReceiveCommunication.PortNumber);
+                    //should be look up local host
+                    //TODO change to look up local host
+                    IPAddress localAddr = IPAddress.Parse(globalConfig.ReceiveCommunication.IPAddress);
+
+                    // TcpListener server = new TcpListener(port);
+                    server = new TcpListener(localAddr, port);
+
+                    // Start listening for client requests.
+                    server.Start();
+                    // Perform a blocking call to accept requests.
+                    // You could also use server.AcceptSocket() here.
+                    client = server.AcceptTcpClient();
+
+                    // Enter the listening loop.
+                    while (!StartStopSaveView._canceller.Token.IsCancellationRequested)
                     {
-                        // connection failure
-                        MessageBoxViewModel.DisplayMessage("Failed to connect to TCP Server");
-                    }
-                    //client.Connect(IPAddress.Parse(globalConfig.ReceiveCommunication.IPAddress), int.Parse(globalConfig.ReceiveCommunication.PortNumber));
-                }
-            }
-            //catch (IOException e)
-            //{
-            //    MessageBox.Show($"IOException: { e.Message }");
-            //}
-            catch (ArgumentNullException e)
-            {
-                MessageBoxViewModel.DisplayMessage($"ArgumentNullException: { e.Message }");
-            }
-            catch (SocketException e)
-            {
-                MessageBoxViewModel.DisplayMessage($"SocketException: { e.Message }");
-            }
-            catch (ObjectDisposedException e)
-            {
-                MessageBoxViewModel.DisplayMessage($"ObjectDisposeException: { e.Message }");
-            }
-            //Looks for cancellation token to stop data collection
-            if (client.Connected)
-            {
-                while (!StartStopSaveView._canceller.Token.IsCancellationRequested)
-                {
-                    //Asynchronious read of data to allow for other operations to occur
-                    dataIn = await Task.Run(() => ReadTCPData(client));
-                    //_liveData.RawWireData = dataIn;
-                    //read data
-                    ParseData(dataIn, globalConfig);
+                        
+                        
+                        //Asynchronious read of data to allow for other operations to occur
+                        dataIn = await Task.Run(() => ReadTCPData(client));
+                        //_liveData.RawWireData = dataIn;
+                        //read data
+                        ParseData(dataIn, globalConfig);
 
+                    }
+                }
+                catch (SocketException e)
+                {
+                    string msg = $"SocketException: {e}";
+                    MessageBoxViewModel.DisplayMessage(msg);
+                }
+                finally
+                {
+                    server.Stop();
+                    client.Close();
+                    client.Dispose();
+                    
                 }
             }
-            //Close TCP client
-            client.Close();
-            //Close Serial port
+            else
+            {
+                TcpClient client = new TcpClient();
+                //client.ReceiveTimeout = 20000;
+                //Check to see if TCP client is connected and if not connect
+                try
+                {
+
+
+                    if (!client.Connected)
+                    {
+                        if (!client.ConnectAsync(IPAddress.Parse(globalConfig.ReceiveCommunication.IPAddress), int.Parse(globalConfig.ReceiveCommunication.PortNumber)).Wait(5000))
+                        {
+                            // connection failure
+                            MessageBoxViewModel.DisplayMessage("Failed to connect to TCP Server");
+                        }
+                        //client.Connect(IPAddress.Parse(globalConfig.ReceiveCommunication.IPAddress), int.Parse(globalConfig.ReceiveCommunication.PortNumber));
+                    }
+                }
+                //catch (IOException e)
+                //{
+                //    MessageBox.Show($"IOException: { e.Message }");
+                //}
+                catch (ArgumentNullException e)
+                {
+                    MessageBoxViewModel.DisplayMessage($"ArgumentNullException: {e.Message}");
+                }
+                catch (SocketException e)
+                {
+                    MessageBoxViewModel.DisplayMessage($"SocketException: {e.Message}");
+                }
+                catch (ObjectDisposedException e)
+                {
+                    MessageBoxViewModel.DisplayMessage($"ObjectDisposeException: {e.Message}");
+                }
+                //Looks for cancellation token to stop data collection
+                if (client.Connected)
+                {
+                    while (!StartStopSaveView._canceller.Token.IsCancellationRequested)
+                    {
+                        //Asynchronious read of data to allow for other operations to occur
+                        dataIn = await Task.Run(() => ReadTCPData(client));
+                        //_liveData.RawWireData = dataIn;
+                        //read data
+                        ParseData(dataIn, globalConfig);
+
+                    }
+                }
+                //Close TCP client
+                client.Close();
+                client.Dispose();
+            }
             if (_serialPort.IsOpen)
             {
                 _serialPort.Close();
+                _serialPort.Dispose();
             }            
             //free up canceller resources
             StartStopSaveView._canceller.Dispose();
@@ -115,18 +166,33 @@
             return responseData;
             
         }
+        private static string ReplaceNonPrintableCharacters(string s, char replaceWith)
+        {
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < s.Length; i++)
+            {
+                char c = s[i];
+                byte b = (byte)c;
+                if (b < 32)
+                    result.Append(replaceWith);
+                else
+                    result.Append(c);
+            }
+            return result.ToString();
+        }
         private static void ParseData(string lines, GlobalConfigModel globalConfig)
         {
             //Parse incoming data function and store in DataPointModel
             bool maxChange = false;
             bool getTime = false;
+
             lines = lines.Replace("$WIR", Environment.NewLine + "$WIR");
             string[] strings = lines.Split(Environment.NewLine,
                             StringSplitOptions.RemoveEmptyEntries);
             foreach (var line in strings)
             {
-
                 string data = line.Replace("\0", string.Empty);
+                data = ReplaceNonPrintableCharacters(data, ' ');
                 string[] strIn = data.Split(',', 'T');
                 DataPointModel latest = new DataPointModel();
                 //Uncomment to log all data coming in
@@ -165,7 +231,7 @@
                                                 
                     }
                     //MTNW 1 input  (Includes date and time)
-                    else if (strIn.Length == 7 && strIn.Contains("RD"))
+                    else if (strIn.Length == 7 && strIn[0].Contains("RD"))
                     {
 
                         latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);

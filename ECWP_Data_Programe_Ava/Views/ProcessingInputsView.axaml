@@ -8,7 +8,7 @@
 	<StackPanel Background="BlanchedAlmond">
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Select Winch:" VerticalAlignment="Center" Width="130"/>
-			<ComboBox SelectedItem="{ Binding Path=SelectedWinch }" Width="150">
+			<ComboBox SelectedItem="{ Binding Path=SelectedWinch, Mode=TwoWay }"  Width="150">
 				<ComboBoxItem Content="MASH Winch" IsSelected="True"/>
 				<ComboBoxItem Content="SIO Traction Winch"/>
 				<ComboBoxItem Content="Armstrong CAST 6"/>
