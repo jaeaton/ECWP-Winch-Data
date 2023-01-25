@@ -57,19 +57,17 @@
                 }
                 catch (SocketException e)
                 {
-                    string msg = $"SocketException: {e}";
+                    string msg = $"SocketException: {e.Message}";
                     MessageBoxViewModel.DisplayMessage(msg);
                 }
-                finally
-                {
-                    server.Stop();
-                    if (client.Connected)
+                server.Stop();
+                    if (client != null)
                     {
                         client.Close();
                         client.Dispose();
                     }
                     
-                }
+                
             }
             else
             {
