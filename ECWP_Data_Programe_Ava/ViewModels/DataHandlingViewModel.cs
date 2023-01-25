@@ -63,8 +63,11 @@
                 finally
                 {
                     server.Stop();
-                    client.Close();
-                    client.Dispose();
+                    if (client.Connected)
+                    {
+                        client.Close();
+                        client.Dispose();
+                    }
                     
                 }
             }
