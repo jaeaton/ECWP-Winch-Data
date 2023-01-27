@@ -6,7 +6,6 @@
              x:Class="Views.ProcessingControlsView">
 	<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 		<Button  Content="?" Width="25" Margin="5,0,5,0" />
-		<Button Content="Switch To Plotting" Margin="5,0,5,0" IsEnabled="False"/>
 		<Button  Content="Combine Files" Margin="5,0,5,0" />
 		<Button  Content="Process Casts"  HorizontalAlignment="Right" Margin="5,0,5,0" />
 	</StackPanel>

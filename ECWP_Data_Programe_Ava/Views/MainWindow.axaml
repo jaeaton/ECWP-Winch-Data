@@ -6,7 +6,13 @@
         x:Class="Views.MainWindow"
 		xmlns:controls="clr-namespace:Views"
         Title="ECWP Winch Data Collection">
-	<Panel>
-		<controls:PlottingView/>
-	</Panel>
+
+	<TabControl>
+		<TabItem Header="Live Data" VerticalContentAlignment="Center">
+			<controls:PlottingView/>
+		</TabItem>
+		<TabItem Header="Data Processing" VerticalContentAlignment="Center">
+			<controls:ProcessingView/>
+		</TabItem>
+	</TabControl>
 </Window>

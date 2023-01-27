@@ -4,14 +4,14 @@
     {
         public static async void CombineFiles()
         {
-            ParseDataStore _settingsStore = MainProcessingViewModel.parseData;
+            ParseDataStore _settingsStore = ProcessingViewModel.parseData;
             List<string> fileList = new(); //List<string>();
             //fileList = _settingsStore.FileList;
             string filePath = _settingsStore.Directory;
             foreach (var fin in _settingsStore.FileList)
             {
                 var fileRead = fin.ToString();
-                MainProcessingViewModel.parseData.ReadingFileName = fileRead;
+                ProcessingViewModel.parseData.ReadingFileName = fileRead;
                 System.IO.StreamReader file = new System.IO.StreamReader(fileRead); //Setup stream reader to read file
                 string line;
                 bool flag = false;
@@ -27,7 +27,7 @@
                     {
                         line = line.Replace("\n", String.Empty); //remove EOL Characters
                         line = line.Replace("\r", String.Empty);
-                        MainProcessingViewModel.parseData.ReadingLine = line;
+                        ProcessingViewModel.parseData.ReadingLine = line;
                         string[] data = line.Split(',');
                         if (data.Length > 2)
                         {
@@ -184,19 +184,19 @@
 
                 file.Close(); //Close the file
             }
-            MainProcessingViewModel.parseData.ReadingLine = "Done!"; //Update UI with done
+            ProcessingViewModel.parseData.ReadingLine = "Done!"; //Update UI with done
         }
         public static async void ParseFiles()
         {
             // Read threshold values
-            float? minPayout = MainProcessingViewModel.parseData.MinPayout;
-            float? minTension = MainProcessingViewModel.parseData.MinTension;
+            float? minPayout = ProcessingViewModel.parseData.MinPayout;
+            float? minTension = ProcessingViewModel.parseData.MinTension;
             //int x = 1;
             //int y = 3;
-            MainProcessingViewModel.parseData.ReadingFileName = MainProcessingViewModel.parseData.CombinedFileName;
-            MainProcessingViewModel.parseData.ReadingLine = "Starting!";
+            ProcessingViewModel.parseData.ReadingFileName = ProcessingViewModel.parseData.CombinedFileName;
+            ProcessingViewModel.parseData.ReadingLine = "Starting!";
             //Read in collected file and determine maximum values of casts
-            using (System.IO.StreamReader sr = new System.IO.StreamReader(MainProcessingViewModel.parseData.Directory + '\\' + MainProcessingViewModel.parseData.CombinedFileName, true))
+            using (System.IO.StreamReader sr = new System.IO.StreamReader(ProcessingViewModel.parseData.Directory + '\\' + ProcessingViewModel.parseData.CombinedFileName, true))
             {
                 float maxTensionCurrent = 0;
                 float maxPayoutCurrent = 0;
@@ -257,7 +257,7 @@
                             if (/*lineData.Tension < minTension &&*/ Math.Abs(lineData.Payout) < minPayout && castActive == true)
                             {
                                 ProcessingWriteFilesViewModel.writeProcessed(maxTensionString, maxPayoutString, cast); //end cast, increment cast number, write processed data
-                                MainProcessingViewModel.parseData.ReadingLine = maxTensionString;
+                                ProcessingViewModel.parseData.ReadingLine = maxTensionString;
 
                                 cast++;
                                 castActive = false;
@@ -309,7 +309,7 @@
                     }
                 });
             }
-            MainProcessingViewModel.parseData.ReadingLine = "Done!";
+            ProcessingViewModel.parseData.ReadingLine = "Done!";
         }
     }
 }

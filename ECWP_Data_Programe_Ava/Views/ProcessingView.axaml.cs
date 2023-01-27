@@ -5,7 +5,7 @@ namespace Views
         public ProcessingView()
         {
             InitializeComponent();
-            this.DataContext= new MainProcessingViewModel();
+            this.DataContext= ProcessingViewModel.parseData;
         }
 
         

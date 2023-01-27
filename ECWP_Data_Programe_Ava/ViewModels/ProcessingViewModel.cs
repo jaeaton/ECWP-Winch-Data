@@ -2,7 +2,7 @@
 
 namespace ViewModels
 {
-    public partial class MainProcessingViewModel : ObservableObject
+    public partial class ProcessingViewModel : ObservableObject
     {
         public static ParseDataStore? parseData = new ParseDataStore();
 
