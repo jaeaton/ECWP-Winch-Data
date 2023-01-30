@@ -8,7 +8,8 @@
 	<StackPanel Background="BlanchedAlmond">
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Select Winch:" VerticalAlignment="Center" Width="130"/>
-			<ComboBox SelectedItem="{ Binding Path=SelectedWinch, Mode=TwoWay }"  Width="150">
+			
+			<ComboBox SelectedItem="{ Binding Path = ParseData.WinchSelection, Mode=TwoWay }"  Width="150">
 				<ComboBoxItem Content="MASH Winch" IsSelected="True"/>
 				<ComboBoxItem Content="SIO Traction Winch"/>
 				<ComboBoxItem Content="Armstrong CAST 6"/>
@@ -17,35 +18,35 @@
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Cruise Name:" VerticalAlignment="Center" Width="130"/>
-			<TextBox Text="{ Binding CruiseName, FallbackValue=Enter Cruise Name}" Width="150"/>
+			<TextBox Text="{ Binding Path=ParseData.CruiseName, FallbackValue=Enter Cruise Name}" Width="150"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Processed Filename:" Width="140"/>
-			<Label Content="{ Binding ProcessedFileName, FallbackValue=Filename } "/>
+			<Label Content="{ Binding Path=ParseData.ProcessedFileName, FallbackValue=Filename } "/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Combined Filename:" Width="140"/>
-			<Label Content="{ Binding CombinedFileName,FallbackValue=Combo Filename }"/>
+			<Label Content="{ Binding ParseData.CombinedFileName,FallbackValue=Combo Filename }"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Directory:" Width="125"/>
-			<Label Content="{ Binding Directory, FallbackValue=Path }"/>
+			<Label Content="{ Binding ParseData.Directory, FallbackValue=Path }"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Number of Files:" Width="125"/>
-			<Label Content="{ Binding NumberOfFiles, FallbackValue=Quantity}"/>
+			<Label Content="{ Binding ParseData.NumberOfFiles, FallbackValue=Quantity}"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Processing File:" Width="125"/>
-			<Label Content="{ Binding ReadingFileName, FallbackValue=Reading File }"/>
+			<Label Content="{ Binding ParseData.ReadingFileName, FallbackValue=Reading File }"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Processing Line:" Width="125"/>
-			<Label Content="{ Binding ReadingLine, FallbackValue=Data}"/>
+			<Label Content="{ Binding ParseData.ReadingLine, FallbackValue=Data}"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Minimum Payout:" VerticalAlignment="Center" Width="140"/>
-			<ComboBox SelectedItem="{ Binding MinPayout}">
+			<ComboBox SelectedItem="{ Binding ParseData.MinPayout}">
 				<ComboBoxItem Content="-10"/>
 				<ComboBoxItem Content="0"/>
 				<ComboBoxItem Content="12"/>
@@ -55,7 +56,7 @@
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Minimum Tension:" VerticalAlignment="Center" Width="140"/>
-			<ComboBox SelectedItem="{ Binding MinTension }">
+			<ComboBox SelectedItem="{ Binding ParseData.MinTension }">
 				<ComboBoxItem Content="-100"/>
 				<ComboBoxItem Content="0"/>
 				<ComboBoxItem Content="100"/>
@@ -64,8 +65,8 @@
 			</ComboBox>
 		</StackPanel>
 
-		<Button Content="File Location" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
-		<Button Content="Save Settings" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
+		<Button Content="File Location" Command="{ Binding File_Location }" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+		<Button Content="Save Settings" Command="{ Binding Save_Config }" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
 	</StackPanel>
 	
 </UserControl>

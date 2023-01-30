@@ -27,9 +27,9 @@ namespace Views
                                                             };
             _configDataStore.AvailableWinches = new List<string>
                                                             {
-                                                                "Gloria/Mash Winches",
+                                                                "UNOLS String",
                                                                 "LCI-90i",
-                                                                "Hawboldt Protocol"
+                                                                "Hawboldt String"
                                                             };
             globalConfig = (GlobalConfigModel)FileOperationsViewModel.ReadConfig(_configDataStore);
             InitializeComponent();

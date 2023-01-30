@@ -1,17 +1,17 @@
 ﻿namespace ViewModels
 {
-    internal class ProcessingReadFilesViewModel
+    internal class ProcessingReadFilesViewModel : ProcessingViewModel
     {
-        public static async void CombineFiles()
+        public static async void CombineFiles(ParseDataStore parseData)
         {
-            ParseDataStore _settingsStore = ProcessingViewModel.parseData;
+            //ParseDataStore _settingsStore = parseData;
             List<string> fileList = new(); //List<string>();
             //fileList = _settingsStore.FileList;
-            string filePath = _settingsStore.Directory;
-            foreach (var fin in _settingsStore.FileList)
+            string filePath = parseData.Directory;
+            foreach (var fin in parseData.FileList)
             {
                 var fileRead = fin.ToString();
-                ProcessingViewModel.parseData.ReadingFileName = fileRead;
+                parseData.ReadingFileName = fileRead;
                 System.IO.StreamReader file = new System.IO.StreamReader(fileRead); //Setup stream reader to read file
                 string line;
                 bool flag = false;
@@ -27,12 +27,12 @@
                     {
                         line = line.Replace("\n", String.Empty); //remove EOL Characters
                         line = line.Replace("\r", String.Empty);
-                        ProcessingViewModel.parseData.ReadingLine = line;
+                        parseData.ReadingLine = line;
                         string[] data = line.Split(',');
                         if (data.Length > 2)
                         {
 
-                            if (_settingsStore.SelectedWinch == "SIO Traction Winch")
+                            if (parseData.SelectedWinch == "SIO Traction Winch")
                             {
                                 if (data[0] == "RD")
                                 {
@@ -70,7 +70,7 @@
                                     //lineData = new Line_Data_Model();
                                 }
                             }
-                            else if (_settingsStore.SelectedWinch == "MASH Winch")
+                            else if (parseData.SelectedWinch == "MASH Winch")
                             {
                                 if (data[0] == "[LOGGING]" ||
                                     data[0] == "DATETIME[YYYY/MM/DD hh:mm:ss.s]" ||
@@ -99,7 +99,7 @@
                                 }
 
                             }
-                            else if (_settingsStore.SelectedWinch == "Armstrong CAST 6")
+                            else if (parseData.SelectedWinch == "Armstrong CAST 6")
                             {
 
                                 //string dataDateAndTime = data[0];
@@ -115,7 +115,7 @@
                                 dataLine = true;
 
                             }
-                            else if (_settingsStore.SelectedWinch == "UNOLS String")
+                            else if (parseData.SelectedWinch == "UNOLS String")
                             {
                                 if (data[0] == "$WIR")
                                 {
@@ -179,24 +179,24 @@
 
                     }
                     //Write data
-                    ProcessingWriteFilesViewModel.WriteCombined(DataModels); //Write Data list
+                    ProcessingWriteFilesViewModel.WriteCombined(DataModels, parseData); //Write Data list
                 });
 
                 file.Close(); //Close the file
             }
-            ProcessingViewModel.parseData.ReadingLine = "Done!"; //Update UI with done
+            parseData.ReadingLine = "Done!"; //Update UI with done
         }
-        public static async void ParseFiles()
+        public static async void ParseFiles(ParseDataStore parseData)
         {
             // Read threshold values
-            float? minPayout = ProcessingViewModel.parseData.MinPayout;
-            float? minTension = ProcessingViewModel.parseData.MinTension;
+            float? minPayout = parseData.MinPayout;
+            float? minTension = parseData.MinTension;
             //int x = 1;
             //int y = 3;
-            ProcessingViewModel.parseData.ReadingFileName = ProcessingViewModel.parseData.CombinedFileName;
-            ProcessingViewModel.parseData.ReadingLine = "Starting!";
+            parseData.ReadingFileName = parseData.CombinedFileName;
+            parseData.ReadingLine = "Starting!";
             //Read in collected file and determine maximum values of casts
-            using (System.IO.StreamReader sr = new System.IO.StreamReader(ProcessingViewModel.parseData.Directory + '\\' + ProcessingViewModel.parseData.CombinedFileName, true))
+            using (System.IO.StreamReader sr = new System.IO.StreamReader(parseData.Directory + '\\' + parseData.CombinedFileName, true))
             {
                 float maxTensionCurrent = 0;
                 float maxPayoutCurrent = 0;
@@ -256,8 +256,8 @@
 
                             if (/*lineData.Tension < minTension &&*/ Math.Abs(lineData.Payout) < minPayout && castActive == true)
                             {
-                                ProcessingWriteFilesViewModel.writeProcessed(maxTensionString, maxPayoutString, cast); //end cast, increment cast number, write processed data
-                                ProcessingViewModel.parseData.ReadingLine = maxTensionString;
+                                ProcessingWriteFilesViewModel.writeProcessed(maxTensionString, maxPayoutString, cast, parseData); //end cast, increment cast number, write processed data
+                                parseData.ReadingLine = maxTensionString;
 
                                 cast++;
                                 castActive = false;
@@ -309,7 +309,7 @@
                     }
                 });
             }
-            ProcessingViewModel.parseData.ReadingLine = "Done!";
+            parseData.ReadingLine = "Done!";
         }
     }
 }
