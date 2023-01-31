@@ -8,13 +8,8 @@
 	<StackPanel Background="BlanchedAlmond">
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Select Winch:" VerticalAlignment="Center" Width="130"/>
-			
-			<ComboBox SelectedItem="{ Binding Path = ParseData.WinchSelection, Mode=TwoWay }"  Width="150">
-				<ComboBoxItem Content="MASH Winch" IsSelected="True"/>
-				<ComboBoxItem Content="SIO Traction Winch"/>
-				<ComboBoxItem Content="Armstrong CAST 6"/>
-				<ComboBoxItem Content="UNOLS String"/>
-			</ComboBox>
+
+			<ComboBox SelectedItem="{ Binding ParseData.SelectedWinch, Mode=TwoWay }"  Items="{ Binding ParseData.AvailableWinches }" Width="150"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Cruise Name:" VerticalAlignment="Center" Width="130"/>
@@ -30,7 +25,7 @@
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Directory:" Width="125"/>
-			<Label Content="{ Binding ParseData.Directory, FallbackValue=Path }"/>
+			<Label Content="{ Binding Path=ParseData.Directory, FallbackValue=Directory }"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Number of Files:" Width="125"/>
@@ -46,27 +41,15 @@
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Minimum Payout:" VerticalAlignment="Center" Width="140"/>
-			<ComboBox SelectedItem="{ Binding ParseData.MinPayout}">
-				<ComboBoxItem Content="-10"/>
-				<ComboBoxItem Content="0"/>
-				<ComboBoxItem Content="12"/>
-				<ComboBoxItem Content="25"/>
-				<ComboBoxItem Content="50"/>
-			</ComboBox>
+			<ComboBox SelectedItem="{ Binding ParseData.MinPayout}" Items="{ Binding ParseData.AvailablePayouts }"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Minimum Tension:" VerticalAlignment="Center" Width="140"/>
-			<ComboBox SelectedItem="{ Binding ParseData.MinTension }">
-				<ComboBoxItem Content="-100"/>
-				<ComboBoxItem Content="0"/>
-				<ComboBoxItem Content="100"/>
-				<ComboBoxItem Content="250"/>
-				<ComboBoxItem Content="500"/>
-			</ComboBox>
+			<ComboBox SelectedItem="{ Binding ParseData.MinTension }" Items="{ Binding ParseData.AvailableTensions }"/>
 		</StackPanel>
 
-		<Button Content="File Location" Command="{ Binding File_Location }" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
-		<Button Content="Save Settings" Command="{ Binding Save_Config }" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
+		<Button Content="File Location" Command="{ Binding File_LocationCommand }" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
+		<Button Content="Save Settings" Command="{ Binding Save_ConfigCommand }" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center" ></Button>
 	</StackPanel>
 	
 </UserControl>

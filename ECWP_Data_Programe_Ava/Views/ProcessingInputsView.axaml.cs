@@ -5,7 +5,7 @@ namespace Views
         public ProcessingInputsView()
         {
             InitializeComponent();
-            
+                       
         }
     }
 }

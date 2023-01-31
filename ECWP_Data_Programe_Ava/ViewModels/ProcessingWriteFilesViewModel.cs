@@ -21,7 +21,7 @@
 
             }
         }
-        public static void writeProcessed(string maxTensionString, string maxPayoutString, int cast, ParseDataStore parseData)  //function to write log
+        public static void WriteProcessed(string maxTensionString, string maxPayoutString, int cast, ParseDataStore parseData)  //function to write log
         {
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(parseData.Directory + '\\' + parseData.ProcessedFileName, true))    //Write Processed Log file
             {
@@ -30,6 +30,28 @@
                 file.WriteLine(maxTensionString);
                 file.WriteLine(maxPayoutString);
                 file.WriteLine("\n");
+            }
+        }
+
+        public static void WriteProcessConfig(ParseDataStore ParseData)
+        {
+            //Logic to save new parameters to config file
+            //Set filname
+            string fileName = "ProcessConfig.txt";
+            //Set path to save config file (Application directory)
+            string destPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+            //Populate array with global configuartion values
+            string[] lines =
+                {
+                $"Minimum Tension,{ ParseData.MinTension }",
+                $"Minimum Payout,{ ParseData.MinPayout }",
+                $"Selected Winch,{ ParseData.WinchSelection }"
+                };
+            //Write each line of array using stream writer
+            using (StreamWriter stream = new StreamWriter(destPath))
+            {
+                foreach (string line in lines)
+                    stream.WriteLine(line);
             }
         }
     }

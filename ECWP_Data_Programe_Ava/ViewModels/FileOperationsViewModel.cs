@@ -1,6 +1,4 @@
-﻿using Store;
-
-namespace ViewModels
+﻿namespace ViewModels
 {
     internal class FileOperationsViewModel
     {
@@ -53,7 +51,6 @@ namespace ViewModels
                     stream.WriteLine(line);
             }
         }
-        
         public static object ReadConfig(ConfigDataStore _configDataStore)
         {
             //Logic to read config file for initial setup based on previous saved data

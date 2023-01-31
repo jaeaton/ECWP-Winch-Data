@@ -4,5 +4,5 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="300"
              x:Class="Views.ProcessingPlotView">
-  Welcome to Avalonia!
+  Eventually I will be a plot of tensions
 </UserControl>

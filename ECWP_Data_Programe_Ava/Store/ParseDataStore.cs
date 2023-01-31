@@ -19,10 +19,10 @@
         private string? _winchSelection;
 
         [ObservableProperty]
-        private float? _minTension;
+        private string? _minTension;
 
         [ObservableProperty]
-        private float? _minPayout;
+        private string? _minPayout;
 
         [ObservableProperty]
         private string? _selectedWinch;
@@ -31,7 +31,7 @@
         private string? _selectedWinchEnabled;
 
         [ObservableProperty]
-        private string? _fileList;
+        private List<string>? _fileList;
 
         [ObservableProperty]
         private string? _readingFileName;
@@ -41,5 +41,14 @@
 
         [ObservableProperty]
         private int? _numberOfFiles;
+
+        [ObservableProperty]
+        private List<string>? _availableWinches;
+
+        [ObservableProperty]
+        private List<string>? _availablePayouts;
+
+        [ObservableProperty]
+        private List<string>? _availableTensions;
     }
 }

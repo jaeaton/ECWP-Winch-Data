@@ -107,7 +107,7 @@
 						</StackPanel>															
 				</StackPanel>
 				
-					<Button Content="Save Parameters" Margin="5" IsEnabled="{Binding Path=UserInputsEnable}" Click="Button_Click"></Button>
+					<Button Content="Save Parameters" Margin="5" IsEnabled="{Binding Path=UserInputsEnable}" Click="Button_Click"/>
 					
 				
 			</StackPanel>

@@ -1,4 +1,6 @@
-﻿namespace ViewModels
+﻿using Store;
+
+namespace ViewModels
 {
     internal class ProcessingReadFilesViewModel : ProcessingViewModel
     {
@@ -189,10 +191,8 @@
         public static async void ParseFiles(ParseDataStore parseData)
         {
             // Read threshold values
-            float? minPayout = parseData.MinPayout;
-            float? minTension = parseData.MinTension;
-            //int x = 1;
-            //int y = 3;
+            float? minPayout = float.Parse(parseData.MinPayout);
+            float? minTension = float.Parse(parseData.MinTension);
             parseData.ReadingFileName = parseData.CombinedFileName;
             parseData.ReadingLine = "Starting!";
             //Read in collected file and determine maximum values of casts
@@ -256,7 +256,7 @@
 
                             if (/*lineData.Tension < minTension &&*/ Math.Abs(lineData.Payout) < minPayout && castActive == true)
                             {
-                                ProcessingWriteFilesViewModel.writeProcessed(maxTensionString, maxPayoutString, cast, parseData); //end cast, increment cast number, write processed data
+                                ProcessingWriteFilesViewModel.WriteProcessed(maxTensionString, maxPayoutString, cast, parseData); //end cast, increment cast number, write processed data
                                 parseData.ReadingLine = maxTensionString;
 
                                 cast++;
@@ -296,7 +296,7 @@
                         //    //detect end of cast (values below threshold with negative slope)
                         //    if (/*(float)valueObject[x] < minTension &&*/ (float)valueObject[y] < minPayout && castActive == true)
                         //    {
-                        //        WriteFilesViewModel.writeProcessed(maxTensionString, maxPayoutString, cast); //end cast, increment cast number, write processed data
+                        //        WriteFilesViewModel.WriteProcessed(maxTensionString, maxPayoutString, cast); //end cast, increment cast number, write processed data
                         //        MainProcessingViewModel.parseData.ReadingLine = maxTensionString;
 
                         //        cast++;
@@ -310,6 +310,74 @@
                 });
             }
             parseData.ReadingLine = "Done!";
+        }
+        public static object ReadProcessConfig()
+        {
+            //Logic to read config file for initial setup based on previous saved data
+            List<string> lines = new List<string>();
+            ParseDataStore parseData = new ParseDataStore();
+            parseData.AvailableWinches = new List<string>
+            {
+                "MASH Winch",
+                "SIO Traction Winch",
+                "Armstrong CAST 6",
+                "UNOLS String"
+            };
+
+            parseData.AvailableTensions = new List<string>
+            {
+                "-100",
+                "0",
+                "100",
+                "250",
+                "500"
+            };
+
+            parseData.AvailablePayouts = new List<string>
+            {
+                "-10",
+                "0",
+                "12",
+                "25",
+                "50"
+            };
+            //set the name of the config file
+            string fileName = "ProcessConfig.txt";
+            //set the path to application directory
+            string destPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+            try
+            {
+                using (StreamReader stream = new StreamReader(destPath))
+                {
+                    string text;
+                    while ((text = stream.ReadLine()) != null)
+                    {
+                        lines.Add(text);
+                    }
+                    foreach (var line in lines)
+                    {
+                        int delim = line.IndexOf(",");
+                        if (line.Substring(0, delim) == "Minimum Tension")
+                        {
+                             parseData.MinTension= line.Substring(delim + 1);
+                        }
+                        if (line.Substring(0, delim) == "Minimum Payout")
+                        {
+                            parseData.MinPayout = line.Substring(delim + 1);
+                        }
+                        if (line.Substring(0, delim) == "Selected Winch")
+                        {
+                            parseData.SelectedWinch = line.Substring(delim + 1);
+                        }
+                    }
+                    
+                    return parseData;
+                }
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

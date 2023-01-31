@@ -4,8 +4,7 @@ namespace Views
     {
         public ProcessingView()
         {
-
-            //this.DataContext = new ParseDataStore();
+                     
             this.DataContext = new ViewModels.ProcessingViewModel();
             InitializeComponent();
         }
