@@ -2,7 +2,7 @@ namespace ECWP_Data_Programe_Ava
 {
     public class ViewLocator : IDataTemplate
     {
-        public IControl Build(object data)
+        public IControl? Build(object data)
         {
             var name = data.GetType().FullName!.Replace("ViewModel", "View");
             var type = Type.GetType(name);

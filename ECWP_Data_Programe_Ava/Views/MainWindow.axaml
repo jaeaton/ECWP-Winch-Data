@@ -15,7 +15,7 @@
 			<controls:ProcessingView/>
 		</TabItem>
 		<TabItem Header="Winch Configuration" VerticalContentAlignment="Center">
-			
+			<controls:WinchConfigurationView />
 		</TabItem>
 	</TabControl>
 </Window>
