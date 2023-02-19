@@ -90,7 +90,11 @@
 
             //uncomment for windowing of plot
             _observableValuesZero.Add(new DateTimePoint { DateTime = dateTime, Value = 0 });
-            _observableValuesMax.Add(new DateTimePoint { DateTime = dateTime, Value = Double.Parse(DataHandlingViewModel._liveData.MaxTension)  });
+            if(Double.TryParse(DataHandlingViewModel._liveData.MaxTension, out double result))
+            {
+                _observableValuesMax.Add(new DateTimePoint { DateTime = dateTime, Value = result  });
+            }
+            
             //_observableValues.Add(new ObservablePoint { X = i++, Y = latest.Tension });
             
             if (_observableValues.Count > 500)
