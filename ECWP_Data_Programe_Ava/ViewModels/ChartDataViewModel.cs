@@ -53,7 +53,7 @@
                 new Axis
                 {
                     
-                    Labeler = value => new DateTime((long)value).ToString("HH:mm:ss"),
+                    Labeler = value => DateTime.Now.ToString("HH:mm:ss"),
                     LabelsRotation = -30,
                     TextSize = 14,
 
