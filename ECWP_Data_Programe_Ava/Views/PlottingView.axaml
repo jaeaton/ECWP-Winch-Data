@@ -16,10 +16,8 @@
 				<ColumnDefinition Width="Auto"></ColumnDefinition>
 				<ColumnDefinition Width="*"></ColumnDefinition>
 			</Grid.ColumnDefinitions>
-			<controls:UserInputsView Grid.Column="0"/>
-			<Grid Grid.Column="1">
-				<controls:DataDisplay/>
-			</Grid>
+			<controls:SelectedWinchDetailsView Grid.Column="0"/>
+			<controls:DataDisplay Grid.Column="1" />
 		</Grid>
 		<controls:StartStopSaveView Grid.Row="1"/>
 	</Grid>

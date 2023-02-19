@@ -1,5 +1,3 @@
-using Avalonia.Markup.Xaml;
-
 namespace Views
 {
     public partial class UserInputsView : UserControl

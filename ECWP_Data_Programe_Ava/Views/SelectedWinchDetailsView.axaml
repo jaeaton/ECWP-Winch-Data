@@ -1,0 +1,23 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="240" d:DesignHeight="600"
+             x:Class="Views.SelectedWinchDetailsView">
+	<Panel>
+		<StackPanel >
+			<StackPanel Orientation="Horizontal" Margin="5">
+			<TextBlock Text="Data Source" Width="100" VerticalAlignment="Center"/>
+			<ComboBox MinWidth="130" SelectedItem="{ Binding Path=WinchSelection, Mode=TwoWay }" Items="{ Binding Path=AvailableWinches }" SelectedIndex="1"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock Text="Cruise Name" Width="100" VerticalAlignment="Center"/>
+				<TextBox x:Name="TextBoxCruiseName" Watermark="OC123" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding Path=CruiseNameBox,Mode=TwoWay}"  Width="120" VerticalAlignment="Center" />
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock Text="Cast Number"  Width="100" VerticalAlignment="Center"/>
+				<TextBox x:Name="TextBoxCastNumber" Watermark="1" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding Path=CastNumberBox,Mode=TwoWay}" Width="120" VerticalAlignment="Center" />
+			</StackPanel>
+		</StackPanel>
+</Panel>
+</UserControl>
