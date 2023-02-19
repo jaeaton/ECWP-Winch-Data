@@ -24,8 +24,12 @@ namespace Views
                 "Notes\n" +
                 "1) The program saves a config file and loads it on start up. This can Speed up the set up process after it has been set for a cruise. It is a human readable text file in the program's directory.\n" +
                 "2) Max log file should be continuos for a given cruise. Each time the Log Max button is pressed a new entry is added. If the cast number is changed to a lower number it will not overwrite the previous entry.\n" +
+                "3) Description of Data Source selection:\n" +
+                "    a) LCI-90i Data Source implies a TCP connection with the data source acting as a TCP Client.\n" +
+                "    b) UNOLS String Data Source implies a TCP Connection with the data source acting as a TCP Server/Listener. \n" +
+                "    c) Hawboldt Data Source has not been implemented.\n" +
                 "\n\n" +
-                 "V4.0.2"); 
+                 "V4.2.0"); 
         }
 
         private void ButtonSaveLocation_Click(object sender, RoutedEventArgs e)
