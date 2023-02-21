@@ -8,7 +8,7 @@ namespace Views
         public StartStopSaveView()
         {
             InitializeComponent();
-            this.DataContext = UserInputsView._configDataStore;
+            this.DataContext = MainWindowViewModel._configDataStore;
         }
         private void ButtonHelp_Click(object sender, RoutedEventArgs e)
         {
@@ -44,8 +44,8 @@ namespace Views
             //Write the max data for the cast
             DataHandlingViewModel.WriteMaxData(UserInputsView.globalConfig);
             //Increase the cast count
-            UserInputsView._configDataStore.CastNumberBox = (int.Parse(UserInputsView._configDataStore.CastNumberBox) + 1).ToString();
-            UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(UserInputsView._configDataStore);
+            MainWindowViewModel._configDataStore.CastNumberBox = (int.Parse(MainWindowViewModel._configDataStore.CastNumberBox) + 1).ToString();
+            UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
 
         }
         public void StartStop()
@@ -65,24 +65,24 @@ namespace Views
                         {
 
                         }
-                        if (UserInputsView._configDataStore.LogMaxDataCheckBox == true)
+                        if (MainWindowViewModel._configDataStore.LogMaxDataCheckBox == true)
                         {
                             //Write the max data for the cast
                             DataHandlingViewModel.WriteMaxData(UserInputsView.globalConfig);
                             //Increase the cast count
-                            UserInputsView._configDataStore.CastNumberBox = (int.Parse(UserInputsView._configDataStore.CastNumberBox) + 1).ToString();
-                            UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(UserInputsView._configDataStore);
+                            MainWindowViewModel._configDataStore.CastNumberBox = (int.Parse(MainWindowViewModel._configDataStore.CastNumberBox) + 1).ToString();
+                            UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
 
                         }
 
                         //Change button text
-                        UserInputsView._configDataStore.StartStopButtonText = "Start Log";
-                        UserInputsView._configDataStore.UserInputsEnable = true;
+                        MainWindowViewModel._configDataStore.StartStopButtonText = "Start Log";
+                        MainWindowViewModel._configDataStore.UserInputsEnable = true;
                         break;
                     }
                 default:
                     {
-                        if (UserInputsView._configDataStore.Log20HzDataCheckBox || UserInputsView._configDataStore.LogMaxDataCheckBox)
+                        if (MainWindowViewModel._configDataStore.Log20HzDataCheckBox || MainWindowViewModel._configDataStore.LogMaxDataCheckBox)
                         {
                             //If the save directory is not set show popup
                             if (UserInputsView.globalConfig.SaveDirectorySet == false)
@@ -99,8 +99,8 @@ namespace Views
                         //Starts Data collection on first press
                         DataHandlingViewModel.GetDataAsync(UserInputsView.globalConfig);
                         //change button text
-                        UserInputsView._configDataStore.StartStopButtonText = "Stop Log";
-                        UserInputsView._configDataStore.UserInputsEnable = false;
+                        MainWindowViewModel._configDataStore.StartStopButtonText = "Stop Log";
+                        MainWindowViewModel._configDataStore.UserInputsEnable = false;
 
                         break;
                     }
@@ -126,7 +126,7 @@ namespace Views
             //GlobalConfigModel globalConfig = new GlobalConfigModel();
             //var anInstanceofMyClass = new AppConfigViewModel();
             //var instanceofFileOperationsViewModel = new FileOperationsViewModel();
-            UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(UserInputsView._configDataStore);
+            UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
             UserInputsView.globalConfig = (GlobalConfigModel)FileOperationsViewModel.SetFileNames(UserInputsView.globalConfig);
             FileOperationsViewModel.SetFileNames(UserInputsView.globalConfig);
             if (UserInputsView.globalConfig.LogMaxValuesSwitch)
@@ -151,7 +151,7 @@ namespace Views
                 //DirectoryLabel.Content = saveFileDialog.InitialFileName;
                 FileInfo fileInfo = new(saveFileName);
                 UserInputsView.globalConfig.SaveDirectory = (string)fileInfo.DirectoryName;
-                UserInputsView._configDataStore.DirectoryLabel = UserInputsView.globalConfig.SaveDirectory;
+                MainWindowViewModel._configDataStore.DirectoryLabel = UserInputsView.globalConfig.SaveDirectory;
                 UserInputsView.globalConfig.SaveDirectorySet = true;
 
 

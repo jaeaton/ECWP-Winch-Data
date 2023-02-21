@@ -80,5 +80,20 @@
 
         [ObservableProperty]
         private List<string>? availableWinches;
+
+        [ObservableProperty]
+        private WinchModel? currentWinch;
+
+        [ObservableProperty]
+        private List<WinchModel>? allWinches;
+
+        [ObservableProperty]
+        private List<string>? speedUnitList;
+
+        [ObservableProperty]
+        private List<string>? tensionUnitList;
+
+        [ObservableProperty]
+        private List<string>? payoutUnitList;
     }
 }

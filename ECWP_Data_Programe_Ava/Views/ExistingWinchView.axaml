@@ -4,8 +4,61 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
              x:Class="Views.ExistingWinchView">
+	<UserControl.ContentTemplate>
+		<DataTemplate>
+			<StackPanel Orientation="Horizontal">
+				<StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Winch Name: "/>
+						<TextBlock Text="Name of Winch"/>
+					</StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Data Type: "/>
+						<TextBlock Text="Type of Data"/>
+					</StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="IP Address: "/>
+						<TextBlock Text="IP of Winch"/>
+					</StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Port: "/>
+						<TextBlock Text="Port of Winch"/>
+					</StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Computer Time: "/>
+						<TextBlock Text="Yes"/>
+					</StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Log 20Hz: "/>
+						<TextBlock Text="No"/>
+					</StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Log Max: "/>
+						<TextBlock Text="Yes"/>
+					</StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Log Format: "/>
+						<TextBlock Text="UNOLS"/>
+					</StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="IP Address: "/>
+						<TextBlock Text="IP of Winch"/>
+					</StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="UDP Output: "/>
+						<TextBlock Text="No"/>
+					</StackPanel>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Serial Output: "/>
+						<TextBlock Text="No"/>
+					</StackPanel>
+				</StackPanel>
+			</StackPanel>
+		</DataTemplate>
+	</UserControl.ContentTemplate>
 	<Grid>
 		<ScrollViewer HorizontalScrollBarVisibility="Visible" FlowDirection="LeftToRight">
+			<!--
 			<StackPanel Orientation="Horizontal">
 				<StackPanel>
 					<StackPanel Orientation="Horizontal">
@@ -238,7 +291,7 @@
 					</StackPanel>
 				</StackPanel>
 			</StackPanel>
-
+-->
 		</ScrollViewer>
 	</Grid>
 </UserControl>

@@ -4,6 +4,7 @@ namespace Views
     {
         public WinchConfigurationView()
         {
+            //this.DataContext = UserInputsView._configDataStore;
             InitializeComponent();
         }
     }

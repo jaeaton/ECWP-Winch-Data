@@ -49,7 +49,7 @@
 		</StackPanel>
 
 		<Button Content="File Location" Command="{ Binding File_LocationCommand }" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>
-		<Button Content="Save Settings" Command="{ Binding Save_ConfigCommand }" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center" ></Button>
+		<Button Content="Save Settings" Command="{ Binding Save_ConfigCommand }" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
 	</StackPanel>
 	
 </UserControl>

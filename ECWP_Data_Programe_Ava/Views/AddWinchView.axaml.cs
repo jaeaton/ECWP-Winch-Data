@@ -6,5 +6,11 @@ namespace Views
         {
             InitializeComponent();
         }
+
+        private void WinchSelected(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
     }
 }

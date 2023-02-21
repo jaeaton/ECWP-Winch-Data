@@ -2,13 +2,13 @@ namespace Views
 {
     public partial class UserInputsView : UserControl
     {
-        public static ConfigDataStore? _configDataStore;
+        public static ConfigDataStore? _configDataStore = MainWindowViewModel._configDataStore;
         public static GlobalConfigModel? globalConfig = new();
         public UserInputsView()
         {
             //Initialized += OnInitialized;
             //InitializeComponent();
-            _configDataStore = new ConfigDataStore();
+            //_configDataStore = new ConfigDataStore();
             
             this.DataContext = _configDataStore;
             
@@ -29,12 +29,28 @@ namespace Views
                                                                 "LCI-90i",
                                                                 "Hawboldt String"
                                                             };
+            _configDataStore.SpeedUnitList = new List<string>
+                                                            {
+                                                                "m/min",
+                                                                "ft/min"
+                                                            };
+            _configDataStore.PayoutUnitList = new List<string>
+                                                            {
+                                                                "m",
+                                                                "ft"
+                                                            };
+            _configDataStore.TensionUnitList = new List<string>
+                                                            {
+                                                                "kg",
+                                                                "lbf"
+                                                            };
             globalConfig = (GlobalConfigModel)FileOperationsViewModel.ReadConfig(_configDataStore);
             InitializeComponent();
             //FileOperationsViewModel.WriteConfig(globalConfig);
 
         }
        
+
         public void Button_Click(object sender, RoutedEventArgs e)
         {
             globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(_configDataStore);

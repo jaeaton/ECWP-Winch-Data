@@ -4,51 +4,51 @@
     public partial class ParseDataStore : ObservableObject
     {
         [ObservableProperty]
-        private string? _directory;
+        private string? directory;
 
         [ObservableProperty]
-        private string? _cruiseName;
+        private string? cruiseName;
 
         [ObservableProperty]
-        private string? _combinedFileName;
+        private string? combinedFileName;
 
         [ObservableProperty]
-        private string? _processedFileName;
+        private string? processedFileName;
 
         [ObservableProperty]
-        private string? _winchSelection;
+        private string? winchSelection;
 
         [ObservableProperty]
-        private string? _minTension;
+        private string? minTension;
 
         [ObservableProperty]
-        private string? _minPayout;
+        private string? minPayout;
 
         [ObservableProperty]
-        private string? _selectedWinch;
+        private string? selectedWinch;
 
         [ObservableProperty]
-        private string? _selectedWinchEnabled;
+        private string? selectedWinchEnabled;
 
         [ObservableProperty]
-        private List<string>? _fileList;
+        private List<string>? fileList;
 
         [ObservableProperty]
-        private string? _readingFileName;
+        private string? readingFileName;
 
         [ObservableProperty]
-        private string? _readingLine;
+        private string? readingLine;
 
         [ObservableProperty]
-        private int? _numberOfFiles;
+        private int? numberOfFiles;
 
         [ObservableProperty]
-        private List<string>? _availableWinches;
+        private List<string>? availableWinches;
 
         [ObservableProperty]
-        private List<string>? _availablePayouts;
+        private List<string>? availablePayouts;
 
         [ObservableProperty]
-        private List<string>? _availableTensions;
+        private List<string>? availableTensions;
     }
 }

@@ -6,7 +6,7 @@ namespace Views
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = UserInputsView._configDataStore;
+            this.DataContext = MainWindowViewModel._configDataStore;
             Instance = this;
         }
 
