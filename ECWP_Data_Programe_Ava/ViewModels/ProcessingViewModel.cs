@@ -3,7 +3,7 @@
     public partial class ProcessingViewModel : ObservableObject
     {
         [ObservableProperty]
-        private ParseDataStore? _parseData = (ParseDataStore?)ProcessingReadFilesViewModel.ReadProcessConfig();
+        private ParseDataStore? parseData = (ParseDataStore?)ProcessingReadFilesViewModel.ReadProcessConfig();
 
         [RelayCommand]
         private async void File_Location()

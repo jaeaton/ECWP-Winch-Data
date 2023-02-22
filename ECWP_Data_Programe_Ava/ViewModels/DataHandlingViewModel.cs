@@ -51,7 +51,7 @@
                         dataIn = await Task.Run(() => ReadTCPData(client));
                         //_liveData.RawWireData = dataIn;
                         //read data
-                        ParseData(dataIn, globalConfig);
+                        ParseWinchData(dataIn, globalConfig);
 
                     }
                 }
@@ -113,7 +113,7 @@
                         dataIn = await Task.Run(() => ReadTCPData(client));
                         //_liveData.RawWireData = dataIn;
                         //read data
-                        ParseData(dataIn, globalConfig);
+                        ParseWinchData(dataIn, globalConfig);
 
                     }
                 }
@@ -181,7 +181,7 @@
             }
             return result.ToString();
         }
-        private static void ParseData(string lines, GlobalConfigModel globalConfig)
+        private static void ParseWinchData(string lines, GlobalConfigModel globalConfig)
         {
             //Parse incoming data function and store in DataPointModel
             bool maxChange = false;
