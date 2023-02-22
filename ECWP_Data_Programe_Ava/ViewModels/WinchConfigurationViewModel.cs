@@ -7,12 +7,13 @@
         [RelayCommand]
         private void AddWinch()
         {
-            _configDataStore.AllWinches.Add(_configDataStore.CurrentWinch);
+            MainWindowViewModel._configDataStore.AllWinches.Add(MainWindowViewModel._configDataStore.CurrentWinch);
+            
         }
         [RelayCommand]
         private void RemoveWinch()
         {
-            _configDataStore.AllWinches.Remove(_configDataStore.CurrentWinch);
+            MainWindowViewModel._configDataStore.AllWinches.Remove(MainWindowViewModel._configDataStore.CurrentWinch);
         }
         public static void LoadWinch(string winch)
         {

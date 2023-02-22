@@ -1,7 +1,8 @@
 ﻿namespace Store
 {
     //Application configuration data for User Inputs View
-    public partial class ConfigDataStore : ObservableObject
+    [INotifyPropertyChanged]
+    public partial class ConfigDataStore 
     {
         [ObservableProperty]
         private string? ipAddressInputSourceBox;
@@ -82,11 +83,12 @@
         private List<string>? availableWinches;
 
         [ObservableProperty]
-        private WinchModel? currentWinch;
+        private WinchModel? currentWinch = new();
 
         [ObservableProperty]
-        private List<WinchModel>? allWinches;
-
+        //[NotifyPropertyChangedFor(nameof(AllWinchNames))]
+        private List<WinchModel>? allWinches = new();
+        
         [ObservableProperty]
         private List<string>? speedUnitList;
 
@@ -95,5 +97,13 @@
 
         [ObservableProperty]
         private List<string>? payoutUnitList;
+
+        [ObservableProperty]
+        private List<string>? winchNames;
+        partial void OnAllWinchesChanged(List<WinchModel>? allWinches)
+        {
+            List<string>? WinchNames = AllWinches.Select(WinchModel => WinchModel.WinchName).ToList();
+        }
+
     }
 }

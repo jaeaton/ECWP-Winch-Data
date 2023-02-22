@@ -9,7 +9,7 @@
 		<StackPanel>
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Winch Select" VerticalAlignment="Center" Width="90"/>
-				<ComboBox Items="{ Binding AllWinches.WinchName }" SelectionChanged="WinchSelected"/>
+				<ComboBox Items="{ Binding WinchNames }" SelectionChanged="WinchSelected"/>
 			</StackPanel>
 			<controls:UserInputsView/>
 			<Button Content="Add Winch" Command="{ Binding AddWinchCommand }"/>

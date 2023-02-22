@@ -11,7 +11,7 @@
 				<StackPanel Background="AliceBlue">
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Text="Winch Name" Width="90" VerticalAlignment="Center" />
-						<TextBox Watermark="Enter Winch Name" Text="{ Binding CurrentWinch.WinchName }"/>
+						<TextBox Watermark="Enter Winch Name" Text="{ Binding CurrentWinch.WinchName, Mode=TwoWay }"/>
 					</StackPanel>
 					<TextBlock Text="Communication Parameters" Margin="5"/>
 					<StackPanel Orientation="Horizontal" Margin="5">

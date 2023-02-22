@@ -4,7 +4,7 @@ namespace Views
     {
         public WinchConfigurationView()
         {
-            //this.DataContext = UserInputsView._configDataStore;
+            this.DataContext = new ViewModels.WinchConfigurationViewModel();
             InitializeComponent();
         }
     }

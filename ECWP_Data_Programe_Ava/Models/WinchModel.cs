@@ -1,20 +1,33 @@
 ﻿namespace Models
 {
-    public class WinchModel
+    public partial class WinchModel : ObservableObject
     {
-        public string? WinchName { get; set; }
-        public string? FileExtension { get; set; }
-        public CommunicationModel? InputCommunication { get; set; }
-        public string? CommunicationType { get; set; }
-        public bool? UseComputerTime { get; set; }
-        public bool? Log20Hz { get; set; }
-        public bool? LogMax { get; set; }
-        public bool? LogFormat { get; set; }
-        public string? SpeedUnit { get; set; }
-        public string? PayoutUnit { get; set; }
-        public string? TensionUnit { get; set; }
-        public double? StopLogTension { get; set; }
-        public double? StopLogPayout { get; set; }
+        [ObservableProperty]
+        public string? winchName;
+        [ObservableProperty]
+        public string? fileExtension ;
+        [ObservableProperty]
+        public CommunicationModel? inputCommunication ;
+        [ObservableProperty]
+        public string? communicationType ;
+        [ObservableProperty]
+        public bool? useComputerTime ;
+        [ObservableProperty]
+        public bool? log20Hz ;
+        [ObservableProperty]
+        public bool? logMax ;
+        [ObservableProperty]
+        public bool? logFormat ;
+        [ObservableProperty]
+        public string? speedUnit ;
+        [ObservableProperty]
+        public string? payoutUnit ;
+        [ObservableProperty]
+        public string? tensionUnit ;
+        [ObservableProperty]
+        public double? stopLogTension ;
+        [ObservableProperty]
+        public double? stopLogPayout ;
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)
         {

@@ -2,7 +2,7 @@ namespace Views
 {
     public partial class UserInputsView : UserControl
     {
-        public static ConfigDataStore? _configDataStore = MainWindowViewModel._configDataStore;
+        //public ConfigDataStore? _configDataStore = MainWindowViewModel._configDataStore;
         public static GlobalConfigModel? globalConfig = new();
         public UserInputsView()
         {
@@ -10,12 +10,12 @@ namespace Views
             //InitializeComponent();
             //_configDataStore = new ConfigDataStore();
             
-            this.DataContext = _configDataStore;
+            this.DataContext = MainWindowViewModel._configDataStore;
             
-            _configDataStore.UserInputsEnable = true;
-            _configDataStore.StartStopButtonText = "Start Log";
-            _configDataStore.AvailableSerialPorts = ViewModels.GetSerialPorts.FindSerialPorts();
-            _configDataStore.AvailableBaudRates = new List<string>
+            MainWindowViewModel._configDataStore.UserInputsEnable = true;
+            MainWindowViewModel._configDataStore.StartStopButtonText = "Start Log";
+            MainWindowViewModel._configDataStore.AvailableSerialPorts = ViewModels.GetSerialPorts.FindSerialPorts();
+            MainWindowViewModel._configDataStore.AvailableBaudRates = new List<string>
                                                             {
                                                                 "57600",
                                                                 "38400",
@@ -23,28 +23,28 @@ namespace Views
                                                                 "9600",
                                                                 "4800"
                                                             };
-            _configDataStore.AvailableWinches = new List<string>
+            MainWindowViewModel._configDataStore.AvailableWinches = new List<string>
                                                             {
                                                                 "UNOLS String",
                                                                 "LCI-90i",
                                                                 "Hawboldt String"
                                                             };
-            _configDataStore.SpeedUnitList = new List<string>
+            MainWindowViewModel._configDataStore.SpeedUnitList = new List<string>
                                                             {
                                                                 "m/min",
                                                                 "ft/min"
                                                             };
-            _configDataStore.PayoutUnitList = new List<string>
+            MainWindowViewModel._configDataStore.PayoutUnitList = new List<string>
                                                             {
                                                                 "m",
                                                                 "ft"
                                                             };
-            _configDataStore.TensionUnitList = new List<string>
+            MainWindowViewModel._configDataStore.TensionUnitList = new List<string>
                                                             {
                                                                 "kg",
                                                                 "lbf"
                                                             };
-            globalConfig = (GlobalConfigModel)FileOperationsViewModel.ReadConfig(_configDataStore);
+            globalConfig = (GlobalConfigModel)FileOperationsViewModel.ReadConfig(MainWindowViewModel._configDataStore);
             InitializeComponent();
             //FileOperationsViewModel.WriteConfig(globalConfig);
 
@@ -53,7 +53,7 @@ namespace Views
 
         public void Button_Click(object sender, RoutedEventArgs e)
         {
-            globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(_configDataStore);
+            globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
             if (globalConfig == null)
             {
                 MessageBoxViewModel.DisplayMessage("No Valid configuration");

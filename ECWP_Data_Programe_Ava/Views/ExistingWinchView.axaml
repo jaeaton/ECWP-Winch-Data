@@ -3,38 +3,39 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
-             x:Class="Views.ExistingWinchView">
+             x:Class="Views.ExistingWinchView"
+			 xmlns:model="clr-namespace:Models">
 	<UserControl.ContentTemplate>
-		<DataTemplate>
+		<DataTemplate DataType="{x:Type model:WinchModel}">
 			<StackPanel Orientation="Horizontal">
 				<StackPanel>
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="Winch Name: "/>
-						<TextBlock Text="Name of Winch"/>
+						<TextBlock Text="{ Binding WinchName }"/>
 					</StackPanel>
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="Data Type: "/>
-						<TextBlock Text="Type of Data"/>
+						<TextBlock Text="{ Binding CommunicationType }"/>
 					</StackPanel>
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="IP Address: "/>
-						<TextBlock Text="IP of Winch"/>
+						<TextBlock Text="{ Binding InputCommunication.IPAddress }"/>
 					</StackPanel>
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="Port: "/>
-						<TextBlock Text="Port of Winch"/>
+						<TextBlock Text="{ Binding InputCommunication.PortNumber }"/>
 					</StackPanel>
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="Computer Time: "/>
-						<TextBlock Text="Yes"/>
+						<TextBlock Text="{ Binding UseComputerTime }"/>
 					</StackPanel>
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="Log 20Hz: "/>
-						<TextBlock Text="No"/>
+						<TextBlock Text="{ Binding Log20Hz }"/>
 					</StackPanel>
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="Log Max: "/>
-						<TextBlock Text="Yes"/>
+						<TextBlock Text="{ Binding LogMax }"/>
 					</StackPanel>
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="Log Format: "/>
@@ -42,7 +43,7 @@
 					</StackPanel>
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="IP Address: "/>
-						<TextBlock Text="IP of Winch"/>
+						<TextBlock Text="IP of Computer"/>
 					</StackPanel>
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="UDP Output: "/>
@@ -58,6 +59,7 @@
 	</UserControl.ContentTemplate>
 	<Grid>
 		<ScrollViewer HorizontalScrollBarVisibility="Visible" FlowDirection="LeftToRight">
+			<ContentControl Content="AllWinches"/>
 			<!--
 			<StackPanel Orientation="Horizontal">
 				<StackPanel>
