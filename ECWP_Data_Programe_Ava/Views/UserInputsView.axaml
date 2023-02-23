@@ -9,6 +9,10 @@
 		<Panel Background="WhiteSmoke" >
 			<StackPanel>
 				<StackPanel Background="AliceBlue">
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="Winch Select" VerticalAlignment="Center" Width="90"/>
+						<ComboBox Items="{ Binding WinchNames }" SelectionChanged="WinchSelected" SelectedItem="{ Binding WinchSelection }"/>
+					</StackPanel>
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Text="Winch Name" Width="90" VerticalAlignment="Center" />
 						<TextBox Watermark="Enter Winch Name" Text="{ Binding CurrentWinch.WinchName, Mode=TwoWay }"/>
@@ -24,7 +28,7 @@
 					</StackPanel>
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Text="Source Type" Width="90" VerticalAlignment="Center"/>
-						<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.CommunicationType, Mode=TwoWay }" Items="{ Binding Path=AvailableWinches }" SelectedIndex="1"/>
+						<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.CommunicationType, Mode=TwoWay }" Items="{ Binding Path=AvailableWinches }" SelectedIndex="0"/>
 					</StackPanel>
 				</StackPanel>
 				<StackPanel Background="MintCream" >

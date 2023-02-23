@@ -3,37 +3,60 @@
     public partial class WinchModel : ObservableObject
     {
         [ObservableProperty]
-        public string? winchName;
+        private string? winchName;
         [ObservableProperty]
-        public string? fileExtension ;
+        private string? fileExtension ;
         [ObservableProperty]
-        public CommunicationModel? inputCommunication ;
+        private CommunicationModel? inputCommunication ;
         [ObservableProperty]
-        public string? communicationType ;
+        private string? communicationType ;
         [ObservableProperty]
-        public bool? useComputerTime ;
+        private bool? useComputerTime ;
         [ObservableProperty]
-        public bool? log20Hz ;
+        private bool? log20Hz ;
         [ObservableProperty]
-        public bool? logMax ;
+        private bool? logMax ;
         [ObservableProperty]
-        public bool? logFormat ;
+        private bool? logFormat ;
         [ObservableProperty]
-        public string? speedUnit ;
+        private string? speedUnit ;
         [ObservableProperty]
-        public string? payoutUnit ;
+        private string? payoutUnit ;
         [ObservableProperty]
-        public string? tensionUnit ;
+        private string? tensionUnit ;
         [ObservableProperty]
-        public double? stopLogTension ;
+        private double? stopLogTension ;
         [ObservableProperty]
-        public double? stopLogPayout ;
+        private double? stopLogPayout ;
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)
         {
             
             WinchName = winchName;
             FileExtension = fileExtension;
+        }
+        public WinchModel(string? _winchName, string? _fileExtension, CommunicationModel? _inputCommunication, string? _communicationType, bool? _useComputerTime, bool? _log20Hz, bool? _logMax, bool? _logFormat, string? _speedUnit, string? _payoutUnit, string? _tensionUnit, double? _stopLogTension, double? _stopLogPayout) 
+          
+        {
+            
+            WinchName = _winchName;
+            FileExtension = _fileExtension;
+            InputCommunication = _inputCommunication;
+            CommunicationType = _communicationType;
+            UseComputerTime = _useComputerTime;
+            Log20Hz = _log20Hz;
+            LogMax = _logMax;
+            LogFormat = _logFormat;
+            SpeedUnit = _speedUnit;
+            PayoutUnit = _payoutUnit;
+            TensionUnit = _tensionUnit;
+            StopLogTension = _stopLogTension;
+            //StopLogPayout = _stopLogPayout;
+        }
+
+        public WinchModel ShallowCopy()
+        {
+            return (WinchModel) this.MemberwiseClone();
         }
     }
 }

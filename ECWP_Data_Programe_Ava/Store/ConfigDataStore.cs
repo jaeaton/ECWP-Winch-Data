@@ -86,8 +86,8 @@
         private WinchModel? currentWinch = new();
 
         [ObservableProperty]
-        //[NotifyPropertyChangedFor(nameof(AllWinchNames))]
-        private List<WinchModel>? allWinches = new();
+        //[NotifyPropertyChangedFor(nameof(WinchNames))]
+        private ObservableCollection<WinchModel>? allWinches = new();
         
         [ObservableProperty]
         private List<string>? speedUnitList;
@@ -99,11 +99,17 @@
         private List<string>? payoutUnitList;
 
         [ObservableProperty]
-        private List<string>? winchNames;
-        partial void OnAllWinchesChanged(List<WinchModel>? allWinches)
-        {
-            List<string>? WinchNames = AllWinches.Select(WinchModel => WinchModel.WinchName).ToList();
-        }
+        private ObservableCollection<string>? winchNames = new();
+        
+        //partial void OnAllWinchesChanged(ObservableCollection<WinchModel>? allWinches)
+        //{
+        //    WinchNames.Clear();
+        //    foreach (var item in AllWinches)
+        //    {
+        //        WinchNames.Add(item.WinchName);
+        //    }
+        //    //WinchNames = AllWinches.Select(WinchModel => WinchModel.WinchName).ToList();
+        //}
 
     }
 }

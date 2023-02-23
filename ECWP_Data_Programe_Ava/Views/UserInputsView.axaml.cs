@@ -62,8 +62,11 @@ namespace Views
             else
                 FileOperationsViewModel.WriteConfig(globalConfig);
         }
+        private void WinchSelected(object sender, SelectionChangedEventArgs e)
+        {
+            WinchConfigurationViewModel.LoadWinch(MainWindowViewModel._configDataStore.WinchSelection);
+        }
 
-        
         //Moved to StartStoSaveView
         //public async static void SaveFileNames()
         //{
