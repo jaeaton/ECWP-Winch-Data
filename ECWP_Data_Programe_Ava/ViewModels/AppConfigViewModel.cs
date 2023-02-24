@@ -58,7 +58,7 @@
             globalConfig.SerialSwitch = _configDataStore.SendSerialDataCheckBox;
             globalConfig.SerialPortName = _configDataStore.SerialPortName;
             globalConfig.SerialPortBaud = _configDataStore.BaudRate;
-            globalConfig.WinchSelection= _configDataStore.WinchSelection;
+            globalConfig.SelectedProtocol = _configDataStore.SelectedProtocol;
             if (globalConfig.SaveDirectory != null)
             {
                 globalConfig.SaveDirectorySet = true;

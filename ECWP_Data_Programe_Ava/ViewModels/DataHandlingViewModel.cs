@@ -21,7 +21,7 @@
                 _serialPort.Open();
             }
             string dataIn;
-            if (globalConfig.WinchSelection == "LCI-90i") 
+            if (globalConfig.SelectedProtocol == "LCI-90i") 
             {
                 TcpListener server = null;
                 TcpClient client = null;
@@ -31,7 +31,7 @@
                     Int32 port = int.Parse(globalConfig.ReceiveCommunication.PortNumber);
                     //should be look up local host
                     //TODO change to look up local host
-                    IPAddress localAddr = IPAddress.Parse(globalConfig.ReceiveCommunication.IPAddress);
+                    IPAddress localAddr = IPAddress.Parse(globalConfig.ReceiveCommunication.TcpIpAddress);
 
                     // TcpListener server = new TcpListener(port);
                     server = new TcpListener(localAddr, port);
@@ -80,7 +80,7 @@
 
                     if (!client.Connected)
                     {
-                        if (!client.ConnectAsync(IPAddress.Parse(globalConfig.ReceiveCommunication.IPAddress), int.Parse(globalConfig.ReceiveCommunication.PortNumber)).Wait(5000))
+                        if (!client.ConnectAsync(IPAddress.Parse(globalConfig.ReceiveCommunication.TcpIpAddress), int.Parse(globalConfig.ReceiveCommunication.PortNumber)).Wait(5000))
                         {
                             // connection failure
                             MessageBoxViewModel.DisplayMessage("Failed to connect to TCP Server");
@@ -371,7 +371,7 @@
             line = $"{ line }{ checkSum }";
             //Send UDP packet
             UdpClient udpClient = new UdpClient();
-            udpClient.Connect(IPAddress.Parse( globalConfig.TransmitCommunication.IPAddress), int.Parse(globalConfig.TransmitCommunication.PortNumber));
+            udpClient.Connect(IPAddress.Parse( globalConfig.TransmitCommunication.TcpIpAddress), int.Parse(globalConfig.TransmitCommunication.PortNumber));
             byte[] sendBytes = Encoding.ASCII.GetBytes(line);
             udpClient.Send(sendBytes, sendBytes.Length);
         }

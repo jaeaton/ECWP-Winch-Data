@@ -10,8 +10,8 @@
 			<StackPanel>
 				<StackPanel Background="AliceBlue">
 					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Winch Select" VerticalAlignment="Center" Width="90"/>
-						<ComboBox Items="{ Binding WinchNames }" SelectionChanged="WinchSelected" SelectedItem="{ Binding WinchSelection }"/>
+						<TextBlock Text="Select Winch" VerticalAlignment="Center" Width="90"/>
+						<ComboBox Items="{ Binding WinchNames }" SelectedItem="{ Binding Path=SelectWinch }"  />
 					</StackPanel>
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Text="Winch Name" Width="90" VerticalAlignment="Center" />
@@ -20,15 +20,15 @@
 					<TextBlock Text="Communication Parameters" Margin="5"/>
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Text="IP Address" Width="90" VerticalAlignment="Center" />
-						<TextBox Watermark="192.168.103.217" Text="{ Binding CurrentWinch.InputCommunication.IPAddress }" IsEnabled="{Binding Path=UserInputsEnable}" Width="130" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBox>
+						<TextBox Watermark="192.168.103.217" Text="{ Binding CurrentWinch.TcpIpAddress, Mode=TwoWay }" IsEnabled="{Binding Path=UserInputsEnable}" Width="130" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBox>
 					</StackPanel>
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Text="Port Number" Width="90" VerticalAlignment="Center" />
-						<TextBox Watermark="50505" x:Name="TextBoxSourcePort" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.InputCommunication.PortNumber}" Width="130" VerticalAlignment="Center"></TextBox>
+						<TextBox Watermark="50505" x:Name="TextBoxSourcePort" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.TcpIpPort, Mode=TwoWay }" Width="130" VerticalAlignment="Center"></TextBox>
 					</StackPanel>
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Text="Source Type" Width="90" VerticalAlignment="Center"/>
-						<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.CommunicationType, Mode=TwoWay }" Items="{ Binding Path=AvailableWinches }" SelectedIndex="0"/>
+						<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.CommunicationType, Mode=TwoWay }" Items="{ Binding Path=AvailableProtocols }" SelectedIndex="0"/>
 					</StackPanel>
 				</StackPanel>
 				<StackPanel Background="MintCream" >
@@ -41,15 +41,15 @@
 						<CheckBox x:Name="CheckBoxUseComputerTime" IsEnabled="{Binding Path=UserInputsEnable}" Content="Use Computer Time" HorizontalContentAlignment="Right" Margin="6,0,50,0" IsChecked="{Binding CurrentWinch.UseComputerTime,FallbackValue='False',Mode=TwoWay}"/>
 						<StackPanel Orientation="Horizontal">
 							<TextBlock Text="Speed Unit" VerticalAlignment="Center" Width="90"/>
-							<ComboBox SelectedItem="{ Binding CurrentWinch.SpeedUnit }" Items="{ Binding SpeedUnitList }"/>
+							<ComboBox SelectedItem="{ Binding CurrentWinch.SpeedUnit, Mode=TwoWay }" Items="{ Binding SpeedUnitList }"/>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal">
 							<TextBlock Text="Payout Unit" VerticalAlignment="Center" Width="90"/>
-							<ComboBox SelectedItem="{ Binding CurrentWinch.PayoutUnit }" Items="{ Binding PayoutUnitList }"/>
+							<ComboBox SelectedItem="{ Binding CurrentWinch.PayoutUnit, Mode=TwoWay }" Items="{ Binding PayoutUnitList }"/>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal">
 							<TextBlock Text="Tension Unit" VerticalAlignment="Center" Width="90"/>
-							<ComboBox SelectedItem="{ Binding CurrentWinch.SpeedUnit }" Items="{ Binding TensionUnitList }"/>
+							<ComboBox SelectedItem="{ Binding CurrentWinch.TensionUnit, Mode=TwoWay }" Items="{ Binding TensionUnitList }"/>
 						</StackPanel>
 					</StackPanel>
 					<!--

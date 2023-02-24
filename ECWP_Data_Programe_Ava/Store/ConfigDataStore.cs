@@ -80,7 +80,10 @@
         private string? winchSelection;
 
         [ObservableProperty]
-        private List<string>? availableWinches;
+        private List<string>? availableProtocols;
+
+        [ObservableProperty]
+        private string? selectedProtocol;
 
         [ObservableProperty]
         private WinchModel? currentWinch = new();
@@ -97,6 +100,13 @@
 
         [ObservableProperty]
         private List<string>? payoutUnitList;
+
+        [ObservableProperty]
+        private string? selectWinch;// = new();
+        partial void OnSelectWinchChanged(string? selectWinch)
+        {
+            WinchConfigurationViewModel.LoadWinch(SelectWinch);
+        }
 
         [ObservableProperty]
         private ObservableCollection<string>? winchNames = new();

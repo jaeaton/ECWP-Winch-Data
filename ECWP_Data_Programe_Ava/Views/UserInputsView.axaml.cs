@@ -23,7 +23,7 @@ namespace Views
                                                                 "9600",
                                                                 "4800"
                                                             };
-            MainWindowViewModel._configDataStore.AvailableWinches = new List<string>
+            MainWindowViewModel._configDataStore.AvailableProtocols = new List<string>
                                                             {
                                                                 "UNOLS String",
                                                                 "LCI-90i",
@@ -62,9 +62,9 @@ namespace Views
             else
                 FileOperationsViewModel.WriteConfig(globalConfig);
         }
-        private void WinchSelected(object sender, SelectionChangedEventArgs e)
+        private void WinchDataMove(object sender, SelectionChangedEventArgs e)
         {
-            WinchConfigurationViewModel.LoadWinch(MainWindowViewModel._configDataStore.WinchSelection);
+            WinchConfigurationViewModel.LoadWinch(MainWindowViewModel._configDataStore.SelectWinch);
         }
 
         //Moved to StartStoSaveView

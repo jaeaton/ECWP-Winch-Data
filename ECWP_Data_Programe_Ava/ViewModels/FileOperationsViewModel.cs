@@ -25,9 +25,9 @@
             //Populate array with global configuartion values
             string[] lines =
                 {
-                $"Receive IP,{ globalConfig.ReceiveCommunication.IPAddress }",
+                $"Receive IP,{ globalConfig.ReceiveCommunication.TcpIpAddress }",
                 $"Receive Port,{ globalConfig.ReceiveCommunication.PortNumber }",
-                $"Transmit IP,{ globalConfig.TransmitCommunication.IPAddress }",
+                $"Transmit IP,{ globalConfig.TransmitCommunication.TcpIpAddress }",
                 $"Transmit Port,{ globalConfig.TransmitCommunication.PortNumber }",
                 $"Cruise Name,{ globalConfig.CruiseInformation.CruiseName }",
                 $"Cast Number,{ globalConfig.CruiseInformation.CastNumber }",
@@ -42,7 +42,7 @@
                 $"UNOLS Serial String,{ globalConfig.UnolsSerialFormatSet }",
                 $"Serial Port Name,{ globalConfig.SerialPortName }",
                 $"Serial Baud Rate,{ globalConfig.SerialPortBaud }",
-                $"Selected Winch,{ globalConfig.WinchSelection }"
+                $"Selected Winch,{ globalConfig.SelectedProtocol }"
                 };
             //Write each line of array using stream writer
             using (StreamWriter stream = new StreamWriter(destPath))
@@ -178,7 +178,7 @@
                         }
                         if (line.Substring(0, delim) == "Selected Winch")
                         {
-                            _configDataStore.WinchSelection = line.Substring(delim + 1);
+                            _configDataStore.SelectedProtocol = line.Substring(delim + 1);
                         }
                     }
                     GlobalConfigModel globalConfig = new GlobalConfigModel();

@@ -23,7 +23,7 @@
         public bool SerialSwitch { get; set; } = new bool();
         public bool UnolsSerialFormatSet { get; set; } = new bool();
         public string? WinchSelection { get; set;}
-
+        public string? SelectedProtocol { get; set; }
 
     }
 }

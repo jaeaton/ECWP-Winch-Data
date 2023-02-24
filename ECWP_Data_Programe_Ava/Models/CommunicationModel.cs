@@ -1,11 +1,11 @@
 ﻿namespace Models
 {
-    public class CommunicationModel //: INotifyPropertyChanged
+    public partial class CommunicationModel : ObservableObject
     {
-        
-        public string IPAddress { get; set; }
-       
-        public string PortNumber {get; set; }
+        [ObservableProperty]
+        private string tcpIpAddress;
+        [ObservableProperty]
+        private string portNumber; 
            
         public CommunicationModel()
         {
@@ -13,7 +13,7 @@
         }
         public CommunicationModel(string _ipAdress, string _portNumber)
         {
-            IPAddress = _ipAdress;
+            TcpIpAddress = _ipAdress;
 
             //int portNumberValue = 50505;
             //int.TryParse(_portNumber, out portNumberValue);

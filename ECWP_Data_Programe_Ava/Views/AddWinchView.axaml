@@ -7,12 +7,7 @@
              x:Class="Views.AddWinchView">
 	<ScrollViewer>
 		<StackPanel>
-			<!--
-			<StackPanel Orientation="Horizontal">
-				<TextBlock Text="Winch Select" VerticalAlignment="Center" Width="90"/>
-				<ComboBox Items="{ Binding WinchNames }" SelectionChanged="WinchSelected"/>
-			</StackPanel>
-			-->
+			
 			<controls:UserInputsView/>
 			<Button Content="Add Winch" Command="{ Binding AddWinchCommand }"/>
 			<Button Content="Remove Winch" Command="{ Binding RemoveWinchCommand }"/>

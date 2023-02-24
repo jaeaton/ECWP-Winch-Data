@@ -27,7 +27,7 @@
                 MainWindowViewModel._configDataStore.WinchNames.Add(item.WinchName);
             }
         }
-        public static void LoadWinch(string winch)
+        public static void LoadWinch(string? winch)
         {
             if (winch != null && MainWindowViewModel._configDataStore.AllWinches != null)
             {
