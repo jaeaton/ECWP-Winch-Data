@@ -2,298 +2,71 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="2000" d:DesignHeight="450"
              x:Class="Views.ExistingWinchView"
 			 xmlns:model="clr-namespace:Models">
-	<UserControl.ContentTemplate>
-		<DataTemplate DataType="{x:Type model:WinchModel}">
-			<StackPanel Orientation="Horizontal">
-				<StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Winch Name: "/>
-						<TextBlock Text="{ Binding WinchName }"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Data Type: "/>
-						<TextBlock Text="{ Binding CommunicationType }"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="IP Address: "/>
-						<TextBlock Text="{ Binding InputCommunication.TcpIpAddress }"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Port: "/>
-						<TextBlock Text="{ Binding InputCommunication.PortNumber }"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Computer Time: "/>
-						<TextBlock Text="{ Binding UseComputerTime }"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Log 20Hz: "/>
-						<TextBlock Text="{ Binding Log20Hz }"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Log Max: "/>
-						<TextBlock Text="{ Binding LogMax }"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Log Format: "/>
-						<TextBlock Text="UNOLS"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="IP Address: "/>
-						<TextBlock Text="IP of Computer"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="UDP Output: "/>
-						<TextBlock Text="No"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Serial Output: "/>
-						<TextBlock Text="No"/>
-					</StackPanel>
+	<UserControl.DataTemplates>
+		<DataTemplate DataType="model:WinchModel">
+			<StackPanel Margin="5">
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Winch Name: "/>
+					<TextBlock Text="{ Binding WinchName }"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Data Type: "/>
+					<TextBlock Text="{ Binding CommunicationType }"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="IP Address: "/>
+					<TextBlock Text="{ Binding TcpIpAddress }"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Port: "/>
+					<TextBlock Text="{ Binding TcpIpPort }"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Computer Time: "/>
+					<TextBlock Text="{ Binding UseComputerTime }"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Log 20Hz: "/>
+					<TextBlock Text="{ Binding Log20Hz }"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Log Max: "/>
+					<TextBlock Text="{ Binding LogMax }"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Log Format: "/>
+					<TextBlock Text="UNOLS"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="IP Address: "/>
+					<TextBlock Text="IP of Computer"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="UDP Output: "/>
+					<TextBlock Text="No"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Serial Output: "/>
+					<TextBlock Text="No"/>
 				</StackPanel>
 			</StackPanel>
 		</DataTemplate>
-	</UserControl.ContentTemplate>
-	<Grid>
-		<ScrollViewer HorizontalScrollBarVisibility="Visible" FlowDirection="LeftToRight">
-			<ContentControl Content="AllWinches"/>
-			<!--
-			<StackPanel Orientation="Horizontal">
-				<StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Winch Name: "/>
-						<TextBlock Text="Name of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Data Type: "/>
-						<TextBlock Text="Type of Data"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="IP Address: "/>
-						<TextBlock Text="IP of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Port: "/>
-						<TextBlock Text="Port of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Computer Time: "/>
-						<TextBlock Text="Yes"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Log 20Hz: "/>
-						<TextBlock Text="No"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Log Max: "/>
-						<TextBlock Text="Yes"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Log Format: "/>
-						<TextBlock Text="UNOLS"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="IP Address: "/>
-						<TextBlock Text="IP of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="UDP Output: "/>
-						<TextBlock Text="No"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Serial Output: "/>
-						<TextBlock Text="No"/>
-					</StackPanel>
-				</StackPanel>
-				<StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Winch Name: "/>
-						<TextBlock Text="Name of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Data Type: "/>
-						<TextBlock Text="Type of Data"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="IP Address: "/>
-						<TextBlock Text="IP of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Port: "/>
-						<TextBlock Text="Port of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Computer Time: "/>
-						<TextBlock Text="Yes"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Log 20Hz: "/>
-						<TextBlock Text="No"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Log Max: "/>
-						<TextBlock Text="Yes"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Log Format: "/>
-						<TextBlock Text="UNOLS"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="IP Address: "/>
-						<TextBlock Text="IP of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="UDP Output: "/>
-						<TextBlock Text="No"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Serial Output: "/>
-						<TextBlock Text="No"/>
-					</StackPanel>
-				</StackPanel>
-				<StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Winch Name: "/>
-						<TextBlock Text="Name of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Data Type: "/>
-						<TextBlock Text="Type of Data"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="IP Address: "/>
-						<TextBlock Text="IP of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Port: "/>
-						<TextBlock Text="Port of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Computer Time: "/>
-						<TextBlock Text="Yes"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Log 20Hz: "/>
-						<TextBlock Text="No"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Log Max: "/>
-						<TextBlock Text="Yes"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Log Format: "/>
-						<TextBlock Text="UNOLS"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="IP Address: "/>
-						<TextBlock Text="IP of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="UDP Output: "/>
-						<TextBlock Text="No"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Serial Output: "/>
-						<TextBlock Text="No"/>
-					</StackPanel>
-				</StackPanel>
-				<StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Winch Name: "/>
-						<TextBlock Text="Name of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Data Type: "/>
-						<TextBlock Text="Type of Data"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="IP Address: "/>
-						<TextBlock Text="IP of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Port: "/>
-						<TextBlock Text="Port of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Computer Time: "/>
-						<TextBlock Text="Yes"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Log 20Hz: "/>
-						<TextBlock Text="No"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Log Max: "/>
-						<TextBlock Text="Yes"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Log Format: "/>
-						<TextBlock Text="UNOLS"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="IP Address: "/>
-						<TextBlock Text="IP of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="UDP Output: "/>
-						<TextBlock Text="No"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Serial Output: "/>
-						<TextBlock Text="No"/>
-					</StackPanel>
-				</StackPanel>
-				<StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Winch Name: "/>
-						<TextBlock Text="Name of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Data Type: "/>
-						<TextBlock Text="Type of Data"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="IP Address: "/>
-						<TextBlock Text="IP of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Port: "/>
-						<TextBlock Text="Port of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Computer Time: "/>
-						<TextBlock Text="Yes"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Log 20Hz: "/>
-						<TextBlock Text="No"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Log Max: "/>
-						<TextBlock Text="Yes"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Log Format: "/>
-						<TextBlock Text="UNOLS"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="IP Address: "/>
-						<TextBlock Text="IP of Winch"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="UDP Output: "/>
-						<TextBlock Text="No"/>
-					</StackPanel>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="Serial Output: "/>
-						<TextBlock Text="No"/>
-					</StackPanel>
-				</StackPanel>
-			</StackPanel>
--->
-		</ScrollViewer>
-	</Grid>
+	</UserControl.DataTemplates>
+	<ItemsControl Items="{ Binding AllWinches}">
+		<ItemsControl.ItemsPanel>
+			<ItemsPanelTemplate>
+				<WrapPanel Margin="5" Orientation="Horizontal"/>
+			</ItemsPanelTemplate>
+		</ItemsControl.ItemsPanel>
+	</ItemsControl>
+	<!--
+	<ListBox Items="{ Binding AllWinches }"/>
+	
+	<StackPanel Orientation="Horizontal">
+		<ContentControl	Content="{ Binding AllWinches }" />
+	</StackPanel>
+	-->
 </UserControl>

@@ -5,6 +5,7 @@ namespace Views
         public ExistingWinchView()
         {
             InitializeComponent();
+            this.DataContext = MainWindowViewModel._configDataStore;
         }
     }
 }
