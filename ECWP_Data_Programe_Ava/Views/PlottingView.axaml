@@ -4,21 +4,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:Views"
 			 xmlns:controls="clr-namespace:Views"
-			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="450"
              x:Class="Views.PlottingView">
 	<Grid>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="*"></RowDefinition>
-			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="*"/>
+			<RowDefinition MaxHeight="70"/>
 		</Grid.RowDefinitions>
-		<Grid>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"></ColumnDefinition>
-				<ColumnDefinition Width="*"></ColumnDefinition>
-			</Grid.ColumnDefinitions>
-			<controls:SelectedWinchDetailsView Grid.Column="0"/>
-			<controls:DataDisplay Grid.Column="1" />
-		</Grid>
+		<StackPanel  Grid.Row="0">
+			<controls:WinchPlotView/>
+			<controls:WinchPlotView/>
+		</StackPanel>
 		<controls:StartStopSaveView Grid.Row="1"/>
 	</Grid>
 </UserControl>

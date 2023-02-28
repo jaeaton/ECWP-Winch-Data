@@ -2,22 +2,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="240" d:DesignHeight="600"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="100"
              x:Class="Views.SelectedWinchDetailsView">
 	<Panel>
-		<StackPanel >
-			<StackPanel Orientation="Horizontal" Margin="5">
-			<TextBlock Text="Data Source" Width="100" VerticalAlignment="Center"/>
-			<ComboBox MinWidth="130" SelectedItem="{ Binding WinchSelection, Mode=TwoWay }" Items="{ Binding WinchNames }" SelectedIndex="1"/>
+		<WrapPanel Orientation="Horizontal">
+			<!--
+			<StackPanel Margin="5">
+			
+				<TextBlock Text="Number of Winches to Display" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+			<ComboBox MinWidth="130" SelectedItem="{ Binding NumberOfPlots, Mode=TwoWay }" Items="{ Binding WinchQuantity }" SelectedIndex="1" HorizontalAlignment="Center"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal" Margin="5">
 				<TextBlock Text="Cruise Name" Width="100" VerticalAlignment="Center"/>
 				<TextBox x:Name="TextBoxCruiseName" Watermark="OC123" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding Path=CruiseNameBox,Mode=TwoWay}"  Width="120" VerticalAlignment="Center" />
 			</StackPanel>
+			-->
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock Text="Data Source" Width="100" VerticalAlignment="Center"/>
+				<ComboBox MinWidth="130" SelectedItem="{ Binding WinchSelection, Mode=TwoWay }" Items="{ Binding WinchNames }" SelectedIndex="1"/>
+			</StackPanel>
 			<StackPanel Orientation="Horizontal" Margin="5">
 				<TextBlock Text="Cast Number"  Width="100" VerticalAlignment="Center"/>
 				<TextBox x:Name="TextBoxCastNumber" Watermark="1" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding Path=CastNumberBox,Mode=TwoWay}" Width="120" VerticalAlignment="Center" />
 			</StackPanel>
-		</StackPanel>
+			
+			<Button Content="Start/Stop" Margin="5" MinWidth="100" HorizontalContentAlignment="Center"/>
+			<Button Content="Log Max" Margin="5" MinWidth="100" HorizontalContentAlignment="Center"/>
+		</WrapPanel>
 </Panel>
 </UserControl>

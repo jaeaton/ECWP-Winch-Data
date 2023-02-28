@@ -15,13 +15,13 @@
         [ObservableProperty]
         private string? communicationType ;
         [ObservableProperty]
-        private bool? useComputerTime ;
+        private bool useComputerTime ;
         [ObservableProperty]
-        private bool? log20Hz ;
+        private bool log20Hz ;
         [ObservableProperty]
-        private bool? logMax ;
+        private bool logMax ;
         [ObservableProperty]
-        private bool? logFormat ;
+        private bool logFormat ;
         [ObservableProperty]
         private string? speedUnit ;
         [ObservableProperty]
@@ -39,7 +39,7 @@
             WinchName = winchName;
             FileExtension = fileExtension;
         }
-        public WinchModel(string? _winchName, string? _fileExtension, string? _tcpIpAddress, string? _tcpIpPort, string? _communicationType, bool? _useComputerTime, bool? _log20Hz, bool? _logMax, bool? _logFormat, string? _speedUnit, string? _payoutUnit, string? _tensionUnit, double? _stopLogTension, double? _stopLogPayout) 
+        public WinchModel(string? _winchName, string? _fileExtension, string? _tcpIpAddress, string? _tcpIpPort, string? _communicationType, bool _useComputerTime, bool _log20Hz, bool _logMax, bool _logFormat, string? _speedUnit, string? _payoutUnit, string? _tensionUnit, double? _stopLogTension, double? _stopLogPayout) 
           
         {
             

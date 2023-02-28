@@ -41,6 +41,18 @@
 					<TextBlock Text="UNOLS"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Speed Unit: "/>
+					<TextBlock Text="{ Binding SpeedUnit }"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Payout Unit: "/>
+					<TextBlock Text="{ Binding PayoutUnit }"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Tension Unit: "/>
+					<TextBlock Text="{ Binding TensionUnit }"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="IP Address: "/>
 					<TextBlock Text="IP of Computer"/>
 				</StackPanel>

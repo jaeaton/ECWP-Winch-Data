@@ -41,15 +41,15 @@
 						<CheckBox x:Name="CheckBoxUseComputerTime" IsEnabled="{Binding Path=UserInputsEnable}" Content="Use Computer Time" HorizontalContentAlignment="Right" Margin="6,0,50,0" IsChecked="{Binding CurrentWinch.UseComputerTime,FallbackValue='False',Mode=TwoWay}"/>
 						<StackPanel Orientation="Horizontal">
 							<TextBlock Text="Speed Unit" VerticalAlignment="Center" Width="90"/>
-							<ComboBox SelectedItem="{ Binding CurrentWinch.SpeedUnit, Mode=TwoWay }" Items="{ Binding SpeedUnitList }"/>
+							<ComboBox SelectedItem="{ Binding CurrentWinch.SpeedUnit, Mode=TwoWay }" Items="{ Binding SpeedUnitList }" SelectedIndex="0"/>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal">
 							<TextBlock Text="Payout Unit" VerticalAlignment="Center" Width="90"/>
-							<ComboBox SelectedItem="{ Binding CurrentWinch.PayoutUnit, Mode=TwoWay }" Items="{ Binding PayoutUnitList }"/>
+							<ComboBox SelectedItem="{ Binding CurrentWinch.PayoutUnit, Mode=TwoWay }" Items="{ Binding PayoutUnitList }" SelectedIndex="0"/>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal">
 							<TextBlock Text="Tension Unit" VerticalAlignment="Center" Width="90"/>
-							<ComboBox SelectedItem="{ Binding CurrentWinch.TensionUnit, Mode=TwoWay }" Items="{ Binding TensionUnitList }"/>
+							<ComboBox SelectedItem="{ Binding CurrentWinch.TensionUnit, Mode=TwoWay }" Items="{ Binding TensionUnitList }" SelectedIndex="1"/>
 						</StackPanel>
 					</StackPanel>
 					<!--

@@ -15,7 +15,12 @@
             {
                 MainWindowViewModel._configDataStore.WinchNames.Add(item.WinchName);
             }
-
+            MainWindowViewModel._configDataStore.QuantityOfWinches.Clear();
+            int count = MainWindowViewModel._configDataStore.AllWinches.Count();
+            for (int i = 1; i <= count; i++)
+            {
+                MainWindowViewModel._configDataStore.QuantityOfWinches.Add(i);
+            }
         }
         [RelayCommand]
         private void RemoveWinch()
@@ -25,6 +30,12 @@
             foreach (var item in MainWindowViewModel._configDataStore.AllWinches)
             {
                 MainWindowViewModel._configDataStore.WinchNames.Add(item.WinchName);
+            }
+            MainWindowViewModel._configDataStore.QuantityOfWinches.Clear();
+            int count = MainWindowViewModel._configDataStore.AllWinches.Count();
+            for (int i = 1; i <= count; i++)
+            {
+                MainWindowViewModel._configDataStore.QuantityOfWinches.Add(i);
             }
         }
         public static void LoadWinch(string? winch)

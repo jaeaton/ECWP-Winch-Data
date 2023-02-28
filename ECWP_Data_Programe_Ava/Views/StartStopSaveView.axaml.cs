@@ -48,69 +48,69 @@ namespace Views
             UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
 
         }
-        public void StartStop()
-        {
+        //public void StartStop()
+        //{
 
-            //Write Start and Stop Logic
-            switch (StartStopButton.Content)
-            {
-                case "Stop Log":
-                    {
-                        try
-                        {
-                            //Set cancellation token to cancel to stop data collection
-                            _canceller.Cancel();
-                        }
-                        catch (ObjectDisposedException ex)
-                        {
+        //    //Write Start and Stop Logic
+        //    switch (StartStopButton.Content)
+        //    {
+        //        case "Stop Log":
+        //            {
+        //                try
+        //                {
+        //                    //Set cancellation token to cancel to stop data collection
+        //                    _canceller.Cancel();
+        //                }
+        //                catch (ObjectDisposedException ex)
+        //                {
 
-                        }
-                        if (MainWindowViewModel._configDataStore.LogMaxDataCheckBox == true)
-                        {
-                            //Write the max data for the cast
-                            DataHandlingViewModel.WriteMaxData(UserInputsView.globalConfig);
-                            //Increase the cast count
-                            MainWindowViewModel._configDataStore.CastNumberBox = (int.Parse(MainWindowViewModel._configDataStore.CastNumberBox) + 1).ToString();
-                            UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
+        //                }
+        //                if (MainWindowViewModel._configDataStore.LogMaxDataCheckBox == true)
+        //                {
+        //                    //Write the max data for the cast
+        //                    DataHandlingViewModel.WriteMaxData(UserInputsView.globalConfig);
+        //                    //Increase the cast count
+        //                    MainWindowViewModel._configDataStore.CastNumberBox = (int.Parse(MainWindowViewModel._configDataStore.CastNumberBox) + 1).ToString();
+        //                    UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
 
-                        }
+        //                }
 
-                        //Change button text
-                        MainWindowViewModel._configDataStore.StartStopButtonText = "Start Log";
-                        MainWindowViewModel._configDataStore.UserInputsEnable = true;
-                        break;
-                    }
-                default:
-                    {
-                        if (MainWindowViewModel._configDataStore.Log20HzDataCheckBox || MainWindowViewModel._configDataStore.LogMaxDataCheckBox)
-                        {
-                            //If the save directory is not set show popup
-                            if (UserInputsView.globalConfig.SaveDirectorySet == false)
-                            {
-                                MessageBoxViewModel.DisplayMessage("Set save location before colecting data");
-                                break;
-                            }
+        //                //Change button text
+        //                MainWindowViewModel._configDataStore.StartStopButtonText = "Start Log";
+        //                MainWindowViewModel._configDataStore.UserInputsEnable = true;
+        //                break;
+        //            }
+        //        default:
+        //            {
+        //                if (MainWindowViewModel._configDataStore.Log20HzDataCheckBox || MainWindowViewModel._configDataStore.LogMaxDataCheckBox)
+        //                {
+        //                    //If the save directory is not set show popup
+        //                    if (UserInputsView.globalConfig.SaveDirectorySet == false)
+        //                    {
+        //                        MessageBoxViewModel.DisplayMessage("Set save location before colecting data");
+        //                        break;
+        //                    }
 
-                        }
+        //                }
 
-                        //ChartDataViewModel.ResetData();
-                        //Create new cancellation token at start of data collection
-                        _canceller = new CancellationTokenSource();
-                        //Starts Data collection on first press
-                        DataHandlingViewModel.GetDataAsync(UserInputsView.globalConfig);
-                        //change button text
-                        MainWindowViewModel._configDataStore.StartStopButtonText = "Stop Log";
-                        MainWindowViewModel._configDataStore.UserInputsEnable = false;
+        //                //ChartDataViewModel.ResetData();
+        //                //Create new cancellation token at start of data collection
+        //                _canceller = new CancellationTokenSource();
+        //                //Starts Data collection on first press
+        //                DataHandlingViewModel.GetDataAsync(UserInputsView.globalConfig);
+        //                //change button text
+        //                MainWindowViewModel._configDataStore.StartStopButtonText = "Stop Log";
+        //                MainWindowViewModel._configDataStore.UserInputsEnable = false;
 
-                        break;
-                    }
-            }
-        }
-        private void ButtonStartLog_Click(object sender, RoutedEventArgs e)
-        {
-            StartStop();
+        //                break;
+        //            }
+        //    }
+        //}
+        //private void ButtonStartLog_Click(object sender, RoutedEventArgs e)
+        //{
+        //    StartStop();
 
-        }
+        //}
 
         public async static void SaveFileNames()
         {

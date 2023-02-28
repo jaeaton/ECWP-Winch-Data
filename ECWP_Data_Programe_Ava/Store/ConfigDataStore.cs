@@ -78,6 +78,10 @@
 
         [ObservableProperty]
         private string? winchSelection;
+        partial void OnWinchSelectionChanged(string? winchSelection)
+        {
+            MainLiveDataViewModel.UpdatePlottingWinch(WinchSelection);
+        }
 
         [ObservableProperty]
         private List<string>? availableProtocols;
@@ -89,8 +93,13 @@
         private WinchModel? currentWinch = new();
 
         [ObservableProperty]
-        //[NotifyPropertyChangedFor(nameof(WinchNames))]
         private ObservableCollection<WinchModel>? allWinches = new();
+
+        [ObservableProperty]
+        private int? numberOfPlots;
+
+        [ObservableProperty]
+        private List<int>? quantityOfWinches = new();
         
         [ObservableProperty]
         private List<string>? speedUnitList;
