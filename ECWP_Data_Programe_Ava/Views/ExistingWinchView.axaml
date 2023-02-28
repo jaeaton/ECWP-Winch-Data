@@ -37,8 +37,12 @@
 					<TextBlock Text="{ Binding LogMax }"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Log Format: "/>
-					<TextBlock Text="UNOLS"/>
+					<TextBlock Text="UNOLS Log Format: "/>
+					<TextBlock Text="{ Binding LogFormatUnols }"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="MTNW Log Format: "/>
+					<TextBlock Text="{ Binding LogFormatMtnw }"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="Speed Unit: "/>
@@ -53,16 +57,12 @@
 					<TextBlock Text="{ Binding TensionUnit }"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="IP Address: "/>
-					<TextBlock Text="IP of Computer"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="UDP Output: "/>
-					<TextBlock Text="No"/>
+					<TextBlock Text="{ Binding UdpOutput }"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="Serial Output: "/>
-					<TextBlock Text="No"/>
+					<TextBlock Text="{ Binding SerialOutput }"/>
 				</StackPanel>
 			</StackPanel>
 		</DataTemplate>

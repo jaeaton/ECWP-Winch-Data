@@ -11,10 +11,17 @@
 			<RowDefinition Height="*"/>
 			<RowDefinition MaxHeight="70"/>
 		</Grid.RowDefinitions>
-		<StackPanel  Grid.Row="0">
-			<controls:WinchPlotView/>
-			<controls:WinchPlotView/>
-		</StackPanel>
+		<Grid Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="200"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+			<controls:PlotsConfigurationView/>
+			<StackPanel  Grid.Column="1">
+				<controls:WinchPlotView/>
+				<controls:WinchPlotView/>
+			</StackPanel>
+		</Grid>
 		<controls:StartStopSaveView Grid.Row="1"/>
 	</Grid>
 </UserControl>

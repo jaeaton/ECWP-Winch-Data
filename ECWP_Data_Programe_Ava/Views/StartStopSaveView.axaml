@@ -9,21 +9,22 @@
 	<Panel>
 		<StackPanel Background="WhiteSmoke" Margin="2">
 			<Grid RowDefinitions="Auto,Auto">
+				<!--
 				<WrapPanel>
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="Set Save Location" Width="125" VerticalAlignment="Center"></TextBlock>
 						<Button x:Name="ButtonSaveLocation" IsEnabled="{Binding Path=UserInputsEnable}" Content="Save Location"  Margin="5,0,5,0"  Click="ButtonSaveLocation_Click"></Button>
 					</StackPanel>
 					<StackPanel Orientation="Horizontal" Margin="5">
-						<TextBlock Text="Number of Winches to Display" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-						<ComboBox MinWidth="130" SelectedItem="{ Binding NumberOfPlots, Mode=TwoWay }" Items="{ Binding QuantityOfWinches }" SelectedIndex="1" HorizontalAlignment="Center"/>
+						<TextBlock Text="Select Winches" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+						<ListBox MinWidth="130" SelectionMode="AlwaysSelected, Multiple" SelectedItems="{ Binding WinchesToPlot, Mode=TwoWay }" Background="LightGray" CornerRadius="5" Items="{ Binding WinchNames }" SelectedIndex="0" HorizontalAlignment="Center"/>
 					</StackPanel>
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Text="Cruise Name" Width="100" VerticalAlignment="Center"/>
 						<TextBox x:Name="TextBoxCruiseName" Watermark="OC123" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding Path=CruiseNameBox,Mode=TwoWay}"  Width="120" VerticalAlignment="Center" />
 					</StackPanel>
 				</WrapPanel>
-				<!--
+				
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
 					<Button x:Name="ButtonHelp" Content="?" Width="25" Margin="5,0,5,0" Click="ButtonHelp_Click"></Button>
 					<Button x:Name="ButtonLogMax" Content="Log Max Values" Margin="5,0,5,0" Click="ButtonLogMax_Click" IsEnabled="{Binding Path=logMaxDataCheckBox}"></Button>

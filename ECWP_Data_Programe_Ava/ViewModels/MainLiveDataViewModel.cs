@@ -2,8 +2,10 @@
 
 namespace ViewModels
 {
-    internal class MainLiveDataViewModel
+    public partial class MainLiveDataViewModel : ObservableObject
     {
+        
+        ConfigDataStore _configDataStore = MainWindowViewModel._configDataStore;
         //move code from code behind to here
         public static void UpdatePlottingWinch(string winch)
         {
@@ -32,6 +34,12 @@ namespace ViewModels
                     MainWindowViewModel._configDataStore.UseComputerTimeCheckBox = PlottingWinch.UseComputerTime;
                 }
             }
+        }
+
+        [RelayCommand]
+        private void SaveLocation()
+        {
+
         }
     }
 }

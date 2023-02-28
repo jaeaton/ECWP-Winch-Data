@@ -1,5 +1,3 @@
-using Avalonia.Controls;
-
 namespace Views
 {
     public partial class PlottingView : UserControl
@@ -7,6 +5,7 @@ namespace Views
         public PlottingView()
         {
             InitializeComponent();
+            this.DataContext = new MainLiveDataViewModel();
         }
     }
 }

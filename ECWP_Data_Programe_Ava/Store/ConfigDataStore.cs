@@ -96,10 +96,10 @@
         private ObservableCollection<WinchModel>? allWinches = new();
 
         [ObservableProperty]
-        private int? numberOfPlots;
+        private List<string>? winchesToPlot = new();
 
-        [ObservableProperty]
-        private List<int>? quantityOfWinches = new();
+        //[ObservableProperty]
+        //private List<int>? quantityOfWinches = new();
         
         [ObservableProperty]
         private List<string>? speedUnitList;

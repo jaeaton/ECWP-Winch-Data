@@ -21,7 +21,9 @@
         [ObservableProperty]
         private bool logMax ;
         [ObservableProperty]
-        private bool logFormat ;
+        private bool logFormatUnols ;
+        [ObservableProperty]
+        private bool logFormatMtnw;
         [ObservableProperty]
         private string? speedUnit ;
         [ObservableProperty]
@@ -32,6 +34,26 @@
         private double? stopLogTension ;
         [ObservableProperty]
         private double? stopLogPayout ;
+        [ObservableProperty]
+        private bool udpOutput;
+        [ObservableProperty]
+        private string? tcpIpAddressOutput;
+        [ObservableProperty]
+        private string? tcpIpPortOutput;
+        [ObservableProperty]
+        private bool udpFormatUnols;
+        [ObservableProperty]
+        private bool udpFormatMtnw;
+        [ObservableProperty]
+        private bool serialOutput;
+        [ObservableProperty]
+        private string? serialPortOutput;
+        [ObservableProperty]
+        private string? baudRateOutput;
+        [ObservableProperty]
+        private bool serialFormatUnols;
+        [ObservableProperty]
+        private bool serialFormatMtnw;
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)
         {
@@ -39,7 +61,7 @@
             WinchName = winchName;
             FileExtension = fileExtension;
         }
-        public WinchModel(string? _winchName, string? _fileExtension, string? _tcpIpAddress, string? _tcpIpPort, string? _communicationType, bool _useComputerTime, bool _log20Hz, bool _logMax, bool _logFormat, string? _speedUnit, string? _payoutUnit, string? _tensionUnit, double? _stopLogTension, double? _stopLogPayout) 
+        public WinchModel(string? _winchName, string? _fileExtension, string? _tcpIpAddress, string? _tcpIpPort, string? _communicationType, bool _useComputerTime, bool _log20Hz, bool _logMax, string? _speedUnit, string? _payoutUnit, string? _tensionUnit, double? _stopLogTension, double? _stopLogPayout) 
           
         {
             
@@ -52,7 +74,6 @@
             UseComputerTime = _useComputerTime;
             Log20Hz = _log20Hz;
             LogMax = _logMax;
-            LogFormat = _logFormat;
             SpeedUnit = _speedUnit;
             PayoutUnit = _payoutUnit;
             TensionUnit = _tensionUnit;

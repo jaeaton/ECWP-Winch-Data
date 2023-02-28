@@ -5,7 +5,9 @@
              xmlns:local="clr-namespace:Views"
 			 xmlns:controls="clr-namespace:Views"
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Views.DataDisplay">
+             xmlns:model="using:Models"
+			 x:Class="Views.DataDisplay"
+			 x:DataType="model:WinchModel">
 	<Grid Background="FloralWhite">
 		<Grid.RowDefinitions>
 			<RowDefinition/>
