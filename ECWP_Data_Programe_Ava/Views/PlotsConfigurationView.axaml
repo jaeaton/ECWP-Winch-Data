@@ -2,21 +2,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="150" d:DesignHeight="450"
              x:Class="Views.PlotsConfigurationView">
 	<StackPanel>
 		<StackPanel Orientation="Vertical" Margin="5">
 			<TextBlock Text="Cruise Name" Width="100" VerticalAlignment="Center"/>
-			<TextBox x:Name="TextBoxCruiseName" Watermark="OC123" Text="{Binding MainWindowViewModel._configDataStore.CruiseNameBox,Mode=TwoWay}"  Width="120" VerticalAlignment="Center" />
+			<TextBox x:Name="TextBoxCruiseName" Watermark="OC123" Text="{Binding CruiseNameBox,Mode=TwoWay}"  Width="120" VerticalAlignment="Center" />
 		</StackPanel>
 		<StackPanel Orientation="Vertical" Margin="5">
 			<TextBlock Text="Select Winches" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-			<ListBox MinWidth="130" MinHeight="100" SelectionMode="AlwaysSelected, Multiple" SelectedItems="{ Binding MainWindowViewModel._configDataStore.WinchesToPlot, Mode=TwoWay }" Background="LightGray" CornerRadius="5" Items="{ Binding _configDataStore.WinchNames }" SelectedIndex="0" HorizontalAlignment="Center"/>
+			<ListBox MinWidth="130" MinHeight="100" SelectionMode="AlwaysSelected, Multiple" SelectedItems="{ Binding WinchesToPlot, Mode=TwoWay }" Background="LightGray" CornerRadius="5" Items="{ Binding WinchNames }" HorizontalAlignment="Center"/>
 		</StackPanel>
 		
-		<StackPanel Orientation="Vertical">
+		<StackPanel Orientation="Vertical" Margin="5">
 			<TextBlock Text="Set Save Location" Width="125" VerticalAlignment="Center"></TextBlock>
 			<Button x:Name="ButtonSaveLocation" HorizontalAlignment="Center" Content="Save Location"  Margin="5,0,5,0"  Command="{ Binding SaveLocationCommand }" />
+		</StackPanel>
+		<StackPanel Margin="5">
+			<TextBlock Text="Help" HorizontalAlignment="Center"/>
+			<Button x:Name="ButtonHelp" HorizontalAlignment="Center" Content="?" Width="25"  Command="{ Binding PlotHelpCommand }"/>
 		</StackPanel>
 	</StackPanel>
 	

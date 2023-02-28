@@ -32,13 +32,6 @@ namespace Views
                  "V4.2.0"); 
         }
 
-        private void ButtonSaveLocation_Click(object sender, RoutedEventArgs e)
-        {
-
-            SaveFileNames();
-
-        }
-
         private void ButtonLogMax_Click(object sender, RoutedEventArgs e)
         {
             //Write the max data for the cast
@@ -112,51 +105,51 @@ namespace Views
 
         //}
 
-        public async static void SaveFileNames()
-        {
-            //Check for valid filename constructor
-            // Show the save file dialog
-            SaveFileDialog saveFileDialog = new();
-            //ConfigDataStore _configDataStore = UserInputsView._configDataStore;
-            //build the save file name
-            //DateTime dateTime = DateTime.Now;
-            //string stringDateTime = dateTime.ToString("yyyyMMddTHHmmssfff");
-            //string dateAndHour = dateTime.ToString("yyyyMMddHH");
-            //string filename = $"{ dateAndHour } { _configDataStore.CruiseNameBox } cast { _configDataStore.CastNumberBox }.Log";
-            //GlobalConfigModel globalConfig = new GlobalConfigModel();
-            //var anInstanceofMyClass = new AppConfigViewModel();
-            //var instanceofFileOperationsViewModel = new FileOperationsViewModel();
-            UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
-            UserInputsView.globalConfig = (GlobalConfigModel)FileOperationsViewModel.SetFileNames(UserInputsView.globalConfig);
-            FileOperationsViewModel.SetFileNames(UserInputsView.globalConfig);
-            if (UserInputsView.globalConfig.LogMaxValuesSwitch)
-            {
-                saveFileDialog.InitialFileName = UserInputsView.globalConfig.MaxLogFileName;
-            }
-            if (UserInputsView.globalConfig.Log20HzSwitch)
-            {
-                if (!UserInputsView.globalConfig.LogUnolsSwitch)
-                {
-                    saveFileDialog.InitialFileName = UserInputsView.globalConfig.Minimal20HzLogFileName;
-                }
-                else
-                {
-                    saveFileDialog.InitialFileName = UserInputsView.globalConfig.UnolsWireLogName;
-                }
-            }
+        //public async static void SaveFileNames()
+        //{
+        //    //Check for valid filename constructor
+        //    // Show the save file dialog
+        //    SaveFileDialog saveFileDialog = new();
+        //    //ConfigDataStore _configDataStore = UserInputsView._configDataStore;
+        //    //build the save file name
+        //    //DateTime dateTime = DateTime.Now;
+        //    //string stringDateTime = dateTime.ToString("yyyyMMddTHHmmssfff");
+        //    //string dateAndHour = dateTime.ToString("yyyyMMddHH");
+        //    //string filename = $"{ dateAndHour } { _configDataStore.CruiseNameBox } cast { _configDataStore.CastNumberBox }.Log";
+        //    //GlobalConfigModel globalConfig = new GlobalConfigModel();
+        //    //var anInstanceofMyClass = new AppConfigViewModel();
+        //    //var instanceofFileOperationsViewModel = new FileOperationsViewModel();
+        //    UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
+        //    UserInputsView.globalConfig = (GlobalConfigModel)FileOperationsViewModel.SetFileNames(UserInputsView.globalConfig);
+        //    FileOperationsViewModel.SetFileNames(UserInputsView.globalConfig);
+        //    if (UserInputsView.globalConfig.LogMaxValuesSwitch)
+        //    {
+        //        saveFileDialog.InitialFileName = UserInputsView.globalConfig.MaxLogFileName;
+        //    }
+        //    if (UserInputsView.globalConfig.Log20HzSwitch)
+        //    {
+        //        if (!UserInputsView.globalConfig.LogUnolsSwitch)
+        //        {
+        //            saveFileDialog.InitialFileName = UserInputsView.globalConfig.Minimal20HzLogFileName;
+        //        }
+        //        else
+        //        {
+        //            saveFileDialog.InitialFileName = UserInputsView.globalConfig.UnolsWireLogName;
+        //        }
+        //    }
 
-            string saveFileName = await saveFileDialog.ShowAsync(MainWindow.Instance);
-            if (saveFileName != null)
-            {
-                //DirectoryLabel.Content = saveFileDialog.InitialFileName;
-                FileInfo fileInfo = new(saveFileName);
-                UserInputsView.globalConfig.SaveDirectory = (string)fileInfo.DirectoryName;
-                MainWindowViewModel._configDataStore.DirectoryLabel = UserInputsView.globalConfig.SaveDirectory;
-                UserInputsView.globalConfig.SaveDirectorySet = true;
+        //    string saveFileName = await saveFileDialog.ShowAsync(MainWindow.Instance);
+        //    if (saveFileName != null)
+        //    {
+        //        //DirectoryLabel.Content = saveFileDialog.InitialFileName;
+        //        FileInfo fileInfo = new(saveFileName);
+        //        UserInputsView.globalConfig.SaveDirectory = (string)fileInfo.DirectoryName;
+        //        MainWindowViewModel._configDataStore.DirectoryLabel = UserInputsView.globalConfig.SaveDirectory;
+        //        UserInputsView.globalConfig.SaveDirectorySet = true;
 
 
-            }
+        //    }
 
-        }
+        //}
     }
 }

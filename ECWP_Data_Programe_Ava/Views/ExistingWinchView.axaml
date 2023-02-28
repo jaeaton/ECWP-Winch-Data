@@ -74,11 +74,5 @@
 			</ItemsPanelTemplate>
 		</ItemsControl.ItemsPanel>
 	</ItemsControl>
-	<!--
-	<ListBox Items="{ Binding AllWinches }"/>
 	
-	<StackPanel Orientation="Horizontal">
-		<ContentControl	Content="{ Binding AllWinches }" />
-	</StackPanel>
-	-->
 </UserControl>

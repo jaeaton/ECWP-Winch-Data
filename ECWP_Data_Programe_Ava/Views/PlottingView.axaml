@@ -5,7 +5,15 @@
              xmlns:local="clr-namespace:Views"
 			 xmlns:controls="clr-namespace:Views"
 			 mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="450"
-             x:Class="Views.PlottingView">
+             x:Class="Views.PlottingView"
+			 xmlns:model="clr-namespace:Models">
+	<UserControl.DataTemplates>
+		<DataTemplate DataType="model:WinchModel">
+			<StackPanel>
+				<controls:DataDisplay/>
+			</StackPanel>
+		</DataTemplate>
+	</UserControl.DataTemplates>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
@@ -18,8 +26,13 @@
 			</Grid.ColumnDefinitions>
 			<controls:PlotsConfigurationView/>
 			<StackPanel  Grid.Column="1">
-				<controls:WinchPlotView/>
-				<controls:WinchPlotView/>
+				<ItemsControl Items="{ Binding PlottingWinches}">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<WrapPanel Margin="5" Orientation="Horizontal"/>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+				</ItemsControl>
 			</StackPanel>
 		</Grid>
 		<controls:StartStopSaveView Grid.Row="1"/>

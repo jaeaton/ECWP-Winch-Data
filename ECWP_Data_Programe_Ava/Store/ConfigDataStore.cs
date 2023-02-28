@@ -1,4 +1,6 @@
-﻿namespace Store
+﻿using System.Diagnostics;
+
+namespace Store
 {
     //Application configuration data for User Inputs View
     [INotifyPropertyChanged]
@@ -80,7 +82,7 @@
         private string? winchSelection;
         partial void OnWinchSelectionChanged(string? winchSelection)
         {
-            MainLiveDataViewModel.UpdatePlottingWinch(WinchSelection);
+            //MainLiveDataViewModel.UpdatePlottingWinch(WinchSelection);
         }
 
         [ObservableProperty]
@@ -97,10 +99,29 @@
 
         [ObservableProperty]
         private List<string>? winchesToPlot = new();
+        partial void OnWinchesToPlotChanged(List<string>? winchesToPlot)
+        {
+            PlottingWinches.Clear();
+            if (AllWinches != null && WinchesToPlot != null)
+            {
+                foreach (var winch in WinchesToPlot)
+                {
+                    for (int i = 0; i < AllWinches.Count; i++)
+                    {
+                        if (AllWinches[i].WinchName == winch)
+                        {
+                            PlottingWinches.Add(AllWinches[i].ShallowCopy());
+                            break;
+                        }
+                    }
 
-        //[ObservableProperty]
-        //private List<int>? quantityOfWinches = new();
-        
+                }   
+            }
+        }
+
+        [ObservableProperty]
+        private ObservableCollection<WinchModel>? plottingWinches = new();
+
         [ObservableProperty]
         private List<string>? speedUnitList;
 
@@ -114,7 +135,19 @@
         private string? selectWinch;// = new();
         partial void OnSelectWinchChanged(string? selectWinch)
         {
-            WinchConfigurationViewModel.LoadWinch(SelectWinch);
+            if (SelectWinch != null && AllWinches != null)
+            {
+                for (int i = 0; i < AllWinches.Count; i++)
+                {
+                    WinchModel item = AllWinches[i];
+                    if (item.WinchName == SelectWinch)
+                    {
+                        
+                        CurrentWinch = AllWinches[i].ShallowCopy();
+                        break;
+                    }
+                }
+            }
         }
 
         [ObservableProperty]

@@ -2,59 +2,60 @@
 {
     public partial class WinchConfigurationViewModel : ObservableObject
     {
-        ConfigDataStore _configDataStore = MainWindowViewModel._configDataStore;
-
+        public ConfigDataStore _configDataStore = MainWindowViewModel._configDataStore;
+        /// <summary>
+        /// Add Winch adds the data currently stored in current Winch as a new selectable winch 
+        /// </summary>
         [RelayCommand]
         private void AddWinch()
         {
-            //WinchModel Winch = new WinchModel();
-            WinchModel Winch = MainWindowViewModel._configDataStore.CurrentWinch.ShallowCopy();
-            MainWindowViewModel._configDataStore.AllWinches.Add(Winch);
-            MainWindowViewModel._configDataStore.WinchNames.Clear();
-            foreach (var item in MainWindowViewModel._configDataStore.AllWinches)
+            //Creates a new set of data so as not to reference existing data
+            WinchModel Winch = _configDataStore.CurrentWinch.ShallowCopy();
+            _configDataStore.AllWinches.Add(Winch);
+            //Clears the current list to make winch names as fresh as possible
+            _configDataStore.WinchNames.Clear();
+            //Loops through all winches and puts winch names in a list for selection process
+            foreach (var item in _configDataStore.AllWinches)
             {
-                MainWindowViewModel._configDataStore.WinchNames.Add(item.WinchName);
+                _configDataStore.WinchNames.Add(item.WinchName);
             }
-            //MainWindowViewModel._configDataStore.QuantityOfWinches.Clear();
-            //int count = MainWindowViewModel._configDataStore.AllWinches.Count();
-            //for (int i = 1; i <= count; i++)
-            //{
-            //    MainWindowViewModel._configDataStore.QuantityOfWinches.Add(i);
-            //}
+            
         }
         [RelayCommand]
         private void RemoveWinch()
         {
-            MainWindowViewModel._configDataStore.AllWinches.Remove(MainWindowViewModel._configDataStore.CurrentWinch);
-            MainWindowViewModel._configDataStore.WinchNames.Clear();
-            foreach (var item in MainWindowViewModel._configDataStore.AllWinches)
+            //Removes the data in the winch entry form from the list of winches
+            _configDataStore.AllWinches.Remove(_configDataStore.CurrentWinch);
+            //Clears the current list to make winch names as fresh as possible
+            _configDataStore.WinchNames.Clear();
+            //Loops through all winches and puts winch names in a list for selection process
+           foreach (var item in _configDataStore.AllWinches)
             {
-                MainWindowViewModel._configDataStore.WinchNames.Add(item.WinchName);
+                _configDataStore.WinchNames.Add(item.WinchName);
             }
-            //MainWindowViewModel._configDataStore.QuantityOfWinches.Clear();
-            //int count = MainWindowViewModel._configDataStore.AllWinches.Count();
-            //for (int i = 1; i <= count; i++)
-            //{
-            //    MainWindowViewModel._configDataStore.QuantityOfWinches.Add(i);
-            //}
         }
-        public static void LoadWinch(string? winch)
+        /// <summary>
+        /// Loads winch data from the list of all winches into the current so it can be edited/removed.
+        /// </summary>
+        /// <param name="winch"></param>
+        /// 
+        
+        public void LoadWinch(string? winch)
         {
-            if (winch != null && MainWindowViewModel._configDataStore.AllWinches != null)
+            if (winch != null && _configDataStore.AllWinches != null)
             {
-                //int i = MainWindowViewModel._configDataStore.AllWinches.FindIndex(a => a.WinchName == winch);
                 int index = -1;
 
-                for (int i = 0; i < MainWindowViewModel._configDataStore.AllWinches.Count; i++)
+                for (int i = 0; i < _configDataStore.AllWinches.Count; i++)
                 {
-                    WinchModel item = MainWindowViewModel._configDataStore.AllWinches[i];
+                    WinchModel item = _configDataStore.AllWinches[i];
                     if (item.WinchName == winch)
                     {
                         index = i;
                         break;
                     }
                 }
-                MainWindowViewModel._configDataStore.CurrentWinch = MainWindowViewModel._configDataStore.AllWinches[index];
+                _configDataStore.CurrentWinch = _configDataStore.AllWinches[index].ShallowCopy();
             }
         }
         
