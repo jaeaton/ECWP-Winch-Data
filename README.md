@@ -9,6 +9,9 @@ To Do:
 - [ ] Display Tension Member Alarms and Warning
 - [ ] Display UNOLS Winch string statuses
 - [ ] Add Multi-winch configurations
+- [ ] Add unit display selection
+- [ ] Add unit conversion
+- [ ] Add Graph view to data processing
 - [ ] Add Hawboldt Data reception
 - [ ] Add in detection and themeing for darkmode
 - [x] ~~Add cast processing~~
