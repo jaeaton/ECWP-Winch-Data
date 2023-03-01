@@ -218,6 +218,7 @@
                 }
                 else
                 {
+                    latest.StringID = "empty";
                     //_liveData.RawWireData = data;
                     if (strIn.Length == 9 && strIn[0].Contains("$WIR"))
                     {
@@ -237,54 +238,56 @@
 
                         latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);
                     }
-                    else
-                    {
-                        return;
-                    }
+                    
                     //DataPointModel latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);
-                    //If needed changes data and time stamp to local machine
-                    if (globalConfig.UseComputerTimeSwitch || getTime)
+                    
+                    if (latest.StringID != "empty")
                     {
-                        DateTime dateTime = DateTime.Now;
-                        latest.Date = dateTime.ToString("yyyyMMdd");
-                        latest.Time = dateTime.ToString("HH:mm:ss.fff");
-                        getTime = false;
-                    }
-                    //Check for max value change
-                    if (maxData.MaxTension.Tension < latest.Tension)
-                    {
-                        maxData.MaxTension = latest;
-                        maxChange = true;
-                    }
-                    if (Math.Abs(maxData.MaxSpeed.Speed) < latest.Speed)
-                    {
-                        maxData.MaxSpeed = latest;
-                        maxChange = true;
-                    }
-                    if (maxData.MaxPayout.Payout < latest.Payout)
-                    {
-                        maxData.MaxPayout = latest;
-                        maxChange = true;
-                    }
-                    if (maxChange)
-                    {
-                        MaxValues();
-                    }
-                    //Write data to logfile
-                    if (globalConfig.Log20HzSwitch)
-                    {
-                        Write20HzData(latest, globalConfig);
-                    }
-                    if (globalConfig.UDPSwitch)
-                    {
-                        Send20HzData(latest, globalConfig);
-                    }
-                    if (globalConfig.SerialSwitch)
-                    {
-                        SendSerialData(latest, globalConfig);
-                    }
+                        //If needed changes data and time stamp to local machine
+                        if (globalConfig.UseComputerTimeSwitch || getTime)
+                        {
+                            DateTime dateTime = DateTime.Now;
+                            latest.Date = dateTime.ToString("yyyyMMdd");
+                            latest.Time = dateTime.ToString("HH:mm:ss.fff");
+                            getTime = false;
+                        }
+                        //Check for max value change
+                        if (maxData.MaxTension.Tension < latest.Tension)
+                        {
+                            maxData.MaxTension = latest;
+                            maxChange = true;
+                        }
+                        if (Math.Abs(maxData.MaxSpeed.Speed) < latest.Speed)
+                        {
+                            maxData.MaxSpeed = latest;
+                            maxChange = true;
+                        }
+                        if (maxData.MaxPayout.Payout < latest.Payout)
+                        {
+                            maxData.MaxPayout = latest;
+                            maxChange = true;
+                        }
+                        if (maxChange)
+                        {
+                            MaxValues();
+                        }
+                        //Write data to logfile
+                        if (globalConfig.Log20HzSwitch)
+                        {
+                            Write20HzData(latest, globalConfig);
+                        }
+                        if (globalConfig.UDPSwitch)
+                        {
+                            Send20HzData(latest, globalConfig);
+                        }
+                        if (globalConfig.SerialSwitch)
+                        {
+                            SendSerialData(latest, globalConfig);
+                        }
 
-                    DisplayData(latest);
+                        DisplayData(latest);
+                    }
+                    
                 }
             }
         }
