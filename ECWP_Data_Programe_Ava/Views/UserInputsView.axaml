@@ -21,11 +21,11 @@
 					<TextBlock Text="Communication Parameters" Margin="5"/>
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Text="IP Address" Width="90" VerticalAlignment="Center" />
-						<TextBox Watermark="192.168.103.217" Text="{ Binding CurrentWinch.TcpIpAddress, Mode=TwoWay }" IsEnabled="{Binding Path=UserInputsEnable}" Width="130" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBox>
+						<TextBox Watermark="192.168.103.217" Text="{ Binding CurrentWinch.InputCommunication.TcpIpAddress, Mode=TwoWay }" IsEnabled="{Binding Path=UserInputsEnable}" Width="130" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBox>
 					</StackPanel>
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Text="Port Number" Width="90" VerticalAlignment="Center" />
-						<TextBox Watermark="50505" x:Name="TextBoxSourcePort" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.TcpIpPort, Mode=TwoWay }" Width="130" VerticalAlignment="Center"></TextBox>
+						<TextBox Watermark="50505" x:Name="TextBoxSourcePort" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.InputCommunication.PortNumber, Mode=TwoWay }" Width="130" VerticalAlignment="Center"></TextBox>
 					</StackPanel>
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Text="Source Type" Width="90" VerticalAlignment="Center"/>
@@ -101,11 +101,11 @@
 						</StackPanel>
 						<StackPanel Orientation="Horizontal" Margin="5" IsVisible="{ Binding ElementName=CheckBoxSendUDP,Path=IsChecked } }">
 							<TextBlock Text="IP Address" Width="90" VerticalAlignment="Center" />
-							<TextBox x:Name="TextBoxDestinationIPAdress" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.TcpIpAddressOutput,FallbackValue='192.168.1.121',Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
+							<TextBox x:Name="TextBoxDestinationIPAdress" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.TcpIpAddressOutput,FallbackValue='192.168.1.121',Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal" Margin="5" IsVisible="{ Binding ElementName=CheckBoxSendUDP,Path=IsChecked }">
 							<TextBlock Text="Port Number" Width="90" VerticalAlignment="Center" />
-							<TextBox x:Name="TextBoxDestinationPort" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.TcpIpPortOutput,FallbackValue='50000',Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
+							<TextBox x:Name="TextBoxDestinationPort" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.PortNumber,FallbackValue='50000',Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
 						</StackPanel>
 						<StackPanel Margin="5" IsVisible="{ Binding ElementName=CheckBoxSendUDP,Path=IsChecked }">
 							<RadioButton Content="MTNW Format"  IsEnabled="{Binding Path=UserInputsEnable}" HorizontalContentAlignment="Right" Margin="6,0,50,0" GroupName="udpFormat"  IsChecked="{Binding CurrentWinch.UdpFormatMtnw, FallbackValue='False'}"/>

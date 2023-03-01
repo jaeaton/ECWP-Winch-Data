@@ -2,16 +2,36 @@
 {
     public partial class WinchModel : ObservableObject
     {
+        private CommunicationModel inputCommunication;
+        public CommunicationModel? InputCommunication 
+        {
+            get => inputCommunication;
+            set => inputCommunication = value;
+        }
+
+        private CommunicationModel outputCommunication;
+        public CommunicationModel? OutputCommunication 
+        { 
+            get => outputCommunication;
+            set => outputCommunication = value;
+        }
+        private LiveDataDataStore? liveData;
+        public LiveDataDataStore? LiveData 
+        { 
+            get => liveData;
+            set => liveData = value;
+        }
         [ObservableProperty]
         private string? winchName;
         [ObservableProperty]
-        private string? fileExtension ;
-        //[ObservableProperty]
-        //private CommunicationModel? inputCommunication = new() ;
+        private string? fileExtension;
         [ObservableProperty]
-        private string? tcpIpAddress;
-        [ObservableProperty]
-        private string? tcpIpPort;
+        private bool plotSelected;
+        partial void OnPlotSelectedChanged(bool value)
+        {
+            MainLiveDataViewModel mldvm = new MainLiveDataViewModel();
+            mldvm.PlotSelectionChanged(value, WinchName);
+        }
         [ObservableProperty]
         private string? communicationType ;
         [ObservableProperty]
@@ -37,10 +57,6 @@
         [ObservableProperty]
         private bool udpOutput;
         [ObservableProperty]
-        private string? tcpIpAddressOutput;
-        [ObservableProperty]
-        private string? tcpIpPortOutput;
-        [ObservableProperty]
         private bool udpFormatUnols;
         [ObservableProperty]
         private bool udpFormatMtnw;
@@ -54,6 +70,8 @@
         private bool serialFormatUnols;
         [ObservableProperty]
         private bool serialFormatMtnw;
+        
+        
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)
         {
@@ -61,15 +79,15 @@
             WinchName = winchName;
             FileExtension = fileExtension;
         }
-        public WinchModel(string? _winchName, string? _fileExtension, string? _tcpIpAddress, string? _tcpIpPort, string? _communicationType, bool _useComputerTime, bool _log20Hz, bool _logMax, string? _speedUnit, string? _payoutUnit, string? _tensionUnit, double? _stopLogTension, double? _stopLogPayout) 
+        public WinchModel(string? _winchName, string? _fileExtension, string? _communicationType, bool _useComputerTime, bool _log20Hz, bool _logMax, string? _speedUnit, string? _payoutUnit, string? _tensionUnit, double? _stopLogTension, double? _stopLogPayout) 
           
         {
             
             WinchName = _winchName;
             FileExtension = _fileExtension;
             //InputCommunication = _inputCommunication;
-            TcpIpAddress = _tcpIpAddress;
-            TcpIpPort = _tcpIpPort;
+            //TcpIpAddress = _tcpIpAddress;
+            //TcpIpPort = _tcpIpPort;
             CommunicationType = _communicationType;
             UseComputerTime = _useComputerTime;
             Log20Hz = _log20Hz;

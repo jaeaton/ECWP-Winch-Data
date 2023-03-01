@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using JetBrains.Annotations;
+using System.Diagnostics;
 
 namespace ViewModels
 {
@@ -74,6 +75,20 @@ namespace ViewModels
                 UserInputsView.globalConfig.SaveDirectorySet = true;
 
 
+            }
+
+            
+        }
+
+        public void PlotSelectionChanged(bool selected, string? WinchName)
+        {
+            if (selected == true)
+            {
+                MainWindowViewModel._configDataStore.WinchesToPlot.Add(WinchName);
+            }
+            if (selected == false)
+            {
+                MainWindowViewModel._configDataStore.WinchesToPlot.Remove(WinchName);
             }
         }
     }
