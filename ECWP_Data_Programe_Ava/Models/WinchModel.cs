@@ -24,6 +24,8 @@
         [ObservableProperty]
         private string? winchName;
         [ObservableProperty]
+        private string? castNumber;
+        [ObservableProperty]
         private string? fileExtension;
         [ObservableProperty]
         private bool plotSelected;

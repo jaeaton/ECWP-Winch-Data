@@ -10,14 +10,14 @@
 	<UserControl.DataTemplates>
 		<DataTemplate DataType="model:WinchModel">
 			<StackPanel>
-				<controls:DataDisplay/>
+				<controls:WinchPlotView/>
 			</StackPanel>
 		</DataTemplate>
 	</UserControl.DataTemplates>
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
-			<RowDefinition MaxHeight="70"/>
+			<RowDefinition MaxHeight="35"/>
 		</Grid.RowDefinitions>
 		<Grid Grid.Row="0">
 			<Grid.ColumnDefinitions>

@@ -84,6 +84,7 @@
             }
             if( DateTime.TryParseExact($"{ latest.Date } { latest.Time }","yyyyMMdd HH:mm:ss.fff", provider, styles, out DateTime dateTime))
             {
+                //double.TryParse(latest.Tension, out double Tension);
                 _observableValues.Add(new DateTimePoint { DateTime = dateTime, Value = latest.Tension });
                 //uncomment for windowing of plot
                 _observableValuesZero.Add(new DateTimePoint { DateTime = dateTime, Value = 0 });
@@ -107,30 +108,6 @@
 
                 }
             }
-            
-            //double.TryParse(latest.Tension, out double Tension);
-
-            //uncomment for windowing of plot
-            //_observableValuesZero.Add(new DateTimePoint { DateTime = dateTime, Value = 0 });
-            //if(Double.TryParse(DataHandlingViewModel._liveData.MaxTension, out double result))
-            //{
-            //    _observableValuesMax.Add(new DateTimePoint { DateTime = dateTime, Value = result  });
-            //}
-            
-            ////_observableValues.Add(new ObservablePoint { X = i++, Y = latest.Tension });
-            
-            //if (_observableValues.Count > 500)
-            //{
-            //    _observableValues.RemoveAt(0);
-            //    _observableValuesMax.RemoveAt(0);
-            //}
-            ////uncomment for windowing of plot Keeps zero series and max series small
-            //if (_observableValuesZero.Count > 10)
-            //    {
-            //        _observableValuesZero.RemoveAt(0);
-            //        //_observableValuesMax.RemoveAt(0);
-
-            //    }
         }
         public static void ResetData()
         {

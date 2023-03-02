@@ -4,7 +4,7 @@ namespace Views
     {
         public SelectedWinchDetailsView()
         {
-            this.DataContext = MainWindowViewModel._configDataStore;
+            //this.DataContext = MainWindowViewModel._configDataStore;
             InitializeComponent();
         }
     }

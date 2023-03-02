@@ -17,10 +17,5 @@
 		<TabItem Header="Winch Config" VerticalContentAlignment="Center">
 			<controls:WinchConfigurationView />
 		</TabItem>
-		<!--
-		<TabItem Header="Data Output Config" VerticalContentAlignment="Center">
-			<controls:WinchConfigurationView />
-		</TabItem>
-		-->
 	</TabControl>
 </Window>
