@@ -3,8 +3,8 @@
 namespace Store
 {
     //Application configuration data for User Inputs View
-    [INotifyPropertyChanged]
-    public partial class ConfigDataStore
+    //[INotifyPropertyChanged]
+    public partial class ConfigDataStore : ObservableObject
     {
         [ObservableProperty]
         private string? ipAddressInputSourceBox;
@@ -80,11 +80,7 @@ namespace Store
 
         [ObservableProperty]
         private string? winchSelection;
-        partial void OnWinchSelectionChanged(string? winchSelection)
-        {
-            //MainLiveDataViewModel.UpdatePlottingWinch(WinchSelection);
-        }
-
+        
         [ObservableProperty]
         private List<string>? availableProtocols;
 
@@ -97,31 +93,8 @@ namespace Store
         [ObservableProperty]
         private ObservableCollection<WinchModel>? allWinches = new();
 
-        //[ObservableProperty]
-        private ObservableCollection<string>? winchesToPlot;// = new();
-        public ObservableCollection<string>? WinchesToPlot 
-        {   get => winchesToPlot; 
-            set => winchesToPlot = value; 
-        }
-        //partial void OnWinchesToPlotChanged(List<string>? WinchesToPlot)
-        //{
-        //    PlottingWinches.Clear();
-        //    if (AllWinches != null && WinchesToPlot != null)
-        //    {
-        //        foreach (var winch in WinchesToPlot)
-        //        {
-        //            for (int i = 0; i < AllWinches.Count; i++)
-        //            {
-        //                if (AllWinches[i].WinchName == winch)
-        //                {
-        //                    PlottingWinches.Add(AllWinches[i].ShallowCopy());
-        //                    break;
-        //                }
-        //            }
-
-        //        }
-        //    }
-        //}
+        [ObservableProperty]
+        private ObservableCollection<string>? winchesToPlot = new();
 
         [ObservableProperty]
         private ObservableCollection<WinchModel>? plottingWinches = new();
@@ -137,35 +110,11 @@ namespace Store
 
         [ObservableProperty]
         private string? selectWinch;// = new();
-        //partial void OnSelectWinchChanged(string? SelectWinch)
-        //{
-        //    if (SelectWinch != null && AllWinches != null)
-        //    {
-        //        for (int i = 0; i < AllWinches.Count; i++)
-        //        {
-        //            WinchModel item = AllWinches[i];
-        //            if (item.WinchName == SelectWinch)
-        //            {
-                        
-        //                CurrentWinch = AllWinches[i].ShallowCopy();
-        //                break;
-        //            }
-        //        }
-        //    }
-        //}
-
+        
         [ObservableProperty]
         private ObservableCollection<string>? winchNames = new();
-        
-        //partial void OnAllWinchesChanged(ObservableCollection<WinchModel>? allWinches)
-        //{
-        //    WinchNames.Clear();
-        //    foreach (var item in AllWinches)
-        //    {
-        //        WinchNames.Add(item.WinchName);
-        //    }
-        //    //WinchNames = AllWinches.Select(WinchModel => WinchModel.WinchName).ToList();
-        //}
 
     }
+
+    
 }

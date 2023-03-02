@@ -84,11 +84,27 @@ namespace ViewModels
         {
             if (selected == true)
             {
-                MainWindowViewModel._configDataStore.WinchesToPlot.Add(WinchName);
+                _configDataStore.WinchesToPlot.Add(WinchName);
             }
             if (selected == false)
             {
                 MainWindowViewModel._configDataStore.WinchesToPlot.Remove(WinchName);
+            }
+            _configDataStore.PlottingWinches.Clear();
+            if (_configDataStore.AllWinches != null && _configDataStore.WinchesToPlot != null)
+            {
+                foreach (var winch in _configDataStore.WinchesToPlot)
+                {
+                    for (int i = 0; i < _configDataStore.AllWinches.Count; i++)
+                    {
+                        if (_configDataStore.AllWinches[i].WinchName == winch)
+                        {
+                            _configDataStore.PlottingWinches.Add(_configDataStore.AllWinches[i].ShallowCopy());
+                            break;
+                        }
+                    }
+
+                }
             }
         }
     }
