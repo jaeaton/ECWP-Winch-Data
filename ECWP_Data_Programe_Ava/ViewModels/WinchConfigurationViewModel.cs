@@ -58,6 +58,18 @@
                 _configDataStore.CurrentWinch = _configDataStore.AllWinches[index].ShallowCopy();
             }
         }
+
+        public void ChangeSerialFormat(bool mtnw)
+        {
+            if(mtnw)
+            {
+                _configDataStore.AllWinches.SerialFormat = "MTNW";
+            }
+            else
+            {
+                _configDataStore.AllWinches.SerialFormat = "UNOLS";
+            }
+        }
         
     }
 }

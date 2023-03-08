@@ -7,6 +7,6 @@
 			 xmlns:view="clr-namespace:Views">
 	<StackPanel>
 		<view:SelectedWinchDetailsView MaxHeight="100" />
-		<view:DataDisplay/>
+		<view:DataDisplay />
 	</StackPanel>
 </UserControl>

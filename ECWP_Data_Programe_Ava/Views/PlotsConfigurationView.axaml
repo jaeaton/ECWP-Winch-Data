@@ -10,14 +10,14 @@
 			<CheckBox Content="{ Binding WinchName }" IsChecked="{ Binding PlotSelected }" Margin="5"/>
 		</DataTemplate>
 	</UserControl.DataTemplates>
-	<StackPanel>
+	<StackPanel Background="SeaShell">
 		<StackPanel Orientation="Vertical" Margin="5">
 			<TextBlock Text="Cruise Name" Width="100" VerticalAlignment="Center"/>
 			<TextBox x:Name="TextBoxCruiseName" Watermark="OC123" Text="{Binding CruiseNameBox,Mode=TwoWay}"  Width="120" VerticalAlignment="Center" />
 		</StackPanel>
 		<StackPanel Orientation="Vertical" Margin="5">
 			<TextBlock Text="Select Winches" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-			<ItemsControl Items="{ Binding AllWinches}">
+			<ItemsControl Items="{ Binding AllWinches}" Background="LightGray" CornerRadius="5">
 			</ItemsControl>
 			<!--
 			<ListBox MinWidth="130" MinHeight="100" SelectionMode="Multiple" SelectedItems="{ Binding WinchesToPlot, Mode=OneWay }" Background="LightGray" CornerRadius="5" Items="{ Binding WinchNames }" HorizontalAlignment="Center"/>

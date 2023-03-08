@@ -63,6 +63,8 @@
         [ObservableProperty]
         private bool udpFormatMtnw;
         [ObservableProperty]
+        private string? udpFormat;
+        [ObservableProperty]
         private bool serialOutput;
         [ObservableProperty]
         private string? serialPortOutput;
@@ -72,7 +74,13 @@
         private bool serialFormatUnols;
         [ObservableProperty]
         private bool serialFormatMtnw;
-        
+        partial void OnSerialFormatMtnwChanged(bool value)
+        {
+            WinchConfigurationViewModel vm = new WinchConfigurationViewModel();
+            vm.ChangeSerialFormat(value);
+        }
+        [ObservableProperty]
+        private string? serialFormat;
         
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)
@@ -105,5 +113,7 @@
         {
             return (WinchModel) this.MemberwiseClone();
         }
+
+       
     }
 }
