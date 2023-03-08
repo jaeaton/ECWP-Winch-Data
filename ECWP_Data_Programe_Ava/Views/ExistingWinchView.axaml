@@ -70,7 +70,7 @@
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" IsVisible="{ Binding UdpOutput }">
 					<TextBlock Text="Output Format: "/>
-					<TextBlock Text="{ Binding OutputCommunication.PortNumber }"/>
+					<TextBlock Text="{ Binding UdpFormat }"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="Serial Output: "/>

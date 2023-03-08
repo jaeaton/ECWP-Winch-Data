@@ -25,7 +25,7 @@
 			<Label Content="{ Binding SpeedUnit }" FontSize="18"></Label>
 			<Label Content="Payout" FontSize="18"></Label>
 			<Label Content="{Binding LiveData.Payout, FallbackValue=0000}" HorizontalContentAlignment="Right" MinWidth="60" FontSize="18"></Label>
-			<Label Content="{ Binding SpeedUnit }" FontSize="18"></Label>
+			<Label Content="{ Binding PayoutUnit }" FontSize="18"></Label>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2">
 			<Label Content="Max Tension"></Label>

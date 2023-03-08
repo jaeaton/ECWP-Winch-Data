@@ -63,13 +63,25 @@
         {
             if(mtnw)
             {
-                _configDataStore.AllWinches.SerialFormat = "MTNW";
+                _configDataStore.CurrentWinch.SerialFormat = $"MTNW";
             }
             else
             {
-                _configDataStore.AllWinches.SerialFormat = "UNOLS";
+                _configDataStore.CurrentWinch.SerialFormat = $"UNOLS";
             }
         }
-        
+
+        public void ChangeUDPFormat(bool mtnw)
+        {
+            if (mtnw)
+            {
+                _configDataStore.CurrentWinch.UdpFormat = $"MTNW";
+            }
+            else
+            {
+                _configDataStore.CurrentWinch.UdpFormat = $"UNOLS";
+            }
+        }
+
     }
 }

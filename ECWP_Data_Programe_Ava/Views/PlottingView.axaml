@@ -29,7 +29,7 @@
 				<ItemsControl Items="{ Binding PlottingWinches}">
 					<ItemsControl.ItemsPanel>
 						<ItemsPanelTemplate>
-							<WrapPanel Margin="5" Orientation="Horizontal"/>
+							<WrapPanel Margin="5" Orientation="Vertical"/>
 						</ItemsPanelTemplate>
 					</ItemsControl.ItemsPanel>
 				</ItemsControl>

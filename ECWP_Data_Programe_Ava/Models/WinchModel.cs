@@ -62,6 +62,11 @@
         private bool udpFormatUnols;
         [ObservableProperty]
         private bool udpFormatMtnw;
+        partial void OnUdpFormatMtnwChanged(bool value)
+        {
+            WinchConfigurationViewModel vm = new WinchConfigurationViewModel();
+            vm.ChangeUDPFormat(value);
+        }
         [ObservableProperty]
         private string? udpFormat;
         [ObservableProperty]
