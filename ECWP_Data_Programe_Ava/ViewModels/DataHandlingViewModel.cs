@@ -2,18 +2,18 @@
 {
     public class DataHandlingViewModel
     {
-        public static LiveDataDataStore _liveData = new();
-        public static MaxDataPointModel maxData = new MaxDataPointModel();
-        public static int i = 0;
-        public static SerialPort _serialPort = new SerialPort();
+        public LiveDataDataStore _liveData = new();
+        public MaxDataPointModel maxData = new MaxDataPointModel();
+        public int i = 0;
+        public SerialPort _serialPort = new SerialPort();
         //Asynchronious method to allow application to still respond to user interaction
-        public static async void GetDataAsync(GlobalConfigModel globalConfig)
+        public async void GetDataAsync(WinchModel winch)
         {
-            if(globalConfig.SerialSwitch)
+            if(winch.SerialOutput)
             {
-                int.TryParse(globalConfig.SerialPortBaud,out int serialBaudRate);
+                int.TryParse(winch.BaudRateOutput,out int serialBaudRate);
                 //_serialPort = new SerialPort(globalConfig.SerialPortName,serialBaudRate,Parity.None,8,StopBits.One);
-                _serialPort.PortName = globalConfig.SerialPortName;
+                _serialPort.PortName = winch.SerialPortOutput;
                 _serialPort.BaudRate = serialBaudRate;
                 _serialPort.Parity = Parity.None;
                 _serialPort.DataBits = 8;
@@ -21,17 +21,17 @@
                 _serialPort.Open();
             }
             string dataIn;
-            if (globalConfig.SelectedProtocol == "LCI-90i") 
+            if (winch.CommunicationType == "LCI-90i") 
             {
                 TcpListener server = null;
                 TcpClient client = null;
                 try
                 {
                     // Set the TcpListener to selected port 
-                    Int32 port = int.Parse(globalConfig.ReceiveCommunication.PortNumber);
+                    Int32 port = int.Parse(winch.InputCommunication.PortNumber);
                     //should be look up local host
                     //TODO change to look up local host
-                    IPAddress localAddr = IPAddress.Parse(globalConfig.ReceiveCommunication.TcpIpAddress);
+                    IPAddress localAddr = IPAddress.Parse(winch.InputCommunication.TcpIpAddress);
 
                     // TcpListener server = new TcpListener(port);
                     server = new TcpListener(localAddr, port);
@@ -51,7 +51,7 @@
                         dataIn = await Task.Run(() => ReadTCPData(client));
                         //_liveData.RawWireData = dataIn;
                         //read data
-                        ParseWinchData(dataIn, globalConfig);
+                        ParseWinchData(dataIn, winch);
 
                     }
                 }
@@ -80,7 +80,7 @@
 
                     if (!client.Connected)
                     {
-                        if (!client.ConnectAsync(IPAddress.Parse(globalConfig.ReceiveCommunication.TcpIpAddress), int.Parse(globalConfig.ReceiveCommunication.PortNumber)).Wait(5000))
+                        if (!client.ConnectAsync(IPAddress.Parse(winch.InputCommunication.TcpIpAddress), int.Parse(winch.InputCommunication.PortNumber)).Wait(5000))
                         {
                             // connection failure
                             MessageBoxViewModel.DisplayMessage("Failed to connect to TCP Server");
@@ -113,7 +113,7 @@
                         dataIn = await Task.Run(() => ReadTCPData(client));
                         //_liveData.RawWireData = dataIn;
                         //read data
-                        ParseWinchData(dataIn, globalConfig);
+                        ParseWinchData(dataIn, winch);
 
                     }
                 }
@@ -127,28 +127,28 @@
                 _serialPort.Dispose();
             }            
             //free up canceller resources
-            StartStopSaveView._canceller.Dispose();
+            PlottingViewModel._canceller.Dispose();
             MainWindowViewModel._configDataStore.StartStopButtonText = "Start Log";
             MainWindowViewModel._configDataStore.UserInputsEnable = true;
 
 
         }
-        public static void DisplayData(DataPointModel latest)
+        public void DisplayData(DataPointModel latest)
         {
             //Write data to bound variables to display on UI
             _liveData.Tension = latest.Tension.ToString();
             _liveData.Payout = latest.Payout.ToString();
             _liveData.Speed = latest.Speed.ToString();
-            ChartDataViewModel.AddData(latest);
+            ChartDataViewModel.AddData(latest, _liveData);
         }
-        private static void MaxValues()
+        private void MaxValues()
         {
             //Write max data to bound variables to display on UI
             _liveData.MaxSpeed = maxData.MaxSpeed.Speed.ToString();
             _liveData.MaxPayout = maxData.MaxPayout.Payout.ToString();
             _liveData.MaxTension = maxData.MaxTension.Tension.ToString();
         }
-        private static string ReadTCPData(TcpClient client)//object tcpCom)
+        private string ReadTCPData(TcpClient client)//object tcpCom)
         {
             
             Byte[] data; //= System.Text.Encoding.ASCII.GetBytes(message);
@@ -167,7 +167,7 @@
             return responseData;
             
         }
-        private static string ReplaceNonPrintableCharacters(string s, char replaceWith)
+        private string ReplaceNonPrintableCharacters(string s, char replaceWith)
         {
             StringBuilder result = new StringBuilder();
             for (int i = 0; i < s.Length; i++)
@@ -181,7 +181,7 @@
             }
             return result.ToString();
         }
-        private static void ParseWinchData(string lines, GlobalConfigModel globalConfig)
+        private void ParseWinchData(string lines, WinchModel winch)
         {
             //Parse incoming data function and store in DataPointModel
             bool maxChange = false;
@@ -197,24 +197,24 @@
                 string[] strIn = data.Split(',', 'T');
                 DataPointModel latest = new DataPointModel();
                 //Uncomment to log all data coming in
-                //WriteRawLog(data, globalConfig);
+                //WriteRawLog(data, winch);
                 //UNOLS String input
 
                 if (strIn[0].Contains("%WIR"))
                 {
-                    if (globalConfig.Log20HzSwitch)
+                    if (winch.Log20Hz)
                     {
-                        Write20HzDataHeader(data, globalConfig);
+                        Write20HzDataHeader(data, winch);
                     }
                 }
                 else if (strIn[0].Contains("%WNC"))
                 {
-                    WriteWinchLog(data, globalConfig);
+                    WriteWinchLog(data, winch);
                 }
                 else if (strIn[0].Contains("$WNC"))
                 {
                     _liveData.RawWinchData = data;
-                    WriteWinchLog(data, globalConfig);
+                    WriteWinchLog(data, winch);
                 }
                 else
                 {
@@ -244,7 +244,7 @@
                     if (latest.StringID != "empty")
                     {
                         //If needed changes data and time stamp to local machine
-                        if (globalConfig.UseComputerTimeSwitch || getTime)
+                        if (winch.UseComputerTime || getTime)
                         {
                             DateTime dateTime = DateTime.Now;
                             latest.Date = dateTime.ToString("yyyyMMdd");
@@ -272,17 +272,17 @@
                             MaxValues();
                         }
                         //Write data to logfile
-                        if (globalConfig.Log20HzSwitch)
+                        if (winch.Log20Hz)
                         {
-                            Write20HzData(latest, globalConfig);
+                            Write20HzData(latest, winch);
                         }
-                        if (globalConfig.UDPSwitch)
+                        if (winch.UdpOutput)
                         {
-                            Send20HzData(latest, globalConfig);
+                            Send20HzData(latest, winch);
                         }
-                        if (globalConfig.SerialSwitch)
+                        if (winch.SerialOutput)
                         {
-                            SendSerialData(latest, globalConfig);
+                            SendSerialData(latest, winch);
                         }
 
                         DisplayData(latest);
@@ -291,22 +291,22 @@
                 }
             }
         }
-        private static void Write20HzData(DataPointModel data, GlobalConfigModel globalConfig)
+        private void Write20HzData(DataPointModel data, WinchModel winch)
         {
             // Write Data to files
             string line;
             string destPath;
             string fileName;
-            if (!globalConfig.LogUnolsSwitch)
+            if (!winch.LogFormatUnols)
             {
-                fileName = globalConfig.Minimal20HzLogFileName;
-                destPath = Path.Combine(globalConfig.SaveDirectory, fileName);
+                fileName = winch.MtnwWireLogName;
+                destPath = Path.Combine(MainWindowViewModel._configDataStore.DirectoryLabel, fileName);
                 line = $"RD,{ data.Date }T{ data.Time },{ data.Tension },{ data.Speed },{ data.Payout }";
             }
             else
             {
-                fileName = globalConfig.UnolsWireLogName;
-                destPath = Path.Combine(globalConfig.SaveDirectory, fileName);
+                fileName = winch.UnolsWireLogName;
+                destPath = Path.Combine(MainWindowViewModel._configDataStore.DirectoryLabel, fileName);
                 line = $"{ data.StringID },{ data.Date },{ data.Time },{ data.Tension },{ data.Speed },{ data.Payout },{ data.TMWarnings },{ data.TMAlarms },{ data.CheckSum }";
             }
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
@@ -315,14 +315,14 @@
             }
 
         }
-        private static void Write20HzDataHeader(string data, GlobalConfigModel globalConfig)
+        private void Write20HzDataHeader(string data, WinchModel winch)
         {
             // Write Data to files
             string line;
             string destPath;
             string fileName;
-                fileName = globalConfig.UnolsWireLogName;
-                destPath = Path.Combine(globalConfig.SaveDirectory, fileName);
+                fileName = winch.UnolsWireLogName;
+                destPath = Path.Combine(MainWindowViewModel._configDataStore.DirectoryLabel, fileName);
                 line = data;
             
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
@@ -331,34 +331,34 @@
             }
 
         }
-        private static void WriteWinchLog(string data, GlobalConfigModel globalConfig)
+        private void WriteWinchLog(string data, WinchModel winch)
         {
             //Write Data to files
-            string fileName = globalConfig.UnolsWinchLogName;
-            string destPath = Path.Combine(globalConfig.SaveDirectory, fileName);
+            string fileName = winch.WinchLogName;
+            string destPath = Path.Combine(MainWindowViewModel._configDataStore.DirectoryLabel, fileName);
             string line = data;
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
             {
                 stream.WriteLine(line);
             }
         }
-        private static void WriteRawLog(string data, GlobalConfigModel globalConfig)
+        private void WriteRawLog(string data, WinchModel winch)
         {
             //Write Data to files
-            string fileName = $"raw1.log";
-            string destPath = Path.Combine(globalConfig.SaveDirectory, fileName);
+            string fileName = $"raw_{winch.WinchName}.log";
+            string destPath = Path.Combine(MainWindowViewModel._configDataStore.DirectoryLabel, fileName);
             string line = $"{data}";
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
             {
                 stream.WriteLine(line);
             }
         }
-        private static void Send20HzData(DataPointModel data, GlobalConfigModel globalConfig)
+        private void Send20HzData(DataPointModel data, WinchModel winch)
         {
             //Format string based on format selection
             string line;
             //If UNOLS Format
-            if (globalConfig.UnolsUdpFormatSet)
+            if (winch.UdpFormatUnols)
             {
                 line = $"WIR,{ data.Date },{ data.Time },{ data.Tension },{ data.Speed },{ data.Payout },{ data.TMWarnings},{data.TMAlarms},";
             }
@@ -374,16 +374,16 @@
             line = $"{ line }{ checkSum }";
             //Send UDP packet
             UdpClient udpClient = new UdpClient();
-            udpClient.Connect(IPAddress.Parse( globalConfig.TransmitCommunication.TcpIpAddress), int.Parse(globalConfig.TransmitCommunication.PortNumber));
+            udpClient.Connect(IPAddress.Parse(winch.OutputCommunication.TcpIpAddress), int.Parse(winch.OutputCommunication.PortNumber));
             byte[] sendBytes = Encoding.ASCII.GetBytes(line);
             udpClient.Send(sendBytes, sendBytes.Length);
         }
-        private static void SendSerialData(DataPointModel data, GlobalConfigModel globalConfig)
+        private void SendSerialData(DataPointModel data, WinchModel winch)
         {
             //Format string based on format selection
             string line;
             //If UNOLS Format
-            if (globalConfig.UnolsSerialFormatSet)
+            if (winch.SerialFormatUnols)
             {
                 line = $"WIR,{data.Date},{data.Time},{data.Tension},{data.Speed},{data.Payout},{data.TMWarnings},{data.TMAlarms},";
             }
@@ -397,25 +397,21 @@
             byte[] asciiBytes = Encoding.ASCII.GetBytes(line);
             Array.ForEach(asciiBytes, delegate (byte i) { checkSum += i; });
             line = $"{line}{checkSum}";
-            //Send UDP packet
-            //UdpClient udpClient = new UdpClient();
-            //udpClient.Connect(IPAddress.Parse(globalConfig.TransmitCommunication.IPAddress), int.Parse(globalConfig.TransmitCommunication.PortNumber));
-            //byte[] sendBytes = Encoding.ASCII.GetBytes(line);
-            //udpClient.Send(sendBytes, sendBytes.Length);
+            
             //Serial Port Transmit
             _serialPort.WriteLine(line);
         }
-        public static void WriteMaxData(GlobalConfigModel globalConfig)
+        public void WriteMaxData(WinchModel winch)
         {
             //Write Max data to file
             //DateTime dateTime = DateTime.Now;
             //string stringDateTime = dateTime.ToString("yyyyMMddTHHmmssfff");
             //string dateAndHour = dateTime.ToString("yyyyMMddHH");
-            string fileName = globalConfig.MaxLogFileName;
-            string destPath = Path.Combine(globalConfig.SaveDirectory, fileName);
+            string fileName = winch.MaxWireLogName;
+            string destPath = Path.Combine(MainWindowViewModel._configDataStore.DirectoryLabel, fileName);
             string[] lines =
             {
-                $"Cast { globalConfig.CruiseInformation.CastNumber }",
+                $"Cast { winch.CastNumber }",
                 $"Field, Date, Time, Tension, Speed, Payout",
                 $"Max Tension: { maxData.MaxTension.Date }, { maxData.MaxTension.Time }, { maxData.MaxTension.Tension }, { maxData.MaxTension.Speed }, { maxData.MaxTension.Payout}",
                 $"Max Payout: { maxData.MaxPayout.Date }, { maxData.MaxPayout.Time }, { maxData.MaxPayout.Tension }, { maxData.MaxPayout.Speed }, { maxData.MaxPayout.Payout }",

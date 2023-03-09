@@ -2,18 +2,19 @@
 {
     internal class FileOperationsViewModel
     {
-        public static object SetFileNames(GlobalConfigModel globalConfig)
+        public static object SetFileNames(WinchModel winch)
         {
+            ConfigDataStore _confDataStore = MainWindowViewModel._configDataStore;
             //Create File Names
             DateTime dateTime = DateTime.Now;
             //string stringDateTime = dateTime.ToString("yyyyMMddTHHmmssfff");
             string dateAndHour = dateTime.ToString("yyyyMMddHH");
-            string dateOnly = dateTime.ToString("yyyyMMdd");
-            globalConfig.Minimal20HzLogFileName = $"{ dateAndHour }_{ globalConfig.CruiseInformation.CruiseName }_cast_{ globalConfig.CruiseInformation.CastNumber }_short.log";
-            globalConfig.UnolsWireLogName = $"{ dateAndHour }_{ globalConfig.CruiseInformation.CruiseName }_cast_{ globalConfig.CruiseInformation.CastNumber }_UNOLS.log";
-            globalConfig.UnolsWinchLogName = $"{ dateOnly }_Winch.log";
-            globalConfig.MaxLogFileName = $"{ dateTime.ToString("yyyyMM") }_{ globalConfig.CruiseInformation.CruiseName }.log";
-            return globalConfig;
+            string dateOnly = dateTime.ToString("yyyyMM");
+            winch.MtnwWireLogName = $"{ dateAndHour }_{ _confDataStore.CruiseNameBox }_cast_{winch.CastNumber }_{winch.WinchName}_short.log";
+            winch.UnolsWireLogName = $"{ dateAndHour }_{ _confDataStore.CruiseNameBox }_cast_{ winch.CastNumber }_{winch.WinchName}_UNOLS.log";
+            winch.WinchLogName = $"{ dateOnly }_{ winch.WinchName }_Winch.log";
+            winch.MaxWireLogName = $"{ dateTime.ToString("yyyyMM") }_{ _confDataStore.CruiseNameBox }_{winch.WinchName}.log";
+            return winch;
         }
         public static void WriteConfig(GlobalConfigModel globalConfig)
         {

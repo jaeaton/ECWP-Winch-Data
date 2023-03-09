@@ -15,12 +15,14 @@
             get => outputCommunication;
             set => outputCommunication = value;
         }
-        private LiveDataDataStore? liveData;
-        public LiveDataDataStore? LiveData 
-        { 
-            get => liveData;
-            set => liveData = value;
-        }
+        //private LiveDataDataStore? liveData;
+        //public LiveDataDataStore? LiveData 
+        //{ 
+        //    get => liveData;
+        //    set => liveData = value;
+        //}
+        [ObservableProperty]
+        private LiveDataDataStore liveData;
         [ObservableProperty]
         private string? winchName;
         [ObservableProperty]
@@ -86,6 +88,14 @@
         }
         [ObservableProperty]
         private string? serialFormat;
+        [ObservableProperty]
+        private string? mtnwWireLogName;
+        [ObservableProperty]
+        private string? unolsWireLogName;
+        [ObservableProperty]
+        private string? maxWireLogName;
+        [ObservableProperty]
+        private string? winchLogName;
         
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)

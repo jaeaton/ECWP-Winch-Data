@@ -62,7 +62,7 @@
             if (globalConfig.SaveDirectory != null)
             {
                 globalConfig.SaveDirectorySet = true;
-                FileOperationsViewModel.SetFileNames(globalConfig);
+                //FileOperationsViewModel.SetFileNames(globalConfig);
             }
             if ((bool)_configDataStore.UnolsUDPStringButton)
             {
