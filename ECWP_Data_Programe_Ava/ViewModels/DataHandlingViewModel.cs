@@ -2,12 +2,12 @@
 {
     public class DataHandlingViewModel
     {
-        public static LiveDataDataStore _liveData = new();
-        public static MaxDataPointModel maxData = new MaxDataPointModel();
-        public static int i = 0;
-        public static SerialPort _serialPort = new SerialPort();
+        public LiveDataDataStore _liveData = new();
+        public MaxDataPointModel maxData = new MaxDataPointModel();
+        public int i = 0;
+        public SerialPort _serialPort = new SerialPort();
         //Asynchronious method to allow application to still respond to user interaction
-        public static async void GetDataAsync(GlobalConfigModel globalConfig)
+        public async void GetDataAsync(GlobalConfigModel globalConfig)
         {
             if(globalConfig.SerialSwitch)
             {
@@ -127,28 +127,28 @@
                 _serialPort.Dispose();
             }            
             //free up canceller resources
-            StartStopSaveView._canceller.Dispose();
+            PlottingViewModel._canceller.Dispose();
             MainWindowViewModel._configDataStore.StartStopButtonText = "Start Log";
             MainWindowViewModel._configDataStore.UserInputsEnable = true;
 
 
         }
-        public static void DisplayData(DataPointModel latest)
+        public void DisplayData(DataPointModel latest)
         {
             //Write data to bound variables to display on UI
             _liveData.Tension = latest.Tension.ToString();
             _liveData.Payout = latest.Payout.ToString();
             _liveData.Speed = latest.Speed.ToString();
-            ChartDataViewModel.AddData(latest);
+            ChartDataViewModel.AddData(latest, _liveData);
         }
-        private static void MaxValues()
+        private void MaxValues()
         {
             //Write max data to bound variables to display on UI
             _liveData.MaxSpeed = maxData.MaxSpeed.Speed.ToString();
             _liveData.MaxPayout = maxData.MaxPayout.Payout.ToString();
             _liveData.MaxTension = maxData.MaxTension.Tension.ToString();
         }
-        private static string ReadTCPData(TcpClient client)//object tcpCom)
+        private string ReadTCPData(TcpClient client)//object tcpCom)
         {
             
             Byte[] data; //= System.Text.Encoding.ASCII.GetBytes(message);
@@ -167,7 +167,7 @@
             return responseData;
             
         }
-        private static string ReplaceNonPrintableCharacters(string s, char replaceWith)
+        private string ReplaceNonPrintableCharacters(string s, char replaceWith)
         {
             StringBuilder result = new StringBuilder();
             for (int i = 0; i < s.Length; i++)
@@ -181,7 +181,7 @@
             }
             return result.ToString();
         }
-        private static void ParseWinchData(string lines, GlobalConfigModel globalConfig)
+        private void ParseWinchData(string lines, GlobalConfigModel globalConfig)
         {
             //Parse incoming data function and store in DataPointModel
             bool maxChange = false;
@@ -291,7 +291,7 @@
                 }
             }
         }
-        private static void Write20HzData(DataPointModel data, GlobalConfigModel globalConfig)
+        private void Write20HzData(DataPointModel data, GlobalConfigModel globalConfig)
         {
             // Write Data to files
             string line;
@@ -315,7 +315,7 @@
             }
 
         }
-        private static void Write20HzDataHeader(string data, GlobalConfigModel globalConfig)
+        private void Write20HzDataHeader(string data, GlobalConfigModel globalConfig)
         {
             // Write Data to files
             string line;
@@ -331,7 +331,7 @@
             }
 
         }
-        private static void WriteWinchLog(string data, GlobalConfigModel globalConfig)
+        private void WriteWinchLog(string data, GlobalConfigModel globalConfig)
         {
             //Write Data to files
             string fileName = globalConfig.UnolsWinchLogName;
@@ -342,7 +342,7 @@
                 stream.WriteLine(line);
             }
         }
-        private static void WriteRawLog(string data, GlobalConfigModel globalConfig)
+        private void WriteRawLog(string data, GlobalConfigModel globalConfig)
         {
             //Write Data to files
             string fileName = $"raw1.log";
@@ -353,7 +353,7 @@
                 stream.WriteLine(line);
             }
         }
-        private static void Send20HzData(DataPointModel data, GlobalConfigModel globalConfig)
+        private void Send20HzData(DataPointModel data, GlobalConfigModel globalConfig)
         {
             //Format string based on format selection
             string line;
@@ -378,7 +378,7 @@
             byte[] sendBytes = Encoding.ASCII.GetBytes(line);
             udpClient.Send(sendBytes, sendBytes.Length);
         }
-        private static void SendSerialData(DataPointModel data, GlobalConfigModel globalConfig)
+        private void SendSerialData(DataPointModel data, GlobalConfigModel globalConfig)
         {
             //Format string based on format selection
             string line;
@@ -397,25 +397,21 @@
             byte[] asciiBytes = Encoding.ASCII.GetBytes(line);
             Array.ForEach(asciiBytes, delegate (byte i) { checkSum += i; });
             line = $"{line}{checkSum}";
-            //Send UDP packet
-            //UdpClient udpClient = new UdpClient();
-            //udpClient.Connect(IPAddress.Parse(globalConfig.TransmitCommunication.IPAddress), int.Parse(globalConfig.TransmitCommunication.PortNumber));
-            //byte[] sendBytes = Encoding.ASCII.GetBytes(line);
-            //udpClient.Send(sendBytes, sendBytes.Length);
+            
             //Serial Port Transmit
             _serialPort.WriteLine(line);
         }
-        public static void WriteMaxData(GlobalConfigModel globalConfig)
+        public void WriteMaxData(WinchModel winch)
         {
             //Write Max data to file
             //DateTime dateTime = DateTime.Now;
             //string stringDateTime = dateTime.ToString("yyyyMMddTHHmmssfff");
             //string dateAndHour = dateTime.ToString("yyyyMMddHH");
-            string fileName = globalConfig.MaxLogFileName;
-            string destPath = Path.Combine(globalConfig.SaveDirectory, fileName);
+            string fileName = winch.MaxWireLogName;
+            string destPath = Path.Combine(MainWindowViewModel._configDataStore.DirectoryLabel, fileName);
             string[] lines =
             {
-                $"Cast { globalConfig.CruiseInformation.CastNumber }",
+                $"Cast { winch.CastNumber }",
                 $"Field, Date, Time, Tension, Speed, Payout",
                 $"Max Tension: { maxData.MaxTension.Date }, { maxData.MaxTension.Time }, { maxData.MaxTension.Tension }, { maxData.MaxTension.Speed }, { maxData.MaxTension.Payout}",
                 $"Max Payout: { maxData.MaxPayout.Date }, { maxData.MaxPayout.Time }, { maxData.MaxPayout.Tension }, { maxData.MaxPayout.Speed }, { maxData.MaxPayout.Payout }",

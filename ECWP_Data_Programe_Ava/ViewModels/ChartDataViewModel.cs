@@ -73,7 +73,7 @@
                 }
             };
         }
-        public static void AddData(DataPointModel latest)
+        public static void AddData(DataPointModel latest, LiveDataDataStore live)
         {
             
             System.Globalization.CultureInfo provider = System.Globalization.CultureInfo.InvariantCulture;
@@ -88,7 +88,7 @@
                 _observableValues.Add(new DateTimePoint { DateTime = dateTime, Value = latest.Tension });
                 //uncomment for windowing of plot
                 _observableValuesZero.Add(new DateTimePoint { DateTime = dateTime, Value = 0 });
-                if (Double.TryParse(DataHandlingViewModel._liveData.MaxTension, out double result))
+                if (Double.TryParse(live.MaxTension, out double result))
                 {
                     _observableValuesMax.Add(new DateTimePoint { DateTime = dateTime, Value = result });
                 }

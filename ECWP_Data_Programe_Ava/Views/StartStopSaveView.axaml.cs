@@ -32,15 +32,15 @@ namespace Views
                  "V4.2.1"); 
         }
 
-        private void ButtonLogMax_Click(object sender, RoutedEventArgs e)
-        {
-            //Write the max data for the cast
-            DataHandlingViewModel.WriteMaxData(UserInputsView.globalConfig);
-            //Increase the cast count
-            MainWindowViewModel._configDataStore.CastNumberBox = (int.Parse(MainWindowViewModel._configDataStore.CastNumberBox) + 1).ToString();
-            UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
+        //private void ButtonLogMax_Click(object sender, RoutedEventArgs e)
+        //{
+        //    //Write the max data for the cast
+        //    DataHandlingViewModel.WriteMaxData(UserInputsView.globalConfig);
+        //    //Increase the cast count
+        //    MainWindowViewModel._configDataStore.CastNumberBox = (int.Parse(MainWindowViewModel._configDataStore.CastNumberBox) + 1).ToString();
+        //    UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
 
-        }
+        //}
         //public void StartStop()
         //{
 

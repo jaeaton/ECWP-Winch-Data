@@ -1,13 +1,11 @@
-﻿using JetBrains.Annotations;
-using System.Diagnostics;
+﻿using Models;
 
 namespace ViewModels
 {
     public partial class MainLiveDataViewModel : ObservableObject
     {
         
-        public ConfigDataStore _configDataStore = MainWindowViewModel._configDataStore;
-
+        ConfigDataStore _configDataStore = MainWindowViewModel._configDataStore;
         //move code from code behind to here
         [RelayCommand]
         private async void PlotHelp()
@@ -46,9 +44,9 @@ namespace ViewModels
             //GlobalConfigModel globalConfig = new GlobalConfigModel();
             //var anInstanceofMyClass = new AppConfigViewModel();
             //var instanceofFileOperationsViewModel = new FileOperationsViewModel();
-            UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
-            UserInputsView.globalConfig = (GlobalConfigModel)FileOperationsViewModel.SetFileNames(UserInputsView.globalConfig);
-            FileOperationsViewModel.SetFileNames(UserInputsView.globalConfig);
+            //UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
+            //UserInputsView.globalConfig = (GlobalConfigModel)FileOperationsViewModel.SetFileNames(UserInputsView.globalConfig);
+            //FileOperationsViewModel.SetFileNames(UserInputsView.globalConfig);
             if (UserInputsView.globalConfig.LogMaxValuesSwitch)
             {
                 saveFileDialog.InitialFileName = UserInputsView.globalConfig.MaxLogFileName;

@@ -2,10 +2,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="100"
+             xmlns:vm="using:ViewModels"
+			 mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="100"
              x:Class="Views.SelectedWinchDetailsView"
 			 xmlns:model="using:Models"
 			 x:DataType="model:WinchModel">
+	<UserControl.Resources>
+		<vm:PlottingViewModel x:Key="commands"/>
+	</UserControl.Resources>
 	<Panel>
 		<WrapPanel Orientation="Horizontal">
 			<StackPanel Orientation="Horizontal" Margin="5">
@@ -17,8 +21,8 @@
 				<TextBox x:Name="TextBoxCastNumber" Watermark="1"  Text="{Binding CastNumber,Mode=TwoWay}" Width="10" VerticalAlignment="Center" />
 			</StackPanel>
 			
-			<Button Content="Start/Stop" Margin="5" MinWidth="100" HorizontalContentAlignment="Center"/>
-			<Button Content="Log Max" Margin="5" MinWidth="100" HorizontalContentAlignment="Center"/>
+			<Button Content="{ Binding StartStopButtonText, FallbackValue='Start Log' }" Command="{ Binding StartStopCommand }" CommandParameter="{ Binding WinchName }" Margin="5" MinWidth="100" HorizontalContentAlignment="Center" DataContext="{StaticResource ResourceKey=commands}"/>
+			<Button Content="Log Max" Command="{ Binding ButtonLogMaxCommand }" Margin="5" MinWidth="100" HorizontalContentAlignment="Center" DataContext="{StaticResource ResourceKey=commands}"/>
 		</WrapPanel>
 	</Panel>
 </UserControl>
