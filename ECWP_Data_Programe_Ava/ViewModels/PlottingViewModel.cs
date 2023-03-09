@@ -86,7 +86,7 @@
                         //Create new cancellation token at start of data collection
                         _canceller = new CancellationTokenSource();
                         //Starts Data collection on first press
-                        dh.GetDataAsync(UserInputsView.globalConfig);
+                        dh.GetDataAsync(winch);
                         //change button text
                         MainWindowViewModel._configDataStore.StartStopButtonText = "Stop Log";
                         MainWindowViewModel._configDataStore.UserInputsEnable = false;
