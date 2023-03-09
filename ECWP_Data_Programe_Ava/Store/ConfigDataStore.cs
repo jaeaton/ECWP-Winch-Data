@@ -47,6 +47,9 @@ namespace Store
 
         [ObservableProperty]
         private string? directoryLabel;
+
+        [ObservableProperty]
+        private bool directorSet;
         
         [ObservableProperty]
         private bool unolsWireLogButton;

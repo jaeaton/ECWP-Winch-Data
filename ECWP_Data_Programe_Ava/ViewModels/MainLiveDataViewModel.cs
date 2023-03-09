@@ -47,35 +47,17 @@ namespace ViewModels
             //UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
             //UserInputsView.globalConfig = (GlobalConfigModel)FileOperationsViewModel.SetFileNames(UserInputsView.globalConfig);
             //FileOperationsViewModel.SetFileNames(UserInputsView.globalConfig);
-            if (UserInputsView.globalConfig.LogMaxValuesSwitch)
-            {
-                saveFileDialog.InitialFileName = UserInputsView.globalConfig.MaxLogFileName;
-            }
-            if (UserInputsView.globalConfig.Log20HzSwitch)
-            {
-                if (!UserInputsView.globalConfig.LogUnolsSwitch)
-                {
-                    saveFileDialog.InitialFileName = UserInputsView.globalConfig.Minimal20HzLogFileName;
-                }
-                else
-                {
-                    saveFileDialog.InitialFileName = UserInputsView.globalConfig.UnolsWireLogName;
-                }
-            }
-
+            saveFileDialog.InitialFileName = "Date_Cruise_Winch.log";
+            
             string saveFileName = await saveFileDialog.ShowAsync(MainWindow.Instance);
             if (saveFileName != null)
             {
                 //DirectoryLabel.Content = saveFileDialog.InitialFileName;
                 FileInfo fileInfo = new(saveFileName);
-                UserInputsView.globalConfig.SaveDirectory = (string)fileInfo.DirectoryName;
-                MainWindowViewModel._configDataStore.DirectoryLabel = UserInputsView.globalConfig.SaveDirectory;
-                UserInputsView.globalConfig.SaveDirectorySet = true;
-
-
+                _configDataStore.DirectoryLabel = (string)fileInfo.DirectoryName;
+                _configDataStore.DirectorSet = true;
             }
 
-            
         }
 
         public void PlotSelectionChanged(bool selected, string? WinchName)
