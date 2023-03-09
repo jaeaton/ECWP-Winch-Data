@@ -32,21 +32,9 @@ namespace ViewModels
         [RelayCommand]
         private async void SaveLocation()
         {
-            //Check for valid filename constructor
             // Show the save file dialog
             SaveFileDialog saveFileDialog = new();
-            //ConfigDataStore _configDataStore = UserInputsView._configDataStore;
-            //build the save file name
-            //DateTime dateTime = DateTime.Now;
-            //string stringDateTime = dateTime.ToString("yyyyMMddTHHmmssfff");
-            //string dateAndHour = dateTime.ToString("yyyyMMddHH");
-            //string filename = $"{ dateAndHour } { _configDataStore.CruiseNameBox } cast { _configDataStore.CastNumberBox }.Log";
-            //GlobalConfigModel globalConfig = new GlobalConfigModel();
-            //var anInstanceofMyClass = new AppConfigViewModel();
-            //var instanceofFileOperationsViewModel = new FileOperationsViewModel();
-            //UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
-            //UserInputsView.globalConfig = (GlobalConfigModel)FileOperationsViewModel.SetFileNames(UserInputsView.globalConfig);
-            //FileOperationsViewModel.SetFileNames(UserInputsView.globalConfig);
+            //Set the dummy filename
             saveFileDialog.InitialFileName = "Date_Cruise_Winch.log";
             
             string saveFileName = await saveFileDialog.ShowAsync(MainWindow.Instance);

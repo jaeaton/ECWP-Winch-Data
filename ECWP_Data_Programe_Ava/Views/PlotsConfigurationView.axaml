@@ -2,9 +2,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="150" d:DesignHeight="450"
+             xmlns:vm="using:ViewModels"
+			 mc:Ignorable="d" d:DesignWidth="150" d:DesignHeight="450"
              x:Class="Views.PlotsConfigurationView"
 			 xmlns:model="clr-namespace:Models">
+	<UserControl.Resources>
+		<vm:MainLiveDataViewModel x:Key="commands"/>
+	</UserControl.Resources>
 	<UserControl.DataTemplates>
 		<DataTemplate DataType="model:WinchModel">
 			<CheckBox Content="{ Binding WinchName }" IsChecked="{ Binding PlotSelected }" Margin="5"/>
@@ -26,11 +30,11 @@
 		
 		<StackPanel Orientation="Vertical" Margin="5">
 			<TextBlock Text="Set Save Location" Width="125" VerticalAlignment="Center"></TextBlock>
-			<Button x:Name="ButtonSaveLocation" HorizontalAlignment="Center" Content="Save Location"  Margin="5,0,5,0"  Command="{ Binding SaveLocationCommand }" />
+			<Button x:Name="ButtonSaveLocation" HorizontalAlignment="Center" Content="Save Location"  Margin="5,0,5,0"  Command="{ Binding SaveLocationCommand }" DataContext="{StaticResource ResourceKey=commands}"/> 
 		</StackPanel>
 		<StackPanel Margin="5">
 			<TextBlock Text="Help" HorizontalAlignment="Center"/>
-			<Button x:Name="ButtonHelp" HorizontalAlignment="Center" Content="?" Width="25"  Command="{ Binding PlotHelpCommand }"/>
+			<Button x:Name="ButtonHelp" HorizontalAlignment="Center" Content="?" Width="25"  Command="{ Binding PlotHelpCommand }" DataContext="{StaticResource ResourceKey=commands}"/>
 		</StackPanel>
 	</StackPanel>
 	

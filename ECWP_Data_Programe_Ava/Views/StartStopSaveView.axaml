@@ -8,7 +8,7 @@
 	
 	<Panel>
 		<StackPanel Background="WhiteSmoke" Margin="2">
-			<Grid RowDefinitions="Auto,Auto">
+			
 				<!--
 				<WrapPanel>
 					<StackPanel Orientation="Horizontal">
@@ -31,13 +31,12 @@
 					<Button x:Name="StartStopButton" Content="{ Binding Path=StartStopButtonText,FallbackValue='Start Log'}"  HorizontalAlignment="Right" Margin="5,0,5,0" Click="ButtonStartLog_Click"></Button>
 				</StackPanel>
 				-->
-				<StackPanel Orientation="Horizontal" Grid.Row="1">
+				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="Path: " VerticalAlignment="Center"/>
 					<TextBlock x:Name="TextBoxFileLocation" Text="{ Binding Path=DirectoryLabel }"  VerticalAlignment="Center"></TextBlock>
 
 				</StackPanel>
-			</Grid>	
-				
+			
 		</StackPanel>
 	</Panel>
 </UserControl>
