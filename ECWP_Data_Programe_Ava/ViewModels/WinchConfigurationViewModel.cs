@@ -11,16 +11,9 @@ namespace ViewModels
         [RelayCommand]
         public void AddWinch()
         {
-            //Creates a new set of data so as not to reference existing data
+            ////Creates a new set of data so as not to reference existing data
             WinchModel Winch = _configDataStore.CurrentWinch.ShallowCopy();
-            _configDataStore.AllWinches.Add(Winch);
-            //Clears the current list to make winch names as fresh as possible
-            _configDataStore.WinchNames.Clear();
-            //Loops through all winches and puts winch names in a list for selection process
-            foreach (var item in _configDataStore.AllWinches)
-            {
-                _configDataStore.WinchNames.Add(item.WinchName);
-            }
+            InsertWinch(Winch);
             FileOperationsViewModel.WriteConfig(_configDataStore);
         }
         [RelayCommand]
@@ -107,5 +100,20 @@ namespace ViewModels
             }
         }
 
+        public void InsertWinch(WinchModel Winch)
+        {
+            _configDataStore.AllWinches.Add(Winch);
+            //Clears the current list to make winch names as fresh as possible
+            _configDataStore.WinchNames.Clear();
+            //Loops through all winches and puts winch names in a list for selection process
+            if ( _configDataStore.AllWinches.Count > 0)
+            {
+                foreach (var item in _configDataStore.AllWinches)
+                {
+                    _configDataStore.WinchNames.Add(item.WinchName);
+                }
+            }
+            
+        }
     }
 }

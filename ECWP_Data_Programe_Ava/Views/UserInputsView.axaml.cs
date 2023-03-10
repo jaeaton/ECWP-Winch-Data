@@ -52,17 +52,17 @@ namespace Views
         }
        
 
-        public void Button_Click(object sender, RoutedEventArgs e)
-        {
-            globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
-            if (globalConfig == null)
-            {
-                MessageBoxViewModel.DisplayMessage("No Valid configuration");
-                return;
-            }
-            else
-                FileOperationsViewModel.WriteConfig(globalConfig);
-        }
+        //public void Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
+        //    if (globalConfig == null)
+        //    {
+        //        MessageBoxViewModel.DisplayMessage("No Valid configuration");
+        //        return;
+        //    }
+        //    else
+        //        FileOperationsViewModel.WriteConfig(globalConfig);
+        //}
         //private void WinchDataMove(object sender, SelectionChangedEventArgs e)
         //{
         //    WinchConfigurationViewModel.LoadWinch(MainWindowViewModel._configDataStore.SelectWinch);
