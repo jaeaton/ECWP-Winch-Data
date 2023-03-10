@@ -16,50 +16,58 @@
             winch.MaxWireLogName = $"{ dateTime.ToString("yyyyMM") }_{ _confDataStore.CruiseNameBox }_{winch.WinchName}.log";
             return winch;
         }
-        public static void WriteConfig(GlobalConfigModel globalConfig)
+        public static void WriteConfig(ConfigDataStore _configDataStore)
         {
             //Logic to save new parameters to config file
             //Set filname
-            string fileName = "dataconfig.txt";
+            string fileName = "ecwp_dataconf.txt";
             //Set path to save config file (Application directory)
             string destPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
-            //Populate array with global configuartion values
-            string[] lines =
-                {
-                $"Receive IP,{ globalConfig.ReceiveCommunication.TcpIpAddress }",
-                $"Receive Port,{ globalConfig.ReceiveCommunication.PortNumber }",
-                $"Transmit IP,{ globalConfig.TransmitCommunication.TcpIpAddress }",
-                $"Transmit Port,{ globalConfig.TransmitCommunication.PortNumber }",
-                $"Cruise Name,{ globalConfig.CruiseInformation.CruiseName }",
-                $"Cast Number,{ globalConfig.CruiseInformation.CastNumber }",
-                $"Send UDP,{ globalConfig.UDPSwitch }",
-                $"Save 20 Hz Data,{ globalConfig.Log20HzSwitch }",
-                $"Log Max Values,{ globalConfig.LogMaxValuesSwitch }",
-                $"Use Computer Time,{ globalConfig.UseComputerTimeSwitch }",
-                $"Save Location,{ globalConfig.SaveDirectory }",
-                $"UNOLS String,{ globalConfig.UnolsUdpFormatSet }",
-                $"UNOLS File Format, {globalConfig.LogUnolsSwitch }",
-                $"Send Serial,{ globalConfig.SerialSwitch }",
-                $"UNOLS Serial String,{ globalConfig.UnolsSerialFormatSet }",
-                $"Serial Port Name,{ globalConfig.SerialPortName }",
-                $"Serial Baud Rate,{ globalConfig.SerialPortBaud }",
-                $"Selected Winch,{ globalConfig.SelectedProtocol }"
-                };
-            //Write each line of array using stream writer
-            using (StreamWriter stream = new StreamWriter(destPath))
+            foreach (WinchModel winch in _configDataStore)
             {
-                foreach (string line in lines)
-                    stream.WriteLine(line);
+                //Populate array with configuartion values
+                string[] lines =
+                    {
+                    $"Winch Name,{ winch.WinchName}",
+                    $"Receive IP,{ winch.InputCommunication.TcpIpAddress }",
+                    $"Receive Port,{ winch.InputCommunication.PortNumber }",
+                    $"Transmit IP,{ winch.OutputCommunication.TcpIpAddress }",
+                    $"Transmit Port,{ winch.OutputCommunication.PortNumber }",
+                    $"Cruise Name,{ _configDataStore.CruiseNameBox }",
+                    $"Cast Number,{ winch.CastNumber }",
+                    $"Send UDP,{ winch.UdpOutput }",
+                    $"UDP String Format,{ winch.UdpFormat }",
+                    $"Save 20Hz Data,{ winch.Log20Hz }",
+                    $"20Hz File Format,{ winch.LogFormat }",
+                    $"Save Max Values,{ winch.LogMax }",
+                    $"Use Computer Time,{ winch.UseComputerTime }",
+                    $"Save Location,{ _configDataStore.DirectoryLabel }",
+                    //$"UNOLS File Format, {globalConfig.LogUnolsSwitch }",
+                    $"Send Serial,{ winch.SerialOutput }",
+                    $"Serial String Format,{ winch.SerialFormat }",
+                    $"Serial Port Name,{ winch.SerialPortOutput }",
+                    $"Serial Baud Rate,{ winch.BaudRateOutput }",
+                    $"Input Communication Type,{  winch.CommunicationType }"
+                    };
+                //Write each line of array using stream writer
+                using (StreamWriter stream = new StreamWriter(destPath))
+                {
+                    foreach (string line in lines)
+                        stream.WriteLine(line);
+                }
             }
+            
         }
         public static object ReadConfig(ConfigDataStore _configDataStore)
         {
             //Logic to read config file for initial setup based on previous saved data
             List<string> lines = new List<string>();
             //set the name of the config file
-            string fileName = "dataconfig.txt";
+            string fileName = "ecwp_dataconf.txt";
             //set the path to application directory
             string destPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+            WinchModel winch = new();
+            WinchConfigurationViewModel viewModel = new WinchConfigurationViewModel();
             try
             {
                 using (StreamReader stream = new StreamReader(destPath))
@@ -72,21 +80,32 @@
                     foreach (var line in lines)
                     {
                         int delim = line.IndexOf(",");
+                        if (line.Substring(0, delim) == "Winch Name")
+                        {
+                            if ( _configDataStore.CurrentWinch != null)
+                            {
+                                _configDataStore.CurrentWinch = winch.ShallowCopy();
+                                viewModel.AddWinch();
+                                _configDataStore.CurrentWinch = null;
+
+                            }
+                            winch.WinchName = line.Substring(delim + 1);
+                        }
                         if (line.Substring(0, delim) == "Receive IP")
                         {
-                            _configDataStore.IpAddressInputSourceBox = line.Substring(delim + 1);
+                            winch.InputCommunication.TcpIpAddress = line.Substring(delim + 1);
                         }
                         if (line.Substring(0, delim) == "Receive Port")
                         {
-                            _configDataStore.PortInputSourceBox = line.Substring(delim + 1);
+                            winch.InputCommunication.PortNumber = line.Substring(delim + 1);
                         }
                         if (line.Substring(0, delim) == "Transmit IP")
                         {
-                            _configDataStore.IpAddressInputDestinationBox = line.Substring(delim + 1);
+                            winch.OutputCommunication.TcpIpAddress = line.Substring(delim + 1);
                         }
                         if (line.Substring(0, delim) == "Transmit Port")
                         {
-                            _configDataStore.PortInputDestinationBox = line.Substring(delim + 1);
+                            winch.OutputCommunication.PortNumber = line.Substring(delim + 1);
                         }
                         if (line.Substring(0, delim) == "Cruise Name")
                         {
@@ -95,97 +114,94 @@
                         if (line.Substring(0, delim) == "Cast Number")
                         {
                             int castCount = int.Parse(line.Substring(delim + 1));// + 1;
-                            _configDataStore.CastNumberBox = castCount.ToString();
+                            winch.CastNumber = castCount.ToString();
                         }
                         if (line.Substring(0, delim) == "Send UDP")
                         {
-                            _configDataStore.SendDataCheckBox = bool.Parse(line.Substring(delim + 1));
+                            winch.UdpOutput = bool.Parse(line.Substring(delim + 1));
                         }
                         if (line.Substring(0, delim) == "Save 20 Hz Data")
                         {
-                            _configDataStore.Log20HzDataCheckBox = bool.Parse(line.Substring(delim + 1));
+                            winch.Log20Hz = bool.Parse(line.Substring(delim + 1));
                         }
-                        if (line.Substring(0, delim) == "Log Max Values")
+                        if (line.Substring(0, delim) == "Save Max Values")
                         {
-                            _configDataStore.LogMaxDataCheckBox = bool.Parse(line.Substring(delim + 1));
+                            winch.LogMax = bool.Parse(line.Substring(delim + 1));
                         }
                         if (line.Substring(0, delim) == "Use Computer Time")
                         {
-                            _configDataStore.UseComputerTimeCheckBox = bool.Parse(line.Substring(delim + 1));
+                            winch.UseComputerTime = bool.Parse(line.Substring(delim + 1));
                         }
                         if (line.Substring(0, delim) == "Save Location")
                         {
                             _configDataStore.DirectoryLabel = line.Substring(delim + 1);
                         }
-                        if (line.Substring(0, delim) == "UNOLS String")
+                        if (line.Substring(0, delim) == "UDP String Format")
                         {
-                            _configDataStore.UnolsUDPStringButton = bool.Parse(line.Substring(delim + 1));
-                            if (!(bool)_configDataStore.UnolsUDPStringButton)
+                            winch.UdpFormat = line.Substring(delim + 1);
+                            if (winch.UdpFormat == "UNOLS")
                             {
-                                //if UNOLS format is not selected, select MTNW formate
-                                _configDataStore.UnolsUDPStringButton = false;
-                                _configDataStore.MtnwUDPStringButton = true;
+                                winch.UdpFormatUnols = true;
+                                winch.UdpFormatMtnw = false;
                             }
-                            if ((bool)_configDataStore.UnolsUDPStringButton)
+                            else
                             {
-                                //Select UNOLS format
-                                _configDataStore.MtnwUDPStringButton = false;
-                                _configDataStore.UnolsUDPStringButton = true;
+                                winch.UdpFormatUnols = false;
+                                winch.UdpFormatMtnw = true;
                             }
                         }
-                        if (line.Substring(0, delim) == "UNOLS File Format")
+                        if (line.Substring(0, delim) == "20Hz File Format")
                         {
-                            _configDataStore.UnolsWireLogButton = bool.Parse(line.Substring(delim + 1));
-                            if (!(bool)_configDataStore.UnolsWireLogButton)
+                            winch.LogFormat = line.Substring(delim + 1);
+                            if (winch.LogFormat == "UNOLS")
                             {
-                                //if UNOLS format is not selected, select MTNW formate
-                                _configDataStore.UnolsWireLogButton = false;
-                                _configDataStore.MtnwWireLogButton = true;
+                                winch.LogFormatUnols = true;
+                                winch.LogFormatMtnw = false;
                             }
-                            if ((bool)_configDataStore.UnolsWireLogButton)
+                            else
                             {
-                                //Select UNOLS format
-                                _configDataStore.MtnwWireLogButton = false;
-                                _configDataStore.UnolsWireLogButton = true;
+                                winch.LogFormatUnols = false;
+                                winch.LogFormatMtnw = true;
                             }
                         }
-                        if (line.Substring(0, delim) == "UNOLS Serial String")
+                        if (line.Substring(0, delim) == "Serial String Format")
                         {
-                            _configDataStore.UnolsSerialStringButton = bool.Parse(line.Substring(delim + 1));
-                            if (!(bool)_configDataStore.UnolsSerialStringButton)
+                            winch.SerialFormat = line.Substring(delim + 1);
+                            if (winch.SerialFormat == "UNOLS")
                             {
-                                //if UNOLS format is not selected, select MTNW formate
-                                _configDataStore.UnolsSerialStringButton = false;
-                                _configDataStore.MtnwSerialStringButton = true;
+                                winch.SerialFormatUnols = true;
+                                winch.SerialFormatMtnw = false;
                             }
-                            if ((bool)_configDataStore.UnolsWireLogButton)
+                            else
                             {
-                                //Select UNOLS format
-                                _configDataStore.MtnwSerialStringButton = false;
-                                _configDataStore.UnolsSerialStringButton = true;
+                                winch.SerialFormatUnols = false;
+                                winch.SerialFormatMtnw = true;
                             }
                         }
                         if (line.Substring(0, delim) == "Send Serial")
                         {
-                            _configDataStore.SendSerialDataCheckBox = bool.Parse(line.Substring(delim + 1));
+                            winch.SerialOutput = bool.Parse(line.Substring(delim + 1));
                         }
                         if (line.Substring(0, delim) == "Serial Port Name")
                         {
-                            _configDataStore.SerialPortName = line.Substring(delim + 1);
+                            winch.SerialPortOutput = line.Substring(delim + 1);
                         }
                         if (line.Substring(0, delim) == "Serial Baud Rate")
                         {
-                            _configDataStore.BaudRate = line.Substring(delim + 1);
+                           winch.BaudRateOutput = line.Substring(delim + 1);
                         }
-                        if (line.Substring(0, delim) == "Selected Winch")
+                        if (line.Substring(0, delim) == "Input Communication Type")
                         {
-                            _configDataStore.SelectedProtocol = line.Substring(delim + 1);
+                            winch.CommunicationType = line.Substring(delim + 1);
                         }
                     }
-                    GlobalConfigModel globalConfig = new GlobalConfigModel();
-                    //update global config to the parameters loaded
-                    globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(_configDataStore);
-                    return globalConfig;
+                    //GlobalConfigModel globalConfig = new GlobalConfigModel();
+                    ////update global config to the parameters loaded
+                    //globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(_configDataStore);
+                    //return globalConfig;
+                    _configDataStore.CurrentWinch = winch.ShallowCopy();
+                    viewModel.AddWinch();
+
                 }
             }
             catch

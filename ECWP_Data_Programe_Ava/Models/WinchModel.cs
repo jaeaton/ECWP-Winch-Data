@@ -48,6 +48,14 @@
         private bool logFormatUnols ;
         [ObservableProperty]
         private bool logFormatMtnw;
+        partial void OnLogFormatMtnwChanged(bool value)
+        {
+            WinchConfigurationViewModel vm = new WinchConfigurationViewModel();
+            vm.ChangeLogFormat(value);
+        }
+        [ObservableProperty]
+        private string? logFormat;
+        
         [ObservableProperty]
         private string? speedUnit ;
         [ObservableProperty]

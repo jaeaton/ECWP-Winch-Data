@@ -44,7 +44,8 @@ namespace Views
                                                                 "kg",
                                                                 "lbf"
                                                             };
-            globalConfig = (GlobalConfigModel)FileOperationsViewModel.ReadConfig(MainWindowViewModel._configDataStore);
+            //globalConfig = (GlobalConfigModel)FileOperationsViewModel.ReadConfig(MainWindowViewModel._configDataStore);
+            FileOperationsViewModel.ReadConfig(MainWindowViewModel._configDataStore);
             InitializeComponent();
             //FileOperationsViewModel.WriteConfig(globalConfig);
 

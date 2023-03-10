@@ -9,7 +9,7 @@ namespace ViewModels
         /// Add Winch adds the data currently stored in current Winch as a new selectable winch 
         /// </summary>
         [RelayCommand]
-        private void AddWinch()
+        public void AddWinch()
         {
             //Creates a new set of data so as not to reference existing data
             WinchModel Winch = _configDataStore.CurrentWinch.ShallowCopy();
@@ -21,7 +21,7 @@ namespace ViewModels
             {
                 _configDataStore.WinchNames.Add(item.WinchName);
             }
-            
+            FileOperationsViewModel.WriteConfig(_configDataStore);
         }
         [RelayCommand]
         private void RemoveWinch()
@@ -92,6 +92,18 @@ namespace ViewModels
             else
             {
                 _configDataStore.CurrentWinch.UdpFormat = $"UNOLS";
+            }
+        }
+
+        public void ChangeLogFormat(bool mtnw)
+        {
+            if (mtnw)
+            {
+                _configDataStore.CurrentWinch.LogFormat = $"MTNW";
+            }
+            else
+            {
+                _configDataStore.CurrentWinch.LogFormat = $"UNOLS";
             }
         }
 
