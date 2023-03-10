@@ -41,7 +41,7 @@ namespace Store
 
         [ObservableProperty]
         private bool unolsUDPStringButton;
-       
+
         [ObservableProperty]
         private bool mtnwUDPStringButton;
 
@@ -50,10 +50,10 @@ namespace Store
 
         [ObservableProperty]
         private bool directorSet;
-        
+
         [ObservableProperty]
         private bool unolsWireLogButton;
-        
+
         [ObservableProperty]
         private bool mtnwWireLogButton;
 
@@ -62,16 +62,16 @@ namespace Store
 
         [ObservableProperty]
         private bool userInputsEnable;
-        
+
         [ObservableProperty]
         private string? serialPortName;
-        
+
         [ObservableProperty]
         private string? baudRate;
 
         [ObservableProperty]
         private bool unolsSerialStringButton;
-        
+
         [ObservableProperty]
         private bool mtnwSerialStringButton;
 
@@ -83,7 +83,7 @@ namespace Store
 
         [ObservableProperty]
         private string? winchSelection;
-        
+
         [ObservableProperty]
         private List<string>? availableProtocols;
 
@@ -113,11 +113,33 @@ namespace Store
 
         [ObservableProperty]
         private string? selectWinch;// = new();
-        
+        partial void OnSelectWinchChanged(string? value)
+        {
+            LoadWinch(value);
+        }
+
         [ObservableProperty]
         private ObservableCollection<string>? winchNames = new();
 
+
+        public void LoadWinch(string? winch)
+        {
+            if (winch != null && AllWinches != null)
+            {
+                int index = -1;
+
+                for (int i = 0; i < AllWinches.Count; i++)
+                {
+                    WinchModel item = AllWinches[i];
+                    if (item.WinchName == winch)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+                CurrentWinch = AllWinches[index].ShallowCopy();
+            }
+        }
     }
 
-    
 }

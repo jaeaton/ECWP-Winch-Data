@@ -1,4 +1,6 @@
-﻿namespace ViewModels
+﻿using System.Diagnostics;
+
+namespace ViewModels
 {
     public partial class WinchConfigurationViewModel : ObservableObject
     {
@@ -25,39 +27,49 @@
         private void RemoveWinch()
         {
             //Removes the data in the winch entry form from the list of winches
-            _configDataStore.AllWinches.Remove(_configDataStore.CurrentWinch);
-            //Clears the current list to make winch names as fresh as possible
-            _configDataStore.WinchNames.Clear();
+            if (_configDataStore.CurrentWinch != null && _configDataStore.AllWinches != null)
+            {
+                int index = -1;
+                string name = _configDataStore.CurrentWinch.WinchName;
+                for (int i = 0; i < _configDataStore.AllWinches.Count; i++)
+                {
+                    WinchModel item = _configDataStore.AllWinches[i];
+                    if (item.WinchName == name)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+                _configDataStore.AllWinches.RemoveAt(index);
+            }
+                //_configDataStore.AllWinches.Remove(_configDataStore.CurrentWinch);
+                //Clears the current list to make winch names as fresh as possible
+                _configDataStore.WinchNames.Clear();
             //Loops through all winches and puts winch names in a list for selection process
            foreach (var item in _configDataStore.AllWinches)
             {
                 _configDataStore.WinchNames.Add(item.WinchName);
             }
         }
-        /// <summary>
-        /// Loads winch data from the list of all winches into the current so it can be edited/removed.
-        /// </summary>
-        /// <param name="winch"></param>
-        /// 
-        
-        public void LoadWinch(string? winch)
-        {
-            if (winch != null && _configDataStore.AllWinches != null)
-            {
-                int index = -1;
+               
+        //public void LoadWinch(string? winch)
+        //{
+        //    if (winch != null && _configDataStore.AllWinches != null)
+        //    {
+        //        int index = -1;
 
-                for (int i = 0; i < _configDataStore.AllWinches.Count; i++)
-                {
-                    WinchModel item = _configDataStore.AllWinches[i];
-                    if (item.WinchName == winch)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-                _configDataStore.CurrentWinch = _configDataStore.AllWinches[index].ShallowCopy();
-            }
-        }
+        //        for (int i = 0; i < _configDataStore.AllWinches.Count; i++)
+        //        {
+        //            WinchModel item = _configDataStore.AllWinches[i];
+        //            if (item.WinchName == winch)
+        //            {
+        //                index = i;
+        //                break;
+        //            }
+        //        }
+        //        _configDataStore.CurrentWinch = _configDataStore.AllWinches[index].ShallowCopy();
+        //    }
+        //}
 
         public void ChangeSerialFormat(bool mtnw)
         {
