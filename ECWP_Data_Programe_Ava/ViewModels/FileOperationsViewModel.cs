@@ -35,7 +35,7 @@
                 string[] lines =
                     {
                     $"Winch Name,{ winch.WinchName}",
-                    //$"Receive IP,{ winch.InputCommunication.TcpIpAddress }",
+                    $"Receive IP,{ winch.InputCommunication.TcpIpAddress }",
                     //$"Receive Port,{ winch.InputCommunication.PortNumber }",
                     //$"Transmit IP,{ winch.OutputCommunication.TcpIpAddress }",
                     //$"Transmit Port,{ winch.OutputCommunication.PortNumber }",
@@ -72,8 +72,8 @@
             string fileName = "ecwp_dataconf.txt";
             //set the path to application directory
             string destPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
-            WinchModel? winch = new();
-            winch = null;
+            WinchModel winch = new();
+            //winch = null;
             WinchConfigurationViewModel viewModel = new WinchConfigurationViewModel();
             try
             {
@@ -89,10 +89,10 @@
                         int delim = line.IndexOf(",");
                         if (line.Substring(0, delim) == "Winch Name")
                         {
-                            if ( winch != null)
+                            if ( winch.WinchName != null)
                             {
                                 viewModel.InsertWinch(winch);
-                                winch = null;
+                                winch = new();
                             }
                             winch.WinchName = line.Substring(delim + 1);
                         }
