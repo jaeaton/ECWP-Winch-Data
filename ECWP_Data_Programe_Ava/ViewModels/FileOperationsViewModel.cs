@@ -57,7 +57,10 @@
                     $"Serial String Format,{ winch.SerialFormat }",
                     $"Serial Port Name,{ winch.SerialPortOutput }",
                     $"Serial Baud Rate,{ winch.BaudRateOutput }",
-                    $"Input Communication Type,{  winch.CommunicationType }"
+                    $"Input Communication Type,{  winch.CommunicationType }",
+                    $"Tension Units,{ winch.TensionUnit }",
+                    $"Payout Units,{ winch.PayoutUnit }",
+                    $"Speed Units,{  winch.SpeedUnit }"
                     };
                 //Write each line of array using stream writer
                 using (StreamWriter stream = new StreamWriter(destPath, true))
@@ -205,6 +208,18 @@
                         if (line.Substring(0, delim) == "Input Communication Type")
                         {
                             winch.CommunicationType = line.Substring(delim + 1);
+                        }
+                        if (line.Substring(0, delim) == "Tension Units")
+                        {
+                            winch.TensionUnit = line.Substring(delim + 1);
+                        }
+                        if (line.Substring(0, delim) == "Payout Units")
+                        {
+                            winch.PayoutUnit = line.Substring(delim + 1);
+                        }
+                        if (line.Substring(0, delim) == "Speed Units")
+                        {
+                            winch.SpeedUnit = line.Substring(delim + 1);
                         }
                     }
                     //GlobalConfigModel globalConfig = new GlobalConfigModel();
