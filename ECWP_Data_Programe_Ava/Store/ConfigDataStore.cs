@@ -137,7 +137,8 @@ namespace Store
                         break;
                     }
                 }
-                CurrentWinch = AllWinches[index].ShallowCopy();
+                //CurrentWinch = AllWinches[index].ShallowCopy();
+                CurrentWinch = AllWinches[index].DeepCopy();
             }
         }
     }

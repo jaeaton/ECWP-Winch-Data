@@ -2,19 +2,23 @@
 {
     public partial class WinchModel : ObservableObject
     {
-        private CommunicationModel inputCommunication;
-        public CommunicationModel? InputCommunication 
-        {
-            get => inputCommunication;
-            set => inputCommunication = value;
-        }
+        //private CommunicationModel? inputCommunication = new();
+        //public CommunicationModel? InputCommunication
+        //{
+        //    get => inputCommunication;
+        //    set => inputCommunication = value;
+        //}
+        [ObservableProperty]
+        private CommunicationModel? inputCommunication = new();
 
-        private CommunicationModel outputCommunication;
-        public CommunicationModel? OutputCommunication 
-        { 
-            get => outputCommunication;
-            set => outputCommunication = value;
-        }
+        //private CommunicationModel outputCommunication = new();
+        //public CommunicationModel? OutputCommunication 
+        //{ 
+        //    get => outputCommunication;
+        //    set => outputCommunication = value;
+        //}
+        [ObservableProperty]
+        private CommunicationModel? outputCommunication = new();
         //private LiveDataDataStore? liveData;
         //public LiveDataDataStore? LiveData 
         //{ 
@@ -137,6 +141,13 @@
             return (WinchModel) this.MemberwiseClone();
         }
 
-       
+        public WinchModel DeepCopy()
+        {
+            WinchModel copy = (WinchModel)this.MemberwiseClone();
+            copy.InputCommunication = new CommunicationModel(InputCommunication.TcpIpAddress, InputCommunication.PortNumber);
+            copy.OutputCommunication = new CommunicationModel(OutputCommunication.TcpIpAddress, OutputCommunication.PortNumber);
+            return copy;
+        }
+
     }
 }

@@ -18,11 +18,11 @@
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="IP Address: "/>
-					<TextBlock Text="{ Binding TcpIpAddress }"/>
+					<TextBlock Text="{ Binding InputCommunication.TcpIpAddress }"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="Port: "/>
-					<TextBlock Text="{ Binding TcpIpPort }"/>
+					<TextBlock Text="{ Binding InputCommunication.PortNumber }"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="Computer Time: "/>

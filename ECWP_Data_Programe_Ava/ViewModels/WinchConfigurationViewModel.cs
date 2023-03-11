@@ -12,7 +12,9 @@ namespace ViewModels
         public void AddWinch()
         {
             ////Creates a new set of data so as not to reference existing data
-            WinchModel Winch = _configDataStore.CurrentWinch.ShallowCopy();
+            //WinchModel Winch = _configDataStore.CurrentWinch.ShallowCopy();
+            WinchModel Winch = _configDataStore.CurrentWinch.DeepCopy();
+
             InsertWinch(Winch);
             FileOperationsViewModel.WriteConfig(_configDataStore);
         }
@@ -43,6 +45,7 @@ namespace ViewModels
             {
                 _configDataStore.WinchNames.Add(item.WinchName);
             }
+            FileOperationsViewModel.WriteConfig(_configDataStore);
         }
                
         //public void LoadWinch(string? winch)

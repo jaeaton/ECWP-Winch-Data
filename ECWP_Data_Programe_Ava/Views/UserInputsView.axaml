@@ -101,7 +101,7 @@
 						</StackPanel>
 						<StackPanel Orientation="Horizontal" Margin="5" IsVisible="{ Binding ElementName=CheckBoxSendUDP,Path=IsChecked } }">
 							<TextBlock Text="IP Address" Width="90" VerticalAlignment="Center" />
-							<TextBox x:Name="TextBoxDestinationIPAdress" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.TcpIpAddressOutput,FallbackValue='192.168.1.121',Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
+							<TextBox x:Name="TextBoxDestinationIPAdress" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.TcpIpAddress,FallbackValue='192.168.1.121',Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal" Margin="5" IsVisible="{ Binding ElementName=CheckBoxSendUDP,Path=IsChecked }">
 							<TextBlock Text="Port Number" Width="90" VerticalAlignment="Center" />

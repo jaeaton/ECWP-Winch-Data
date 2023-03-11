@@ -1,23 +1,24 @@
 ﻿namespace Models
 {
-    public partial class CommunicationModel : ObservableObject
+    //[INotifyPropertyChanged]
+    public partial class CommunicationModel  : ObservableObject
     {
         [ObservableProperty]
-        private string tcpIpAddress;
+        private string? tcpIpAddress;
         [ObservableProperty]
-        private string portNumber; 
+        private string? portNumber; 
            
         public CommunicationModel()
         {
 
         }
-        public CommunicationModel(string _ipAdress, string _portNumber)
+        public CommunicationModel(string _ipAdress, string _pNumber)
         {
             TcpIpAddress = _ipAdress;
 
             //int portNumberValue = 50505;
             //int.TryParse(_portNumber, out portNumberValue);
-            PortNumber = _portNumber;//portNumberValue;
+            PortNumber = _pNumber;//portNumberValue;
         }
         //public event PropertyChangedEventHandler PropertyChanged;
 
@@ -27,6 +28,10 @@
         //    {
         //        PropertyChanged(this, new PropertyChangedEventArgs(property));
         //    }
+        //}
+        //public CommunicationModel ShallowCopy()
+        //{
+        //    return (CommunicationModel)this.MemberwiseClone();
         //}
     }
 }

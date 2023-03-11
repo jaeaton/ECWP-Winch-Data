@@ -67,7 +67,8 @@ namespace ViewModels
                     {
                         if (_configDataStore.AllWinches[i].WinchName == winch)
                         {
-                            _configDataStore.PlottingWinches.Add(_configDataStore.AllWinches[i].ShallowCopy());
+                            //_configDataStore.PlottingWinches.Add(_configDataStore.AllWinches[i].ShallowCopy());
+                            _configDataStore.PlottingWinches.Add(_configDataStore.AllWinches[i].DeepCopy());
                             break;
                         }
                     }
