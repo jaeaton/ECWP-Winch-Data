@@ -25,9 +25,9 @@ namespace Views
                                                             };
             MainWindowViewModel._configDataStore.AvailableProtocols = new List<string>
                                                             {
-                                                                "UNOLS String",
-                                                                "LCI-90i",
-                                                                "Hawboldt String"
+                                                                "TCP Server",
+                                                                "TCP Client",
+                                                                "UDP"
                                                             };
             MainWindowViewModel._configDataStore.SpeedUnitList = new List<string>
                                                             {

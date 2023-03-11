@@ -21,7 +21,7 @@
                 _serialPort.Open();
             }
             string dataIn;
-            if (winch.CommunicationType == "LCI-90i") 
+            if (winch.CommunicationType == "TCP Client") 
             {
                 TcpListener server = null;
                 TcpClient client = null;
