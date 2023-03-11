@@ -2,29 +2,13 @@
 {
     public partial class WinchModel : ObservableObject
     {
-        //private CommunicationModel? inputCommunication = new();
-        //public CommunicationModel? InputCommunication
-        //{
-        //    get => inputCommunication;
-        //    set => inputCommunication = value;
-        //}
+        
         [ObservableProperty]
         private CommunicationModel? inputCommunication = new();
 
-        //private CommunicationModel outputCommunication = new();
-        //public CommunicationModel? OutputCommunication 
-        //{ 
-        //    get => outputCommunication;
-        //    set => outputCommunication = value;
-        //}
         [ObservableProperty]
         private CommunicationModel? outputCommunication = new();
-        //private LiveDataDataStore? liveData;
-        //public LiveDataDataStore? LiveData 
-        //{ 
-        //    get => liveData;
-        //    set => liveData = value;
-        //}
+        
         [ObservableProperty]
         private LiveDataDataStore liveData;
         [ObservableProperty]
