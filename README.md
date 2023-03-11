@@ -8,8 +8,8 @@ The current version can communicate with ECWP winches: Gloria, Moe, Larry, Curly
 To Do:
 - [ ] Display Tension Member Alarms and Warning
 - [ ] Display UNOLS Winch string statuses
-- [ ] Add Multi-winch configurations
-- [ ] Add unit display selection
+- [x] ~~Add Multi-winch configurations~~
+- [x] ~~Add unit display selection~~
 - [ ] Add unit conversion
 - [ ] Add Graph view to data processing
 - [ ] Add Hawboldt Data reception
@@ -17,6 +17,6 @@ To Do:
 - [x] ~~Add cast processing~~
 - [x] ~~Record the UNOLS Winch string~~
 - [x] ~~Add LCI-90i data reception~~
-- [ ] ~~Move to .Net MAUI for Cross platform application~~  No Linux support
+- ~~[ ] Move to .Net MAUI for Cross platform application~~  No Linux support
 - [x] ~~Move to Avalonia UI for Cross Platform Application~~
 
