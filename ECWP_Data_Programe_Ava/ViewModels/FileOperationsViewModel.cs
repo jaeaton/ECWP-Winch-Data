@@ -150,6 +150,10 @@
                         if (line.Substring(0, delim) == "Save Location")
                         {
                             _configDataStore.DirectoryLabel = line.Substring(delim + 1);
+                            if (_configDataStore.DirectoryLabel != null)
+                            {
+                                _configDataStore.DirectorySet = true;
+                            }
                         }
                         if (line.Substring(0, delim) == "UDP String Format")
                         {

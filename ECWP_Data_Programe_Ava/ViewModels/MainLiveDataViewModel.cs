@@ -43,7 +43,7 @@ namespace ViewModels
                 //DirectoryLabel.Content = saveFileDialog.InitialFileName;
                 FileInfo fileInfo = new(saveFileName);
                 _configDataStore.DirectoryLabel = (string)fileInfo.DirectoryName;
-                _configDataStore.DirectorSet = true;
+                _configDataStore.DirectorySet = true;
             }
 
         }

@@ -37,7 +37,6 @@ namespace ViewModels
                 }
                 _configDataStore.AllWinches.RemoveAt(index);
             }
-                //_configDataStore.AllWinches.Remove(_configDataStore.CurrentWinch);
                 //Clears the current list to make winch names as fresh as possible
                 _configDataStore.WinchNames.Clear();
             //Loops through all winches and puts winch names in a list for selection process

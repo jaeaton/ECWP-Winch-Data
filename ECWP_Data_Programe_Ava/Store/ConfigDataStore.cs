@@ -6,56 +6,56 @@ namespace Store
     //[INotifyPropertyChanged]
     public partial class ConfigDataStore : ObservableObject
     {
-        [ObservableProperty]
-        private string? ipAddressInputSourceBox;
+        //[ObservableProperty]
+        //private string? ipAddressInputSourceBox;
 
-        [ObservableProperty]
-        private string? portInputSourceBox;
+        //[ObservableProperty]
+        //private string? portInputSourceBox;
 
-        [ObservableProperty]
-        private string? ipAddressInputDestinationBox;
+        //[ObservableProperty]
+        //private string? ipAddressInputDestinationBox;
 
-        [ObservableProperty]
-        private string? portInputDestinationBox;
+        //[ObservableProperty]
+        //private string? portInputDestinationBox;
 
         [ObservableProperty]
         private string? cruiseNameBox;
 
-        [ObservableProperty]
-        private string? castNumberBox;
+        //[ObservableProperty]
+        //private string? castNumberBox;
 
-        [ObservableProperty]
-        private bool logMaxDataCheckBox;
+        //[ObservableProperty]
+        //private bool logMaxDataCheckBox;
 
-        [ObservableProperty]
-        private bool log20HzDataCheckBox;
+        //[ObservableProperty]
+        //private bool log20HzDataCheckBox;
 
-        [ObservableProperty]
-        private bool sendDataCheckBox;
+        //[ObservableProperty]
+        //private bool sendDataCheckBox;
 
-        [ObservableProperty]
-        private bool sendSerialDataCheckBox;
+        //[ObservableProperty]
+        //private bool sendSerialDataCheckBox;
 
-        [ObservableProperty]
-        private bool useComputerTimeCheckBox;
+        //[ObservableProperty]
+        //private bool useComputerTimeCheckBox;
 
-        [ObservableProperty]
-        private bool unolsUDPStringButton;
+        //[ObservableProperty]
+        //private bool unolsUDPStringButton;
 
-        [ObservableProperty]
-        private bool mtnwUDPStringButton;
+        //[ObservableProperty]
+        //private bool mtnwUDPStringButton;
 
         [ObservableProperty]
         private string? directoryLabel;
 
         [ObservableProperty]
-        private bool directorSet;
+        private bool directorySet;
 
-        [ObservableProperty]
-        private bool unolsWireLogButton;
+        //[ObservableProperty]
+        //private bool unolsWireLogButton;
 
-        [ObservableProperty]
-        private bool mtnwWireLogButton;
+        //[ObservableProperty]
+        //private bool mtnwWireLogButton;
 
         [ObservableProperty]
         private string? startStopButtonText;
@@ -69,11 +69,11 @@ namespace Store
         [ObservableProperty]
         private string? baudRate;
 
-        [ObservableProperty]
-        private bool unolsSerialStringButton;
+        //[ObservableProperty]
+        //private bool unolsSerialStringButton;
 
-        [ObservableProperty]
-        private bool mtnwSerialStringButton;
+        //[ObservableProperty]
+        //private bool mtnwSerialStringButton;
 
         [ObservableProperty]
         private List<string>? availableSerialPorts;
