@@ -27,7 +27,7 @@ namespace ViewModels
                 "    b) UNOLS String Data Source implies a TCP Connection with the data source acting as a TCP Server/Listener. \n" +
                 "    c) Hawboldt Data Source has not been implemented.\n" +
                 "\n\n" +
-                 "V4.2.0");
+                 "V5.0.0");
         }
         [RelayCommand]
         private async void SaveLocation()
