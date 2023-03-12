@@ -50,7 +50,9 @@
                     }
                     else
                     {
-                        MessageBoxViewModel.DisplayMessage("Input IP Address not valid");
+                        MessageBoxViewModel.DisplayMessage(
+                            $"{winch.WinchName}\n"+
+                            $"Input IP Address not valid");
                         break;
                     }
                     
@@ -64,7 +66,8 @@
                     }
                     else
                     {
-                        MessageBoxViewModel.DisplayMessage("Input Port number not valid");
+                        MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
+                            $"Input Port number not valid");
                         break;
                     }
                     
@@ -78,7 +81,8 @@
                     }
                     else
                     {
-                        MessageBoxViewModel.DisplayMessage("Output IP Address not valid");
+                        MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
+                            $"Output IP Address not valid");
                         break;
                     }
                     
@@ -92,7 +96,8 @@
                     }
                     else
                     {
-                        MessageBoxViewModel.DisplayMessage("Output Port Number not Valid");
+                        MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
+                            $"Output Port Number not Valid");
                         break;
                     }
                     
@@ -119,7 +124,8 @@
                     }
                     else
                     {
-                        MessageBoxViewModel.DisplayMessage("Cast number not valid.");
+                        MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
+                            $"Cast number not valid.");
                         break;
                     }
                 }
@@ -187,6 +193,7 @@
                 //Write each line of array using stream writer
                 using (StreamWriter stream = new StreamWriter(destPath, true))
                 {
+                    lines.Add("-----");
                     foreach (string line in lines)
                         stream.WriteLine(line);
                 }
@@ -215,138 +222,143 @@
                     }
                     foreach (var line in lines)
                     {
-                        int delim = line.IndexOf(",");
-                        if (line.Substring(0, delim) == "Winch Name")
+                        if (line.Contains(","))
                         {
-                            if ( winch.WinchName != null)
+                            int delim = line.IndexOf(",");
+                            if (line.Substring(0, delim) == "Winch Name")
                             {
-                                viewModel.InsertWinch(winch);
-                                winch = new();
+                                if ( winch.WinchName != null)
+                                {
+                                    viewModel.InsertWinch(winch);
+                                    winch = new();
+                                }
+                                winch.WinchName = line.Substring(delim + 1);
                             }
-                            winch.WinchName = line.Substring(delim + 1);
-                        }
-                        if (line.Substring(0, delim) == "Receive IP")
-                        {
-                            winch.InputCommunication.TcpIpAddress = line.Substring(delim + 1);
-                        }
-                        if (line.Substring(0, delim) == "Receive Port")
-                        {
-                            winch.InputCommunication.PortNumber = line.Substring(delim + 1);
-                        }
-                        if (line.Substring(0, delim) == "Transmit IP")
-                        {
-                            winch.OutputCommunication.TcpIpAddress = line.Substring(delim + 1);
-                        }
-                        if (line.Substring(0, delim) == "Transmit Port")
-                        {
-                            winch.OutputCommunication.PortNumber = line.Substring(delim + 1);
-                        }
-                        if (line.Substring(0, delim) == "Cruise Name")
-                        {
-                            _configDataStore.CruiseNameBox = line.Substring(delim + 1);
-                        }
-                        if (line.Substring(0, delim) == "Cast Number")
-                        {
-                            if( int.TryParse(line.Substring(delim + 1), out int castCount))// + 1;
+                            if (line.Substring(0, delim) == "Receive IP")
                             {
-                                winch.CastNumber = castCount.ToString();
+                                winch.InputCommunication.TcpIpAddress = line.Substring(delim + 1);
                             }
-                                
-                        }
-                        if (line.Substring(0, delim) == "Send UDP")
-                        {
-                            winch.UdpOutput = bool.Parse(line.Substring(delim + 1));
-                        }
-                        if (line.Substring(0, delim) == "Save 20 Hz Data")
-                        {
-                            winch.Log20Hz = bool.Parse(line.Substring(delim + 1));
-                        }
-                        if (line.Substring(0, delim) == "Save Max Values")
-                        {
-                            winch.LogMax = bool.Parse(line.Substring(delim + 1));
-                        }
-                        if (line.Substring(0, delim) == "Use Computer Time")
-                        {
-                            winch.UseComputerTime = bool.Parse(line.Substring(delim + 1));
-                        }
-                        if (line.Substring(0, delim) == "Save Location")
-                        {
-                            _configDataStore.DirectoryLabel = line.Substring(delim + 1);
-                            if (_configDataStore.DirectoryLabel != null)
+                            if (line.Substring(0, delim) == "Receive Port")
                             {
-                                _configDataStore.DirectorySet = true;
+                                winch.InputCommunication.PortNumber = line.Substring(delim + 1);
                             }
-                        }
-                        if (line.Substring(0, delim) == "UDP String Format")
-                        {
-                            winch.UdpFormat = line.Substring(delim + 1);
-                            if (winch.UdpFormat == "UNOLS")
+                            if (line.Substring(0, delim) == "Transmit IP")
                             {
-                                winch.UdpFormatUnols = true;
-                                winch.UdpFormatMtnw = false;
+                                winch.OutputCommunication.TcpIpAddress = line.Substring(delim + 1);
                             }
-                            else
+                            if (line.Substring(0, delim) == "Transmit Port")
                             {
-                                winch.UdpFormatUnols = false;
-                                winch.UdpFormatMtnw = true;
+                                winch.OutputCommunication.PortNumber = line.Substring(delim + 1);
                             }
-                        }
-                        if (line.Substring(0, delim) == "20Hz File Format")
-                        {
-                            winch.LogFormat = line.Substring(delim + 1);
-                            if (winch.LogFormat == "UNOLS")
+                            if (line.Substring(0, delim) == "Cruise Name")
                             {
-                                winch.LogFormatUnols = true;
-                                winch.LogFormatMtnw = false;
+                                _configDataStore.CruiseNameBox = line.Substring(delim + 1);
                             }
-                            else
+                            if (line.Substring(0, delim) == "Cast Number")
                             {
-                                winch.LogFormatUnols = false;
-                                winch.LogFormatMtnw = true;
+                                if( int.TryParse(line.Substring(delim + 1), out int castCount))// + 1;
+                                {
+                                    winch.CastNumber = castCount.ToString();
+                                }
+                                    
                             }
-                        }
-                        if (line.Substring(0, delim) == "Serial String Format")
-                        {
-                            winch.SerialFormat = line.Substring(delim + 1);
-                            if (winch.SerialFormat == "UNOLS")
+                            if (line.Substring(0, delim) == "Send UDP")
                             {
-                                winch.SerialFormatUnols = true;
-                                winch.SerialFormatMtnw = false;
+                                winch.UdpOutput = bool.Parse(line.Substring(delim + 1));
                             }
-                            else
+                            if (line.Substring(0, delim) == "Save 20 Hz Data")
                             {
-                                winch.SerialFormatUnols = false;
-                                winch.SerialFormatMtnw = true;
+                                winch.Log20Hz = bool.Parse(line.Substring(delim + 1));
+                            }
+                            if (line.Substring(0, delim) == "Save Max Values")
+                            {
+                                winch.LogMax = bool.Parse(line.Substring(delim + 1));
+                            }
+                            if (line.Substring(0, delim) == "Use Computer Time")
+                            {
+                                winch.UseComputerTime = bool.Parse(line.Substring(delim + 1));
+                            }
+                            if (line.Substring(0, delim) == "Save Location")
+                            {
+                                _configDataStore.DirectoryLabel = line.Substring(delim + 1);
+                                if (_configDataStore.DirectoryLabel != null)
+                                {
+                                    _configDataStore.DirectorySet = true;
+                                }
+                            }
+                            if (line.Substring(0, delim) == "UDP String Format")
+                            {
+                                winch.UdpFormat = line.Substring(delim + 1);
+                                if (winch.UdpFormat == "UNOLS")
+                                {
+                                    winch.UdpFormatUnols = true;
+                                    winch.UdpFormatMtnw = false;
+                                }
+                                else
+                                {
+                                    winch.UdpFormatUnols = false;
+                                    winch.UdpFormatMtnw = true;
+                                }
+                            }
+                            if (line.Substring(0, delim) == "20Hz File Format")
+                            {
+                                winch.LogFormat = line.Substring(delim + 1);
+                                if (winch.LogFormat == "UNOLS")
+                                {
+                                    winch.LogFormatUnols = true;
+                                    winch.LogFormatMtnw = false;
+                                }
+                                else
+                                {
+                                    winch.LogFormatUnols = false;
+                                    winch.LogFormatMtnw = true;
+                                }
+                            }
+                            if (line.Substring(0, delim) == "Serial String Format")
+                            {
+                                winch.SerialFormat = line.Substring(delim + 1);
+                                if (winch.SerialFormat == "UNOLS")
+                                {
+                                    winch.SerialFormatUnols = true;
+                                    winch.SerialFormatMtnw = false;
+                                }
+                                else
+                                {
+                                    winch.SerialFormatUnols = false;
+                                    winch.SerialFormatMtnw = true;
+                                }
+                            }
+                            if (line.Substring(0, delim) == "Send Serial")
+                            {
+                                winch.SerialOutput = bool.Parse(line.Substring(delim + 1));
+                            }
+                            if (line.Substring(0, delim) == "Serial Port Name")
+                            {
+                                winch.SerialPortOutput = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Serial Baud Rate")
+                            {
+                               winch.BaudRateOutput = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Input Communication Type")
+                            {
+                                winch.CommunicationType = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Tension Units")
+                            {
+                                winch.TensionUnit = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Payout Units")
+                            {
+                                winch.PayoutUnit = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Speed Units")
+                            {
+                                winch.SpeedUnit = line.Substring(delim + 1);
                             }
                         }
-                        if (line.Substring(0, delim) == "Send Serial")
-                        {
-                            winch.SerialOutput = bool.Parse(line.Substring(delim + 1));
-                        }
-                        if (line.Substring(0, delim) == "Serial Port Name")
-                        {
-                            winch.SerialPortOutput = line.Substring(delim + 1);
-                        }
-                        if (line.Substring(0, delim) == "Serial Baud Rate")
-                        {
-                           winch.BaudRateOutput = line.Substring(delim + 1);
-                        }
-                        if (line.Substring(0, delim) == "Input Communication Type")
-                        {
-                            winch.CommunicationType = line.Substring(delim + 1);
-                        }
-                        if (line.Substring(0, delim) == "Tension Units")
-                        {
-                            winch.TensionUnit = line.Substring(delim + 1);
-                        }
-                        if (line.Substring(0, delim) == "Payout Units")
-                        {
-                            winch.PayoutUnit = line.Substring(delim + 1);
-                        }
-                        if (line.Substring(0, delim) == "Speed Units")
-                        {
-                            winch.SpeedUnit = line.Substring(delim + 1);
-                        }
+                        
+                        
                     }
                     //GlobalConfigModel globalConfig = new GlobalConfigModel();
                     ////update global config to the parameters loaded

@@ -5,24 +5,6 @@
     {
         [ObservableProperty]
         private string? cruiseNameBox;
-        partial void OnCruiseNameBoxChanged(string? value)
-        {
-            bool output = true;
-            //Validate fields for cruise info
-            //Check to see if a name is provided for the cruise
-            if (value == null)
-            {
-                output = false;
-            }
-            else if (value.Length == 0)
-            {
-                output = false;
-            }
-            if (!output)
-            {
-                MessageBoxViewModel.DisplayMessage("Cruise name not valid");
-            }
-        }
 
         [ObservableProperty]
         private string? directoryLabel;
