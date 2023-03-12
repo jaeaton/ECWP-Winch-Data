@@ -1,61 +1,34 @@
-﻿using System.Diagnostics;
-
-namespace Store
+﻿namespace Store
 {
     //Application configuration data for User Inputs View
-    //[INotifyPropertyChanged]
     public partial class ConfigDataStore : ObservableObject
     {
-        //[ObservableProperty]
-        //private string? ipAddressInputSourceBox;
-
-        //[ObservableProperty]
-        //private string? portInputSourceBox;
-
-        //[ObservableProperty]
-        //private string? ipAddressInputDestinationBox;
-
-        //[ObservableProperty]
-        //private string? portInputDestinationBox;
-
         [ObservableProperty]
         private string? cruiseNameBox;
-
-        //[ObservableProperty]
-        //private string? castNumberBox;
-
-        //[ObservableProperty]
-        //private bool logMaxDataCheckBox;
-
-        //[ObservableProperty]
-        //private bool log20HzDataCheckBox;
-
-        //[ObservableProperty]
-        //private bool sendDataCheckBox;
-
-        //[ObservableProperty]
-        //private bool sendSerialDataCheckBox;
-
-        //[ObservableProperty]
-        //private bool useComputerTimeCheckBox;
-
-        //[ObservableProperty]
-        //private bool unolsUDPStringButton;
-
-        //[ObservableProperty]
-        //private bool mtnwUDPStringButton;
+        partial void OnCruiseNameBoxChanged(string? value)
+        {
+            bool output = true;
+            //Validate fields for cruise info
+            //Check to see if a name is provided for the cruise
+            if (value == null)
+            {
+                output = false;
+            }
+            else if (value.Length == 0)
+            {
+                output = false;
+            }
+            if (!output)
+            {
+                MessageBoxViewModel.DisplayMessage("Cruise name not valid");
+            }
+        }
 
         [ObservableProperty]
         private string? directoryLabel;
 
         [ObservableProperty]
         private bool directorySet;
-
-        //[ObservableProperty]
-        //private bool unolsWireLogButton;
-
-        //[ObservableProperty]
-        //private bool mtnwWireLogButton;
 
         [ObservableProperty]
         private string? startStopButtonText;
@@ -68,12 +41,6 @@ namespace Store
 
         [ObservableProperty]
         private string? baudRate;
-
-        //[ObservableProperty]
-        //private bool unolsSerialStringButton;
-
-        //[ObservableProperty]
-        //private bool mtnwSerialStringButton;
 
         [ObservableProperty]
         private List<string>? availableSerialPorts;

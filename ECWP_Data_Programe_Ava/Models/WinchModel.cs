@@ -15,6 +15,21 @@
         private string? winchName;
         [ObservableProperty]
         private string? castNumber;
+        partial void OnCastNumberChanged(string? value)
+        {
+            bool output = true;
+            //Check to see if a number is provided for casts
+            int castNum;
+            bool validCast = int.TryParse(value, out castNum);
+            if (validCast == false || castNum < 1)
+            {
+                output = false;
+            }
+            if (!output)
+            {
+                MessageBoxViewModel.DisplayMessage("Cast number not valid");
+            }
+        }
         [ObservableProperty]
         private string? fileExtension;
         [ObservableProperty]

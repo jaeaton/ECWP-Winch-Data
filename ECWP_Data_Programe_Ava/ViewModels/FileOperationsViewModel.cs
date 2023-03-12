@@ -36,32 +36,154 @@
                     break;
                 }
                 //Populate array with configuartion values
-                string[] lines =
+                List<string> lines = new();
+                if (winch.WinchName != null)
+                {
+                    lines.Add($"Winch Name,{winch.WinchName}");
+                }
+                if (winch.InputCommunication.TcpIpAddress  != null)
+                {
+                    bool valid = ValidateIPViewModel.ValidateIPFunction(winch.InputCommunication.TcpIpAddress);
+                    if (valid)
                     {
-                    $"Winch Name,{ winch.WinchName}",
-                    $"Receive IP,{ winch.InputCommunication.TcpIpAddress }",
-                    $"Receive Port,{ winch.InputCommunication.PortNumber }",
-                    $"Transmit IP,{ winch.OutputCommunication.TcpIpAddress }",
-                    $"Transmit Port,{ winch.OutputCommunication.PortNumber }",
-                    $"Cruise Name,{ _configDataStore.CruiseNameBox }",
-                    $"Cast Number,{ winch.CastNumber }",
-                    $"Send UDP,{ winch.UdpOutput }",
-                    $"UDP String Format,{ winch.UdpFormat }",
-                    $"Save 20Hz Data,{ winch.Log20Hz }",
-                    $"20Hz File Format,{ winch.LogFormat }",
-                    $"Save Max Values,{ winch.LogMax }",
-                    $"Use Computer Time,{ winch.UseComputerTime }",
-                    $"Save Location,{ _configDataStore.DirectoryLabel }",
-                    //$"UNOLS File Format, {globalConfig.LogUnolsSwitch }",
-                    $"Send Serial,{ winch.SerialOutput }",
-                    $"Serial String Format,{ winch.SerialFormat }",
-                    $"Serial Port Name,{ winch.SerialPortOutput }",
-                    $"Serial Baud Rate,{ winch.BaudRateOutput }",
-                    $"Input Communication Type,{  winch.CommunicationType }",
-                    $"Tension Units,{ winch.TensionUnit }",
-                    $"Payout Units,{ winch.PayoutUnit }",
-                    $"Speed Units,{  winch.SpeedUnit }"
-                    };
+                        lines.Add($"Receive IP,{ winch.InputCommunication.TcpIpAddress }");
+                    }
+                    else
+                    {
+                        MessageBoxViewModel.DisplayMessage("Input IP Address not valid");
+                        break;
+                    }
+                    
+                }
+                if (winch.InputCommunication.PortNumber != null)
+                {
+                    bool valid = ValidateIPViewModel.ValidatePortFunction(winch.InputCommunication.PortNumber);
+                    if (valid)
+                    {
+                        lines.Add($"Receive Port,{winch.InputCommunication.PortNumber}");
+                    }
+                    else
+                    {
+                        MessageBoxViewModel.DisplayMessage("Input Port number not valid");
+                        break;
+                    }
+                    
+                }
+                if (winch.OutputCommunication.TcpIpAddress != null)
+                {
+                    bool valid = ValidateIPViewModel.ValidateIPFunction(winch.OutputCommunication.TcpIpAddress);
+                    if (valid)
+                    {
+                        lines.Add($"Transmit IP,{winch.OutputCommunication.TcpIpAddress}");
+                    }
+                    else
+                    {
+                        MessageBoxViewModel.DisplayMessage("Output IP Address not valid");
+                        break;
+                    }
+                    
+                }
+                if (winch.OutputCommunication.PortNumber != null)
+                {
+                    bool valid = ValidateIPViewModel.ValidatePortFunction (winch.OutputCommunication.PortNumber);
+                    if (valid)
+                    {
+                        lines.Add($"Transmit Port,{winch.OutputCommunication.PortNumber}");
+                    }
+                    else
+                    {
+                        MessageBoxViewModel.DisplayMessage("Output Port Number not Valid");
+                        break;
+                    }
+                    
+                }
+                if (_configDataStore.CruiseNameBox != null)
+                {
+                    bool valid = ValidateCruiseViewModel.ValidateCruiseName(_configDataStore.CruiseNameBox);
+                    if (valid)
+                    {
+                        lines.Add($"Cruise Name,{_configDataStore.CruiseNameBox}");
+                    }
+                    else
+                    {
+                        MessageBoxViewModel.DisplayMessage("Cruise name not valid.");
+                        break;
+                    }
+                }
+                if (winch.CastNumber != null)
+                {
+                    bool valid = ValidateCruiseViewModel.ValidateCastNumber(winch.CastNumber);
+                    if (valid)
+                    {
+                        lines.Add($"Cast Number,{winch.CastNumber}");
+                    }
+                    else
+                    {
+                        MessageBoxViewModel.DisplayMessage("Cast number not valid.");
+                        break;
+                    }
+                }
+                if (winch.UdpOutput != null)
+                {
+                    lines.Add($"Send UDP,{ winch.UdpOutput }");
+                }
+                if (winch.UdpFormat != null)
+                {
+                    lines.Add($"UDP String Format,{ winch.UdpFormat }");
+                }
+                if (winch.Log20Hz!= null)
+                {
+                    lines.Add($"Save 20Hz Data,{ winch.Log20Hz }");
+                }
+                if (winch.LogFormat != null)
+                {
+                    lines.Add($"20Hz File Format,{ winch.LogFormat }");
+                }
+                if (winch.LogMax != null)
+                {
+                    lines.Add($"Save Max Values,{ winch.LogMax }");
+                }
+                if (winch.UseComputerTime != null)
+                {
+                    lines.Add($"Use Computer Time,{ winch.UseComputerTime }");
+                }
+                if (_configDataStore.DirectoryLabel != null)
+                {
+                    lines.Add($"Save Location,{ _configDataStore.DirectoryLabel }");
+                }
+                if (winch.SerialOutput != null)
+                {
+                    lines.Add($"Send Serial,{ winch.SerialOutput }");
+                }
+                if (winch.SerialFormat != null)
+                {
+                    lines.Add($"Serial String Format,{ winch.SerialFormat }");
+                }
+                if (winch.SerialPortOutput != null)
+                {
+                    lines.Add($"Serial Port Name,{ winch.SerialPortOutput }");
+                }
+                if (winch.BaudRateOutput != null)
+                {
+                    lines.Add($"Serial Baud Rate,{ winch.BaudRateOutput }");
+                }
+                if (winch.CommunicationType != null)
+                {
+                    lines.Add($"Input Communication Type,{  winch.CommunicationType }");
+                }
+                if (winch.TensionUnit != null)
+                {
+                    lines.Add($"Tension Units,{ winch.TensionUnit }");
+                }
+                if (winch.PayoutUnit != null)
+                {
+                    lines.Add($"Payout Units,{ winch.PayoutUnit }");
+                }
+                if (winch.SpeedUnit != null)
+                {
+                    lines.Add($"Speed Units,{  winch.SpeedUnit }");
+                }                   
+                    
                 //Write each line of array using stream writer
                 using (StreamWriter stream = new StreamWriter(destPath, true))
                 {
