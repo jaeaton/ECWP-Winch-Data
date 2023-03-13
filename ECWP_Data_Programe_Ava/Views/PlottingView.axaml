@@ -17,7 +17,7 @@
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
-			<RowDefinition MaxHeight="35"/>
+			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 		
 		<Grid Grid.Row="0" ShowGridLines="True">
