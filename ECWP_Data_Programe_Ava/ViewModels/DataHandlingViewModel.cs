@@ -2,7 +2,7 @@
 {
     public class DataHandlingViewModel
     {
-        public LiveDataDataStore _liveData = new();
+        //public LiveDataDataStore _liveData = new();
         public MaxDataPointModel maxData = new MaxDataPointModel();
         public int i = 0;
         public SerialPort _serialPort = new SerialPort();
@@ -48,7 +48,7 @@
                         
                         
                         //Asynchronious read of data to allow for other operations to occur
-                        dataIn = await Task.Run(() => ReadTCPData(client));
+                        dataIn = await Task.Run(() => ReadTCPData(client, winch));
                         //_liveData.RawWireData = dataIn;
                         //read data
                         ParseWinchData(dataIn, winch);
@@ -107,10 +107,10 @@
                 //Looks for cancellation token to stop data collection
                 if (client.Connected)
                 {
-                    while (!StartStopSaveView._canceller.Token.IsCancellationRequested)
+                    while (!PlottingViewModel._canceller.Token.IsCancellationRequested)
                     {
                         //Asynchronious read of data to allow for other operations to occur
-                        dataIn = await Task.Run(() => ReadTCPData(client));
+                        dataIn = await Task.Run(() => ReadTCPData(client, winch));
                         //_liveData.RawWireData = dataIn;
                         //read data
                         ParseWinchData(dataIn, winch);
@@ -128,27 +128,27 @@
             }            
             //free up canceller resources
             PlottingViewModel._canceller.Dispose();
-            MainWindowViewModel._configDataStore.StartStopButtonText = "Start Log";
+            winch.StartStopButtonText = "Start Log";
             MainWindowViewModel._configDataStore.UserInputsEnable = true;
 
 
         }
-        public void DisplayData(DataPointModel latest)
+        public void DisplayData(DataPointModel latest, WinchModel winch)
         {
             //Write data to bound variables to display on UI
-            _liveData.Tension = latest.Tension.ToString();
-            _liveData.Payout = latest.Payout.ToString();
-            _liveData.Speed = latest.Speed.ToString();
-            ChartDataViewModel.AddData(latest, _liveData);
+            winch.LiveData.Tension = latest.Tension.ToString();
+            winch.LiveData.Payout = latest.Payout.ToString();
+            winch.LiveData.Speed = latest.Speed.ToString();
+            ChartDataViewModel.AddData(latest, winch.LiveData);
         }
-        private void MaxValues()
+        private void MaxValues(WinchModel winch)
         {
             //Write max data to bound variables to display on UI
-            _liveData.MaxSpeed = maxData.MaxSpeed.Speed.ToString();
-            _liveData.MaxPayout = maxData.MaxPayout.Payout.ToString();
-            _liveData.MaxTension = maxData.MaxTension.Tension.ToString();
+            winch.LiveData.MaxSpeed = maxData.MaxSpeed.Speed.ToString();
+            winch.LiveData.MaxPayout = maxData.MaxPayout.Payout.ToString();
+            winch.LiveData.MaxTension = maxData.MaxTension.Tension.ToString();
         }
-        private string ReadTCPData(TcpClient client)//object tcpCom)
+        private string ReadTCPData(TcpClient client, WinchModel winch)//object tcpCom)
         {
             
             Byte[] data; //= System.Text.Encoding.ASCII.GetBytes(message);
@@ -162,7 +162,7 @@
             Int32 bytes = stream.Read(data, 0, data.Length);
             responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
             //Uncomment to show all data in Wire Data Field
-            _liveData.RawWireData = responseData;
+            //winch.LiveData.RawWireData = responseData;
             
             return responseData;
             
@@ -213,7 +213,7 @@
                 }
                 else if (strIn[0].Contains("$WNC"))
                 {
-                    _liveData.RawWinchData = data;
+                    winch.LiveData.RawWinchData = data;
                     WriteWinchLog(data, winch);
                 }
                 else
@@ -269,7 +269,7 @@
                         }
                         if (maxChange)
                         {
-                            MaxValues();
+                            MaxValues(winch);
                         }
                         //Write data to logfile
                         if (winch.Log20Hz)
@@ -285,7 +285,7 @@
                             SendSerialData(latest, winch);
                         }
 
-                        DisplayData(latest);
+                        DisplayData(latest, winch);
                     }
                     
                 }
@@ -407,6 +407,7 @@
             //DateTime dateTime = DateTime.Now;
             //string stringDateTime = dateTime.ToString("yyyyMMddTHHmmssfff");
             //string dateAndHour = dateTime.ToString("yyyyMMddHH");
+            FileOperationsViewModel.SetFileNames(winch);
             string fileName = winch.MaxWireLogName;
             string destPath = Path.Combine(MainWindowViewModel._configDataStore.DirectoryLabel, fileName);
             string[] lines =

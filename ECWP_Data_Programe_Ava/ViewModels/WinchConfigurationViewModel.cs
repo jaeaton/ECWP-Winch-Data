@@ -14,7 +14,7 @@ namespace ViewModels
             ////Creates a new set of data so as not to reference existing data
             //WinchModel Winch = _configDataStore.CurrentWinch.ShallowCopy();
             WinchModel Winch = _configDataStore.CurrentWinch.DeepCopy();
-
+            Winch.CastNumber = "1";
             InsertWinch(Winch);
             FileOperationsViewModel.WriteConfig(_configDataStore);
         }

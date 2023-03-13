@@ -41,7 +41,7 @@
         {
             WinchModel winch = GetWinch(winchname);
             FileOperationsViewModel.SetFileNames(winch);
-            switch (MainWindowViewModel._configDataStore.StartStopButtonText)
+            switch (winch.StartStopButtonText)
             {
                 case "Stop Log":
                     {
@@ -65,7 +65,7 @@
                         }
 
                         //Change button text
-                        MainWindowViewModel._configDataStore.StartStopButtonText = "Start Log";
+                        winch.StartStopButtonText = "Start Log";
                         MainWindowViewModel._configDataStore.UserInputsEnable = true;
                         break;
                     }
@@ -74,7 +74,7 @@
                         if (winch.Log20Hz)
                         {
                             //If the save directory is not set show popup
-                            if (UserInputsView.globalConfig.SaveDirectorySet == false)
+                            if (MainWindowViewModel._configDataStore.DirectorySet == false)
                             {
                                 MessageBoxViewModel.DisplayMessage("Set save location before colecting data");
                                 break;
@@ -88,7 +88,7 @@
                         //Starts Data collection on first press
                         dh.GetDataAsync(winch);
                         //change button text
-                        MainWindowViewModel._configDataStore.StartStopButtonText = "Stop Log";
+                        winch.StartStopButtonText = "Stop Log";
                         MainWindowViewModel._configDataStore.UserInputsEnable = false;
 
                         break;

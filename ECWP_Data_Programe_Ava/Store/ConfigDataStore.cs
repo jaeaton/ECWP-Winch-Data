@@ -12,17 +12,17 @@
         [ObservableProperty]
         private bool directorySet;
 
-        [ObservableProperty]
-        private string? startStopButtonText;
+        //[ObservableProperty]
+        //private string? startStopButtonText;
 
         [ObservableProperty]
         private bool userInputsEnable;
 
-        [ObservableProperty]
-        private string? serialPortName;
+        //[ObservableProperty]
+        //private string? serialPortName;
 
-        [ObservableProperty]
-        private string? baudRate;
+        //[ObservableProperty]
+        //private string? baudRate;
 
         [ObservableProperty]
         private List<string>? availableSerialPorts;

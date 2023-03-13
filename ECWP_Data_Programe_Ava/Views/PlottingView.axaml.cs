@@ -5,7 +5,7 @@ namespace Views
         public PlottingView()
         {
             InitializeComponent();
-            this.DataContext = MainWindowViewModel._configDataStore;
+            DataContext = MainWindowViewModel._configDataStore;
         }
     }
 }

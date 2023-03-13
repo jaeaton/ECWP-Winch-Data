@@ -10,7 +10,7 @@
         private CommunicationModel? outputCommunication = new();
         
         [ObservableProperty]
-        private LiveDataDataStore liveData;
+        private LiveDataDataStore liveData = new();
         [ObservableProperty]
         private string? winchName;
         [ObservableProperty]
@@ -92,6 +92,8 @@
         private string? maxWireLogName;
         [ObservableProperty]
         private string? winchLogName;
+        [ObservableProperty]
+        private string? startStopButtonText;
         
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)

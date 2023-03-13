@@ -13,7 +13,7 @@ namespace Views
             this.DataContext = MainWindowViewModel._configDataStore;
             
             MainWindowViewModel._configDataStore.UserInputsEnable = true;
-            MainWindowViewModel._configDataStore.StartStopButtonText = "Start Log";
+            //winch.StartStopButtonText = "Start Log";
             MainWindowViewModel._configDataStore.AvailableSerialPorts = ViewModels.GetSerialPorts.FindSerialPorts();
             MainWindowViewModel._configDataStore.AvailableBaudRates = new List<string>
                                                             {
