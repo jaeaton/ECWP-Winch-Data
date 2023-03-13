@@ -9,9 +9,9 @@
 			 xmlns:model="clr-namespace:Models">
 	<UserControl.DataTemplates>
 		<DataTemplate DataType="model:WinchModel">
-			<StackPanel>
-				<controls:WinchPlotView/>
-			</StackPanel>
+			<Grid>
+				<controls:WinchPlotView />				
+			</Grid>
 		</DataTemplate>
 	</UserControl.DataTemplates>
 	<Grid>
@@ -19,21 +19,22 @@
 			<RowDefinition Height="*"/>
 			<RowDefinition MaxHeight="35"/>
 		</Grid.RowDefinitions>
-		<Grid Grid.Row="0">
+		
+		<Grid Grid.Row="0" ShowGridLines="True">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="200"/>
-				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="auto"/>
+				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
-			<controls:PlotsConfigurationView/>
-			<StackPanel  Grid.Column="1">
-				<ItemsControl Items="{ Binding PlottingWinches}">
-					<ItemsControl.ItemsPanel>
-						<ItemsPanelTemplate>
-							<WrapPanel Margin="5" Orientation="Vertical"/>
-						</ItemsPanelTemplate>
-					</ItemsControl.ItemsPanel>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<controls:PlotsConfigurationView Grid.Column="0"/>
+			<Grid Grid.Column="1" >
+				<ItemsControl Items="{ Binding PlottingWinches}" >
+					
 				</ItemsControl>
-			</StackPanel>
+			</Grid>
+			
 		</Grid>
 		<controls:StartStopSaveView Grid.Row="1"/>
 	</Grid>

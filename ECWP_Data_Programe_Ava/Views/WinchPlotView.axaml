@@ -5,8 +5,12 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Views.WinchPlotView"
 			 xmlns:view="clr-namespace:Views">
-	<StackPanel>
-		<view:SelectedWinchDetailsView MaxHeight="100" />
-		<view:DataDisplay />
-	</StackPanel>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+		<view:SelectedWinchDetailsView Grid.Row="0" HorizontalAlignment="Center"/>
+		<view:DataDisplay Grid.Row="1" />
+	</Grid>
 </UserControl>

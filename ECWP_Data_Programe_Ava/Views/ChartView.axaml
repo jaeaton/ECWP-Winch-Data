@@ -6,7 +6,7 @@
              xmlns:vm="clr-namespace:ViewModels"
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Views.ChartView">
-	<Panel>
+	<Panel > 
 		<Panel.DataContext>
 			<vm:ChartDataViewModel/>
 		</Panel.DataContext>
@@ -15,10 +15,5 @@
                            XAxes="{Binding XAxes}"
                            YAxes="{Binding YAxes}"
                            EasingFunction="{x:Null}" />
-		<!--<lc:CartesianChart x:Name="Chart2"  
-                           Series="{ Binding Path=SeriesZero }" 
-                           XAxes="{Binding XAxes}"  
-                           YAxes="{Binding YAxes}"
-                           EasingFunction="{x:Null}" />-->
 	</Panel>
 </UserControl>
