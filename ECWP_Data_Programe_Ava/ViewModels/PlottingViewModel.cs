@@ -2,7 +2,7 @@
 {
     public partial class PlottingViewModel
     {
-        public static CancellationTokenSource? _canceller;
+        //public CancellationTokenSource? _canceller;
         DataHandlingViewModel dh = new DataHandlingViewModel();
         ConfigDataStore _configDataStore = MainWindowViewModel._configDataStore;
 
@@ -48,7 +48,7 @@
                         try
                         {
                             //Set cancellation token to cancel to stop data collection
-                            _canceller.Cancel();
+                            winch.Canceller.Cancel();
                         }
                         catch (ObjectDisposedException ex)
                         {
@@ -84,7 +84,7 @@
 
                         //ChartDataViewModel.ResetData();
                         //Create new cancellation token at start of data collection
-                        _canceller = new CancellationTokenSource();
+                        winch.Canceller = new CancellationTokenSource();
                         //Starts Data collection on first press
                         dh.GetDataAsync(winch);
                         //change button text

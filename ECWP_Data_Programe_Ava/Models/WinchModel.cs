@@ -11,6 +11,13 @@
         
         [ObservableProperty]
         private LiveDataDataStore liveData = new();
+
+        [ObservableProperty]
+        private MaxDataPointModel maxData = new();
+
+        [ObservableProperty]
+        private CancellationTokenSource canceller;
+
         [ObservableProperty]
         private string? winchName;
         [ObservableProperty]
@@ -132,6 +139,8 @@
             WinchModel copy = (WinchModel)this.MemberwiseClone();
             copy.InputCommunication = new CommunicationModel(InputCommunication.TcpIpAddress, InputCommunication.PortNumber);
             copy.OutputCommunication = new CommunicationModel(OutputCommunication.TcpIpAddress, OutputCommunication.PortNumber);
+            copy.LiveData = new LiveDataDataStore(LiveData.Tension, LiveData.MaxTension, LiveData.Speed, LiveData.MaxSpeed, LiveData.Payout, LiveData.MaxPayout, LiveData.RawWireData, LiveData.RawWinchData);
+            copy.MaxData = new MaxDataPointModel(MaxData.MaxPayout, MaxData.MaxTension, MaxData.MaxSpeed);
             return copy;
         }
 

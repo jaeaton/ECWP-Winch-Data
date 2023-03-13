@@ -13,9 +13,9 @@ namespace ViewModels
         {
             ////Creates a new set of data so as not to reference existing data
             //WinchModel Winch = _configDataStore.CurrentWinch.ShallowCopy();
-            WinchModel Winch = _configDataStore.CurrentWinch.DeepCopy();
-            Winch.CastNumber = "1";
-            InsertWinch(Winch);
+            //WinchModel Winch = _configDataStore.CurrentWinch.DeepCopy();
+            //Winch.CastNumber = "1";
+            InsertWinch(_configDataStore.CurrentWinch);
             FileOperationsViewModel.WriteConfig(_configDataStore);
         }
         [RelayCommand]
@@ -104,7 +104,8 @@ namespace ViewModels
 
         public void InsertWinch(WinchModel Winch)
         {
-            _configDataStore.AllWinches.Add(Winch);
+            WinchModel winch = Winch.DeepCopy();
+            _configDataStore.AllWinches.Add(winch);
             //Clears the current list to make winch names as fresh as possible
             _configDataStore.WinchNames.Clear();
             //Loops through all winches and puts winch names in a list for selection process

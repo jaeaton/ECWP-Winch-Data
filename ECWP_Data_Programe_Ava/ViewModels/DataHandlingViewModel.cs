@@ -3,7 +3,8 @@
     public class DataHandlingViewModel
     {
         //public LiveDataDataStore _liveData = new();
-        public MaxDataPointModel maxData = new MaxDataPointModel();
+        //public MaxDataPointModel maxData = new MaxDataPointModel();
+        ChartDataViewModel chartVM = new ChartDataViewModel();
         public int i = 0;
         public SerialPort _serialPort = new SerialPort();
         //Asynchronious method to allow application to still respond to user interaction
@@ -107,7 +108,7 @@
                 //Looks for cancellation token to stop data collection
                 if (client.Connected)
                 {
-                    while (!PlottingViewModel._canceller.Token.IsCancellationRequested)
+                    while (!winch.Canceller.Token.IsCancellationRequested)
                     {
                         //Asynchronious read of data to allow for other operations to occur
                         dataIn = await Task.Run(() => ReadTCPData(client, winch));
@@ -127,7 +128,7 @@
                 _serialPort.Dispose();
             }            
             //free up canceller resources
-            PlottingViewModel._canceller.Dispose();
+            winch.Canceller.Dispose();
             winch.StartStopButtonText = "Start Log";
             MainWindowViewModel._configDataStore.UserInputsEnable = true;
 
@@ -139,14 +140,14 @@
             winch.LiveData.Tension = latest.Tension.ToString();
             winch.LiveData.Payout = latest.Payout.ToString();
             winch.LiveData.Speed = latest.Speed.ToString();
-            ChartDataViewModel.AddData(latest, winch.LiveData);
+            chartVM.AddData(latest, winch.LiveData);
         }
         private void MaxValues(WinchModel winch)
         {
             //Write max data to bound variables to display on UI
-            winch.LiveData.MaxSpeed = maxData.MaxSpeed.Speed.ToString();
-            winch.LiveData.MaxPayout = maxData.MaxPayout.Payout.ToString();
-            winch.LiveData.MaxTension = maxData.MaxTension.Tension.ToString();
+            winch.LiveData.MaxSpeed = winch.MaxData.MaxSpeed.Speed.ToString();
+            winch.LiveData.MaxPayout = winch.MaxData.MaxPayout.Payout.ToString();
+            winch.LiveData.MaxTension = winch.MaxData.MaxTension.Tension.ToString();
         }
         private string ReadTCPData(TcpClient client, WinchModel winch)//object tcpCom)
         {
@@ -252,19 +253,19 @@
                             getTime = false;
                         }
                         //Check for max value change
-                        if (maxData.MaxTension.Tension < latest.Tension)
+                        if (winch.MaxData.MaxTension.Tension < latest.Tension)
                         {
-                            maxData.MaxTension = latest;
+                            winch.MaxData.MaxTension = latest;
                             maxChange = true;
                         }
-                        if (Math.Abs(maxData.MaxSpeed.Speed) < latest.Speed)
+                        if (Math.Abs(winch.MaxData.MaxSpeed.Speed) < latest.Speed)
                         {
-                            maxData.MaxSpeed = latest;
+                            winch.MaxData.MaxSpeed = latest;
                             maxChange = true;
                         }
-                        if (maxData.MaxPayout.Payout < latest.Payout)
+                        if (winch.MaxData.MaxPayout.Payout < latest.Payout)
                         {
-                            maxData.MaxPayout = latest;
+                            winch.MaxData.MaxPayout = latest;
                             maxChange = true;
                         }
                         if (maxChange)
@@ -414,8 +415,8 @@
             {
                 $"Cast { winch.CastNumber }",
                 $"Field, Date, Time, Tension, Speed, Payout",
-                $"Max Tension: { maxData.MaxTension.Date }, { maxData.MaxTension.Time }, { maxData.MaxTension.Tension }, { maxData.MaxTension.Speed }, { maxData.MaxTension.Payout}",
-                $"Max Payout: { maxData.MaxPayout.Date }, { maxData.MaxPayout.Time }, { maxData.MaxPayout.Tension }, { maxData.MaxPayout.Speed }, { maxData.MaxPayout.Payout }",
+                $"Max Tension: { winch.MaxData.MaxTension.Date }, { winch.MaxData.MaxTension.Time }, { winch.MaxData.MaxTension.Tension }, { winch.MaxData.MaxTension.Speed }, { winch.MaxData.MaxTension.Payout}",
+                $"Max Payout: { winch.MaxData.MaxPayout.Date }, { winch.MaxData.MaxPayout.Time }, { winch.MaxData.MaxPayout.Tension }, { winch.MaxData.MaxPayout.Speed }, { winch.MaxData.MaxPayout.Payout }",
                 $" "
             };
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
@@ -424,7 +425,7 @@
                     stream.WriteLine(line);
             }
             //Clear max data
-            maxData.Clear();
+            winch.MaxData.Clear();
         }
     }
 }

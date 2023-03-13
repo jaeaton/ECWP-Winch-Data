@@ -3,17 +3,17 @@
     public class ChartDataViewModel
     {
         //private readonly LiveDataDataStore _liveData = DataHandlingViewModel._liveData;
-        public static ObservableCollection<DateTimePoint> _observableValues = new ObservableCollection<DateTimePoint>();
-        public static ObservableCollection<ISeries> Series { get; set; }
+        public  ObservableCollection<DateTimePoint> _observableValues = new ObservableCollection<DateTimePoint>();
+        public  ObservableCollection<ISeries> Series { get; set; }
         //Uncomment to allow for windowing of plot
-        public static ObservableCollection<DateTimePoint> _observableValuesZero = new ObservableCollection<DateTimePoint>();
-        public static ObservableCollection<DateTimePoint> _observableValuesMax = new ObservableCollection<DateTimePoint>();
-        public static IEnumerable<ICartesianAxis> XAxes { get; set; }
-        public static IEnumerable<ICartesianAxis> YAxes { get; set; }
+        public  ObservableCollection<DateTimePoint> _observableValuesZero = new ObservableCollection<DateTimePoint>();
+        public  ObservableCollection<DateTimePoint> _observableValuesMax = new ObservableCollection<DateTimePoint>();
+        public  IEnumerable<ICartesianAxis> XAxes { get; set; }
+        public  IEnumerable<ICartesianAxis> YAxes { get; set; }
 
-        public static int  i = 0;
+        public  int  i = 0;
         
-        static ChartDataViewModel()
+        public ChartDataViewModel()
         {
             //LiveDataDataStore _liveData = DataHandlingViewModel._liveData;
             //_liveData.Series = new ObservableCollection<ISeries>
@@ -73,7 +73,7 @@
                 }
             };
         }
-        public static void AddData(DataPointModel latest, LiveDataDataStore live)
+        public void AddData(DataPointModel latest, LiveDataDataStore live)
         {
             
             System.Globalization.CultureInfo provider = System.Globalization.CultureInfo.InvariantCulture;
