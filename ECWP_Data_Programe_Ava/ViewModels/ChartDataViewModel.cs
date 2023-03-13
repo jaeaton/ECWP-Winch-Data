@@ -109,7 +109,7 @@
                 }
             }
         }
-        public static void ResetData()
+        public void ResetData()
         {
             //if( _observableValues.Count != 0)
             //{

@@ -11,7 +11,7 @@
 			<vm:ChartDataViewModel/>
 		</Grid.DataContext>
 		<lc:CartesianChart x:Name="Chart"
-                           Series="{ Binding Path=Series }"
+                           Series="{ Binding Series }"
                            XAxes="{Binding XAxes}"
                            YAxes="{Binding YAxes}"
                            EasingFunction="{x:Null}" />
