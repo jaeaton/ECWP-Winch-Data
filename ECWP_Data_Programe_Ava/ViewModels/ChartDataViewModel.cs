@@ -11,12 +11,19 @@
         public  IEnumerable<ICartesianAxis> XAxes { get; set; }
         public  IEnumerable<ICartesianAxis> YAxes { get; set; }
 
-        public  int  i = 0;
+        //public  int  i = 0;
         
+        public ChartDataViewModel(ObservableCollection<DateTimePoint> _observableVals, ObservableCollection<ISeries> series, ObservableCollection<DateTimePoint> _observableValsZero, ObservableCollection<DateTimePoint> _observableValsMax, IEnumerable<ICartesianAxis> xAxes, IEnumerable<ICartesianAxis> yAxes)
+        {
+            _observableValues = _observableVals;
+            Series = series;
+            XAxes = xAxes;
+            YAxes = yAxes;
+            _observableValuesMax = _observableValsMax;
+            _observableValuesZero = _observableValsZero;
+        }
         public ChartDataViewModel()
         {
-            //LiveDataDataStore _liveData = DataHandlingViewModel._liveData;
-            //_liveData.Series = new ObservableCollection<ISeries>
             Series = new ObservableCollection<ISeries>
             {
                 new LineSeries<DateTimePoint>

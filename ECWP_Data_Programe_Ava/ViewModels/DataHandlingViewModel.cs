@@ -44,7 +44,7 @@
                     client = server.AcceptTcpClient();
 
                     // Enter the listening loop.
-                    while (!StartStopSaveView._canceller.Token.IsCancellationRequested)
+                    while (!winch.Canceller.Token.IsCancellationRequested)
                     {
                         
                         
@@ -140,7 +140,8 @@
             winch.LiveData.Tension = latest.Tension.ToString();
             winch.LiveData.Payout = latest.Payout.ToString();
             winch.LiveData.Speed = latest.Speed.ToString();
-            chartVM.AddData(latest, winch.LiveData);
+            //chartVM.AddData(latest, winch.LiveData);
+            winch.ChartData.AddData(latest, winch.LiveData);
         }
         private void MaxValues(WinchModel winch)
         {
