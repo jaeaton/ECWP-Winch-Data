@@ -17,5 +17,8 @@
 		<TabItem Header="Winch Config" VerticalContentAlignment="Center">
 			<controls:WinchConfigurationView />
 		</TabItem>
+		<TabItem Header="Update Check" VerticalContentAlignment="Center">
+			<controls:UpdateCheckView />
+		</TabItem>
 	</TabControl>
 </Window>

@@ -29,7 +29,7 @@ namespace ViewModels
                 "    b) TCP Server source implies a TCP Connection with the data source acting as a TCP Server/Listener. Example: ECWP Equipment \n" +
                 "    c) UDP source has not been implemented and will fall back to TCP Server.\n" +
                 "\n\n" +
-                 "V5.0.0-a2");
+                 "v.5.0.0.a2");
         }
         [RelayCommand]
         private async void SaveLocation()
