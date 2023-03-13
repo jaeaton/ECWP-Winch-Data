@@ -22,9 +22,9 @@ namespace ViewModels
             GithubUpdateCheck update = new GithubUpdateCheck("jaeaton", "ECWP-Winch-Data");
             //bool isUpdate = update.IsUpdateAvailable("1.0.0", VersionChange.Minor);
             IsAsyncUpdate = await update.IsUpdateAvailableAsync(RunningVersion, VersionChange.Revision);
-            GitVersion = await update.VersionAsync();
-        }
-
+                GitVersion = await update.VersionAsync();
+            }
+            
         [RelayCommand]
         private void OpenUrl()
         {
