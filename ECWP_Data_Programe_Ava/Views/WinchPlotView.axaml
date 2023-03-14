@@ -11,6 +11,6 @@
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 		<view:SelectedWinchDetailsView Grid.Row="0" HorizontalAlignment="Center"/>
-		<view:DataDisplay Grid.Row="1" />
+		<view:DataDisplay Grid.Row="1" VerticalAlignment="Bottom"/>
 	</Grid>
 </UserControl>
