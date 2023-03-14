@@ -14,6 +14,7 @@
 		-->
 		<lc:CartesianChart x:Name="Chart"
                            Series="{ Binding ChartData.Series }"
+						   Sections	="{ Binding ChartData.Sections }"
                            XAxes="{Binding ChartData.XAxes}"
                            YAxes="{Binding ChartData.YAxes}"
                            EasingFunction="{x:Null}" />

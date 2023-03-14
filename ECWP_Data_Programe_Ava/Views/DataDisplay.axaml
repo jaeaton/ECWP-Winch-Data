@@ -10,7 +10,7 @@
 			 x:DataType="model:WinchModel">
 	<Grid Background="FloralWhite">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
+			<RowDefinition MinHeight="300"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>

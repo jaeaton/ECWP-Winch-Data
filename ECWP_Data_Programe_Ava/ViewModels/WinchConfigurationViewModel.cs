@@ -104,6 +104,7 @@ namespace ViewModels
 
         public void InsertWinch(WinchModel Winch)
         {
+            Winch.StartStopButtonText = "Start Log";
             WinchModel winch = Winch.DeepCopy();
             _configDataStore.AllWinches.Add(winch);
             //Clears the current list to make winch names as fresh as possible

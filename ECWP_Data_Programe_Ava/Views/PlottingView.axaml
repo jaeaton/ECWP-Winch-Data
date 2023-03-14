@@ -7,6 +7,7 @@
 			 mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="450"
              x:Class="Views.PlottingView"
 			 xmlns:model="clr-namespace:Models">
+	
 	<UserControl.DataTemplates>
 		<DataTemplate DataType="model:WinchModel">
 			<Grid>
@@ -14,6 +15,7 @@
 			</Grid>
 		</DataTemplate>
 	</UserControl.DataTemplates>
+	
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
@@ -30,9 +32,11 @@
 			</Grid.RowDefinitions>
 			<controls:PlotsConfigurationView Grid.Column="0"/>
 			<Grid Grid.Column="1" >
-				<ItemsControl Items="{ Binding PlottingWinches}" >
-					
-				</ItemsControl>
+				<ScrollViewer>
+					<ItemsControl Items="{ Binding PlottingWinches}" />
+				</ScrollViewer>
+				
+				
 			</Grid>
 			
 		</Grid>
