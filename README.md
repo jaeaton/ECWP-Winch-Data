@@ -6,14 +6,16 @@ The current configuration can read MTNW Legacy, MTNW 1, and the UNOLS Wire Strin
 The current version can communicate with ECWP winches: Gloria, Moe, Larry, Curly, and Shemp (0.322 Hawboldt Winch, and ECWP MASH winches). In addition it can receive TCP data from LCI-90i.
 
 To Do:
-- [ ] Display Tension Member Alarms and Warning
+- [ ] Display tension member alarms and warnings
+- [ ] Display tension member alarm and warning levels on trend graph
 - [ ] Display UNOLS Winch string statuses
-- [x] ~~Add Multi-winch configurations~~
-- [x] ~~Add unit display selection~~
+- [ ] Start and stop casts (and log files) based on payout and tension
 - [ ] Add unit conversion
 - [ ] Add Graph view to data processing
 - [ ] Add Hawboldt Data reception
 - [ ] Add in detection and themeing for darkmode
+- [x] ~~Add Multi-winch configurations~~
+- [x] ~~Add unit display selection~~
 - [x] ~~Add cast processing~~
 - [x] ~~Record the UNOLS Winch string~~
 - [x] ~~Add LCI-90i data reception~~
