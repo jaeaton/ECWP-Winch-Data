@@ -1,4 +1,6 @@
-﻿namespace ViewModels
+﻿using System.Net.Sockets;
+
+namespace ViewModels
 {
     public class DataHandlingViewModel
     {
@@ -70,7 +72,7 @@
                     
                 
             }
-            else
+            else if (winch.CommunicationType == "TCP Server")
             {
                 TcpClient client = new TcpClient();
                 //client.ReceiveTimeout = 20000;
@@ -122,6 +124,34 @@
                 client.Close();
                 client.Dispose();
             }
+            else if (winch.CommunicationType == "UDP")
+            {
+                    // Set the TcpListener to selected port 
+                    Int32 port = int.Parse(winch.InputCommunication.PortNumber);
+                    UdpClient client = new UdpClient(port);
+                try
+                {
+                   
+                    // Enter the listening loop.
+                    while (!winch.Canceller.Token.IsCancellationRequested)
+                    {
+                        //Asynchronious read of data to allow for other operations to occur
+                        dataIn = await Task.Run(() => ReadUDPData(client, winch));
+                        //_liveData.RawWireData = dataIn;
+                        //read data
+                        ParseWinchData(dataIn, winch);
+
+                    }
+                }
+                catch (SocketException e)
+                {
+                    string msg = $"SocketException: {e.Message}";
+                    MessageBoxViewModel.DisplayMessage(msg);
+                }
+                client.Close();
+                client.Dispose();
+            }
+               
             if (_serialPort.IsOpen)
             {
                 _serialPort.Close();
@@ -149,6 +179,16 @@
             winch.LiveData.MaxSpeed = winch.MaxData.MaxSpeed.Speed.ToString();
             winch.LiveData.MaxPayout = winch.MaxData.MaxPayout.Payout.ToString();
             winch.LiveData.MaxTension = winch.MaxData.MaxTension.Tension.ToString();
+        }
+        private string ReadUDPData(UdpClient udpClient, WinchModel winch)
+        {
+            //IPEndPoint object will allow us to read datagrams sent from any source.
+            IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
+
+            // Blocks until a message returns on this socket from a remote host.
+            Byte[] receiveBytes = udpClient.Receive(ref RemoteIpEndPoint);
+            string responseData = Encoding.ASCII.GetString(receiveBytes);
+            return responseData;
         }
         private string ReadTCPData(TcpClient client, WinchModel winch)//object tcpCom)
         {
