@@ -80,7 +80,7 @@
                 new Axis
                 {
                     
-                    Labeler = value => DateTime.Now.ToString("HH:mm:ss"),
+                    Labeler = value => new DateTime((long) value).ToString("HH:mm:ss"),
                     LabelsRotation = -30,
                     TextSize = 14,
 
@@ -109,8 +109,9 @@
             {
                 return;
             }
-            if( DateTime.TryParseExact($"{ latest.Date } { latest.Time }","yyyyMMdd HH:mm:ss.fff", provider, styles, out DateTime dateTime))
+            if (DateTime.TryParseExact($"{latest.Date} {latest.Time}", "yyyyMMdd HH:mm:ss.fff", provider, styles, out DateTime dateTime))
             {
+                
                 //double.TryParse(latest.Tension, out double Tension);
                 _observableValues.Add(new DateTimePoint { DateTime = dateTime, Value = latest.Tension });
                 //uncomment for windowing of plot

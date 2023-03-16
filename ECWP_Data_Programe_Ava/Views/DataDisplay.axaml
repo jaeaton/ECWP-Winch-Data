@@ -8,7 +8,7 @@
              xmlns:model="using:Models"
 			 x:Class="Views.DataDisplay"
 			 x:DataType="model:WinchModel">
-	<Grid Background="FloralWhite" ShowGridLines="True">
+	<Grid Background="FloralWhite" ShowGridLines="False">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition MinHeight="250"/>

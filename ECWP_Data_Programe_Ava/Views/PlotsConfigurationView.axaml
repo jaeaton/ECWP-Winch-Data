@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:ViewModels"
-			 mc:Ignorable="d" d:DesignWidth="150" d:DesignHeight="450"
+			 mc:Ignorable="d" d:DesignWidth="200" d:DesignHeight="450"
              x:Class="Views.PlotsConfigurationView"
 			 xmlns:model="clr-namespace:Models">
 	<UserControl.Resources>
@@ -23,18 +23,18 @@
 			<TextBlock Text="Select Winches" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 			<ItemsControl Items="{ Binding AllWinches}" Background="LightGray" CornerRadius="5">
 			</ItemsControl>
-			<!--
-			<ListBox MinWidth="130" MinHeight="100" SelectionMode="Multiple" SelectedItems="{ Binding WinchesToPlot, Mode=OneWay }" Background="LightGray" CornerRadius="5" Items="{ Binding WinchNames }" HorizontalAlignment="Center"/>
-		-->
 		</StackPanel>
-		
 		<StackPanel Orientation="Vertical" Margin="5">
 			<TextBlock Text="Set Save Location" Width="125" VerticalAlignment="Center"></TextBlock>
-			<Button x:Name="ButtonSaveLocation" HorizontalAlignment="Center" Content="Save Location"  Margin="5,0,5,0"  Command="{ Binding SaveLocationCommand }" DataContext="{StaticResource ResourceKey=commands}"/> 
+			<Button x:Name="ButtonSaveLocation" ToolTip.Tip="Set the location where files are to be saved" HorizontalAlignment="Center" Content="Save Location"  Margin="5,0,5,0"  Command="{ Binding SaveLocationCommand }" DataContext="{StaticResource ResourceKey=commands}"/> 
+		</StackPanel>
+		<StackPanel Orientation="Vertical" Margin="5">
+			<TextBlock Text="Update Config File"  Width="125" VerticalAlignment="Center"></TextBlock>
+			<Button x:Name="ButtonConfigUpdate" ToolTip.Tip="Update Configuration file with save location, cruise name, and Cast Count" HorizontalAlignment="Center" Content="Update Configuration"  Margin="5,0,5,0"  Command="{ Binding ConfigUpdateCommand }" DataContext="{StaticResource ResourceKey=commands}"/>
 		</StackPanel>
 		<StackPanel Margin="5">
 			<TextBlock Text="Help" HorizontalAlignment="Center"/>
-			<Button x:Name="ButtonHelp" HorizontalAlignment="Center" Content="?" Width="25"  Command="{ Binding PlotHelpCommand }" DataContext="{StaticResource ResourceKey=commands}"/>
+			<Button x:Name="ButtonHelp" HorizontalAlignment="Center" ToolTip.Tip="Usage guide" Content="?" Width="25"  Command="{ Binding PlotHelpCommand }" DataContext="{StaticResource ResourceKey=commands}"/>
 		</StackPanel>
 	</StackPanel>
 	

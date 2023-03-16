@@ -20,7 +20,7 @@
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 		
-		<Grid Grid.Row="0" ShowGridLines="True">
+		<Grid Grid.Row="0" ShowGridLines="False">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="auto"/>
 				<ColumnDefinition Width="*"/>

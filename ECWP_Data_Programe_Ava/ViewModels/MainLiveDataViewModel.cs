@@ -1,4 +1,5 @@
 ﻿using Models;
+using System.Reflection;
 
 namespace ViewModels
 {
@@ -10,6 +11,8 @@ namespace ViewModels
         [RelayCommand]
         private async void PlotHelp()
         {
+            UpdateCheckViewModel viewModel = new UpdateCheckViewModel();
+            viewModel.RunningVersion = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
             MessageBoxViewModel.DisplayMessage("Step 1: Set source parameters. \n" +
                 "Step 1a: For ECWP winches input the IP address of the winch and use the port number 50505. Select source type TCP Server. \n" +
                 "Step 1b: For LCI-90i connections IP adress is of the host computer and port number is as configured on the 90i. LCI-90i \n" +
@@ -29,7 +32,7 @@ namespace ViewModels
                 "    b) TCP Server source implies a TCP Connection with the data source acting as a TCP Server/Listener. Example: ECWP Equipment \n" +
                 "    c) UDP source has not been implemented and will fall back to TCP Server.\n" +
                 "\n\n" +
-                 "v.5.0.0");
+                 $"{ viewModel.RunningVersion }");
         }
         [RelayCommand]
         private async void SaveLocation()
@@ -46,8 +49,14 @@ namespace ViewModels
                 FileInfo fileInfo = new(saveFileName);
                 _configDataStore.DirectoryLabel = (string)fileInfo.DirectoryName;
                 _configDataStore.DirectorySet = true;
+                FileOperationsViewModel.WriteConfig(_configDataStore);
             }
 
+        }
+        [RelayCommand]
+        private void ConfigUpdate()
+        {
+            FileOperationsViewModel.WriteConfig(_configDataStore);
         }
 
         public void PlotSelectionChanged(bool selected, string? WinchName)
