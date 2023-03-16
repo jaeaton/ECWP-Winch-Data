@@ -10,7 +10,7 @@
 	
 	<UserControl.DataTemplates>
 		<DataTemplate DataType="model:WinchModel">
-			<controls:DataDisplay  />				
+			<controls:DataDisplay  Margin="2"/>				
 		</DataTemplate>
 	</UserControl.DataTemplates>
 	
@@ -28,7 +28,7 @@
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
-			<controls:PlotsConfigurationView Grid.Column="0"/>
+			<controls:PlotsConfigurationView Grid.Column="0" Margin="2"/>
 			<ScrollViewer Grid.Column="1">
 					<ItemsControl Items="{ Binding PlottingWinches}" >
 						<ItemsControl.ItemsPanel>
