@@ -1,22 +1,49 @@
 ﻿namespace ViewModels
 {
-    public class ChartDataViewModel
+   
+    public partial class ChartDataViewModel : ObservableObject
     {
         //private readonly LiveDataDataStore _liveData = DataHandlingViewModel._liveData;
-        public static ObservableCollection<DateTimePoint> _observableValues = new ObservableCollection<DateTimePoint>();
-        public static ObservableCollection<ISeries> Series { get; set; }
+        public  ObservableCollection<DateTimePoint> _observableValues = new ObservableCollection<DateTimePoint>();
+        public  ObservableCollection<ISeries> Series { get; set; }
         //Uncomment to allow for windowing of plot
-        public static ObservableCollection<DateTimePoint> _observableValuesZero = new ObservableCollection<DateTimePoint>();
-        public static ObservableCollection<DateTimePoint> _observableValuesMax = new ObservableCollection<DateTimePoint>();
-        public static IEnumerable<ICartesianAxis> XAxes { get; set; }
-        public static IEnumerable<ICartesianAxis> YAxes { get; set; }
-
-        public static int  i = 0;
+        public  ObservableCollection<DateTimePoint> _observableValuesZero = new ObservableCollection<DateTimePoint>();
+        public  ObservableCollection<DateTimePoint> _observableValuesMax = new ObservableCollection<DateTimePoint>();
+        public  IEnumerable<ICartesianAxis> XAxes { get; set; }
+        public  IEnumerable<ICartesianAxis> YAxes { get; set; }
         
-        static ChartDataViewModel()
+        //Color bars for warnings and alarms
+        //public RectangularSection[] Sections { get; set; }  =
+        //    {
+        //        new RectangularSection
+        //        {
+        //            Yi = 150,
+        //            Yj = 200,
+        //            Fill = new SolidColorPaint { Color = SKColors.Yellow.WithAlpha(20) }
+        //        },
+        //        new RectangularSection
+        //        {
+        //            Yi = 200,
+        //            Yj = 100000,
+        //            Fill = new SolidColorPaint { Color = SKColors.Red.WithAlpha(20) }
+        //        }
+        //    };
+
+        //public  int  i = 0;
+
+        public ChartDataViewModel(ObservableCollection<DateTimePoint> _observableVals, ObservableCollection<ISeries> series, ObservableCollection<DateTimePoint> _observableValsZero, ObservableCollection<DateTimePoint> _observableValsMax, IEnumerable<ICartesianAxis> xAxes, IEnumerable<ICartesianAxis> yAxes)
         {
-            //LiveDataDataStore _liveData = DataHandlingViewModel._liveData;
-            //_liveData.Series = new ObservableCollection<ISeries>
+            _observableValues = _observableVals;
+            Series = series;
+            XAxes = xAxes;
+            YAxes = yAxes;
+            _observableValuesMax = _observableValsMax;
+            _observableValuesZero = _observableValsZero;
+        }
+        public ChartDataViewModel()
+        {
+            
+
             Series = new ObservableCollection<ISeries>
             {
                 new LineSeries<DateTimePoint>
@@ -44,7 +71,7 @@
                     LineSmoothness = 0,
                     Stroke = new SolidColorPaint(SKColors.Red, 1),
                 }
-
+               
             };
 
             XAxes = new List<Axis>
@@ -73,7 +100,7 @@
                 }
             };
         }
-        public static void AddData(DataPointModel latest, LiveDataDataStore live)
+        public void AddData(DataPointModel latest, LiveDataDataStore live)
         {
             
             System.Globalization.CultureInfo provider = System.Globalization.CultureInfo.InvariantCulture;
@@ -109,7 +136,7 @@
                 }
             }
         }
-        public static void ResetData()
+        public void ResetData()
         {
             //if( _observableValues.Count != 0)
             //{

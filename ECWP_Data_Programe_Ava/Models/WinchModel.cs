@@ -10,7 +10,17 @@
         private CommunicationModel? outputCommunication = new();
         
         [ObservableProperty]
-        private LiveDataDataStore liveData;
+        private LiveDataDataStore liveData = new();
+
+        [ObservableProperty]
+        private MaxDataPointModel maxData = new();
+
+        [ObservableProperty]
+        private CancellationTokenSource canceller;
+
+        [ObservableProperty]
+        private ChartDataViewModel chartData = new();
+
         [ObservableProperty]
         private string? winchName;
         [ObservableProperty]
@@ -92,6 +102,8 @@
         private string? maxWireLogName;
         [ObservableProperty]
         private string? winchLogName;
+        [ObservableProperty]
+        private string? startStopButtonText;
         
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)
@@ -130,6 +142,9 @@
             WinchModel copy = (WinchModel)this.MemberwiseClone();
             copy.InputCommunication = new CommunicationModel(InputCommunication.TcpIpAddress, InputCommunication.PortNumber);
             copy.OutputCommunication = new CommunicationModel(OutputCommunication.TcpIpAddress, OutputCommunication.PortNumber);
+            copy.LiveData = new LiveDataDataStore(LiveData.Tension, LiveData.MaxTension, LiveData.Speed, LiveData.MaxSpeed, LiveData.Payout, LiveData.MaxPayout, LiveData.RawWireData, LiveData.RawWinchData);
+            copy.MaxData = new MaxDataPointModel(MaxData.MaxPayout, MaxData.MaxTension, MaxData.MaxSpeed);
+            copy.ChartData = new ChartDataViewModel(ChartData._observableValues, ChartData.Series, ChartData._observableValuesZero, ChartData._observableValuesMax, ChartData.XAxes,ChartData.YAxes);
             return copy;
         }
 

@@ -15,6 +15,17 @@
         /// </summary>
         public DataPointModel MaxSpeed { get; set; } = new DataPointModel();
 
+        public MaxDataPointModel()
+        {
+            
+        }
+        public MaxDataPointModel(DataPointModel maxPayout, DataPointModel maxTension, DataPointModel maxSpeed)
+        {
+            MaxPayout = maxPayout;
+            MaxTension = maxTension;
+            MaxSpeed = maxSpeed;
+        }
+
         public void Clear()
         {
             MaxPayout = new DataPointModel();

@@ -8,15 +8,17 @@
              xmlns:model="using:Models"
 			 x:Class="Views.DataDisplay"
 			 x:DataType="model:WinchModel">
-	<Grid Background="FloralWhite">
+	<Grid Background="FloralWhite" ShowGridLines="True">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="40"/>
-			<RowDefinition Height="25"/>
-			<RowDefinition Height="25"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition MinHeight="250"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
-		<controls:ChartView/>
-		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+		<controls:SelectedWinchDetailsView/>
+		<controls:ChartView Grid.Row="1"/>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2">
 			<Label Content="Tension" FontSize="18"></Label>
 			<Label Content="{Binding LiveData.Tension, FallbackValue=00000}" HorizontalContentAlignment="Right" FontSize="18" MinWidth="70"></Label>
 			<Label Content="{ Binding TensionUnit }" FontSize="18"></Label>
@@ -27,7 +29,7 @@
 			<Label Content="{Binding LiveData.Payout, FallbackValue=0000}" HorizontalContentAlignment="Right" MinWidth="60" FontSize="18"></Label>
 			<Label Content="{ Binding PayoutUnit }" FontSize="18"></Label>
 		</StackPanel>
-		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="2">
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="3">
 			<Label Content="Max Tension"></Label>
 			<Label Content="{Binding LiveData.MaxTension, FallbackValue=00000}" MinWidth="50" HorizontalContentAlignment="Right"></Label>
 			<Label Content="{ Binding TensionUnit }"></Label>
@@ -37,9 +39,7 @@
 			<Label Content="Max Payout"></Label>
 			<Label Content="{Binding LiveData.MaxPayout, FallbackValue=0000}" MinWidth="40" HorizontalContentAlignment="Right"></Label>
 			<Label Content="{ Binding PayoutUnit }"></Label>
-
 		</StackPanel>
-		<Label Grid.Row="3" Content="{Binding LiveData.RawWireData, FallbackValue='Received String'}" HorizontalAlignment="Center"/>
-
+		<Label Grid.Row="4" Content="{Binding LiveData.RawWireData, FallbackValue='Received String'}" HorizontalAlignment="Center"/>
 	</Grid>
 </UserControl>

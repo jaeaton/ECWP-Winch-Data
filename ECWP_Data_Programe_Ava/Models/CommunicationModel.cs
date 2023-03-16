@@ -1,13 +1,16 @@
-﻿namespace Models
+﻿using System.Net;
+
+namespace Models
 {
     //[INotifyPropertyChanged]
     public partial class CommunicationModel  : ObservableObject
     {
         [ObservableProperty]
         private string? tcpIpAddress;
+            
         [ObservableProperty]
         private string? portNumber; 
-           
+                  
         public CommunicationModel()
         {
 

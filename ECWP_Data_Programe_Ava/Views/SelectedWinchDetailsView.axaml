@@ -10,7 +10,7 @@
 	<UserControl.Resources>
 		<vm:PlottingViewModel x:Key="commands"/>
 	</UserControl.Resources>
-	<Panel>
+	
 		<WrapPanel Orientation="Horizontal">
 			<StackPanel Orientation="Horizontal" Margin="5">
 				<TextBlock Text="Data Source" Width="100" VerticalAlignment="Center"/>
@@ -18,11 +18,11 @@
 			</StackPanel>
 			<StackPanel Orientation="Horizontal" Margin="5">
 				<TextBlock Text="Cast Number"  Width="100" VerticalAlignment="Center"/>
-				<TextBox x:Name="TextBoxCastNumber" Watermark="1"  Text="{Binding CastNumber,Mode=TwoWay}" Width="10" VerticalAlignment="Center" />
+				<TextBox x:Name="TextBoxCastNumber"  Text="{Binding CastNumber,Mode=TwoWay, FallbackValue='1'}" Width="10" VerticalAlignment="Center" />
 			</StackPanel>
 			
-			<Button Content="{ Binding StartStopButtonText, FallbackValue='Start Log' }" Command="{ Binding StartStopCommand }" CommandParameter="{ Binding WinchName }" Margin="5" MinWidth="100" HorizontalContentAlignment="Center" DataContext="{StaticResource ResourceKey=commands}"/>
-			<Button Content="Log Max" Command="{ Binding ButtonLogMaxCommand }" Margin="5" MinWidth="100" HorizontalContentAlignment="Center" DataContext="{StaticResource ResourceKey=commands}"/>
+			<Button Content="{ Binding StartStopButtonText, FallbackValue='Start Log' }" Command="{ Binding Source={ StaticResource ResourceKey=commands }, Path=StartStopCommand }" CommandParameter="{ Binding WinchName }" Margin="5" MinWidth="100" HorizontalContentAlignment="Center" />
+			<Button Content="Log Max" Command="{ Binding Source={ StaticResource ResourceKey=commands }, Path=ButtonLogMaxCommand }" CommandParameter="{ Binding WinchName }" Margin="5" MinWidth="100" HorizontalContentAlignment="Center" />
 		</WrapPanel>
-	</Panel>
+	
 </UserControl>

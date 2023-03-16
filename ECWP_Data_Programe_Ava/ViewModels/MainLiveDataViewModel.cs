@@ -29,7 +29,7 @@ namespace ViewModels
                 "    b) TCP Server source implies a TCP Connection with the data source acting as a TCP Server/Listener. Example: ECWP Equipment \n" +
                 "    c) UDP source has not been implemented and will fall back to TCP Server.\n" +
                 "\n\n" +
-                 "V5.0.0");
+                 "v.5.0.0");
         }
         [RelayCommand]
         private async void SaveLocation()
@@ -70,7 +70,7 @@ namespace ViewModels
                         if (_configDataStore.AllWinches[i].WinchName == winch)
                         {
                             //_configDataStore.PlottingWinches.Add(_configDataStore.AllWinches[i].ShallowCopy());
-                            _configDataStore.PlottingWinches.Add(_configDataStore.AllWinches[i].DeepCopy());
+                            _configDataStore.PlottingWinches.Add(_configDataStore.AllWinches[i]);//.DeepCopy());
                             break;
                         }
                     }

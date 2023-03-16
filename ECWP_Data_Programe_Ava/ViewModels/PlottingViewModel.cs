@@ -2,7 +2,7 @@
 {
     public partial class PlottingViewModel
     {
-        public static CancellationTokenSource? _canceller;
+        //public CancellationTokenSource? _canceller;
         DataHandlingViewModel dh = new DataHandlingViewModel();
         ConfigDataStore _configDataStore = MainWindowViewModel._configDataStore;
 
@@ -41,14 +41,14 @@
         {
             WinchModel winch = GetWinch(winchname);
             FileOperationsViewModel.SetFileNames(winch);
-            switch (MainWindowViewModel._configDataStore.StartStopButtonText)
+            switch (winch.StartStopButtonText)
             {
                 case "Stop Log":
                     {
                         try
                         {
                             //Set cancellation token to cancel to stop data collection
-                            _canceller.Cancel();
+                            winch.Canceller.Cancel();
                         }
                         catch (ObjectDisposedException ex)
                         {
@@ -65,7 +65,7 @@
                         }
 
                         //Change button text
-                        MainWindowViewModel._configDataStore.StartStopButtonText = "Start Log";
+                        winch.StartStopButtonText = "Start Log";
                         MainWindowViewModel._configDataStore.UserInputsEnable = true;
                         break;
                     }
@@ -74,7 +74,7 @@
                         if (winch.Log20Hz)
                         {
                             //If the save directory is not set show popup
-                            if (UserInputsView.globalConfig.SaveDirectorySet == false)
+                            if (MainWindowViewModel._configDataStore.DirectorySet == false)
                             {
                                 MessageBoxViewModel.DisplayMessage("Set save location before colecting data");
                                 break;
@@ -84,11 +84,11 @@
 
                         //ChartDataViewModel.ResetData();
                         //Create new cancellation token at start of data collection
-                        _canceller = new CancellationTokenSource();
+                        winch.Canceller = new CancellationTokenSource();
                         //Starts Data collection on first press
                         dh.GetDataAsync(winch);
                         //change button text
-                        MainWindowViewModel._configDataStore.StartStopButtonText = "Stop Log";
+                        winch.StartStopButtonText = "Stop Log";
                         MainWindowViewModel._configDataStore.UserInputsEnable = false;
 
                         break;

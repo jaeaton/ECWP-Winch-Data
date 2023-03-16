@@ -8,6 +8,7 @@
     <ApplicationIcon>Assets\ECWP Icon.ico</ApplicationIcon>
     <PackageIcon>ECWPLogo.jpg</PackageIcon>
 	  <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+	  <Version>5.0.0</Version>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>portable</DebugType>
@@ -41,6 +42,7 @@
     <PackageReference Include="LiveChartsCore" Version="2.0.0-beta.701" />
     <PackageReference Include="LiveChartsCore.SkiaSharpView" Version="2.0.0-beta.701" />
     <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.0.0-beta.700-11.0.0-preview4" />
+    <PackageReference Include="Mayerch1.GithubUpdateCheck" Version="1.2.1" />
     <PackageReference Include="MessageBox.Avalonia" Version="2.3.1-prev2" />
     <PackageReference Include="System.IO.Ports" Version="7.0.0" />
     <PackageReference Include="XamlNameReferenceGenerator" Version="1.5.1" />

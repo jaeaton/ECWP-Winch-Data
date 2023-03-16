@@ -1,49 +1,10 @@
-﻿using System.Diagnostics;
-
-namespace Store
+﻿namespace Store
 {
     //Application configuration data for User Inputs View
-    //[INotifyPropertyChanged]
     public partial class ConfigDataStore : ObservableObject
     {
-        //[ObservableProperty]
-        //private string? ipAddressInputSourceBox;
-
-        //[ObservableProperty]
-        //private string? portInputSourceBox;
-
-        //[ObservableProperty]
-        //private string? ipAddressInputDestinationBox;
-
-        //[ObservableProperty]
-        //private string? portInputDestinationBox;
-
         [ObservableProperty]
         private string? cruiseNameBox;
-
-        //[ObservableProperty]
-        //private string? castNumberBox;
-
-        //[ObservableProperty]
-        //private bool logMaxDataCheckBox;
-
-        //[ObservableProperty]
-        //private bool log20HzDataCheckBox;
-
-        //[ObservableProperty]
-        //private bool sendDataCheckBox;
-
-        //[ObservableProperty]
-        //private bool sendSerialDataCheckBox;
-
-        //[ObservableProperty]
-        //private bool useComputerTimeCheckBox;
-
-        //[ObservableProperty]
-        //private bool unolsUDPStringButton;
-
-        //[ObservableProperty]
-        //private bool mtnwUDPStringButton;
 
         [ObservableProperty]
         private string? directoryLabel;
@@ -51,29 +12,8 @@ namespace Store
         [ObservableProperty]
         private bool directorySet;
 
-        //[ObservableProperty]
-        //private bool unolsWireLogButton;
-
-        //[ObservableProperty]
-        //private bool mtnwWireLogButton;
-
-        [ObservableProperty]
-        private string? startStopButtonText;
-
         [ObservableProperty]
         private bool userInputsEnable;
-
-        [ObservableProperty]
-        private string? serialPortName;
-
-        [ObservableProperty]
-        private string? baudRate;
-
-        //[ObservableProperty]
-        //private bool unolsSerialStringButton;
-
-        //[ObservableProperty]
-        //private bool mtnwSerialStringButton;
 
         [ObservableProperty]
         private List<string>? availableSerialPorts;
@@ -137,7 +77,7 @@ namespace Store
                         break;
                     }
                 }
-                //CurrentWinch = AllWinches[index].ShallowCopy();
+                //Deep copy to break link between class objects
                 CurrentWinch = AllWinches[index].DeepCopy();
             }
         }

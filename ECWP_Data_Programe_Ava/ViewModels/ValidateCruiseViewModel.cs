@@ -23,7 +23,7 @@
             {
                 output = false;
             }
-            else if (cruiseName.Length == 0 )
+            else if (cruiseName.Length == 0)
             {
                 output = false;
             }

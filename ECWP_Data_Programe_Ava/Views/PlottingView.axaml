@@ -7,33 +7,37 @@
 			 mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="450"
              x:Class="Views.PlottingView"
 			 xmlns:model="clr-namespace:Models">
+	
 	<UserControl.DataTemplates>
 		<DataTemplate DataType="model:WinchModel">
-			<StackPanel>
-				<controls:WinchPlotView/>
-			</StackPanel>
+			<controls:DataDisplay  />				
 		</DataTemplate>
 	</UserControl.DataTemplates>
+	
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="*"/>
-			<RowDefinition MaxHeight="35"/>
+			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
-		<Grid Grid.Row="0">
+		
+		<Grid Grid.Row="0" ShowGridLines="True">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="200"/>
-				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="auto"/>
+				<ColumnDefinition Width="*"/>
 			</Grid.ColumnDefinitions>
-			<controls:PlotsConfigurationView/>
-			<StackPanel  Grid.Column="1">
-				<ItemsControl Items="{ Binding PlottingWinches}">
-					<ItemsControl.ItemsPanel>
-						<ItemsPanelTemplate>
-							<WrapPanel Margin="5" Orientation="Vertical"/>
-						</ItemsPanelTemplate>
-					</ItemsControl.ItemsPanel>
-				</ItemsControl>
-			</StackPanel>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			<controls:PlotsConfigurationView Grid.Column="0"/>
+			<ScrollViewer Grid.Column="1">
+					<ItemsControl Items="{ Binding PlottingWinches}" >
+						<ItemsControl.ItemsPanel>
+							<ItemsPanelTemplate>
+								<UniformGrid Rows="{Binding PlottingWinches.Count}"></UniformGrid>
+							</ItemsPanelTemplate>
+						</ItemsControl.ItemsPanel>
+					</ItemsControl>
+				</ScrollViewer>
 		</Grid>
 		<controls:StartStopSaveView Grid.Row="1"/>
 	</Grid>

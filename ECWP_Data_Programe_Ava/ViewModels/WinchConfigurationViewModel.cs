@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace ViewModels
+﻿namespace ViewModels
 {
     public partial class WinchConfigurationViewModel : ObservableObject
     {
@@ -11,11 +9,9 @@ namespace ViewModels
         [RelayCommand]
         public void AddWinch()
         {
-            ////Creates a new set of data so as not to reference existing data
-            //WinchModel Winch = _configDataStore.CurrentWinch.ShallowCopy();
-            WinchModel Winch = _configDataStore.CurrentWinch.DeepCopy();
-
-            InsertWinch(Winch);
+            //Send to generic method to add winch to the winch list
+            InsertWinch(_configDataStore.CurrentWinch);
+            //Write the config file 
             FileOperationsViewModel.WriteConfig(_configDataStore);
         }
         [RelayCommand]
@@ -44,27 +40,9 @@ namespace ViewModels
             {
                 _configDataStore.WinchNames.Add(item.WinchName);
             }
+           //Write the config file with updated list of winches
             FileOperationsViewModel.WriteConfig(_configDataStore);
         }
-               
-        //public void LoadWinch(string? winch)
-        //{
-        //    if (winch != null && _configDataStore.AllWinches != null)
-        //    {
-        //        int index = -1;
-
-        //        for (int i = 0; i < _configDataStore.AllWinches.Count; i++)
-        //        {
-        //            WinchModel item = _configDataStore.AllWinches[i];
-        //            if (item.WinchName == winch)
-        //            {
-        //                index = i;
-        //                break;
-        //            }
-        //        }
-        //        _configDataStore.CurrentWinch = _configDataStore.AllWinches[index].ShallowCopy();
-        //    }
-        //}
 
         public void ChangeSerialFormat(bool mtnw)
         {
@@ -104,7 +82,35 @@ namespace ViewModels
 
         public void InsertWinch(WinchModel Winch)
         {
-            _configDataStore.AllWinches.Add(Winch);
+            //Check to see if a cast number has been added. If not set to 1
+            if (Winch.CastNumber == null)
+            {
+                Winch.CastNumber = "1";
+            }
+            //Check to see if the start button has a name. If not set to "start log"
+            if (Winch.StartStopButtonText == null)
+            {
+                Winch.StartStopButtonText = "Start Log";
+            }
+            //See if winch name is already used. If it is perform update on parameters. If not add it to the list
+            int index = -1;
+            for (int i = 0; i < _configDataStore.AllWinches.Count; i++)
+            {
+                WinchModel item = _configDataStore.AllWinches[i];
+                if (item.WinchName == Winch.WinchName)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            if (index != -1)
+            {
+                _configDataStore.AllWinches[index] = Winch.DeepCopy();
+            }
+            else
+            {
+                _configDataStore.AllWinches.Add(Winch.DeepCopy());
+            }
             //Clears the current list to make winch names as fresh as possible
             _configDataStore.WinchNames.Clear();
             //Loops through all winches and puts winch names in a list for selection process
