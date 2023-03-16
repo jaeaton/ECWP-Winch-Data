@@ -9,7 +9,7 @@
         //Uncomment to allow for windowing of plot
         public  ObservableCollection<DateTimePoint> _observableValuesZero = new ObservableCollection<DateTimePoint>();
         public  ObservableCollection<DateTimePoint> _observableValuesMax = new ObservableCollection<DateTimePoint>();
-        public  IEnumerable<ICartesianAxis> XAxes { get; set; }
+        public IEnumerable<ICartesianAxis> XAxes { get; set; } 
         public  IEnumerable<ICartesianAxis> YAxes { get; set; }
         
         //Color bars for warnings and alarms
