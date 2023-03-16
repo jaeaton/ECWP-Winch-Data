@@ -10,10 +10,7 @@
 	
 	<UserControl.DataTemplates>
 		<DataTemplate DataType="model:WinchModel">
-			<Grid>
-				
-				<controls:DataDisplay  />				
-			</Grid>
+			<controls:DataDisplay  />				
 		</DataTemplate>
 	</UserControl.DataTemplates>
 	
@@ -32,18 +29,15 @@
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 			<controls:PlotsConfigurationView Grid.Column="0"/>
-			<Grid Grid.Column="1" >
-				<ScrollViewer>
+			<ScrollViewer Grid.Column="1">
 					<ItemsControl Items="{ Binding PlottingWinches}" >
 						<ItemsControl.ItemsPanel>
 							<ItemsPanelTemplate>
 								<UniformGrid Rows="{Binding PlottingWinches.Count}"></UniformGrid>
 							</ItemsPanelTemplate>
 						</ItemsControl.ItemsPanel>
-
 					</ItemsControl>
 				</ScrollViewer>
-			</Grid>
 		</Grid>
 		<controls:StartStopSaveView Grid.Row="1"/>
 	</Grid>

@@ -4,6 +4,9 @@ using System.Runtime.InteropServices;
 
 namespace ViewModels
 {
+    /// <summary>
+    /// Checks for a new version on githug
+    /// </summary>
     internal partial class UpdateCheckViewModel : ObservableObject
     {
         [ObservableProperty]

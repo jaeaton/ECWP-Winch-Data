@@ -12,17 +12,8 @@
         [ObservableProperty]
         private bool directorySet;
 
-        //[ObservableProperty]
-        //private string? startStopButtonText;
-
         [ObservableProperty]
         private bool userInputsEnable;
-
-        //[ObservableProperty]
-        //private string? serialPortName;
-
-        //[ObservableProperty]
-        //private string? baudRate;
 
         [ObservableProperty]
         private List<string>? availableSerialPorts;
@@ -86,7 +77,7 @@
                         break;
                     }
                 }
-                //CurrentWinch = AllWinches[index].ShallowCopy();
+                //Deep copy to break link between class objects
                 CurrentWinch = AllWinches[index].DeepCopy();
             }
         }

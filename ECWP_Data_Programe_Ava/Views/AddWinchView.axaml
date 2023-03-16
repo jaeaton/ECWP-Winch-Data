@@ -3,15 +3,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:Views"
-			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="700"
              x:Class="Views.AddWinchView">
 	<ScrollViewer>
 		<StackPanel>
-			
 			<controls:UserInputsView/>
-			<Button Content="Add Winch" Command="{ Binding AddWinchCommand }"/>
-			<Button Content="Remove Winch" Command="{ Binding RemoveWinchCommand }"/>
+			<Button Content="Add/Update Winch" Command="{ Binding AddWinchCommand }" Width="150" HorizontalAlignment="Center" Margin="5"/>
+			<Button Content="Remove Winch" Command="{ Binding RemoveWinchCommand }" Width="150" HorizontalAlignment="Center" />
 		</StackPanel>
-		
 	</ScrollViewer>
 </UserControl>

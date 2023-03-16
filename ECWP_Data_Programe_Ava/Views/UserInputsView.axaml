@@ -5,9 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="240" d:DesignHeight="900"
 			 x:Class="Views.UserInputsView">
 
-	<ScrollViewer>
-		<Panel Background="WhiteSmoke" >
-			<StackPanel>
+		<StackPanel Background="WhiteSmoke">
 				<StackPanel Orientation="Horizontal" Margin="5">
 					<TextBlock Text="Select Winch" VerticalAlignment="Center" Width="90"/>
 					<ComboBox Items="{ Binding WinchNames }" SelectedItem="{ Binding SelectWinch }"  />
@@ -94,6 +92,4 @@
 						</StackPanel>															
 				</StackPanel>
 			</StackPanel>
-		</Panel>
-	</ScrollViewer>
 </UserControl>

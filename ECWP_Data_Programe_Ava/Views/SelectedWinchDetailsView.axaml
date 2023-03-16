@@ -10,7 +10,7 @@
 	<UserControl.Resources>
 		<vm:PlottingViewModel x:Key="commands"/>
 	</UserControl.Resources>
-	<Panel>
+	
 		<WrapPanel Orientation="Horizontal">
 			<StackPanel Orientation="Horizontal" Margin="5">
 				<TextBlock Text="Data Source" Width="100" VerticalAlignment="Center"/>
@@ -24,5 +24,5 @@
 			<Button Content="{ Binding StartStopButtonText, FallbackValue='Start Log' }" Command="{ Binding Source={ StaticResource ResourceKey=commands }, Path=StartStopCommand }" CommandParameter="{ Binding WinchName }" Margin="5" MinWidth="100" HorizontalContentAlignment="Center" />
 			<Button Content="Log Max" Command="{ Binding Source={ StaticResource ResourceKey=commands }, Path=ButtonLogMaxCommand }" CommandParameter="{ Binding WinchName }" Margin="5" MinWidth="100" HorizontalContentAlignment="Center" />
 		</WrapPanel>
-	</Panel>
+	
 </UserControl>
