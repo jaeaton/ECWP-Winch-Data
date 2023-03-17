@@ -1,9 +1,9 @@
 # ECWP-Winch-Data
 This program was written to move data between and ECWP winch with a Remote VPN router and firewall to a ship's network. This is accomplised through connecting to a TCP server on the winch controller. The winch controller then streams data through the firwall to the program. Further, this program can log the raw data, log maximum data (tension and payout),  plot the realtime tension, and transmit UDP packets of data.
 
-The current configuration can read MTNW Legacy, MTNW 1, and the UNOLS Wire String.
+The current configuration can read MTNW Legacy, MTNW 1, the UNOLS Wire String.
 
-The current version can communicate with ECWP winches: Gloria, Moe, Larry, Curly, and Shemp (0.322 Hawboldt Winch, and ECWP MASH winches). In addition it can receive TCP data from LCI-90i.
+The current version can communicate with ECWP winches: Gloria, Moe, Larry, Curly, and Shemp (0.322 Hawboldt Winch, and ECWP MASH winches). In addition it can receive TCP data from LCI-90i. Hawboldt winches SPRE-2640RS and SPRE-2648RS. It is possible that other MASH and Hawboldt winches will work.
 
 To Do:
 - [ ] Display tension member alarms and warnings
