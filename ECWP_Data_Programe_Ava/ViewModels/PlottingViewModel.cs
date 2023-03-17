@@ -54,15 +54,7 @@
                         {
 
                         }
-                        if (winch.LogMax == true)
-                        {
-                            //Write the max data for the cast
-                            dh.WriteMaxData(winch);
-                            //Increase the cast count
-                           winch.CastNumber = (int.Parse(winch.CastNumber) + 1).ToString();
-                            //UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
-
-                        }
+                        
 
                         //Change button text
                         winch.StartStopButtonText = "Start Log";

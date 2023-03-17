@@ -35,21 +35,43 @@
 						<TextBlock Text="Logging Parameters"/>
 						<CheckBox x:Name="CheckBoxLog20Hz" IsEnabled="{Binding Path=UserInputsEnable}" Content="Log 20Hz Data"  HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding CurrentWinch.Log20Hz,FallbackValue='False'}"/>
 						<RadioButton Content="MTNW Format"  IsEnabled="{Binding Path=UserInputsEnable}" HorizontalContentAlignment="Right" Margin="15,2,50,0" GroupName="logFormat" IsChecked="{Binding LogFormatMtnw, FallbackValue='False'}" IsVisible="{ Binding ElementName=CheckBoxLog20Hz,Path=IsChecked }"/>
-						<RadioButton Content="UNOLS Format" IsEnabled="{Binding Path=UserInputsEnable}" HorizontalContentAlignment="Right" Margin="15,2,50,0" GroupName="logFormat" IsChecked="{Binding LogFormatUnols, FallbackValue='True'}" IsVisible="{ Binding ElementName=CheckBoxLog20Hz,Path=IsChecked }"/> 
+						<RadioButton Content="UNOLS Format" IsEnabled="{Binding Path=UserInputsEnable}" HorizontalContentAlignment="Right" Margin="15,2,50,0" GroupName="logFormat" IsChecked="{Binding LogFormatUnols, FallbackValue='True'}" IsVisible="{ Binding ElementName=CheckBoxLog20Hz,Path=IsChecked }"/>
+						<CheckBox x:Name="CheckBoxAutoLog" IsEnabled="{Binding Path=UserInputsEnable}" Content="Auto Log" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding CurrentWinch.AutoLog, FallbackValue='False'}" IsVisible="{ Binding ElementName=CheckBoxLog20Hz,Path=IsChecked }"/>
+						<StackPanel Orientation="Horizontal" Margin="2" IsVisible="{ Binding ElementName=CheckBoxAutoLog,Path=IsChecked }">
+							<TextBlock Text="Min Log Tension" Width="120" VerticalAlignment="Center" />
+							<TextBox Watermark="100" x:Name="TextBoxMinTension" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.StopLogTension, Mode=TwoWay }" Width="90" VerticalAlignment="Center"></TextBox>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal" Margin="2" IsVisible="{ Binding ElementName=CheckBoxAutoLog,Path=IsChecked }">
+							<TextBlock Text="Min Log Payout" Width="120" VerticalAlignment="Center" />
+							<TextBox Watermark="-1" x:Name="TextBoxMinPayout" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.StopLogPayout, Mode=TwoWay }" Width="90" VerticalAlignment="Center"></TextBox>
+						</StackPanel>
 						<CheckBox x:Name="CheckBoxLogMax" IsEnabled="{Binding Path=UserInputsEnable}" Content="Log Max Data" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding CurrentWinch.LogMax, FallbackValue='True'}"/>
 						<CheckBox x:Name="CheckBoxUseComputerTime" IsEnabled="{Binding Path=UserInputsEnable}" Content="Use Computer Time" HorizontalContentAlignment="Right" Margin="6,0,50,0" IsChecked="{Binding CurrentWinch.UseComputerTime,FallbackValue='False',Mode=TwoWay}"/>
-						<StackPanel Orientation="Horizontal">
-							<TextBlock Text="Speed Unit" VerticalAlignment="Center" Width="90"/>
-							<ComboBox SelectedItem="{ Binding CurrentWinch.SpeedUnit, Mode=TwoWay }" Items="{ Binding SpeedUnitList }" SelectedIndex="0"/>
+						<StackPanel Orientation="Horizontal" Margin="2">
+							<TextBlock Text="Speed Unit" VerticalAlignment="Center" Width="120"/>
+							<ComboBox SelectedItem="{ Binding CurrentWinch.SpeedUnit, Mode=TwoWay }" Width="90" Items="{ Binding SpeedUnitList }" SelectedIndex="0"/>
 						</StackPanel>
-						<StackPanel Orientation="Horizontal">
-							<TextBlock Text="Payout Unit" VerticalAlignment="Center" Width="90"/>
-							<ComboBox SelectedItem="{ Binding CurrentWinch.PayoutUnit, Mode=TwoWay }" Items="{ Binding PayoutUnitList }" SelectedIndex="0"/>
+						<StackPanel Orientation="Horizontal" Margin="2">
+							<TextBlock Text="Payout Unit" VerticalAlignment="Center" Width="120"/>
+							<ComboBox SelectedItem="{ Binding CurrentWinch.PayoutUnit, Mode=TwoWay }" Width="90" Items="{ Binding PayoutUnitList }" SelectedIndex="0"/>
 						</StackPanel>
-						<StackPanel Orientation="Horizontal">
-							<TextBlock Text="Tension Unit" VerticalAlignment="Center" Width="90"/>
-							<ComboBox SelectedItem="{ Binding CurrentWinch.TensionUnit, Mode=TwoWay }" Items="{ Binding TensionUnitList }" SelectedIndex="1"/>
+						<StackPanel Orientation="Horizontal" Margin="2">
+							<TextBlock Text="Tension Unit" VerticalAlignment="Center" Width="120"/>
+							<ComboBox SelectedItem="{ Binding CurrentWinch.TensionUnit, Mode=TwoWay }" Width="90" Items="{ Binding TensionUnitList }" SelectedIndex="1"/>
 						</StackPanel>
+						<StackPanel Orientation="Horizontal" Margin="2">
+							<TextBlock Text="Warning Tension" Width="120" VerticalAlignment="Center" />
+							<TextBox Watermark="5000" x:Name="TextBoxWarningmTension" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.TensionWarningLevel, Mode=TwoWay }" Width="90" VerticalAlignment="Center"></TextBox>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal" Margin="2">
+							<TextBlock Text="Alarm Tension" Width="120" VerticalAlignment="Center" />
+							<TextBox Watermark="4800" x:Name="TextBoxAlarmTension" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.TensionAlarmLevel, Mode=TwoWay }" Width="90" VerticalAlignment="Center"></TextBox>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal" Margin="2">
+							<TextBlock Text="ABL" Width="120" VerticalAlignment="Center" />
+							<TextBox Watermark="10000" x:Name="TextBoxABL" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.AssignedBreakingLoad, Mode=TwoWay }" Width="90" VerticalAlignment="Center"></TextBox>
+						</StackPanel>
+						
 					</StackPanel>
 				</StackPanel>
 				<StackPanel Background="LavenderBlush">

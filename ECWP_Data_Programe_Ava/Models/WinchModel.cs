@@ -16,7 +16,7 @@
         private MaxDataPointModel maxData = new();
 
         [ObservableProperty]
-        private CancellationTokenSource canceller;
+        private CancellationTokenSource? canceller;
 
         [ObservableProperty]
         private ChartDataViewModel chartData = new();
@@ -61,9 +61,9 @@
         [ObservableProperty]
         private string? tensionUnit ;
         [ObservableProperty]
-        private double? stopLogTension ;
+        private string? stopLogTension ;
         [ObservableProperty]
-        private double? stopLogPayout ;
+        private string? stopLogPayout ;
         [ObservableProperty]
         private bool udpOutput;
         [ObservableProperty]
@@ -104,6 +104,27 @@
         private string? winchLogName;
         [ObservableProperty]
         private string? startStopButtonText;
+        [ObservableProperty]
+        private string? tensionWarningLevel;
+        partial void OnTensionWarningLevelChanged(string? value)
+        {
+            ChartData.Sections[0].Yi = Convert.ToDouble(value);
+        }
+        [ObservableProperty]
+        private string? tensionAlarmLevel;
+        partial void OnTensionAlarmLevelChanged(string? value)
+        {
+            ChartData.Sections[0].Yj = Convert.ToDouble(value);
+            ChartData.Sections[1].Yi = Convert.ToDouble(value);
+        }
+        [ObservableProperty]
+        private string? assignedBreakingLoad;
+        partial void OnAssignedBreakingLoadChanged(string? value)
+        {
+            ChartData.Sections[1].Yj = Convert.ToDouble(value);
+        }
+        [ObservableProperty]
+        private bool autoLog;
         
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)
@@ -112,7 +133,7 @@
             WinchName = winchName;
             FileExtension = fileExtension;
         }
-        public WinchModel(string? _winchName, string? _fileExtension, string? _communicationType, bool _useComputerTime, bool _log20Hz, bool _logMax, string? _speedUnit, string? _payoutUnit, string? _tensionUnit, double? _stopLogTension, double? _stopLogPayout) 
+        public WinchModel(string? _winchName, string? _fileExtension, string? _communicationType, bool _useComputerTime, bool _log20Hz, bool _logMax, string? _speedUnit, string? _payoutUnit, string? _tensionUnit, string? _stopLogTension, string? _stopLogPayout) 
           
         {
             
@@ -144,7 +165,7 @@
             copy.OutputCommunication = new CommunicationModel(OutputCommunication.TcpIpAddress, OutputCommunication.PortNumber);
             copy.LiveData = new LiveDataDataStore(LiveData.Tension, LiveData.MaxTension, LiveData.Speed, LiveData.MaxSpeed, LiveData.Payout, LiveData.MaxPayout, LiveData.RawWireData, LiveData.RawWinchData);
             copy.MaxData = new MaxDataPointModel(MaxData.MaxPayout, MaxData.MaxTension, MaxData.MaxSpeed);
-            copy.ChartData = new ChartDataViewModel(ChartData._observableValues, ChartData.Series, ChartData._observableValuesZero, ChartData._observableValuesMax, ChartData.XAxes,ChartData.YAxes);
+            copy.ChartData = new ChartDataViewModel(ChartData._observableValues, ChartData.Series, ChartData.Sections, ChartData._observableValuesZero, ChartData._observableValuesMax, ChartData.XAxes,ChartData.YAxes);
             return copy;
         }
 

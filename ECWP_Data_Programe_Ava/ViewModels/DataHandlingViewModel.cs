@@ -12,7 +12,8 @@ namespace ViewModels
         //Asynchronious method to allow application to still respond to user interaction
         public async void GetDataAsync(WinchModel winch)
         {
-            if(winch.SerialOutput)
+            //ChartDataViewModel chartVM = new ChartDataViewModel(winch);
+            if (winch.SerialOutput)
             {
                 int.TryParse(winch.BaudRateOutput,out int serialBaudRate);
                 //_serialPort = new SerialPort(globalConfig.SerialPortName,serialBaudRate,Parity.None,8,StopBits.One);
@@ -159,6 +160,15 @@ namespace ViewModels
             }            
             //free up canceller resources
             winch.Canceller.Dispose();
+            if (winch.LogMax == true)
+            {
+                //Write the max data for the cast
+                WriteMaxData(winch);
+                //Increase the cast count
+                winch.CastNumber = (int.Parse(winch.CastNumber) + 1).ToString();
+                //UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
+
+            }
             winch.StartStopButtonText = "Start Log";
             MainWindowViewModel._configDataStore.UserInputsEnable = true;
 
@@ -281,7 +291,7 @@ namespace ViewModels
                         latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);
                     }
                     //Hawboldt UDP string
-                    else if (strIn.Length == 50 )
+                    else if (strIn.Length > 34)
                     {
                         //string DateString;
                         //string TimeString;
@@ -327,9 +337,20 @@ namespace ViewModels
                             MaxValues(winch);
                         }
                         //Write data to logfile
-                        if (winch.Log20Hz)
+                        if (winch.Log20Hz && !winch.AutoLog)
                         {
                             Write20HzData(latest, winch);
+                        }
+                        if (winch.AutoLog)
+                        {
+                            if (latest.Payout > Convert.ToDouble(winch.StopLogPayout) && latest.Tension > Convert.ToDouble(winch.StopLogTension))
+                            {
+                                Write20HzData(latest, winch);
+                            }
+                            else
+                            {
+                                winch.Canceller.Cancel();
+                            }
                         }
                         if (winch.UdpOutput)
                         {

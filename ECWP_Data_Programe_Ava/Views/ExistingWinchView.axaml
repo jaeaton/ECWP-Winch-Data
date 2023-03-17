@@ -36,13 +36,21 @@
 					<TextBlock Text="Log Max: "/>
 					<TextBlock Text="{ Binding LogMax }"/>
 				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="UNOLS Log Format: "/>
-					<TextBlock Text="{ Binding LogFormatUnols }"/>
+				<StackPanel Orientation="Horizontal" IsVisible="{ Binding Log20Hz }">
+					<TextBlock Text="Log Format: "/>
+					<TextBlock Text="{ Binding LogFormat }"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="MTNW Log Format: "/>
-					<TextBlock Text="{ Binding LogFormatMtnw }"/>
+					<TextBlock Text="Stop Log Automatically: " IsVisible="{ Binding Log20Hz }" />
+					<TextBlock Text="{ Binding AutoLog }"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" IsVisible="{ Binding AutoLog }">
+					<TextBlock Text="Stop Log Tension: "/>
+					<TextBlock Text="{ Binding StopLogTension }"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" IsVisible="{ Binding AutoLog }">
+					<TextBlock Text="Stop Log Payout: "/>
+					<TextBlock Text="{ Binding StopLogPayout }"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="Speed Unit: "/>
@@ -55,6 +63,18 @@
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="Tension Unit: "/>
 					<TextBlock Text="{ Binding TensionUnit }"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Tension Warning Threshold: "/>
+					<TextBlock Text="{ Binding TensionWarningLevel }"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Tension Alarm Threshold: "/>
+					<TextBlock Text="{ Binding TensionAlarmLevel }"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Assigned Breaking Load: "/>
+					<TextBlock Text="{ Binding AssignedBreakingLoad }"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="UDP Output: "/>

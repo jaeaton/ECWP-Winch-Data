@@ -188,7 +188,31 @@
                 if (winch.SpeedUnit != null)
                 {
                     lines.Add($"Speed Units,{  winch.SpeedUnit }");
-                }                   
+                }
+                if (winch.AutoLog != null)
+                {
+                    lines.Add($"Auto Log, { winch.AutoLog}");
+                }
+                if (winch.StopLogPayout != null)
+                {
+                    lines.Add($"Auto Log Stop Payout, {winch.StopLogPayout }");
+                }
+                if (winch.StopLogTension != null)
+                {
+                    lines.Add($"Auto Log Stop Tension, { winch.StopLogTension }");
+                }
+                if (winch.TensionWarningLevel != null)
+                {
+                    lines.Add($"Tension Warning Level, { winch.TensionWarningLevel }");
+                }
+                if (winch.TensionAlarmLevel != null)
+                {
+                    lines.Add($"Tension Alarm Level, { winch.TensionAlarmLevel }");
+                }
+                if (winch.AssignedBreakingLoad != null)
+                {
+                    lines.Add($"Assigned Breaking Load, { winch.AssignedBreakingLoad }");
+                }
                     
                 //Write each line of array using stream writer
                 using (StreamWriter stream = new StreamWriter(destPath, true))
@@ -355,6 +379,30 @@
                             if (line.Substring(0, delim) == "Speed Units")
                             {
                                 winch.SpeedUnit = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Auto Log")
+                            {
+                                winch.AutoLog = bool.Parse(line.Substring(delim + 1));
+                            }
+                            if (line.Substring(0, delim) == "Auto Log Stop Payout")
+                            {
+                                winch.StopLogPayout = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Auto Log Stop Tension")
+                            {
+                                winch.StopLogTension = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Tension Warning Level")
+                            {
+                                winch.TensionWarningLevel = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Tension Alarm Level")
+                            {
+                                winch.TensionAlarmLevel = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Assigned Breaking Load")
+                            {
+                                winch.AssignedBreakingLoad = line.Substring(delim + 1);
                             }
                         }
                         
