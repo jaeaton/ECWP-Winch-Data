@@ -8,8 +8,9 @@
 	<ScrollViewer>
 		<StackPanel>
 			<controls:UserInputsView/>
-			<Button Content="Add/Update Winch" Command="{ Binding AddWinchCommand }" Width="150" HorizontalAlignment="Center" Margin="5"/>
-			<Button Content="Remove Winch" Command="{ Binding RemoveWinchCommand }" Width="150" HorizontalAlignment="Center" />
+			<Button Content="Add/Update Winch" Command="{ Binding AddWinchCommand }" Width="150" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="5"/>
+			<Button Content="Remove Winch" Command="{ Binding RemoveWinchCommand }" Width="150" HorizontalContentAlignment="Center" HorizontalAlignment="Center" />
+			<Button Content="Help" Command="{ Binding ConfigHelpCommand }" Width="150" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="5"/>
 		</StackPanel>
 	</ScrollViewer>
 </UserControl>

@@ -43,6 +43,33 @@
            //Write the config file with updated list of winches
             FileOperationsViewModel.WriteConfig(_configDataStore);
         }
+        [RelayCommand]
+        public void ConfigHelp()
+        {
+            MessageBoxViewModel.DisplayMessage($"Step 1. Provide a unique name to the winch. \n" + 
+                $"Step 2. Fill in communication parameters.\n" +
+                "   a. Input an IP address of the winch for TCP Server Source (ECWP Winches) or \n" +
+                "   that of the host computer for TCP Client and UDP.\n" +
+                "   b. Enter a port number for the communications (ECWP uses 50505)\n" +
+                "   c. Select a source type from the drop down list. \n" +
+                "       TCP Server -- ECWP Winch\n" +
+                "       TCP Client -- LCI-90i\n" +
+                "       UDP -- UDP Sources\n" +
+                "Step 3. Select the logging paramters\n" +
+                "   a. Log 20Hz Data logs the input data at the input data rate to the local machine.\n" +
+                "   Then select the log format to use. MTNW format includes the date, time, tension, \n" +
+                "   speed, and payout. UNOLS format adds fields for Tension member alarms and warnings.\n" +
+                "   b. Log Max Data allows the logging of the cast maximum tension and payout strings.\n " +
+                "   c. Use computer time uses the time from the computer running this program for log times.\n" +
+                "   d. Tension, Speed, and Payout unit selection sets the units for the incoming data.\n" +
+                "Step 4. Send UDP data enables the sending of the data via UDP to another computer.\n" +
+                "Step 5. Send Serial data enables sending the data via serial port.\n" +
+                "Step 6. Add/Update winch either adds the information to the winch list or updates\n" +
+                "   an existing entry with a namtching name.\n" +
+                "Step 7. Remove winch removes the winch from the winch list.\n" + 
+                "Step 8. Using the drop down at the top will load the information of the selected winch." +
+                "Note: Adding/Updating or Removing a winch writes a configuration file to application directory.");
+        }
 
         public void ChangeSerialFormat(bool mtnw)
         {

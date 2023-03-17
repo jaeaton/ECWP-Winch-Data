@@ -280,9 +280,22 @@ namespace ViewModels
 
                         latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);
                     }
-                    
-                    //DataPointModel latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);
-                    
+                    //Hawboldt UDP string
+                    else if (strIn.Length == 50 )
+                    {
+                        //string DateString;
+                        //string TimeString;
+                        //string rawDateString = $"{strIn[0]}, {strIn[1]}, {strIn[2]}, {strIn[3]}, {strIn[4]}, {strIn[5]}";
+                        //if (DateTime.TryParse(rawDateString, out DateTime assembledDateTime))
+                        //{
+                        //    DateString = assembledDateTime.ToString("yyyyMMdd");
+                        //    TimeString = assembledDateTime.ToString("HH:mm:ss.fff");
+                        //    latest = new DataPointModel(strIn[6], DateString, TimeString, strIn[12], strIn[14], strIn[13], strIn[32], strIn[33]);
+                        //}
+                        latest = new DataPointModel(strIn[6], " ", " ", strIn[12], strIn[14], strIn[13], strIn[32], strIn[33]);
+                        getTime = true;
+                    }
+
                     if (latest.StringID != "empty")
                     {
                         //If needed changes data and time stamp to local machine

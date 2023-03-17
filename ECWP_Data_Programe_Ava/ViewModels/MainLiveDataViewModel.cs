@@ -13,26 +13,16 @@ namespace ViewModels
         {
             UpdateCheckViewModel viewModel = new UpdateCheckViewModel();
             viewModel.RunningVersion = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
-            MessageBoxViewModel.DisplayMessage("Step 1: Set source parameters. \n" +
-                "Step 1a: For ECWP winches input the IP address of the winch and use the port number 50505. Select source type TCP Server. \n" +
-                "Step 1b: For LCI-90i connections IP adress is of the host computer and port number is as configured on the 90i. LCI-90i \n" +
-                "         should be configured to send a single winch using either the MTNW Legacy or MTNW1 Protocol. Select a source type \n" +
-                "         of TCP Client. \n" +
-                "Step 2: Set destination parameters. If using UDP logging set the logging computer IP address and the UDP port for logging. \n" +
-                "Step 3: Set cruise information. Fill in the name of the cruise and the cast number. \n" +
-                "Step 4: Select options for data collection. \n" +
+            MessageBoxViewModel.DisplayMessage("Step 1: Configure winch(es) in the Config Winch tab. \n" +
+                "Step 2: Select the winches to plot. \n" +
+                "Step 3: Set the cruise name. \n" +
+                "Step 4: Set the cast numbers for the selected winches. \n" +
                 "Step 5: Set save file location. If you are saving either the max data or the 20 hz data the file location MUST be set.\n" +
-                "Step 6: Start Capture. This connects to the winch and then processes the data as needed and saves, transmits, and displays the data.\n" +
-                "Step 7: Save Max Values. This button writes the max values to a file, zeros out the max values, and increments the cast number\n\n" +
-                "Notes\n" +
-                "1) The program saves a config file and loads it on start up. This can Speed up the set up process after it has been set for a cruise. It is a human readable text file in the program's directory.\n" +
-                "2) Max log file should be continuos for a given cruise. Each time the Log Max button is pressed a new entry is added. If the cast number is changed to a lower number it will not overwrite the previous entry.\n" +
-                "3) Description of data source type selection:\n" +
-                "    a) TCP Client source implies a TCP connection with the data source acting as a TCP Client. Example: LCI-90i \n" +
-                "    b) TCP Server source implies a TCP Connection with the data source acting as a TCP Server/Listener. Example: ECWP Equipment \n" +
-                "    c) UDP source has not been implemented and will fall back to TCP Server.\n" +
-                "\n\n" +
-                 $"{ viewModel.RunningVersion }");
+                "Step 6: Update Configuration adds the cruise name, cast numbers, and file location to the config file.\n" +
+                "Step 7: Start Log begins the capture of data and displays, logs, and retransmits as configured.\n" +
+                "Step 8: Stop Log ends the capture of data, completes logs (including max log if selected), increases the cast count, and resets the maximum data values.\n" +
+                "Step 9. Log max logs the maximum data strings, increases the cast number, and resets the maximum values.\n\n" +
+                $"{ viewModel.RunningVersion }");
         }
         [RelayCommand]
         private async void SaveLocation()

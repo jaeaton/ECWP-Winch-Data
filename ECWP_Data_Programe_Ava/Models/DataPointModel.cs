@@ -111,7 +111,41 @@
             TMAlarms = tMAlarms;
 
         }
+        /// <summary>
+        /// Hawboldt string in
+        /// </summary>
+        /// <param name="inID"></param>
+        /// <param name="inDate"></param>
+        /// <param name="inTime"></param>
+        /// <param name="inTension"></param>
+        /// <param name="inSpeed"></param>
+        /// <param name="inPayout"></param>
+        /// <param name="tMWarnings"></param>
+        /// <param name="tMAlarms"></param>
+        public DataPointModel(string inID, string inDate, string inTime, string inTension, string inSpeed, string inPayout, string tMWarnings, string tMAlarms)
+        {
+            StringID = inID;
 
+            //DateTime.TryParseExact(inDate,yyyyMMdd, out DateTime YMD);
+            Date = inDate;
+
+            //DateTime.TryParse(inTime, out DateTime HMS);
+            Time = inTime;
+
+            float.TryParse(inTension, out float tension);
+            Tension = tension;
+
+            float.TryParse(inPayout, out float payout);
+            Payout = payout;
+
+            float.TryParse(inSpeed, out float speed);
+            Speed = speed;
+
+            
+            TMWarnings = tMWarnings;
+            TMAlarms = tMAlarms;
+
+        }
         public DataPointModel(string SID, string Ten, string Sp, string Pay)
         {
             StringID = SID;
