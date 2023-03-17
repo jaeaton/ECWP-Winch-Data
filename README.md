@@ -7,12 +7,13 @@ The current version can communicate with ECWP winches: Gloria, Moe, Larry, Curly
 
 To Do:
 - [ ] Display tension member alarms and warnings
-- [ ] Display tension member alarm and warning levels on trend graph
+- [x] ~~Display tension member alarm and warning levels on trend graph~~
 - [ ] Display UNOLS Winch string statuses
-- [ ] Start and stop casts (and log files) based on payout and tension
+- [ ] Start casts (and log files) based on payout and tension
+- [x] ~~End casts (and log files) based on payout and tension~~
 - [ ] Add unit conversion
 - [ ] Add Graph view to data processing
-- [ ] Add Hawboldt Data reception
+- [x] ~~Add Hawboldt Data reception~~
 - [ ] Add in detection and themeing for darkmode
 - [x] ~~Add Multi-winch configurations~~
 - [x] ~~Add unit display selection~~
