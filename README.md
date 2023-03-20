@@ -14,7 +14,8 @@ To Do:
 - [ ] Add unit conversion
 - [ ] Add Graph view to data processing
 - [x] ~~Add Hawboldt Data reception (SPRE-2640RS & SPRE-2648RS)~~
-- [ ] Add Godzilla Reception (SPRE 3464)
+- [x] ~~Add Godzilla Reception (SPRE 3464)~~
+- [x] ~~Add WCWP Hawboldt Reception~~
 - [ ] Add Mermac Reception (MacArtney)
 - [ ] Add Odim Reception
 - [ ] Add in detection and themeing for darkmode
