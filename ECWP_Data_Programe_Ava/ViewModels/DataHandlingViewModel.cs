@@ -290,8 +290,8 @@ namespace ViewModels
 
                         latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);
                     }
-                    //Hawboldt UDP string
-                    else if (strIn.Length > 34)
+                    //Hawboldt SPRE-2640RS & SPRE-2648RS UDP string
+                    else if (strIn.Length > 38)
                     {
                         //string DateString;
                         //string TimeString;
@@ -305,8 +305,20 @@ namespace ViewModels
                         latest = new DataPointModel(strIn[6], " ", " ", strIn[12], strIn[14], strIn[13], strIn[32], strIn[33]);
                         getTime = true;
                     }
+                    //WCWP Hawboldt small winches
+                    else if (strIn.Length > 20 && strIn.Length < 38)
+                    {
+                        latest = new DataPointModel(strIn[6], " ", " ", strIn[12], strIn[14], strIn[13], strIn[28], strIn[29]);
+                        getTime = true;
+                    }
+                    //Godzilla
+                    else if (strIn.Length > 12 && strIn.Length < 20)
+                    {
+                        latest = new DataPointModel(strIn[6], strIn[12], strIn[14], strIn[13]);
+                        getTime = true;
+                    }
 
-                    if (latest.StringID != "empty")
+                        if (latest.StringID != "empty")
                     {
                         //If needed changes data and time stamp to local machine
                         if (winch.UseComputerTime || getTime)
