@@ -3,7 +3,7 @@ This program was written to move data between and ECWP winch with a Remote VPN r
 
 The current configuration can read MTNW Legacy, MTNW 1, the UNOLS Wire String.
 
-The current version can communicate with ECWP winches: Gloria, Jay Jay, Moe, Larry, Curly, and Shemp (0.322 Hawboldt Winch, IOS Clean Winch, and ECWP MASH winches). In addition it can receive TCP data from LCI-90i. Hawboldt winches SPRE-2640RS and SPRE-2648RS also work. The Small Hawboldt winches from the WCWP should also work. It is possible that other MASH and Hawboldt winches will work.
+The current version can communicate with ECWP winches: Gloria, Jay Jay, Godzilla, Moe, Larry, Curly, and Shemp (0.322 Hawboldt Winch, IOS Clean Winch, Hawboldt SPRE-3464 and ECWP MASH winches). In addition it can receive TCP data from LCI-90i. Hawboldt winches SPRE-2640RS and SPRE-2648RS also work. The Small Hawboldt winches from the WCWP should also work. It is possible that other MASH and Hawboldt winches will work.
 
 To Do:
 - [ ] Display tension member alarms and warnings
@@ -14,7 +14,8 @@ To Do:
 - [ ] Add unit conversion
 - [ ] Add Graph view to data processing
 - [x] ~~Add Hawboldt Data reception (SPRE-2640RS & SPRE-2648RS)~~
-- [ ] Add Godzilla Reception (SPRE 3464)
+- [x] ~~Add Godzilla Reception (SPRE 3464)~~
+- [x] ~~Add WCWP Hawboldt Reception~~
 - [ ] Add Mermac Reception (MacArtney)
 - [ ] Add Odim Reception
 - [ ] Add in detection and themeing for darkmode
