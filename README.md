@@ -7,18 +7,19 @@ The current version can communicate with ECWP winches: Gloria, Jay Jay, Godzilla
 
 To Do:
 - [ ] Display tension member alarms and warnings
-- [x] ~~Display tension member alarm and warning levels on trend graph~~
 - [ ] Display UNOLS Winch string statuses
 - [ ] Start casts (and log files) based on payout and tension
-- [x] ~~End casts (and log files) based on payout and tension~~
 - [ ] Add unit conversion
 - [ ] Add Graph view to data processing
-- [x] ~~Add Hawboldt Data reception (SPRE-2640RS & SPRE-2648RS)~~
-- [x] ~~Add Godzilla Reception (SPRE 3464)~~
-- [x] ~~Add WCWP Hawboldt Reception~~
 - [ ] Add Mermac Reception (MacArtney)
 - [ ] Add Odim Reception
 - [ ] Add in detection and themeing for darkmode
+- [x] ~~Display tension member alarm and warning levels on trend graph~~
+- [x] ~~End casts (and log files) based on payout and tension~~
+- [x] ~~End casts (and log files) based on payout and tension~~
+- [x] ~~Add Hawboldt Data reception (SPRE-2640RS & SPRE-2648RS)~~
+- [x] ~~Add Godzilla Reception (SPRE 3464)~~
+- [x] ~~Add WCWP Hawboldt Reception~~
 - [x] ~~Add Multi-winch configurations~~
 - [x] ~~Add unit display selection~~
 - [x] ~~Add cast processing~~
