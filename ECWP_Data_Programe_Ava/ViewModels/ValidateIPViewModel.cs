@@ -24,7 +24,7 @@
                 {
                     int octetValue;
                     bool validOctet = int.TryParse(octet, out octetValue);
-                    if (validOctet == false || octetValue < 1 || octetValue > 255)
+                    if (validOctet == false || octetValue < 0 || octetValue > 255)
                     {
                         output = false;
                     }

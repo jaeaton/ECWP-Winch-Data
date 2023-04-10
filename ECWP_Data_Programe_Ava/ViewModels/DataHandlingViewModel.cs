@@ -138,7 +138,7 @@ namespace ViewModels
                     {
                         //Asynchronious read of data to allow for other operations to occur
                         dataIn = await Task.Run(() => ReadUDPData(client, winch));
-                        //_liveData.RawWireData = dataIn;
+                        winch.LiveData.RawWireData = dataIn;
                         //read data
                         ParseWinchData(dataIn, winch);
 
