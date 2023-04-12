@@ -256,12 +256,14 @@
                 data = ReplaceNonPrintableCharacters(data, ' ');
                 string[] strIn = data.Split(',', 'T');
                 strIn[0] = strIn[0].Replace("0", string.Empty);
+                strIn[0] = strIn[0].Replace(" ", string.Empty);
                 DataPointModel latest = new DataPointModel();
                 //Uncomment to log all data coming in
                 //WriteRawLog(data, winch);
                 //UNOLS String input
                 latest.StringID = "empty";
-                //LiveData.RawWireData = data;
+                
+                //winch.LiveData.RawWireData = data;
                 switch (strIn[0])
                 {
                     //Wire Log Header
@@ -277,14 +279,14 @@
                         break;
                         //Winch Log
                     case "$WNC":
-                        winch.LiveData.RawWinchData = data;
+                        //winch.LiveData.RawWinchData = data;
                         WriteWinchLog(data, winch);
                         break;
                         //UNOLS String Wire Log
                     case "$WIR":
                         latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6], strIn[7], strIn[8]);
                         break;
-                    case "00RD":
+                    case "RD":
                         //MTNW Legacy input (does not include date and time)
                         if (strIn.Length == 5)
                         {
