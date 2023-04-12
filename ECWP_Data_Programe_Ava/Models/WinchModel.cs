@@ -125,6 +125,10 @@
         }
         [ObservableProperty]
         private bool autoLog;
+        [ObservableProperty]
+        private bool protocolHawboldt;
+        [ObservableProperty]
+        private string? hawboldtModel;
         
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)

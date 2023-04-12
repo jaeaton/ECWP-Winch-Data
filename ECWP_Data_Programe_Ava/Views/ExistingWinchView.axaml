@@ -24,6 +24,10 @@
 					<TextBlock Text="Port: "/>
 					<TextBlock Text="{ Binding InputCommunication.PortNumber }"/>
 				</StackPanel>
+				<StackPanel Orientation="Horizontal" IsVisible="{ Binding ProtocolHawboldt }">
+					<TextBlock Text="Hawboldt Model: "/>
+					<TextBlock Text="{ Binding HawboldtModel }"/>
+				</StackPanel>
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="Computer Time: "/>
 					<TextBlock Text="{ Binding UseComputerTime }"/>

@@ -44,6 +44,13 @@ namespace Views
                                                                 "kg",
                                                                 "lbf"
                                                             };
+            MainWindowViewModel._configDataStore.HawboldtModelList = new List<string>
+                                                            {
+                                                                "SPRE-3464",
+                                                                "SPRE-2648RS",
+                                                                "SPRE-2640",
+                                                                "SPRE-2036S"
+                                                            };
             //globalConfig = (GlobalConfigModel)FileOperationsViewModel.ReadConfig(MainWindowViewModel._configDataStore);
             FileOperationsViewModel.ReadConfig(MainWindowViewModel._configDataStore);
             InitializeComponent();

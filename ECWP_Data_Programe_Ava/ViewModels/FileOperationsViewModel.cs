@@ -191,29 +191,33 @@
                 }
                 if (winch.AutoLog != null)
                 {
-                    lines.Add($"Auto Log, { winch.AutoLog}");
+                    lines.Add($"Auto Log,{ winch.AutoLog}");
                 }
                 if (winch.StopLogPayout != null)
                 {
-                    lines.Add($"Auto Log Stop Payout, {winch.StopLogPayout }");
+                    lines.Add($"Auto Log Stop Payout,{winch.StopLogPayout }");
                 }
                 if (winch.StopLogTension != null)
                 {
-                    lines.Add($"Auto Log Stop Tension, { winch.StopLogTension }");
+                    lines.Add($"Auto Log Stop Tension,{ winch.StopLogTension }");
                 }
                 if (winch.TensionWarningLevel != null)
                 {
-                    lines.Add($"Tension Warning Level, { winch.TensionWarningLevel }");
+                    lines.Add($"Tension Warning Level,{ winch.TensionWarningLevel }");
                 }
                 if (winch.TensionAlarmLevel != null)
                 {
-                    lines.Add($"Tension Alarm Level, { winch.TensionAlarmLevel }");
+                    lines.Add($"Tension Alarm Level,{ winch.TensionAlarmLevel }");
                 }
                 if (winch.AssignedBreakingLoad != null)
                 {
-                    lines.Add($"Assigned Breaking Load, { winch.AssignedBreakingLoad }");
+                    lines.Add($"Assigned Breaking Load,{ winch.AssignedBreakingLoad }");
                 }
-                    
+                if (winch.ProtocolHawboldt == true)
+                {
+                    lines.Add($"HawboldtModel,{winch.HawboldtModel}");
+                }
+
                 //Write each line of array using stream writer
                 using (StreamWriter stream = new StreamWriter(destPath, true))
                 {
@@ -404,6 +408,12 @@
                             {
                                 winch.AssignedBreakingLoad = line.Substring(delim + 1);
                             }
+                            if (line.Substring(0, delim) == "HawboldtModel")
+                            {
+                                winch.HawboldtModel = line.Substring(delim + 1);
+                                winch.ProtocolHawboldt = true;
+                            }
+                            
                         }
                         
                         
