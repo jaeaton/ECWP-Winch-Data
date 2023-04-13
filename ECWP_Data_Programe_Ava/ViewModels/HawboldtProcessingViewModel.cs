@@ -11,16 +11,16 @@ namespace ViewModels
             switch (HawboldtModel)
             {
                 case "SPRE-3464":
-                    SPRE_3464(byteArray);
+                    ResponseData = SPRE_3464(byteArray);
                     return ResponseData;
                 case "SPRE-2648RS":
-                    SPRE_2648RS(byteArray);
+                    ResponseData = SPRE_2648RS(byteArray);
                     return ResponseData;
                 case "SPRE-2640":
-                    SPRE_2640(byteArray);
+                    ResponseData = SPRE_2640(byteArray);
                     return ResponseData;
                 case "SPRE-2036S":
-                    SPRE_2036S(byteArray);
+                    ResponseData = SPRE_2036S(byteArray);
                     return ResponseData;
                 default:
                     return ResponseData;
@@ -57,19 +57,19 @@ namespace ViewModels
             string minute = OneByteInt(bytes1);
 
             //Process Seconds
-            Array.Copy(byteArray, 6, bytes4, 0, 4);
-            string second = RealByteInt(bytes4);
+            Array.Copy(byteArray, 6, bytes1, 0, 1);
+            string second = OneByteInt(bytes1);
 
             //Process Tension
-            Array.Copy(byteArray, 30, bytes4, 0, 4);
+            Array.Copy(byteArray, 28, bytes4, 0, 4);
             string tension = RealByteInt(bytes4);
 
             //Process Payout
-            Array.Copy(byteArray, 34, bytes4, 0, 4);
+            Array.Copy(byteArray, 32, bytes4, 0, 4);
             string payout = RealByteInt(bytes4);
 
             //Process Speed
-            Array.Copy(byteArray, 38, bytes4, 0, 4);
+            Array.Copy(byteArray, 34, bytes4, 0, 4);
             string speed = RealByteInt(bytes4);
 
             //Form data into string
@@ -106,7 +106,7 @@ namespace ViewModels
 
             //Process Seconds
             Array.Copy(byteArray, 6, bytes4, 0, 4);
-            string second = RealByteInt(bytes4);
+            string second = TimeRealByteInt(bytes4);
 
             //Process Tension
             Array.Copy(byteArray, 64, bytes4, 0, 4);
@@ -154,7 +154,7 @@ namespace ViewModels
 
             //Process Seconds
             Array.Copy(byteArray, 6, bytes4, 0, 4);
-            string second = RealByteInt(bytes4);
+            string second = TimeRealByteInt(bytes4);
 
             //Process Tension
             Array.Copy(byteArray, 64, bytes4, 0, 4);
@@ -202,7 +202,7 @@ namespace ViewModels
 
             //Process Seconds
             Array.Copy(byteArray, 6, bytes4, 0, 4);
-            string second = RealByteInt(bytes4);
+            string second = TimeRealByteInt(bytes4);
 
             //Process Tension
             Array.Copy(byteArray, 64, bytes4, 0, 4);
@@ -223,7 +223,8 @@ namespace ViewModels
 
         private string OneByteInt(byte[] bytes1)
         {
-            int Int = BitConverter.ToInt16(bytes1);
+            //int Int = BitConverter.ToInt16(bytes1);
+            int Int = (int)bytes1[0];
             return Int.ToString();
         }
         private string TwoByteInt(byte[] bytes)
@@ -242,7 +243,16 @@ namespace ViewModels
                 Array.Reverse(bytes);
             }
             float Float = BitConverter.ToSingle(bytes);
-            return Float.ToString();
+            return Float.ToString("N1");
+        }
+        private string TimeRealByteInt(byte[] bytes)
+        {
+            if (BitConverter.IsLittleEndian)
+            {
+                Array.Reverse(bytes);
+            }
+            float Float = BitConverter.ToSingle(bytes);
+            return Float.ToString("N3");
         }
     }
 }

@@ -303,20 +303,20 @@
                         break;
                     //Hawboldt SPRE-3648 UDP String
                     //Godzilla
-                    case "HWIR1":
+                    case "$HWIR1":
                         latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
                         break;
                     //Hawboldt PRE-2648RS UDP string
-                    case "HWIR2":
+                    case "$HWIR2":
                         latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
                         break;
                     //Hawboldt SPRE-2640RS UDP String
-                    case "HWIR3":
+                    case "$HWIR3":
                         latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
                         break;
                     //Hawboldt SPRE-2036S UDP String
                     //WCWP Hawboldt small winches
-                    case "HWIR4":
+                    case "$HWIR4":
                         latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
                         break;
 
