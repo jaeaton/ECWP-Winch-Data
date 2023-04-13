@@ -14,6 +14,7 @@ To Do:
 - [ ] Add Mermac Reception (MacArtney)
 - [ ] Add Odim Reception
 - [ ] Add in detection and themeing for darkmode
+- [x] ~~Configurable time span of charts on a per winch basis (10,20,30,45 seconds)~~
 - [x] ~~Display tension member alarm and warning levels on trend graph~~
 - [x] ~~End casts (and log files) based on payout and tension~~
 - [x] ~~End casts (and log files) based on payout and tension~~
