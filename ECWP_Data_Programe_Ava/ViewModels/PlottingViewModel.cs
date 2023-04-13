@@ -78,9 +78,10 @@
                         //Create new cancellation token at start of data collection
                         winch.Canceller = new CancellationTokenSource();
                         //Starts Data collection on first press
+                        winch.StartStopButtonText = "Stop Log";
                         dh.GetDataAsync(winch);
                         //change button text
-                        winch.StartStopButtonText = "Stop Log";
+                        
                         MainWindowViewModel._configDataStore.UserInputsEnable = false;
 
                         break;

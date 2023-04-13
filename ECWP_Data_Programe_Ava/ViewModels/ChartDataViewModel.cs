@@ -182,7 +182,7 @@ namespace ViewModels
                 }
             };
         }
-        public void AddData(DataPointModel latest, LiveDataDataStore live)
+        public void AddData(DataPointModel latest, LiveDataDataStore live, string? chartLength)
         {
             
             System.Globalization.CultureInfo provider = System.Globalization.CultureInfo.InvariantCulture;
@@ -202,10 +202,17 @@ namespace ViewModels
                 {
                     _observableValuesMax.Add(new DateTimePoint { DateTime = dateTime, Value = result });
                 }
-
-                //_observableValues.Add(new ObservablePoint { X = i++, Y = latest.Tension });
-
-                if (_observableValues.Count > 500)
+               TimeSpan span = _observableValues.Last().DateTime - _observableValues.First().DateTime;
+               if (TimeSpan.TryParse($"00:00:{chartLength}", out TimeSpan chartTime))
+                {
+                    //_observableValues.Add(new ObservablePoint { X = i++, Y = latest.Tension });
+                    if (span.Seconds > chartTime.Seconds)
+                    {
+                        _observableValues.RemoveAt(0);
+                        _observableValuesMax.RemoveAt(0);
+                    }
+                }                
+                else if (_observableValues.Count > 500)
                 {
                     _observableValues.RemoveAt(0);
                     _observableValuesMax.RemoveAt(0);

@@ -63,6 +63,9 @@
 
         [ObservableProperty]
         private ObservableCollection<string>? winchNames = new();
+        
+        [ObservableProperty]
+        private List<string>? chartTimeSpanList;
 
 
         public void LoadWinch(string? winch)

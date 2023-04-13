@@ -1,4 +1,6 @@
-﻿namespace ViewModels
+﻿using LiveChartsCore;
+
+namespace ViewModels
 {
     internal class FileOperationsViewModel
     {
@@ -217,6 +219,10 @@
                 {
                     lines.Add($"HawboldtModel,{winch.HawboldtModel}");
                 }
+                if (winch.ChartTimeSpan != null)
+                {
+                    lines.Add($"Chart Time Span,{winch.ChartTimeSpan}");
+                }
 
                 //Write each line of array using stream writer
                 using (StreamWriter stream = new StreamWriter(destPath, true))
@@ -413,10 +419,14 @@
                                 winch.HawboldtModel = line.Substring(delim + 1);
                                 winch.ProtocolHawboldt = true;
                             }
-                            
+                            if (line.Substring(0, delim) == "Chart Time Span")
+                            {
+                                winch.ChartTimeSpan = line.Substring(delim + 1);
+                            }
                         }
                         
-                        
+
+
                     }
                     //GlobalConfigModel globalConfig = new GlobalConfigModel();
                     ////update global config to the parameters loaded

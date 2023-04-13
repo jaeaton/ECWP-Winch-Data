@@ -33,6 +33,10 @@
 					<TextBlock Text="{ Binding UseComputerTime }"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Chart Time: "/>
+					<TextBlock Text="{ Binding ChartTimeSpan }"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="Log 20Hz: "/>
 					<TextBlock Text="{ Binding Log20Hz }"/>
 				</StackPanel>

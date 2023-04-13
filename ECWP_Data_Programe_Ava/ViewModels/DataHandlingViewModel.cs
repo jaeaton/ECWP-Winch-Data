@@ -180,7 +180,7 @@
             winch.LiveData.Payout = latest.Payout.ToString();
             winch.LiveData.Speed = latest.Speed.ToString();
             //chartVM.AddData(latest, winch.LiveData);
-            winch.ChartData.AddData(latest, winch.LiveData);
+            winch.ChartData.AddData(latest, winch.LiveData, winch.ChartTimeSpan);
         }
         private void MaxValues(WinchModel winch)
         {

@@ -129,6 +129,8 @@
         private bool protocolHawboldt;
         [ObservableProperty]
         private string? hawboldtModel;
+        [ObservableProperty]
+        private string? chartTimeSpan;
         
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)

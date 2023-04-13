@@ -51,6 +51,13 @@ namespace Views
                                                                 "SPRE-2640",
                                                                 "SPRE-2036S"
                                                             };
+            MainWindowViewModel._configDataStore.ChartTimeSpanList = new List<string>
+                                                            {
+                                                                "10",
+                                                                "20",
+                                                                "30",
+                                                                "45"
+                                                            };
             //globalConfig = (GlobalConfigModel)FileOperationsViewModel.ReadConfig(MainWindowViewModel._configDataStore);
             FileOperationsViewModel.ReadConfig(MainWindowViewModel._configDataStore);
             InitializeComponent();

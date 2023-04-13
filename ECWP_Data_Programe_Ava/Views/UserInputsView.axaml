@@ -52,6 +52,10 @@
 						<CheckBox x:Name="CheckBoxLogMax" IsEnabled="{Binding Path=UserInputsEnable}" Content="Log Max Data" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding CurrentWinch.LogMax, FallbackValue='True'}"/>
 						<CheckBox x:Name="CheckBoxUseComputerTime" IsEnabled="{Binding Path=UserInputsEnable}" Content="Use Computer Time" HorizontalContentAlignment="Right" Margin="6,0,50,0" IsChecked="{Binding CurrentWinch.UseComputerTime,FallbackValue='False',Mode=TwoWay}"/>
 						<StackPanel Orientation="Horizontal" Margin="2">
+							<TextBlock Text="Chart Time Span" VerticalAlignment="Center" Width="120"/>
+							<ComboBox SelectedItem="{ Binding CurrentWinch.ChartTimeSpan, Mode=TwoWay }" Width="90" Items="{ Binding ChartTimeSpanList }" SelectedIndex="2"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal" Margin="2">
 							<TextBlock Text="Speed Unit" VerticalAlignment="Center" Width="120"/>
 							<ComboBox SelectedItem="{ Binding CurrentWinch.SpeedUnit, Mode=TwoWay }" Width="90" Items="{ Binding SpeedUnitList }" SelectedIndex="0"/>
 						</StackPanel>
