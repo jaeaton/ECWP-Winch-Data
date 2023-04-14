@@ -68,6 +68,14 @@
                     }
                     ParseData.FileList.Sort();
                 }
+                if (ParseData.SelectedWinch == "Jay Jay")
+                {
+                    foreach (var fi in di.GetFiles("*.csv", SearchOption.AllDirectories))
+                    {
+                        ParseData.FileList.Add($"{fi.DirectoryName}\\{fi.Name}");//fi.Name);
+                    }
+                    ParseData.FileList.Sort();
+                }
             }
         }
         [RelayCommand]

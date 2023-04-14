@@ -15,7 +15,7 @@
                 {
                     DataPointModel lineData = Data[j];
                     file.WriteLine(lineData.StringID + "," + lineData.DateAndTime.ToString(dateFormat) + "," + lineData.DateAndTime.ToString(timeFormat) + "," + lineData.Tension + "," + lineData.Speed + "," + lineData.Payout + "," + lineData.TMWarnings + "," + lineData.TMAlarms + "," + lineData.CheckSum);
-
+                    //file.WriteLine(lineData.StringID + "," + lineData.Date + "," + lineData.Time + "," + lineData.Tension + "," + lineData.Speed + "," + lineData.Payout + "," + lineData.TMWarnings + "," + lineData.TMAlarms + "," + lineData.CheckSum);
                 }
 
 

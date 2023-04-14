@@ -117,11 +117,11 @@ namespace ViewModels
                                 dataLine = true;
 
                             }
-                            else if (parseData.SelectedWinch == "UNOLS String")
+                            else if (parseData.SelectedWinch == "UNOLS String" )
                             {
                                 if (data[0] == "$WIR")
                                 {
-                                    bool LengthBool;
+                                    bool LengthBool = false;
                                     bool TensionBool = false;
                                     bool SpeedBool = false;
                                     bool PayoutBool = false;
@@ -129,11 +129,12 @@ namespace ViewModels
                                     float Speed = 0;
                                     float Payout = 0;
 
-                                    if (LengthBool = data.Length > 6)
+                                    if ( data.Length > 6)
                                     {
-                                        TensionBool = float.TryParse(data[2], out Tension);
-                                        SpeedBool = float.TryParse(data[3], out Speed);
-                                        PayoutBool = float.TryParse(data[4], out Payout);
+                                        LengthBool = true;
+                                        TensionBool = float.TryParse(data[3], out Tension);
+                                        SpeedBool = float.TryParse(data[4], out Speed);
+                                        PayoutBool = float.TryParse(data[5], out Payout);
                                     }
                                     if (LengthBool != false && TensionBool != false && SpeedBool != false && PayoutBool != false)//float.TryParse(data[2], out float Tension) != false)
                                     {
@@ -151,23 +152,75 @@ namespace ViewModels
 
                                         //Gloria Early implementation
                                         lineData.StringID = data[0];
-                                        lineData.Tension = float.Parse(data[2]);
+                                        //lineData.Tension = float.Parse(data[3]);
                                         lineData.Tension = Tension;
                                         //lineData.Speed = float.Parse(data[3]);
                                         lineData.Speed = Speed;
                                         //lineData.Payout = float.Parse(data[4]);
                                         lineData.Payout = Payout;
                                         lineData.CheckSum = "no chk sum";
-                                        lineData.DateAndTime = DateTime.Parse($"{data[1]}");//T{data[2]}");
-                                        lineData.TMAlarms = data[5];
-                                        lineData.TMWarnings = data[6];
+                                        lineData.DateAndTime = DateTime.ParseExact($"{data[1]}"); //{data[2]}","yyyyMMdd HH:mm:SS.fff", CultureInfo.InvariantCulture);
+                                        //lineData.Date = data[1];
+                                        //lineData.Time = data[2];
+                                        lineData.TMAlarms = data[6];
+                                        lineData.TMWarnings = data[7];
 
                                         dataLine = true;
                                     }
+
                                 }
                             }
+                            else if (parseData.SelectedWinch == "Jay Jay")
+                            {
+                                if (data[0] == "$WIR")
+                                {
+                                    bool LengthBool = false;
+                                    bool TensionBool = false;
+                                    bool SpeedBool = false;
+                                    bool PayoutBool = false;
+                                    float Tension = 0;
+                                    float Speed = 0;
+                                    float Payout = 0;
 
-                            if (dataLine == true)
+                                    if (data.Length > 6)
+                                    {
+                                        LengthBool = true;
+                                        TensionBool = float.TryParse(data[3], out Tension);
+                                        SpeedBool = float.TryParse(data[4], out Speed);
+                                        PayoutBool = float.TryParse(data[5], out Payout);
+                                    }
+                                    if (LengthBool != false && TensionBool != false && SpeedBool != false && PayoutBool != false)//float.TryParse(data[2], out float Tension) != false)
+                                    {
+
+
+                                        //Current UNOLS String
+                                        //lineData.StringID = data[0];
+                                        //lineData.Tension = float.Parse(data[3]);
+                                        //lineData.Speed = float.Parse(data[4]);
+                                        //lineData.Payout = float.Parse(data[5]);
+                                        //lineData.Checksum = data[6];
+                                        //lineData.DateAndTime = DateTime.Parse($"{data[1]}T{data[2]}");
+                                        //lineData.TMAlarms = data[7];
+                                        //lineData.TMWarnings = data[8];
+
+                                        //Gloria Early implementation
+                                        lineData.StringID = data[0];
+                                        //lineData.Tension = float.Parse(data[3]);
+                                        lineData.Tension = Tension;
+                                        //lineData.Speed = float.Parse(data[3]);
+                                        lineData.Speed = Speed;
+                                        //lineData.Payout = float.Parse(data[4]);
+                                        lineData.Payout = Payout;
+                                        lineData.CheckSum = "no chk sum";
+                                        //lineData.DateAndTime = DateTime.ParseExact($"{data[1]} {data[2]}","yyyyMMdd HH:mm:SS.fff", CultureInfo.InvariantCulture);
+                                        lineData.Date = data[1];
+                                        lineData.Time = data[2];
+                                        lineData.TMAlarms = data[6];
+                                        lineData.TMWarnings = data[7];
+
+                                        dataLine = true;
+                                    }
+                                    if (dataLine == true)
                             {
                                 //Data.Add(stringData); //add the string to Data List
                                 DataModels.Add(lineData);
@@ -321,7 +374,8 @@ namespace ViewModels
                 "MASH Winch",
                 "SIO Traction Winch",
                 "Armstrong CAST 6",
-                "UNOLS String"
+                "UNOLS String",
+                "Jay Jay"
             };
 
             parseData.AvailableTensions = new List<string>
