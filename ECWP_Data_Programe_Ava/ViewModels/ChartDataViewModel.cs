@@ -202,6 +202,10 @@ namespace ViewModels
                 {
                     _observableValuesMax.Add(new DateTimePoint { DateTime = dateTime, Value = result });
                 }
+                else
+                {
+                    _observableValuesMax.Add(new DateTimePoint { DateTime = dateTime, Value = 0 });
+                }
                TimeSpan span = _observableValues.Last().DateTime - _observableValues.First().DateTime;
                if (TimeSpan.TryParse($"00:00:{chartLength}", out TimeSpan chartTime))
                 {

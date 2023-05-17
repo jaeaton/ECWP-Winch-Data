@@ -307,9 +307,10 @@ namespace ViewModels
                         //    }
                         //}
                     }
+                    parseData.ReadingLine = "Done!";
                 });
             }
-            parseData.ReadingLine = "Done!";
+            //parseData.ReadingLine = "Done!";
         }
         public static object ReadProcessConfig()
         {
