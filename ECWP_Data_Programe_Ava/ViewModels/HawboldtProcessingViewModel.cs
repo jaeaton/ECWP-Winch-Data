@@ -73,7 +73,7 @@ namespace ViewModels
             string speed = RealByteInt(bytes4);
 
             //Form data into string
-            ResponseData = $"$HWIR1,{year}/{month}/{day},{hour}:{minute}:{second},{tension},{speed},{payout}";
+            ResponseData = $"$HWIR1,{year}-{month}-{day},{hour}:{minute}:{second},{tension},{speed},{payout}";
             return ResponseData;
         }
         private string SPRE_2648RS(byte[] byteArray)
@@ -121,7 +121,7 @@ namespace ViewModels
             string speed = RealByteInt(bytes4);
 
             //Form data into string
-            ResponseData = $"$HWIR2,{year}/{month}/{day},{hour}:{minute}:{second},{tension},{speed},{payout}";
+            ResponseData = $"$HWIR2,{year}-{month}-{day},{hour}:{minute}:{second},{tension},{speed},{payout}";
             return ResponseData;
         }
         private string SPRE_2640(byte[] byteArray)
@@ -169,7 +169,7 @@ namespace ViewModels
             string speed = RealByteInt(bytes4);
 
             //Form data into string
-            ResponseData = $"$HWIR3,{year}/{month}/{day},{hour}:{minute}:{second},{tension},{speed},{payout}";
+            ResponseData = $"$HWIR3,{year}-{month}-{day},{hour}:{minute}:{second},{tension},{speed},{payout}";
             return ResponseData;
         }
         private string SPRE_2036S(byte[] byteArray)
@@ -217,7 +217,7 @@ namespace ViewModels
             string speed = RealByteInt(bytes4);
 
             //Form data into string
-            ResponseData = $"$HWIR4,{year}/{month}/{day},{hour}:{minute}:{second},{tension},{speed},{payout}";
+            ResponseData = $"$HWIR4,{year}-{month}-{day},{hour}:{minute}:{second},{tension},{speed},{payout}";
             return ResponseData;
         }
 

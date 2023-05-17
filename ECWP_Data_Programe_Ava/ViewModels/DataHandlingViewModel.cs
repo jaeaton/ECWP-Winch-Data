@@ -304,90 +304,30 @@
                     //Hawboldt SPRE-3648 UDP String
                     //Godzilla
                     case "$HWIR1":
-                        latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
+                        getTime = true;
+                        latest = new DataPointModel(strIn[0], "", "", strIn[3], strIn[4], strIn[5], " ");
                         break;
                     //Hawboldt PRE-2648RS UDP string
                     case "$HWIR2":
-                        latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
+                        getTime = true;
+                        latest = new DataPointModel(strIn[0], "", "", strIn[3], strIn[4], strIn[5], " ");
                         break;
                     //Hawboldt SPRE-2640RS UDP String
                     case "$HWIR3":
-                        latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
+                        getTime = true;
+                        latest = new DataPointModel(strIn[0], "", "", strIn[3], strIn[4], strIn[5], " ");
                         break;
                     //Hawboldt SPRE-2036S UDP String
                     //WCWP Hawboldt small winches
                     case "$HWIR4":
-                        latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
+                        getTime = true;
+                        latest = new DataPointModel(strIn[0], "", "", strIn[3], strIn[4], strIn[5], " ");
                         break;
 
                     default: 
                         break;
                 }
-                //if (strIn[0].Contains("%WIR"))
-                //{
-                //    if (winch.Log20Hz)
-                //    {
-                //        Write20HzDataHeader(data, winch);
-                //    }
-                //}
-                //else if (strIn[0].Contains("%WNC"))
-                //{
-                //    WriteWinchLog(data, winch);
-                //}
-                //else if (strIn[0].Contains("$WNC"))
-                //{
-                //    winch.LiveData.RawWinchData = data;
-                //    WriteWinchLog(data, winch);
-                //}
-                //else
-                //{
-                    //latest.StringID = "empty";
-                    ////_liveData.RawWireData = data;
-                    //if (strIn.Length == 9 && strIn[0].Contains("$WIR"))
-                    //{
-
-                    //    latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6], strIn[7], strIn[8]);
-                    //}
-                    //MTNW Legacy input (does not include date and time)
-                    //else if (strIn.Length == 5 && strIn[0].Contains("RD"))
-                    //{
-                    //     getTime = true;
-                    //     latest = new DataPointModel(strIn[0], "", "", strIn[1], strIn[2], strIn[3], strIn[4]);
-                                                
-                    //}
-                    ////MTNW 1 input  (Includes date and time)
-                    //else if (strIn.Length == 7 && strIn[0].Contains("RD"))
-                    //{
-
-                    //    latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);
-                    //}
-                    //Hawboldt PRE-2648RS UDP string
-                    //else if (strIn[0].Contains("$HWIR2"))
-                    //{                       
-                    //    latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5]," ");
-                    //    //getTime = true;
-                    //}
-                    ////Hawboldt SPRE-2640RS UDP String
-                    //else if (strIn[0].Contains("$HWIR3"))
-                    //{
-                        
-                    //    latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5]," ");
-                    //    //getTime = true;
-                    //}
-                    ////Hawboldt SPRE-2036S UDP String
-                    ////WCWP Hawboldt small winches
-                    //else if (strIn[0].Contains("$HWIR4"))
-                    //{
-                    //    latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
-                    //    //getTime = true;
-                    //}
-                    ////Hawboldt SPRE-3648 UDP String
-                    ////Godzilla
-                    //else if (strIn[0].Contains("$HWIR1"))
-                    //{
-                    //    latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
-                    //    //getTime = true;
-                    //}
+               
 
                         if (latest.StringID != "empty")
                     {
