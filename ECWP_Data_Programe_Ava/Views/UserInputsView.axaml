@@ -8,7 +8,7 @@
 		<StackPanel Background="WhiteSmoke">
 				<StackPanel Orientation="Horizontal" Margin="5">
 					<TextBlock Text="Select Winch" VerticalAlignment="Center" Width="90"/>
-					<ComboBox Items="{ Binding WinchNames }" SelectedItem="{ Binding SelectWinch }"  />
+					<ComboBox ItemsSource="{ Binding WinchNames }" SelectedItem="{ Binding SelectWinch }"  />
 				</StackPanel>
 				<StackPanel Background="AliceBlue">
 					
@@ -27,11 +27,11 @@
 					</StackPanel>
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Text="Source Type" Width="90" VerticalAlignment="Center"/>
-						<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.CommunicationType, Mode=TwoWay }" Items="{ Binding Path=AvailableProtocols }" SelectedIndex="0"/>
+						<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.CommunicationType, Mode=TwoWay }" ItemsSource="{ Binding Path=AvailableProtocols }" SelectedIndex="0"/>
 					</StackPanel>
 					<StackPanel>
 						<CheckBox x:Name="CheckBoxHawboldt" Content="Check for Hawboldt Winch" IsChecked="{ Binding CurrentWinch.ProtocolHawboldt, FallbackValue='False' }"/>
-						<ComboBox Items="{ Binding HawboldtModelList }" SelectedItem="{ Binding CurrentWinch.HawboldtModel, Mode=TwoWay }" IsVisible="{ Binding ElementName=CheckBoxHawboldt,Path=IsChecked }"/>
+						<ComboBox ItemsSource="{ Binding HawboldtModelList }" SelectedItem="{ Binding CurrentWinch.HawboldtModel, Mode=TwoWay }" IsVisible="{ Binding ElementName=CheckBoxHawboldt,Path=IsChecked }"/>
 					</StackPanel>
 				</StackPanel>
 				<StackPanel Background="MintCream" >
@@ -53,19 +53,19 @@
 						<CheckBox x:Name="CheckBoxUseComputerTime" IsEnabled="{Binding Path=UserInputsEnable}" Content="Use Computer Time" HorizontalContentAlignment="Right" Margin="6,0,50,0" IsChecked="{Binding CurrentWinch.UseComputerTime,FallbackValue='False',Mode=TwoWay}"/>
 						<StackPanel Orientation="Horizontal" Margin="2">
 							<TextBlock Text="Chart Time Span" VerticalAlignment="Center" Width="120"/>
-							<ComboBox SelectedItem="{ Binding CurrentWinch.ChartTimeSpan, Mode=TwoWay }" Width="90" Items="{ Binding ChartTimeSpanList }" SelectedIndex="2"/>
+							<ComboBox SelectedItem="{ Binding CurrentWinch.ChartTimeSpan, Mode=TwoWay }" Width="90" ItemsSource="{ Binding ChartTimeSpanList }" SelectedIndex="2"/>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal" Margin="2">
 							<TextBlock Text="Speed Unit" VerticalAlignment="Center" Width="120"/>
-							<ComboBox SelectedItem="{ Binding CurrentWinch.SpeedUnit, Mode=TwoWay }" Width="90" Items="{ Binding SpeedUnitList }" SelectedIndex="0"/>
+							<ComboBox SelectedItem="{ Binding CurrentWinch.SpeedUnit, Mode=TwoWay }" Width="90" ItemsSource="{ Binding SpeedUnitList }" SelectedIndex="0"/>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal" Margin="2">
 							<TextBlock Text="Payout Unit" VerticalAlignment="Center" Width="120"/>
-							<ComboBox SelectedItem="{ Binding CurrentWinch.PayoutUnit, Mode=TwoWay }" Width="90" Items="{ Binding PayoutUnitList }" SelectedIndex="0"/>
+							<ComboBox SelectedItem="{ Binding CurrentWinch.PayoutUnit, Mode=TwoWay }" Width="90" ItemsSource="{ Binding PayoutUnitList }" SelectedIndex="0"/>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal" Margin="2">
 							<TextBlock Text="Tension Unit" VerticalAlignment="Center" Width="120"/>
-							<ComboBox SelectedItem="{ Binding CurrentWinch.TensionUnit, Mode=TwoWay }" Width="90" Items="{ Binding TensionUnitList }" SelectedIndex="1"/>
+							<ComboBox SelectedItem="{ Binding CurrentWinch.TensionUnit, Mode=TwoWay }" Width="90" ItemsSource="{ Binding TensionUnitList }" SelectedIndex="1"/>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal" Margin="2">
 							<TextBlock Text="Warning Tension" Width="120" VerticalAlignment="Center" />
@@ -109,11 +109,11 @@
 					<StackPanel IsVisible="{ Binding ElementName=CheckBoxSendSerial,Path=IsChecked }">
 							<StackPanel  Margin="5" Orientation="Horizontal">
 								<TextBlock Text="Serial Port" Width="100" VerticalAlignment="Center"/>
-								<ComboBox Name="serialPorts" Width="100" SelectedItem="{Binding CurrentWinch.SerialPortOutput,Mode=TwoWay}" Items="{ Binding Path=AvailableSerialPorts }" />
+								<ComboBox Name="serialPorts" Width="100" SelectedItem="{Binding CurrentWinch.SerialPortOutput,Mode=TwoWay}" ItemsSource="{ Binding Path=AvailableSerialPorts }" />
 							</StackPanel>
 							<StackPanel  Margin="5" Orientation="Horizontal">
 								<TextBlock Text="Baud Rate" Width="100" VerticalAlignment="Center" />
-								<ComboBox Width="100" SelectedItem="{ Binding CurrentWinch.BaudRateOutput,Mode=TwoWay }" Items="{ Binding Path=AvailableBaudRates }" SelectedIndex="0"/>
+								<ComboBox Width="100" SelectedItem="{ Binding CurrentWinch.BaudRateOutput,Mode=TwoWay }" ItemsSource="{ Binding Path=AvailableBaudRates }" SelectedIndex="0"/>
 								</StackPanel>
 							<StackPanel>
 								<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" Margin="6,0,50,0" GroupName="serialRadioButtons"  IsChecked="{Binding CurrentWinch.SerialFormatMtnw,FallbackValue='False'}" />

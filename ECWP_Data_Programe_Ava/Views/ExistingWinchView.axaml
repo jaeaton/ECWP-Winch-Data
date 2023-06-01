@@ -115,7 +115,7 @@
 			</StackPanel>
 		</DataTemplate>
 	</UserControl.DataTemplates>
-	<ItemsControl Items="{ Binding AllWinches}">
+	<ItemsControl ItemsSource="{ Binding AllWinches}">
 		<ItemsControl.ItemsPanel>
 			<ItemsPanelTemplate>
 				<WrapPanel Margin="5" Orientation="Horizontal"/>

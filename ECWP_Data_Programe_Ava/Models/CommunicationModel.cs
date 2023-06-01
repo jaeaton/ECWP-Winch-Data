@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace Models
+﻿namespace Models
 {
     //[INotifyPropertyChanged]
     public partial class CommunicationModel  : ObservableObject
@@ -23,15 +21,7 @@ namespace Models
             //int.TryParse(_portNumber, out portNumberValue);
             PortNumber = _pNumber;//portNumberValue;
         }
-        //public event PropertyChangedEventHandler PropertyChanged;
-
-        //private void RaisePropertyChanged(string property)
-        //{
-        //    if (PropertyChanged != null)
-        //    {
-        //        PropertyChanged(this, new PropertyChangedEventArgs(property));
-        //    }
-        //}
+        
         //public CommunicationModel ShallowCopy()
         //{
         //    return (CommunicationModel)this.MemberwiseClone();

@@ -222,6 +222,7 @@ namespace ViewModels
                                         dataLine = true;
                                     }
                                 }
+                            }
                                 if (dataLine == true)
                                 {
                                     //Data.Add(stringData); //add the string to Data List
@@ -232,7 +233,7 @@ namespace ViewModels
                                     lineData = new DataPointModel();
                                     dataLine = false;
                                 }
-                            }
+                            
                         }
 
                     }
@@ -311,7 +312,7 @@ namespace ViewModels
                             {
                                 ProcessingWriteFilesViewModel.WriteProcessed(maxTensionString, maxPayoutString, cast, parseData); //end cast, increment cast number, write processed data
                                 parseData.ReadingLine = maxTensionString;
-                                parseData.ProcessCasts.Add(processCastDataModel);
+                                parseData.ProcessCasts?.Add(processCastDataModel);
                                 cast++;
                                 castActive = false;
                                 maxPayoutCurrent = 0;
@@ -325,7 +326,7 @@ namespace ViewModels
                                 processPointDataModel.Payout = lineData.Payout;
                                 processPointDataModel.Tension = lineData.Tension;
                                 processPointDataModel.PointNumber = i++;
-                                processCastDataModel.ProcessPoints.Add(processPointDataModel);
+                                processCastDataModel.ProcessPoints?.Add(processPointDataModel);
                             }
                         }
                         
