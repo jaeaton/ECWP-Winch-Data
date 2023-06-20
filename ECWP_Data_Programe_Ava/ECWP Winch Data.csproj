@@ -39,11 +39,11 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.0-rc1.1" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0-rc1.1" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
-    <PackageReference Include="LiveChartsCore" Version="2.0.0-beta.710" />
-    <PackageReference Include="LiveChartsCore.SkiaSharpView" Version="2.0.0-beta.710" />
-    <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.0.0-beta.700-11.0.0-preview8" />
+    <PackageReference Include="LiveChartsCore" Version="2.0.0-beta.801" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView" Version="2.0.0-beta.801" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.0.0-beta.800-11.0.0-rc1.1" />
     <PackageReference Include="Mayerch1.GithubUpdateCheck" Version="1.2.1" />
-    <PackageReference Include="MessageBox.Avalonia" Version="2.3.1-prev7.0" />
+    <PackageReference Include="MessageBox.Avalonia" Version="2.3.1-rc1" />
     <PackageReference Include="System.IO.Ports" Version="7.0.0" />
   </ItemGroup>
 
