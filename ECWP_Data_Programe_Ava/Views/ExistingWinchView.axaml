@@ -116,9 +116,10 @@
 			</StackPanel>
 			</Panel>
 		</DataTemplate>
+		
 	</UserControl.DataTemplates>
-	
-			<ItemsControl ItemsSource="{ Binding AllWinches}">
+	<Panel>
+		<ItemsControl ItemsSource="{ Binding AllWinches}">
 				
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
@@ -130,5 +131,7 @@
 					</ItemsPanelTemplate>
 				</ItemsControl.ItemsPanel>
 			</ItemsControl>
+	</Panel>
+			
 	
 </UserControl>
