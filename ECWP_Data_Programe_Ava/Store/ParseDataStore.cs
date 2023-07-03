@@ -1,4 +1,6 @@
-﻿namespace Store
+﻿using Models;
+
+namespace Store
 {
     //Data store for parse data
     public partial class ParseDataStore : ObservableObject
@@ -50,5 +52,8 @@
 
         [ObservableProperty]
         private List<string>? availableTensions;
+
+        [ObservableProperty]
+        private List<ProcessCastDataModel>? processCasts;
     }
 }

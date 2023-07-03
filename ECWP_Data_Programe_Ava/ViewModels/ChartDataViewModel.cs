@@ -130,8 +130,11 @@ namespace ViewModels
             {
                 new LineSeries<DateTimePoint>
                 {
+                    Name = "Tension",
                     Values = _observableValues,
                     Fill = null,
+                    GeometryFill = null,
+                    GeometryStroke = null,
                     GeometrySize = 0,
                     LineSmoothness = 0,
                     Stroke = new SolidColorPaint(SKColors.CornflowerBlue, 1)
@@ -141,14 +144,19 @@ namespace ViewModels
                 {
                     Values = _observableValuesZero,
                     Fill = null,
+                    GeometryFill = null,
+                    GeometryStroke = null,
                     GeometrySize = 0,
                     LineSmoothness = 0,
                     Stroke = new SolidColorPaint(SKColors.Empty, 1),
                 },
                 new LineSeries<DateTimePoint>
                 {
+                    Name = "Max Tension",
                     Values = _observableValuesMax,
                     Fill = null,
+                    GeometryFill = null,
+                    GeometryStroke = null,
                     GeometrySize = 0,
                     LineSmoothness = 0,
                     Stroke = new SolidColorPaint(SKColors.Red, 1),

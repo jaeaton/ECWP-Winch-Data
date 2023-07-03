@@ -30,7 +30,7 @@
 			</Grid.RowDefinitions>
 			<controls:PlotsConfigurationView Grid.Column="0" Margin="2"/>
 			<ScrollViewer Grid.Column="1">
-					<ItemsControl Items="{ Binding PlottingWinches}" >
+					<ItemsControl ItemsSource="{ Binding PlottingWinches}" >
 						<ItemsControl.ItemsPanel>
 							<ItemsPanelTemplate>
 								<UniformGrid Rows="{Binding PlottingWinches.Count}"></UniformGrid>

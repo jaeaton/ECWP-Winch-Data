@@ -9,7 +9,7 @@
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Select Winch:" VerticalAlignment="Center" Width="130"/>
 
-			<ComboBox SelectedItem="{ Binding ParseData.SelectedWinch, Mode=TwoWay }"  Items="{ Binding ParseData.AvailableWinches }" Width="150"/>
+			<ComboBox SelectedItem="{ Binding ParseData.SelectedWinch, Mode=TwoWay }"  ItemsSource="{ Binding ParseData.AvailableWinches }" Width="150"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Cruise Name:" VerticalAlignment="Center" Width="130"/>
@@ -41,11 +41,11 @@
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Minimum Payout:" VerticalAlignment="Center" Width="140"/>
-			<ComboBox SelectedItem="{ Binding ParseData.MinPayout}" Items="{ Binding ParseData.AvailablePayouts }"/>
+			<ComboBox SelectedItem="{ Binding ParseData.MinPayout}" ItemsSource="{ Binding ParseData.AvailablePayouts }"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Label Content="Minimum Tension:" VerticalAlignment="Center" Width="140"/>
-			<ComboBox SelectedItem="{ Binding ParseData.MinTension }" Items="{ Binding ParseData.AvailableTensions }"/>
+			<ComboBox SelectedItem="{ Binding ParseData.MinTension }" ItemsSource="{ Binding ParseData.AvailableTensions }"/>
 		</StackPanel>
 
 		<Button Content="File Location" Command="{ Binding File_LocationCommand }" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center"/>

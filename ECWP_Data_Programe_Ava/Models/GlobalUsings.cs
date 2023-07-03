@@ -27,9 +27,10 @@ global using Avalonia.Controls.Templates;
 global using Avalonia.Data;
 global using Avalonia.Layout;
 global using Avalonia.Media;
-//global using MessageBox;
-//global using MessageBox.Avalonia;
-//global using MessageBox.Avalonia.DTO;
+global using MessageBox.Avalonia;
+global using MessageBox.Avalonia.DTO;
+global using MessageBox.Avalonia.Enums;
+global using MsBox.Avalonia;
 //global using MessageBox.Avalonia.Models;
 
 global using Models;

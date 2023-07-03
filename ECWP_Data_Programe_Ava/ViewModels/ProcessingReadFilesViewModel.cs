@@ -117,11 +117,12 @@ namespace ViewModels
                                 dataLine = true;
 
                             }
+                            //Fix this section
                             else if (parseData.SelectedWinch == "UNOLS String")
                             {
                                 if (data[0] == "$WIR")
                                 {
-                                    bool LengthBool;
+                                    bool LengthBool = false;
                                     bool TensionBool = false;
                                     bool SpeedBool = false;
                                     bool PayoutBool = false;
@@ -129,11 +130,12 @@ namespace ViewModels
                                     float Speed = 0;
                                     float Payout = 0;
 
-                                    if (LengthBool = data.Length > 6)
+                                    if (data.Length > 6)
                                     {
-                                        TensionBool = float.TryParse(data[2], out Tension);
-                                        SpeedBool = float.TryParse(data[3], out Speed);
-                                        PayoutBool = float.TryParse(data[4], out Payout);
+                                        LengthBool = true;
+                                        TensionBool = float.TryParse(data[3], out Tension);
+                                        SpeedBool = float.TryParse(data[4], out Speed);
+                                        PayoutBool = float.TryParse(data[5], out Payout);
                                     }
                                     if (LengthBool != false && TensionBool != false && SpeedBool != false && PayoutBool != false)//float.TryParse(data[2], out float Tension) != false)
                                     {
@@ -151,7 +153,7 @@ namespace ViewModels
 
                                         //Gloria Early implementation
                                         lineData.StringID = data[0];
-                                        lineData.Tension = float.Parse(data[2]);
+                                        //lineData.Tension = float.Parse(data[3]);
                                         lineData.Tension = Tension;
                                         //lineData.Speed = float.Parse(data[3]);
                                         lineData.Speed = Speed;
@@ -159,24 +161,79 @@ namespace ViewModels
                                         lineData.Payout = Payout;
                                         lineData.CheckSum = "no chk sum";
                                         lineData.DateAndTime = DateTime.Parse($"{data[1]}");//T{data[2]}");
-                                        lineData.TMAlarms = data[5];
-                                        lineData.TMWarnings = data[6];
+                                        //lineData.Date = data[1];
+                                        //lineData.Time = data[2];
+                                        lineData.TMAlarms = data[6];
+                                        lineData.TMWarnings = data[7];
+
+                                        dataLine = true;
+                                    }
+
+                                }
+                            }
+                            else if (parseData.SelectedWinch == "Jay Jay")
+                            {
+                                if (data[0] == "$WIR")
+                                {
+                                    bool LengthBool = false;
+                                    bool TensionBool = false;
+                                    bool SpeedBool = false;
+                                    bool PayoutBool = false;
+                                    float Tension = 0;
+                                    float Speed = 0;
+                                    float Payout = 0;
+
+                                    if (data.Length > 6)
+                                    {
+                                        LengthBool = true;
+                                        TensionBool = float.TryParse(data[3], out Tension);
+                                        SpeedBool = float.TryParse(data[4], out Speed);
+                                        PayoutBool = float.TryParse(data[5], out Payout);
+                                    }
+                                    if (LengthBool != false && TensionBool != false && SpeedBool != false && PayoutBool != false)//float.TryParse(data[2], out float Tension) != false)
+                                    {
+
+
+                                        //Current UNOLS String
+                                        //lineData.StringID = data[0];
+                                        //lineData.Tension = float.Parse(data[3]);
+                                        //lineData.Speed = float.Parse(data[4]);
+                                        //lineData.Payout = float.Parse(data[5]);
+                                        //lineData.Checksum = data[6];
+                                        //lineData.DateAndTime = DateTime.Parse($"{data[1]}T{data[2]}");
+                                        //lineData.TMAlarms = data[7];
+                                        //lineData.TMWarnings = data[8];
+
+                                        //Gloria Early implementation
+                                        lineData.StringID = data[0];
+                                        //lineData.Tension = float.Parse(data[3]);
+                                        lineData.Tension = Tension;
+                                        //lineData.Speed = float.Parse(data[3]);
+                                        lineData.Speed = Speed;
+                                        //lineData.Payout = float.Parse(data[4]);
+                                        lineData.Payout = Payout;
+                                        lineData.CheckSum = "no chk sum";
+                                        //lineData.DateAndTime = DateTime.ParseExact($"{data[1]} {data[2]}","yyyyMMdd HH:mm:SS.fff", CultureInfo.InvariantCulture);
+                                        lineData.Date = data[1];
+                                        lineData.Time = data[2];
+                                        lineData.TMAlarms = data[6];
+                                        lineData.TMWarnings = data[7];
 
                                         dataLine = true;
                                     }
                                 }
                             }
-
-                            if (dataLine == true)
-                            {
-                                //Data.Add(stringData); //add the string to Data List
-                                DataModels.Add(lineData);
-                                //MainProcessingViewModel.parseData.ReadingLine = stringData; //Updates Line being written to UI
-                                //MainProcessingViewModel.parseData.ReadingLine = lineData.StringID + "," + lineData.Tension + "," + lineData.Speed + "," + lineData.Payout + "," + lineData.DateAndTime;
-                                //stringData = null; //Clear stringData for next loop
-                                lineData = new DataPointModel();
-                                dataLine = false;
-                            }
+                                if (dataLine == true)
+                                {
+                                    //Data.Add(stringData); //add the string to Data List
+                                    DataModels.Add(lineData);
+                                    //MainProcessingViewModel.parseData.ReadingLine = stringData; //Updates Line being written to UI
+                                    //MainProcessingViewModel.parseData.ReadingLine = lineData.StringID + "," + lineData.Tension + "," + lineData.Speed + "," + lineData.Payout + "," + lineData.DateAndTime;
+                                    //stringData = null; //Clear stringData for next loop
+                                    lineData = new DataPointModel();
+                                    dataLine = false;
+                                }
+                            
                         }
 
                     }
@@ -203,16 +260,19 @@ namespace ViewModels
                 string? maxTensionString = null;
                 string? maxPayoutString = null;
                 int cast = 1;
+                int i = 0;
                 bool castActive = false;
                 float temp;
                 string input;
+                ProcessPointDataModel processPointDataModel = new();
+                ProcessCastDataModel processCastDataModel = new();
                 await Task.Run(() =>
                 {
                     while ((input = sr.ReadLine()) != null)
                     {
                         input = input.Replace("\n", String.Empty); //remove EOL Characters
                         input = input.Replace("\r", String.Empty);
-                        DataPointModel lineData = new();// Line_Data_Model();
+                        DataPointModel lineData = new();
                         string[] values = input.Split(',');
                         //object[] valueObject = new object[values.Length];
                         //int i = 0;
@@ -225,16 +285,10 @@ namespace ViewModels
                         //lineData.DateAndTime = DateTime.Parse($"{values[1]}T{values[2]}");
                         //lineData.TMAlarms = values[7];
                         //lineData.TMWarnings = values[6];
+                        processCastDataModel.CastNumber = cast;
 
-                        //if (MainProcessingViewModel.parseData.SelectedWinch == "SIO Traction Winch")
                         {
-                            //foreach (var ob in values)
-                            //{
-                            //    var test = float.TryParse(ob, out temp);
-                            //    if (test == true) { valueObject[i] = temp; }
-                            //    else { valueObject[i] = ob; }
-                            //    i++;
-                            //}
+                            
                             //detect start of cast (values above threshold with positive slope)
                             if (lineData.Tension > minTension && Math.Abs(lineData.Payout) > minPayout)
                             {
@@ -258,54 +312,24 @@ namespace ViewModels
                             {
                                 ProcessingWriteFilesViewModel.WriteProcessed(maxTensionString, maxPayoutString, cast, parseData); //end cast, increment cast number, write processed data
                                 parseData.ReadingLine = maxTensionString;
-
+                                parseData.ProcessCasts?.Add(processCastDataModel);
                                 cast++;
                                 castActive = false;
                                 maxPayoutCurrent = 0;
                                 maxTensionCurrent = 0;
+                                i = 0;
 
                             }
 
+                            if (castActive)
+                            {
+                                processPointDataModel.Payout = lineData.Payout;
+                                processPointDataModel.Tension = lineData.Tension;
+                                processPointDataModel.PointNumber = i++;
+                                processCastDataModel.ProcessPoints?.Add(processPointDataModel);
+                            }
                         }
-                        //if (MainProcessingViewModel.parseData.SelectedWinch == "MASH Winch")
-                        //{
-                        //    foreach (var ob in values)
-                        //    {
-                        //        var test = float.TryParse(ob, out temp);
-                        //        if (test == true) { valueObject[i] = temp; }
-                        //        else { valueObject[i] = ob; }
-                        //        i++;
-                        //    }
-                        //    //detect start of cast (values above threshold with positive slope)
-                        //    if ((float)valueObject[x] > minTension && (float)valueObject[y] > minPayout)
-                        //    {
-                        //        castActive = true;
-                        //        //check for new maximum values (tension and payout) and store
-                        //        if ((float)valueObject[x] > maxTensionCurrent)
-                        //        {
-                        //            maxTensionCurrent = (float)valueObject[x];
-                        //            maxTensionString = input;
-                        //        }
-                        //        if ((float)valueObject[y] > maxPayoutCurrent)
-                        //        {
-                        //            maxPayoutCurrent = (float)valueObject[y];
-                        //            maxPayoutString = input;
-                        //        }
-
-                        //    }
-                        //    //detect end of cast (values below threshold with negative slope)
-                        //    if (/*(float)valueObject[x] < minTension &&*/ (float)valueObject[y] < minPayout && castActive == true)
-                        //    {
-                        //        WriteFilesViewModel.WriteProcessed(maxTensionString, maxPayoutString, cast); //end cast, increment cast number, write processed data
-                        //        MainProcessingViewModel.parseData.ReadingLine = maxTensionString;
-
-                        //        cast++;
-                        //        castActive = false;
-                        //        maxPayoutCurrent = 0;
-                        //        maxTensionCurrent = 0;
-
-                        //    }
-                        //}
+                        
                     }
                     parseData.ReadingLine = "Done!";
                 });
@@ -322,7 +346,8 @@ namespace ViewModels
                 "MASH Winch",
                 "SIO Traction Winch",
                 "Armstrong CAST 6",
-                "UNOLS String"
+                "UNOLS String",
+                "Jay Jay"
             };
 
             parseData.AvailableTensions = new List<string>

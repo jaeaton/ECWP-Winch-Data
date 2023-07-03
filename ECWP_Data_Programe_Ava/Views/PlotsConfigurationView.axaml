@@ -21,7 +21,7 @@
 		</StackPanel>
 		<StackPanel Orientation="Vertical" Margin="5">
 			<TextBlock Text="Select Winches" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-			<ItemsControl Items="{ Binding AllWinches}" Background="LightGray" CornerRadius="5">
+			<ItemsControl ItemsSource="{ Binding AllWinches}" Background="LightGray" CornerRadius="5">
 			</ItemsControl>
 		</StackPanel>
 		<StackPanel Orientation="Vertical" Margin="5">
