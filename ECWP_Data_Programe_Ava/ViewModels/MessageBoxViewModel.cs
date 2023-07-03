@@ -2,10 +2,10 @@
 {
     public class MessageBoxViewModel
     {
-        public static void DisplayMessage(string message)
+        public async static void DisplayMessage(string message)
         {
-            var messageBoxStandardWindow = MessageBox.Avalonia.MessageBoxManager.GetMessageBoxStandardWindow("Note", message);
-            messageBoxStandardWindow.Show();
+            var messageBoxStandardWindow = MessageBoxManager.GetMessageBoxStandard("Note", message);
+            await messageBoxStandardWindow.ShowAsync();
         }
     }
         

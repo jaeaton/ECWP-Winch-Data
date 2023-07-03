@@ -7,6 +7,7 @@
 			 xmlns:model="clr-namespace:Models">
 	<UserControl.DataTemplates>
 		<DataTemplate DataType="model:WinchModel">
+			<Panel Width="250">
 			<StackPanel Margin="5">
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="Winch Name: "/>
@@ -113,14 +114,21 @@
 					<TextBlock Text="{ Binding BaudRateOutput }"/>
 				</StackPanel>
 			</StackPanel>
+			</Panel>
 		</DataTemplate>
 	</UserControl.DataTemplates>
-	<ItemsControl ItemsSource="{ Binding AllWinches}">
-		<ItemsControl.ItemsPanel>
-			<ItemsPanelTemplate>
-				<WrapPanel Margin="5" Orientation="Horizontal"/>
-			</ItemsPanelTemplate>
-		</ItemsControl.ItemsPanel>
-	</ItemsControl>
+	
+			<ItemsControl ItemsSource="{ Binding AllWinches}">
+				
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						
+							<WrapPanel Margin="5" />
+						
+						
+						
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+			</ItemsControl>
 	
 </UserControl>
