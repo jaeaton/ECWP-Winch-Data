@@ -6,15 +6,18 @@
 			 x:Class="Views.UserInputsView">
 
 		<StackPanel Background="WhiteSmoke">
-				<StackPanel Orientation="Horizontal" Margin="5">
+			<Border BorderBrush="Gray" BorderThickness="1" CornerRadius="5"	>
+			<StackPanel Orientation="Horizontal" Margin="5">
 					<TextBlock Text="Select Winch" VerticalAlignment="Center" Width="90"/>
-					<ComboBox ItemsSource="{ Binding WinchNames }" SelectedItem="{ Binding SelectWinch }"  />
+					<ComboBox ItemsSource="{ Binding WinchNames }" SelectedItem="{ Binding SelectWinch }" Width="130" />
 				</StackPanel>
-				<StackPanel Background="AliceBlue">
+			</Border>
+			<Border Background="AliceBlue" BorderBrush="Gray" BorderThickness="1" CornerRadius="5">
+				<StackPanel >
 					
 					<StackPanel Orientation="Horizontal" Margin="5">
 						<TextBlock Text="Winch Name" Width="90" VerticalAlignment="Center" />
-						<TextBox Watermark="Enter Winch Name" Text="{ Binding CurrentWinch.WinchName, Mode=TwoWay }"/>
+						<TextBox Watermark="Enter Name" Text="{ Binding CurrentWinch.WinchName, Mode=TwoWay }" Width="130"/>
 					</StackPanel>
 					<TextBlock Text="Communication Parameters" Margin="5"/>
 					<StackPanel Orientation="Horizontal" Margin="5">
@@ -29,12 +32,18 @@
 						<TextBlock Text="Source Type" Width="90" VerticalAlignment="Center"/>
 						<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.CommunicationType, Mode=TwoWay }" ItemsSource="{ Binding Path=AvailableProtocols }" SelectedIndex="0"/>
 					</StackPanel>
-					<StackPanel>
-						<CheckBox x:Name="CheckBoxHawboldt" Content="Check for Hawboldt Winch" IsChecked="{ Binding CurrentWinch.ProtocolHawboldt, FallbackValue='False' }"/>
-						<ComboBox ItemsSource="{ Binding HawboldtModelList }" SelectedItem="{ Binding CurrentWinch.HawboldtModel, Mode=TwoWay }" IsVisible="{ Binding ElementName=CheckBoxHawboldt,Path=IsChecked }"/>
+					<StackPanel Margin="5">
+						<CheckBox x:Name="CheckBoxHawboldt" Content="Hawboldt Winch" IsChecked="{ Binding CurrentWinch.ProtocolHawboldt, FallbackValue='False' }" Margin="6,2,50,0"/>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="Model" Width="90" Margin="5" VerticalAlignment="Center" IsVisible="{ Binding ElementName=CheckBoxHawboldt,Path=IsChecked }" />
+							<ComboBox ItemsSource="{ Binding HawboldtModelList }" SelectedItem="{ Binding CurrentWinch.HawboldtModel, Mode=TwoWay }" IsVisible="{ Binding ElementName=CheckBoxHawboldt,Path=IsChecked }" Width="130"/>
+						</StackPanel>
+						
 					</StackPanel>
 				</StackPanel>
-				<StackPanel Background="MintCream" >
+			</Border>
+			<Border Background="MintCream" BorderBrush="Gray" BorderThickness="1" CornerRadius="5"	>
+				<StackPanel >
 					<StackPanel Margin="5">
 						<TextBlock Text="Logging Parameters"/>
 						<CheckBox x:Name="CheckBoxLog20Hz" IsEnabled="{Binding Path=UserInputsEnable}" Content="Log 20Hz Data"  HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding CurrentWinch.Log20Hz,FallbackValue='False'}"/>
@@ -79,10 +88,13 @@
 							<TextBlock Text="ABL" Width="120" VerticalAlignment="Center" />
 							<TextBox Watermark="10000" x:Name="TextBoxABL" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.AssignedBreakingLoad, Mode=TwoWay }" Width="90" VerticalAlignment="Center"></TextBox>
 						</StackPanel>
-						
+
 					</StackPanel>
+				
 				</StackPanel>
-				<StackPanel Background="LavenderBlush">
+			</Border>
+			<Border Background="LavenderBlush" BorderBrush="Gray" BorderThickness="1" CornerRadius="5"	>
+				<StackPanel>
 					<StackPanel Margin="5">
 						<CheckBox x:Name="CheckBoxSendUDP" IsEnabled="{Binding Path=UserInputsEnable}" Content="Send UDP Data" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding CurrentWinch.UdpOutput,FallbackValue='True'}"/>
 					</StackPanel>
@@ -102,7 +114,9 @@
 							<RadioButton Content="UNOLS Format" HorizontalContentAlignment="Right" Margin="6,0,50,0" GroupName="udpRadioButtons" IsChecked="{Binding CurrentWinch.UdpFormatUnols, FallbackValue='True'}"/>
 						</StackPanel>										
 				</StackPanel>
-				<StackPanel Background="Cornsilk">
+				</Border>
+			<Border Background="Cornsilk" BorderBrush="Gray" BorderThickness="1" CornerRadius="5"	>
+				<StackPanel>
 					<StackPanel Margin="5">
 						<CheckBox x:Name="CheckBoxSendSerial" Content="Send Serial Data" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding CurrentWinch.SerialOutput}"/>
 					</StackPanel>
@@ -121,5 +135,6 @@
 							</StackPanel>
 						</StackPanel>															
 				</StackPanel>
+				</Border>
 			</StackPanel>
 </UserControl>
