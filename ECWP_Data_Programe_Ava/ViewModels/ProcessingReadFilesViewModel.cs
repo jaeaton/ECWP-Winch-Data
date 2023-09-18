@@ -142,15 +142,15 @@ namespace ViewModels
 
 
                                         //Current UNOLS String
-                                        //lineData.StringID = data[0];
-                                        //lineData.Tension = float.Parse(data[3]);
-                                        //lineData.Speed = float.Parse(data[4]);
-                                        //lineData.Payout = float.Parse(data[5]);
-                                        //lineData.Checksum = data[6];
-                                        //lineData.DateAndTime = DateTime.Parse($"{data[1]}T{data[2]}");
-                                        //lineData.TMAlarms = data[7];
-                                        //lineData.TMWarnings = data[8];
-
+                                        lineData.StringID = data[0];
+                                        lineData.Tension = float.Parse(data[3]);
+                                        lineData.Speed = float.Parse(data[4]);
+                                        lineData.Payout = float.Parse(data[5]);
+                                        lineData.CheckSum = data[6];
+                                        lineData.DateAndTime = DateTime.ParseExact($"{data[1]}T{data[2]}","yyyyMMddTHH:mm:ss.fff", null);
+                                        lineData.TMAlarms = data[7];
+                                        lineData.TMWarnings = data[8];
+                                        /*
                                         //Gloria Early implementation
                                         lineData.StringID = data[0];
                                         //lineData.Tension = float.Parse(data[3]);
@@ -165,7 +165,7 @@ namespace ViewModels
                                         //lineData.Time = data[2];
                                         lineData.TMAlarms = data[6];
                                         lineData.TMWarnings = data[7];
-
+                                        */
                                         dataLine = true;
                                     }
 
@@ -363,6 +363,9 @@ namespace ViewModels
             {
                 "-10",
                 "0",
+                "1",
+                "5",
+                "10",
                 "12",
                 "25",
                 "50"
