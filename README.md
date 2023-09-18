@@ -9,13 +9,13 @@ To Do:
 - [ ] Display tension member alarms and warnings
 - [ ] Display UNOLS Winch string statuses
 - [ ] Start casts (and log files) based on payout and tension
-- [ ] Dynamically resize line parameter text (Add ability to resize plot)
 - [ ] Add unit conversion
 - [ ] Add Graph view to data processing
 - [ ] Add Mermac Reception (MacArtney)
 - [ ] Add Odim Reception
 - [ ] Record Hawboldt winch statuses
 - [ ] Add in detection and themeing for darkmode
+- [x] ~~Dynamically resize line parameter text (Add ability to resize plot)~~
 - [x] ~~Configurable time span of charts on a per winch basis (10,20,30,45 seconds)~~
 - [x] ~~Display tension member alarm and warning levels on trend graph~~
 - [x] ~~End casts (and log files) based on payout and tension~~
