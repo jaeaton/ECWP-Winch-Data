@@ -9,6 +9,7 @@ To Do:
 - [ ] Display tension member alarms and warnings
 - [ ] Display UNOLS Winch string statuses
 - [ ] Start casts (and log files) based on payout and tension
+- [ ] Dynamically resize line parameter text (Add ability to resize plot)
 - [ ] Add unit conversion
 - [ ] Add Graph view to data processing
 - [ ] Add Mermac Reception (MacArtney)
