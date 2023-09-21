@@ -43,6 +43,11 @@ namespace ViewModels
                 {
                     lines.Add($"Winch Name,{winch.WinchName}");
                 }
+                else
+                {
+                    MessageBoxViewModel.DisplayMessage(
+                           $"Winch Name must be entered.");
+                }
                 if (winch.InputCommunication.TcpIpAddress  != null)
                 {
                     bool valid = ValidateIPViewModel.ValidateIPFunction(winch.InputCommunication.TcpIpAddress);
@@ -56,8 +61,13 @@ namespace ViewModels
                             $"{winch.WinchName}\n"+
                             $"Input IP Address not valid");
                         break;
-                    }
-                    
+                    }    
+                }
+                else
+                {
+                    MessageBoxViewModel.DisplayMessage(
+                            $"{winch.WinchName}\n" +
+                            $"Input IP Address required");
                 }
                 if (winch.InputCommunication.PortNumber != null)
                 {
@@ -74,6 +84,12 @@ namespace ViewModels
                     }
                     
                 }
+                else
+                {
+                    MessageBoxViewModel.DisplayMessage(
+                            $"{winch.WinchName}\n" +
+                            $"Input port number required");
+                }
                 if (winch.OutputCommunication.TcpIpAddress != null)
                 {
                     bool valid = ValidateIPViewModel.ValidateIPFunction(winch.OutputCommunication.TcpIpAddress);
@@ -89,6 +105,7 @@ namespace ViewModels
                     }
                     
                 }
+                
                 if (winch.OutputCommunication.PortNumber != null)
                 {
                     bool valid = ValidateIPViewModel.ValidatePortFunction (winch.OutputCommunication.PortNumber);
@@ -134,12 +151,24 @@ namespace ViewModels
                 if (winch.UdpOutput != null)
                 {
                     lines.Add($"Send UDP,{ winch.UdpOutput }");
+                    if (winch.OutputCommunication.TcpIpAddress == null)
+                    {
+                        MessageBoxViewModel.DisplayMessage(
+                                    $"{winch.WinchName}\n" +
+                                    $"Output IP Address required");
+                    }
+                    if (winch.OutputCommunication.PortNumber == null)
+                    {
+                        MessageBoxViewModel.DisplayMessage(
+                                    $"{winch.WinchName}\n" +
+                                    $"Output port number required");
+                    }
                 }
                 if (winch.UdpFormat != null)
                 {
                     lines.Add($"UDP String Format,{ winch.UdpFormat }");
                 }
-                if (winch.Log20Hz!= null)
+                if (winch.Log20Hz != null)
                 {
                     lines.Add($"Save 20Hz Data,{ winch.Log20Hz }");
                 }

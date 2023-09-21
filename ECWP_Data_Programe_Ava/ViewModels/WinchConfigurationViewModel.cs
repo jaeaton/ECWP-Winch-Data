@@ -48,13 +48,14 @@
         {
             MessageBoxViewModel.DisplayMessage($"Step 1. Provide a unique name to the winch. \n" + 
                 $"Step 2. Fill in communication parameters.\n" +
-                "   a. Input an IP address of the winch for TCP Server Source (ECWP Winches) or \n" +
+                "   a. Input an IP address of the winch for TCP Server Source (ECWP Winches: Moe, Larry, Curly, Shemp, Gloria, Jay Jay) or \n" +
                 "   that of the host computer for TCP Client and UDP.\n" +
                 "   b. Enter a port number for the communications (ECWP uses 50505)\n" +
                 "   c. Select a source type from the drop down list. \n" +
                 "       TCP Server -- ECWP Winch\n" +
                 "       TCP Client -- LCI-90i\n" +
                 "       UDP -- UDP Sources\n" +
+                "   d. For winches that use the Hawboldt protocol, check the box and select the model number.\n" +
                 "Step 3. Select the logging paramters\n" +
                 "   a. Log 20Hz Data logs the input data at the input data rate to the local machine.\n" +
                 "   Then select the log format to use. MTNW format includes the date, time, tension, \n" +
