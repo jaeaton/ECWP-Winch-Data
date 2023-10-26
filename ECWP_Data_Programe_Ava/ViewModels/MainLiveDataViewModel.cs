@@ -49,7 +49,7 @@ namespace ViewModels
             FileOperationsViewModel.WriteConfig(_configDataStore);
         }
 
-        public void PlotSelectionChanged(bool selected, string? WinchName)
+        public void PlotSelectionChanged(bool? selected, string? WinchName)
         {
             if (selected == true)
             {

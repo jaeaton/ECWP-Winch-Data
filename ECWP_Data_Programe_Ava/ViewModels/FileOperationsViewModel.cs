@@ -256,7 +256,10 @@ namespace ViewModels
                 {
                     lines.Add($"Chart Time Span,{winch.ChartTimeSpan}");
                 }
-
+                if (winch.PlotSelected != null)
+                {
+                    lines.Add($"Plot Winch,{winch.PlotSelected}");
+                }
                 //Write each line of array using stream writer
                 using (StreamWriter stream = new StreamWriter(destPath, true))
                 {
@@ -300,6 +303,7 @@ namespace ViewModels
                                     winch = new();
                                 }
                                 winch.WinchName = line.Substring(delim + 1);
+                              
                             }
                             if (line.Substring(0, delim) == "Receive IP")
                             {
@@ -459,6 +463,14 @@ namespace ViewModels
                             if (line.Substring(0, delim) == "Chart Time Span")
                             {
                                 winch.ChartTimeSpan = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Plot Winch")
+                            {
+                                winch.PlotSelected = bool.Parse(line.Substring(delim + 1));
+                            }
+                            if (line.Substring(0, delim) == "Plot Winch")
+                            {
+                                winch.PlotSelected = bool.Parse(line.Substring(delim + 1));
                             }
                         }
                         

@@ -28,8 +28,8 @@
         [ObservableProperty]
         private string? fileExtension;
         [ObservableProperty]
-        private bool plotSelected;
-        partial void OnPlotSelectedChanged(bool value)
+        private bool? plotSelected;
+        partial void OnPlotSelectedChanged(bool? value)
         {
             MainLiveDataViewModel mldvm = new MainLiveDataViewModel();
             mldvm.PlotSelectionChanged(value, WinchName);
