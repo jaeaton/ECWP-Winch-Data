@@ -244,6 +244,10 @@ namespace ViewModels
                 {
                     lines.Add($"Assigned Breaking Load,{ winch.AssignedBreakingLoad }");
                 }
+                if (winch.FactorOfSafety != null)
+                {
+                    lines.Add($"Factor Of Safety,{winch.FactorOfSafety}");
+                }
                 if (winch.ProtocolHawboldt == true)
                 {
                     lines.Add($"HawboldtModel,{winch.HawboldtModel}");
@@ -442,6 +446,10 @@ namespace ViewModels
                             if (line.Substring(0, delim) == "Assigned Breaking Load")
                             {
                                 winch.AssignedBreakingLoad = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Factor Of Safety")
+                            {
+                                winch.FactorOfSafety = Convert.ToDouble(line.Substring(delim + 1));
                             }
                             if (line.Substring(0, delim) == "HawboldtModel")
                             {
