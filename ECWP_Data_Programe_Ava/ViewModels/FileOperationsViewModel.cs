@@ -148,7 +148,7 @@ namespace ViewModels
                         break;
                     }
                 }
-                if (winch.UdpOutput != null)
+                if (winch.UdpOutput == true)
                 {
                     lines.Add($"Send UDP,{ winch.UdpOutput }");
                     if (winch.OutputCommunication.TcpIpAddress == null)
