@@ -121,7 +121,33 @@
         private string? assignedBreakingLoad;
         partial void OnAssignedBreakingLoadChanged(string? value)
         {
-            ChartData.Sections[1].Yj = Convert.ToDouble(value);
+            if (double.TryParse(AssignedBreakingLoad, out double abl))
+            {
+                ChartData.Sections[1].Yj = abl;
+
+                if (FactorOfSafety != null)
+                {
+                    TensionAlarmLevel = (Convert.ToInt16(abl / FactorOfSafety)).ToString();
+
+                    if (FactorOfSafety == 5)
+                    {
+                        TensionWarningLevel = (Convert.ToInt16(abl / 5.5)).ToString();
+                    }
+                    if (FactorOfSafety == 2.5)
+                    {
+                        TensionWarningLevel = (Convert.ToInt16(abl / 2.8)).ToString();
+                    }
+                    if (FactorOfSafety == 2.0)
+                    {
+                        TensionWarningLevel = (Convert.ToInt16(abl / 2.2)).ToString();
+                    }
+                    if (FactorOfSafety == 1.5)
+                    {
+                        TensionWarningLevel = (Convert.ToInt16(abl / 1.7)).ToString();
+                    }
+                }
+            }
+            
         }
         [ObservableProperty]
         private bool autoLog;
@@ -131,7 +157,34 @@
         private string? hawboldtModel;
         [ObservableProperty]
         private string? chartTimeSpan;
-        
+        [ObservableProperty]
+        private double? factorOfSafety;
+        partial void OnFactorOfSafetyChanged(double? oldValue, double? newValue)
+        {
+            if(double.TryParse(AssignedBreakingLoad, out double abl))
+            {
+                TensionAlarmLevel = (Convert.ToInt16(abl/newValue)).ToString();
+                
+                if(FactorOfSafety == 5)
+                {
+                    TensionWarningLevel = (Convert.ToInt16(abl / 5.5)).ToString();
+                }
+                if (FactorOfSafety == 2.5)
+                {
+                    TensionWarningLevel = (Convert.ToInt16(abl / 2.8)).ToString();
+                }
+                if (FactorOfSafety == 2.0)
+                {
+                    TensionWarningLevel = (Convert.ToInt16(abl / 2.2)).ToString();
+                }
+                if (FactorOfSafety == 1.5)
+                {
+                    TensionWarningLevel = (Convert.ToInt16(abl / 1.7)).ToString();
+                }
+            }
+            
+            
+        }
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)
         {

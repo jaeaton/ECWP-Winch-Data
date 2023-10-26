@@ -79,18 +79,26 @@
 						</StackPanel>
 						<StackPanel Orientation="Horizontal" Margin="2">
 							<TextBlock Text="Warning Tension" Width="110" VerticalAlignment="Center" />
-							<TextBox Watermark="Ex: 4000" x:Name="TextBoxWarningmTension" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.TensionWarningLevel, Mode=TwoWay }" Width="90" VerticalAlignment="Center"></TextBox>
+							<Border BorderBrush="DarkGray" BorderThickness="1" CornerRadius="2">
+								<TextBlock Text="{Binding CurrentWinch.TensionWarningLevel}" Width="90" VerticalAlignment="Center"/>
+							</Border>							
 							<TextBlock Margin="3" Text="{Binding CurrentWinch.TensionUnit}" VerticalAlignment="Center"/>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal" Margin="2">
 							<TextBlock Text="Alarm Tension" Width="110" VerticalAlignment="Center" />
-							<TextBox Watermark="Ex: 5000" x:Name="TextBoxAlarmTension" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.TensionAlarmLevel, Mode=TwoWay }" Width="90" VerticalAlignment="Center"></TextBox>
-							<TextBlock Margin="3" Text="{Binding CurrentWinch.TensionUnit}" VerticalAlignment="Center"/>
+							<Border BorderBrush="DarkGray" BorderThickness="1" CornerRadius="2">
+								<TextBlock  Text="{Binding CurrentWinch.TensionAlarmLevel, Mode=TwoWay }" Width="90" VerticalAlignment="Center"></TextBlock>
+							</Border>
+								<TextBlock Margin="3" Text="{Binding CurrentWinch.TensionUnit}" VerticalAlignment="Center"/>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal" Margin="2">
 							<TextBlock Text="ABL" Width="110" VerticalAlignment="Center" />
 							<TextBox Watermark="Ex: 10000" x:Name="TextBoxABL" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.AssignedBreakingLoad, Mode=TwoWay }" Width="90" VerticalAlignment="Center"></TextBox>
 							<TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.TensionUnit }" VerticalAlignment="Center"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal" Margin="2">
+							<TextBlock Text="App A FoS" VerticalAlignment="Center" Width="110"/>
+							<ComboBox SelectedItem="{ Binding CurrentWinch.FactorOfSafety, Mode=TwoWay }" Width="90" ItemsSource="{ Binding FactorOfSafetyList }" SelectedIndex="1"/>
 						</StackPanel>
 
 					</StackPanel>

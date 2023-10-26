@@ -55,6 +55,9 @@
         private List<string>? hawboldtModelList;
 
         [ObservableProperty]
+        private List<double>? factorOfSafetyList;
+
+        [ObservableProperty]
         private string? selectWinch;// = new();
         partial void OnSelectWinchChanged(string? value)
         {

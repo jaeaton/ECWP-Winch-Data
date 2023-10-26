@@ -58,6 +58,13 @@ namespace Views
                                                                 "30",
                                                                 "45"
                                                             };
+            MainWindowViewModel._configDataStore.FactorOfSafetyList = new List<double>
+                                                            {
+                                                                5.0,
+                                                                2.5,
+                                                                2.0,
+                                                                1.5
+                                                            };
             //globalConfig = (GlobalConfigModel)FileOperationsViewModel.ReadConfig(MainWindowViewModel._configDataStore);
             FileOperationsViewModel.ReadConfig(MainWindowViewModel._configDataStore);
             InitializeComponent();
