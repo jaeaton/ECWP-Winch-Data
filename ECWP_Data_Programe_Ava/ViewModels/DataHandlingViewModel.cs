@@ -458,7 +458,7 @@
             //If UNOLS Format
             if (winch.UdpFormatUnols)
             {
-                line = $"WIR,{ data.Date },{ data.Time },{ data.Tension },{ data.Speed },{ data.Payout },{ data.TMWarnings},{data.TMAlarms},";
+                line = $"$WIR,{ data.Date },{ data.Time },{ data.Tension },{ data.Speed },{ data.Payout },{ data.TMWarnings },{ data.TMAlarms },{ data.CheckSum }";
             }
             //Not UNOLS Format (MTNW 1)
             else
@@ -483,7 +483,7 @@
             //If UNOLS Format
             if (winch.SerialFormatUnols)
             {
-                line = $"WIR,{data.Date},{data.Time},{data.Tension},{data.Speed},{data.Payout},{data.TMWarnings},{data.TMAlarms},";
+                line = $"WIR,{data.Date},{data.Time},{data.Tension},{data.Speed},{data.Payout},{data.TMWarnings},{data.TMAlarms}, { data.CheckSum }";
             }
             //Not UNOLS Format (MTNW 1)
             else

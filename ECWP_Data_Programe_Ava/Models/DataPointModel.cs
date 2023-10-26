@@ -74,6 +74,8 @@
             Speed = speed;
 
             CheckSum = inCheckSum;
+            TMAlarms = "00000000";
+            TMWarnings = "00000000";
         }
         /// <summary>
         /// UNOLS String, Overloads include Tension member warnings and alarms
