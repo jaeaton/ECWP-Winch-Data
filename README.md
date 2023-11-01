@@ -7,10 +7,14 @@ The current version can communicate with ECWP winches: Gloria, Jay Jay, Godzilla
 
 To Do:
 - [ ] Display tension member alarms and warnings
+- [ ] Record Tension Member Alarms and Warnings
+- [ ] Add Wire total wire
+- [ ] Add left on drum amount (total-wire out)
 - [ ] Display UNOLS Winch string statuses
 - [ ] Start casts (and log files) based on payout and tension
 - [ ] Add unit conversion
 - [ ] Add Graph view to data processing
+- [ ] Add 3PS Data reception
 - [ ] Add Mermac Reception (MacArtney)
 - [ ] Add Odim Reception
 - [ ] Record Hawboldt winch statuses
