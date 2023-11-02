@@ -26,6 +26,8 @@
         [ObservableProperty]
         private string? rawWinchData;
         //public string RawWinchData { get => _rawWinchData; set { _rawWinchData = value; OnPropertyChanged(nameof(RawWinchData)); } }
+        [ObservableProperty]
+        private string? tensionColor;
         public LiveDataDataStore() { }
         public LiveDataDataStore(string? tens, string? maxTens, string? spee, string? maxSpee, string? payo, string? maxPayo, string? rawWire, string? rawWinch)
         {

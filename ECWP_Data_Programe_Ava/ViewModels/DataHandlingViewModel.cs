@@ -1,4 +1,6 @@
-﻿namespace ViewModels
+﻿using System.Diagnostics;
+
+namespace ViewModels
 {
     public class DataHandlingViewModel
     {
@@ -181,6 +183,18 @@
             winch.LiveData.Speed = latest.Speed.ToString();
             //chartVM.AddData(latest, winch.LiveData);
             winch.ChartData.AddData(latest, winch.LiveData, winch.ChartTimeSpan);
+            if(latest.TMWarnings.IndexOf("1") > 0 )
+            {
+                winch.LiveData.TensionColor = "yellow";
+                if(latest.TMAlarms.IndexOf("1") > 0 )
+                {
+                    winch.LiveData.TensionColor = "red";
+                }
+            }
+            else
+            {
+                winch.LiveData.TensionColor = "";
+            }
         }
         private void MaxValues(WinchModel winch)
         {
@@ -358,6 +372,19 @@
                         {
                             MaxValues(winch);
                         }
+                        //Look for TM warnings and alarms and set valvues
+                        if (winch.TensionWarningLevel != null && winch.TensionAlarmLevel != null)
+                        {
+                            if (latest.Tension > float.Parse(winch.TensionWarningLevel))
+                            {
+                            latest.TMAlarms = "00000001";                        
+                            }
+                            if (latest.Tension > float.Parse(winch.TensionAlarmLevel))
+                            {
+                                latest.TMAlarms = "00000001";
+                            }   
+                        }
+                        
                         //Write data to logfile
                         if (winch.Log20Hz && !winch.AutoLog)
                         {

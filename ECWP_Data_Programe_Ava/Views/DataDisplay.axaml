@@ -29,10 +29,10 @@
 		<Viewbox Grid.Row="0" StretchDirection="Both" Stretch="Uniform">
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 			<Label Content="Tension"></Label>
-			<Label Content="{Binding LiveData.Tension, FallbackValue=00000}" HorizontalContentAlignment="Right"  MinWidth="70"/>
+			<Label Content="{Binding LiveData.Tension, FallbackValue=00000}" HorizontalContentAlignment="Right"  MinWidth="70" Background="{ Binding LiveData.TensionColor }"/>
 			<Label Content="{ Binding TensionUnit }" />
 			<Label Content="Speed"/>
-			<Label Content="{Binding LiveData.Speed, FallbackValue=000}" HorizontalContentAlignment="Right" MinWidth="50"/>
+			<Label Content="{Binding LiveData.Speed, FallbackValue=000}" HorizontalContentAlignment="Right" MinWidth="50" />
 			<Label Content="{ Binding SpeedUnit }" />
 			<Label Content="Payout" />
 			<Label Content="{Binding LiveData.Payout, FallbackValue=0000}" HorizontalContentAlignment="Right" MinWidth="60" />
