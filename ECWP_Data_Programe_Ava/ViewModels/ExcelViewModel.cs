@@ -4,15 +4,16 @@ namespace ViewModels
 {
     internal class ExcelViewModel
     {
-        private void AddData()
+        private void AddData(WinchModel winch, DataPointModel dataMaxTension, DataPointModel dataMaxPayout, ConfigDataStore config)
         {
+            string fileName = $"{winch.MaxWireLogName}";
             //Check for file
-            if (!File.Exists("test"))
+            if (!File.Exists(fileName))
             {
-                NewWorkbook();
+                NewWorkbook(winch);
             }
             // Opening workbook
-            var wb = new XLWorkbook("test");
+            var wb = new XLWorkbook(fileName);
 
             //Selecting a worksheet
             var ws = wb.Worksheets.Worksheet("Log");
@@ -23,27 +24,27 @@ namespace ViewModels
             int CurrentRow = LastRow + 1;
             
             //Cruise Number
-            ws.Cell($"A{CurrentRow}").Value = "Cruise Number";
+            ws.Cell($"A{CurrentRow}").Value = $"{config.CruiseNameBox}";
             //Date
-            ws.Cell($"B{CurrentRow}").Value = "Date";
+            ws.Cell($"B{CurrentRow}").Value = $"{dataMaxTension.Date}";
             //Cast number
-            ws.Cell($"C{CurrentRow}").Value = "Cast Number";
+            ws.Cell($"C{CurrentRow}").Value = $"{winch.CastNumber}";
             //Total Length of Cable
             ws.Cell($"D{CurrentRow}").Value = "Cable Length (m)";
             //Maximum Tension
-            ws.Cell($"E{CurrentRow}").Value = "Maximum Tension (lbf)";
+            ws.Cell($"E{CurrentRow}").Value = $"{dataMaxTension.Tension}";
             //Wire Out at Max Tension
-            ws.Cell($"F{CurrentRow}").Value = "MT Wire Out (m)";
+            ws.Cell($"F{CurrentRow}").Value = $"{dataMaxTension.Payout}";
             //Wire on drum at Max Tension
             ws.Cell($"G{CurrentRow}").Value = "MT Wire In (m)";
             //Maximum Wire Out
-            ws.Cell($"H{CurrentRow}").Value = "Max Wire Out (m)";
+            ws.Cell($"H{CurrentRow}").Value = $"{dataMaxPayout.Payout}";
         }
 
-        private void NewWorkbook()
+        private void NewWorkbook(WinchModel winch)
         {
             // Creating a new workbook
-            var wb = new XLWorkbook();
+            var wb = new XLWorkbook(winch.MaxWireLogName);
 
             //Adding a worksheet
             var ws = wb.Worksheets.Add("Log");
@@ -71,7 +72,7 @@ namespace ViewModels
             ws.Cell("I24").Value = "Notes";
 
             //Save File Cruise Name + Winch Name
-            wb.SaveAs($"test");
+            wb.Save();
         }
     }
 }
