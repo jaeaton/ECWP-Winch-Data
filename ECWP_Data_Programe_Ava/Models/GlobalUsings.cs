@@ -30,8 +30,8 @@ global using Avalonia.Media;
 global using MsBox.Avalonia;
 global using MsBox.Avalonia.Dto;
 global using MsBox.Avalonia.Enums;
-//global using MsBox.Avalonia;
-//global using MessageBox.Avalonia.Models;
+global using ClosedXML;
+global using ClosedXML.Excel;
 
 global using Models;
 global using Views;

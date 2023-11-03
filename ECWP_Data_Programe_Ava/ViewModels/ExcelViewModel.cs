@@ -1,0 +1,77 @@
+﻿using DocumentFormat.OpenXml.Drawing;
+
+namespace ViewModels
+{
+    internal class ExcelViewModel
+    {
+        private void AddData()
+        {
+            //Check for file
+            if (!File.Exists("test"))
+            {
+                NewWorkbook();
+            }
+            // Opening workbook
+            var wb = new XLWorkbook("test");
+
+            //Selecting a worksheet
+            var ws = wb.Worksheets.Worksheet("Log");
+
+            //Get last row
+            int LastRow = ws.LastRowUsed().RowNumber();
+            //Set Current Row
+            int CurrentRow = LastRow + 1;
+            
+            //Cruise Number
+            ws.Cell($"A{CurrentRow}").Value = "Cruise Number";
+            //Date
+            ws.Cell($"B{CurrentRow}").Value = "Date";
+            //Cast number
+            ws.Cell($"C{CurrentRow}").Value = "Cast Number";
+            //Total Length of Cable
+            ws.Cell($"D{CurrentRow}").Value = "Cable Length (m)";
+            //Maximum Tension
+            ws.Cell($"E{CurrentRow}").Value = "Maximum Tension (lbf)";
+            //Wire Out at Max Tension
+            ws.Cell($"F{CurrentRow}").Value = "MT Wire Out (m)";
+            //Wire on drum at Max Tension
+            ws.Cell($"G{CurrentRow}").Value = "MT Wire In (m)";
+            //Maximum Wire Out
+            ws.Cell($"H{CurrentRow}").Value = "Max Wire Out (m)";
+        }
+
+        private void NewWorkbook()
+        {
+            // Creating a new workbook
+            var wb = new XLWorkbook();
+
+            //Adding a worksheet
+            var ws = wb.Worksheets.Add("Log");
+            
+            //Adding text
+            //Title
+            ws.Cell("A1").Value = "Wire Log";
+
+            //Add Header
+            ws.Cell("A2").Value = "Tension Member Identifier";
+            ws.Cell("A3").Value = "Winch Name";
+            ws.Cell("A4").Value = "Winch Model";
+            ws.Cell("A5").Value = "Winch Manufacturer";
+            ws.Cell("A6").Value = "Ship";
+
+            //Add Column Headings
+            ws.Cell("A24").Value = "Cruise Number";
+            ws.Cell("B24").Value = "Date";
+            ws.Cell("C24").Value = "Cast Number";
+            ws.Cell("D24").Value = "Cable Length (m)";
+            ws.Cell("E24").Value = "Maximum Tension (lbf)";
+            ws.Cell("F24").Value = "MT Wire Out (m)";
+            ws.Cell("G24").Value = "MT Wire In (m)";
+            ws.Cell("H24").Value = "Max Wire Out (m)";
+            ws.Cell("I24").Value = "Notes";
+
+            //Save File Cruise Name + Winch Name
+            wb.SaveAs($"test");
+        }
+    }
+}
