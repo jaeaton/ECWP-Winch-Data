@@ -6,10 +6,8 @@ The current version can communicate with ECWP winches: Gloria, Jay Jay, Godzilla
 
 
 To Do:
-- [ ] Display tension member alarms and warnings
 - [ ] Record Tension Member Alarms and Warnings
-- [ ] Add Wire total wire
-- [ ] Add left on drum amount (total-wire out)
+- [ ] UNOLS Wire Pool Excel Format
 - [ ] Display UNOLS Winch string statuses
 - [ ] Start casts (and log files) based on payout and tension
 - [ ] Add unit conversion
@@ -19,10 +17,12 @@ To Do:
 - [ ] Add Odim Reception
 - [ ] Record Hawboldt winch statuses
 - [ ] Add in detection and themeing for darkmode
+- [x] ~~Add Wire total wire~~
+- [x] ~~Add left on drum amount (total-wire out)~~
+- [x] ~~Display tension member alarms and warnings~~
 - [x] ~~Dynamically resize line parameter text (Add ability to resize plot)~~
 - [x] ~~Configurable time span of charts on a per winch basis (10,20,30,45 seconds)~~
 - [x] ~~Display tension member alarm and warning levels on trend graph~~
-- [x] ~~End casts (and log files) based on payout and tension~~
 - [x] ~~End casts (and log files) based on payout and tension~~
 - [x] ~~Add Hawboldt Data reception (SPRE-2640RS & SPRE-2648RS)~~
 - [x] ~~Add Godzilla Reception (SPRE 3464)~~

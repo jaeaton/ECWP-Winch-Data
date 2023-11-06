@@ -78,9 +78,14 @@
 							<ComboBox SelectedItem="{ Binding CurrentWinch.TensionUnit, Mode=TwoWay }" Width="90" ItemsSource="{ Binding TensionUnitList }" SelectedIndex="1"/>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal" Margin="2">
+							<TextBlock Text="Installed Length" Width="110" VerticalAlignment="Center" />
+							<TextBox Watermark="Ex: 6000" x:Name="TextBoxInstalledLength" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.AssignedBreakingLoad, Mode=TwoWay }" Width="90" VerticalAlignment="Center"></TextBox>
+							<TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.PayoutUnit }" VerticalAlignment="Center"/>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal" Margin="2">
 							<TextBlock Text="Warning Tension" Width="110" VerticalAlignment="Center" />
 							<Border BorderBrush="DarkGray" BorderThickness="1" CornerRadius="2">
-								<TextBlock Text="{Binding CurrentWinch.TensionWarningLevel}" Width="90" VerticalAlignment="Center"/>
+								<TextBlock Text="{Binding CurrentWinch.InstalledLength}" Width="90" VerticalAlignment="Center"/>
 							</Border>							
 							<TextBlock Margin="3" Text="{Binding CurrentWinch.TensionUnit}" VerticalAlignment="Center"/>
 						</StackPanel>

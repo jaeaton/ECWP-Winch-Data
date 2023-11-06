@@ -29,7 +29,7 @@
         [ObservableProperty]
         private string? tensionColor;
         public LiveDataDataStore() { }
-        public LiveDataDataStore(string? tens, string? maxTens, string? spee, string? maxSpee, string? payo, string? maxPayo, string? rawWire, string? rawWinch)
+        public LiveDataDataStore(string? tens, string? maxTens, string? spee, string? maxSpee, string? payo, string? maxPayo, string? rawWire, string? rawWinch, string? tenColor)
         {
             Tension = tens;
             MaxTension = maxTens;
@@ -39,6 +39,7 @@
             MaxPayout = maxPayo;
             RawWireData = rawWire;
             RawWinchData = rawWinch;
+            TensionColor = tenColor;
         }
     }
 }

@@ -11,12 +11,13 @@
 		<TabItem Header="Live Data" VerticalContentAlignment="Center">
 			<controls:PlottingView/>
 		</TabItem>
-		<TabItem Header="Cast Processing" VerticalContentAlignment="Center">
-			<controls:ProcessingView/>
-		</TabItem>
 		<TabItem Header="Winch Config" VerticalContentAlignment="Center">
 			<controls:WinchConfigurationView />
 		</TabItem>
+		<TabItem Header="Cast Processing" VerticalContentAlignment="Center">
+			<controls:ProcessingView/>
+		</TabItem>
+		
 		<TabItem Header="Update Check" VerticalContentAlignment="Center">
 			<controls:UpdateCheckView />
 		</TabItem>

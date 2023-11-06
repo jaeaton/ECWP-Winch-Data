@@ -159,6 +159,8 @@
         private string? chartTimeSpan;
         [ObservableProperty]
         private double? factorOfSafety;
+        [ObservableProperty]
+        private double? installedLength;
         partial void OnFactorOfSafetyChanged(double? oldValue, double? newValue)
         {
             if(double.TryParse(AssignedBreakingLoad, out double abl))
@@ -222,7 +224,7 @@
             WinchModel copy = (WinchModel)this.MemberwiseClone();
             copy.InputCommunication = new CommunicationModel(InputCommunication.TcpIpAddress, InputCommunication.PortNumber);
             copy.OutputCommunication = new CommunicationModel(OutputCommunication.TcpIpAddress, OutputCommunication.PortNumber);
-            copy.LiveData = new LiveDataDataStore(LiveData.Tension, LiveData.MaxTension, LiveData.Speed, LiveData.MaxSpeed, LiveData.Payout, LiveData.MaxPayout, LiveData.RawWireData, LiveData.RawWinchData);
+            copy.LiveData = new LiveDataDataStore(LiveData.Tension, LiveData.MaxTension, LiveData.Speed, LiveData.MaxSpeed, LiveData.Payout, LiveData.MaxPayout, LiveData.RawWireData, LiveData.RawWinchData, LiveData.TensionColor);
             copy.MaxData = new MaxDataPointModel(MaxData.MaxPayout, MaxData.MaxTension, MaxData.MaxSpeed);
             copy.ChartData = new ChartDataViewModel(ChartData._observableValues, ChartData.Series, ChartData.Sections, ChartData._observableValuesZero, ChartData._observableValuesMax, ChartData.XAxes,ChartData.YAxes);
             return copy;

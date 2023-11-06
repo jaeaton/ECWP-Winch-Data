@@ -232,14 +232,10 @@ namespace ViewModels
                 {
                     lines.Add($"Auto Log Stop Tension,{ winch.StopLogTension }");
                 }
-                if (winch.TensionWarningLevel != null)
+                if (winch.InstalledLength != null)
                 {
-                    lines.Add($"Tension Warning Level,{ winch.TensionWarningLevel }");
-                }
-                if (winch.TensionAlarmLevel != null)
-                {
-                    lines.Add($"Tension Alarm Level,{ winch.TensionAlarmLevel }");
-                }
+                    lines.Add($"Installed Length,{ winch.InstalledLength }");
+                }               
                 if (winch.AssignedBreakingLoad != null)
                 {
                     lines.Add($"Assigned Breaking Load,{ winch.AssignedBreakingLoad }");
@@ -259,6 +255,10 @@ namespace ViewModels
                 if (winch.PlotSelected != null)
                 {
                     lines.Add($"Plot Winch,{winch.PlotSelected}");
+                }
+                if (_configDataStore.ShipName != null)
+                {
+                    lines.Add($"Ship Name,{_configDataStore.ShipName}");
                 }
                 //Write each line of array using stream writer
                 using (StreamWriter stream = new StreamWriter(destPath, true))
@@ -439,13 +439,9 @@ namespace ViewModels
                             {
                                 winch.StopLogTension = line.Substring(delim + 1);
                             }
-                            if (line.Substring(0, delim) == "Tension Warning Level")
+                            if (line.Substring(0, delim) == "Installed Length")
                             {
-                                winch.TensionWarningLevel = line.Substring(delim + 1);
-                            }
-                            if (line.Substring(0, delim) == "Tension Alarm Level")
-                            {
-                                winch.TensionAlarmLevel = line.Substring(delim + 1);
+                                winch.InstalledLength = Convert.ToDouble(line.Substring(delim + 1));
                             }
                             if (line.Substring(0, delim) == "Assigned Breaking Load")
                             {
@@ -468,10 +464,14 @@ namespace ViewModels
                             {
                                 winch.PlotSelected = bool.Parse(line.Substring(delim + 1));
                             }
-                            if (line.Substring(0, delim) == "Plot Winch")
+                            if (line.Substring(0, delim) == "Ship Name")
                             {
-                                winch.PlotSelected = bool.Parse(line.Substring(delim + 1));
+                                _configDataStore.ShipName = line.Substring(delim + 1);
                             }
+                            //if (line.Substring(0, delim) == "Plot Winch")
+                            //{
+                            //    winch.PlotSelected = bool.Parse(line.Substring(delim + 1));
+                            //}
                         }
                         
 

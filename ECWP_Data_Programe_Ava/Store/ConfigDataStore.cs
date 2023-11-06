@@ -7,6 +7,9 @@
         private string? cruiseNameBox;
 
         [ObservableProperty]
+        private string? shipName;
+
+        [ObservableProperty]
         private string? directoryLabel;
 
         [ObservableProperty]

@@ -8,7 +8,7 @@ namespace ViewModels
         {
             string fileName = $"{winch.MaxWireLogName}";
             //Check for file
-            if (!File.Exists(fileName))
+            if (!File.Exists($"{fileName}.xslx"))
             {
                 NewWorkbook(winch);
             }
@@ -30,13 +30,14 @@ namespace ViewModels
             //Cast number
             ws.Cell($"C{CurrentRow}").Value = $"{winch.CastNumber}";
             //Total Length of Cable
-            ws.Cell($"D{CurrentRow}").Value = "Cable Length (m)";
+            ws.Cell($"D{CurrentRow}").Value = $"{winch.InstalledLength}";
             //Maximum Tension
             ws.Cell($"E{CurrentRow}").Value = $"{dataMaxTension.Tension}";
             //Wire Out at Max Tension
             ws.Cell($"F{CurrentRow}").Value = $"{dataMaxTension.Payout}";
             //Wire on drum at Max Tension
-            ws.Cell($"G{CurrentRow}").Value = "MT Wire In (m)";
+            double? WireIn = winch.InstalledLength - Convert.ToDouble(dataMaxTension.Payout);
+            ws.Cell($"G{CurrentRow}").Value = $"{WireIn}";
             //Maximum Wire Out
             ws.Cell($"H{CurrentRow}").Value = $"{dataMaxPayout.Payout}";
         }
@@ -44,7 +45,7 @@ namespace ViewModels
         private void NewWorkbook(WinchModel winch)
         {
             // Creating a new workbook
-            var wb = new XLWorkbook(winch.MaxWireLogName);
+            var wb = new XLWorkbook($"{winch.MaxWireLogName}.xslx");
 
             //Adding a worksheet
             var ws = wb.Worksheets.Add("Log");
@@ -55,7 +56,9 @@ namespace ViewModels
 
             //Add Header
             ws.Cell("A2").Value = "Tension Member Identifier";
+            ws.Cell("E2").Value = "Tension Member Identifier";
             ws.Cell("A3").Value = "Winch Name";
+            ws.Cell("E3").Value = $"{winch.WinchName}";
             ws.Cell("A4").Value = "Winch Model";
             ws.Cell("A5").Value = "Winch Manufacturer";
             ws.Cell("A6").Value = "Ship";

@@ -119,6 +119,7 @@
 		
 	</UserControl.DataTemplates>
 	<Panel>
+		<WrapPanel>
 		<ItemsControl ItemsSource="{ Binding AllWinches}">
 				
 				<ItemsControl.ItemsPanel>
@@ -131,6 +132,7 @@
 					</ItemsPanelTemplate>
 				</ItemsControl.ItemsPanel>
 			</ItemsControl>
+			</WrapPanel>
 	</Panel>
 			
 	
