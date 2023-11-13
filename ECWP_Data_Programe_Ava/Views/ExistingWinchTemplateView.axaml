@@ -1,0 +1,115 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="450"
+             x:Class="Views.ExistingWinchTemplateView">
+	<Panel Width="250">
+		<StackPanel Margin="5">
+			<StackPanel Orientation="Horizontal">
+				<TextBlock FontWeight="Bold" Text="Winch Name: "/>
+				<TextBlock FontWeight="Bold" Text="{ Binding WinchName }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Data Type: "/>
+				<TextBlock Text="{ Binding CommunicationType }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="IP Address: "/>
+				<TextBlock Text="{ Binding InputCommunication.TcpIpAddress }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Port: "/>
+				<TextBlock Text="{ Binding InputCommunication.PortNumber }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" IsVisible="{ Binding ProtocolHawboldt }">
+				<TextBlock Text="Hawboldt Model: "/>
+				<TextBlock Text="{ Binding HawboldtModel }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Computer Time: "/>
+				<TextBlock Text="{ Binding UseComputerTime }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Chart Time: "/>
+				<TextBlock Text="{ Binding ChartTimeSpan }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Log 20Hz: "/>
+				<TextBlock Text="{ Binding Log20Hz }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Log Max: "/>
+				<TextBlock Text="{ Binding LogMax }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" IsVisible="{ Binding Log20Hz }">
+				<TextBlock Text="Log Format: "/>
+				<TextBlock Text="{ Binding LogFormat }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Stop Log Automatically: " IsVisible="{ Binding Log20Hz }" />
+				<TextBlock Text="{ Binding AutoLog }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" IsVisible="{ Binding AutoLog }">
+				<TextBlock Text="Stop Log Tension: "/>
+				<TextBlock Text="{ Binding StopLogTension }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" IsVisible="{ Binding AutoLog }">
+				<TextBlock Text="Stop Log Payout: "/>
+				<TextBlock Text="{ Binding StopLogPayout }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Speed Unit: "/>
+				<TextBlock Text="{ Binding SpeedUnit }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Payout Unit: "/>
+				<TextBlock Text="{ Binding PayoutUnit }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Tension Unit: "/>
+				<TextBlock Text="{ Binding TensionUnit }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Tension Warning Threshold: "/>
+				<TextBlock Text="{ Binding TensionWarningLevel }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Tension Alarm Threshold: "/>
+				<TextBlock Text="{ Binding TensionAlarmLevel }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Assigned Breaking Load: "/>
+				<TextBlock Text="{ Binding AssignedBreakingLoad }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="UDP Output: "/>
+				<TextBlock Text="{ Binding UdpOutput }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" IsVisible="{ Binding UdpOutput }">
+				<TextBlock Text="UDP IP Address: "/>
+				<TextBlock Text="{ Binding OutputCommunication.TcpIpAddress }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" IsVisible="{ Binding UdpOutput }">
+				<TextBlock Text="UDP Port: "/>
+				<TextBlock Text="{ Binding OutputCommunication.PortNumber }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" IsVisible="{ Binding UdpOutput }">
+				<TextBlock Text="Output Format: "/>
+				<TextBlock Text="{ Binding UdpFormat }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="Serial Output: "/>
+				<TextBlock Text="{ Binding SerialOutput }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" IsVisible="{ Binding SerialOutput }">
+				<TextBlock Text="Serial Port: "/>
+				<TextBlock Text="{ Binding SerialPortOutput }"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" IsVisible="{ Binding SerialOutput }">
+				<TextBlock Text="Serial Baud Rate: "/>
+				<TextBlock Text="{ Binding BaudRateOutput }"/>
+			</StackPanel>
+		</StackPanel>
+	</Panel>
+</UserControl>

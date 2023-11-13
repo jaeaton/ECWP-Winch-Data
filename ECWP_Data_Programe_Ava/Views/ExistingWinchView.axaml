@@ -2,138 +2,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="2000" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="450"
              x:Class="Views.ExistingWinchView"
-			 xmlns:model="clr-namespace:Models">
+			 xmlns:model="clr-namespace:Models"
+			 xmlns:controls="clr-namespace:Views">
 	<UserControl.DataTemplates>
 		<DataTemplate DataType="model:WinchModel">
-			<Panel Width="250">
-			<StackPanel Margin="5">
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Winch Name: "/>
-					<TextBlock Text="{ Binding WinchName }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Data Type: "/>
-					<TextBlock Text="{ Binding CommunicationType }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="IP Address: "/>
-					<TextBlock Text="{ Binding InputCommunication.TcpIpAddress }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Port: "/>
-					<TextBlock Text="{ Binding InputCommunication.PortNumber }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal" IsVisible="{ Binding ProtocolHawboldt }">
-					<TextBlock Text="Hawboldt Model: "/>
-					<TextBlock Text="{ Binding HawboldtModel }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Computer Time: "/>
-					<TextBlock Text="{ Binding UseComputerTime }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Chart Time: "/>
-					<TextBlock Text="{ Binding ChartTimeSpan }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Log 20Hz: "/>
-					<TextBlock Text="{ Binding Log20Hz }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Log Max: "/>
-					<TextBlock Text="{ Binding LogMax }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal" IsVisible="{ Binding Log20Hz }">
-					<TextBlock Text="Log Format: "/>
-					<TextBlock Text="{ Binding LogFormat }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Stop Log Automatically: " IsVisible="{ Binding Log20Hz }" />
-					<TextBlock Text="{ Binding AutoLog }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal" IsVisible="{ Binding AutoLog }">
-					<TextBlock Text="Stop Log Tension: "/>
-					<TextBlock Text="{ Binding StopLogTension }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal" IsVisible="{ Binding AutoLog }">
-					<TextBlock Text="Stop Log Payout: "/>
-					<TextBlock Text="{ Binding StopLogPayout }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Speed Unit: "/>
-					<TextBlock Text="{ Binding SpeedUnit }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Payout Unit: "/>
-					<TextBlock Text="{ Binding PayoutUnit }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Tension Unit: "/>
-					<TextBlock Text="{ Binding TensionUnit }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Tension Warning Threshold: "/>
-					<TextBlock Text="{ Binding TensionWarningLevel }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Tension Alarm Threshold: "/>
-					<TextBlock Text="{ Binding TensionAlarmLevel }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Assigned Breaking Load: "/>
-					<TextBlock Text="{ Binding AssignedBreakingLoad }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="UDP Output: "/>
-					<TextBlock Text="{ Binding UdpOutput }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal" IsVisible="{ Binding UdpOutput }">
-					<TextBlock Text="UDP IP Address: "/>
-					<TextBlock Text="{ Binding OutputCommunication.TcpIpAddress }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal" IsVisible="{ Binding UdpOutput }">
-					<TextBlock Text="UDP Port: "/>
-					<TextBlock Text="{ Binding OutputCommunication.PortNumber }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal" IsVisible="{ Binding UdpOutput }">
-					<TextBlock Text="Output Format: "/>
-					<TextBlock Text="{ Binding UdpFormat }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Serial Output: "/>
-					<TextBlock Text="{ Binding SerialOutput }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal" IsVisible="{ Binding SerialOutput }">
-					<TextBlock Text="Serial Port: "/>
-					<TextBlock Text="{ Binding SerialPortOutput }"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal" IsVisible="{ Binding SerialOutput }">
-					<TextBlock Text="Serial Baud Rate: "/>
-					<TextBlock Text="{ Binding BaudRateOutput }"/>
-				</StackPanel>
-			</StackPanel>
-			</Panel>
+			<controls:ExistingWinchTemplateView/>
 		</DataTemplate>
 		
 	</UserControl.DataTemplates>
-	<Panel>
-		<WrapPanel>
-		<ItemsControl ItemsSource="{ Binding AllWinches}">
+	<Grid Margin="2">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="1"/>
+			<ColumnDefinition Width="Auto"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+		<ScrollViewer Grid.Column="1" >
+		<ItemsControl ItemsSource="{ Binding AllWinches}" >
 				
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
-						
-							<WrapPanel Margin="5" />
-						
-						
-						
+						<WrapPanel Orientation="Vertical"/>
 					</ItemsPanelTemplate>
 				</ItemsControl.ItemsPanel>
 			</ItemsControl>
-			</WrapPanel>
-	</Panel>
+			</ScrollViewer>
+	</Grid>
 			
 	
 </UserControl>

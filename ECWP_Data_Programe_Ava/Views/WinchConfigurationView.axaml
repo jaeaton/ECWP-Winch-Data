@@ -7,6 +7,6 @@
              x:Class="Views.WinchConfigurationView">
 	<StackPanel Orientation="Horizontal">
 		<controls:AddWinchView/>
-		<controls:ExistingWinchView/>
+		<controls:ExistingWinchesScrollView/>
 	</StackPanel>
 </UserControl>
