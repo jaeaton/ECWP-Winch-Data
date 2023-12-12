@@ -38,6 +38,7 @@
 
         [ObservableProperty]
         private ObservableCollection<WinchModel>? allWinches = new();
+        
 
         [ObservableProperty]
         private ObservableCollection<string>? winchesToPlot = new();
@@ -73,6 +74,8 @@
         [ObservableProperty]
         private List<string>? chartTimeSpanList;
 
+        [ObservableProperty]
+        private List<TabItemModel>? tabItems = new();
 
         public void LoadWinch(string? winch)
         {
@@ -91,6 +94,16 @@
                 }
                 //Deep copy to break link between class objects
                 CurrentWinch = AllWinches[index].DeepCopy();
+            }
+        }
+
+        public void RefreshWinches(ObservableCollection<WinchModel>? winches)
+        {
+            TabItems.Clear();
+            foreach (var winch in winches)
+            {
+                TabItemModel tabitem = new TabItemModel(winch.WinchName, winch.WinchName);
+                TabItems.Add(tabitem);
             }
         }
     }

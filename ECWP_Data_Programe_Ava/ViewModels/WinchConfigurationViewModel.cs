@@ -1,4 +1,6 @@
-﻿namespace ViewModels
+﻿using Avalonia.Controls;
+
+namespace ViewModels
 {
     public partial class WinchConfigurationViewModel : ObservableObject
     {
@@ -141,12 +143,14 @@
             }
             //Clears the current list to make winch names as fresh as possible
             _configDataStore.WinchNames.Clear();
+            _configDataStore.TabItems.Clear();
             //Loops through all winches and puts winch names in a list for selection process
             if ( _configDataStore.AllWinches.Count > 0)
             {
                 foreach (var item in _configDataStore.AllWinches)
                 {
                     _configDataStore.WinchNames.Add(item.WinchName);
+                    _configDataStore.TabItems.Add(new TabItemModel (item.WinchName, item.WinchName));
                 }
             }
             
