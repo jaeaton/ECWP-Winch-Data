@@ -1,8 +1,10 @@
+using Avalonia.Controls;
+
 namespace Views
 {
-    public partial class ExistingWinchTemplateView : UserControl
+    public partial class UserControl1 : UserControl
     {
-        public ExistingWinchTemplateView()
+        public UserControl1()
         {
             InitializeComponent();
             DataContext = MainWindowViewModel._configDataStore;

@@ -8,43 +8,19 @@
 			 mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
              x:Class="Views.ExistingWinchesScrollView">
 	
-	<UserControl.DataTemplates>
-	<!--	
-			
-			<DataTemplate DataType="model:WinchModel">
-				<TabControl ItemsSource="{Binding}">
-				<TabControl.ItemTemplate>
-					<DataTemplate DataType="model:WinchModel">
-					
-						<TextBlock Text="{Binding WinchName}"/>
-					</DataTemplate>
-				</TabControl.ItemTemplate>
-				<TabControl.ContentTemplate>
-					<DataTemplate DataType="model:WinchModel">
-						<controls:ExistingWinchTemplateView/>
-					</DataTemplate>					
-				</TabControl.ContentTemplate>
-					</TabControl>
-			</DataTemplate>
-
-		-->
-		
-	</UserControl.DataTemplates>
-	<!--	
-	<TabControl ItemsSource="{ Binding AllWinches}" TabStripPlacement="Left" ContentTemplate="winch"/>
-	-->
-	<TabControl ItemsSource="{Binding TabItems}">
-		
+	<TabControl TabStripPlacement="Left" ItemsSource="{ Binding TabItems }" SelectedItem=" { Binding SelectedWinch }">
 		<TabControl.ItemTemplate>
-			<DataTemplate >
-				<TextBlock Text="{Binding Header}"/>
+			<DataTemplate>
+				<TextBlock Text="{ Binding Header }"/>
 			</DataTemplate>
 		</TabControl.ItemTemplate>
 		<TabControl.ContentTemplate>
 			<DataTemplate>
-				<TextBlock Text="{Binding Content}"/>
+				<TextBlock Text="Check"/>
+				<!--<DockPanel LastChildFill="True">
+					
+				</DockPanel>-->
 			</DataTemplate>
-			<!--<controls:ExistingWinchTemplateView/>-->
 		</TabControl.ContentTemplate>
 	</TabControl>
 </UserControl>

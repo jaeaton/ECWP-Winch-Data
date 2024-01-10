@@ -39,7 +39,6 @@
         [ObservableProperty]
         private ObservableCollection<WinchModel>? allWinches = new();
         
-
         [ObservableProperty]
         private ObservableCollection<string>? winchesToPlot = new();
 
@@ -67,7 +66,12 @@
         {
             LoadWinch(value);
         }
-
+        [ObservableProperty]
+        private TabItemModel? selectedWinch;
+        partial void OnSelectedWinchChanged(TabItemModel value)
+        {
+            LoadWinch(value.Header);
+        }
         [ObservableProperty]
         private ObservableCollection<string>? winchNames = new();
         
@@ -75,7 +79,7 @@
         private List<string>? chartTimeSpanList;
 
         [ObservableProperty]
-        private List<TabItemModel>? tabItems = new();
+        private ObservableCollection<TabItemModel>? tabItems = new();
 
         public void LoadWinch(string? winch)
         {

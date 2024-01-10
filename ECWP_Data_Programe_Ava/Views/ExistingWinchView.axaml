@@ -5,32 +5,26 @@
              mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="450"
              x:Class="Views.ExistingWinchView"
 			 xmlns:model="clr-namespace:Models"
-			 xmlns:controls="clr-namespace:Views">
-	<UserControl.DataTemplates>
-		<DataTemplate DataType="model:WinchModel">
-			<controls:ExistingWinchTemplateView/>
-		</DataTemplate>
-		
-	</UserControl.DataTemplates>
-	<Grid Margin="2">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="1"/>
-			<ColumnDefinition Width="Auto"/>
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
-		<ScrollViewer Grid.Column="1" >
-		<ItemsControl ItemsSource="{ Binding AllWinches}" >
-				
-				<ItemsControl.ItemsPanel>
-					<ItemsPanelTemplate>
-						<WrapPanel Orientation="Vertical"/>
-					</ItemsPanelTemplate>
-				</ItemsControl.ItemsPanel>
-			</ItemsControl>
-			</ScrollViewer>
-	</Grid>
-			
+			 xmlns:controls="clr-namespace:Views"
+			  x:CompileBindings="false">
 	
+		<Panel>
+			<TabControl TabStripPlacement="Left" ItemsSource="{ Binding TabItems }" SelectedItem=" { Binding SelectedWinch }">
+				<TabControl.ItemTemplate>
+					<DataTemplate>
+						<TextBlock Text="{ Binding Header }"/>
+					</DataTemplate>
+				</TabControl.ItemTemplate>
+				<TabControl.ContentTemplate>
+					<DataTemplate>
+						<TextBlock Text="Test"/>
+						<!--
+						<DockPanel LastChildFill="True">
+							<TextBlock Text=" { Binding Content }"/>
+							
+						</DockPanel>-->
+					</DataTemplate>
+				</TabControl.ContentTemplate>
+			</TabControl>
+		</Panel>
 </UserControl>

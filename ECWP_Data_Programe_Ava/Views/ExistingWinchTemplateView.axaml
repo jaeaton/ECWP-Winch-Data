@@ -8,107 +8,107 @@
 		<StackPanel Margin="5">
 			<StackPanel Orientation="Horizontal">
 				<TextBlock FontWeight="Bold" Text="Winch Name: "/>
-				<TextBlock FontWeight="Bold" Text="{ Binding WinchName }"/>
+				<TextBlock FontWeight="Bold" Text="{ Binding CurrentWinch.WinchName }"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Data Type: "/>
-				<TextBlock Text="{ Binding CommunicationType }"/>
+				<TextBlock Text="{ Binding CurrentWinch.CommunicationType }"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="IP Address: "/>
-				<TextBlock Text="{ Binding InputCommunication.TcpIpAddress }"/>
+				<TextBlock Text="{ Binding CurrentWinch.InputCommunication.TcpIpAddress }"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Port: "/>
-				<TextBlock Text="{ Binding InputCommunication.PortNumber }"/>
+				<TextBlock Text="{ Binding CurrentWinch.InputCommunication.PortNumber }"/>
 			</StackPanel>
-			<StackPanel Orientation="Horizontal" IsVisible="{ Binding ProtocolHawboldt }">
+			<StackPanel Orientation="Horizontal" IsVisible="{ Binding CurrentWinch.ProtocolHawboldt }">
 				<TextBlock Text="Hawboldt Model: "/>
-				<TextBlock Text="{ Binding HawboldtModel }"/>
+				<TextBlock Text="{ Binding CurrentWinch.HawboldtModel }"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Computer Time: "/>
-				<TextBlock Text="{ Binding UseComputerTime }"/>
+				<TextBlock Text="{ Binding CurrentWinch.UseComputerTime }"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Chart Time: "/>
-				<TextBlock Text="{ Binding ChartTimeSpan }"/>
+				<TextBlock Text="{ Binding CurrentWinch.ChartTimeSpan }"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Log 20Hz: "/>
-				<TextBlock Text="{ Binding Log20Hz }"/>
+				<TextBlock Text="{ Binding CurrentWinch.Log20Hz }"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Log Max: "/>
-				<TextBlock Text="{ Binding LogMax }"/>
+				<TextBlock Text="{ Binding CurrentWinch.LogMax }"/>
 			</StackPanel>
-			<StackPanel Orientation="Horizontal" IsVisible="{ Binding Log20Hz }">
+			<StackPanel Orientation="Horizontal" IsVisible="{ Binding CurrentWinch.Log20Hz }">
 				<TextBlock Text="Log Format: "/>
-				<TextBlock Text="{ Binding LogFormat }"/>
+				<TextBlock Text="{ Binding CurrentWinch.LogFormat }"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal">
-				<TextBlock Text="Stop Log Automatically: " IsVisible="{ Binding Log20Hz }" />
-				<TextBlock Text="{ Binding AutoLog }"/>
+				<TextBlock Text="Stop Log Automatically: " IsVisible="{ Binding CurrentWinch.Log20Hz }" />
+				<TextBlock Text="{ Binding CurrentWinch.AutoLog }"/>
 			</StackPanel>
-			<StackPanel Orientation="Horizontal" IsVisible="{ Binding AutoLog }">
+			<StackPanel Orientation="Horizontal" IsVisible="{ Binding CurrentWinch.AutoLog }">
 				<TextBlock Text="Stop Log Tension: "/>
-				<TextBlock Text="{ Binding StopLogTension }"/>
+				<TextBlock Text="{ Binding CurrentWinch.StopLogTension }"/>
 			</StackPanel>
-			<StackPanel Orientation="Horizontal" IsVisible="{ Binding AutoLog }">
+			<StackPanel Orientation="Horizontal" IsVisible="{ Binding CurrentWinch.AutoLog }">
 				<TextBlock Text="Stop Log Payout: "/>
-				<TextBlock Text="{ Binding StopLogPayout }"/>
+				<TextBlock Text="{ Binding CurrentWinch.StopLogPayout }"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Speed Unit: "/>
-				<TextBlock Text="{ Binding SpeedUnit }"/>
+				<TextBlock Text="{ Binding CurrentWinch.SpeedUnit }"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Payout Unit: "/>
-				<TextBlock Text="{ Binding PayoutUnit }"/>
+				<TextBlock Text="{ Binding CurrentWinch.PayoutUnit }"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Tension Unit: "/>
-				<TextBlock Text="{ Binding TensionUnit }"/>
+				<TextBlock Text="{ Binding CurrentWinch.TensionUnit }"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Tension Warning Threshold: "/>
-				<TextBlock Text="{ Binding TensionWarningLevel }"/>
+				<TextBlock Text="{ Binding CurrentWinch.TensionWarningLevel }"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Tension Alarm Threshold: "/>
-				<TextBlock Text="{ Binding TensionAlarmLevel }"/>
+				<TextBlock Text="{ Binding CurrentWinch.TensionAlarmLevel }"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Assigned Breaking Load: "/>
-				<TextBlock Text="{ Binding AssignedBreakingLoad }"/>
+				<TextBlock Text="{ Binding CurrentWinch.AssignedBreakingLoad }"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="UDP Output: "/>
-				<TextBlock Text="{ Binding UdpOutput }"/>
+				<TextBlock Text="{ Binding CurrentWinch.UdpOutput }"/>
 			</StackPanel>
-			<StackPanel Orientation="Horizontal" IsVisible="{ Binding UdpOutput }">
+			<StackPanel Orientation="Horizontal" IsVisible="{ Binding CurrentWinch.UdpOutput }">
 				<TextBlock Text="UDP IP Address: "/>
-				<TextBlock Text="{ Binding OutputCommunication.TcpIpAddress }"/>
+				<TextBlock Text="{ Binding CurrentWinch.OutputCommunication.TcpIpAddress }"/>
 			</StackPanel>
-			<StackPanel Orientation="Horizontal" IsVisible="{ Binding UdpOutput }">
+			<StackPanel Orientation="Horizontal" IsVisible="{ Binding CurrentWinch.UdpOutput }">
 				<TextBlock Text="UDP Port: "/>
-				<TextBlock Text="{ Binding OutputCommunication.PortNumber }"/>
+				<TextBlock Text="{ Binding CurrentWinch.OutputCommunication.PortNumber }"/>
 			</StackPanel>
-			<StackPanel Orientation="Horizontal" IsVisible="{ Binding UdpOutput }">
+			<StackPanel Orientation="Horizontal" IsVisible="{ Binding CurrentWinch.UdpOutput }">
 				<TextBlock Text="Output Format: "/>
-				<TextBlock Text="{ Binding UdpFormat }"/>
+				<TextBlock Text="{ Binding CurrentWinch.UdpFormat }"/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal">
 				<TextBlock Text="Serial Output: "/>
-				<TextBlock Text="{ Binding SerialOutput }"/>
+				<TextBlock Text="{ Binding CurrentWinch.SerialOutput }"/>
 			</StackPanel>
-			<StackPanel Orientation="Horizontal" IsVisible="{ Binding SerialOutput }">
+			<StackPanel Orientation="Horizontal" IsVisible="{ Binding CurrentWinch.SerialOutput }">
 				<TextBlock Text="Serial Port: "/>
-				<TextBlock Text="{ Binding SerialPortOutput }"/>
+				<TextBlock Text="{ Binding CurrentWinch.SerialPortOutput }"/>
 			</StackPanel>
-			<StackPanel Orientation="Horizontal" IsVisible="{ Binding SerialOutput }">
+			<StackPanel Orientation="Horizontal" IsVisible="{ Binding CurrentWinch.SerialOutput }">
 				<TextBlock Text="Serial Baud Rate: "/>
-				<TextBlock Text="{ Binding BaudRateOutput }"/>
+				<TextBlock Text="{ Binding CurrentWinch.BaudRateOutput }"/>
 			</StackPanel>
 		</StackPanel>
 	</Panel>

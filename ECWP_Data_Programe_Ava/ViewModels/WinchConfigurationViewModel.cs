@@ -40,7 +40,9 @@ namespace ViewModels
             //Loops through all winches and puts winch names in a list for selection process
            foreach (var item in _configDataStore.AllWinches)
             {
+                TabItemModel tabItem = new TabItemModel(item.WinchName, item.WinchName);
                 _configDataStore.WinchNames.Add(item.WinchName);
+                _configDataStore.TabItems.Add(tabItem);
             }
            //Write the config file with updated list of winches
             FileOperationsViewModel.WriteConfig(_configDataStore);
@@ -149,8 +151,9 @@ namespace ViewModels
             {
                 foreach (var item in _configDataStore.AllWinches)
                 {
+                    TabItemModel tabItem = new TabItemModel(item.WinchName, item.WinchName);
                     _configDataStore.WinchNames.Add(item.WinchName);
-                    _configDataStore.TabItems.Add(new TabItemModel (item.WinchName, item.WinchName));
+                    _configDataStore.TabItems.Add(tabItem);
                 }
             }
             
