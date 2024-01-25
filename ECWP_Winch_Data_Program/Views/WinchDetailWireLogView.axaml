@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Views.WinchDetailWireLogView">
+
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="auto"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<StackPanel Grid.Column="0">
+			<StackPanel Orientation="Horizontal" Margin="2">
+				<TextBlock Text="Log Event Type:" Width="120" VerticalAlignment="Center" Margin="2"/>
+				<ComboBox Width="150" Margin="2"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" Margin="2">
+				<TextBlock Text="Date:"  Width="120" VerticalAlignment="Center" Margin="2"/>
+				<CalendarDatePicker  Margin="2"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" Margin="2">
+				<Button Content="Add Log Event" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Width="160" Margin="2"/>
+			</StackPanel>
+		</StackPanel>
+		<Grid Grid.Column="1" Margin="2">
+			<TextBlock Text="Data Grid"/>
+		</Grid>
+	</Grid> 
+</UserControl>

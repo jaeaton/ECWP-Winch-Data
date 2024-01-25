@@ -1,0 +1,47 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:v="clr-namespace:Views"
+			 xmlns:m="clr-namespace:Models"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Views.LiveDataView">
+	
+	<UserControl.DataTemplates>
+		<DataTemplate DataType="m:WinchModel">
+			<v:LiveDataWinchView  Margin="2"/>
+		</DataTemplate>
+	</UserControl.DataTemplates>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		
+		<Grid Grid.Row="0" ShowGridLines="False">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="auto"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+			</Grid.RowDefinitions>
+			
+			<v:LiveDataPlotSelectionView Grid.Column="0" Margin="2"/>
+			<ScrollViewer Grid.Column="1">
+				
+				<ItemsControl ItemsSource="{ Binding PlottingWinches}" >
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<UniformGrid Rows="{Binding PlottingWinches.Count}"></UniformGrid>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+				</ItemsControl>
+				
+			</ScrollViewer>
+			
+		</Grid>
+		<v:LiveDataPathView Grid.Row="1"/>
+	</Grid>
+</UserControl>

@@ -1,0 +1,26 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Views.WinchDetailParticularsView">
+
+	<StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<TextBlock Text="Winch Name" Width="160" VerticalAlignment="Center" />
+			<TextBox Watermark="Enter Name" Text="{ Binding CurrentWinch.WinchName, Mode=TwoWay }" Width="130"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<TextBlock Text="Winch Manufacturer" Width="160" VerticalAlignment="Center" />
+			<TextBox Watermark="Enter Name" Text="{ Binding CurrentWinch.WinchManufacturer, Mode=TwoWay }" Width="130"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<TextBlock Text="Winch Model" Width="160" VerticalAlignment="Center" />
+			<TextBox Watermark="Enter Model" Text="{ Binding CurrentWinch.WinchModelName, Mode=TwoWay }" Width="130"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Button Content="Add/Update Winch" HorizontalContentAlignment="Center" Width="160" Margin="2"/>
+			<Button Content="Remove Winch" HorizontalContentAlignment="Center" Width="160" Margin="2"/>
+		</StackPanel>
+	</StackPanel>
+</UserControl>

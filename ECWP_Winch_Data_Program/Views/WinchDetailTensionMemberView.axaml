@@ -1,0 +1,57 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Views.WinchDetailTensionMemberView">
+  
+  <StackPanel>
+	  <StackPanel Orientation="Horizontal" Margin="2">
+		  <TextBlock Text="Name:" Width="160" VerticalAlignment="Center" Margin="2"/>
+		  <TextBox Width="150" Margin="2"/>
+	  </StackPanel>
+	  <StackPanel Orientation="Horizontal" Margin="2">
+		  <TextBlock Text="Manufacturer:"  Width="160" VerticalAlignment="Center" Margin="2"/>
+		  <TextBox Width="150" Margin="2"/>
+	  </StackPanel>
+	  <StackPanel Orientation="Horizontal" Margin="2">
+		  <TextBlock Text="Part Number:" Width="160" VerticalAlignment="Center" Margin="2"/>
+		  <TextBox Width="150" Margin="2"/>
+	  </StackPanel>
+	  <StackPanel Orientation="Horizontal" Margin="2">
+		  <TextBlock Text="NSF ID:"  Width="160" VerticalAlignment="Center" Margin="2"/>
+		  <TextBox Width="150" Margin="2"/>		  
+	  </StackPanel>
+	  <StackPanel Orientation="Horizontal" Margin="2">
+		  <TextBlock Text="Installed Length" Width="160" VerticalAlignment="Center" Margin="2"/>
+		  <TextBox Watermark="Ex: 6000" x:Name="TextBoxInstalledLength" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.AssignedBreakingLoad, Mode=TwoWay }" Width="90" VerticalAlignment="Center" Margin="2"/>
+		  <TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.PayoutUnit }" VerticalAlignment="Center"/>
+	  </StackPanel>
+	  <StackPanel Orientation="Horizontal" Margin="2">
+		  <TextBlock Text="Current Length" Width="160" VerticalAlignment="Center" Margin="2"/>
+		  <TextBox Watermark="Ex: 6000" IsEnabled="False" Text="{Binding CurrentWinch.AssignedBreakingLoad, Mode=TwoWay }" Width="90" VerticalAlignment="Center" Margin="2"/>
+		  <TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.PayoutUnit }" VerticalAlignment="Center"/>
+	  </StackPanel>
+	  <StackPanel Orientation="Horizontal" Margin="2">
+		  <TextBlock Text="Warning Tension" Width="160" VerticalAlignment="Center" Margin="2"/>
+		   <TextBox Text="{Binding CurrentWinch.InstalledLength}" Width="90" VerticalAlignment="Center" Margin="2"/>
+		  
+		  <TextBlock Margin="3" Text="{Binding CurrentWinch.TensionUnit}" VerticalAlignment="Center" />
+	  </StackPanel>
+	  <StackPanel Orientation="Horizontal" Margin="2">
+		  <TextBlock Text="Alarm Tension" Width="160" VerticalAlignment="Center" Margin="2"/>
+			  <TextBox  Text="{Binding CurrentWinch.TensionAlarmLevel, Mode=TwoWay }" Width="90" VerticalAlignment="Center"></TextBox>
+		  
+		  <TextBlock Margin="3" Text="{Binding CurrentWinch.TensionUnit}" VerticalAlignment="Center"/>
+	  </StackPanel>
+	  <StackPanel Orientation="Horizontal" Margin="2">
+		  <TextBlock Text="ABL" Width="160" VerticalAlignment="Center" Margin="2" />
+		  <TextBox Watermark="Ex: 10000" x:Name="TextBoxABL" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.AssignedBreakingLoad, Mode=TwoWay }" Width="90" VerticalAlignment="Center" Margin="2"/>
+		  <TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.TensionUnit }" VerticalAlignment="Center"/>
+	  </StackPanel>
+	  <StackPanel Orientation="Horizontal" Margin="2">
+		  <TextBlock Text="App A FoS" VerticalAlignment="Center" Width="160" Margin="2"/>
+		  <ComboBox SelectedItem="{ Binding CurrentWinch.FactorOfSafety, Mode=TwoWay }" Width="90" ItemsSource="{ Binding FactorOfSafetyList }" Margin="2" SelectedIndex="1"/>
+	  </StackPanel>
+  </StackPanel>
+</UserControl>

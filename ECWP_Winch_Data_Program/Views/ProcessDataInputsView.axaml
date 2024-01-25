@@ -1,0 +1,65 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:ViewModels"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Views.ProcessDataInputsView">
+	<UserControl.Resources>
+		<vm:ProcessDataCommandsViewModel x:Key="commands"/>
+	</UserControl.Resources>
+	
+	<StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Select Winch:" VerticalAlignment="Center" Width="130"/>
+
+			<ComboBox SelectedItem="{ Binding  SelectedWinch, Mode=TwoWay }"  ItemsSource="{ Binding  AvailableWinches }" Width="150"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Cruise Name:" VerticalAlignment="Center" Width="130"/>
+			<TextBox Text="{ Binding Path= CruiseName, FallbackValue=Enter Cruise Name}" Width="150"/>
+		</StackPanel>
+		<StackPanel Margin="5">
+			<TextBlock Text="File Type:"/>
+			<RadioButton GroupName="FileType" Content="Excel" />
+			<RadioButton GroupName="FileType" Content="Text"/>
+		</StackPanel>
+		
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Processed Filename:" Width="140"/>
+			<Label Content="{ Binding Path= ProcessedFileName, FallbackValue=Filename } "/>
+		</StackPanel>
+		
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Combined Filename:" Width="140"/>
+			<Label Content="{ Binding  CombinedFileName,FallbackValue=Combo Filename }"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Directory:" Width="125"/>
+			<Label Content="{ Binding Path= Directory, FallbackValue=Directory }"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Number of Files:" Width="125"/>
+			<Label Content="{ Binding  NumberOfFiles }"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Processing File:" Width="125"/>
+			<Label Content="{ Binding  ReadingFileName, FallbackValue=Reading File }"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Processing Line:" Width="125"/>
+			<Label Content="{ Binding  ReadingLine, FallbackValue=Data}"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Minimum Payout:" VerticalAlignment="Center" Width="140"/>
+			<ComboBox SelectedItem="{ Binding  MinPayout}" ItemsSource="{ Binding  AvailablePayouts }"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<Label Content="Minimum Tension:" VerticalAlignment="Center" Width="140"/>
+			<ComboBox SelectedItem="{ Binding  MinTension }" ItemsSource="{ Binding  AvailableTensions }"/>
+		</StackPanel>
+
+		<Button Content="File Location" Command="{ Binding File_LocationCommand }" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center" DataContext="{StaticResource ResourceKey=commands}"/>
+		<Button Content="Save Settings" Command="{ Binding Save_ConfigCommand }" Width="130" Margin="5" HorizontalContentAlignment="Center" HorizontalAlignment="Center" DataContext="{StaticResource ResourceKey=commands}" />
+	</StackPanel>
+</UserControl>

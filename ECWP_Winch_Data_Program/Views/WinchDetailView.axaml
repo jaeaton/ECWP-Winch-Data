@@ -1,0 +1,28 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:v="clr-namespace:Views"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Views.WinchDetailView">
+	<TabControl TabStripPlacement="Left" >
+		<TabItem Header="Winch Particulars" VerticalContentAlignment="Center" >
+			<v:WinchDetailParticularsView />
+		</TabItem>
+		<TabItem Header="Tension Member" VerticalContentAlignment="Center">
+			<v:WinchDetailTensionMemberView/>
+		</TabItem>
+		<TabItem Header="Logging Parameters" VerticalContentAlignment="Center">
+			<v:WinchDetailLoggingView/>
+		</TabItem>
+		<TabItem Header="Incoming Data" VerticalContentAlignment="Center">
+			<v:WinchDetailDataInView/>
+		</TabItem>
+		<TabItem Header="Outgoing Data" VerticalContentAlignment="Center">
+			<v:WinchDetailDataOutView/>
+		</TabItem>
+		<TabItem Header="Wire Log" VerticalContentAlignment="Center">
+			<v:WinchDetailWireLogView/>
+		</TabItem>
+	</TabControl>
+</UserControl>

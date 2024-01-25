@@ -1,0 +1,31 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:v="clr-namespace:Views"
+			 xmlns:vm="clr-namespace:ViewModels"
+			 xmlns:m="clr-namespace:Models"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Views.LiveDataPlotControlsView"
+			 x:DataType="m:WinchModel">
+	
+	<UserControl.Resources>
+		<vm:LiveDataPlottingViewModel x:Key="commands"/>
+	</UserControl.Resources>
+	
+	
+	<WrapPanel Orientation="Horizontal">
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<TextBlock Text="Data Source" Width="100" VerticalAlignment="Center"/>
+			<TextBox MinWidth="130" Text="{ Binding WinchName }" IsReadOnly="True" />
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<TextBlock Text="Cast Number"  Width="100" VerticalAlignment="Center"/>
+			<TextBox x:Name="TextBoxCastNumber"  Text="{Binding CastNumber,Mode=TwoWay, FallbackValue='1'}" Width="10" VerticalAlignment="Center" />
+		</StackPanel>
+
+		<Button Content="{ Binding StartStopButtonText, FallbackValue='Start Log' }" Command="{ Binding Source={ StaticResource ResourceKey=commands }, Path=StartStopCommand }" CommandParameter="{ Binding WinchName }" Margin="5" MinWidth="100" HorizontalContentAlignment="Center" />
+		<Button Content="Log Max" Command="{ Binding Source={ StaticResource ResourceKey=commands }, Path=ButtonLogMaxCommand }" CommandParameter="{ Binding WinchName }" Margin="5" MinWidth="100" HorizontalContentAlignment="Center" />
+	</WrapPanel>
+
+</UserControl>

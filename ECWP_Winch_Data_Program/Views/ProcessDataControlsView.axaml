@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="clr-namespace:ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Views.ProcessDataControlsView">
+	<UserControl.Resources>
+		<vm:ProcessDataCommandsViewModel x:Key="commands"/>
+	</UserControl.Resources>
+	
+	<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+		<Button  Content="?" Width="25" Margin="5,0,5,0" DataContext="{StaticResource ResourceKey=commands}" />
+		<Button  Content="Combine Files" Command="{ Binding Combine_FilesCommand }" Margin="5,0,5,0" DataContext="{StaticResource ResourceKey=commands}" />
+		<Button  Content="Process Casts" Command="{ Binding Process_FilesCommand }" DataContext="{StaticResource ResourceKey=commands}" HorizontalAlignment="Right" Margin="5,0,5,0" />
+	</StackPanel>
+</UserControl>
