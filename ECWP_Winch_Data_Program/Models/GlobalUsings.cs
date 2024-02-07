@@ -37,6 +37,7 @@ global using MsBox.Avalonia.Enums;
 global using ClosedXML;
 global using ClosedXML.Excel;
 global using Mayerch1.GithubUpdateCheck;
+global using CloneExtensions;
 
 
 global using Models;

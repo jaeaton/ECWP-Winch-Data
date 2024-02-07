@@ -1,45 +1,45 @@
 ﻿namespace Models
 {
-    public class DataPointModel
+    public class DataPointModel 
     {
 
-        public string StringID { get; set; } = string.Empty;
+        public string StringID  = string.Empty;
         /// <summary>
         /// Date value from data source
         /// </summary>
-        public string Date { get; set; } = string.Empty;
+        public string Date   = string.Empty;
         /// <summary>
         /// Time from data source
         /// </summary>
-        public string Time { get; set; } = string.Empty;
+        public string Time   = string.Empty;
         /// <summary>
         /// Combined Date and Time
         /// </summary>
-        public DateTime DateAndTime { get; set; } = new();
+        public DateTime DateAndTime   = new();
         /// <summary>
         /// Tension value
         /// </summary>
-        public float Tension { get; set; }
+        public float Tension;
         /// <summary>
         /// Payout value
         /// </summary>
-        public float Payout { get; set; }
+        public float Payout;
         /// <summary>
         /// Speed value
         /// </summary>
-        public float Speed { get; set; }
+        public float Speed;
         /// <summary>
         /// Check Sum Value
         /// </summary>
-        public string CheckSum { get; set; } = string.Empty;
+        public string CheckSum   = string.Empty;
         /// <summary>
         /// Tension Member Warning (8 bits)
         /// </summary>
-        public string TMWarnings { get; set; } = string.Empty;
+        public string TMWarnings   = string.Empty;
         /// <summary>
         /// Tension member alarms(8 bits)
         /// </summary>
-        public string TMAlarms { get; set; } = string.Empty;    
+        public string TMAlarms   = string.Empty;    
         public DataPointModel()
         {
 
@@ -156,6 +156,12 @@
             Payout = float.Parse(Pay);
             TMWarnings = "00000000";
             TMAlarms = "00000000";
+        }
+
+      public DataPointModel ShallowCopy()
+        {
+            DataPointModel copy = (DataPointModel)this.MemberwiseClone();
+            return copy;
         }
 
     }

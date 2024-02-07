@@ -268,6 +268,8 @@ namespace ViewModels
                     bool castActive = false;
                     //float temp;
                     string input = string.Empty;
+                    DataPointModel MaxTensionDataPoint = new();
+                    DataPointModel MaxPayoutDataPoint = new();
                     ProcessPointDataModel processPointDataModel = new();
                     ProcessCastDataModel processCastDataModel = new();
                     //await Task.Run(() =>
@@ -277,6 +279,8 @@ namespace ViewModels
                             input = input.Replace("\n", String.Empty); //remove EOL Characters
                             input = input.Replace("\r", String.Empty);
                             DataPointModel lineData = new();
+                            //DataPointModel MaxTensionDataPoint = new();
+                            //DataPointModel MaxPayoutDataPoint = new();
                             string[] values = input.Split(',');
                             //object[] valueObject = new object[values.Length];
                             //int i = 0;
@@ -306,11 +310,13 @@ namespace ViewModels
                                         maxTensionCurrent = lineData.Tension;
                                         maxTensionPayoutCurrent = lineData.Payout;
                                         maxTensionString = input;
+                                        MaxTensionDataPoint = lineData.ShallowCopy();
                                     }
                                     if (Math.Abs(lineData.Payout) > maxPayoutCurrent)
                                     {
                                         maxPayoutCurrent = Math.Abs(lineData.Payout);
                                         maxPayoutString = input;
+                                        MaxPayoutDataPoint = lineData.ShallowCopy() ;
                                     }
 
                                 }
@@ -318,7 +324,10 @@ namespace ViewModels
 
                                 if (/*lineData.Tension < minTension &&*/ Math.Abs(lineData.Payout) < minPayout && castActive == true)
                                 {
+                                    DataPointModel mTenDataPt = MaxTensionDataPoint.ShallowCopy();
+                                    DataPointModel mPayDataPt = MaxPayoutDataPoint.ShallowCopy();
                                     ProcessDataWriteFilesViewModel.WriteProcessed(maxTensionString, maxPayoutString, cast); //end cast, increment cast number, write processed data
+                                    ExcelViewModel.AddData(mTenDataPt, mPayDataPt);
                                     parseData.ReadingLine = maxTensionString;
                                     parseData.ProcessCasts.Add(processCastDataModel);
                                     float mTenSend = maxTensionCurrent;
