@@ -17,6 +17,9 @@
         private ObservableCollection<DataPointModel> dataToPlot = new();
 
         [ObservableProperty]
+        private ObservableCollection<WireLogModel> wireLog = new ObservableCollection<WireLogModel>();
+
+        [ObservableProperty]
         private string cruiseName = string.Empty;
 
         [ObservableProperty]

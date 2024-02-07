@@ -6,6 +6,7 @@
 			 xmlns:vm="clr-namespace:ViewModels"
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Views.ProcessDataPlotView">
+	<!--
 	<Panel Background="LightGray">
 		<lc:CartesianChart x:Name="Plot"
 						   SyncContext="{Binding Sync}"
@@ -15,6 +16,8 @@
 							  EasingFunction="{x:Null}"
 						   ZoomMode="X"/>
 	</Panel>
+	-->
+	
 	
 	
 	

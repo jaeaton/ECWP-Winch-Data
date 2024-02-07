@@ -4,5 +4,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Views.ProcessDataDataGridView">
- Data Grid
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<TextBlock Text="Cast Table" Grid.Row="0" HorizontalAlignment="Center" FontWeight="Bold"/>
+		
+		<ScrollViewer Grid.Row="1">
+			<DataGrid GridLinesVisibility="All" Margin="20" BorderThickness="2" ItemsSource="{ Binding WireLog}">
+				<DataGrid.Columns>
+					<DataGridTextColumn Header="Cruise Number" Binding="{ Binding CruiseNumber }"/>
+					<DataGridTextColumn Header="Date" Binding="{ Binding EventDate }"/>
+					<DataGridTextColumn Header="Cast Number" Binding="{ Binding CastNumber }"/>
+					<DataGridTextColumn Header="Cable Length" Binding="{ Binding InstalledTensionMemberLength }"/>
+					<DataGridTextColumn Header="Maximum Tension" Binding="{ Binding MaxTension }"/>
+					<DataGridTextColumn Header="Max Tension Wire Out" Binding="{ Binding MaxTensionWireOut }"/>
+					<DataGridTextColumn Header="Max Tension Wire In" Binding="{ Binding MaxTensionWireIn }"/>
+					<DataGridTextColumn Header="Max Wire Out" Binding="{ Binding MaxWireOut }"/>
+					<DataGridTextColumn Header="Notes" Binding="{ Binding Notes }"/>
+				</DataGrid.Columns>
+			</DataGrid>
+		</ScrollViewer>
+		
+	</Grid>
 </UserControl>

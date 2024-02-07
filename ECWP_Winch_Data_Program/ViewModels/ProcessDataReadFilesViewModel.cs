@@ -1,4 +1,7 @@
-﻿namespace ViewModels
+﻿using Avalonia.Threading;
+using LiveChartsCore.Geo;
+
+namespace ViewModels
 {
     internal class ProcessDataReadFilesViewModel
     {
@@ -256,6 +259,7 @@
                 using (System.IO.StreamReader sr = new System.IO.StreamReader(parseData.Directory + '\\' + parseData.CombinedFileName, true))
                 {
                     float maxTensionCurrent = 0;
+                    float maxTensionPayoutCurrent = 0;
                     float maxPayoutCurrent = 0;
                     string maxTensionString = string.Empty;
                     string maxPayoutString = string.Empty;
@@ -300,6 +304,7 @@
                                     if (lineData.Tension > maxTensionCurrent)
                                     {
                                         maxTensionCurrent = lineData.Tension;
+                                        maxTensionPayoutCurrent = lineData.Payout;
                                         maxTensionString = input;
                                     }
                                     if (Math.Abs(lineData.Payout) > maxPayoutCurrent)
@@ -313,9 +318,16 @@
 
                                 if (/*lineData.Tension < minTension &&*/ Math.Abs(lineData.Payout) < minPayout && castActive == true)
                                 {
-                                    //ProcessDataWriteFilesViewModel.WriteProcessed(maxTensionString, maxPayoutString, cast); //end cast, increment cast number, write processed data
+                                    ProcessDataWriteFilesViewModel.WriteProcessed(maxTensionString, maxPayoutString, cast); //end cast, increment cast number, write processed data
                                     parseData.ReadingLine = maxTensionString;
                                     parseData.ProcessCasts.Add(processCastDataModel);
+                                    float mTenSend = maxTensionCurrent;
+                                    float mTenPaySend = maxTensionPayoutCurrent;
+                                    float mPaySend = maxPayoutCurrent;
+                                    int castSend = cast;
+                                    Dispatcher.UIThread.Post(() => AddData(lineData, castSend, mTenSend, mTenPaySend, mPaySend));
+                                    //parseData.WireLog.Add(new WireLogModel(lineData.DateAndTime, "Cast Data", cast, maxTensionCurrent, maxPayoutCurrent)) ;
+                                    //parseData.DataToPlot.Add(lineData);
                                     cast++;
                                     castActive = false;
                                     maxPayoutCurrent = 0;
@@ -326,26 +338,30 @@
 
                                 if (castActive)
                                 {
-                                    processPointDataModel.Payout = lineData.Payout;
-                                    processPointDataModel.Tension = lineData.Tension;
-                                    processPointDataModel.PointNumber = i++;
-                                    processCastDataModel.ProcessPoints?.Add(processPointDataModel);
+                                    //processPointDataModel.Payout = lineData.Payout;
+                                    //processPointDataModel.Tension = lineData.Tension;
+                                    //processPointDataModel.PointNumber = i++;
+                                    //processCastDataModel.ProcessPoints?.Add(processPointDataModel);
                                     //parseData.ChartData.AddData(lineData);
-                                    parseData.DataToPlot.Add(lineData);
+                                    //parseData.DataToPlot.Add(lineData);
                                 }
                             }
 
                         }
-                        foreach (var val in parseData.DataToPlot)
-                        {
-                            parseData.ChartData.AddData(val);
-                        }
-                        parseData.ChartData.PlotData();
+                        //foreach (var val in parseData.DataToPlot)
+                        //{
+                        //    parseData.ChartData.AddData(val);
+                        //}
+                        //parseData.ChartData.PlotData();
                         parseData.ReadingLine = "Done!";
                     }
                 }
                 //parseData.ReadingLine = "Done!";
             });
+        }
+        private static void AddData(DataPointModel lineData, int cast, float maxTenCurrent, float maxTenPayCurrent, float maxPayCurrent)
+        {
+            ProcessDataViewModel.ParseData.WireLog.Add(new WireLogModel(lineData.DateAndTime, "Cast Data", cast, maxTenCurrent, maxTenPayCurrent, maxPayCurrent));
         }
         public static object ReadProcessConfig()
         {

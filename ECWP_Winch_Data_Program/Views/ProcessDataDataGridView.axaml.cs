@@ -5,6 +5,7 @@ namespace Views
         public ProcessDataDataGridView()
         {
             InitializeComponent();
+            DataContext = ViewModels.ProcessDataViewModel.ParseData;
         }
     }
 }

@@ -194,7 +194,7 @@
             lock (ProcessDataViewModel.ParseData.Sync)
             {
                 _observableValues = _observableStore;
-
+                
             }
         }
         public void AddData(DataPointModel latest)
