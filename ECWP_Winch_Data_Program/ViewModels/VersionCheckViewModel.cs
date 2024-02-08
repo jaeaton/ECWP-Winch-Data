@@ -3,9 +3,9 @@
     internal partial class VersionCheckViewModel : ViewModelBase
     {
         [ObservableProperty]
-        private string? runningVersion;
+        private string runningVersion = string.Empty;
         [ObservableProperty]
-        private string? gitVersion;
+        private string gitVersion = string.Empty;
         [ObservableProperty]
         private bool isAsyncUpdate;
         string url = "https://github.com/jaeaton/ECWP-Winch-Data/releases";
