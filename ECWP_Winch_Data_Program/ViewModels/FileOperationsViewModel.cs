@@ -39,7 +39,7 @@ namespace ViewModels
                 }
                 //Populate array with configuartion values
                 List<string> lines = new();
-                if (winch.WinchName != null)
+                if (winch.WinchName != string.Empty)
                 {
                     lines.Add($"Winch Name,{winch.WinchName}");
                 }
@@ -48,7 +48,7 @@ namespace ViewModels
                     MessageBoxViewModel.DisplayMessage(
                            $"Winch Name must be entered.");
                 }
-                if (winch.InputCommunication.TcpIpAddress  != null)
+                if (winch.InputCommunication.TcpIpAddress  != string.Empty)
                 {
                     bool valid = ValidateIPViewModel.ValidateIPFunction(winch.InputCommunication.TcpIpAddress);
                     if (valid)
@@ -151,13 +151,13 @@ namespace ViewModels
                 if (winch.UdpOutput == true)
                 {
                     lines.Add($"Send UDP,{ winch.UdpOutput }");
-                    if (winch.OutputCommunication.TcpIpAddress == null)
+                    if (winch.OutputCommunication.TcpIpAddress == string.Empty)
                     {
                         MessageBoxViewModel.DisplayMessage(
                                     $"{winch.WinchName}\n" +
                                     $"Output IP Address required");
                     }
-                    if (winch.OutputCommunication.PortNumber == null)
+                    if (winch.OutputCommunication.PortNumber == string.Empty)
                     {
                         MessageBoxViewModel.DisplayMessage(
                                     $"{winch.WinchName}\n" +

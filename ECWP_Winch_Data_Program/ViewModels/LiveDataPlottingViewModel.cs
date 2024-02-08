@@ -37,7 +37,7 @@
         }
 
         [RelayCommand]
-        private async void StartStop(string winchname)
+        private async Task StartStop(string winchname)
         {
             WinchModel winch = GetWinch(winchname);
             FileOperationsViewModel.SetFileNames(winch);

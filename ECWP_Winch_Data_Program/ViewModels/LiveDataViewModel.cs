@@ -1,15 +1,17 @@
-﻿namespace ViewModels
+﻿using Avalonia.Controls;
+
+namespace ViewModels
 {
     internal partial class LiveDataViewModel : ViewModelBase
     {
         ConfigDataStore _configDataStore = MainViewModel._configDataStore;
         //move code from code behind to here
         [RelayCommand]
-        private async void PlotHelp()
+        private async Task PlotHelp()
         {
             VersionCheckViewModel viewModel = new VersionCheckViewModel();
             viewModel.RunningVersion = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyInformationalVersionAttribute>().InformationalVersion;
-            MessageBoxViewModel.DisplayMessage("Step 1: Configure winch(es) in the Config Winch tab. \n" +
+            await MessageBoxViewModel.DisplayMessage("Step 1: Configure winch(es) in the Config Winch tab. \n" +
                 "Step 2: Select the winches to plot. \n" +
                 "Step 3: Set the cruise name. \n" +
                 "Step 4: Set the cast numbers for the selected winches. \n" +
@@ -21,7 +23,7 @@
                 $"{viewModel.RunningVersion}");
         }
         [RelayCommand]
-        private async void SaveLocation()
+        private async Task SaveLocation()
         {
             // Show the save file dialog
             SaveFileDialog saveFileDialog = new();
@@ -29,6 +31,8 @@
             saveFileDialog.InitialFileName = "Date_Cruise_Winch.log";
 
             string saveFileName = await saveFileDialog.ShowAsync(MainWindow.Instance);
+            //var topLevel = TopLevel.GetTopLevel(this);
+            //var storage = topLevel.StorageProvider;
             if (saveFileName != null)
             {
                 //DirectoryLabel.Content = saveFileDialog.InitialFileName;

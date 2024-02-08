@@ -98,13 +98,13 @@
 
         [ObservableProperty]
         private string selectWinch = string.Empty;// = new();
-        partial void OnSelectWinchChanged(string? value)
+        partial void OnSelectWinchChanged(string value)
         {
             LoadWinch(value);
         }
         [ObservableProperty]
         private TabItemModel winchSelected;
-        partial void OnWinchSelectedChanged(TabItemModel? value)
+        partial void OnWinchSelectedChanged(TabItemModel value)
         {
             if (value != null)
             {

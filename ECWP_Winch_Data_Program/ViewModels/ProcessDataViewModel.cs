@@ -6,7 +6,7 @@
         public static ParseDataStore ParseData = new();
 
         [RelayCommand]
-        private async void File_Location()
+        private async Task File_Location()
         {
             // Show the save file dialog
             SaveFileDialog saveFileDialog = new();

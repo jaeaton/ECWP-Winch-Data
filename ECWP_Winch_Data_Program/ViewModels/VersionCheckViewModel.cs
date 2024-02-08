@@ -13,7 +13,7 @@
         Uri? uri = new Uri("https://github.com/jaeaton/ECWP-Winch-Data/releases");
 
         [RelayCommand]
-        public async void CheckForUpdate()
+        public async Task CheckForUpdate()
         {
             GithubUpdateCheck update = new GithubUpdateCheck("jaeaton", "ECWP-Winch-Data");
             //bool isUpdate = update.IsUpdateAvailable("1.0.0", VersionChange.Minor);

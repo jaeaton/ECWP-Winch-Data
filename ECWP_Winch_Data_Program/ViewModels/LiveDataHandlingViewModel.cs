@@ -59,7 +59,7 @@
                 catch (SocketException e)
                 {
                     string msg = $"SocketException: {e.Message}";
-                    MessageBoxViewModel.DisplayMessage(msg);
+                    await  MessageBoxViewModel.DisplayMessage(msg);
                 }
                 server.Stop();
                 if (client != null)
@@ -84,7 +84,7 @@
                         if (!client.ConnectAsync(IPAddress.Parse(winch.InputCommunication.TcpIpAddress), int.Parse(winch.InputCommunication.PortNumber)).Wait(5000))
                         {
                             // connection failure
-                            MessageBoxViewModel.DisplayMessage("Failed to connect to TCP Server");
+                            await MessageBoxViewModel.DisplayMessage("Failed to connect to TCP Server");
                         }
                         //client.Connect(IPAddress.Parse(globalConfig.ReceiveCommunication.IPAddress), int.Parse(globalConfig.ReceiveCommunication.PortNumber));
                     }
@@ -95,15 +95,15 @@
                 //}
                 catch (ArgumentNullException e)
                 {
-                    MessageBoxViewModel.DisplayMessage($"ArgumentNullException: {e.Message}");
+                    await MessageBoxViewModel.DisplayMessage($"ArgumentNullException: {e.Message}");
                 }
                 catch (SocketException e)
                 {
-                    MessageBoxViewModel.DisplayMessage($"SocketException: {e.Message}");
+                    await MessageBoxViewModel.DisplayMessage($"SocketException: {e.Message}");
                 }
                 catch (ObjectDisposedException e)
                 {
-                    MessageBoxViewModel.DisplayMessage($"ObjectDisposeException: {e.Message}");
+                    await MessageBoxViewModel.DisplayMessage($"ObjectDisposeException: {e.Message}");
                 }
                 //Looks for cancellation token to stop data collection
                 if (client.Connected)
@@ -144,7 +144,7 @@
                 catch (SocketException e)
                 {
                     string msg = $"SocketException: {e.Message}";
-                    MessageBoxViewModel.DisplayMessage(msg);
+                    await MessageBoxViewModel.DisplayMessage(msg);
                 }
                 client.Close();
                 client.Dispose();
