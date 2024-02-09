@@ -6,7 +6,7 @@
              x:Class="Views.WinchDetailDataInView">
 	<Panel>
 		<StackPanel >
-			<TextBlock Text="Communication Parameters" Margin="5"/>
+			<TextBlock Text="Input Communication Parameters" Margin="5"/>
 			<StackPanel Orientation="Horizontal" Margin="5">
 				<TextBlock Text="IP Address" Width="90" VerticalAlignment="Center" />
 				<TextBox Watermark="Ex: 192.168.103.217" Text="{ Binding CurrentWinch.InputCommunication.TcpIpAddress, Mode=TwoWay }" IsEnabled="{Binding Path=UserInputsEnable}" Width="130" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBox>
@@ -19,14 +19,19 @@
 				<TextBlock Text="Source Type" Width="90" VerticalAlignment="Center"/>
 				<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.CommunicationType, Mode=TwoWay }" ItemsSource="{ Binding Path=AvailableProtocols }" SelectedIndex="0"/>
 			</StackPanel>
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock Text="Protocol" Width="90" VerticalAlignment="Center"/>
+				<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.CommunicationType, Mode=TwoWay }" ItemsSource="{ Binding Path=AvailableProtocols }" SelectedIndex="0"/>
+			</StackPanel>
+			<!--
 			<StackPanel Margin="5">
 				<CheckBox x:Name="CheckBoxHawboldt" Content="Hawboldt Protocol" IsChecked="{ Binding CurrentWinch.ProtocolHawboldt, FallbackValue='False' }" Margin="6,2,50,0" />
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="Model" Width="90" Margin="5" VerticalAlignment="Center" IsVisible="{ Binding ElementName=CheckBoxHawboldt,Path=IsChecked }" />
 					<ComboBox ItemsSource="{ Binding HawboldtModelList }" SelectedItem="{ Binding CurrentWinch.HawboldtModel, Mode=TwoWay }" IsVisible="{ Binding ElementName=CheckBoxHawboldt,Path=IsChecked }" Width="130"/>
 				</StackPanel>
-
 			</StackPanel>
+			-->
 		</StackPanel>
 	</Panel>
 </UserControl>

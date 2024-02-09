@@ -9,6 +9,32 @@
 		<RadioButton Content="UDP" x:Name="RadioButtonSendUDP" GroupName="OutputType"/>
 		<RadioButton Content="Serial" x:Name="RadioButtonSendSerial" GroupName="OutputType"/>
 		
+		<Border BorderThickness="1" BorderBrush="Gray" IsVisible="{Binding ElementName=RadioButtonSendTCP, Path=IsChecked}">
+
+			<StackPanel Margin="10" IsVisible="{Binding ElementName=RadioButtonSendTCP, Path=IsChecked}">
+				<StackPanel Orientation="Horizontal" >
+					<TextBlock Text="Destination" Width="90" VerticalAlignment="Center" />
+					<TextBox Watermark="TCP Connection" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.PortNumber,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
+				</StackPanel>
+				<StackPanel>
+					<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" GroupName="udpRadioButtons" IsChecked="{Binding CurrentWinch.UdpFormatMtnw, FallbackValue='False'}"/>
+					<RadioButton Content="UNOLS Format" HorizontalContentAlignment="Right" GroupName="udpRadioButtons" IsChecked="{Binding CurrentWinch.UdpFormatUnols, FallbackValue='True'}"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="5"  >
+					<TextBlock Text="Port Number" Width="90" VerticalAlignment="Center" />
+					<TextBox  Watermark="50000" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.PortNumber,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="5"  >
+					<TextBlock Text="IP Address" Width="90" VerticalAlignment="Center" />
+					<TextBox  Watermark="192.168.1.121" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.TcpIpAddress,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<Button Content="Add" HorizontalContentAlignment="Center" Width="160" Margin="2"/>
+					<Button Content="Remove" HorizontalContentAlignment="Center" Width="160" Margin="2"/>
+				</StackPanel>
+			</StackPanel>
+		</Border>
+		
 		<Border BorderThickness="1" BorderBrush="Gray" IsVisible="{Binding ElementName=RadioButtonSendUDP, Path=IsChecked}">
 			
 			<StackPanel Margin="10" IsVisible="{Binding ElementName=RadioButtonSendUDP, Path=IsChecked}">
