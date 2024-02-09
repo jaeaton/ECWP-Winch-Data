@@ -129,7 +129,30 @@
         {
             new TabItemModel("Add New", "Add New")
         };
-
+        [ObservableProperty]
+        private List<string> wireLogEventList = new List<string> 
+                                                            { 
+                                                                "Cut Back",
+                                                                "Lubrication",
+                                                                "Other"
+                                                            };
+        [ObservableProperty]
+        private string wireLogEventSelection = string.Empty;
+        [ObservableProperty]
+        private string wireLogEventCutBack = string.Empty;
+        partial void OnWireLogEventCutBackChanged(string value)
+        {
+            if (double.TryParse(value, out double result))
+            {
+                CurrentWinch.AvailableLength = CurrentWinch.AvailableLength - result;
+            }
+            
+        }
+        [ObservableProperty]
+        private DateTime wireLogEventDate = DateTime.Now;
+        
+        [ObservableProperty]
+        private string wireLogEventNotes = string.Empty;
         public void LoadWinch(string winch)
         {
             if (winch != null && AllWinches != null)

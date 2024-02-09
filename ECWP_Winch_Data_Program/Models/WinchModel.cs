@@ -132,7 +132,7 @@
             {
                 ChartData.Sections[1].Yj = abl;
 
-                if (FactorOfSafety != null)
+                if (FactorOfSafety != default)
                 {
                     TensionAlarmLevel = (Convert.ToInt16(abl / FactorOfSafety)).ToString();
 
@@ -166,8 +166,6 @@
         private string chartTimeSpan = string.Empty ;
         [ObservableProperty]
         private double factorOfSafety = default;
-        [ObservableProperty]
-        private double installedLength = default;
         partial void OnFactorOfSafetyChanged(double oldValue, double newValue)
         {
             if(double.TryParse(AssignedBreakingLoad, out double abl))
@@ -194,6 +192,22 @@
             
             
         }
+        [ObservableProperty]
+        private double installedLength = default;
+        partial void OnInstalledLengthChanged(double value)
+        {
+            AvailableLength = value;
+        }
+        [ObservableProperty]
+        private double availableLength = default;
+        [ObservableProperty]
+        private string tensionMemberName = string.Empty ;
+        [ObservableProperty]
+        private string tensionMemberManufacturer = string.Empty ;
+        [ObservableProperty]
+        private string tensionMemberPartNumber = string.Empty;
+        [ObservableProperty]
+        private string tensionMemberNSFID = string.Empty ;
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)
         {

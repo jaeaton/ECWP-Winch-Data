@@ -2,45 +2,45 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
              x:Class="Views.WinchDetailTensionMemberView">
   
   <StackPanel>
 	  <StackPanel Orientation="Horizontal" Margin="2">
 		  <TextBlock Text="Name:" Width="160" VerticalAlignment="Center" Margin="2"/>
-		  <TextBox Width="150" Margin="2"/>
+		  <TextBox Text="{Binding CurrentWinch.TensionMemberName}" Watermark="Tension Member" Width="150" Margin="2"/>
 	  </StackPanel>
 	  <StackPanel Orientation="Horizontal" Margin="2">
 		  <TextBlock Text="Manufacturer:"  Width="160" VerticalAlignment="Center" Margin="2"/>
-		  <TextBox Width="150" Margin="2"/>
+		  <TextBox Text="{Binding CurrentWinch.TensionMemberManufacturer}" Watermark="Enter Manufacturer" Width="150" Margin="2"/>
 	  </StackPanel>
 	  <StackPanel Orientation="Horizontal" Margin="2">
 		  <TextBlock Text="Part Number:" Width="160" VerticalAlignment="Center" Margin="2"/>
-		  <TextBox Width="150" Margin="2"/>
+		  <TextBox Text="{Binding CurrentWinch.TensionMemberPartNumber}" Watermark="Part Number" Width="150" Margin="2"/>
 	  </StackPanel>
 	  <StackPanel Orientation="Horizontal" Margin="2">
 		  <TextBlock Text="NSF ID:"  Width="160" VerticalAlignment="Center" Margin="2"/>
-		  <TextBox Width="150" Margin="2"/>		  
+		  <TextBox Text="{Binding CurrentWinch.TensionMemberNSFID}" Watermark="NSF ID" Width="150" Margin="2"/>		  
 	  </StackPanel>
 	  <StackPanel Orientation="Horizontal" Margin="2">
 		  <TextBlock Text="Installed Length" Width="160" VerticalAlignment="Center" Margin="2"/>
-		  <TextBox Watermark="Ex: 6000" x:Name="TextBoxInstalledLength" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.AssignedBreakingLoad, Mode=TwoWay }" Width="90" VerticalAlignment="Center" Margin="2"/>
+		  <TextBox Watermark="Ex: 6000" x:Name="TextBoxInstalledLength" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.InstalledLength, Mode=TwoWay }" Width="90" VerticalAlignment="Center" Margin="2"/>
 		  <TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.PayoutUnit }" VerticalAlignment="Center"/>
 	  </StackPanel>
 	  <StackPanel Orientation="Horizontal" Margin="2">
 		  <TextBlock Text="Current Length" Width="160" VerticalAlignment="Center" Margin="2"/>
-		  <TextBox Watermark="Ex: 6000" IsEnabled="False" Text="{Binding CurrentWinch.AssignedBreakingLoad, Mode=TwoWay }" Width="90" VerticalAlignment="Center" Margin="2"/>
+		  <TextBox Watermark="Ex: 6000" IsEnabled="False" Text="{Binding CurrentWinch.AvailableLength, Mode=TwoWay }" Width="90" VerticalAlignment="Center" Margin="2"/>
 		  <TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.PayoutUnit }" VerticalAlignment="Center"/>
 	  </StackPanel>
 	  <StackPanel Orientation="Horizontal" Margin="2">
 		  <TextBlock Text="Warning Tension" Width="160" VerticalAlignment="Center" Margin="2"/>
-		   <TextBox Text="{Binding CurrentWinch.InstalledLength}" Width="90" VerticalAlignment="Center" Margin="2"/>
+		   <TextBox Text="{Binding CurrentWinch.TensionWarningLevel}" IsEnabled="False" Width="90" VerticalAlignment="Center" Margin="2"/>
 		  
 		  <TextBlock Margin="3" Text="{Binding CurrentWinch.TensionUnit}" VerticalAlignment="Center" />
 	  </StackPanel>
 	  <StackPanel Orientation="Horizontal" Margin="2">
 		  <TextBlock Text="Alarm Tension" Width="160" VerticalAlignment="Center" Margin="2"/>
-			  <TextBox  Text="{Binding CurrentWinch.TensionAlarmLevel, Mode=TwoWay }" Width="90" VerticalAlignment="Center"></TextBox>
+			  <TextBox  Text="{Binding CurrentWinch.TensionAlarmLevel, Mode=OneWay }" IsEnabled="False" Width="90" VerticalAlignment="Center"></TextBox>
 		  
 		  <TextBlock Margin="3" Text="{Binding CurrentWinch.TensionUnit}" VerticalAlignment="Center"/>
 	  </StackPanel>

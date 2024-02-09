@@ -324,16 +324,17 @@ namespace ViewModels
 
                                 if (/*lineData.Tension < minTension &&*/ Math.Abs(lineData.Payout) < minPayout && castActive == true)
                                 {
-                                    DataPointModel mTenDataPt = MaxTensionDataPoint.ShallowCopy();
-                                    DataPointModel mPayDataPt = MaxPayoutDataPoint.ShallowCopy();
-                                    ProcessDataWriteFilesViewModel.WriteProcessed(maxTensionString, maxPayoutString, cast); //end cast, increment cast number, write processed data
-                                    ExcelViewModel.AddData(mTenDataPt, mPayDataPt);
-                                    parseData.ReadingLine = maxTensionString;
-                                    parseData.ProcessCasts.Add(processCastDataModel);
                                     float mTenSend = maxTensionCurrent;
                                     float mTenPaySend = maxTensionPayoutCurrent;
                                     float mPaySend = maxPayoutCurrent;
                                     int castSend = cast;
+                                    DataPointModel mTenDataPt = MaxTensionDataPoint.ShallowCopy();
+                                    DataPointModel mPayDataPt = MaxPayoutDataPoint.ShallowCopy();
+                                    ProcessDataWriteFilesViewModel.WriteProcessed(maxTensionString, maxPayoutString, cast); //end cast, increment cast number, write processed data
+                                    ExcelViewModel.AddCastData(mTenDataPt, mPayDataPt, castSend);
+                                    parseData.ReadingLine = maxTensionString;
+                                    parseData.ProcessCasts.Add(processCastDataModel);
+                                    
                                     Dispatcher.UIThread.Post(() => AddData(lineData, castSend, mTenSend, mTenPaySend, mPaySend));
                                     //parseData.WireLog.Add(new WireLogModel(lineData.DateAndTime, "Cast Data", cast, maxTensionCurrent, maxPayoutCurrent)) ;
                                     //parseData.DataToPlot.Add(lineData);

@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
              x:Class="Views.WinchDetailWireLogView">
 
 	<Grid>
@@ -12,15 +12,24 @@
 		</Grid.ColumnDefinitions>
 		<StackPanel Grid.Column="0">
 			<StackPanel Orientation="Horizontal" Margin="2">
-				<TextBlock Text="Log Event Type:" Width="120" VerticalAlignment="Center" Margin="2"/>
-				<ComboBox Width="150" Margin="2"/>
+				<TextBlock Text="Date:"  Width="120" VerticalAlignment="Center"  />
+				<CalendarDatePicker SelectedDate="{Binding WireLogEventDate}"  />
 			</StackPanel>
 			<StackPanel Orientation="Horizontal" Margin="2">
-				<TextBlock Text="Date:"  Width="120" VerticalAlignment="Center" Margin="2"/>
-				<CalendarDatePicker  Margin="2"/>
+				<TextBlock Text="Log Event Type:" Width="120" VerticalAlignment="Center"  />
+				<ComboBox ItemsSource="{Binding WireLogEventList}" SelectedItem="{Binding WireLogEventSelection}" Width="150"  />
 			</StackPanel>
 			<StackPanel Orientation="Horizontal" Margin="2">
-				<Button Content="Add Log Event" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Width="160" Margin="2"/>
+				<TextBlock Text="Cut Back Length:" VerticalAlignment="Center" Width="120"/>
+				<TextBox Text="{Binding WireLogEventCutBack}" Width="160"/>
+			</StackPanel>
+			<StackPanel Orientation="Horizontal" Margin="2">
+				<TextBlock Text="Notes:" Width="120" VerticalAlignment="Center"/>
+				<TextBox Text="{Binding WireLogEventNotes}" Width="200" Height="200"/>
+			</StackPanel>
+			
+			<StackPanel Orientation="Horizontal" Margin="2">
+				<Button Content="Add Log Event" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Width="160"  />
 			</StackPanel>
 		</StackPanel>
 		<Grid Grid.Column="1" Margin="2">

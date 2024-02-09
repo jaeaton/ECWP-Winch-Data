@@ -29,8 +29,8 @@
 					<TextBox x:Name="TextBoxDestinationIPAdress" Watermark="192.168.1.121" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.TcpIpAddress,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal">
-					<Button Content="Add"/>
-					<Button Content="Remove"/>
+					<Button Content="Add" HorizontalContentAlignment="Center" Width="160" Margin="2"/>
+					<Button Content="Remove" HorizontalContentAlignment="Center" Width="160" Margin="2"/>
 				</StackPanel>
 			</StackPanel>
 		</Border>
