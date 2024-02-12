@@ -5,11 +5,30 @@
         
         [ObservableProperty]
         private CommunicationModel inputCommunication = new();
+        [ObservableProperty]
+        private ObservableCollection<CommunicationModel> allOutputCommunication = new();
+        [ObservableProperty]
+        private TabItemModel outputCommsSelected;
+        partial void OnOutputCommsSelectedChanged(TabItemModel value)
+        {
+            if (value != null)
+            {
+                LoadComms(value.Header);
+            }
+        }
+        [ObservableProperty]
+        private ObservableCollection<TabItemModel> tabItemsOutputComms = new()
+        {
+            new TabItemModel("Add New", "Add New")
+        };
 
         [ObservableProperty]
         private CommunicationModel outputCommunication = new();
-        
+
         [ObservableProperty]
+        private string inputCommTypeSelection = string.Empty;
+
+         [ObservableProperty]
         private LiveDataDataStore liveData = new();
 
         [ObservableProperty]
@@ -251,5 +270,24 @@
             return copy;
         }
 
+        public void LoadComms(string comm)
+        {
+            if (comm != null && AllOutputCommunication != null)
+            {
+                int index = -1;
+
+                for (int i = 0; i < AllOutputCommunication.Count; i++)
+                {
+                    CommunicationModel item = AllOutputCommunication[i];
+                    if (item.CommunicationType == comm)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+                //Deep copy to break link between class objects
+                OutputCommunication = AllOutputCommunication[index];//.DeepCopy();
+            }
+        }
     }
 }

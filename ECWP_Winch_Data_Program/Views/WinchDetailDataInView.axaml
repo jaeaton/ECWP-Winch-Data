@@ -2,36 +2,57 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="700" d:DesignHeight="450"
              x:Class="Views.WinchDetailDataInView">
 	<Panel>
 		<StackPanel >
 			<TextBlock Text="Input Communication Parameters" Margin="5"/>
-			<StackPanel Orientation="Horizontal" Margin="5">
-				<TextBlock Text="IP Address" Width="90" VerticalAlignment="Center" />
-				<TextBox Watermark="Ex: 192.168.103.217" Text="{ Binding CurrentWinch.InputCommunication.TcpIpAddress, Mode=TwoWay }" IsEnabled="{Binding Path=UserInputsEnable}" Width="130" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBox>
+			<StackPanel Orientation="Vertical" Margin="5">
+				<RadioButton Content="Network" x:Name="RadioButtonInputCommNetwork" GroupName="InputCommType"/>
+				<RadioButton Content="Serial" x:Name="RadioButtonInputCommSerial" GroupName="InputCommType"/>
 			</StackPanel>
-			<StackPanel Orientation="Horizontal" Margin="5">
-				<TextBlock Text="Port Number" Width="90" VerticalAlignment="Center" />
-				<TextBox Watermark="Ex: 50505" x:Name="TextBoxSourcePort" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.InputCommunication.PortNumber, Mode=TwoWay }" Width="130" VerticalAlignment="Center"></TextBox>
+			<StackPanel IsVisible="{Binding ElementName=RadioButtonInputCommNetwork, Path=IsChecked}">
+				<StackPanel Orientation="Horizontal" Margin="5">
+					<TextBlock Text="IP Address" Width="90" VerticalAlignment="Center" />
+					<TextBox Watermark="Ex: 192.168.103.217" Text="{ Binding CurrentWinch.InputCommunication.TcpIpAddress, Mode=TwoWay }" IsEnabled="{Binding Path=UserInputsEnable}" Width="130" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBox>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="5">
+					<TextBlock Text="Port Number" Width="90" VerticalAlignment="Center" />
+					<TextBox Watermark="Ex: 50505" x:Name="TextBoxSourcePort" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.InputCommunication.PortNumber, Mode=TwoWay }" Width="130" VerticalAlignment="Center"></TextBox>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="5">
+					<TextBlock Text="Source Type" Width="90" VerticalAlignment="Center"/>
+					<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.InputCommunication.CommunicationType, Mode=TwoWay }" ItemsSource="{ Binding AvailableProtocols }" SelectedIndex="0"/>
+				</StackPanel>
 			</StackPanel>
-			<StackPanel Orientation="Horizontal" Margin="5">
-				<TextBlock Text="Source Type" Width="90" VerticalAlignment="Center"/>
-				<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.CommunicationType, Mode=TwoWay }" ItemsSource="{ Binding Path=AvailableProtocols }" SelectedIndex="0"/>
-			</StackPanel>
+			
+			<StackPanel IsVisible="{Binding ElementName=RadioButtonInputCommSerial, Path=IsChecked}">
+				<StackPanel  Margin="5" Orientation="Horizontal">
+					<TextBlock Text="Serial Port" Width="100" VerticalAlignment="Center"/>
+					<ComboBox Name="serialPorts" Width="100" SelectedItem="{Binding CurrentWinch.InputCommunication.SerialPort,Mode=TwoWay}" ItemsSource="{ Binding Path=AvailableSerialPorts }" />
+				</StackPanel>
+				<StackPanel  Margin="5" Orientation="Horizontal">
+					<TextBlock Text="Baud Rate" Width="100" VerticalAlignment="Center" />
+					<ComboBox Width="100" SelectedItem="{ Binding CurrentWinch.InputCommunication.BaudRate,Mode=TwoWay }" ItemsSource="{ Binding Path=AvailableBaudRates }" SelectedIndex="0"/>
+				</StackPanel>
+				<StackPanel  Margin="5" Orientation="Horizontal">
+					<TextBlock Text="Data Bits" Width="100" VerticalAlignment="Center"/>
+					<ComboBox Width="100" SelectedItem="{Binding CurrentWinch.InputCommunication.DataBits,Mode=TwoWay}" ItemsSource="{ Binding Path=AvailableDataBits }" />
+				</StackPanel>
+				<StackPanel  Margin="5" Orientation="Horizontal">
+					<TextBlock Text="Parity" Width="100" VerticalAlignment="Center"/>
+					<ComboBox Width="100" SelectedItem="{Binding CurrentWinch.InputCommunication.Parity,Mode=TwoWay}" ItemsSource="{ Binding Path=AvailableParity }" SelectedIndex="1" />
+				</StackPanel>
+				<StackPanel  Margin="5" Orientation="Horizontal">
+					<TextBlock Text="Stop Bits" Width="100" VerticalAlignment="Center" />
+					<ComboBox Width="100" SelectedItem="{ Binding CurrentWinch.InputCommunication.StopBits,Mode=TwoWay }" ItemsSource="{ Binding Path=AvailableStopBits }" SelectedIndex="0"/>
+				</StackPanel>
+			</StackPanel>	
+			
 			<StackPanel Orientation="Horizontal" Margin="5">
 				<TextBlock Text="Protocol" Width="90" VerticalAlignment="Center"/>
 				<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.CommunicationType, Mode=TwoWay }" ItemsSource="{ Binding Path=AvailableProtocols }" SelectedIndex="0"/>
 			</StackPanel>
-			<!--
-			<StackPanel Margin="5">
-				<CheckBox x:Name="CheckBoxHawboldt" Content="Hawboldt Protocol" IsChecked="{ Binding CurrentWinch.ProtocolHawboldt, FallbackValue='False' }" Margin="6,2,50,0" />
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="Model" Width="90" Margin="5" VerticalAlignment="Center" IsVisible="{ Binding ElementName=CheckBoxHawboldt,Path=IsChecked }" />
-					<ComboBox ItemsSource="{ Binding HawboldtModelList }" SelectedItem="{ Binding CurrentWinch.HawboldtModel, Mode=TwoWay }" IsVisible="{ Binding ElementName=CheckBoxHawboldt,Path=IsChecked }" Width="130"/>
-				</StackPanel>
-			</StackPanel>
-			-->
 		</StackPanel>
 	</Panel>
 </UserControl>

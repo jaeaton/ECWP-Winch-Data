@@ -1,6 +1,4 @@
-﻿//using DocumentFormat.OpenXml.Drawing;
-
-namespace ViewModels
+﻿namespace ViewModels
 {
     public class ExcelViewModel 
     {

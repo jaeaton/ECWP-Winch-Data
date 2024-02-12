@@ -31,7 +31,30 @@
                                                                 "4800"
                                                             };
 
-    [ObservableProperty]
+        [ObservableProperty]
+        private List<string> availableDataBits = new List<string>
+                                                            {
+                                                                "7",
+                                                                "8",
+                                                            };
+
+        [ObservableProperty]
+        private List<string> availableParity = new List<string>
+                                                            {
+                                                                "N",
+                                                                "E",
+                                                                "O",
+                                                            };
+
+        [ObservableProperty]
+        private List<string> availableStopBits = new List<string>
+                                                            {
+                                                                "1",
+                                                                "1.5",
+                                                                "2",
+                                                            };
+
+        [ObservableProperty]
         private string winchSelection = string.Empty;
 
         [ObservableProperty]
@@ -129,6 +152,7 @@
         {
             new TabItemModel("Add New", "Add New")
         };
+        
         [ObservableProperty]
         private List<string> wireLogEventList = new List<string> 
                                                             { 
@@ -150,7 +174,6 @@
         }
         [ObservableProperty]
         private DateTime wireLogEventDate = DateTime.Now;
-        
         [ObservableProperty]
         private string wireLogEventNotes = string.Empty;
         public void LoadWinch(string winch)
@@ -172,7 +195,6 @@
                 CurrentWinch = AllWinches[index].DeepCopy();
             }
         }
-
         public void RefreshWinches(ObservableCollection<WinchModel> winches)
         {
             TabItems.Clear();

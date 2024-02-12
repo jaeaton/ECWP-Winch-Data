@@ -14,7 +14,7 @@
 			<StackPanel Margin="10" IsVisible="{Binding ElementName=RadioButtonSendTCP, Path=IsChecked}">
 				<StackPanel Orientation="Horizontal" >
 					<TextBlock Text="Destination" Width="90" VerticalAlignment="Center" />
-					<TextBox Watermark="TCP Connection" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.PortNumber,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
+					<TextBox Watermark="Identifier" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.PortNumber,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
 				</StackPanel>
 				<StackPanel>
 					<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" GroupName="udpRadioButtons" IsChecked="{Binding CurrentWinch.UdpFormatMtnw, FallbackValue='False'}"/>
@@ -40,7 +40,7 @@
 			<StackPanel Margin="10" IsVisible="{Binding ElementName=RadioButtonSendUDP, Path=IsChecked}">
 				<StackPanel Orientation="Horizontal" >
 					<TextBlock Text="Destination" Width="90" VerticalAlignment="Center" />
-					<TextBox Watermark="UDP Connection" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.PortNumber,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
+					<TextBox Watermark="Identifier" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.PortNumber,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
 				</StackPanel>
 				<StackPanel>
 					<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" GroupName="udpRadioButtons" IsChecked="{Binding CurrentWinch.UdpFormatMtnw, FallbackValue='False'}"/>
@@ -65,7 +65,7 @@
 			<StackPanel Margin="10" IsVisible="{ Binding ElementName=RadioButtonSendSerial,Path=IsChecked }">
 				<StackPanel Orientation="Horizontal" >
 					<TextBlock Text="Destination" Width="90" VerticalAlignment="Center" />
-					<TextBox Watermark="Serial Port" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.PortNumber,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
+					<TextBox Watermark="Identifier" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.PortNumber,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
 				</StackPanel>
 				<StackPanel>
 					<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" GroupName="serialRadioButtons"  IsChecked="{Binding CurrentWinch.SerialFormatMtnw,FallbackValue='False'}" />
@@ -79,55 +79,23 @@
 					<TextBlock Text="Baud Rate" Width="100" VerticalAlignment="Center" />
 					<ComboBox Width="100" SelectedItem="{ Binding CurrentWinch.BaudRateOutput,Mode=TwoWay }" ItemsSource="{ Binding Path=AvailableBaudRates }" SelectedIndex="0"/>
 				</StackPanel>
+				<StackPanel  Margin="5" Orientation="Horizontal">
+					<TextBlock Text="Data Bits" Width="100" VerticalAlignment="Center"/>
+					<ComboBox Width="100" SelectedItem="{Binding CurrentWinch.SerialPortOutput,Mode=TwoWay}" ItemsSource="{ Binding Path=AvailableDataBits }" />
+				</StackPanel>
+				<StackPanel  Margin="5" Orientation="Horizontal">
+					<TextBlock Text="Parity" Width="100" VerticalAlignment="Center"/>
+					<ComboBox Width="100" SelectedItem="{Binding CurrentWinch.SerialPortOutput,Mode=TwoWay}" ItemsSource="{ Binding Path=AvailableParity }" />
+				</StackPanel>
+				<StackPanel  Margin="5" Orientation="Horizontal">
+					<TextBlock Text="Stop Bits" Width="100" VerticalAlignment="Center" />
+					<ComboBox Width="100" SelectedItem="{ Binding CurrentWinch.BaudRateOutput,Mode=TwoWay }" ItemsSource="{ Binding Path=AvailableStopBits }" SelectedIndex="0"/>
+				</StackPanel>
 				<StackPanel Orientation="Horizontal">
-					<Button Content="Add"/>
-					<Button Content="Remove"/>
+					<Button Content="Add" HorizontalContentAlignment="Center" Width="160" Margin="2"/>
+					<Button Content="Remove" HorizontalContentAlignment="Center" Width="160" Margin="2"/>
 				</StackPanel>
 			</StackPanel>
-		</Border>
-		
-
-		
-		<!--
-		<StackPanel>
-			<StackPanel Margin="5">
-				<CheckBox x:Name="CheckBoxSendUDP" IsEnabled="{Binding Path=UserInputsEnable}" Content="Send UDP Data" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding CurrentWinch.UdpOutput,FallbackValue='False'}"/>
-			</StackPanel>
-			<StackPanel Orientation="Horizontal" Margin="5" IsVisible="{ Binding ElementName=CheckBoxSendUDP,Path=IsChecked } }">
-				<TextBlock Text="Data Destination" Width="100" VerticalAlignment="Center"/>
-			</StackPanel>
-			<StackPanel Orientation="Horizontal" Margin="5" IsVisible="{ Binding ElementName=CheckBoxSendUDP,Path=IsChecked } }">
-				<TextBlock Text="IP Address" Width="90" VerticalAlignment="Center" />
-				<TextBox x:Name="TextBoxDestinationIPAdress" Watermark="192.168.1.121" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.TcpIpAddress,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
-			</StackPanel>
-			<StackPanel Orientation="Horizontal" Margin="5" IsVisible="{ Binding ElementName=CheckBoxSendUDP,Path=IsChecked }">
-				<TextBlock Text="Port Number" Width="90" VerticalAlignment="Center" />
-				<TextBox x:Name="TextBoxDestinationPort" Watermark="50000" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.PortNumber,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
-			</StackPanel>
-			<StackPanel Margin="5" IsVisible="{ Binding ElementName=CheckBoxSendUDP,Path=IsChecked }">
-				<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" Margin="6,0,50,0" GroupName="udpRadioButtons" IsChecked="{Binding CurrentWinch.UdpFormatMtnw, FallbackValue='False'}"/>
-				<RadioButton Content="UNOLS Format" HorizontalContentAlignment="Right" Margin="6,0,50,0" GroupName="udpRadioButtons" IsChecked="{Binding CurrentWinch.UdpFormatUnols, FallbackValue='True'}"/>
-			</StackPanel>
-		</StackPanel>
-		<StackPanel>
-			<StackPanel Margin="5">
-				<CheckBox x:Name="CheckBoxSendSerial" Content="Send Serial Data" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding CurrentWinch.SerialOutput}"/>
-			</StackPanel>
-			<StackPanel IsVisible="{ Binding ElementName=CheckBoxSendSerial,Path=IsChecked }">
-				<StackPanel  Margin="5" Orientation="Horizontal">
-					<TextBlock Text="Serial Port" Width="100" VerticalAlignment="Center"/>
-					<ComboBox Name="serialPorts" Width="100" SelectedItem="{Binding CurrentWinch.SerialPortOutput,Mode=TwoWay}" ItemsSource="{ Binding Path=AvailableSerialPorts }" />
-				</StackPanel>
-				<StackPanel  Margin="5" Orientation="Horizontal">
-					<TextBlock Text="Baud Rate" Width="100" VerticalAlignment="Center" />
-					<ComboBox Width="100" SelectedItem="{ Binding CurrentWinch.BaudRateOutput,Mode=TwoWay }" ItemsSource="{ Binding Path=AvailableBaudRates }" SelectedIndex="0"/>
-				</StackPanel>
-				<StackPanel>
-					<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" Margin="6,0,50,0" GroupName="serialRadioButtons"  IsChecked="{Binding CurrentWinch.SerialFormatMtnw,FallbackValue='False'}" />
-					<RadioButton Content="UNOLS Format" HorizontalContentAlignment="Right" Margin="6,0,50,0" GroupName="serialRadioButtons" IsChecked="{Binding CurrentWinch.SerialFormatUnols,FallbackValue='True' }" />
-				</StackPanel>
-			</StackPanel>
-		</StackPanel>
-		-->
+		</Border>		
 	</StackPanel>
 </UserControl>
