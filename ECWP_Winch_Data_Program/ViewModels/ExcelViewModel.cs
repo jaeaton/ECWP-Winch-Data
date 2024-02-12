@@ -1,4 +1,6 @@
-﻿namespace ViewModels
+﻿using DocumentFormat.OpenXml.Drawing.Charts;
+
+namespace ViewModels
 {
     public class ExcelViewModel 
     {
@@ -7,11 +9,11 @@
         {
             ConfigDataStore _config = MainViewModel._configDataStore;
             //Should be set by WinchModel.Filename?
-            string fileName = $"test";
+            string fileName = $"{ProcessDataViewModel.ParseData.CruiseName}_Processed";
             //Check for file
             if (!File.Exists($"{ProcessDataViewModel.ParseData.Directory}\\{fileName}.xlsx"))
             {
-                NewWorkbook("test");
+                NewWorkbook(fileName);
             }
             // Opening workbook
             var wb = new XLWorkbook($"{ProcessDataViewModel.ParseData.Directory}\\{fileName}.xlsx");
@@ -33,7 +35,7 @@
             //Cast number
             ws.Cell($"D{CurrentRow}").Value = cast;
             //Total Length of Cable
-            ws.Cell($"E{CurrentRow}").Value = $"{_config.CurrentWinch.AvailableLength}";
+            ws.Cell($"E{CurrentRow}").Value = _config.CurrentWinch.AvailableLength;
             //Maximum Tension
             ws.Cell($"F{CurrentRow}").Value = dataMaxTension.Tension;
             //Wire Out at Max Tension
@@ -94,27 +96,67 @@
 
             //Add Header
             ws.Cell("A2").Value = "Tension Member Identifier";
-            ws.Cell("E2").Value = $"{_config.CurrentWinch.TensionMemberNSFID}";
+            ws.Cell("D2").Value = $"{_config.CurrentWinch.TensionMemberNSFID}";
             ws.Cell("A3").Value = "Winch Name";
-            ws.Cell("E3").Value = $"{_config.CurrentWinch.WinchName}";//$"{winch.WinchName}";
+            ws.Cell("D3").Value = $"{_config.CurrentWinch.WinchName}";
             ws.Cell("A4").Value = "Winch Model";
-            ws.Cell("E4").Value = $"{_config.CurrentWinch.WinchModelName}";//$"{winch.WinchModelName}";
+            ws.Cell("D4").Value = $"{_config.CurrentWinch.WinchModelName}";
             ws.Cell("A5").Value = "Winch Manufacturer";
-            ws.Cell("E5").Value = $"{_config.CurrentWinch.WinchManufacturer}"; //$"{winch.WinchManufacturer}";
+            ws.Cell("D5").Value = $"{_config.CurrentWinch.WinchManufacturer}"; 
             ws.Cell("A6").Value = "Ship";
-            ws.Cell("E6").Value = $"{_config.ShipName}";//$"{MainViewModel._configDataStore.ShipName}";
+            ws.Cell("D6").Value = $"{_config.ShipName}";
+
+            //Merge Header Cells
+            ws.Range("A1:C1").Merge();
+            ws.Range("A2:C2").Merge();
+            ws.Range("A3:C3").Merge();
+            ws.Range("A4:C4").Merge();
+            ws.Range("A5:C5").Merge();
+            ws.Range("A6:C6").Merge();
+            ws.Range("D2:F2").Merge();
+            ws.Range("D3:F3").Merge();
+            ws.Range("D4:F4").Merge();
+            ws.Range("D5:F5").Merge();
+            ws.Range("D6:F6").Merge();
+
+            //Merge Image Cell
+            ws.Range("B8:I22").Merge();
+
+            //Set Column widths
+            ws.Column(1).Width = 10;
+            ws.Column(2).Width = 13;
+            ws.Column(3).Width = 12;
+            ws.Column(4).Width = 5;
+            ws.Column(5).Width = 9;
+            ws.Column(6).Width = 11;
+            ws.Column(7).Width = 9;
+            ws.Column(8).Width = 9;
+            ws.Column(9).Width = 9;
+            ws.Column(10).Width = 10;
+
+            //Set Row Heights
+            ws.Row(24).Height = 30;
+
+            //Set Text Alignment
+            ws.Row(24).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+
+            //Wrap text in cell
+            ws.Row(24).Style.Alignment.WrapText = true;
 
             //Add Column Headings
             ws.Cell("A24").Value = "Event Type";
-            ws.Cell("B24").Value = "Cruise Number";
+            ws.Cell("B24").Value = "Cruise #";
             ws.Cell("C24").Value = "Date";
-            ws.Cell("D24").Value = "Cast Number";
+            ws.Cell("D24").Value = "Cast #";
             ws.Cell("E24").Value = "Cable Length (m)";
             ws.Cell("F24").Value = "Maximum Tension (lbf)";
             ws.Cell("G24").Value = "MT Wire Out (m)";
             ws.Cell("H24").Value = "MT Wire In (m)";
             ws.Cell("I24").Value = "Max Wire Out (m)";
             ws.Cell("J24").Value = "Notes";
+            
+            //Freeze the headings in place
+            ws.SheetView.FreezeRows(24);
 
             //Save File Cruise Name + Winch Name
             var path = $"{ProcessDataViewModel.ParseData.Directory}\\{winch}.xlsx";
