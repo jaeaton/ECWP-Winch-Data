@@ -159,5 +159,11 @@
             }
 
         }
+
+        [RelayCommand]
+        public void AddWireLog()
+        {
+            ExcelViewModel.AddEvent();
+        }
     }
 }
