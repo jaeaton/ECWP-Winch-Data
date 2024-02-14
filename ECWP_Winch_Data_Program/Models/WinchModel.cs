@@ -50,6 +50,8 @@
         [ObservableProperty]
         private string winchModelName = string.Empty;
         [ObservableProperty]
+        private string winchDirectory = string.Empty;
+        [ObservableProperty]
         private string castNumber = string.Empty;
         [ObservableProperty]
         private string fileExtension = string.Empty;
@@ -128,6 +130,8 @@
         private string maxWireLogName = string.Empty;
         [ObservableProperty]
         private string winchLogName = string.Empty;
+        [ObservableProperty]
+        private string wirePoolWireLogName = string.Empty;
         [ObservableProperty]
         private string startStopButtonText = string.Empty;
         [ObservableProperty]

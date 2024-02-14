@@ -16,6 +16,7 @@ namespace ViewModels
             winch.UnolsWireLogName = $"{ dateAndHour }_{ _confDataStore.CruiseNameBox }_cast_{ winch.CastNumber }_{winch.WinchName}_UNOLS.log";
             winch.WinchLogName = $"{ dateOnly }_{ winch.WinchName }_Winch.log";
             winch.MaxWireLogName = $"{ dateTime.ToString("yyyyMM") }_{ _confDataStore.CruiseNameBox }_{winch.WinchName}.log";
+            winch.WirePoolWireLogName = $"{dateTime.ToString("yyyy")}_{winch.WinchName}_Wire_Log";
             return winch;
         }
         public static void WriteConfig(ConfigDataStore _configDataStore)
@@ -31,14 +32,33 @@ namespace ViewModels
             {
                 File.Delete(destPath);
             }
+            List<string> lines = new();
+            if (_configDataStore.ShipName != string.Empty)
+            {
+                lines.Add($"Ship Name,{_configDataStore.ShipName}");
+            }
+            if (_configDataStore.CruiseNameBox != string.Empty)
+            {
+                bool valid = ValidateCruiseViewModel.ValidateCruiseName(_configDataStore.CruiseNameBox);
+                if (valid)
+                {
+                    lines.Add($"Cruise Name,{_configDataStore.CruiseNameBox}");
+                }
+                else
+                {
+                    MessageBoxViewModel.DisplayMessage("Cruise name not valid.");
+                    break;
+                }
+            }
+            lines.Add("-----");
             foreach (WinchModel winch in conf.AllWinches)
             {
                 if (winch == null)
                 {
                     break;
                 }
-                //Populate array with configuartion values
-                List<string> lines = new();
+                //Populate array with winch configuartion values
+                
                 if (winch.WinchName != string.Empty)
                 {
                     lines.Add($"Winch Name,{winch.WinchName}");
@@ -48,93 +68,190 @@ namespace ViewModels
                     MessageBoxViewModel.DisplayMessage(
                            $"Winch Name must be entered.");
                 }
-                if (winch.InputCommunication.TcpIpAddress  != string.Empty)
+                if (winch.InputCommunication.CommunicationType == "Serial")
                 {
-                    bool valid = ValidateIPViewModel.ValidateIPFunction(winch.InputCommunication.TcpIpAddress);
-                    if (valid)
+                    lines.Add($"Receive Communication Type,Serial");
+                    if (winch.InputCommunication.SerialPort != string.Empty)
                     {
-                        lines.Add($"Receive IP,{ winch.InputCommunication.TcpIpAddress }");
+                        lines.Add($"Receive Serial Port Name,{winch.InputCommunication.SerialPort}");
+                    }
+                    if (winch.InputCommunication.BaudRate != string.Empty)
+                    {
+                        lines.Add($"Receive Serial Baud Rate,{winch.InputCommunication.BaudRate}");
+                    }
+                    if (winch.InputCommunication.Parity != string.Empty)
+                    {
+                        lines.Add($"Receive Parity,{winch.InputCommunication.Parity}");
+                    }
+                    if (winch.InputCommunication.StopBits != string.Empty)
+                    {
+                        lines.Add($"Receive Stop Bits,{winch.InputCommunication.StopBits}");
+                    }
+                    if (winch.InputCommunication.DataBits != string.Empty)
+                    {
+                        lines.Add($"Receive Data Bits,{winch.InputCommunication.DataBits}");
+                    }
+                    if (winch.InputCommunication.DataProtocol != string.Empty)
+                    {
+                        lines.Add($"Receive Data Protocol,{winch.InputCommunication.DataProtocol}");
+                    }
+                }
+                else if (winch.InputCommunication.CommunicationType == "Network")
+                {
+                    lines.Add($"Receive Communication Type,Network");
+                    if (winch.InputCommunication.TcpIpAddress != string.Empty)
+                    {
+                        bool valid = ValidateIPViewModel.ValidateIPFunction(winch.InputCommunication.TcpIpAddress);
+                        if (valid)
+                        {
+                            lines.Add($"Receive IP,{winch.InputCommunication.TcpIpAddress}");
+                        }
+                        else
+                        {
+                            MessageBoxViewModel.DisplayMessage(
+                                $"{winch.WinchName}\n" +
+                                $"Input IP Address not valid");
+                            break;
+                        }
                     }
                     else
                     {
                         MessageBoxViewModel.DisplayMessage(
-                            $"{winch.WinchName}\n"+
-                            $"Input IP Address not valid");
-                        break;
-                    }    
+                                $"{winch.WinchName}\n" +
+                                $"Input IP Address required");
+                    }
+                    if (winch.InputCommunication.PortNumber != null)
+                    {
+                        bool valid = ValidateIPViewModel.ValidatePortFunction(winch.InputCommunication.PortNumber);
+                        if (valid)
+                        {
+                            lines.Add($"Receive Port,{winch.InputCommunication.PortNumber}");
+                        }
+                        else
+                        {
+                            MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
+                                $"Input Port number not valid");
+                            break;
+                        }
+
+                    }
+                    else
+                    {
+                        MessageBoxViewModel.DisplayMessage(
+                                $"{winch.WinchName}\n" +
+                                $"Input port number required");
+                    }
+                    if (winch.InputCommunication.CommunicationProtocol != string.Empty)
+                    {
+                        lines.Add($"Receive Communication Protocol,{winch.InputCommunication.CommunicationProtocol}");
+                    }
+                    else
+                    {
+                        MessageBoxViewModel.DisplayMessage(
+                                $"{winch.WinchName}\n" +
+                                $"Input communication protocol required");
+                    }
+                    if (winch.InputCommunication.DataProtocol != string.Empty)
+                    {
+                        lines.Add($"Receive Data Protocol,{winch.InputCommunication.DataProtocol}");
+                    }
+                    else
+                    {
+                        MessageBoxViewModel.DisplayMessage(
+                                $"{winch.WinchName}\n" +
+                                $"Input data procol required");
+                    }
                 }
                 else
                 {
                     MessageBoxViewModel.DisplayMessage(
-                            $"{winch.WinchName}\n" +
-                            $"Input IP Address required");
+                           $"Input communications missing.");
                 }
-                if (winch.InputCommunication.PortNumber != null)
+                if (winch.AllOutputCommunication != null)
                 {
-                    bool valid = ValidateIPViewModel.ValidatePortFunction(winch.InputCommunication.PortNumber);
-                    if (valid)
+                    foreach (CommunicationModel com in  winch.AllOutputCommunication)
                     {
-                        lines.Add($"Receive Port,{winch.InputCommunication.PortNumber}");
+                        if (com.CommunicationType == "Serial")
+                        {
+                            lines.Add($"Transmit Communication Type,Serial");
+                            if (com.DestinationName != string.Empty)
+                            {
+                                lines.Add($"Transmit Destination Name,{com.DestinationName}");
+                            }
+                            if (com.SerialPort != string.Empty)
+                            {
+                                lines.Add($"Transmit Serial Port Name,{com.SerialPort}");
+                            }
+                            if (com.BaudRate != string.Empty)
+                            {
+                                lines.Add($"Transmit Serial Baud Rate,{com.BaudRate}");
+                            }
+                            if (com.Parity != string.Empty)
+                            {
+                                lines.Add($"Transmit Parity,{com.Parity}");
+                            }
+                            if (com.StopBits != string.Empty)
+                            {
+                                lines.Add($"Transmit Stop Bits,{com.StopBits}");
+                            }
+                            if (com.DataBits  != string.Empty)
+                            {
+                                lines.Add($"Transmit Data Bits,{com.DataBits}");
+                            }
+                            if (com.DataProtocol != string.Empty)
+                            {
+                                lines.Add($"Transmit Data Protocol,{com.DataProtocol}");
+                            }
+                        }
+                        if (com.CommunicationType == "Network")
+                        {
+                            lines.Add($"Transmit Communication Type,Network");
+                            if (com.DestinationName != string.Empty)
+                            {
+                                lines.Add($"Transmit Destination Name,{com.DestinationName}");
+                            }
+                            if (com.TcpIpAddress != string.Empty)
+                            {
+                                bool valid = ValidateIPViewModel.ValidateIPFunction(com.TcpIpAddress);
+                                if (valid)
+                                {
+                                    lines.Add($"Transmit IP,{com.TcpIpAddress}");
+                                }
+                                else
+                                {
+                                    MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
+                                        $"Output IP Address not valid");
+                                    break;
+                                }
+
+                            }
+                            if (com.PortNumber != string.Empty)
+                            {
+                                bool valid = ValidateIPViewModel.ValidatePortFunction(com.PortNumber);
+                                if (valid)
+                                {
+                                    lines.Add($"Transmit Port,{com.PortNumber}");
+                                }
+                                else
+                                {
+                                    MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
+                                        $"Output Port Number not Valid");
+                                    break;
+                                }
+                            }
+                            if (com.CommunicationProtocol != string.Empty)
+                            {
+                                lines.Add($"Transmit Communication Protocol,{com.CommunicationProtocol}");
+                            }
+                            if (com.DataProtocol != string.Empty)
+                            {
+                                lines.Add($"Transmit Data Protocol,{com.DataProtocol}");
+                            }
+                        }
                     }
-                    else
-                    {
-                        MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
-                            $"Input Port number not valid");
-                        break;
-                    }
-                    
                 }
-                else
-                {
-                    MessageBoxViewModel.DisplayMessage(
-                            $"{winch.WinchName}\n" +
-                            $"Input port number required");
-                }
-                if (winch.OutputCommunication.TcpIpAddress != null)
-                {
-                    bool valid = ValidateIPViewModel.ValidateIPFunction(winch.OutputCommunication.TcpIpAddress);
-                    if (valid)
-                    {
-                        lines.Add($"Transmit IP,{winch.OutputCommunication.TcpIpAddress}");
-                    }
-                    else
-                    {
-                        MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
-                            $"Output IP Address not valid");
-                        break;
-                    }
-                    
-                }
-                
-                if (winch.OutputCommunication.PortNumber != null)
-                {
-                    bool valid = ValidateIPViewModel.ValidatePortFunction (winch.OutputCommunication.PortNumber);
-                    if (valid)
-                    {
-                        lines.Add($"Transmit Port,{winch.OutputCommunication.PortNumber}");
-                    }
-                    else
-                    {
-                        MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
-                            $"Output Port Number not Valid");
-                        break;
-                    }
-                    
-                }
-                if (_configDataStore.CruiseNameBox != null)
-                {
-                    bool valid = ValidateCruiseViewModel.ValidateCruiseName(_configDataStore.CruiseNameBox);
-                    if (valid)
-                    {
-                        lines.Add($"Cruise Name,{_configDataStore.CruiseNameBox}");
-                    }
-                    else
-                    {
-                        MessageBoxViewModel.DisplayMessage("Cruise name not valid.");
-                        break;
-                    }
-                }
-                if (winch.CastNumber != null)
+
+                if (winch.CastNumber != string.Empty)
                 {
                     bool valid = ValidateCruiseViewModel.ValidateCastNumber(winch.CastNumber);
                     if (valid)
@@ -147,26 +264,6 @@ namespace ViewModels
                             $"Cast number not valid.");
                         break;
                     }
-                }
-                if (winch.UdpOutput == true)
-                {
-                    lines.Add($"Send UDP,{ winch.UdpOutput }");
-                    if (winch.OutputCommunication.TcpIpAddress == string.Empty)
-                    {
-                        MessageBoxViewModel.DisplayMessage(
-                                    $"{winch.WinchName}\n" +
-                                    $"Output IP Address required");
-                    }
-                    if (winch.OutputCommunication.PortNumber == string.Empty)
-                    {
-                        MessageBoxViewModel.DisplayMessage(
-                                    $"{winch.WinchName}\n" +
-                                    $"Output port number required");
-                    }
-                }
-                if (winch.UdpFormat != null)
-                {
-                    lines.Add($"UDP String Format,{ winch.UdpFormat }");
                 }
                 if (winch.Log20Hz != null)
                 {
@@ -184,59 +281,63 @@ namespace ViewModels
                 {
                     lines.Add($"Use Computer Time,{ winch.UseComputerTime }");
                 }
-                if (_configDataStore.DirectoryLabel != null)
+                if (winch.WinchDirectory != string.Empty)
                 {
-                    lines.Add($"Save Location,{ _configDataStore.DirectoryLabel }");
+                    lines.Add($"Save Location,{ winch.WinchDirectory }");
                 }
-                if (winch.SerialOutput != null)
-                {
-                    lines.Add($"Send Serial,{ winch.SerialOutput }");
-                }
-                if (winch.SerialFormat != null)
-                {
-                    lines.Add($"Serial String Format,{ winch.SerialFormat }");
-                }
-                if (winch.SerialPortOutput != null)
-                {
-                    lines.Add($"Serial Port Name,{ winch.SerialPortOutput }");
-                }
-                if (winch.BaudRateOutput != null)
-                {
-                    lines.Add($"Serial Baud Rate,{ winch.BaudRateOutput }");
-                }
-                if (winch.CommunicationType != null)
-                {
-                    lines.Add($"Input Communication Type,{  winch.CommunicationType }");
-                }
-                if (winch.TensionUnit != null)
+
+                if (winch.TensionUnit != string.Empty)
                 {
                     lines.Add($"Tension Units,{ winch.TensionUnit }");
                 }
-                if (winch.PayoutUnit != null)
+                if (winch.PayoutUnit != string.Empty)
                 {
                     lines.Add($"Payout Units,{ winch.PayoutUnit }");
                 }
-                if (winch.SpeedUnit != null)
+                if (winch.SpeedUnit != string.Empty)
                 {
                     lines.Add($"Speed Units,{  winch.SpeedUnit }");
                 }
+
                 if (winch.AutoLog != null)
                 {
                     lines.Add($"Auto Log,{ winch.AutoLog}");
                 }
-                if (winch.StopLogPayout != null)
+                if (winch.StopLogPayout != string.Empty)
                 {
                     lines.Add($"Auto Log Stop Payout,{winch.StopLogPayout }");
                 }
-                if (winch.StopLogTension != null)
+                if (winch.StopLogTension != string.Empty)
                 {
                     lines.Add($"Auto Log Stop Tension,{ winch.StopLogTension }");
                 }
-                if (winch.InstalledLength != null)
+
+                if (winch.TensionMemberName != string.Empty)
+                {
+                    lines.Add($"Tension Member Name,{winch.TensionMemberName}");
+                }
+                if (winch.TensionMemberManufacturer != string.Empty)
+                {
+                    lines.Add($"Tension Member Manufacturer,{winch.TensionMemberManufacturer}");
+
+                }
+                if (winch.TensionMemberPartNumber != string.Empty)
+                {
+                    lines.Add($"Tension Member Part Number,{winch.TensionMemberPartNumber}");
+                }
+                if (winch.TensionMemberNSFID != string.Empty)
+                {
+                    lines.Add($"Tension Member NSF ID,{winch.TensionMemberNSFID}");
+                }
+                if (winch.InstalledLength != default)
                 {
                     lines.Add($"Installed Length,{ winch.InstalledLength }");
-                }               
-                if (winch.AssignedBreakingLoad != null)
+                }  
+                if (winch.AvailableLength != default)
+                {
+                    lines.Add($"Available Length,{winch.AvailableLength}");
+                }
+                if (winch.AssignedBreakingLoad != string.Empty)
                 {
                     lines.Add($"Assigned Breaking Load,{ winch.AssignedBreakingLoad }");
                 }
@@ -244,11 +345,8 @@ namespace ViewModels
                 {
                     lines.Add($"Factor Of Safety,{winch.FactorOfSafety}");
                 }
-                if (winch.ProtocolHawboldt == true)
-                {
-                    lines.Add($"HawboldtModel,{winch.HawboldtModel}");
-                }
-                if (winch.ChartTimeSpan != null)
+
+                if (winch.ChartTimeSpan != string.Empty)
                 {
                     lines.Add($"Chart Time Span,{winch.ChartTimeSpan}");
                 }
@@ -256,17 +354,17 @@ namespace ViewModels
                 {
                     lines.Add($"Plot Winch,{winch.PlotSelected}");
                 }
-                if (_configDataStore.ShipName != null)
-                {
-                    lines.Add($"Ship Name,{_configDataStore.ShipName}");
-                }
+                
                 //Write each line of array using stream writer
                 using (StreamWriter stream = new StreamWriter(destPath, true))
                 {
                     lines.Add("-----");
-                    foreach (string line in lines)
+                    foreach (string line in lines) 
+                    { 
                         stream.WriteLine(line);
+                    }     
                 }
+                lines.Clear();
             }
             
         }
@@ -278,6 +376,7 @@ namespace ViewModels
             string fileName = "ecwp_dataconf.txt";
             //set the path to application directory
             string destPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
+            CommunicationModel tempComms = new();
             WinchModel winch = new();
             //winch = null;
             WinchViewModel viewModel = new WinchViewModel();
@@ -295,6 +394,14 @@ namespace ViewModels
                         if (line.Contains(","))
                         {
                             int delim = line.IndexOf(",");
+                            if (line.Substring(0, delim) == "Ship Name")
+                            {
+                                _configDataStore.ShipName = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Cruise Name")
+                            {
+                                _configDataStore.CruiseNameBox = line.Substring(delim + 1);
+                            }
                             if (line.Substring(0, delim) == "Winch Name")
                             {
                                 if ( winch.WinchName != null)
@@ -305,6 +412,10 @@ namespace ViewModels
                                 winch.WinchName = line.Substring(delim + 1);
                               
                             }
+                            if (line.Substring(0, delim) == "Receive Communication Type")
+                            {
+                                winch.InputCommunication.CommunicationType = line.Substring(delim + 1);
+                            }
                             if (line.Substring(0, delim) == "Receive IP")
                             {
                                 winch.InputCommunication.TcpIpAddress = line.Substring(delim + 1);
@@ -313,18 +424,78 @@ namespace ViewModels
                             {
                                 winch.InputCommunication.PortNumber = line.Substring(delim + 1);
                             }
+                            if (line.Substring(0, delim) == "Receive Communication Protocol")
+                            {
+                                winch.InputCommunication.CommunicationProtocol = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Receive Data Protocol")
+                            {
+                                winch.InputCommunication.DataProtocol = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Receive Serial Port Name")
+                            {
+                                winch.InputCommunication.SerialPort = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Receive Serial Baud Rate")
+                            {
+                                winch.InputCommunication.BaudRate = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Receive Parity")
+                            {
+                                winch.InputCommunication.Parity = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Receive Stop Bits")
+                            {
+                                winch.InputCommunication.StopBits = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Receive Data Bits")
+                            {
+                                winch.InputCommunication.DataBits = line.Substring(delim + 1);
+                            }
+                            
+                            if (line.Substring(0, delim) == "Transmit Communication Type")
+                            {
+                                tempComms.PortNumber = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Transmit Communication Protocol")
+                            {
+                                tempComms.CommunicationProtocol = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Transmit Serial Port Name")
+                            {
+                                tempComms.SerialPort = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Transmit Serial Baud Rate")
+                            {
+                                tempComms.BaudRate = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Transmit Parity")
+                            {
+                                tempComms.Parity = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Transmit Stop Bits")
+                            {
+                                tempComms.StopBits = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Transmit Data Bits")
+                            {
+                                tempComms.DataBits = line.Substring(delim + 1);
+                            }
                             if (line.Substring(0, delim) == "Transmit IP")
                             {
-                                winch.OutputCommunication.TcpIpAddress = line.Substring(delim + 1);
+                                tempComms.TcpIpAddress = line.Substring(delim + 1);
                             }
                             if (line.Substring(0, delim) == "Transmit Port")
                             {
-                                winch.OutputCommunication.PortNumber = line.Substring(delim + 1);
+                                tempComms.PortNumber = line.Substring(delim + 1);
                             }
-                            if (line.Substring(0, delim) == "Cruise Name")
+                            if (line.Substring(0, delim) == "Transmit Data Protocol")
                             {
-                                _configDataStore.CruiseNameBox = line.Substring(delim + 1);
+                                tempComms.DataProtocol = line.Substring(delim + 1);
+                                winch = AddComms(tempComms, winch);
+                                tempComms = new();
                             }
+
                             if (line.Substring(0, delim) == "Cast Number")
                             {
                                 if( int.TryParse(line.Substring(delim + 1), out int castCount))// + 1;
@@ -332,11 +503,7 @@ namespace ViewModels
                                     winch.CastNumber = castCount.ToString();
                                 }
                                     
-                            }
-                            if (line.Substring(0, delim) == "Send UDP")
-                            {
-                                winch.UdpOutput = bool.Parse(line.Substring(delim + 1));
-                            }
+                            }                            
                             if (line.Substring(0, delim) == "Save 20 Hz Data")
                             {
                                 winch.Log20Hz = bool.Parse(line.Substring(delim + 1));
@@ -351,25 +518,11 @@ namespace ViewModels
                             }
                             if (line.Substring(0, delim) == "Save Location")
                             {
-                                _configDataStore.DirectoryLabel = line.Substring(delim + 1);
-                                if (_configDataStore.DirectoryLabel != null)
-                                {
-                                    _configDataStore.DirectorySet = true;
-                                }
-                            }
-                            if (line.Substring(0, delim) == "UDP String Format")
-                            {
-                                winch.UdpFormat = line.Substring(delim + 1);
-                                if (winch.UdpFormat == "UNOLS")
-                                {
-                                    winch.UdpFormatUnols = true;
-                                    winch.UdpFormatMtnw = false;
-                                }
-                                else
-                                {
-                                    winch.UdpFormatUnols = false;
-                                    winch.UdpFormatMtnw = true;
-                                }
+                                winch.WinchDirectory = line.Substring(delim + 1);
+                                //if (_configDataStore.DirectoryLabel != null)
+                                //{
+                                //    _configDataStore.DirectorySet = true;
+                                //}
                             }
                             if (line.Substring(0, delim) == "20Hz File Format")
                             {
@@ -385,36 +538,7 @@ namespace ViewModels
                                     winch.LogFormatMtnw = true;
                                 }
                             }
-                            if (line.Substring(0, delim) == "Serial String Format")
-                            {
-                                winch.SerialFormat = line.Substring(delim + 1);
-                                if (winch.SerialFormat == "UNOLS")
-                                {
-                                    winch.SerialFormatUnols = true;
-                                    winch.SerialFormatMtnw = false;
-                                }
-                                else
-                                {
-                                    winch.SerialFormatUnols = false;
-                                    winch.SerialFormatMtnw = true;
-                                }
-                            }
-                            if (line.Substring(0, delim) == "Send Serial")
-                            {
-                                winch.SerialOutput = bool.Parse(line.Substring(delim + 1));
-                            }
-                            if (line.Substring(0, delim) == "Serial Port Name")
-                            {
-                                winch.SerialPortOutput = line.Substring(delim + 1);
-                            }
-                            if (line.Substring(0, delim) == "Serial Baud Rate")
-                            {
-                               winch.BaudRateOutput = line.Substring(delim + 1);
-                            }
-                            if (line.Substring(0, delim) == "Input Communication Type")
-                            {
-                                winch.CommunicationType = line.Substring(delim + 1);
-                            }
+                            
                             if (line.Substring(0, delim) == "Tension Units")
                             {
                                 winch.TensionUnit = line.Substring(delim + 1);
@@ -427,6 +551,7 @@ namespace ViewModels
                             {
                                 winch.SpeedUnit = line.Substring(delim + 1);
                             }
+                            
                             if (line.Substring(0, delim) == "Auto Log")
                             {
                                 winch.AutoLog = bool.Parse(line.Substring(delim + 1));
@@ -439,9 +564,30 @@ namespace ViewModels
                             {
                                 winch.StopLogTension = line.Substring(delim + 1);
                             }
+
+                            if (line.Substring(0, delim) == "Tension Member Name")
+                            {
+                                winch.TensionMemberName = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Tension Member Manufacturer")
+                            {
+                                winch.TensionMemberManufacturer = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Tension Member Part Number")
+                            {
+                                winch.TensionMemberPartNumber = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Tension Member NSF ID")
+                            {
+                                winch.TensionMemberNSFID = line.Substring(delim + 1);
+                            }
                             if (line.Substring(0, delim) == "Installed Length")
                             {
                                 winch.InstalledLength = Convert.ToDouble(line.Substring(delim + 1));
+                            }
+                            if (line.Substring(0, delim) == "Available Length")
+                            {
+                                winch.AvailableLength = Convert.ToDouble(line.Substring(delim + 1));
                             }
                             if (line.Substring(0, delim) == "Assigned Breaking Load")
                             {
@@ -451,11 +597,11 @@ namespace ViewModels
                             {
                                 winch.FactorOfSafety = Convert.ToDouble(line.Substring(delim + 1));
                             }
-                            if (line.Substring(0, delim) == "HawboldtModel")
-                            {
-                                winch.HawboldtModel = line.Substring(delim + 1);
-                                winch.ProtocolHawboldt = true;
-                            }
+                            //if (line.Substring(0, delim) == "HawboldtModel")
+                            //{
+                            //    winch.HawboldtModel = line.Substring(delim + 1);
+                            //    winch.ProtocolHawboldt = true;
+                            //}
                             if (line.Substring(0, delim) == "Chart Time Span")
                             {
                                 winch.ChartTimeSpan = line.Substring(delim + 1);
@@ -464,10 +610,7 @@ namespace ViewModels
                             {
                                 winch.PlotSelected = bool.Parse(line.Substring(delim + 1));
                             }
-                            if (line.Substring(0, delim) == "Ship Name")
-                            {
-                                _configDataStore.ShipName = line.Substring(delim + 1);
-                            }
+                            
                             //if (line.Substring(0, delim) == "Plot Winch")
                             //{
                             //    winch.PlotSelected = bool.Parse(line.Substring(delim + 1));
@@ -497,6 +640,10 @@ namespace ViewModels
             }
         }
         
-        
+        public static WinchModel AddComms(CommunicationModel tempComms, WinchModel winch)
+        {
+            winch.AllOutputCommunication.Add(tempComms);
+            return winch;
+        }
     }
 }

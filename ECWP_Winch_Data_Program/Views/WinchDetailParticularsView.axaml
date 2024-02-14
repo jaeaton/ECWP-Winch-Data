@@ -2,9 +2,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
+             xmlns:vm="clr-namespace:ViewModels"
+			 mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
              x:Class="Views.WinchDetailParticularsView">
 
+	<UserControl.Resources>
+		<vm:WinchViewModel x:Key="winch"/>
+	</UserControl.Resources>
 	<StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<TextBlock Text="Winch Name" Width="160" VerticalAlignment="Center" />
@@ -18,9 +22,9 @@
 			<TextBlock Text="Winch Model" Width="160" VerticalAlignment="Center" />
 			<TextBox Watermark="Enter Model" Text="{ Binding CurrentWinch.WinchModelName, Mode=TwoWay }" Width="130"/>
 		</StackPanel>
-		<StackPanel Orientation="Horizontal" Margin="5">
-			<Button Content="Add/Update Winch" HorizontalContentAlignment="Center" Width="160" Margin="2"/>
-			<Button Content="Remove Winch" HorizontalContentAlignment="Center" Width="160" Margin="2"/>
+		<StackPanel Orientation="Horizontal" Margin="5" DataContext="{StaticResource winch}">
+			<Button Content="Add/Update Winch" Command="{Binding AddWinchCommand}" HorizontalContentAlignment="Center" Width="160" Margin="2"/>
+			<Button Content="Remove Winch" Command="{Binding RemoveWinchCommand}" HorizontalContentAlignment="Center" Width="160" Margin="2"/>
 		</StackPanel>
 	</StackPanel>
 </UserControl>

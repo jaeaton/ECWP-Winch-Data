@@ -2,15 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
+             xmlns:vm="clr-namespace:ViewModels"
+			 mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
              x:Class="Views.WinchDetailWireLogView">
 
+	<UserControl.Resources>
+		<vm:WinchViewModel x:Key="winch"/>
+	</UserControl.Resources>
 	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="auto"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
-		<StackPanel Grid.Column="0">
+		
+		<StackPanel>
 			<StackPanel Orientation="Horizontal" Margin="2">
 				<TextBlock Text="Date:"  Width="120" VerticalAlignment="Center"  />
 				<CalendarDatePicker SelectedDate="{Binding WireLogEventDate}"  />
@@ -28,13 +29,11 @@
 				<TextBox Text="{Binding WireLogEventNotes}" Width="200" Height="200"/>
 			</StackPanel>
 			
-			<StackPanel Orientation="Horizontal" Margin="2">
+			<StackPanel Orientation="Horizontal" Margin="2" DataContext="{StaticResource winch}">
 				<TextBlock Width="120"/>
-				<Button Content="Add Log Event" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Width="160"  />
+				<Button Content="Add Log Event" Command="{Binding AddWireLogEventCommand}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Width="160"  />
 			</StackPanel>
 		</StackPanel>
-		<Grid Grid.Column="1" Margin="2">
-			<TextBlock Text="Data Grid"/>
-		</Grid>
+		
 	</Grid> 
 </UserControl>

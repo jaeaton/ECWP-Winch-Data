@@ -4,6 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
              x:Class="Views.WinchDetailDataOutView">
+	<UserControl.Resources>
+		
+	</UserControl.Resources>
+	
 	<StackPanel Margin="10">
 		<RadioButton Content="TCP" x:Name="RadioButtonSendTCP" GroupName="OutputType"/>
 		<RadioButton Content="UDP" x:Name="RadioButtonSendUDP" GroupName="OutputType"/>
@@ -14,7 +18,7 @@
 			<StackPanel Margin="10" IsVisible="{Binding ElementName=RadioButtonSendTCP, Path=IsChecked}">
 				<StackPanel Orientation="Horizontal" >
 					<TextBlock Text="Destination" Width="90" VerticalAlignment="Center" />
-					<TextBox Watermark="Identifier" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.PortNumber,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
+					<TextBox Watermark="Identifier" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.DestinationName,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
 				</StackPanel>
 				<StackPanel>
 					<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" GroupName="udpRadioButtons" IsChecked="{Binding CurrentWinch.UdpFormatMtnw, FallbackValue='False'}"/>
@@ -40,7 +44,7 @@
 			<StackPanel Margin="10" IsVisible="{Binding ElementName=RadioButtonSendUDP, Path=IsChecked}">
 				<StackPanel Orientation="Horizontal" >
 					<TextBlock Text="Destination" Width="90" VerticalAlignment="Center" />
-					<TextBox Watermark="Identifier" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.PortNumber,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
+					<TextBox Watermark="Identifier" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.DestinationName,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
 				</StackPanel>
 				<StackPanel>
 					<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" GroupName="udpRadioButtons" IsChecked="{Binding CurrentWinch.UdpFormatMtnw, FallbackValue='False'}"/>
@@ -65,7 +69,7 @@
 			<StackPanel Margin="10" IsVisible="{ Binding ElementName=RadioButtonSendSerial,Path=IsChecked }">
 				<StackPanel Orientation="Horizontal" >
 					<TextBlock Text="Destination" Width="90" VerticalAlignment="Center" />
-					<TextBox Watermark="Identifier" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.PortNumber,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
+					<TextBox Watermark="Identifier" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.DestinationName,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
 				</StackPanel>
 				<StackPanel>
 					<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" GroupName="serialRadioButtons"  IsChecked="{Binding CurrentWinch.SerialFormatMtnw,FallbackValue='False'}" />

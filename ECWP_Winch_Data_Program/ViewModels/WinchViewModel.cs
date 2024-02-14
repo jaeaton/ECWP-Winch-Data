@@ -161,7 +161,7 @@
         }
 
         [RelayCommand]
-        public void AddWireLog()
+        public void AddWireLogEvent()
         {
             ExcelViewModel.AddEvent();
         }

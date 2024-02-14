@@ -8,6 +8,7 @@
         [ObservableProperty]
         private string portNumber = string.Empty;
 
+        //Serial Vs Network
         [ObservableProperty]
         private string communicationType = string.Empty;
 
@@ -26,8 +27,16 @@
         [ObservableProperty]
         private string stopBits = string.Empty;
 
+        //TCP/IP, UDP, etc
         [ObservableProperty]
         private string communicationProtocol = string.Empty;
+
+        //Data string format, MTNW, UNOLS, Hawboldt, etc
+        [ObservableProperty]
+        private string dataProtocol = string.Empty;
+
+        [ObservableProperty]
+        private string destinationName = string.Empty;
                   
         public CommunicationModel()
         {

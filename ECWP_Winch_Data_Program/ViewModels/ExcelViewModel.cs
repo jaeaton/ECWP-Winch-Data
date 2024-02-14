@@ -8,8 +8,9 @@ namespace ViewModels
         public static void AddCastData( DataPointModel dataMaxTension, DataPointModel dataMaxPayout, int cast)
         {
             ConfigDataStore _config = MainViewModel._configDataStore;
-            //Should be set by WinchModel.Filename?
-            string fileName = $"{ProcessDataViewModel.ParseData.CruiseName}_Processed";
+            SetWireLogFileName();
+            //Load Filename
+            string fileName = $"{_config.CurrentWinch.WirePoolWireLogName}";
             //Check for file
             if (!File.Exists($"{ProcessDataViewModel.ParseData.Directory}\\{fileName}.xlsx"))
             {
@@ -53,12 +54,13 @@ namespace ViewModels
         public static void AddEvent()
         {
             ConfigDataStore _config = MainViewModel._configDataStore;
-            //Should be set by WinchModel.Filename?
-            string fileName = $"test";
+            SetWireLogFileName();
+            //Set filename
+            string fileName = $"{_config.CurrentWinch.WirePoolWireLogName}";
             //Check for file
             if (!File.Exists($"{ProcessDataViewModel.ParseData.Directory}\\{fileName}.xlsx"))
             {
-                NewWorkbook("test");
+                NewWorkbook(fileName);
             }
             // Opening workbook
             var wb = new XLWorkbook($"{ProcessDataViewModel.ParseData.Directory}\\{fileName}.xlsx");
@@ -82,7 +84,7 @@ namespace ViewModels
             ws.Cell($"J{CurrentRow}").Value = $"{MainViewModel._configDataStore.WireLogEventNotes}";
 
         }
-        public static void NewWorkbook(string winch/*WinchModel winch*/)
+        public static void NewWorkbook(string fileName/*WinchModel winch*/)
         {
             ConfigDataStore _config = MainViewModel._configDataStore;
             // Creating a new workbook
@@ -159,8 +161,15 @@ namespace ViewModels
             ws.SheetView.FreezeRows(24);
 
             //Save File Cruise Name + Winch Name
-            var path = $"{ProcessDataViewModel.ParseData.Directory}\\{winch}.xlsx";
+            var path = $"{ProcessDataViewModel.ParseData.Directory}\\{fileName}.xlsx";
             wb.SaveAs(path);
+        }
+
+        public static void SetWireLogFileName()
+        {
+            ConfigDataStore _confDataStore = MainViewModel._configDataStore;
+            DateTime dateTime = DateTime.Now;
+            _confDataStore.CurrentWinch.WirePoolWireLogName = $"{dateTime.ToString("yyyy")}_{_confDataStore.CurrentWinch.WinchName}_Wire_Log";
         }
     }
 }
