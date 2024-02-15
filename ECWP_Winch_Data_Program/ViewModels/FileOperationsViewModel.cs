@@ -642,7 +642,7 @@ namespace ViewModels
         
         public static WinchModel AddComms(CommunicationModel tempComms, WinchModel winch)
         {
-            winch.AllOutputCommunication.Add(tempComms);
+            winch.AllOutputCommunication.Add(tempComms.ShallowCopy());
             return winch;
         }
     }

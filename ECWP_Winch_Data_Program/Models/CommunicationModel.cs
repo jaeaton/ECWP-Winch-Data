@@ -61,10 +61,10 @@
             DataBits = _dataBit;
             CommunicationType = _commType;
             CommunicationProtocol = _commProtocol;
-        } 
-        //public CommunicationModel ShallowCopy()
-        //{
-        //    return (CommunicationModel)this.MemberwiseClone();
-        //}
+        }
+        public CommunicationModel ShallowCopy()
+        {
+            return (CommunicationModel)this.MemberwiseClone();
+        }
     }
 }
