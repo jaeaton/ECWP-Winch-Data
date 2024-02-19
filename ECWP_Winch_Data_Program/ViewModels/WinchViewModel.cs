@@ -161,6 +161,55 @@
         }
 
         [RelayCommand]
+        public void AddCommOut()
+        {
+            InsertCommOut();
+        }
+
+        [RelayCommand]
+        public void RemoveCommOut()
+        {
+
+        }
+
+        public void InsertCommOut()
+        {
+            //See if Comm name is already used. If it is perform update on parameters. If not add it to the list
+            int index = -1;
+            for (int i = 0; i < _configDataStore.CurrentWinch.AllOutputCommunication.Count; i++)
+            {
+                CommunicationModel item = _configDataStore.CurrentWinch.AllOutputCommunication[i];
+                if (item.DestinationName == _configDataStore.CurrentWinch.OutputCommunication.DestinationName)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            if (index != -1)
+            {
+                _configDataStore.CurrentWinch.AllOutputCommunication[index] = _configDataStore.CurrentWinch.OutputCommunication.ShallowCopy();
+            }
+            else
+            {
+                _configDataStore.CurrentWinch.AllOutputCommunication.Add(_configDataStore.CurrentWinch.OutputCommunication.ShallowCopy());
+            }
+            //Clears the current list to make winch names as fresh as possible
+            //_configDataStore.CurrentWinch.AllOutputCommunication.Clear();
+            _configDataStore.CurrentWinch.TabItemsOutputComms.Clear();
+            new TabItemModel("Add New", "Add New");
+            //Loops through all winches and puts winch names in a list for selection process
+            if (_configDataStore.CurrentWinch.AllOutputCommunication.Count > 0)
+            {
+                foreach (var item in _configDataStore.CurrentWinch.AllOutputCommunication)
+                {
+                    TabItemModel tabItem = new TabItemModel(item.DestinationName, item.DestinationName);
+                    //_configDataStore.WinchNames.Add(item.WinchName);
+                    _configDataStore.CurrentWinch.TabItemsOutputComms.Add(tabItem);
+                }
+            }
+        }
+
+        [RelayCommand]
         public void AddWireLogEvent()
         {
             ExcelViewModel.AddEvent();

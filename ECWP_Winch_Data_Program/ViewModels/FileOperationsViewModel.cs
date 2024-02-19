@@ -37,6 +37,11 @@ namespace ViewModels
             {
                 lines.Add($"Ship Name,{_configDataStore.ShipName}");
             }
+            else
+            {
+                MessageBoxViewModel.DisplayMessage("Ship name not valid.");
+
+            }
             if (_configDataStore.CruiseNameBox != string.Empty)
             {
                 bool valid = ValidateCruiseViewModel.ValidateCruiseName(_configDataStore.CruiseNameBox);
@@ -47,7 +52,7 @@ namespace ViewModels
                 else
                 {
                     MessageBoxViewModel.DisplayMessage("Cruise name not valid.");
-                    break;
+                    
                 }
             }
             lines.Add("-----");
@@ -415,6 +420,16 @@ namespace ViewModels
                             if (line.Substring(0, delim) == "Receive Communication Type")
                             {
                                 winch.InputCommunication.CommunicationType = line.Substring(delim + 1);
+                                if (winch.InputCommunication.CommunicationType == "Network")
+                                {
+                                    winch.InputCommunication.IsNetwork = true;
+                                    winch.InputCommunication.IsSerial = false;
+                                }
+                                else if (winch.InputCommunication.CommunicationType == "Serial")
+                                {
+                                    winch.InputCommunication.IsNetwork = false;
+                                    winch.InputCommunication.IsSerial = true;
+                                }
                             }
                             if (line.Substring(0, delim) == "Receive IP")
                             {
@@ -427,6 +442,7 @@ namespace ViewModels
                             if (line.Substring(0, delim) == "Receive Communication Protocol")
                             {
                                 winch.InputCommunication.CommunicationProtocol = line.Substring(delim + 1);
+                                
                             }
                             if (line.Substring(0, delim) == "Receive Data Protocol")
                             {
@@ -455,7 +471,17 @@ namespace ViewModels
                             
                             if (line.Substring(0, delim) == "Transmit Communication Type")
                             {
-                                tempComms.PortNumber = line.Substring(delim + 1);
+                                tempComms.CommunicationType = line.Substring(delim + 1);
+                                if (tempComms.CommunicationType == "Network")
+                                {
+                                    tempComms.IsNetwork = true;
+                                    tempComms.IsSerial = false;
+                                }
+                                else if (tempComms.CommunicationType == "Serial")
+                                {
+                                    tempComms.IsNetwork = false;
+                                    tempComms.IsSerial = true;
+                                }
                             }
                             if (line.Substring(0, delim) == "Transmit Communication Protocol")
                             {

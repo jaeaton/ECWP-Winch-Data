@@ -8,8 +8,8 @@
 		<StackPanel >
 			<TextBlock Text="Input Communication Parameters" Margin="5"/>
 			<StackPanel Orientation="Vertical" Margin="5">
-				<RadioButton Content="Network" x:Name="RadioButtonInputCommNetwork" GroupName="InputCommType"/>
-				<RadioButton Content="Serial" x:Name="RadioButtonInputCommSerial" GroupName="InputCommType"/>
+				<RadioButton Content="Network" IsChecked="{Binding CurrentWinch.InputCommunications.IsNetwork}" x:Name="RadioButtonInputCommNetwork" GroupName="InputCommType"/>
+				<RadioButton Content="Serial" IsChecked="{Binding CurrentWinch.InputCommunications.IsSerial}" x:Name="RadioButtonInputCommSerial" GroupName="InputCommType"/>
 			</StackPanel>
 			
 			<StackPanel IsVisible="{Binding ElementName=RadioButtonInputCommNetwork, Path=IsChecked}">
@@ -52,7 +52,7 @@
 			
 			<StackPanel Orientation="Horizontal" Margin="5">
 				<TextBlock Text="Protocol" Width="90" VerticalAlignment="Center"/>
-				<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.CommunicationType, Mode=TwoWay }" ItemsSource="{ Binding Path=AvailableProtocols }" SelectedIndex="0"/>
+				<ComboBox MinWidth="210" SelectedItem="{ Binding CurrentWinch.CommunicationType, Mode=TwoWay }" ItemsSource="{ Binding Path=DataProtocolList }" SelectedIndex="0"/>
 			</StackPanel>
 			
 		</StackPanel>

@@ -135,21 +135,21 @@
         [ObservableProperty]
         private string startStopButtonText = string.Empty;
         [ObservableProperty]
-        private string? tensionWarningLevel;
-        partial void OnTensionWarningLevelChanged(string? value)
+        private string tensionWarningLevel = string.Empty;
+        partial void OnTensionWarningLevelChanged(string value)
         {
             ChartData.Sections[0].Yi = Convert.ToDouble(value);
         }
         [ObservableProperty]
-        private string? tensionAlarmLevel;
-        partial void OnTensionAlarmLevelChanged(string? value)
+        private string tensionAlarmLevel = string.Empty;
+        partial void OnTensionAlarmLevelChanged(string value)
         {
             ChartData.Sections[0].Yj = Convert.ToDouble(value);
             ChartData.Sections[1].Yi = Convert.ToDouble(value);
         }
         [ObservableProperty]
-        private string? assignedBreakingLoad;
-        partial void OnAssignedBreakingLoadChanged(string? value)
+        private string assignedBreakingLoad = string.Empty;
+        partial void OnAssignedBreakingLoadChanged(string value)
         {
             if (double.TryParse(AssignedBreakingLoad, out double abl))
             {
@@ -294,7 +294,7 @@
                     }
                 }
                 //Deep copy to break link between class objects
-                OutputCommunication = AllOutputCommunication[index];//.DeepCopy();
+                OutputCommunication = AllOutputCommunication[index].ShallowCopy();
             }
         }
     }

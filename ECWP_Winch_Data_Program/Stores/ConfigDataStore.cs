@@ -102,12 +102,17 @@
                                                             };
 
         [ObservableProperty]
-        private List<string> hawboldtModelList = new List<string>
+        private List<string> dataProtocolList = new List<string>
                                                             {
-                                                                "SPRE-3464",
-                                                                "SPRE-2648RS",
-                                                                "SPRE-2640",
-                                                                "SPRE-2036S"
+                                                                "MASH",
+                                                                "Jay Jay",
+                                                                "UNOLS String",
+                                                                "MTNW 1",
+                                                                "MTNW Legacy",
+                                                                "Hawboldt SPRE-3464",
+                                                                "Hawboldt SPRE-2648RS",
+                                                                "Hawboldt SPRE-2640",
+                                                                "Hawboldt SPRE-2036S"
                                                             };
 
         [ObservableProperty]

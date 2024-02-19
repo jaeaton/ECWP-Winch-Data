@@ -6,7 +6,7 @@
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Views.WinchDetailView">
 	<TabControl TabStripPlacement="Left" >
-		<TabItem Header="Winch Particulars" VerticalContentAlignment="Center" >
+		<TabItem Header="Winch Information" VerticalContentAlignment="Center" >
 			<v:WinchDetailParticularsView />
 		</TabItem>
 		<TabItem Header="Tension Member" VerticalContentAlignment="Center">
@@ -19,7 +19,7 @@
 			<v:WinchDetailDataInView/>
 		</TabItem>
 		<TabItem Header="Outgoing Data" VerticalContentAlignment="Center">
-			<v:WinchDetailDataOutView/>
+			<v:WinchDetailDataOutTabView/>
 		</TabItem>
 		<TabItem Header="Wire Log" VerticalContentAlignment="Center">
 			<v:WinchDetailWireLogView/>

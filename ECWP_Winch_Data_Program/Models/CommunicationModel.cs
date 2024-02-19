@@ -11,6 +11,10 @@
         //Serial Vs Network
         [ObservableProperty]
         private string communicationType = string.Empty;
+        [ObservableProperty]
+        private bool isSerial;// = new();
+        [ObservableProperty]
+        private bool isNetwork;// = new();
 
         [ObservableProperty]
         private string serialPort = string.Empty;
@@ -30,7 +34,7 @@
         //TCP/IP, UDP, etc
         [ObservableProperty]
         private string communicationProtocol = string.Empty;
-
+        
         //Data string format, MTNW, UNOLS, Hawboldt, etc
         [ObservableProperty]
         private string dataProtocol = string.Empty;
