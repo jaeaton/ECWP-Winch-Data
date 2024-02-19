@@ -169,7 +169,34 @@
         [RelayCommand]
         public void RemoveCommOut()
         {
-
+            //Removes the data in the winch entry form from the list of Output comms
+            if (_configDataStore.CurrentWinch.OutputCommunication != null && _configDataStore.CurrentWinch.AllOutputCommunication != null)
+            {
+                int index = -1;
+                string name = _configDataStore.CurrentWinch.OutputCommunication.DestinationName;
+                for (int i = 0; i < _configDataStore.CurrentWinch.AllOutputCommunication.Count; i++)
+                {
+                    CommunicationModel item = _configDataStore.CurrentWinch.AllOutputCommunication[i];
+                    if (item.DestinationName == name)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+                _configDataStore.CurrentWinch.AllOutputCommunication.RemoveAt(index);
+            }
+            //Clears the current list to make Comm names as fresh as possible
+            //_configDataStore.WinchNames.Clear();
+            _configDataStore.CurrentWinch.TabItemsOutputComms.Clear();
+            new TabItemModel("Add New", "Add New");
+            //Loops through all winches and puts winch names in a list for selection process
+            foreach (var item in _configDataStore.CurrentWinch.AllOutputCommunication)
+            {
+                TabItemModel tabItem = new TabItemModel(item.DestinationName, item.DestinationName);
+                //_configDataStore.WinchNames.Add(item.DestinationName);
+                _configDataStore.CurrentWinch.TabItemsOutputComms.Add(tabItem);
+            }
+            
         }
 
         public void InsertCommOut()
