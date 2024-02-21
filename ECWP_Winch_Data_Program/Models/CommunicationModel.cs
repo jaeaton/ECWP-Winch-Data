@@ -11,10 +11,31 @@
         //Serial Vs Network
         [ObservableProperty]
         private string communicationType = string.Empty;
+        partial void OnCommunicationTypeChanged(string value)
+        {
+            if (value == "Serial")
+            {
+                IsSerial = true;
+                IsNetwork = false;
+            }
+            if (value == "Network")
+            {
+                IsNetwork = true;
+                IsSerial = false;
+            }
+        }
         [ObservableProperty]
         private bool isSerial;// = new();
+        partial void OnIsSerialChanged(bool value)
+        {
+            CommunicationType = "Serial";
+        }
         [ObservableProperty]
         private bool isNetwork;// = new();
+        partial void OnIsNetworkChanged(bool value)
+        {
+            CommunicationType = "Network";
+        }
 
         [ObservableProperty]
         private string serialPort = string.Empty;
@@ -38,10 +59,39 @@
         //Data string format, MTNW, UNOLS, Hawboldt, etc
         [ObservableProperty]
         private string dataProtocol = string.Empty;
+        partial void OnDataProtocolChanged(string value)
+        {
+            if (value == "UNOLS")
+            {
+                IsUNOLS = true;
+                IsMTNW = false;
+            }
+
+            if (value == "MTNW")
+            {
+                IsUNOLS = false;
+                IsMTNW = true;
+            }
+        }
+
+        [ObservableProperty]
+        private bool isUNOLS;
+        partial void OnIsUNOLSChanged(bool value)
+        {
+            DataProtocol = "UNOLS";
+        }
+
+        [ObservableProperty]
+        private bool isMTNW;
+        partial void OnIsMTNWChanged(bool value)
+        {
+            DataProtocol = "MTNW";
+        }
 
         [ObservableProperty]
         private string destinationName = string.Empty;
-                  
+        public object Sync { get; } = new object();
+
         public CommunicationModel()
         {
 

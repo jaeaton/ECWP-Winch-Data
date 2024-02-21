@@ -231,6 +231,9 @@
         private string tensionMemberPartNumber = string.Empty;
         [ObservableProperty]
         private string tensionMemberNSFID = string.Empty ;
+        //[ObservableProperty]
+        //private string winchDirectory = string.Empty;
+        public object Sync { get; } = new object();
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)
         {
@@ -268,10 +271,14 @@
             WinchModel copy = (WinchModel)this.MemberwiseClone();
             copy.InputCommunication = this.InputCommunication.ShallowCopy();//new CommunicationModel(InputCommunication.TcpIpAddress, InputCommunication.PortNumber);
             //copy.OutputCommunication = new CommunicationModel(OutputCommunication.TcpIpAddress, OutputCommunication.PortNumber);
-            foreach (CommunicationModel com in AllOutputCommunication)
+            lock (Sync)
             {
-                copy.AllOutputCommunication.Add(com.ShallowCopy());
+                foreach (CommunicationModel com in AllOutputCommunication.ToList())
+                {
+                    copy.AllOutputCommunication.Add(com.ShallowCopy());
+                }
             }
+            
             copy.LiveData = new LiveDataDataStore(LiveData.Tension, LiveData.MaxTension, LiveData.Speed, LiveData.MaxSpeed, LiveData.Payout, LiveData.MaxPayout, LiveData.RawWireData, LiveData.RawWinchData, LiveData.TensionColor);
             copy.MaxData = new MaxDataPointModel(MaxData.MaxPayout, MaxData.MaxTension, MaxData.MaxSpeed);
             copy.ChartData = new ChartDataViewModel(ChartData._observableValues, ChartData.Series, ChartData.Sections, ChartData._observableValuesZero, ChartData._observableValuesMax, ChartData.XAxes,ChartData.YAxes);

@@ -72,99 +72,111 @@ namespace ViewModels
                 {
                     MessageBoxViewModel.DisplayMessage(
                            $"Winch Name must be entered.");
+                    break;
                 }
-                if (winch.InputCommunication.CommunicationType == "Serial")
+                if (winch.WinchManufacturer != string.Empty)
                 {
-                    lines.Add($"Receive Communication Type,Serial");
-                    if (winch.InputCommunication.SerialPort != string.Empty)
-                    {
-                        lines.Add($"Receive Serial Port Name,{winch.InputCommunication.SerialPort}");
-                    }
-                    if (winch.InputCommunication.BaudRate != string.Empty)
-                    {
-                        lines.Add($"Receive Serial Baud Rate,{winch.InputCommunication.BaudRate}");
-                    }
-                    if (winch.InputCommunication.Parity != string.Empty)
-                    {
-                        lines.Add($"Receive Parity,{winch.InputCommunication.Parity}");
-                    }
-                    if (winch.InputCommunication.StopBits != string.Empty)
-                    {
-                        lines.Add($"Receive Stop Bits,{winch.InputCommunication.StopBits}");
-                    }
-                    if (winch.InputCommunication.DataBits != string.Empty)
-                    {
-                        lines.Add($"Receive Data Bits,{winch.InputCommunication.DataBits}");
-                    }
-                    if (winch.InputCommunication.DataProtocol != string.Empty)
-                    {
-                        lines.Add($"Receive Data Protocol,{winch.InputCommunication.DataProtocol}");
-                    }
+                    lines.Add($"Winch Manufacturer,{winch.WinchManufacturer}");
                 }
-                else if (winch.InputCommunication.CommunicationType == "Network")
+                if (winch.WinchModelName != string.Empty)
                 {
-                    lines.Add($"Receive Communication Type,Network");
-                    if (winch.InputCommunication.TcpIpAddress != string.Empty)
+                    lines.Add($"Winch Model,{winch.WinchModelName}");
+                }
+                if (winch.InputCommunication.CommunicationType != string.Empty)
+                {
+                    if (winch.InputCommunication.CommunicationType == "Serial")
                     {
-                        bool valid = ValidateIPViewModel.ValidateIPFunction(winch.InputCommunication.TcpIpAddress);
-                        if (valid)
+                        lines.Add($"Receive Communication Type,Serial");
+                        if (winch.InputCommunication.SerialPort != string.Empty)
                         {
-                            lines.Add($"Receive IP,{winch.InputCommunication.TcpIpAddress}");
+                            lines.Add($"Receive Serial Port Name,{winch.InputCommunication.SerialPort}");
+                        }
+                        if (winch.InputCommunication.BaudRate != string.Empty)
+                        {
+                            lines.Add($"Receive Serial Baud Rate,{winch.InputCommunication.BaudRate}");
+                        }
+                        if (winch.InputCommunication.Parity != string.Empty)
+                        {
+                            lines.Add($"Receive Parity,{winch.InputCommunication.Parity}");
+                        }
+                        if (winch.InputCommunication.StopBits != string.Empty)
+                        {
+                            lines.Add($"Receive Stop Bits,{winch.InputCommunication.StopBits}");
+                        }
+                        if (winch.InputCommunication.DataBits != string.Empty)
+                        {
+                            lines.Add($"Receive Data Bits,{winch.InputCommunication.DataBits}");
+                        }
+                        if (winch.InputCommunication.DataProtocol != string.Empty)
+                        {
+                            lines.Add($"Receive Data Protocol,{winch.InputCommunication.DataProtocol}");
+                        }
+                    }
+                    if (winch.InputCommunication.CommunicationType == "Network")
+                    {
+                        lines.Add($"Receive Communication Type,Network");
+                        if (winch.InputCommunication.TcpIpAddress != string.Empty)
+                        {
+                            bool valid = ValidateIPViewModel.ValidateIPFunction(winch.InputCommunication.TcpIpAddress);
+                            if (valid)
+                            {
+                                lines.Add($"Receive IP,{winch.InputCommunication.TcpIpAddress}");
+                            }
+                            else
+                            {
+                                MessageBoxViewModel.DisplayMessage(
+                                    $"{winch.WinchName}\n" +
+                                    $"Input IP Address not valid");
+                                break;
+                            }
                         }
                         else
                         {
                             MessageBoxViewModel.DisplayMessage(
-                                $"{winch.WinchName}\n" +
-                                $"Input IP Address not valid");
-                            break;
+                                    $"{winch.WinchName}\n" +
+                                    $"Input IP Address required");
                         }
-                    }
-                    else
-                    {
-                        MessageBoxViewModel.DisplayMessage(
-                                $"{winch.WinchName}\n" +
-                                $"Input IP Address required");
-                    }
-                    if (winch.InputCommunication.PortNumber != null)
-                    {
-                        bool valid = ValidateIPViewModel.ValidatePortFunction(winch.InputCommunication.PortNumber);
-                        if (valid)
+                        if (winch.InputCommunication.PortNumber != null)
                         {
-                            lines.Add($"Receive Port,{winch.InputCommunication.PortNumber}");
+                            bool valid = ValidateIPViewModel.ValidatePortFunction(winch.InputCommunication.PortNumber);
+                            if (valid)
+                            {
+                                lines.Add($"Receive Port,{winch.InputCommunication.PortNumber}");
+                            }
+                            else
+                            {
+                                MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
+                                    $"Input Port number not valid");
+                                break;
+                            }
+
                         }
                         else
                         {
-                            MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
-                                $"Input Port number not valid");
-                            break;
+                            MessageBoxViewModel.DisplayMessage(
+                                    $"{winch.WinchName}\n" +
+                                    $"Input port number required");
                         }
-
-                    }
-                    else
-                    {
-                        MessageBoxViewModel.DisplayMessage(
-                                $"{winch.WinchName}\n" +
-                                $"Input port number required");
-                    }
-                    if (winch.InputCommunication.CommunicationProtocol != string.Empty)
-                    {
-                        lines.Add($"Receive Communication Protocol,{winch.InputCommunication.CommunicationProtocol}");
-                    }
-                    else
-                    {
-                        MessageBoxViewModel.DisplayMessage(
-                                $"{winch.WinchName}\n" +
-                                $"Input communication protocol required");
-                    }
-                    if (winch.InputCommunication.DataProtocol != string.Empty)
-                    {
-                        lines.Add($"Receive Data Protocol,{winch.InputCommunication.DataProtocol}");
-                    }
-                    else
-                    {
-                        MessageBoxViewModel.DisplayMessage(
-                                $"{winch.WinchName}\n" +
-                                $"Input data procol required");
+                        if (winch.InputCommunication.CommunicationProtocol != string.Empty)
+                        {
+                            lines.Add($"Receive Communication Protocol,{winch.InputCommunication.CommunicationProtocol}");
+                        }
+                        else
+                        {
+                            MessageBoxViewModel.DisplayMessage(
+                                    $"{winch.WinchName}\n" +
+                                    $"Input communication protocol required");
+                        }
+                        if (winch.InputCommunication.DataProtocol != string.Empty)
+                        {
+                            lines.Add($"Receive Data Protocol,{winch.InputCommunication.DataProtocol}");
+                        }
+                        else
+                        {
+                            MessageBoxViewModel.DisplayMessage(
+                                    $"{winch.WinchName}\n" +
+                                    $"Input data procol required");
+                        }
                     }
                 }
                 else
@@ -270,21 +282,12 @@ namespace ViewModels
                         break;
                     }
                 }
-                if (winch.Log20Hz != null)
-                {
-                    lines.Add($"Save 20Hz Data,{ winch.Log20Hz }");
-                }
+                lines.Add($"Save 20Hz Data,{ winch.Log20Hz }");
+                lines.Add($"Save Max Values,{ winch.LogMax }");
+                lines.Add($"Use Computer Time,{ winch.UseComputerTime }");
                 if (winch.LogFormat != null)
                 {
                     lines.Add($"20Hz File Format,{ winch.LogFormat }");
-                }
-                if (winch.LogMax != null)
-                {
-                    lines.Add($"Save Max Values,{ winch.LogMax }");
-                }
-                if (winch.UseComputerTime != null)
-                {
-                    lines.Add($"Use Computer Time,{ winch.UseComputerTime }");
                 }
                 if (winch.WinchDirectory != string.Empty)
                 {
@@ -303,11 +306,8 @@ namespace ViewModels
                 {
                     lines.Add($"Speed Units,{  winch.SpeedUnit }");
                 }
-
-                if (winch.AutoLog != null)
-                {
-                    lines.Add($"Auto Log,{ winch.AutoLog}");
-                }
+                
+                lines.Add($"Auto Log,{ winch.AutoLog}");
                 if (winch.StopLogPayout != string.Empty)
                 {
                     lines.Add($"Auto Log Stop Payout,{winch.StopLogPayout }");
@@ -346,7 +346,7 @@ namespace ViewModels
                 {
                     lines.Add($"Assigned Breaking Load,{ winch.AssignedBreakingLoad }");
                 }
-                if (winch.FactorOfSafety != null)
+                if (winch.FactorOfSafety != default)
                 {
                     lines.Add($"Factor Of Safety,{winch.FactorOfSafety}");
                 }
@@ -355,10 +355,7 @@ namespace ViewModels
                 {
                     lines.Add($"Chart Time Span,{winch.ChartTimeSpan}");
                 }
-                if (winch.PlotSelected != null)
-                {
-                    lines.Add($"Plot Winch,{winch.PlotSelected}");
-                }
+                lines.Add($"Plot Winch,{winch.PlotSelected}");
                 
                 //Write each line of array using stream writer
                 using (StreamWriter stream = new StreamWriter(destPath, true))
@@ -409,13 +406,21 @@ namespace ViewModels
                             }
                             if (line.Substring(0, delim) == "Winch Name")
                             {
-                                if ( winch.WinchName != null)
+                                if ( winch.WinchName != string.Empty)
                                 {
                                     viewModel.InsertWinch(winch);
                                     winch = new();
                                 }
                                 winch.WinchName = line.Substring(delim + 1);
                               
+                            }
+                            if (line.Substring(0, delim) == "Winch Manufacturer")
+                            {
+                                winch.WinchManufacturer = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Winch Model")
+                            {
+                                winch.WinchModelName = line.Substring(delim + 1);
                             }
                             if (line.Substring(0, delim) == "Receive Communication Type")
                             {

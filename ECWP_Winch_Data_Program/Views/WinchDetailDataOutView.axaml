@@ -22,17 +22,17 @@
 					<TextBox Watermark="Identifier" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.DestinationName,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
 				</StackPanel>
 				<StackPanel>
-					<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" GroupName="udpRadioButtons" IsChecked="{Binding CurrentWinch.UdpFormatMtnw, FallbackValue='False'}"/>
-					<RadioButton Content="UNOLS Format" HorizontalContentAlignment="Right" GroupName="udpRadioButtons" IsChecked="{Binding CurrentWinch.UdpFormatUnols, FallbackValue='True'}"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal" Margin="5"  >
-					<TextBlock Text="Port Number" Width="90" VerticalAlignment="Center" />
-					<TextBox x:Name="TextBoxDestinationPort" Watermark="50000" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.PortNumber,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
+					<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" GroupName="udpRadioButtons" IsChecked="{Binding CurrentWinch.OutputCommunication.IsMTNW}"/>
+					<RadioButton Content="UNOLS Format" HorizontalContentAlignment="Right" GroupName="udpRadioButtons" IsChecked="{Binding CurrentWinch.OutputCommunication.IsUNOLS}"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5"  >
 					<TextBlock Text="IP Address" Width="90" VerticalAlignment="Center" />
 					<TextBox x:Name="TextBoxDestinationIPAdress" Watermark="192.168.1.121" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.TcpIpAddress,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
 				</StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="5"  >
+					<TextBlock Text="Port Number" Width="90" VerticalAlignment="Center" />
+					<TextBox x:Name="TextBoxDestinationPort" Watermark="50000" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.PortNumber,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
+				</StackPanel>				
 				<StackPanel Orientation="Horizontal" Margin="5">
 					<TextBlock Text="Source Type" Width="90" VerticalAlignment="Center"/>
 					<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.OutputCommunication.CommunicationType, Mode=TwoWay }" ItemsSource="{ Binding AvailableProtocols }" SelectedIndex="0"/>
@@ -51,8 +51,8 @@
 					<TextBox Watermark="Identifier" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.DestinationName,Mode=TwoWay}" Width="130" VerticalAlignment="Center"></TextBox>
 				</StackPanel>
 				<StackPanel>
-					<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" GroupName="serialRadioButtons"  IsChecked="{Binding CurrentWinch.SerialFormatMtnw,FallbackValue='False'}" />
-					<RadioButton Content="UNOLS Format" HorizontalContentAlignment="Right" GroupName="serialRadioButtons" IsChecked="{Binding CurrentWinch.SerialFormatUnols,FallbackValue='True' }" />
+					<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" GroupName="serialRadioButtons"  IsChecked="{Binding CurrentWinch.OutputCommunication.IsMTNW,Mode=TwoWay}" />
+					<RadioButton Content="UNOLS Format" HorizontalContentAlignment="Right" GroupName="serialRadioButtons" IsChecked="{Binding CurrentWinch.OutputCommunication.IsUNOLS,FallbackValue=True }" />
 				</StackPanel>
 				<StackPanel  Margin="5" Orientation="Horizontal">
 					<TextBlock Text="Serial Port" Width="100" VerticalAlignment="Center"/>

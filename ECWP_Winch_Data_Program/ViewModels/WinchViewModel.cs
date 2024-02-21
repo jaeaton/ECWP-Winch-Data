@@ -227,7 +227,7 @@
             //Loops through all winches and puts winch names in a list for selection process
             if (_configDataStore.CurrentWinch.AllOutputCommunication.Count > 0)
             {
-                foreach (var item in _configDataStore.CurrentWinch.AllOutputCommunication)
+                foreach (var item in _configDataStore.CurrentWinch.AllOutputCommunication.ToList())
                 {
                     TabItemModel tabItem = new TabItemModel(item.DestinationName, item.DestinationName);
                     //_configDataStore.WinchNames.Add(item.WinchName);
@@ -240,6 +240,21 @@
         public void AddWireLogEvent()
         {
             ExcelViewModel.AddEvent();
+        }
+        [RelayCommand]
+        public async void SetWinchPath()
+        {
+            // Show the save file dialog
+            SaveFileDialog saveFileDialog = new();
+            //build the save file name
+            saveFileDialog.InitialFileName = _configDataStore.CurrentWinch.WinchName;
+            string saveFileName = await saveFileDialog.ShowAsync(MainWindow.Instance);
+            if (saveFileName != null)
+            {
+                //DirectoryLabel.Content = saveFileDialog.InitialFileName;
+                FileInfo fileInfo = new(saveFileName);
+                _configDataStore.CurrentWinch.WinchDirectory = fileInfo.DirectoryName;
+            }
         }
     }
 }
