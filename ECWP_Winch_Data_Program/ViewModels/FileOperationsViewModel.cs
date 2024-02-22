@@ -236,7 +236,7 @@ namespace ViewModels
                                 }
                                 else
                                 {
-                                    MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
+                                    await MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
                                         $"Output IP Address not valid");
                                     break;
                                 }
@@ -251,7 +251,7 @@ namespace ViewModels
                                 }
                                 else
                                 {
-                                    MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
+                                    await MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
                                         $"Output Port Number not Valid");
                                     break;
                                 }
@@ -277,7 +277,7 @@ namespace ViewModels
                     }
                     else
                     {
-                        MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
+                        await MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
                             $"Cast number not valid.");
                         break;
                     }

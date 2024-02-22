@@ -48,9 +48,9 @@
             FileOperationsViewModel.WriteConfig(_configDataStore);
         }
         [RelayCommand]
-        public void ConfigHelp()
+        public async void ConfigHelp()
         {
-            MessageBoxViewModel.DisplayMessage($"Step 1. Provide a unique name to the winch. \n" +
+            await MessageBoxViewModel.DisplayMessage($"Step 1. Provide a unique name to the winch. \n" +
                 $"Step 2. Fill in communication parameters.\n" +
                 "   a. Input an IP address of the winch for TCP Server Source (ECWP Winches: Moe, Larry, Curly, Shemp, Gloria, Jay Jay) or \n" +
                 "   that of the host computer for TCP Client and UDP.\n" +
