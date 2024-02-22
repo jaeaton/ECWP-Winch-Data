@@ -169,14 +169,14 @@
         private string wireLogEventSelection = string.Empty;
         [ObservableProperty]
         private string wireLogEventCutBack = string.Empty;
-        partial void OnWireLogEventCutBackChanged(string value)
-        {
-            if (double.TryParse(value, out double result))
-            {
-                CurrentWinch.AvailableLength = CurrentWinch.AvailableLength - result;
-            }
+        //partial void OnWireLogEventCutBackChanged(string value)
+        //{
+        //    if (double.TryParse(value, out double result))
+        //    {
+        //        CurrentWinch.AvailableLength = CurrentWinch.AvailableLength - result;
+        //    }
             
-        }
+        //}
         [ObservableProperty]
         private DateTime wireLogEventDate = DateTime.Now;
         [ObservableProperty]

@@ -48,7 +48,7 @@
             FileOperationsViewModel.WriteConfig(_configDataStore);
         }
         [RelayCommand]
-        public async void ConfigHelp()
+        public async Task ConfigHelp()
         {
             await MessageBoxViewModel.DisplayMessage($"Step 1. Provide a unique name to the winch. \n" +
                 $"Step 2. Fill in communication parameters.\n" +
@@ -239,11 +239,17 @@
         [RelayCommand]
         public void AddWireLogEvent()
         {
+            if (double.TryParse(_configDataStore.WireLogEventCutBack, out double result) && _configDataStore.WireLogEventSelection == "Cut Back")
+            {
+                _configDataStore.CurrentWinch.AvailableLength -= result;
+            }
+                
+
             ExcelViewModel.AddEvent();
             FileOperationsViewModel.WriteConfig(MainViewModel._configDataStore);
         }
         [RelayCommand]
-        public async void SetWinchPath()
+        public async Task SetWinchPath()
         {
             // Show the save file dialog
             SaveFileDialog saveFileDialog = new();

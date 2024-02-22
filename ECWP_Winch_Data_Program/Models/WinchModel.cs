@@ -231,8 +231,6 @@
         private string tensionMemberPartNumber = string.Empty;
         [ObservableProperty]
         private string tensionMemberNSFID = string.Empty ;
-        //[ObservableProperty]
-        //private string winchDirectory = string.Empty;
         public object Sync { get; } = new object();
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)
