@@ -240,6 +240,7 @@
         public void AddWireLogEvent()
         {
             ExcelViewModel.AddEvent();
+            FileOperationsViewModel.WriteConfig(MainViewModel._configDataStore);
         }
         [RelayCommand]
         public async void SetWinchPath()

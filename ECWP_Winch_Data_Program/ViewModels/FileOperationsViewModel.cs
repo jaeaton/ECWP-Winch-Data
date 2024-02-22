@@ -19,7 +19,7 @@ namespace ViewModels
             winch.WirePoolWireLogName = $"{dateTime.ToString("yyyy")}_{winch.WinchName}_Wire_Log";
             return winch;
         }
-        public static void WriteConfig(ConfigDataStore _configDataStore)
+        public async static void WriteConfig(ConfigDataStore _configDataStore)
         {
             //Logic to save new parameters to config file
             //Set filname
@@ -39,7 +39,7 @@ namespace ViewModels
             }
             else
             {
-                MessageBoxViewModel.DisplayMessage("Ship name not valid.");
+                await MessageBoxViewModel.DisplayMessage("Ship name not valid.");
 
             }
             if (_configDataStore.CruiseNameBox != string.Empty)
@@ -51,7 +51,7 @@ namespace ViewModels
                 }
                 else
                 {
-                    MessageBoxViewModel.DisplayMessage("Cruise name not valid.");
+                    await MessageBoxViewModel.DisplayMessage("Cruise name not valid.");
                     
                 }
             }
@@ -70,7 +70,7 @@ namespace ViewModels
                 }
                 else
                 {
-                    MessageBoxViewModel.DisplayMessage(
+                    await MessageBoxViewModel.DisplayMessage(
                            $"Winch Name must be entered.");
                     break;
                 }
@@ -124,7 +124,7 @@ namespace ViewModels
                             }
                             else
                             {
-                                MessageBoxViewModel.DisplayMessage(
+                                await MessageBoxViewModel.DisplayMessage(
                                     $"{winch.WinchName}\n" +
                                     $"Input IP Address not valid");
                                 break;
@@ -132,7 +132,7 @@ namespace ViewModels
                         }
                         else
                         {
-                            MessageBoxViewModel.DisplayMessage(
+                            await MessageBoxViewModel.DisplayMessage(
                                     $"{winch.WinchName}\n" +
                                     $"Input IP Address required");
                         }
@@ -145,7 +145,7 @@ namespace ViewModels
                             }
                             else
                             {
-                                MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
+                                await MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
                                     $"Input Port number not valid");
                                 break;
                             }
@@ -153,7 +153,7 @@ namespace ViewModels
                         }
                         else
                         {
-                            MessageBoxViewModel.DisplayMessage(
+                            await MessageBoxViewModel.DisplayMessage(
                                     $"{winch.WinchName}\n" +
                                     $"Input port number required");
                         }
@@ -163,7 +163,7 @@ namespace ViewModels
                         }
                         else
                         {
-                            MessageBoxViewModel.DisplayMessage(
+                            await MessageBoxViewModel.DisplayMessage(
                                     $"{winch.WinchName}\n" +
                                     $"Input communication protocol required");
                         }
@@ -173,7 +173,7 @@ namespace ViewModels
                         }
                         else
                         {
-                            MessageBoxViewModel.DisplayMessage(
+                            await MessageBoxViewModel.DisplayMessage(
                                     $"{winch.WinchName}\n" +
                                     $"Input data procol required");
                         }
@@ -181,7 +181,7 @@ namespace ViewModels
                 }
                 else
                 {
-                    MessageBoxViewModel.DisplayMessage(
+                    await MessageBoxViewModel.DisplayMessage(
                            $"Input communications missing.");
                 }
                 if (winch.AllOutputCommunication != null)

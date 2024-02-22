@@ -11,13 +11,20 @@ namespace ViewModels
             SetWireLogFileName();
             //Load Filename
             string fileName = $"{_config.CurrentWinch.WirePoolWireLogName}";
+            
+            if (_config.CurrentWinch.WinchDirectory == string.Empty)
+            {
+                NoDirectory();
+                return;
+            }
+
             //Check for file
-            if (!File.Exists($"{ProcessDataViewModel.ParseData.Directory}\\{fileName}.xlsx"))
+            if (!File.Exists($"{_config.CurrentWinch.WinchDirectory}\\{fileName}.xlsx"))
             {
                 NewWorkbook(fileName);
             }
             // Opening workbook
-            var wb = new XLWorkbook($"{ProcessDataViewModel.ParseData.Directory}\\{fileName}.xlsx");
+            var wb = new XLWorkbook($"{_config.CurrentWinch.WinchDirectory}\\{fileName}.xlsx");
 
             //Selecting a worksheet
             var ws = wb.Worksheets.Worksheet("Log");
@@ -57,13 +64,18 @@ namespace ViewModels
             SetWireLogFileName();
             //Set filename
             string fileName = $"{_config.CurrentWinch.WirePoolWireLogName}";
+            if (_config.CurrentWinch.WinchDirectory == string.Empty)
+            {
+                NoDirectory();
+                return;
+            }
             //Check for file
-            if (!File.Exists($"{ProcessDataViewModel.ParseData.Directory}\\{fileName}.xlsx"))
+            if (!File.Exists($"{_config.CurrentWinch.WinchDirectory}\\{fileName}.xlsx"))
             {
                 NewWorkbook(fileName);
             }
             // Opening workbook
-            var wb = new XLWorkbook($"{ProcessDataViewModel.ParseData.Directory}\\{fileName}.xlsx");
+            var wb = new XLWorkbook($"{_config.CurrentWinch.WinchDirectory}\\{fileName}.xlsx");
             //Selecting a worksheet
             var ws = wb.Worksheets.Worksheet("Log");
 
@@ -75,14 +87,14 @@ namespace ViewModels
             //Event Type
             ws.Cell($"A{CurrentRow}").Value = $"{MainViewModel._configDataStore.WireLogEventSelection}";
             //Date
-            ws.Cell($"C{CurrentRow}").Value = MainViewModel._configDataStore.WireLogEventDate.ToString();
+            ws.Cell($"C{CurrentRow}").Value = MainViewModel._configDataStore.WireLogEventDate.ToString("yyyy/MM/dd");
             //Wire Length
             ws.Cell($"E{CurrentRow}").Value = $"{MainViewModel._configDataStore.CurrentWinch.AvailableLength}";
             //Cutback Length
             ws.Cell($"I{CurrentRow}").Value = $"{MainViewModel._configDataStore.WireLogEventCutBack}";
             //Notes
             ws.Cell($"J{CurrentRow}").Value = $"{MainViewModel._configDataStore.WireLogEventNotes}";
-
+            wb.Save();
         }
         public static void NewWorkbook(string fileName/*WinchModel winch*/)
         {
@@ -161,7 +173,7 @@ namespace ViewModels
             ws.SheetView.FreezeRows(24);
 
             //Save File Cruise Name + Winch Name
-            var path = $"{ProcessDataViewModel.ParseData.Directory}\\{fileName}.xlsx";
+            var path = $"{_config.CurrentWinch.WinchDirectory}\\{fileName}.xlsx";
             wb.SaveAs(path);
         }
 
@@ -170,6 +182,13 @@ namespace ViewModels
             ConfigDataStore _confDataStore = MainViewModel._configDataStore;
             DateTime dateTime = DateTime.Now;
             _confDataStore.CurrentWinch.WirePoolWireLogName = $"{dateTime.ToString("yyyy")}_{_confDataStore.CurrentWinch.WinchName}_Wire_Log";
+        }
+
+        public async static void NoDirectory()
+        {
+            await MessageBoxViewModel.DisplayMessage(
+                                    $"{MainViewModel._configDataStore.CurrentWinch.WinchName}\n" +
+                                    $"Log directory is not set. \nSet in the winch configuration");
         }
     }
 }
