@@ -6,8 +6,10 @@ The current version can communicate with ECWP winches: Gloria, Jay Jay, Godzilla
 
 
 To Do:
+- [ ] Migrate to TopLevel.StorageProvider API from SaveFileDialog (obsolete)
 - [ ] Record Tension Member Alarms and Warnings
-- [ ] UNOLS Wire Pool Excel Format
+- [ ] Generate new wire path diagram
+- [ ] Insert wire path diagram (existing)
 - [ ] Display UNOLS Winch string statuses
 - [ ] Start casts (and log files) based on payout and tension
 - [ ] Add unit conversion
@@ -16,7 +18,8 @@ To Do:
 - [ ] Add Mermac Reception (MacArtney)
 - [ ] Add Odim Reception
 - [ ] Record Hawboldt winch statuses
-- [ ] Add in detection and themeing for darkmode
+- [x] ~~UNOLS Wire Pool Excel Format~~
+- [x] ~~Add in detection and themeing for darkmode~~
 - [x] ~~Add Wire total wire~~
 - [x] ~~Add left on drum amount (total-wire out)~~
 - [x] ~~Display tension member alarms and warnings~~

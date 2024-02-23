@@ -29,6 +29,8 @@ global using Avalonia.Controls;
 global using Avalonia.Interactivity;
 global using Avalonia.Controls.Templates;
 global using Avalonia.Data;
+global using Avalonia.Controls.ApplicationLifetimes;
+global using Avalonia.Platform.Storage;
 global using Avalonia.Layout;
 global using Avalonia.Media;
 global using MsBox.Avalonia;
