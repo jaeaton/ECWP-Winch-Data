@@ -80,5 +80,12 @@
         {
             ProcessDataReadFilesViewModel.ParseFiles(ProcessDataViewModel.ParseData);
         }
+
+        [RelayCommand]
+        private void SingleProcessFiles() 
+        { 
+            ProcessDataReadFilesViewModel.ReadDataFiles(ProcessDataViewModel.ParseData);
+        
+        }
     }
 }

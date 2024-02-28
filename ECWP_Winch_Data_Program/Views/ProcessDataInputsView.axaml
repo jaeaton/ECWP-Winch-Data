@@ -3,16 +3,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:ViewModels"
-			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Views.ProcessDataInputsView">
+			 xmlns:vms="clr-namespace:ViewModels"
+			 mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="800"
+             x:Class="Views.ProcessDataInputsView"
+			 x:CompileBindings="False">
 	<UserControl.Resources>
 		<vm:ProcessDataCommandsViewModel x:Key="commands"/>
+		<vms:MainViewModel x:Key="test"/>
 	</UserControl.Resources>
 	
 	<StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5" DataContext="{StaticResource ResourceKey=test}">
+			<TextBlock Text="Winch Selection:" VerticalAlignment="Center" Width="130" />
+			<ComboBox  Width="150"  ItemsSource="{Binding _configDataStore.WinchNames}" />
+			<TextBlock Text="{Binding _configDataStore.CurrentWinch.WinchName}" />
+		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
-			<Label Content="Select Winch:" VerticalAlignment="Center" Width="130"/>
-
+			<Label Content="Winch Type:" VerticalAlignment="Center" Width="130"/>
 			<ComboBox SelectedItem="{ Binding  SelectedWinch, Mode=TwoWay }"  ItemsSource="{ Binding  AvailableWinches }" Width="150"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">

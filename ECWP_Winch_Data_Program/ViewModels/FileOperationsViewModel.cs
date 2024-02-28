@@ -291,7 +291,11 @@ namespace ViewModels
                 }
                 if (winch.WinchDirectory != string.Empty)
                 {
-                    lines.Add($"Save Location,{ winch.WinchDirectory }");
+                    lines.Add($"UNOLS Log Location,{ winch.WinchDirectory }");
+                }
+                if (winch.RawLogDirectory != string.Empty)
+                {
+                    lines.Add($"Raw Log Location,{winch.RawLogDirectory}");
                 }
 
                 if (winch.TensionUnit != string.Empty)
@@ -381,7 +385,7 @@ namespace ViewModels
             CommunicationModel tempComms = new();
             WinchModel winch = new();
             //winch = null;
-            WinchViewModel viewModel = new WinchViewModel();
+            WinchViewModel winchViewModel = new WinchViewModel();
             try
             {
                 using (StreamReader stream = new StreamReader(destPath))
@@ -408,7 +412,7 @@ namespace ViewModels
                             {
                                 if ( winch.WinchName != string.Empty)
                                 {
-                                    viewModel.InsertWinch(winch);
+                                    winchViewModel.InsertWinch(winch);
                                     winch = new();
                                 }
                                 winch.WinchName = line.Substring(delim + 1);
@@ -547,13 +551,15 @@ namespace ViewModels
                             {
                                 winch.UseComputerTime = bool.Parse(line.Substring(delim + 1));
                             }
-                            if (line.Substring(0, delim) == "Save Location")
+                            if (line.Substring(0, delim) == "UNOLS Log Location")
                             {
                                 winch.WinchDirectory = line.Substring(delim + 1);
-                                //if (_configDataStore.DirectoryLabel != null)
-                                //{
-                                //    _configDataStore.DirectorySet = true;
-                                //}
+                                
+                            }
+                            if (line.Substring(0, delim) == "Raw Log Location")
+                            {
+                                winch.RawLogDirectory = line.Substring(delim + 1);
+                                
                             }
                             if (line.Substring(0, delim) == "20Hz File Format")
                             {
@@ -660,7 +666,7 @@ namespace ViewModels
                     //{
                     //    viewModel.InsertWinch(winch);
                     //}
-                    viewModel.InsertWinch(winch);
+                    winchViewModel.InsertWinch(winch);
 
                 }
                 

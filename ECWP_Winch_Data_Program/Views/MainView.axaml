@@ -15,9 +15,11 @@
 		<TabItem Header="Winch Config" VerticalContentAlignment="Center">
 			<v:WinchView />
 		</TabItem>
+		<!--
 		<TabItem Header="Cast Processing" VerticalContentAlignment="Center">
 			<v:ProcessDataView/>
 		</TabItem>
+		-->
 		<TabItem Header="Update Check" VerticalContentAlignment="Center">
 			<v:VersionCheckView />
 		</TabItem>

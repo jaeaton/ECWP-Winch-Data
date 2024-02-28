@@ -146,12 +146,14 @@
             //Clears the current list to make winch names as fresh as possible
             _configDataStore.WinchNames.Clear();
             _configDataStore.TabItems.Clear();
-            new TabItemModel("Add New", "Add New");
+
+            _configDataStore.TabItems.Add(new TabItemModel("Add New", "Add New"));
             //Loops through all winches and puts winch names in a list for selection process
             if (_configDataStore.AllWinches.Count > 0)
             {
                 foreach (var item in _configDataStore.AllWinches)
                 {
+                    
                     TabItemModel tabItem = new TabItemModel(item.WinchName, item.WinchName);
                     _configDataStore.WinchNames.Add(item.WinchName);
                     _configDataStore.TabItems.Add(tabItem);
@@ -249,7 +251,16 @@
             FileOperationsViewModel.WriteConfig(MainViewModel._configDataStore);
         }
         [RelayCommand]
-        public async Task SetWinchPath()
+        public void SetRawLogPath()
+        {
+            _configDataStore.CurrentWinch.RawLogDirectory = SetWinchPath().Result;
+        }
+        [RelayCommand]
+        public void SetUNOLSLogPath() 
+        {
+            _configDataStore.CurrentWinch.WinchDirectory = SetWinchPath().Result;
+        }
+        public async Task<string> SetWinchPath()
         {
             // Show the save file dialog
             SaveFileDialog saveFileDialog = new();
@@ -260,8 +271,9 @@
             {
                 //DirectoryLabel.Content = saveFileDialog.InitialFileName;
                 FileInfo fileInfo = new(saveFileName);
-                _configDataStore.CurrentWinch.WinchDirectory = fileInfo.DirectoryName;
+                return fileInfo.DirectoryName;
             }
+            return AppDomain.CurrentDomain.BaseDirectory;
         }
     }
 }

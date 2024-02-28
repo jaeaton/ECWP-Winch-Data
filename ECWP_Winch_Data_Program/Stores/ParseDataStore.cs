@@ -38,6 +38,27 @@
         private string minPayout = string.Empty;
 
         [ObservableProperty]
+        private float maxTensionCurrent = 0;
+
+        [ObservableProperty]
+        private float maxTensionPayoutCurrent = 0;
+
+        [ObservableProperty]
+        private float maxPayoutCurrent = 0;
+
+        [ObservableProperty]
+        private string maxTensionString = string.Empty;
+
+        [ObservableProperty]
+        private string maxPayoutString = string.Empty;
+
+        [ObservableProperty]
+        private int cast = 1;
+
+        [ObservableProperty]
+        private bool castActive = false;
+
+        [ObservableProperty]
         private string selectedWinch = string.Empty;
 
         [ObservableProperty]

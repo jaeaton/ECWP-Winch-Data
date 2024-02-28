@@ -371,6 +371,7 @@ namespace ViewModels
         }
         public static async void ReadDataFiles(ParseDataStore parseData)
         {
+            
             string filePath = parseData.Directory;
             foreach (var fin in parseData.FileList)
             {
@@ -622,14 +623,14 @@ namespace ViewModels
             {
                 foreach (DataPointModel model in dataPointModels)
                 {
-                    float maxTensionCurrent = 0;
-                    float maxTensionPayoutCurrent = 0;
-                    float maxPayoutCurrent = 0;
-                    string maxTensionString = string.Empty;
-                    string maxPayoutString = string.Empty;
-                    int cast = 1;
+                    float maxTensionCurrent = parseData.MaxTensionCurrent;
+                    float maxTensionPayoutCurrent = parseData.MaxTensionPayoutCurrent;
+                    float maxPayoutCurrent = parseData.MaxPayoutCurrent;
+                    string maxTensionString = parseData.MaxTensionString;
+                    string maxPayoutString = parseData.MaxPayoutString;
+                    int cast = parseData.Cast;
                     //int i = 0;
-                    bool castActive = false;
+                    bool castActive = parseData.CastActive;
                     //float temp;
                     string input = string.Empty;
                     DataPointModel MaxTensionDataPoint = new();
@@ -706,7 +707,7 @@ namespace ViewModels
                                     castActive = false;
                                     maxPayoutCurrent = 0;
                                     maxTensionCurrent = 0;
-                                    i = 0;
+                                    //i = 0;
 
                                 }
 

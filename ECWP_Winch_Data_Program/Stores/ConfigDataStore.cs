@@ -183,9 +183,14 @@
         private string wireLogEventNotes = string.Empty;
         public void LoadWinch(string winch)
         {
+            if ( winch == "Add New")
+            {
+                CurrentWinch = new WinchModel();
+                return;
+            }
             if (winch != null && AllWinches != null)
             {
-                int index = -1;
+                int index = 0;
 
                 for (int i = 0; i < AllWinches.Count; i++)
                 {
@@ -202,10 +207,12 @@
         }
         public void RefreshWinches(ObservableCollection<WinchModel> winches)
         {
+            
             TabItems.Clear();
-            new TabItemModel("Add New", "Add New");
+            TabItems.Add(new TabItemModel("Add New", "Add New"));
             foreach (var winch in winches)
             {
+                
                 TabItemModel tabitem = new TabItemModel(winch.WinchName, winch.WinchName);
                 TabItems.Add(tabitem);
             }

@@ -50,6 +50,8 @@
         [ObservableProperty]
         private string winchModelName = string.Empty;
         [ObservableProperty]
+        private string rawLogDirectory = string.Empty;
+        [ObservableProperty]
         private string winchDirectory = string.Empty;
         [ObservableProperty]
         private string castNumber = string.Empty;
@@ -216,7 +218,7 @@
             
         }
         [ObservableProperty]
-        private double installedLength = default;
+        private double installedLength;
         partial void OnInstalledLengthChanged(double value)
         {
             AvailableLength = value;

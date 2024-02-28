@@ -21,8 +21,11 @@
 		<TabItem Header="Outgoing Data" VerticalContentAlignment="Center">
 			<v:WinchDetailDataOutTabView/>
 		</TabItem>
-		<TabItem Header="Wire Log" VerticalContentAlignment="Center">
+		<TabItem Header="UNOLS Event Log" VerticalContentAlignment="Center">
 			<v:WinchDetailWireLogView/>
+		</TabItem>
+		<TabItem Header="Log Processing" VerticalContentAlignment="Center">
+			<v:WinchDetailLogProcessingView/>
 		</TabItem>
 	</TabControl>
 </UserControl>
