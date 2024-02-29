@@ -14,12 +14,8 @@
 	</UserControl.DataTemplates>
 
 	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"/>
-		</Grid.RowDefinitions>
+			
 		
-		<Grid Grid.Row="0" ShowGridLines="False">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="auto"/>
 				<ColumnDefinition Width="*"/>
@@ -41,7 +37,7 @@
 				
 			</ScrollViewer>
 			
-		</Grid>
-		<v:LiveDataPathView Grid.Row="1"/>
+		
+		
 	</Grid>
 </UserControl>

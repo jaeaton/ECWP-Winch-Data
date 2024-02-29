@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
+             x:Class="Views.WinchDetailLogProcessingControlsView">
+	<StackPanel>
+		<StackPanel Orientation="Horizontal">
+			<TextBlock Text="File Name:" Width="160"/>
+			<TextBlock Text="name of file"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal">
+			<TextBlock Text="Save Path:" Width="160"/>
+			<TextBlock Text="directory"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal">
+			<TextBlock Text="Processing Line:" Width="160"/>
+			<TextBlock Text="data"/>
+		</StackPanel>
+		<Button Content="Start Processing"/>
+	</StackPanel>
+</UserControl>

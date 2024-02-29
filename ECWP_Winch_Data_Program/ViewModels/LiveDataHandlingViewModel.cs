@@ -160,7 +160,9 @@
             if (winch.LogMax == true)
             {
                 //Write the max data for the cast
-                WriteMaxData(winch);
+                //WriteMaxData(winch);
+                ExcelViewModel.AddCastData(winch.MaxData.MaxTension, winch.MaxData.MaxPayout, int.Parse(winch.CastNumber));
+                winch.MaxData.Clear();
                 //Increase the cast count
                 winch.CastNumber = (int.Parse(winch.CastNumber) + 1).ToString();
                 //UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
@@ -528,22 +530,23 @@
             //DateTime dateTime = DateTime.Now;
             //string stringDateTime = dateTime.ToString("yyyyMMddTHHmmssfff");
             //string dateAndHour = dateTime.ToString("yyyyMMddHH");
-            FileOperationsViewModel.SetFileNames(winch);
-            string fileName = winch.MaxWireLogName;
-            string destPath = Path.Combine(MainViewModel._configDataStore.DirectoryLabel, fileName);
-            string[] lines =
-            {
-                $"Cast { winch.CastNumber }",
-                $"Field, Date, Time, Tension, Speed, Payout",
-                $"Max Tension: { winch.MaxData.MaxTension.Date }, { winch.MaxData.MaxTension.Time }, { winch.MaxData.MaxTension.Tension }, { winch.MaxData.MaxTension.Speed }, { winch.MaxData.MaxTension.Payout}",
-                $"Max Payout: { winch.MaxData.MaxPayout.Date }, { winch.MaxData.MaxPayout.Time }, { winch.MaxData.MaxPayout.Tension }, { winch.MaxData.MaxPayout.Speed }, { winch.MaxData.MaxPayout.Payout }",
-                $" "
-            };
-            using (StreamWriter stream = new StreamWriter(destPath, append: true))
-            {
-                foreach (string line in lines)
-                    stream.WriteLine(line);
-            }
+            //FileOperationsViewModel.SetFileNames(winch);
+            //string fileName = winch.MaxWireLogName;
+            //string destPath = Path.Combine(MainViewModel._configDataStore.DirectoryLabel, fileName);
+            //string[] lines =
+            //{
+            //    $"Cast { winch.CastNumber }",
+            //    $"Field, Date, Time, Tension, Speed, Payout",
+            //    $"Max Tension: { winch.MaxData.MaxTension.Date }, { winch.MaxData.MaxTension.Time }, { winch.MaxData.MaxTension.Tension }, { winch.MaxData.MaxTension.Speed }, { winch.MaxData.MaxTension.Payout}",
+            //    $"Max Payout: { winch.MaxData.MaxPayout.Date }, { winch.MaxData.MaxPayout.Time }, { winch.MaxData.MaxPayout.Tension }, { winch.MaxData.MaxPayout.Speed }, { winch.MaxData.MaxPayout.Payout }",
+            //    $" "
+            //};
+            //using (StreamWriter stream = new StreamWriter(destPath, append: true))
+            //{
+            //    foreach (string line in lines)
+            //        stream.WriteLine(line);
+            //}
+            ExcelViewModel.AddCastData(winch.MaxData.MaxTension, winch.MaxData.MaxPayout, int.Parse(winch.CastNumber));
             //Clear max data
             winch.MaxData.Clear();
         }
