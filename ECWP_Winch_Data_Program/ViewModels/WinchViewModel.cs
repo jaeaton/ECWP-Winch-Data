@@ -253,27 +253,40 @@
         [RelayCommand]
         public void SetRawLogPath()
         {
-            _configDataStore.CurrentWinch.RawLogDirectory = SetWinchPath().Result;
+            Task<string> t = Task.Run<string>(() =>
+            {
+                return SetWinchPath(".log");         });
+            _configDataStore.CurrentWinch.RawLogDirectory = t.Result;
         }
         [RelayCommand]
         public void SetUNOLSLogPath() 
         {
-            _configDataStore.CurrentWinch.WinchDirectory = SetWinchPath().Result;
+            Task<string> t = Task.Run<string>(() =>
+            {
+                return SetWinchPath(".xlsx");
+            });
+            _configDataStore.CurrentWinch.WinchDirectory = t.Result;
         }
-        public async Task<string> SetWinchPath()
+        public async Task<string> SetWinchPath(string extension)
         {
             // Show the save file dialog
             SaveFileDialog saveFileDialog = new();
             //build the save file name
-            saveFileDialog.InitialFileName = _configDataStore.CurrentWinch.WinchName;
+            saveFileDialog.InitialFileName = _configDataStore.CurrentWinch.WinchName + extension;
             string saveFileName = await saveFileDialog.ShowAsync(MainWindow.Instance);
             if (saveFileName != null)
             {
                 //DirectoryLabel.Content = saveFileDialog.InitialFileName;
                 FileInfo fileInfo = new(saveFileName);
-                return fileInfo.DirectoryName;
+                if (fileInfo.DirectoryName != null)
+                {
+                    return fileInfo.DirectoryName;
+                }
+                
             }
             return AppDomain.CurrentDomain.BaseDirectory;
         }
+
+       
     }
 }
