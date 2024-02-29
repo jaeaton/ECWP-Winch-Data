@@ -7,7 +7,7 @@
 	<Panel>
 		<StackPanel >
 			<StackPanel Margin="5">
-				<TextBlock Text="Logging Parameters"/>
+				<TextBlock Text="Live Data Parameters"/>
 				<CheckBox x:Name="CheckBoxLog20Hz" IsEnabled="{Binding Path=UserInputsEnable}" Content="Log 20Hz Data"  HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding CurrentWinch.Log20Hz,FallbackValue='False'}"/>
 				<RadioButton Content="MTNW Format"  IsEnabled="{Binding Path=UserInputsEnable}" HorizontalContentAlignment="Right" Margin="15,2,50,0" GroupName="logFormat" IsChecked="{Binding LogFormatMtnw, FallbackValue='False'}" IsVisible="{ Binding ElementName=CheckBoxLog20Hz,Path=IsChecked }"/>
 				<RadioButton Content="UNOLS Format" IsEnabled="{Binding Path=UserInputsEnable}" HorizontalContentAlignment="Right" Margin="15,2,50,0" GroupName="logFormat" IsChecked="{Binding LogFormatUnols, FallbackValue='True'}" IsVisible="{ Binding ElementName=CheckBoxLog20Hz,Path=IsChecked }"/>
@@ -38,6 +38,19 @@
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Tension Unit" VerticalAlignment="Center" Width="120"/>
 					<ComboBox SelectedItem="{ Binding CurrentWinch.TensionUnit, Mode=TwoWay }" Width="90" ItemsSource="{ Binding TensionUnitList }" SelectedIndex="1"/>
+				</StackPanel>
+				<TextBlock Text="Processing Parameters"/>
+				<StackPanel Orientation="Horizontal" Margin="2">
+					<TextBlock Text="Data Type" VerticalAlignment="Center" Width="120"/>
+					<ComboBox SelectedItem="{ Binding CurrentWinch.PayoutUnit, Mode=TwoWay }" Width="90" ItemsSource="{ Binding PayoutUnitList }" SelectedIndex="0"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="2">
+					<TextBlock Text="Minimum Payout" VerticalAlignment="Center" Width="120"/>
+					<ComboBox SelectedItem="{ Binding CurrentWinch.PayoutUnit, Mode=TwoWay }" Width="90" ItemsSource="{ Binding PayoutUnitList }" SelectedIndex="0"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="2">
+					<TextBlock Text="Minimum Tension" VerticalAlignment="Center" Width="120"/>
+					<ComboBox SelectedItem="{ Binding CurrentWinch.PayoutUnit, Mode=TwoWay }" Width="90" ItemsSource="{ Binding PayoutUnitList }" SelectedIndex="0"/>
 				</StackPanel>
 			</StackPanel>
 		</StackPanel>
