@@ -19,12 +19,12 @@ namespace ViewModels
             }
 
             //Check for file
-            if (!File.Exists($"{_config.CurrentWinch.WinchDirectory}\\{fileName}.xlsx"))
+            if (!File.Exists($"{_config.CurrentWinch.WinchDirectory}\\{fileName}"))
             {
                 NewWorkbook(fileName);
             }
             // Opening workbook
-            var wb = new XLWorkbook($"{_config.CurrentWinch.WinchDirectory}\\{fileName}.xlsx");
+            var wb = new XLWorkbook($"{_config.CurrentWinch.WinchDirectory}\\{fileName}");
 
             //Selecting a worksheet
             var ws = wb.Worksheets.Worksheet("Log");
