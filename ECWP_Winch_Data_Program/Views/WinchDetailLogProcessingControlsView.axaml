@@ -5,16 +5,22 @@
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
              x:Class="Views.WinchDetailLogProcessingControlsView">
 	<StackPanel>
-		<StackPanel Orientation="Horizontal">
-			<TextBlock Text="Data Location:" Width="160"/>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<TextBlock Text="UNOLS Log Location:" Width="160"/>
 			<TextBlock Text="{Binding CurrentWinch.WinchDirectory}"/>
 			<TextBlock Text="\"/>
 			<TextBlock Text="{Binding CurrentWinch.WirePoolWireLogName}"/>
 		</StackPanel>
-		<StackPanel Orientation="Horizontal">
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<TextBlock Text="Raw Log Location:" Width="160"/>
+			<TextBlock Text="{Binding CurrentWinch.RawLogDirectory}"/>
+			<TextBlock Text="\"/>
+			<TextBlock Text="{Binding CurrentWinch.WirePoolWireLogName}"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
 			<TextBlock Text="Processing Line:" Width="160"/>
 			<TextBlock Text="data"/>
 		</StackPanel>
-		<Button Content="Start Processing"/>
+		<Button Content="Start Processing" Margin="5"/>
 	</StackPanel>
 </UserControl>
