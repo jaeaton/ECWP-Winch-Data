@@ -174,7 +174,7 @@ namespace ViewModels
             ws.SheetView.FreezeRows(24);
 
             //Save File Cruise Name + Winch Name
-            var path = $"{_config.CurrentWinch.WinchDirectory}\\{fileName}.xlsx";
+            var path = $"{_config.CurrentWinch.WinchDirectory}\\{fileName}";
             wb.SaveAs(path);
         }
 
@@ -182,7 +182,7 @@ namespace ViewModels
         {
             ConfigDataStore _confDataStore = MainViewModel._configDataStore;
             DateTime dateTime = DateTime.Now;
-            _confDataStore.CurrentWinch.WirePoolWireLogName = $"{dateTime.ToString("yyyy")}_{_confDataStore.CurrentWinch.WinchName}_Wire_Log";
+            _confDataStore.CurrentWinch.WirePoolWireLogName = $"{dateTime.ToString("yyyy")}_{_confDataStore.CurrentWinch.WinchName}_Wire_Log.xlsx";
         }
 
         public async static void NoDirectory()

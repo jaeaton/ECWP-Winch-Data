@@ -7,9 +7,9 @@
 	<StackPanel>
 		<StackPanel Orientation="Horizontal">
 			<TextBlock Text="Data Location:" Width="160"/>
-			<TextBlock Text="directory"/>
-			<TextBlock Text="/"/>
-			<TextBlock Text="name of file"/>
+			<TextBlock Text="{Binding CurrentWinch.WinchDirectory}"/>
+			<TextBlock Text="\"/>
+			<TextBlock Text="{Binding CurrentWinch.WirePoolWireLogName}"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal">
 			<TextBlock Text="Processing Line:" Width="160"/>
