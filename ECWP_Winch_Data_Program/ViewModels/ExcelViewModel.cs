@@ -96,6 +96,7 @@ namespace ViewModels
             ws.Cell($"J{CurrentRow}").Value = $"{MainViewModel._configDataStore.WireLogEventNotes}";
             wb.Save();
         }
+
         public static void NewWorkbook(string fileName/*WinchModel winch*/)
         {
             ConfigDataStore _config = MainViewModel._configDataStore;
