@@ -2,8 +2,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
+             xmlns:vm="clr-namespace:ViewModels"
+			 mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
              x:Class="Views.WinchDetailLogProcessingControlsView">
+	
+	<UserControl.Resources>
+		<vm:ProcessDataViewModel x:Key="winch"/>
+		<vm:ProcessDataCommandsViewModel x:Key="commands"/>
+	</UserControl.Resources>
+	
+
 	<StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<TextBlock Text="UNOLS Log Location:" Width="160"/>
@@ -15,12 +23,12 @@
 			<TextBlock Text="Raw Log Location:" Width="160"/>
 			<TextBlock Text="{Binding CurrentWinch.RawLogDirectory}"/>
 			<TextBlock Text="\"/>
-			<TextBlock Text="{Binding CurrentWinch.WirePoolWireLogName}"/>
+			<TextBlock Text="{Binding ParseData.ReadingFileName}" DataContext="{StaticResource ResourceKey=winch}"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<TextBlock Text="Processing Line:" Width="160"/>
-			<TextBlock Text="data"/>
+			<TextBlock Text="{ Binding ProcessData.ReadingLine }" DataContext="{StaticResource ResourceKey=winch}"/>
 		</StackPanel>
-		<Button Content="Start Processing" Margin="5"/>
+		<Button Content="Start Processing" Command="{ Binding SingleProcessFilesCommand }" Margin="5" DataContext="{ StaticResource ResourceKey=commands }"/>
 	</StackPanel>
 </UserControl>
