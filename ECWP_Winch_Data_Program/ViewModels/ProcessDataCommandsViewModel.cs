@@ -84,8 +84,13 @@
         [RelayCommand]
         private void SingleProcessFiles() 
         {
+            ConfigDataStore _config = MainViewModel._configDataStore;
+            ParseDataStore ParseData = ProcessDataViewModel.ParseData;
+            ParseData.SelectedWinch = _config.CurrentWinch.WinchLogType;
+            ParseData.MinPayout = _config.CurrentWinch.MinimumPayout;
+            ParseData.MinTension = _config.CurrentWinch.MinimumTension;
             ExcelViewModel.SetWireLogFileName();
-            
+            FindFiles();
             ProcessDataReadFilesViewModel.ReadDataFiles(ProcessDataViewModel.ParseData);
         
         }
@@ -101,7 +106,7 @@
             ParseData.FileList.Clear();
             string extension;
             //Set File extension
-            switch (_config.CurrentWinch.typ)
+            switch (_config.CurrentWinch.WinchLogType)
             {
                 case "SIO Traction Winch":
                     extension = "*.Raw";

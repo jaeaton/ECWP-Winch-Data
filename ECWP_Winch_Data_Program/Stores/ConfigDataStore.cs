@@ -66,6 +66,39 @@
                                                             };
 
         [ObservableProperty]
+        private List<string> winchDataType = new()
+        {
+                "MASH Winch",
+                "SIO Traction Winch",
+                "Armstrong CAST 6",
+                "UNOLS String",
+                "Jay Jay"
+        };
+
+        [ObservableProperty]
+        private List<string> availablePayouts = new()
+        {
+                "-10",
+                "0",
+                "1",
+                "5",
+                "10",
+                "12",
+                "25",
+                "50"
+        };
+
+        [ObservableProperty]
+        private List<string> availableTensions = new()
+        {
+                "-100",
+                "0",
+                "100",
+                "250",
+                "500"
+        };
+
+        [ObservableProperty]
         private string selectedProtocol = string.Empty;
 
         [ObservableProperty]

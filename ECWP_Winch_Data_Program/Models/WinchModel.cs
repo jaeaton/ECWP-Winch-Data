@@ -233,6 +233,12 @@
         private string tensionMemberPartNumber = string.Empty;
         [ObservableProperty]
         private string tensionMemberNSFID = string.Empty ;
+        [ObservableProperty]
+        private string winchLogType = string.Empty ;
+        [ObservableProperty]
+        private string minimumPayout = string.Empty ;
+        [ObservableProperty]
+        private string minimumTension = string.Empty ;
         public object Sync { get; } = new object();
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)

@@ -2,8 +2,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="clr-namespace:ViewModels"
+			 mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="800"
              x:Class="Views.WinchDetailLoggingView">
+
+	<UserControl.Resources>
+		<vm:ProcessDataViewModel x:Key="winch"/>
+	</UserControl.Resources>
+	
 	<Panel>
 		<StackPanel >
 			<StackPanel Margin="5">
@@ -25,7 +31,7 @@
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Chart Time Span" VerticalAlignment="Center" Width="120"/>
 					<ComboBox SelectedItem="{ Binding CurrentWinch.ChartTimeSpan, Mode=TwoWay }" Width="90" ItemsSource="{ Binding ChartTimeSpanList }" SelectedIndex="2"/>
-					<TextBlock Text=" s" VerticalAlignment="Center"/>
+					<TextBlock Text="s" VerticalAlignment="Center" Margin="2"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Speed Unit" VerticalAlignment="Center" Width="120"/>
@@ -42,15 +48,17 @@
 				<TextBlock Text="Processing Parameters"/>
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Data Type" VerticalAlignment="Center" Width="120"/>
-					<ComboBox SelectedItem="{ Binding CurrentWinch.PayoutUnit, Mode=TwoWay }" Width="90" ItemsSource="{ Binding PayoutUnitList }" SelectedIndex="0"/>
+					<ComboBox SelectedItem="{ Binding CurrentWinch.WinchLogType, Mode=TwoWay }" Width="90" ItemsSource="{ Binding WinchDataType }" SelectedIndex="0"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Minimum Payout" VerticalAlignment="Center" Width="120"/>
-					<ComboBox SelectedItem="{ Binding CurrentWinch.PayoutUnit, Mode=TwoWay }" Width="90" ItemsSource="{ Binding PayoutUnitList }" SelectedIndex="0"/>
+					<ComboBox SelectedItem="{ Binding CurrentWinch.MinimumPayout, Mode=TwoWay }" Width="90" ItemsSource="{ Binding AvailablePayouts }" SelectedIndex="0"/>
+					<TextBlock Text="{ Binding CurrentWinch.PayoutUnit }" VerticalAlignment="Center" Margin="2"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Minimum Tension" VerticalAlignment="Center" Width="120"/>
-					<ComboBox SelectedItem="{ Binding CurrentWinch.PayoutUnit, Mode=TwoWay }" Width="90" ItemsSource="{ Binding PayoutUnitList }" SelectedIndex="0"/>
+					<ComboBox SelectedItem="{ Binding CurrentWinch.MinimumTension, Mode=TwoWay }"  Width="90" ItemsSource="{ Binding AvailableTensions }" SelectedIndex="0"/>
+					<TextBlock Text="{ Binding CurrentWinch.TensionUnit }" Margin="2" VerticalAlignment="Center"/>
 				</StackPanel>
 			</StackPanel>
 		</StackPanel>

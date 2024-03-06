@@ -1,7 +1,4 @@
-﻿using Avalonia.Threading;
-using LiveChartsCore.Geo;
-
-namespace ViewModels
+﻿namespace ViewModels
 {
     internal class ProcessDataReadFilesViewModel
     {
