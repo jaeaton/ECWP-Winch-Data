@@ -24,6 +24,8 @@
         private string maxWireOut = string.Empty;
         [ObservableProperty]
         private string notes = string.Empty;
+        [ObservableProperty]
+        private string cruiseNumber = string.Empty;
 
         public WireLogModel()
         {

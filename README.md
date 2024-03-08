@@ -35,6 +35,6 @@ To Do:
 - [x] ~~Add cast processing~~
 - [x] ~~Record the UNOLS Winch string~~
 - [x] ~~Add LCI-90i data reception~~
-- ~~[ ] Move to .Net MAUI for Cross platform application~~  No Linux support
+- [ ] ~~Move to .Net MAUI for Cross platform application~~  No Linux support
 - [x] ~~Move to Avalonia UI for Cross Platform Application~~
 

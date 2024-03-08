@@ -23,11 +23,11 @@
 			<TextBlock Text="Raw Log Location:" Width="160"/>
 			<TextBlock Text="{Binding CurrentWinch.RawLogDirectory}"/>
 			<TextBlock Text="\"/>
-			<TextBlock Text="{Binding ParseData.ReadingFileName}" DataContext="{StaticResource ResourceKey=winch}"/>
+			<TextBlock Text="{Binding ParseData.ReadingFileName}" DataContext="{StaticResource ResourceKey=commands}"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<TextBlock Text="Processing Line:" Width="160"/>
-			<TextBlock Text="{ Binding ProcessData.ReadingLine }" DataContext="{StaticResource ResourceKey=winch}"/>
+			<TextBlock Text="{ Binding ParseData.ReadingLine }" DataContext="{StaticResource ResourceKey=commands}"/>
 		</StackPanel>
 		<Button Content="Start Processing" Command="{ Binding SingleProcessFilesCommand }" Margin="5" DataContext="{ StaticResource ResourceKey=commands }"/>
 	</StackPanel>

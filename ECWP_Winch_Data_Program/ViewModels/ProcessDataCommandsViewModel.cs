@@ -2,6 +2,7 @@
 {
     public partial class ProcessDataCommandsViewModel : ViewModelBase
     {
+        ParseDataStore ParseData =ProcessDataViewModel.ParseData;
         [RelayCommand]
         private async void File_Location()
         {
@@ -85,7 +86,7 @@
         private void SingleProcessFiles() 
         {
             ConfigDataStore _config = MainViewModel._configDataStore;
-            ParseDataStore ParseData = ProcessDataViewModel.ParseData;
+            //ParseDataStore ParseData = ProcessDataViewModel.ParseData;
             ParseData.SelectedWinch = _config.CurrentWinch.WinchLogType;
             ParseData.MinPayout = _config.CurrentWinch.MinimumPayout;
             ParseData.MinTension = _config.CurrentWinch.MinimumTension;
@@ -98,7 +99,7 @@
         private void FindFiles()
         {
             ConfigDataStore _config = MainViewModel._configDataStore;
-            ParseDataStore ParseData = ProcessDataViewModel.ParseData;
+            //ParseDataStore ParseData = ProcessDataViewModel.ParseData;
 
             ParseData.FileList = new Store.SortableObservableCollection<string>();//SortableObservableCollection<string>();
             DirectoryInfo di = new DirectoryInfo(_config.CurrentWinch.RawLogDirectory);
