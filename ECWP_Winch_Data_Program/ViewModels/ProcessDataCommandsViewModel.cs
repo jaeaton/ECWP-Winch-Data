@@ -100,7 +100,7 @@
         {
             ConfigDataStore _config = MainViewModel._configDataStore;
             //ParseDataStore ParseData = ProcessDataViewModel.ParseData;
-
+            ParseData.FileList.Clear();
             ParseData.FileList = new Store.SortableObservableCollection<string>();//SortableObservableCollection<string>();
             DirectoryInfo di = new DirectoryInfo(_config.CurrentWinch.RawLogDirectory);
 

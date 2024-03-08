@@ -369,7 +369,7 @@
         public static async void ReadDataFiles(ParseDataStore parseData)
         {
             //Makes reading the file Asynchronous leaving the UI responsive
-            //await Task.Run(() =>
+            await Task.Run(() =>
             {
                 string filePath = parseData.Directory;
                 foreach (var fin in parseData.FileList)
@@ -590,19 +590,19 @@
                                     lineData = new DataPointModel();
                                     dataLine = false;
                                 }
-
+                                
                             }
-
+                            
                         }
                         //Write data
                         ParseDataFromLogs(DataModels);
-
+                        
                     }
 
                     file.Close(); //Close the file
                 }
                 parseData.ReadingLine = "Done!"; //Update UI with done
-            }//);
+            });
         }
         public static void ParseDataFromLogs(List<DataPointModel> dataPointModels)
         {
