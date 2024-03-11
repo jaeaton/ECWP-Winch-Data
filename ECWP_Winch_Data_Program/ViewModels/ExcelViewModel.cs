@@ -7,6 +7,17 @@ namespace ViewModels
         //public void AddData(WinchModel winch, DataPointModel dataMaxTension, DataPointModel dataMaxPayout, ConfigDataStore config)
         public static void AddCastData( DataPointModel dataMaxTension, DataPointModel dataMaxPayout, int cast)
         {
+            //Check Date for data point
+            string date = string.Empty;
+            if (dataMaxTension.Date != string.Empty)
+            {
+                date = dataMaxTension.Date;
+            }
+            else if (dataMaxTension.DateAndTime != new DateTime())
+            {
+                date = dataMaxTension.DateAndTime.ToShortDateString();
+            }
+            else { date = "No Date"; }
             ConfigDataStore _config = MainViewModel._configDataStore;
             SetWireLogFileName();
             //Load Filename
@@ -39,7 +50,7 @@ namespace ViewModels
             //Cruise Number
             ws.Cell($"B{CurrentRow}").Value = $"{_config.CruiseNameBox}";
             //Date
-            ws.Cell($"C{CurrentRow}").Value = dataMaxTension.Date.ToString();
+            ws.Cell($"C{CurrentRow}").Value = date;
             //Cast number
             ws.Cell($"D{CurrentRow}").Value = cast;
             //Total Length of Cable
@@ -49,12 +60,13 @@ namespace ViewModels
             //Wire Out at Max Tension
             ws.Cell($"G{CurrentRow}").Value = dataMaxTension.Payout;
             //Wire on drum at Max Tension
-            //double? WireIn = winch.InstalledLength - Convert.ToDouble(dataMaxTension.Payout);
-            //ws.Cell($"H{CurrentRow}").Value = $"{WireIn}";
+            double WireIn = _config.CurrentWinch.InstalledLength - Convert.ToDouble(dataMaxTension.Payout);
+            ws.Cell($"H{CurrentRow}").Value = $"{WireIn}";
             //Maximum Wire Out
             ws.Cell($"I{CurrentRow}").Value = dataMaxPayout.Payout;
             //Notes
-
+            //Borders
+            ws.Range($"A{CurrentRow}:J{CurrentRow}").Style.Border.SetInsideBorder(XLBorderStyleValues.Thin);
             wb.Save();
         }
 
@@ -105,6 +117,14 @@ namespace ViewModels
             //Adding a worksheet
             var ws = wb.Worksheets.Add("Log");
             
+            //Set sheet to landscape
+            ws.PageSetup.PageOrientation = XLPageOrientation.Landscape;
+            //Set Margins
+            ws.PageSetup.Margins.Top = 0.25;
+            ws.PageSetup.Margins.Bottom = 0.25;
+            ws.PageSetup.Margins.Left = 0.25;
+            ws.PageSetup.Margins.Right = 0.25;
+
             //Adding text
             //Title
             ws.Cell("A1").Value = "Wire Log";
@@ -136,6 +156,9 @@ namespace ViewModels
 
             //Merge Image Cell
             ws.Range("B8:I22").Merge();
+            ws.Cell("B8").Value = "Insert Sheave Train Diagram";
+            ws.Cell("B8").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+            ws.Cell("B8").Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center);
 
             //Set Column widths
             ws.Column(1).Width = 10;
@@ -169,6 +192,7 @@ namespace ViewModels
             ws.Cell("H24").Value = "MT Wire In (m)";
             ws.Cell("I24").Value = "Max Wire Out (m)";
             ws.Cell("J24").Value = "Notes";
+            ws.Range("A24:J24").Style.Border.SetBottomBorder(XLBorderStyleValues.Double);
             
             //Freeze the headings in place
             ws.SheetView.FreezeRows(24);

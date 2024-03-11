@@ -617,12 +617,13 @@
             string maxTensionString = parseData.MaxTensionString;
             string maxPayoutString = parseData.MaxPayoutString;
             int cast = parseData.Cast;
+            DataPointModel MaxTensionDataPoint = parseData.MaxTensionDataPoint;
+            DataPointModel MaxPayoutDataPoint = parseData.MaxPayoutDataPoint;
             //int i = 0;
             bool castActive = parseData.CastActive;
             //float temp;
             string input = string.Empty;
-            DataPointModel MaxTensionDataPoint = new();
-            DataPointModel MaxPayoutDataPoint = new();
+            
             ProcessPointDataModel processPointDataModel = new();
             ProcessCastDataModel processCastDataModel = new();
             
@@ -680,6 +681,8 @@
                     parseData.MaxPayoutCurrent = maxPayoutCurrent;
                     parseData.MaxTensionString = maxTensionCurrent.ToString();
                     parseData.MaxPayoutString = maxTensionCurrent.ToString();
+                    parseData.MaxPayoutDataPoint = MaxPayoutDataPoint;
+                    parseData.MaxTensionDataPoint = MaxTensionDataPoint;
                     //i = 0;
 
                 }
@@ -708,8 +711,10 @@
             parseData.MaxTensionString = maxTensionCurrent.ToString();
             parseData.MaxPayoutString = maxTensionCurrent.ToString();
             parseData.Cast = cast;
-            
-         }
+            parseData.MaxPayoutDataPoint = MaxPayoutDataPoint;
+            parseData.MaxTensionDataPoint = MaxTensionDataPoint;
+
+        }
         private static void AddData(DataPointModel lineData, int cast, float maxTenCurrent, float maxTenPayCurrent, float maxPayCurrent)
         {
             ProcessDataViewModel.ParseData.WireLog.Add(new WireLogModel(lineData.DateAndTime, "Cast Data", cast, maxTenCurrent, maxTenPayCurrent, maxPayCurrent));

@@ -20,6 +20,12 @@
         private ObservableCollection<WireLogModel> wireLog = new ObservableCollection<WireLogModel>();
 
         [ObservableProperty]
+        private DataPointModel maxTensionDataPoint = new();
+
+        [ObservableProperty]
+        private DataPointModel maxPayoutDataPoint = new();
+
+        [ObservableProperty]
         private string cruiseName = string.Empty;
 
         [ObservableProperty]
