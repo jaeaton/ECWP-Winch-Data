@@ -368,6 +368,7 @@
         }
         public static async void ReadDataFiles(ParseDataStore parseData)
         {
+            parseData.ReadingLine = "Reading!"; //Update UI with reading
             //Makes reading the file Asynchronous leaving the UI responsive
             await Task.Run(() =>
             {
@@ -375,7 +376,7 @@
                 foreach (var fin in parseData.FileList)
                 {
                     var fileRead = fin.ToString();
-                    parseData.ReadingFileName = fileRead;
+                    //parseData.ReadingFileName = fileRead;
                     System.IO.StreamReader file = new System.IO.StreamReader(fileRead); //Setup stream reader to read file
                     string line = string.Empty;
                     bool flag = false;
@@ -383,9 +384,8 @@
                     DataPointModel lineData = new();
                     List<string> Data = new();
                     List<DataPointModel> DataModels = new();
+                    Dispatcher.UIThread.Post(() => parseData.ReadingFileName = fileRead);
 
-                    //Makes reading the file Asynchronous leaving the UI responsive
-                    //await Task.Run(() =>
                     {
                         DataModels.Clear();
                         while ((line = file.ReadLine()) != null)
@@ -601,121 +601,115 @@
 
                     file.Close(); //Close the file
                 }
-                parseData.ReadingLine = "Done!"; //Update UI with done
+                
             });
+            parseData.ReadingLine = "Done!"; //Update UI with done
         }
         public static void ParseDataFromLogs(List<DataPointModel> dataPointModels)
         {
-            // Read threshold values
+            // Read stored values
             ParseDataStore parseData = ProcessDataViewModel.ParseData;
             float minPayout = float.Parse(parseData.MinPayout);
             float minTension = float.Parse(parseData.MinTension);
-            //parseData.ReadingFileName = parseData.CombinedFileName;
-            //parseData.ReadingLine = "Starting!";
-            //Read in collected file and determine maximum values of casts
-            //await Task.Run(() =>
+            float maxTensionCurrent = parseData.MaxTensionCurrent;
+            float maxTensionPayoutCurrent = parseData.MaxTensionPayoutCurrent;
+            float maxPayoutCurrent = parseData.MaxPayoutCurrent;
+            string maxTensionString = parseData.MaxTensionString;
+            string maxPayoutString = parseData.MaxPayoutString;
+            int cast = parseData.Cast;
+            //int i = 0;
+            bool castActive = parseData.CastActive;
+            //float temp;
+            string input = string.Empty;
+            DataPointModel MaxTensionDataPoint = new();
+            DataPointModel MaxPayoutDataPoint = new();
+            ProcessPointDataModel processPointDataModel = new();
+            ProcessCastDataModel processCastDataModel = new();
+            
+            foreach (DataPointModel lineData in dataPointModels)
             {
-                foreach (DataPointModel model in dataPointModels)
+                processCastDataModel.CastNumber = cast;
+                
+                //detect start of cast (values above threshold with positive slope)
+                if (lineData.Tension > minTension && Math.Abs(lineData.Payout) > minPayout)
                 {
-                    float maxTensionCurrent = parseData.MaxTensionCurrent;
-                    float maxTensionPayoutCurrent = parseData.MaxTensionPayoutCurrent;
-                    float maxPayoutCurrent = parseData.MaxPayoutCurrent;
-                    string maxTensionString = parseData.MaxTensionString;
-                    string maxPayoutString = parseData.MaxPayoutString;
-                    int cast = parseData.Cast;
-                    //int i = 0;
-                    bool castActive = parseData.CastActive;
-                    //float temp;
-                    string input = string.Empty;
-                    DataPointModel MaxTensionDataPoint = new();
-                    DataPointModel MaxPayoutDataPoint = new();
-                    ProcessPointDataModel processPointDataModel = new();
-                    ProcessCastDataModel processCastDataModel = new();
-                    //await Task.Run(() =>
+                    castActive = true;
+                    //check for new maximum values (tension and payout) and store
+                    if (lineData.Tension > maxTensionCurrent)
                     {
-                        foreach (DataPointModel lineData in dataPointModels)
-                        {
-                            
-                            processCastDataModel.CastNumber = cast;
-                            
-
-                            {
-
-                                //detect start of cast (values above threshold with positive slope)
-                                if (lineData.Tension > minTension && Math.Abs(lineData.Payout) > minPayout)
-                                {
-                                    castActive = true;
-                                    //check for new maximum values (tension and payout) and store
-                                    if (lineData.Tension > maxTensionCurrent)
-                                    {
-                                        maxTensionCurrent = lineData.Tension;
-                                        maxTensionPayoutCurrent = lineData.Payout;
-                                        maxTensionString = input;
-                                        MaxTensionDataPoint = lineData.ShallowCopy();
-                                    }
-                                    if (Math.Abs(lineData.Payout) > maxPayoutCurrent)
-                                    {
-                                        maxPayoutCurrent = Math.Abs(lineData.Payout);
-                                        maxPayoutString = input;
-                                        MaxPayoutDataPoint = lineData.ShallowCopy();
-                                    }
-
-                                }
-                                //detect end of cast (values below threshold with negative slope)
-                                //Write data point
-                                if (/*lineData.Tension < minTension &&*/ Math.Abs(lineData.Payout) < minPayout && castActive == true)
-                                {
-                                    float mTenSend = maxTensionCurrent;
-                                    float mTenPaySend = maxTensionPayoutCurrent;
-                                    float mPaySend = maxPayoutCurrent;
-                                    int castSend = cast;
-                                    DataPointModel mTenDataPt = MaxTensionDataPoint.ShallowCopy();
-                                    DataPointModel mPayDataPt = MaxPayoutDataPoint.ShallowCopy();
-                                    //ProcessDataWriteFilesViewModel.WriteProcessed(maxTensionString, maxPayoutString, cast); //end cast, increment cast number, write processed data
-                                    ExcelViewModel.AddCastData(mTenDataPt, mPayDataPt, castSend);
-                                    parseData.ReadingLine = maxTensionString;
-                                    parseData.ProcessCasts.Add(processCastDataModel);
-
-                                    Dispatcher.UIThread.Post(() => AddData(lineData, castSend, mTenSend, mTenPaySend, mPaySend));
-                                    //parseData.WireLog.Add(new WireLogModel(lineData.DateAndTime, "Cast Data", cast, maxTensionCurrent, maxPayoutCurrent)) ;
-                                    //parseData.DataToPlot.Add(lineData);
-                                    cast++;
-                                    castActive = false;
-                                    maxPayoutCurrent = 0;
-                                    maxTensionCurrent = 0;
-                                    //i = 0;
-
-                                }
-
-                                if (castActive)
-                                {
-                                    //processPointDataModel.Payout = lineData.Payout;
-                                    //processPointDataModel.Tension = lineData.Tension;
-                                    //processPointDataModel.PointNumber = i++;
-                                    //processCastDataModel.ProcessPoints?.Add(processPointDataModel);
-                                    //parseData.ChartData.AddData(lineData);
-                                    //parseData.DataToPlot.Add(lineData);
-                                }
-                            }
-
-                        }
-                        //foreach (var val in parseData.DataToPlot)
-                        //{
-                        //    parseData.ChartData.AddData(val);
-                        //}
-                        //parseData.ChartData.PlotData();
-                        parseData.ReadingLine = "Done!";
-                        parseData.MaxTensionCurrent = maxTensionCurrent;
-                        parseData.MaxTensionPayoutCurrent = maxTensionPayoutCurrent;
-                        parseData.MaxPayoutCurrent = maxPayoutCurrent;
-                        parseData.MaxTensionString = maxTensionCurrent.ToString();
-                        parseData.MaxPayoutString = maxTensionCurrent.ToString();
-                        parseData.Cast = cast;
+                        maxTensionCurrent = lineData.Tension;
+                        maxTensionPayoutCurrent = lineData.Payout;
+                        //maxTensionString = input;
+                        MaxTensionDataPoint = lineData.DeepCopy();
                     }
+                    if (Math.Abs(lineData.Payout) > maxPayoutCurrent)
+                    {
+                        maxPayoutCurrent = Math.Abs(lineData.Payout);
+                        //maxPayoutString = input;
+                        MaxPayoutDataPoint = lineData.DeepCopy();
+                    }
+
                 }
-                //parseData.ReadingLine = "Done!";
-            }//);
-        }
+                //detect end of cast (values below threshold with negative slope)
+                //Write data point
+                if (/*lineData.Tension < minTension &&*/ Math.Abs(lineData.Payout) < minPayout && castActive == true)
+                {
+                    float mTenSend = maxTensionCurrent;
+                    float mTenPaySend = maxTensionPayoutCurrent;
+                    float mPaySend = maxPayoutCurrent;
+                    int castSend = cast;
+                    DataPointModel mTenDataPt = new();
+                    mTenDataPt = MaxTensionDataPoint.DeepCopy();
+                    DataPointModel mPayDataPt = new();
+                    mPayDataPt = MaxPayoutDataPoint.DeepCopy();
+                    //ProcessDataWriteFilesViewModel.WriteProcessed(maxTensionString, maxPayoutString, cast); //end cast, increment cast number, write processed data
+                    ExcelViewModel.AddCastData(mTenDataPt, mPayDataPt, castSend);
+                    parseData.ReadingLine = maxTensionString;
+                    parseData.ProcessCasts.Add(processCastDataModel);
+
+                    Dispatcher.UIThread.Post(() => AddData(lineData, castSend, mTenSend, mTenPaySend, mPaySend));
+                    //parseData.WireLog.Add(new WireLogModel(lineData.DateAndTime, "Cast Data", cast, maxTensionCurrent, maxPayoutCurrent)) ;
+                    //parseData.DataToPlot.Add(lineData);
+                    cast++;
+                    castActive = false;
+                    maxPayoutCurrent = 0;
+                    maxTensionCurrent = 0;
+                    maxTensionPayoutCurrent = 0;
+                    parseData.MaxTensionCurrent = maxTensionCurrent;
+                    parseData.MaxTensionPayoutCurrent = maxTensionPayoutCurrent;
+                    parseData.MaxPayoutCurrent = maxPayoutCurrent;
+                    parseData.MaxTensionString = maxTensionCurrent.ToString();
+                    parseData.MaxPayoutString = maxTensionCurrent.ToString();
+                    //i = 0;
+
+                }
+
+                if (castActive)
+                {
+                    //processPointDataModel.Payout = lineData.Payout;
+                    //processPointDataModel.Tension = lineData.Tension;
+                    //processPointDataModel.PointNumber = i++;
+                    //processCastDataModel.ProcessPoints?.Add(processPointDataModel);
+                    //parseData.ChartData.AddData(lineData);
+                    //parseData.DataToPlot.Add(lineData);
+                }
+                
+
+            }
+            //foreach (var val in parseData.DataToPlot)
+            //{
+            //    parseData.ChartData.AddData(val);
+            //}
+            //parseData.ChartData.PlotData();
+            parseData.ReadingLine = "Done!";
+            parseData.MaxTensionCurrent = maxTensionCurrent;
+            parseData.MaxTensionPayoutCurrent = maxTensionPayoutCurrent;
+            parseData.MaxPayoutCurrent = maxPayoutCurrent;
+            parseData.MaxTensionString = maxTensionCurrent.ToString();
+            parseData.MaxPayoutString = maxTensionCurrent.ToString();
+            parseData.Cast = cast;
+            
+         }
         private static void AddData(DataPointModel lineData, int cast, float maxTenCurrent, float maxTenPayCurrent, float maxPayCurrent)
         {
             ProcessDataViewModel.ParseData.WireLog.Add(new WireLogModel(lineData.DateAndTime, "Cast Data", cast, maxTenCurrent, maxTenPayCurrent, maxPayCurrent));

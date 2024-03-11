@@ -40,6 +40,7 @@
         /// Tension member alarms(8 bits)
         /// </summary>
         public string TMAlarms   = string.Empty;    
+        
         public DataPointModel()
         {
 
@@ -161,6 +162,14 @@
       public DataPointModel ShallowCopy()
         {
             DataPointModel copy = (DataPointModel)this.MemberwiseClone();
+            return copy;
+        }
+
+        public DataPointModel DeepCopy()
+        {
+            DataPointModel copy = new();
+            copy = (DataPointModel)this.MemberwiseClone();
+            copy.DateAndTime = DateAndTime;
             return copy;
         }
 
