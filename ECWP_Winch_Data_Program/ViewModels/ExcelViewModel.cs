@@ -60,8 +60,9 @@ namespace ViewModels
             //Wire Out at Max Tension
             ws.Cell($"G{CurrentRow}").Value = dataMaxTension.Payout;
             //Wire on drum at Max Tension
-            double WireIn = _config.CurrentWinch.InstalledLength - Convert.ToDouble(dataMaxTension.Payout);
+            float WireIn = _config.CurrentWinch.InstalledLength - dataMaxTension.Payout;
             ws.Cell($"H{CurrentRow}").Value = $"{WireIn}";
+            //ws.Cell($"H{CurrentRow}").Style.NumberFormat.Format = ;
             //Maximum Wire Out
             ws.Cell($"I{CurrentRow}").Value = dataMaxPayout.Payout;
             //Notes

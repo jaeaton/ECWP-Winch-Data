@@ -620,11 +620,11 @@ namespace ViewModels
                             }
                             if (line.Substring(0, delim) == "Installed Length")
                             {
-                                winch.InstalledLength = Convert.ToDouble(line.Substring(delim + 1));
+                                winch.InstalledLength = float.Parse(line.Substring(delim + 1));
                             }
                             if (line.Substring(0, delim) == "Available Length")
                             {
-                                winch.AvailableLength = Convert.ToDouble(line.Substring(delim + 1));
+                                winch.AvailableLength = float.Parse(line.Substring(delim + 1));
                             }
                             if (line.Substring(0, delim) == "Assigned Breaking Load")
                             {

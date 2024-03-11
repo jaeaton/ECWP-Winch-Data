@@ -241,7 +241,7 @@
         [RelayCommand]
         public void AddWireLogEvent()
         {
-            if (double.TryParse(_configDataStore.WireLogEventCutBack, out double result) && _configDataStore.WireLogEventSelection == "Cut Back")
+            if (float.TryParse(_configDataStore.WireLogEventCutBack, out float result) && _configDataStore.WireLogEventSelection == "Cut Back")
             {
                 _configDataStore.CurrentWinch.AvailableLength -= result;
             }

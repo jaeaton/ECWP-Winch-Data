@@ -8,7 +8,7 @@
         [ObservableProperty]
         private ObservableCollection<CommunicationModel> allOutputCommunication = new();
         [ObservableProperty]
-        private TabItemModel outputCommsSelected;
+        private TabItemModel outputCommsSelected = new();
         partial void OnOutputCommsSelectedChanged(TabItemModel value)
         {
             if (value != null)
@@ -218,13 +218,13 @@
             
         }
         [ObservableProperty]
-        private double installedLength;
-        partial void OnInstalledLengthChanged(double value)
+        private float installedLength;
+        partial void OnInstalledLengthChanged(float value)
         {
             AvailableLength = value;
         }
         [ObservableProperty]
-        private double availableLength = default;
+        private float availableLength = default;
         [ObservableProperty]
         private string tensionMemberName = string.Empty ;
         [ObservableProperty]
