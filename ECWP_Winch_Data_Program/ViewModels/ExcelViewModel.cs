@@ -15,7 +15,7 @@ namespace ViewModels
             }
             else if (dataMaxTension.DateAndTime != new DateTime())
             {
-                date = dataMaxTension.DateAndTime.ToShortDateString();
+                date = dataMaxTension.DateAndTime.ToString("yyyy/MM/dd");
             }
             else { date = "No Date"; }
             ConfigDataStore _config = MainViewModel._configDataStore;
@@ -61,7 +61,7 @@ namespace ViewModels
             ws.Cell($"G{CurrentRow}").Value = dataMaxTension.Payout;
             //Wire on drum at Max Tension
             float WireIn = _config.CurrentWinch.InstalledLength - dataMaxTension.Payout;
-            ws.Cell($"H{CurrentRow}").Value = $"{WireIn}";
+            ws.Cell($"H{CurrentRow}").Value = WireIn;
             //ws.Cell($"H{CurrentRow}").Style.NumberFormat.Format = ;
             //Maximum Wire Out
             ws.Cell($"I{CurrentRow}").Value = dataMaxPayout.Payout;
@@ -83,12 +83,12 @@ namespace ViewModels
                 return;
             }
             //Check for file
-            if (!File.Exists($"{_config.CurrentWinch.WinchDirectory}\\{fileName}.xlsx"))
+            if (!File.Exists($"{_config.CurrentWinch.WinchDirectory}\\{fileName}"))
             {
                 NewWorkbook(fileName);
             }
             // Opening workbook
-            var wb = new XLWorkbook($"{_config.CurrentWinch.WinchDirectory}\\{fileName}.xlsx");
+            var wb = new XLWorkbook($"{_config.CurrentWinch.WinchDirectory}\\{fileName}");
             //Selecting a worksheet
             var ws = wb.Worksheets.Worksheet("Log");
 
@@ -98,15 +98,17 @@ namespace ViewModels
             int CurrentRow = LastRow + 1;
 
             //Event Type
-            ws.Cell($"A{CurrentRow}").Value = $"{MainViewModel._configDataStore.WireLogEventSelection}";
+            ws.Cell($"A{CurrentRow}").Value = MainViewModel._configDataStore.WireLogEventSelection;
             //Date
             ws.Cell($"C{CurrentRow}").Value = MainViewModel._configDataStore.WireLogEventDate.ToString("yyyy/MM/dd");
             //Wire Length
-            ws.Cell($"E{CurrentRow}").Value = $"{MainViewModel._configDataStore.CurrentWinch.AvailableLength}";
+            ws.Cell($"E{CurrentRow}").Value = MainViewModel._configDataStore.CurrentWinch.AvailableLength;
             //Cutback Length
-            ws.Cell($"I{CurrentRow}").Value = $"{MainViewModel._configDataStore.WireLogEventCutBack}";
+            ws.Cell($"I{CurrentRow}").Value = MainViewModel._configDataStore.WireLogEventCutBack;
             //Notes
-            ws.Cell($"J{CurrentRow}").Value = $"{MainViewModel._configDataStore.WireLogEventNotes}";
+            ws.Cell($"J{CurrentRow}").Value = MainViewModel._configDataStore.WireLogEventNotes;
+            //Borders
+            ws.Range($"A{CurrentRow}:J{CurrentRow}").Style.Border.SetInsideBorder(XLBorderStyleValues.Thin);
             wb.Save();
         }
 
