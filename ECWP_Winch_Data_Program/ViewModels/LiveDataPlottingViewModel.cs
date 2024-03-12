@@ -58,7 +58,7 @@
 
                         //Change button text
                         winch.StartStopButtonText = "Start Log";
-                        MainViewModel._configDataStore.UserInputsEnable = true;
+                        //MainViewModel._configDataStore.UserInputsEnable = true;
                         break;
                     }
                 default:
@@ -66,9 +66,9 @@
                         if (winch.Log20Hz)
                         {
                             //If the save directory is not set show popup
-                            if (MainViewModel._configDataStore.DirectorySet == false)
+                            if (winch.RawLogDirectory == string.Empty)
                             {
-                                MessageBoxViewModel.DisplayMessage("Set save location before colecting data");
+                                await MessageBoxViewModel.DisplayMessage("Set save location before colecting data");
                                 break;
                             }
 
@@ -81,8 +81,8 @@
                         winch.StartStopButtonText = "Stop Log";
                         dh.GetDataAsync(winch);
                         //change button text
-
-                        MainViewModel._configDataStore.UserInputsEnable = false;
+                        
+                        //MainViewModel._configDataStore.UserInputsEnable = false;
 
                         break;
                     }

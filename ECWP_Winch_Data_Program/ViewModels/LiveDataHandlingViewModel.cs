@@ -22,7 +22,7 @@
                 _serialPort.Open();
             }
             string dataIn;
-            if (winch.CommunicationType == "TCP Client")
+            if (winch.InputCommunication.DataProtocol == "TCP Client")
             {
                 TcpListener server = null;
                 TcpClient client = null;
@@ -70,7 +70,7 @@
 
 
             }
-            else if (winch.CommunicationType == "TCP Server")
+            else if (winch.InputCommunication.DataProtocol == "TCP Server")
             {
                 TcpClient client = new TcpClient();
                 //client.ReceiveTimeout = 20000;
@@ -423,13 +423,13 @@
             if (!winch.LogFormatUnols)
             {
                 fileName = winch.MtnwWireLogName;
-                destPath = Path.Combine(MainViewModel._configDataStore.DirectoryLabel, fileName);
+                destPath = Path.Combine(winch.RawLogDirectory, fileName);
                 line = $"RD,{data.Date}T{data.Time},{data.Tension},{data.Speed},{data.Payout}";
             }
             else
             {
                 fileName = winch.UnolsWireLogName;
-                destPath = Path.Combine(MainViewModel._configDataStore.DirectoryLabel, fileName);
+                destPath = Path.Combine(winch.RawLogDirectory, fileName);
                 line = $"{data.StringID},{data.Date},{data.Time},{data.Tension},{data.Speed},{data.Payout},{data.TMWarnings},{data.TMAlarms},{data.CheckSum}";
             }
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
@@ -445,7 +445,7 @@
             string destPath;
             string fileName;
             fileName = winch.UnolsWireLogName;
-            destPath = Path.Combine(MainViewModel._configDataStore.DirectoryLabel, fileName);
+            destPath = Path.Combine(winch.RawLogDirectory, fileName);
             line = data;
 
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
@@ -458,7 +458,7 @@
         {
             //Write Data to files
             string fileName = winch.WinchLogName;
-            string destPath = Path.Combine(MainViewModel._configDataStore.DirectoryLabel, fileName);
+            string destPath = Path.Combine(winch.RawLogDirectory, fileName);
             string line = data;
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
             {
@@ -469,7 +469,7 @@
         {
             //Write Data to files
             string fileName = $"raw_{winch.WinchName}.log";
-            string destPath = Path.Combine(MainViewModel._configDataStore.DirectoryLabel, fileName);
+            string destPath = Path.Combine(winch.RawLogDirectory, fileName);
             string line = $"{data}";
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
             {

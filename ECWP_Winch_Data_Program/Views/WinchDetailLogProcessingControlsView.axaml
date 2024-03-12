@@ -28,6 +28,13 @@
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<TextBlock Text="Processing Line:" Width="160"/>
 			<TextBlock Text="{ Binding ParseData.ReadingLine }" DataContext="{StaticResource ResourceKey=commands}"/>
+			<ProgressBar/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<TextBlock Text="Start Date" VerticalAlignment="Center" Margin="0,0,5,0"/>
+			<CalendarDatePicker SelectedDate="{Binding ParseData.StartDate}"   Margin="0,0,20,0" />
+			<TextBlock Text="End Date" VerticalAlignment="Center" Margin="0,0,5,0"/>
+			<CalendarDatePicker SelectedDate="{Binding ParseData.EndDate}" Margin="0,0,10,0"/>
 		</StackPanel>
 		<Button Content="Start Processing" Command="{ Binding SingleProcessFilesCommand }" Margin="5" DataContext="{ StaticResource ResourceKey=commands }"/>
 	</StackPanel>

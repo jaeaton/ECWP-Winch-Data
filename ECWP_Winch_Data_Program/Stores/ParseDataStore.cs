@@ -83,6 +83,12 @@
         private int numberOfFiles = default;
 
         [ObservableProperty]
+        private DateTime startDate = new();
+
+        [ObservableProperty]
+        private DateTime endDate = new();
+
+        [ObservableProperty]
         private List<string> availableWinches = new()
         {
                 "MASH Winch",

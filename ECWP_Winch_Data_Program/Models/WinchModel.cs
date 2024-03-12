@@ -135,7 +135,7 @@
         [ObservableProperty]
         private string wirePoolWireLogName = string.Empty;
         [ObservableProperty]
-        private string startStopButtonText = string.Empty;
+        private string startStopButtonText = "Start Log";
         [ObservableProperty]
         private string tensionWarningLevel = string.Empty;
         partial void OnTensionWarningLevelChanged(string value)
