@@ -701,9 +701,9 @@
             }
             //foreach (var val in parseData.DataToPlot)
             //{
-            //    parseData.ChartData.AddData(val);
+            //    Dispatcher.UIThread.Post(() => parseData.ChartData.AddData(val));
             //}
-            //parseData.ChartData.PlotData();
+            //Dispatcher.UIThread.Post(() => parseData.ChartData.PlotData());
             parseData.ReadingLine = "Done!";
             parseData.MaxTensionCurrent = maxTensionCurrent;
             parseData.MaxTensionPayoutCurrent = maxTensionPayoutCurrent;
@@ -713,6 +713,7 @@
             parseData.Cast = cast;
             parseData.MaxPayoutDataPoint = MaxPayoutDataPoint;
             parseData.MaxTensionDataPoint = MaxTensionDataPoint;
+            //parseData.DataToPlot.Clear();
 
         }
         private static void AddData(DataPointModel lineData, int cast, float maxTenCurrent, float maxTenPayCurrent, float maxPayCurrent)

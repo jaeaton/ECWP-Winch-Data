@@ -199,26 +199,36 @@
         }
         public void AddData(DataPointModel latest)
         {
-
+            bool dateTimeSet = false;
+            DateTime dateTime = new DateTime();
             System.Globalization.CultureInfo provider = System.Globalization.CultureInfo.InvariantCulture;
             DateTimeStyles styles = DateTimeStyles.AssumeLocal;
-            if (latest.Date == null || latest.Time == null || latest.Tension < 0)
+            if (latest.DateAndTime != new DateTime())
+            {
+                dateTime = latest.DateAndTime;
+                dateTimeSet = true;
+            }
+            else if (latest.Date == string.Empty || latest.Time == string.Empty || latest.Tension < 0)
             {
                 return;
             }
-            if (DateTime.TryParseExact($"{latest.Date} {latest.Time}", "yyyy/MM/dd HH:mm:ss.fff", provider, styles, out DateTime dateTime))
+            else if (DateTime.TryParseExact($"{latest.Date} {latest.Time}", "yyyy/MM/dd HH:mm:ss.fff", provider, styles, out dateTime))
+            { 
+                dateTimeSet = true;
+            }
+            if (dateTimeSet)
             {
 
                 if (double.TryParse(latest.Payout.ToString(), out double Tension)) 
                 {
                     DateTimePoint point = new DateTimePoint { DateTime = dateTime, Value = Tension };
-                    _observableStore.Add(point);
-                    //lock (ProcessDataViewModel.ParseData.Sync)
-                    //{
-                    //    _observableValues.Add(point);
-                       
-                    //}
-                    
+                    //_observableStore.Add(point);
+                    lock (ProcessDataViewModel.ParseData.Sync)
+                    {
+                        _observableValues.Add(point);
+
+                    }
+
                 };
                 
                 //uncomment for windowing of plot
