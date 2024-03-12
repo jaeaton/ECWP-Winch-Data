@@ -196,6 +196,8 @@
                                                             { 
                                                                 "Cut Back",
                                                                 "Lubrication",
+                                                                "Installation",
+                                                                "Removal",
                                                                 "Other"
                                                             };
         [ObservableProperty]

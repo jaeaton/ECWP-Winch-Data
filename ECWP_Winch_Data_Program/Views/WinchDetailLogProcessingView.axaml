@@ -12,9 +12,11 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		<v:WinchDetailLogProcessingControlsView Grid.Row="0"/>
-		
+		<!--
+		<v:ProcessDataPlotView Grid.Row="1"/>
+		-->
 		<v:ProcessDataDataGridView Grid.Row="2"/>
 		
-		<v:ProcessDataPlotView Grid.Row="1"/>
+		
 	</Grid>
 </UserControl>

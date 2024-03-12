@@ -718,7 +718,9 @@
         }
         private static void AddData(DataPointModel lineData, int cast, float maxTenCurrent, float maxTenPayCurrent, float maxPayCurrent)
         {
-            ProcessDataViewModel.ParseData.WireLog.Add(new WireLogModel(lineData.DateAndTime, "Cast Data", cast, maxTenCurrent, maxTenPayCurrent, maxPayCurrent));
+            WinchModel winch = MainViewModel._configDataStore.CurrentWinch;
+            //ProcessDataViewModel.ParseData.WireLog.Add(new WireLogModel(lineData.DateAndTime, "Cast Data" ,cast, maxTenCurrent, maxTenPayCurrent, maxPayCurrent));
+            ProcessDataViewModel.ParseData.WireLog.Add(new WireLogModel(lineData.DateAndTime, "Cast Data", winch.InstalledLength, cast, maxTenCurrent, maxTenPayCurrent,maxPayCurrent,string.Empty, MainViewModel._configDataStore.CruiseNameBox));
         }
         public static object ReadProcessConfig()
         {

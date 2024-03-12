@@ -42,5 +42,22 @@
             MaxTensionWireOut = _maxTensionWireOut.ToString();
             MaxWireOut = _maxWireOut.ToString();
         }
+
+        public WireLogModel(DateTime eventDate, string eventType, float installedTensionMemberLength, int castNumber, float maxTension, float maxTensionWireOut, float maxWireOut, string notes, string cruiseNumber)
+        {
+            EventDate = eventDate.ToString("yyyy-MM-dd");
+            EventType = eventType;
+            InstalledTensionMemberLength = installedTensionMemberLength.ToString();
+            //CutBackAmount = cutBackAmount;
+            //TensionMemberID = tensionMemberID;
+            CastNumber = castNumber.ToString();
+            MaxTension = maxTension.ToString();
+            MaxTensionWireOut = maxTensionWireOut.ToString();
+            MaxTensionWireIn = (installedTensionMemberLength - maxTensionWireOut).ToString();
+            MaxWireOut = maxWireOut.ToString();
+            Notes = notes;
+            CruiseNumber = cruiseNumber;
+           
+        }
     }
 }
