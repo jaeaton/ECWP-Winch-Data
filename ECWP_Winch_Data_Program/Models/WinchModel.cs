@@ -279,9 +279,9 @@
             //copy.OutputCommunication = new CommunicationModel(OutputCommunication.TcpIpAddress, OutputCommunication.PortNumber);
             lock (Sync)
             {
-                foreach (CommunicationModel com in AllOutputCommunication.ToList())
+                foreach (CommunicationModel com in AllOutputCommunication)//.ToList())
                 {
-                    copy.AllOutputCommunication.Add(com.ShallowCopy());
+                    copy.AllOutputCommunication.Add(new CommunicationModel(com.TcpIpAddress, com.PortNumber,com.CommunicationType, com.SerialPort, com.BaudRate, com.DataBits, com.Parity, com.StopBits, com.DataProtocol));
                 }
             }
             

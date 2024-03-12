@@ -104,7 +104,7 @@ namespace ViewModels
             //Wire Length
             ws.Cell($"E{CurrentRow}").Value = MainViewModel._configDataStore.CurrentWinch.AvailableLength;
             //Cutback Length
-            ws.Cell($"I{CurrentRow}").Value = MainViewModel._configDataStore.WireLogEventCutBack;
+            ws.Cell($"I{CurrentRow}").Value = float.Parse(MainViewModel._configDataStore.WireLogEventCutBack);
             //Notes
             ws.Cell($"J{CurrentRow}").Value = MainViewModel._configDataStore.WireLogEventNotes;
             //Borders

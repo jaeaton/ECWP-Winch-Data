@@ -310,7 +310,19 @@ namespace ViewModels
                 {
                     lines.Add($"Speed Units,{  winch.SpeedUnit }");
                 }
-                
+                if (winch.WinchLogType != string.Empty)
+                {
+                    lines.Add($"Winch Log Type,{winch.WinchLogType}");
+                }
+                if (winch.MinimumPayout != string.Empty)
+                {
+                    lines.Add($"Minimum Logging Payout,{winch.MinimumPayout}");
+                }
+                if (winch.MinimumTension != string.Empty)
+                {
+                    lines.Add($"Minimum Logging Tension,{winch.MinimumTension}");
+                }
+
                 lines.Add($"Auto Log,{ winch.AutoLog}");
                 if (winch.StopLogPayout != string.Empty)
                 {
@@ -588,7 +600,19 @@ namespace ViewModels
                             {
                                 winch.SpeedUnit = line.Substring(delim + 1);
                             }
-                            
+                            if (line.Substring(0, delim) == "Winch Log Type")
+                            {
+                                winch.WinchLogType = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Minimum Logging Payout")
+                            {
+                                winch.MinimumPayout = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Minimum Logging Tension")
+                            {
+                                winch.MinimumTension = line.Substring(delim + 1);
+                            }
+
                             if (line.Substring(0, delim) == "Auto Log")
                             {
                                 winch.AutoLog = bool.Parse(line.Substring(delim + 1));
@@ -648,10 +672,6 @@ namespace ViewModels
                                 winch.PlotSelected = bool.Parse(line.Substring(delim + 1));
                             }
                             
-                            //if (line.Substring(0, delim) == "Plot Winch")
-                            //{
-                            //    winch.PlotSelected = bool.Parse(line.Substring(delim + 1));
-                            //}
                         }
                         
 

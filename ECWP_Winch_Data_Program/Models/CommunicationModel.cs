@@ -1,4 +1,6 @@
-﻿namespace Models
+﻿using System.IO.Ports;
+
+namespace Models
 {
     public partial class CommunicationModel  : ObservableObject
     {
@@ -115,6 +117,44 @@
             DataBits = _dataBit;
             CommunicationType = _commType;
             CommunicationProtocol = _commProtocol;
+        }
+
+        public CommunicationModel(string _tcpIpAddress, string _portNumber, string _communicationType, bool _isSerial, bool _isNetwork, string _serialPort, string _baudRate, string _dataBits, string _parity, string _stopBits, string _communicationProtocol, string _dataProtocol, bool _isUNOLS, bool _isMTNW, string _destinationName)
+        {
+            DestinationName = _destinationName;
+            TcpIpAddress = _tcpIpAddress;
+            PortNumber = _portNumber;
+            CommunicationType = _communicationType;
+            IsSerial = _isSerial;
+            IsNetwork = _isNetwork;
+            SerialPort = _serialPort;
+            BaudRate = _baudRate;
+            DataBits = _dataBits;
+            Parity = _parity;
+            StopBits = _stopBits;
+            CommunicationProtocol = _communicationProtocol;
+            DataProtocol = _dataProtocol;
+            IsUNOLS = _isUNOLS;
+            IsMTNW = _isMTNW;
+        }
+
+        public CommunicationModel(CommunicationModel _commModel)
+        {
+            DestinationName = _commModel.DestinationName;
+            TcpIpAddress = _commModel.TcpIpAddress;
+            PortNumber = _commModel.PortNumber;
+            CommunicationType = _commModel.CommunicationType;
+            IsSerial = _commModel.IsSerial;
+            IsNetwork = _commModel.IsNetwork;
+            SerialPort = _commModel.SerialPort;
+            BaudRate = _commModel.BaudRate;
+            DataBits = _commModel.DataBits;
+            Parity = _commModel.Parity;
+            StopBits = _commModel.StopBits;
+            CommunicationProtocol = _commModel.CommunicationProtocol;
+            DataProtocol = _commModel.DataProtocol;
+            IsUNOLS = _commModel.IsUNOLS;
+            IsMTNW = _commModel.IsMTNW;
         }
         public CommunicationModel ShallowCopy()
         {
