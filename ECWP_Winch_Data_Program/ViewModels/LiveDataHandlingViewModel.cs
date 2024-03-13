@@ -47,6 +47,7 @@ namespace ViewModels
                 InputSerialPort.Parity = InputParity;
                 InputSerialPort.DataBits = int.Parse(winch.InputCommunication.DataBits);
                 InputSerialPort.StopBits = InputStopBits;
+                InputSerialPort.ReadTimeout = 500;
                 
                 InputSerialPort.Open();
 
