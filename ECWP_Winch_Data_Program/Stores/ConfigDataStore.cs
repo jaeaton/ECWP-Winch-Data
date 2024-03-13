@@ -216,6 +216,12 @@
         private DateTime endDate = DateTime.Today;
         [ObservableProperty]
         private bool dateRangeCheckBox = false;
+        [ObservableProperty]
+        private string readingLine = string.Empty;
+        [ObservableProperty]
+        private int numberOfFiles = 0;
+        [ObservableProperty]
+        private int numberOfProcessedFiles = 0;
         public void LoadWinch(string winch)
         {
             if ( winch == "Add New")

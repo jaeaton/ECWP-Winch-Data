@@ -368,13 +368,15 @@
         }
         public static async void ReadDataFiles(ParseDataStore parseData)
         {
-            parseData.ReadingLine = "Reading!"; //Update UI with reading
+            ProcessDataViewModel.ParseData.ReadingLine = "Reading!"; //Update UI with reading
+            ProcessDataViewModel.ParseData.NumberOfProcessedFiles = 0;
             //Makes reading the file Asynchronous leaving the UI responsive
             await Task.Run(() =>
             {
                 string filePath = parseData.Directory;
                 foreach (var fin in parseData.FileList)
                 {
+                    ProcessDataViewModel.ParseData.NumberOfProcessedFiles++;
                     var fileRead = fin.ToString();
                     //parseData.ReadingFileName = fileRead;
                     System.IO.StreamReader file = new System.IO.StreamReader(fileRead); //Setup stream reader to read file
@@ -450,7 +452,6 @@
                                         lineData.DateAndTime = DateTime.Parse(dataDate[0] + "T" + dataDate[1]);
                                         lineData.TMAlarms = "00000000";
                                         lineData.TMWarnings = "00000000";
-                                        //MainProcessingViewModel.parseData.ReadingLine = stringData; //Updates Line being written to UI
                                         dataLine = true;
 
                                     }

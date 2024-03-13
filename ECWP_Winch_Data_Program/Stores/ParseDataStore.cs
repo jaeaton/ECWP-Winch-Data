@@ -78,9 +78,24 @@
 
         [ObservableProperty]
         private string readingLine = string.Empty   ;
+        partial void OnReadingLineChanged(string value)
+        {
+            //Dispatcher.UIThread.Post(() => MainViewModel._configDataStore.ReadingLine = value);
+           
+        }
 
         [ObservableProperty]
-        private int numberOfFiles = default;
+        private int numberOfFiles = 0;
+        partial void OnNumberOfFilesChanged(int value)
+        {
+            MainViewModel._configDataStore.NumberOfFiles = value;
+        }
+        [ObservableProperty]
+        private int numberOfProcessedFiles = 0;
+        partial void OnNumberOfProcessedFilesChanged(int value)
+        {
+            Dispatcher.UIThread.Post(() => MainViewModel._configDataStore.NumberOfProcessedFiles = value);
+        }
 
         [ObservableProperty]
         private DateTime startDate = DateTime.Today;

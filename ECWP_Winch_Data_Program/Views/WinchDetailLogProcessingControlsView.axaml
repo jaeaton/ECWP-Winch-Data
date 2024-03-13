@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:ViewModels"
-			 mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="450"
+			 mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
 			 x:CompileBindings="False"
              x:Class="Views.WinchDetailLogProcessingControlsView">
 	
@@ -24,12 +24,17 @@
 			<TextBlock Text="Raw Log Location:" Width="160"/>
 			<TextBlock Text="{Binding CurrentWinch.RawLogDirectory}"/>
 			<TextBlock Text="\"/>
-			<TextBlock Text="{Binding ParseData.ReadingFileName}" DataContext="{StaticResource ResourceKey=commands}"/>
+			<TextBlock Text="{Binding ParseData.ReadingFileName}" DataContext="{StaticResource ResourceKey=winch}"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<TextBlock Text="Processing Line:" Width="160"/>
-			<TextBlock Text="{ Binding ParseData.ReadingLine }" DataContext="{StaticResource ResourceKey=commands}"/>
-			<ProgressBar/>
+			<!--
+			<TextBlock Text="{ Binding ReadingLine }" />
+			-->
+			<TextBlock Text="{Binding NumberOfProcessedFiles}" Width="50" TextAlignment="Right"/>
+			<TextBlock Text="/"/>
+			<TextBlock Text="{Binding NumberOfFiles}" Width="50"/>
+			<ProgressBar Minimum="0" Maximum="{Binding NumberOfFiles}" Value="{Binding NumberOfProcessedFiles}"/>
 		</StackPanel>
 		<CheckBox Content="Use Date Ranges" IsChecked="{Binding DateRangeCheckBox}" Margin="5" x:Name="DateRangeCheckBox"/>
 		<StackPanel Orientation="Horizontal" Margin="5" IsVisible="{Binding ElementName=DateRangeCheckBox, Path=IsChecked}" >
