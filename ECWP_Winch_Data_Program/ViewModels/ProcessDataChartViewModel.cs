@@ -14,28 +14,7 @@
         public ProcessDataChartViewModel(WinchModel winchModel)
         {
 
-            //Color bars for warnings and alarms
-            //if (winchModel.TensionWarningLevel != null && winchModel.TensionAlarmLevel != null && winchModel.AssignedBreakingLoad != null)
-            //{
-            //    if (Sections == null)
-            //    {
-            //        Sections = new RectangularSection[2];
-            //    }
-            //    Sections[0] =
-            //        new RectangularSection
-            //        {
-            //            Yi = Convert.ToDouble(winchModel.TensionWarningLevel),
-            //            Yj = Convert.ToDouble(winchModel.TensionAlarmLevel),
-            //            Fill = new SolidColorPaint { Color = SKColors.Yellow.WithAlpha(20) }
-            //        };
-            //    Sections[1] =
-            //        new RectangularSection
-            //        {
-            //            Yi = Convert.ToDouble(winchModel.TensionAlarmLevel),
-            //            Yj = Convert.ToDouble(winchModel.AssignedBreakingLoad),
-            //            Fill = new SolidColorPaint { Color = SKColors.Red.WithAlpha(20) }
-            //        };
-            //}
+            
             Series = new ObservableCollection<ISeries>
             {
                 new LineSeries<DateTimePoint>

@@ -30,11 +30,7 @@
                     }
                 }
             }
-            //if (!output)
-            //{
-            //    //MessageBox.Show("IP Address not valid");
-            //    MessageBoxViewModel.DisplayMessage("IP Address not valid");
-            //}
+           
             return output;
         }
         public static bool ValidatePortFunction(string portNum)

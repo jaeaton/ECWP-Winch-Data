@@ -4,7 +4,7 @@ namespace ViewModels
 {
     public class ExcelViewModel 
     {
-        //public void AddData(WinchModel winch, DataPointModel dataMaxTension, DataPointModel dataMaxPayout, ConfigDataStore config)
+        
         public static void AddCastData( DataPointModel dataMaxTension, DataPointModel dataMaxPayout, int cast)
         {
             //Check Date for data point

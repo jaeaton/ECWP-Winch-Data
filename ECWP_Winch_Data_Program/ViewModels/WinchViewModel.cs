@@ -244,11 +244,11 @@
             if (float.TryParse(_configDataStore.WireLogEventCutBack, out float result) && _configDataStore.WireLogEventSelection == "Cut Back")
             {
                 _configDataStore.CurrentWinch.AvailableLength -= result;
+                FileOperationsViewModel.WriteConfig(MainViewModel._configDataStore);
             }
                 
 
             ExcelViewModel.AddEvent();
-            FileOperationsViewModel.WriteConfig(MainViewModel._configDataStore);
         }
         [RelayCommand]
         public void SetRawLogPath()

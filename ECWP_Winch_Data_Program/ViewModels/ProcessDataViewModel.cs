@@ -21,11 +21,7 @@
                 //DirectoryLabel.Content = saveFileDialog.InitialFileName;
                 FileInfo fileInfo = new(saveFileName);
                 ParseData.Directory = fileInfo.DirectoryName;
-                //UserInputsView.globalConfig.SaveDirectorySet = true;
-
-                //var dialog = new System.Windows.Forms.FolderBrowserDialog();
-                //System.Windows.Forms.DialogResult result = dialog.ShowDialog();
-                //_settingsStore.Directory = dialog.SelectedPath;
+                
                 ParseData.FileList = new Store.SortableObservableCollection<string>();//SortableObservableCollection<string>();
                 DirectoryInfo di = new DirectoryInfo(ParseData.Directory);
                 

@@ -436,8 +436,6 @@
                                         data[0] == "TIME")
                                     {
                                         dataLine = false;
-                                        //stringData = null; //Ingnore line that starts with above
-                                        //lineData = new Line_Data_Model();
                                     }
                                     else
                                     {
@@ -696,16 +694,12 @@
 
                 if (castActive)
                 {
-                    //processPointDataModel.Payout = lineData.Payout;
-                    //processPointDataModel.Tension = lineData.Tension;
-                    //processPointDataModel.PointNumber = i++;
-                    //processCastDataModel.ProcessPoints?.Add(processPointDataModel);
-                    //parseData.ChartData.AddData(lineData);
                     //parseData.DataToPlot.Add(lineData);
                 }
                 
 
             }
+            //Live Charts 2 final may make this possible
             //foreach (var val in parseData.DataToPlot)
             //{
             //    Dispatcher.UIThread.Post(() => parseData.ChartData.AddData(val));

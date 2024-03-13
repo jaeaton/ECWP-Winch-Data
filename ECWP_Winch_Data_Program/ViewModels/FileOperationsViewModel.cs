@@ -685,15 +685,7 @@ namespace ViewModels
 
 
                     }
-                    //GlobalConfigModel globalConfig = new GlobalConfigModel();
-                    ////update global config to the parameters loaded
-                    //globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(_configDataStore);
-                    //return globalConfig;
-                    //_configDataStore.CurrentWinch = winch.ShallowCopy();
-                    //if (winch.WinchName != null)
-                    //{
-                    //    viewModel.InsertWinch(winch);
-                    //}
+                    
                     winchViewModel.InsertWinch(winch);
 
                 }
