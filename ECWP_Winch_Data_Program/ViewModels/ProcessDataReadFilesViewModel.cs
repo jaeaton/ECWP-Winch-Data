@@ -570,7 +570,7 @@
                                             //lineData.Payout = float.Parse(data[4]);
                                             lineData.Payout = Payout;
                                             lineData.CheckSum = "no chk sum";
-                                            //lineData.DateAndTime = DateTime.ParseExact($"{data[1]} {data[2]}","yyyyMMdd HH:mm:SS.fff", CultureInfo.InvariantCulture);
+                                            lineData.DateAndTime = DateTime.ParseExact($"{data[1]} {data[2]}","yyyyMMddTHH:mm:SS.fff", CultureInfo.InvariantCulture);
                                             lineData.Date = data[1];
                                             lineData.Time = data[2];
                                             lineData.TMAlarms = data[6];
@@ -578,6 +578,13 @@
 
                                             dataLine = true;
                                         }
+                                    }
+                                }
+                                if (parseData.UseDateRange == true )
+                                {
+                                    if (lineData.DateAndTime < parseData.StartDate || lineData.DateAndTime > parseData.EndDate)
+                                    {
+                                        dataLine = false;
                                     }
                                 }
                                 if (dataLine == true)

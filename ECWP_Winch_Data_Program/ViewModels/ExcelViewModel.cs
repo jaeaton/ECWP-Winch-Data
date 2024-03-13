@@ -111,6 +111,7 @@ namespace ViewModels
             
             //Notes
             ws.Cell($"J{CurrentRow}").Value = MainViewModel._configDataStore.WireLogEventNotes;
+            ws.Range($"J{CurrentRow}:M{CurrentRow}").Merge();
             //Borders
             ws.Range($"A{CurrentRow}:J{CurrentRow}").Style.Border.SetInsideBorder(XLBorderStyleValues.Thin);
             wb.Save();
@@ -134,42 +135,58 @@ namespace ViewModels
 
             //Adding text
             //Title
-            ws.Cell("A1").Value = "Wire Log";
+            ws.Cell("A1").Value = "UNOLS Wire Log";
 
-            //Add Header
-            ws.Cell("A2").Value = "Tension Member Identifier";
-            ws.Cell("D2").Value = $"{_config.CurrentWinch.TensionMemberNSFID}";
-            ws.Cell("A3").Value = "Winch Name";
-            ws.Cell("D3").Value = $"{_config.CurrentWinch.WinchName}";
-            ws.Cell("A4").Value = "Winch Model";
-            ws.Cell("D4").Value = $"{_config.CurrentWinch.WinchModelName}";
-            ws.Cell("A5").Value = "Winch Manufacturer";
-            ws.Cell("D5").Value = $"{_config.CurrentWinch.WinchManufacturer}"; 
-            ws.Cell("A6").Value = "Ship";
-            ws.Cell("D6").Value = $"{_config.ShipName}";
+            //Add Headers
+            //Tension Member Data
+            ws.Cell("A2").Value = "Tension Member NSF ID";
+            ws.Cell("C2").Value = $"{_config.CurrentWinch.TensionMemberNSFID}";
+            ws.Cell("A3").Value = "Tension Member Part Number";
+            ws.Cell("C3").Value = $"{_config.CurrentWinch.TensionMemberPartNumber}";
+            ws.Cell("A4").Value = "Tension Member Manufacturer";
+            ws.Cell("C4").Value = $"{_config.CurrentWinch.TensionMemberManufacturer}";
+            ws.Cell("A5").Value = "Ship";
+            ws.Cell("C5").Value = $"{_config.ShipName}";
+            //Winch Data
+            ws.Cell("F2").Value = "Winch Name";
+            ws.Cell("H2").Value = $"{_config.CurrentWinch.WinchName}";
+            ws.Cell("F3").Value = "Winch Model";
+            ws.Cell("H3").Value = $"{_config.CurrentWinch.WinchModelName}";
+            ws.Cell("F4").Value = "Winch Manufacturer";
+            ws.Cell("H4").Value = $"{_config.CurrentWinch.WinchManufacturer}"; 
+            ws.Cell("F5").Value = "Serial Number";
+            ws.Cell("H5").Value = $"{_config.CurrentWinch.WinchSerialNumber}";
+            
 
             //Merge Header Cells
             ws.Range("A1:C1").Merge();
-            ws.Range("A2:C2").Merge();
-            ws.Range("A3:C3").Merge();
-            ws.Range("A4:C4").Merge();
-            ws.Range("A5:C5").Merge();
-            ws.Range("A6:C6").Merge();
-            ws.Range("D2:F2").Merge();
-            ws.Range("D3:F3").Merge();
-            ws.Range("D4:F4").Merge();
-            ws.Range("D5:F5").Merge();
-            ws.Range("D6:F6").Merge();
+            ws.Range("A2:B2").Merge();
+            ws.Range("A3:B3").Merge();
+            ws.Range("A4:B4").Merge();
+            ws.Range("A5:B5").Merge();
+            ws.Range("C2:E2").Merge();
+            ws.Range("C3:E3").Merge();
+            ws.Range("C4:E4").Merge();
+            ws.Range("C5:E5").Merge();
+            
+            ws.Range("F2:G2").Merge();
+            ws.Range("F3:G3").Merge();
+            ws.Range("F4:G4").Merge();
+            ws.Range("F5:G5").Merge();
+            ws.Range("H2:I2").Merge();
+            ws.Range("H3:I3").Merge();
+            ws.Range("H4:I4").Merge();
+            ws.Range("H5:I5").Merge();
 
             //Merge Image Cell
-            ws.Range("B8:I22").Merge();
-            ws.Cell("B8").Value = "Insert Sheave Train Diagram";
-            ws.Cell("B8").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
-            ws.Cell("B8").Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center);
+            ws.Range("B6:I20").Merge();
+            ws.Cell("B6").Value = "Insert Sheave Train Diagram";
+            ws.Cell("B6").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
+            ws.Cell("B6").Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center);
 
             //Set Column widths
-            ws.Column(1).Width = 10;
-            ws.Column(2).Width = 13;
+            ws.Column(1).Width = 11;
+            ws.Column(2).Width = 14;
             ws.Column(3).Width = 12;
             ws.Column(4).Width = 5;
             ws.Column(5).Width = 9;
@@ -180,29 +197,30 @@ namespace ViewModels
             ws.Column(10).Width = 10;
 
             //Set Row Heights
-            ws.Row(24).Height = 30;
+            ws.Row(22).Height = 30;
 
             //Set Text Alignment
-            ws.Row(24).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+            ws.Row(22).Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
 
             //Wrap text in cell
-            ws.Row(24).Style.Alignment.WrapText = true;
+            ws.Row(22).Style.Alignment.WrapText = true;
 
             //Add Column Headings
-            ws.Cell("A24").Value = "Event Type";
-            ws.Cell("B24").Value = "Cruise #";
-            ws.Cell("C24").Value = "Date";
-            ws.Cell("D24").Value = "Cast #";
-            ws.Cell("E24").Value = "Cable Length (m)";
-            ws.Cell("F24").Value = "Maximum Tension (lbf)";
-            ws.Cell("G24").Value = "MT Wire Out (m)";
-            ws.Cell("H24").Value = "MT Wire In (m)";
-            ws.Cell("I24").Value = "Max Wire Out (m)";
-            ws.Cell("J24").Value = "Notes";
-            ws.Range("A24:J24").Style.Border.SetBottomBorder(XLBorderStyleValues.Double);
+            ws.Cell("A22").Value = "Event Type";
+            ws.Cell("B22").Value = "Cruise #";
+            ws.Cell("C22").Value = "Date";
+            ws.Cell("D22").Value = "Cast #";
+            ws.Cell("E22").Value = "Cable Length (m)";
+            ws.Cell("F22").Value = "Maximum Tension (lbf)";
+            ws.Cell("G22").Value = "MT Wire Out (m)";
+            ws.Cell("H22").Value = "MT Wire In (m)";
+            ws.Cell("I22").Value = "Max Wire Out (m)";
+            ws.Cell("J22").Value = "Notes";
+            ws.Range("J22:M22").Merge();
+            ws.Range("A22:J22").Style.Border.SetBottomBorder(XLBorderStyleValues.Double);
             
             //Freeze the headings in place
-            ws.SheetView.FreezeRows(24);
+            ws.SheetView.FreezeRows(22);
 
             //Save File Cruise Name + Winch Name
             var path = $"{_config.CurrentWinch.WinchDirectory}\\{fileName}";

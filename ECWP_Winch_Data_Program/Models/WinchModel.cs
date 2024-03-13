@@ -50,6 +50,8 @@
         [ObservableProperty]
         private string winchModelName = string.Empty;
         [ObservableProperty]
+        private string winchSerialNumber = string.Empty;
+        [ObservableProperty]
         private string rawLogDirectory = string.Empty;
         [ObservableProperty]
         private string winchDirectory = string.Empty;

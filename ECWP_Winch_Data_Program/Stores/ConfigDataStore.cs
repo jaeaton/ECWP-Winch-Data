@@ -216,6 +216,14 @@
         private DateTime wireLogEventDate = DateTime.Now;
         [ObservableProperty]
         private string wireLogEventNotes = string.Empty;
+
+        [ObservableProperty]
+        private DateTime startDate = DateTime.Today;
+
+        [ObservableProperty]
+        private DateTime endDate = DateTime.Today;
+        [ObservableProperty]
+        private bool dateRangeCheckBox = false;
         public void LoadWinch(string winch)
         {
             if ( winch == "Add New")

@@ -16,11 +16,15 @@
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<TextBlock Text="Winch Manufacturer" Width="160" VerticalAlignment="Center" />
-			<TextBox Watermark="Enter Name" Text="{ Binding CurrentWinch.WinchManufacturer, Mode=TwoWay }" Width="160"/>
+			<TextBox Watermark="Enter Manufacturer" Text="{ Binding CurrentWinch.WinchManufacturer, Mode=TwoWay }" Width="160"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<TextBlock Text="Winch Model" Width="160" VerticalAlignment="Center" />
 			<TextBox Watermark="Enter Model" Text="{ Binding CurrentWinch.WinchModelName, Mode=TwoWay }" Width="160"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<TextBlock Text="Winch Serial Number" Width="160" VerticalAlignment="Center" />
+			<TextBox Watermark="Enter Serial Number" Text="{ Binding CurrentWinch.WinchSerialNumber, Mode=TwoWay }" Width="160"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<Button Content="Set Raw Path" Command="{Binding SetRawLogPathCommand}" Margin="0,0,5,0" Width="155" HorizontalContentAlignment="Center" DataContext="{StaticResource winch}"/>

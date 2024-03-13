@@ -2,7 +2,7 @@
 {
     public partial class ProcessDataCommandsViewModel : ViewModelBase
     {
-        ParseDataStore ParseData =ProcessDataViewModel.ParseData;
+        public ParseDataStore ParseData =ProcessDataViewModel.ParseData;
         [RelayCommand]
         private async void File_Location()
         {
@@ -90,6 +90,9 @@
             ParseData.SelectedWinch = _config.CurrentWinch.WinchLogType;
             ParseData.MinPayout = _config.CurrentWinch.MinimumPayout;
             ParseData.MinTension = _config.CurrentWinch.MinimumTension;
+            ParseData.StartDate = _config.StartDate;
+            ParseData.EndDate = _config.EndDate;
+            ParseData.UseDateRange = _config.DateRangeCheckBox;
             ExcelViewModel.SetWireLogFileName();
             FindFiles();
             ProcessDataReadFilesViewModel.ReadDataFiles(ProcessDataViewModel.ParseData);

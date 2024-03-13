@@ -82,6 +82,10 @@ namespace ViewModels
                 {
                     lines.Add($"Winch Model,{winch.WinchModelName}");
                 }
+                if (winch.WinchSerialNumber != string.Empty)
+                {
+                    lines.Add($"Winch Serial Number,{winch.WinchSerialNumber}");
+                }
                 if (winch.InputCommunication.CommunicationType != string.Empty)
                 {
                     if (winch.InputCommunication.CommunicationType == "Serial")
@@ -437,6 +441,10 @@ namespace ViewModels
                             if (line.Substring(0, delim) == "Winch Model")
                             {
                                 winch.WinchModelName = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Winch Serial Number")
+                            {
+                                winch.WinchSerialNumber = line.Substring(delim + 1);
                             }
                             if (line.Substring(0, delim) == "Receive Communication Type")
                             {

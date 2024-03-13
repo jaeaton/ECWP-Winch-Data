@@ -83,10 +83,13 @@
         private int numberOfFiles = default;
 
         [ObservableProperty]
-        private DateTime startDate = new();
+        private DateTime startDate = DateTime.Today;
 
         [ObservableProperty]
-        private DateTime endDate = new();
+        private DateTime endDate = DateTime.Today;
+
+        [ObservableProperty]
+        private bool useDateRange = false;
 
         [ObservableProperty]
         private List<string> availableWinches = new()
