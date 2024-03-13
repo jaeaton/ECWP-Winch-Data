@@ -39,7 +39,6 @@ namespace ViewModels
                 if (winch.InputCommunication.StopBits == "1") { InputStopBits = StopBits.One;}
                 else if (winch.InputCommunication.StopBits == "1.5") { InputStopBits = StopBits.OnePointFive;}
                 else if (winch.InputCommunication.StopBits == "2") { InputStopBits= StopBits.Two;}
-                else if (winch.InputCommunication.StopBits == "None") {  InputStopBits = StopBits.None;}
                 else { InputStopBits = StopBits.One; }
 
                 InputSerialPort.PortName = winch.InputCommunication.SerialPort;
