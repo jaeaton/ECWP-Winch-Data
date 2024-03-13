@@ -1,4 +1,6 @@
-﻿namespace ViewModels
+﻿using LiveChartsCore.SkiaSharpView.Drawing.Geometries;
+
+namespace ViewModels
 {
     internal partial class LiveDataHandlingViewModel : ViewModelBase
     {
@@ -6,148 +8,199 @@
         LiveDataHawboldtViewModel hawboldtProcessingVM = new LiveDataHawboldtViewModel();
         public int i = 0;
         public SerialPort _serialPort = new SerialPort();
+        public SerialPort InputSerialPort = new SerialPort();
         //Asynchronious method to allow application to still respond to user interaction
         public async void GetDataAsync(WinchModel winch)
         {
-            //ChartDataViewModel chartVM = new ChartDataViewModel(winch);
-            if (winch.SerialOutput)
-            {
-                int.TryParse(winch.BaudRateOutput, out int serialBaudRate);
-                //_serialPort = new SerialPort(globalConfig.SerialPortName,serialBaudRate,Parity.None,8,StopBits.One);
-                _serialPort.PortName = winch.SerialPortOutput;
-                _serialPort.BaudRate = serialBaudRate;
-                _serialPort.Parity = Parity.None;
-                _serialPort.DataBits = 8;
-                _serialPort.StopBits = StopBits.One;
-                _serialPort.Open();
-            }
             string dataIn;
-            if (winch.InputCommunication.DataProtocol == "TCP Client")
+            //ChartDataViewModel chartVM = new ChartDataViewModel(winch);
+            //Need new data output
+            //if (winch.SerialOutput)
+            //{
+            //    int.TryParse(winch.BaudRateOutput, out int serialBaudRate);
+            //    //_serialPort = new SerialPort(globalConfig.SerialPortName,serialBaudRate,Parity.None,8,StopBits.One);
+            //    _serialPort.PortName = winch.SerialPortOutput;
+            //    _serialPort.BaudRate = serialBaudRate;
+            //    _serialPort.Parity = Parity.None;
+            //    _serialPort.DataBits = 8;
+            //    _serialPort.StopBits = StopBits.One;
+            //    _serialPort.Open();
+            //}
+            if (winch.InputCommunication.CommunicationType == "Serial")
             {
-                TcpListener server = null;
-                TcpClient client = null;
-                try
+                Parity InputParity = new Parity();
+                StopBits InputStopBits = new StopBits();
+                int.TryParse(winch.BaudRateOutput, out int serialBaudRate);
+                if (winch.InputCommunication.Parity == "N") { InputParity = Parity.None; }
+                else if (winch.InputCommunication.Parity == "E") { InputParity = Parity.Even; }
+                else if (winch.InputCommunication.Parity == "O") { InputParity = Parity.Odd; }
+                else { InputParity = Parity.None; }
+                
+                if (winch.InputCommunication.StopBits == "1") { InputStopBits = StopBits.One;}
+                else if (winch.InputCommunication.StopBits == "1.5") { InputStopBits = StopBits.OnePointFive;}
+                else if (winch.InputCommunication.StopBits == "2") { InputStopBits= StopBits.Two;}
+                else if (winch.InputCommunication.StopBits == "None") {  InputStopBits = StopBits.None;}
+                else { InputStopBits = StopBits.One; }
+
+                InputSerialPort.PortName = winch.InputCommunication.SerialPort;
+                InputSerialPort.BaudRate = serialBaudRate;
+                InputSerialPort.Parity = InputParity;
+                InputSerialPort.DataBits = int.Parse(winch.InputCommunication.DataBits);
+                InputSerialPort.StopBits = InputStopBits;
+                
+                InputSerialPort.Open();
+
+                while (!winch.Canceller.Token.IsCancellationRequested)
                 {
-                    // Set the TcpListener to selected port 
-                    Int32 port = int.Parse(winch.InputCommunication.PortNumber);
-                    //should be look up local host
-                    //TODO change to look up local host
-                    IPAddress localAddr = IPAddress.Parse(winch.InputCommunication.TcpIpAddress);
 
-                    // TcpListener server = new TcpListener(port);
-                    server = new TcpListener(localAddr, port);
 
-                    // Start listening for client requests.
-                    server.Start();
-                    // Perform a blocking call to accept requests.
-                    // You could also use server.AcceptSocket() here.
-                    client = server.AcceptTcpClient();
+                    //Asynchronious read of data to allow for other operations to occur
+                    dataIn = await Task.Run(() => ReadSerialData(InputSerialPort,winch));
+                    //_liveData.RawWireData = dataIn;
+                    //read data
+                    ParseWinchData(dataIn, winch);
 
-                    // Enter the listening loop.
-                    while (!winch.Canceller.Token.IsCancellationRequested)
+                }
+
+                if (InputSerialPort.IsOpen)
+                {
+                    InputSerialPort.Close();
+                    InputSerialPort.Dispose();
+                }
+            }
+            if (winch.InputCommunication.CommunicationType == "Network")
+            {
+                if (winch.InputCommunication.DataProtocol == "TCP Client")
+                {
+                    TcpListener server = null;
+                    TcpClient client = null;
+                    try
+                    {
+                        // Set the TcpListener to selected port 
+                        Int32 port = int.Parse(winch.InputCommunication.PortNumber);
+                        //should be look up local host
+                        //TODO change to look up local host
+                        IPAddress localAddr = IPAddress.Parse(winch.InputCommunication.TcpIpAddress);
+
+                        // TcpListener server = new TcpListener(port);
+                        server = new TcpListener(localAddr, port);
+
+                        // Start listening for client requests.
+                        server.Start();
+                        // Perform a blocking call to accept requests.
+                        // You could also use server.AcceptSocket() here.
+                        client = server.AcceptTcpClient();
+
+                        // Enter the listening loop.
+                        while (!winch.Canceller.Token.IsCancellationRequested)
+                        {
+
+
+                            //Asynchronious read of data to allow for other operations to occur
+                            dataIn = await Task.Run(() => ReadTCPData(client, winch));
+                            //_liveData.RawWireData = dataIn;
+                            //read data
+                            ParseWinchData(dataIn, winch);
+
+                        }
+                    }
+                    catch (SocketException e)
+                    {
+                        string msg = $"SocketException: {e.Message}";
+                        await  MessageBoxViewModel.DisplayMessage(msg);
+                    }
+                    server.Stop();
+                    if (client != null)
+                    {
+                        client.Close();
+                        client.Dispose();
+                    }
+
+
+                }
+                else if (winch.InputCommunication.DataProtocol == "TCP Server")
+                {
+                    TcpClient client = new TcpClient();
+                    //client.ReceiveTimeout = 20000;
+                    //Check to see if TCP client is connected and if not connect
+                    try
                     {
 
 
-                        //Asynchronious read of data to allow for other operations to occur
-                        dataIn = await Task.Run(() => ReadTCPData(client, winch));
-                        //_liveData.RawWireData = dataIn;
-                        //read data
-                        ParseWinchData(dataIn, winch);
-
+                        if (!client.Connected)
+                        {
+                            if (!client.ConnectAsync(IPAddress.Parse(winch.InputCommunication.TcpIpAddress), int.Parse(winch.InputCommunication.PortNumber)).Wait(5000))
+                            {
+                                // connection failure
+                                await MessageBoxViewModel.DisplayMessage("Failed to connect to TCP Server");
+                            }
+                            //client.Connect(IPAddress.Parse(globalConfig.ReceiveCommunication.IPAddress), int.Parse(globalConfig.ReceiveCommunication.PortNumber));
+                        }
                     }
-                }
-                catch (SocketException e)
-                {
-                    string msg = $"SocketException: {e.Message}";
-                    await  MessageBoxViewModel.DisplayMessage(msg);
-                }
-                server.Stop();
-                if (client != null)
-                {
+                    //catch (IOException e)
+                    //{
+                    //    MessageBox.Show($"IOException: { e.Message }");
+                    //}
+                    catch (ArgumentNullException e)
+                    {
+                        await MessageBoxViewModel.DisplayMessage($"ArgumentNullException: {e.Message}");
+                    }
+                    catch (SocketException e)
+                    {
+                        await MessageBoxViewModel.DisplayMessage($"SocketException: {e.Message}");
+                    }
+                    catch (ObjectDisposedException e)
+                    {
+                        await MessageBoxViewModel.DisplayMessage($"ObjectDisposeException: {e.Message}");
+                    }
+                    //Looks for cancellation token to stop data collection
+                    if (client.Connected)
+                    {
+                        while (!winch.Canceller.Token.IsCancellationRequested)
+                        {
+                            //Asynchronious read of data to allow for other operations to occur
+                            dataIn = await Task.Run(() => ReadTCPData(client, winch));
+                            //_liveData.RawWireData = dataIn;
+                            //read data
+                            ParseWinchData(dataIn, winch);
+
+                        }
+                    }
+                    //Close TCP client
                     client.Close();
                     client.Dispose();
                 }
-
-
-            }
-            else if (winch.InputCommunication.DataProtocol == "TCP Server")
-            {
-                TcpClient client = new TcpClient();
-                //client.ReceiveTimeout = 20000;
-                //Check to see if TCP client is connected and if not connect
-                try
+                else if (winch.CommunicationType == "UDP")
                 {
-
-
-                    if (!client.Connected)
+                    // Set the TcpListener to selected port 
+                    Int32 port = int.Parse(winch.InputCommunication.PortNumber);
+                    UdpClient client = new UdpClient(port);
+                    try
                     {
-                        if (!client.ConnectAsync(IPAddress.Parse(winch.InputCommunication.TcpIpAddress), int.Parse(winch.InputCommunication.PortNumber)).Wait(5000))
+
+                        // Enter the listening loop.
+                        while (!winch.Canceller.Token.IsCancellationRequested)
                         {
-                            // connection failure
-                            await MessageBoxViewModel.DisplayMessage("Failed to connect to TCP Server");
+                            //Asynchronious read of data to allow for other operations to occur
+                            dataIn = await Task.Run(() => ReadUDPData(client, winch));
+                            //winch.LiveData.RawWireData = dataIn;
+                            //read data
+                            ParseWinchData(dataIn, winch);
+
                         }
-                        //client.Connect(IPAddress.Parse(globalConfig.ReceiveCommunication.IPAddress), int.Parse(globalConfig.ReceiveCommunication.PortNumber));
                     }
-                }
-                //catch (IOException e)
-                //{
-                //    MessageBox.Show($"IOException: { e.Message }");
-                //}
-                catch (ArgumentNullException e)
-                {
-                    await MessageBoxViewModel.DisplayMessage($"ArgumentNullException: {e.Message}");
-                }
-                catch (SocketException e)
-                {
-                    await MessageBoxViewModel.DisplayMessage($"SocketException: {e.Message}");
-                }
-                catch (ObjectDisposedException e)
-                {
-                    await MessageBoxViewModel.DisplayMessage($"ObjectDisposeException: {e.Message}");
-                }
-                //Looks for cancellation token to stop data collection
-                if (client.Connected)
-                {
-                    while (!winch.Canceller.Token.IsCancellationRequested)
+                    catch (SocketException e)
                     {
-                        //Asynchronious read of data to allow for other operations to occur
-                        dataIn = await Task.Run(() => ReadTCPData(client, winch));
-                        //_liveData.RawWireData = dataIn;
-                        //read data
-                        ParseWinchData(dataIn, winch);
-
+                        string msg = $"SocketException: {e.Message}";
+                        await MessageBoxViewModel.DisplayMessage(msg);
                     }
+                    client.Close();
+                    client.Dispose();
                 }
-                //Close TCP client
-                client.Close();
-                client.Dispose();
             }
-            else if (winch.CommunicationType == "UDP")
+            else
             {
-                // Set the TcpListener to selected port 
-                Int32 port = int.Parse(winch.InputCommunication.PortNumber);
-                UdpClient client = new UdpClient(port);
-                try
-                {
-
-                    // Enter the listening loop.
-                    while (!winch.Canceller.Token.IsCancellationRequested)
-                    {
-                        //Asynchronious read of data to allow for other operations to occur
-                        dataIn = await Task.Run(() => ReadUDPData(client, winch));
-                        //winch.LiveData.RawWireData = dataIn;
-                        //read data
-                        ParseWinchData(dataIn, winch);
-
-                    }
-                }
-                catch (SocketException e)
-                {
-                    string msg = $"SocketException: {e.Message}";
-                    await MessageBoxViewModel.DisplayMessage(msg);
-                }
-                client.Close();
-                client.Dispose();
+                await MessageBoxViewModel.DisplayMessage("Input communication not set");
             }
 
             if (_serialPort.IsOpen)
@@ -220,6 +273,11 @@
 
             return responseData;
         }
+        private string ReadSerialData(SerialPort serial, WinchModel winch)
+        {
+            string responseData = serial.ReadLine();
+            return responseData;
+        }
         private string ReadTCPData(TcpClient client, WinchModel winch)//object tcpCom)
         {
 
@@ -228,7 +286,7 @@
             data = new Byte[256];
 
             // String to store the response ASCII representation.
-            String responseData = String.Empty;
+            string responseData;
 
             // Read the first batch of the TcpServer response bytes.
             Int32 bytes = stream.Read(data, 0, data.Length);
