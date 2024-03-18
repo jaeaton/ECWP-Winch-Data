@@ -1,4 +1,6 @@
-﻿namespace Models
+﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
+
+namespace Models
 {
     public partial class WinchModel : ObservableObject
     {
@@ -281,7 +283,7 @@
             //copy.OutputCommunication = new CommunicationModel(OutputCommunication.TcpIpAddress, OutputCommunication.PortNumber);
             lock (Sync)
             {
-                foreach (CommunicationModel com in AllOutputCommunication)//.ToList())
+                foreach (CommunicationModel com in AllOutputCommunication.ToList())//.ToList())
                 {
                     copy.AllOutputCommunication.Add(new CommunicationModel(com.TcpIpAddress, com.PortNumber,com.CommunicationType, com.SerialPort, com.BaudRate, com.DataBits, com.Parity, com.StopBits, com.DataProtocol));
                 }
@@ -295,21 +297,32 @@
 
         public void LoadComms(string comm)
         {
-            if (comm != null && AllOutputCommunication != null)
+            if (comm != string.Empty && AllOutputCommunication != null)
             {
                 int index = -1;
-
-                for (int i = 0; i < AllOutputCommunication.Count; i++)
+                if (comm == "Add New")
                 {
-                    CommunicationModel item = AllOutputCommunication[i];
-                    if (item.CommunicationType == comm)
+                    //OutputCommunication = new();
+                }
+                
+                else
+                {
+                    for (int i = 0; i < AllOutputCommunication.Count; i++)
                     {
-                        index = i;
-                        break;
+                        CommunicationModel item = AllOutputCommunication[i];
+                        if (item.DestinationName == comm)
+                        {
+                            index = i;
+                            break;
+                        }
+                    }
+                    if (index != -1)
+                    {
+                        //Deep copy to break link between class objects
+                        OutputCommunication = AllOutputCommunication[index].ShallowCopy();
                     }
                 }
-                //Deep copy to break link between class objects
-                OutputCommunication = AllOutputCommunication[index].ShallowCopy();
+                
             }
         }
     }

@@ -225,7 +225,7 @@
             //Clears the current list to make winch names as fresh as possible
             //_configDataStore.CurrentWinch.AllOutputCommunication.Clear();
             _configDataStore.CurrentWinch.TabItemsOutputComms.Clear();
-            new TabItemModel("Add New", "Add New");
+            _configDataStore.CurrentWinch.TabItemsOutputComms.Add( new TabItemModel("Add New", "Add New"));
             //Loops through all winches and puts winch names in a list for selection process
             if (_configDataStore.CurrentWinch.AllOutputCommunication.Count > 0)
             {

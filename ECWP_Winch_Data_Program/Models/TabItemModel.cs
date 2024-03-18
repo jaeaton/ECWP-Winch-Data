@@ -8,7 +8,11 @@
         [ObservableProperty]
         private string content = string.Empty;
 
-        public TabItemModel() { }
+        public TabItemModel() 
+        {
+            Header = string.Empty;
+            Content = string.Empty;
+        }
 
         public TabItemModel(string _header, string _content)
         {
