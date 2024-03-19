@@ -368,250 +368,271 @@
         }
         public static async void ReadDataFiles()//ParseDataStore parseData)
         {
-            CancellationTokenSource cts = new CancellationTokenSource();
+            
             ParseDataStore parseData = ProcessDataViewModel.ParseData;
+            CancellationToken token = ProcessDataViewModel.ParseData.CancellationTokenSource.Token;
             ProcessDataViewModel.ParseData.ReadingLine = "Reading!"; //Update UI with reading
             ProcessDataViewModel.ParseData.NumberOfProcessedFiles = 0;
+            //bool canceled = false;
             //Makes reading the file Asynchronous leaving the UI responsive
-            await Task.Run(() =>
+            try
             {
-                string filePath = parseData.Directory;
-                foreach (var fin in parseData.FileList)
+                await Task.Run( () =>  ReadDataFromLogs(parseData), ProcessDataViewModel.ParseData.CancellationTokenSource.Token);
+            }
+            catch (Exception ae)
+            {
+                if (ae is TaskCanceledException)
                 {
-                    ProcessDataViewModel.ParseData.NumberOfProcessedFiles++;
-                    var fileRead = fin.ToString();
-                    //parseData.ReadingFileName = fileRead;
-                    System.IO.StreamReader file = new System.IO.StreamReader(fileRead); //Setup stream reader to read file
-                    string line = string.Empty;
-                    bool flag = false;
-                    bool dataLine = false;
-                    DataPointModel lineData = new();
-                    List<string> Data = new();
-                    List<DataPointModel> DataModels = new();
-                    Dispatcher.UIThread.Post(() => parseData.ReadingFileName = fileRead);
+                    //cancelled = true;
+                    parseData.CancellationTokenSource.Dispose();
+                }
+                else
+                {
+                    //cancelled = true;
+                    parseData.CancellationTokenSource.Cancel();
+                    parseData.CancellationTokenSource.Dispose();
+                }
+            }
+            
+            parseData.ReadingLine = "Done!"; //Update UI with done
+        }
+        public static void ReadDataFromLogs(ParseDataStore parseData)
+        {
+            string filePath = parseData.Directory;
+            foreach (var fin in parseData.FileList)
+            {
+                ProcessDataViewModel.ParseData.NumberOfProcessedFiles++;
+                var fileRead = fin.ToString();
+                //parseData.ReadingFileName = fileRead;
+                System.IO.StreamReader file = new System.IO.StreamReader(fileRead); //Setup stream reader to read file
+                string line = string.Empty;
+                bool flag = false;
+                bool dataLine = false;
+                DataPointModel lineData = new();
+                List<string> Data = new();
+                List<DataPointModel> DataModels = new();
+                //Dispatcher.UIThread.Post(() => parseData.ReadingFileName = fileRead);
 
+
+                DataModels.Clear();
+                while ((line = file.ReadLine()) != null)
+                {
+                    line = line.Replace("\n", String.Empty); //remove EOL Characters
+                    line = line.Replace("\r", String.Empty);
+                    parseData.ReadingLine = line;
+                    string[] data = line.Split(',');
+                    if (data.Length > 2)
                     {
-                        DataModels.Clear();
-                        while ((line = file.ReadLine()) != null)
+
+                        if (parseData.SelectedWinch == "SIO Traction Winch")
                         {
-                            line = line.Replace("\n", String.Empty); //remove EOL Characters
-                            line = line.Replace("\r", String.Empty);
-                            parseData.ReadingLine = line;
-                            string[] data = line.Split(',');
-                            if (data.Length > 2)
+                            if (data[0] == "RD")
                             {
+                                lineData.StringID = data[0];
+                                lineData.Tension = float.Parse(data[1]);
+                                lineData.Speed = float.Parse(data[2]);
+                                lineData.Payout = float.Parse(data[3]);
+                                lineData.CheckSum = data[4];
+                                lineData.TMAlarms = "00000000";
+                                lineData.TMWarnings = "00000000";
+                                //foreach (var dat in data)
+                                //{
+                                //    stringData += dat + ',';
 
-                                if (parseData.SelectedWinch == "SIO Traction Winch")
-                                {
-                                    if (data[0] == "RD")
-                                    {
-                                        lineData.StringID = data[0];
-                                        lineData.Tension = float.Parse(data[1]);
-                                        lineData.Speed = float.Parse(data[2]);
-                                        lineData.Payout = float.Parse(data[3]);
-                                        lineData.CheckSum = data[4];
-                                        lineData.TMAlarms = "00000000";
-                                        lineData.TMWarnings = "00000000";
-                                        //foreach (var dat in data)
-                                        //{
-                                        //    stringData += dat + ',';
-
-                                        //}
-                                        flag = false;
-                                    }
-                                    else if (flag == true && data[0].Contains('/'))
-                                    {
-                                        data = data.Take(data.Length - 1).ToArray();
-                                        lineData.DateAndTime = DateTime.Parse(data[0] + "T" + data[1]);
-                                        flag = false;
-                                        dataLine = true;
-                                    }
-                                    else
-                                    {
-                                        //stringData = null;
-                                        dataLine = false;
-                                        //lineData = new Line_Data_Model();
-                                    }
-                                }
-                                else if (parseData.SelectedWinch == "MASH Winch")
-                                {
-                                    if (data[0] == "[LOGGING]" ||
-                                        data[0] == "DATETIME[YYYY/MM/DD hh:mm:ss.s]" ||
-                                        data[0] == "TIME")
-                                    {
-                                        dataLine = false;
-                                    }
-                                    else
-                                    {
-                                        string dataDateAndTime = data[0];
-                                        string[] dataDate = dataDateAndTime.Split(' ');
-                                        //stringData = "RD," + data[3] + "," + data[2] + "," + data[4] + "," + data[1] + "," + dataDate[0] + "," + dataDate[1];
-                                        lineData.StringID = "RD";
-                                        lineData.Tension = float.Parse(data[3]);
-                                        lineData.Speed = float.Parse(data[2]);
-                                        lineData.Payout = float.Parse(data[4]);
-                                        lineData.CheckSum = data[1];
-                                        lineData.DateAndTime = DateTime.Parse(dataDate[0] + "T" + dataDate[1]);
-                                        lineData.TMAlarms = "00000000";
-                                        lineData.TMWarnings = "00000000";
-                                        dataLine = true;
-
-                                    }
-
-                                }
-                                else if (parseData.SelectedWinch == "Armstrong CAST 6")
-                                {
-
-                                    //string dataDateAndTime = data[0];
-                                    //string[] dataDate = dataDateAndTime.Split(' ');
-                                    //stringData = line;//"RD," + data[3] + "," + data[2] + "," + data[4] + "," + data[1] + "," + dataDate[0] + "," + dataDate[1];
-                                    /*foreach (var dat in data)
-                                    {
-                                        stringData += dat + ',';
-                                    }*/
-                                    //writeCombined();
-                                    //MainProcessingViewModel.parseData.ReadingLine = stringData; //Updates Line being written to UI
-                                    //stringData = null;
-                                    dataLine = true;
-
-                                }
-                                //Fix this section
-                                else if (parseData.SelectedWinch == "UNOLS String")
-                                {
-                                    if (data[0] == "$WIR")
-                                    {
-                                        bool LengthBool = false;
-                                        bool TensionBool = false;
-                                        bool SpeedBool = false;
-                                        bool PayoutBool = false;
-                                        float Tension = 0;
-                                        float Speed = 0;
-                                        float Payout = 0;
-
-                                        if (data.Length > 6)
-                                        {
-                                            LengthBool = true;
-                                            TensionBool = float.TryParse(data[3], out Tension);
-                                            SpeedBool = float.TryParse(data[4], out Speed);
-                                            PayoutBool = float.TryParse(data[5], out Payout);
-                                        }
-                                        if (LengthBool != false && TensionBool != false && SpeedBool != false && PayoutBool != false)//float.TryParse(data[2], out float Tension) != false)
-                                        {
-
-
-                                            //Current UNOLS String
-                                            lineData.StringID = data[0];
-                                            lineData.Tension = float.Parse(data[3]);
-                                            lineData.Speed = float.Parse(data[4]);
-                                            lineData.Payout = float.Parse(data[5]);
-                                            lineData.CheckSum = data[6];
-                                            lineData.DateAndTime = DateTime.ParseExact($"{data[1]}T{data[2]}", "yyyyMMddTHH:mm:ss.fff", null);
-                                            lineData.TMAlarms = data[7];
-                                            lineData.TMWarnings = data[8];
-                                            /*
-                                            //Gloria Early implementation
-                                            lineData.StringID = data[0];
-                                            //lineData.Tension = float.Parse(data[3]);
-                                            lineData.Tension = Tension;
-                                            //lineData.Speed = float.Parse(data[3]);
-                                            lineData.Speed = Speed;
-                                            //lineData.Payout = float.Parse(data[4]);
-                                            lineData.Payout = Payout;
-                                            lineData.CheckSum = "no chk sum";
-                                            lineData.DateAndTime = DateTime.Parse($"{data[1]}");//T{data[2]}");
-                                            //lineData.Date = data[1];
-                                            //lineData.Time = data[2];
-                                            lineData.TMAlarms = data[6];
-                                            lineData.TMWarnings = data[7];
-                                            */
-                                            dataLine = true;
-                                        }
-
-                                    }
-                                }
-                                else if (parseData.SelectedWinch == "Jay Jay")
-                                {
-                                    if (data[0] == "$WIR")
-                                    {
-                                        bool LengthBool = false;
-                                        bool TensionBool = false;
-                                        bool SpeedBool = false;
-                                        bool PayoutBool = false;
-                                        float Tension = 0;
-                                        float Speed = 0;
-                                        float Payout = 0;
-
-                                        if (data.Length > 6)
-                                        {
-                                            LengthBool = true;
-                                            TensionBool = float.TryParse(data[3], out Tension);
-                                            SpeedBool = float.TryParse(data[4], out Speed);
-                                            PayoutBool = float.TryParse(data[5], out Payout);
-                                        }
-                                        if (LengthBool != false && TensionBool != false && SpeedBool != false && PayoutBool != false)//float.TryParse(data[2], out float Tension) != false)
-                                        {
-
-
-                                            //Current UNOLS String
-                                            //lineData.StringID = data[0];
-                                            //lineData.Tension = float.Parse(data[3]);
-                                            //lineData.Speed = float.Parse(data[4]);
-                                            //lineData.Payout = float.Parse(data[5]);
-                                            //lineData.Checksum = data[6];
-                                            //lineData.DateAndTime = DateTime.Parse($"{data[1]}T{data[2]}");
-                                            //lineData.TMAlarms = data[7];
-                                            //lineData.TMWarnings = data[8];
-
-                                            //Gloria Early implementation
-                                            lineData.StringID = data[0];
-                                            //lineData.Tension = float.Parse(data[3]);
-                                            lineData.Tension = Tension;
-                                            //lineData.Speed = float.Parse(data[3]);
-                                            lineData.Speed = Speed;
-                                            //lineData.Payout = float.Parse(data[4]);
-                                            lineData.Payout = Payout;
-                                            lineData.CheckSum = "no chk sum";
-                                            lineData.DateAndTime = DateTime.ParseExact($"{data[1]} {data[2]}","yyyyMMddTHH:mm:SS.fff", CultureInfo.InvariantCulture);
-                                            lineData.Date = data[1];
-                                            lineData.Time = data[2];
-                                            lineData.TMAlarms = data[6];
-                                            lineData.TMWarnings = data[7];
-
-                                            dataLine = true;
-                                        }
-                                    }
-                                }
-                                if (parseData.UseDateRange == true )
-                                {
-                                    if (lineData.DateAndTime < parseData.StartDate || lineData.DateAndTime > parseData.EndDate)
-                                    {
-                                        dataLine = false;
-                                    }
-                                }
-                                if (dataLine == true)
-                                {
-                                    //Data.Add(stringData); //add the string to Data List
-                                    DataModels.Add(lineData);
-                                    //MainProcessingViewModel.parseData.ReadingLine = stringData; //Updates Line being written to UI
-                                    //MainProcessingViewModel.parseData.ReadingLine = lineData.StringID + "," + lineData.Tension + "," + lineData.Speed + "," + lineData.Payout + "," + lineData.DateAndTime;
-                                    //stringData = null; //Clear stringData for next loop
-                                    lineData = new DataPointModel();
-                                    dataLine = false;
-                                }
-                                
+                                //}
+                                flag = false;
                             }
-                            
+                            else if (flag == true && data[0].Contains('/'))
+                            {
+                                data = data.Take(data.Length - 1).ToArray();
+                                lineData.DateAndTime = DateTime.Parse(data[0] + "T" + data[1]);
+                                flag = false;
+                                dataLine = true;
+                            }
+                            else
+                            {
+                                //stringData = null;
+                                dataLine = false;
+                                //lineData = new Line_Data_Model();
+                            }
                         }
-                        //Write data
-                        ParseDataFromLogs(DataModels);
-                        
+                        else if (parseData.SelectedWinch == "MASH Winch")
+                        {
+                            if (data[0] == "[LOGGING]" ||
+                                data[0] == "DATETIME[YYYY/MM/DD hh:mm:ss.s]" ||
+                                data[0] == "TIME")
+                            {
+                                dataLine = false;
+                            }
+                            else
+                            {
+                                string dataDateAndTime = data[0];
+                                string[] dataDate = dataDateAndTime.Split(' ');
+                                //stringData = "RD," + data[3] + "," + data[2] + "," + data[4] + "," + data[1] + "," + dataDate[0] + "," + dataDate[1];
+                                lineData.StringID = "RD";
+                                lineData.Tension = float.Parse(data[3]);
+                                lineData.Speed = float.Parse(data[2]);
+                                lineData.Payout = float.Parse(data[4]);
+                                lineData.CheckSum = data[1];
+                                lineData.DateAndTime = DateTime.Parse(dataDate[0] + "T" + dataDate[1]);
+                                lineData.TMAlarms = "00000000";
+                                lineData.TMWarnings = "00000000";
+                                dataLine = true;
+
+                            }
+
+                        }
+                        else if (parseData.SelectedWinch == "Armstrong CAST 6")
+                        {
+
+                            //string dataDateAndTime = data[0];
+                            //string[] dataDate = dataDateAndTime.Split(' ');
+                            //stringData = line;//"RD," + data[3] + "," + data[2] + "," + data[4] + "," + data[1] + "," + dataDate[0] + "," + dataDate[1];
+                            /*foreach (var dat in data)
+                            {
+                                stringData += dat + ',';
+                            }*/
+                            //writeCombined();
+                            //MainProcessingViewModel.parseData.ReadingLine = stringData; //Updates Line being written to UI
+                            //stringData = null;
+                            dataLine = true;
+
+                        }
+                        //Fix this section
+                        else if (parseData.SelectedWinch == "UNOLS String")
+                        {
+                            if (data[0] == "$WIR")
+                            {
+                                bool LengthBool = false;
+                                bool TensionBool = false;
+                                bool SpeedBool = false;
+                                bool PayoutBool = false;
+                                float Tension = 0;
+                                float Speed = 0;
+                                float Payout = 0;
+
+                                if (data.Length > 6)
+                                {
+                                    LengthBool = true;
+                                    TensionBool = float.TryParse(data[3], out Tension);
+                                    SpeedBool = float.TryParse(data[4], out Speed);
+                                    PayoutBool = float.TryParse(data[5], out Payout);
+                                }
+                                if (LengthBool != false && TensionBool != false && SpeedBool != false && PayoutBool != false)//float.TryParse(data[2], out float Tension) != false)
+                                {
+
+
+                                    //Current UNOLS String
+                                    lineData.StringID = data[0];
+                                    lineData.Tension = float.Parse(data[3]);
+                                    lineData.Speed = float.Parse(data[4]);
+                                    lineData.Payout = float.Parse(data[5]);
+                                    lineData.CheckSum = data[6];
+                                    lineData.DateAndTime = DateTime.ParseExact($"{data[1]}T{data[2]}", "yyyyMMddTHH:mm:ss.fff", null);
+                                    lineData.TMAlarms = data[7];
+                                    lineData.TMWarnings = data[8];
+                                    /*
+                                    //Gloria Early implementation
+                                    lineData.StringID = data[0];
+                                    //lineData.Tension = float.Parse(data[3]);
+                                    lineData.Tension = Tension;
+                                    //lineData.Speed = float.Parse(data[3]);
+                                    lineData.Speed = Speed;
+                                    //lineData.Payout = float.Parse(data[4]);
+                                    lineData.Payout = Payout;
+                                    lineData.CheckSum = "no chk sum";
+                                    lineData.DateAndTime = DateTime.Parse($"{data[1]}");//T{data[2]}");
+                                    //lineData.Date = data[1];
+                                    //lineData.Time = data[2];
+                                    lineData.TMAlarms = data[6];
+                                    lineData.TMWarnings = data[7];
+                                    */
+                                    dataLine = true;
+                                }
+
+                            }
+                        }
+                        else if (parseData.SelectedWinch == "Jay Jay")
+                        {
+                            if (data[0] == "$WIR")
+                            {
+                                bool LengthBool = false;
+                                bool TensionBool = false;
+                                bool SpeedBool = false;
+                                bool PayoutBool = false;
+                                float Tension = 0;
+                                float Speed = 0;
+                                float Payout = 0;
+
+                                if (data.Length > 6)
+                                {
+                                    LengthBool = true;
+                                    TensionBool = float.TryParse(data[3], out Tension);
+                                    SpeedBool = float.TryParse(data[4], out Speed);
+                                    PayoutBool = float.TryParse(data[5], out Payout);
+                                }
+                                if (LengthBool != false && TensionBool != false && SpeedBool != false && PayoutBool != false)//float.TryParse(data[2], out float Tension) != false)
+                                {
+
+
+                                    //Current UNOLS String
+                                    //lineData.StringID = data[0];
+                                    //lineData.Tension = float.Parse(data[3]);
+                                    //lineData.Speed = float.Parse(data[4]);
+                                    //lineData.Payout = float.Parse(data[5]);
+                                    //lineData.Checksum = data[6];
+                                    //lineData.DateAndTime = DateTime.Parse($"{data[1]}T{data[2]}");
+                                    //lineData.TMAlarms = data[7];
+                                    //lineData.TMWarnings = data[8];
+
+                                    //Gloria Early implementation
+                                    lineData.StringID = data[0];
+                                    //lineData.Tension = float.Parse(data[3]);
+                                    lineData.Tension = Tension;
+                                    //lineData.Speed = float.Parse(data[3]);
+                                    lineData.Speed = Speed;
+                                    //lineData.Payout = float.Parse(data[4]);
+                                    lineData.Payout = Payout;
+                                    lineData.CheckSum = "no chk sum";
+                                    lineData.DateAndTime = DateTime.ParseExact($"{data[1]} {data[2]}", "yyyyMMddTHH:mm:SS.fff", CultureInfo.InvariantCulture);
+                                    lineData.Date = data[1];
+                                    lineData.Time = data[2];
+                                    lineData.TMAlarms = data[6];
+                                    lineData.TMWarnings = data[7];
+
+                                    dataLine = true;
+                                }
+                            }
+                        }
+                        if (parseData.UseDateRange == true)
+                        {
+                            if (lineData.DateAndTime < parseData.StartDate || lineData.DateAndTime > parseData.EndDate)
+                            {
+                                dataLine = false;
+                            }
+                        }
+                        if (dataLine == true)
+                        {
+                            //Data.Add(stringData); //add the string to Data List
+                            DataModels.Add(lineData);
+                            //MainProcessingViewModel.parseData.ReadingLine = stringData; //Updates Line being written to UI
+                            //MainProcessingViewModel.parseData.ReadingLine = lineData.StringID + "," + lineData.Tension + "," + lineData.Speed + "," + lineData.Payout + "," + lineData.DateAndTime;
+                            //stringData = null; //Clear stringData for next loop
+                            lineData = new DataPointModel();
+                            dataLine = false;
+                        }
+
                     }
 
-                    file.Close(); //Close the file
                 }
-                
-            }, cts.Token);
-            parseData.ReadingLine = "Done!"; //Update UI with done
+                //Write data
+                ParseDataFromLogs(DataModels);
+
+
+
+                file.Close(); //Close the file
+            }
+            
         }
         public static void ParseDataFromLogs(List<DataPointModel> dataPointModels)
         {

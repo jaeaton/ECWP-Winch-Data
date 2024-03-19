@@ -73,6 +73,10 @@
                             }
 
                         }
+                        if (winch.CastNumber == string.Empty)
+                        {
+                            winch.CastNumber = "1";
+                        }
 
                         //ChartDataViewModel.ResetData();
                         //Create new cancellation token at start of data collection

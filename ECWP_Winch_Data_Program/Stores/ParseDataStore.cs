@@ -141,6 +141,9 @@
 
         [ObservableProperty]
         private List<ProcessCastDataModel> processCasts =new();
+
+        [ObservableProperty]
+        private CancellationTokenSource cancellationTokenSource = new();
     }
     public class SortableObservableCollection<T> : ObservableCollection<T>
     {

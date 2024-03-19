@@ -215,7 +215,7 @@
                if (TimeSpan.TryParse($"00:00:{chartLength}", out TimeSpan chartTime))
                 {
                     //_observableValues.Add(new ObservablePoint { X = i++, Y = latest.Tension });
-                    if (span.Seconds > chartTime.Seconds)
+                    if (span.TotalSeconds > chartTime.Seconds)
                     {
                         _observableValues.RemoveAt(0);
                         _observableValuesMax.RemoveAt(0);
