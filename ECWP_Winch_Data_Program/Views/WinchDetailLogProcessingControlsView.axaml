@@ -24,10 +24,10 @@
 			<TextBlock Text="Raw Log Location:" Width="160"/>
 			<TextBlock Text="{Binding CurrentWinch.RawLogDirectory}"/>
 			<TextBlock Text="\"/>
-			<TextBlock Text="{Binding ParseData.ReadingFileName}" DataContext="{StaticResource ResourceKey=winch}"/>
+			<TextBlock Text="{Binding parseData.ReadingFileName}" DataContext="{StaticResource ResourceKey=winch}"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
-			<TextBlock Text="Processing Line:" Width="160"/>
+			<TextBlock Text="Progress:" Width="160"/>
 			<!--
 			<TextBlock Text="{ Binding ReadingLine }" />
 			-->
@@ -43,6 +43,9 @@
 			<TextBlock Text="End Date" VerticalAlignment="Center" Margin="0,0,5,0"/>
 			<CalendarDatePicker SelectedDate="{ Binding EndDate }" Margin="0,0,10,0"/>
 		</StackPanel>
-		<Button Content="Start Processing" Command="{ Binding SingleProcessFilesCommand }" Margin="5" DataContext="{ StaticResource ResourceKey=commands }"/>
+		<StackPanel>
+			<Button Content="{Binding ProcessButtonText}" Command="{ Binding SingleProcessFilesCommand }" Margin="5" DataContext="{ StaticResource ResourceKey=commands }"/>	
+		</StackPanel>
+		
 	</StackPanel>
 </UserControl>

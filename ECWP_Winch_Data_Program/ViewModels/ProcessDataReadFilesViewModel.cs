@@ -366,8 +366,10 @@
                 //parseData.ReadingLine = "Done!";
             });
         }
-        public static async void ReadDataFiles(ParseDataStore parseData)
+        public static async void ReadDataFiles()//ParseDataStore parseData)
         {
+            CancellationTokenSource cts = new CancellationTokenSource();
+            ParseDataStore parseData = ProcessDataViewModel.ParseData;
             ProcessDataViewModel.ParseData.ReadingLine = "Reading!"; //Update UI with reading
             ProcessDataViewModel.ParseData.NumberOfProcessedFiles = 0;
             //Makes reading the file Asynchronous leaving the UI responsive
@@ -608,7 +610,7 @@
                     file.Close(); //Close the file
                 }
                 
-            });
+            }, cts.Token);
             parseData.ReadingLine = "Done!"; //Update UI with done
         }
         public static void ParseDataFromLogs(List<DataPointModel> dataPointModels)
