@@ -1,4 +1,5 @@
-﻿using LiveChartsCore.SkiaSharpView.Drawing.Geometries;
+﻿using DocumentFormat.OpenXml.Drawing;
+using LiveChartsCore.SkiaSharpView.Drawing.Geometries;
 
 namespace ViewModels
 {
@@ -30,7 +31,7 @@ namespace ViewModels
             {
                 Parity InputParity = new Parity();
                 StopBits InputStopBits = new StopBits();
-                int.TryParse(winch.BaudRateOutput, out int serialBaudRate);
+                int.TryParse(winch.InputCommunication.BaudRate, out int serialBaudRate);
                 if (winch.InputCommunication.Parity == "N") { InputParity = Parity.None; }
                 else if (winch.InputCommunication.Parity == "E") { InputParity = Parity.Even; }
                 else if (winch.InputCommunication.Parity == "O") { InputParity = Parity.Odd; }
@@ -49,16 +50,33 @@ namespace ViewModels
                 InputSerialPort.ReadTimeout = 500;
                 
                 InputSerialPort.Open();
-
-                while (!winch.Canceller.Token.IsCancellationRequested)
+                //Task<string> t = new Task<string>(() => { ReadSerialData(InputSerialPort, winch); }, winch.Canceller.Token) ;
+                bool cancelled = false;
+                while (cancelled == false) //!winch.Canceller.Token.IsCancellationRequested)
                 {
 
+                    try
+                    {
+                        //Asynchronious read of data to allow for other operations to occur
+                        dataIn = await Task.Run(() => ReadSerialData(InputSerialPort, winch), winch.Canceller.Token);
+                        //_liveData.RawWireData = dataIn;
+                        ParseWinchData(dataIn, winch);
+                    }
+                    catch (Exception ae)
+                    {
+                        if (ae is TaskCanceledException)
+                        {
+                            cancelled = true;
+                            break;
+                        }
+                        else
+                        {
+                            cancelled = true;
+                            break;
+                        }
+                    }
 
-                    //Asynchronious read of data to allow for other operations to occur
-                    dataIn = await Task.Run(() => ReadSerialData(InputSerialPort,winch));
-                    //_liveData.RawWireData = dataIn;
-                    //read data
-                    ParseWinchData(dataIn, winch);
+
 
                 }
 
@@ -90,17 +108,33 @@ namespace ViewModels
                         // Perform a blocking call to accept requests.
                         // You could also use server.AcceptSocket() here.
                         client = server.AcceptTcpClient();
-
+                        bool cancelled = false;
                         // Enter the listening loop.
-                        while (!winch.Canceller.Token.IsCancellationRequested)
+                        while (cancelled == false)//!winch.Canceller.Token.IsCancellationRequested)
                         {
 
+                            try
+                            {
+                                //Asynchronious read of data to allow for other operations to occur
+                                dataIn = await Task.Run(() => ReadTCPData(client, winch),winch.Canceller.Token);
+                                //_liveData.RawWireData = dataIn;
+                                //read data
+                                ParseWinchData(dataIn, winch);
+                            }
+                            catch (Exception ae)
+                            {
+                                if (ae is TaskCanceledException)
+                                {
+                                    cancelled = true;
+                                    break;
+                                }
+                                else
+                                {
+                                    cancelled = true;
+                                    break;
+                                }
+                            }
 
-                            //Asynchronious read of data to allow for other operations to occur
-                            dataIn = await Task.Run(() => ReadTCPData(client, winch));
-                            //_liveData.RawWireData = dataIn;
-                            //read data
-                            ParseWinchData(dataIn, winch);
 
                         }
                     }
@@ -156,13 +190,30 @@ namespace ViewModels
                     //Looks for cancellation token to stop data collection
                     if (client.Connected)
                     {
-                        while (!winch.Canceller.Token.IsCancellationRequested)
+                        bool cancelled = false;
+                        while (cancelled == false)
                         {
-                            //Asynchronious read of data to allow for other operations to occur
-                            dataIn = await Task.Run(() => ReadTCPData(client, winch));
-                            //_liveData.RawWireData = dataIn;
-                            //read data
-                            ParseWinchData(dataIn, winch);
+                            try
+                            {
+                                //Asynchronious read of data to allow for other operations to occur
+                                dataIn = await Task.Run(() => ReadTCPData(client, winch),winch.Canceller.Token);
+                                //_liveData.RawWireData = dataIn;
+                                //read data
+                                ParseWinchData(dataIn, winch);
+                            }
+                            catch (Exception ae)
+                            {
+                               if (ae is TaskCanceledException)
+                                    {
+                                        cancelled = true;
+                                        break;
+                                    }
+                                else
+                                {
+                                    cancelled = true;
+                                    break;
+                                }
+                            }
 
                         }
                     }
@@ -177,15 +228,31 @@ namespace ViewModels
                     UdpClient client = new UdpClient(port);
                     try
                     {
-
+                        bool cancelled = false;
                         // Enter the listening loop.
-                        while (!winch.Canceller.Token.IsCancellationRequested)
+                        while (cancelled == false)
                         {
+                            try 
+                            { 
                             //Asynchronious read of data to allow for other operations to occur
                             dataIn = await Task.Run(() => ReadUDPData(client, winch));
                             //winch.LiveData.RawWireData = dataIn;
                             //read data
                             ParseWinchData(dataIn, winch);
+                            }
+                            catch (Exception ae)
+                            {
+                                if (ae is TaskCanceledException)
+                                {
+                                    cancelled = true;
+                                    break;
+                                }
+                                else
+                                {
+                                    cancelled = true;
+                                    break;
+                                }
+                            }       
 
                         }
                     }
@@ -275,6 +342,7 @@ namespace ViewModels
         }
         private string ReadSerialData(SerialPort serial, WinchModel winch)
         {
+            
             string responseData = serial.ReadLine();
             return responseData;
         }
@@ -478,16 +546,17 @@ namespace ViewModels
             string line;
             string destPath;
             string fileName;
+            
             if (!winch.LogFormatUnols)
             {
                 fileName = winch.MtnwWireLogName;
-                destPath = Path.Combine(winch.RawLogDirectory, fileName);
+                destPath = System.IO.Path.Combine(winch.RawLogDirectory, fileName);
                 line = $"RD,{data.Date}T{data.Time},{data.Tension},{data.Speed},{data.Payout}";
             }
             else
             {
                 fileName = winch.UnolsWireLogName;
-                destPath = Path.Combine(winch.RawLogDirectory, fileName);
+                destPath = System.IO.Path.Combine(winch.RawLogDirectory, fileName);
                 line = $"{data.StringID},{data.Date},{data.Time},{data.Tension},{data.Speed},{data.Payout},{data.TMWarnings},{data.TMAlarms},{data.CheckSum}";
             }
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
@@ -503,7 +572,7 @@ namespace ViewModels
             string destPath;
             string fileName;
             fileName = winch.UnolsWireLogName;
-            destPath = Path.Combine(winch.RawLogDirectory, fileName);
+            destPath = System.IO.Path.Combine(winch.RawLogDirectory, fileName);
             line = data;
 
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
@@ -516,7 +585,7 @@ namespace ViewModels
         {
             //Write Data to files
             string fileName = winch.WinchLogName;
-            string destPath = Path.Combine(winch.RawLogDirectory, fileName);
+            string destPath = System.IO.Path.Combine(winch.RawLogDirectory, fileName);
             string line = data;
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
             {
@@ -527,7 +596,7 @@ namespace ViewModels
         {
             //Write Data to files
             string fileName = $"raw_{winch.WinchName}.log";
-            string destPath = Path.Combine(winch.RawLogDirectory, fileName);
+            string destPath = System.IO.Path.Combine(winch.RawLogDirectory, fileName);
             string line = $"{data}";
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
             {
