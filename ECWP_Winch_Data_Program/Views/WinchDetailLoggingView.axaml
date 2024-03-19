@@ -48,7 +48,11 @@
 				<TextBlock Text="Processing Parameters"/>
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Data Type" VerticalAlignment="Center" Width="120"/>
-					<ComboBox SelectedItem="{ Binding CurrentWinch.WinchLogType, Mode=TwoWay }" Width="90" ItemsSource="{ Binding WinchDataType }" SelectedIndex="0"/>
+					<ComboBox SelectedItem="{ Binding CurrentWinch.WinchLogType, Mode=TwoWay }" Width="180" ItemsSource="{ Binding WinchDataType }" SelectedIndex="0"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="2" IsVisible="{Binding CurrentWinch.ThreePeeEssSelected}">
+					<TextBlock Text="3PS ID Number" VerticalAlignment="Center" Width="120"/>
+					<TextBox Watermark="Enter ID" Text="{Binding CurrentWinch.Atlantis3PSWinchID}" Width="90"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Minimum Payout" VerticalAlignment="Center" Width="120"/>

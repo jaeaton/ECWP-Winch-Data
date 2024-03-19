@@ -239,12 +239,25 @@ namespace Models
         private string tensionMemberNSFID = string.Empty ;
         [ObservableProperty]
         private string winchLogType = string.Empty ;
+        partial void OnWinchLogTypeChanged(string value)
+        {
+            if (value == "Atlantis 3PS")
+            {
+                ThreePeeEssSelected = true;
+            }
+            else
+            {
+                ThreePeeEssSelected = false;
+            }
+        }
         [ObservableProperty]
         private string minimumPayout = string.Empty ;
         [ObservableProperty]
         private string minimumTension = string.Empty ;
         [ObservableProperty]
         private string atlantis3PSWinchID = string.Empty ;
+        [ObservableProperty]
+        private bool threePeeEssSelected = false;
         public object Sync { get; } = new object();
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)
