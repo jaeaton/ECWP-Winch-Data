@@ -1,6 +1,6 @@
 ﻿namespace Models
 {
-    public class DataPointModel 
+    public struct DataPointModel 
     {
 
         public string StringID  = string.Empty;
