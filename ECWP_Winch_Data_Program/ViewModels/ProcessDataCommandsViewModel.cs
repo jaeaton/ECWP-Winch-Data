@@ -117,29 +117,6 @@
                     }
 
             }
-            //if (ProcessButtonText == "Stop Processing")
-            //{
-            //    //Cancel Task
-            //    ParseData.CancellationTokenSource.Cancel();
-            //    //ParseData.CancellationTokenSource.Dispose();
-            //    ProcessButtonText = "Start Processing";
-            //}
-            //else
-            //{
-            //    ParseData.CancellationTokenSource = new CancellationTokenSource();
-            //    ProcessButtonText = "Stop Processing";
-            //    ConfigDataStore _config = MainViewModel._configDataStore;
-            //    //ParseDataStore ParseData = ProcessDataViewModel.ParseData;
-            //    ParseData.SelectedWinch = _config.CurrentWinch.WinchLogType;
-            //    ParseData.MinPayout = _config.CurrentWinch.MinimumPayout;
-            //    ParseData.MinTension = _config.CurrentWinch.MinimumTension;
-            //    ParseData.StartDate = _config.StartDate;
-            //    ParseData.EndDate = _config.EndDate;
-            //    ParseData.UseDateRange = _config.DateRangeCheckBox;
-            //    ExcelViewModel.SetWireLogFileName();
-            //    FindFiles();
-            //    ProcessDataReadFilesViewModel.ReadDataFiles();//ProcessDataViewModel.ParseData);
-            //}
             
         
         }

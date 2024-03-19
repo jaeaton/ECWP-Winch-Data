@@ -243,6 +243,8 @@ namespace Models
         private string minimumPayout = string.Empty ;
         [ObservableProperty]
         private string minimumTension = string.Empty ;
+        [ObservableProperty]
+        private string atlantis3PSWinchID = string.Empty ;
         public object Sync { get; } = new object();
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)

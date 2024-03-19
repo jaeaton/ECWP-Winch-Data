@@ -604,6 +604,24 @@
                                 }
                             }
                         }
+                        else if (parseData.SelectedWinch == "Atlantis 3PS")
+                        {
+                            string[] header = data[0].Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+                            if (header[5] == "3PS" && data[2] == parseData.WinchID)
+                            {
+                                lineData.StringID = header[3];
+                                lineData.Tension = float.Parse(data[3]);
+                                lineData.Speed = float.Parse(data[7]);
+                                lineData.Payout = float.Parse(data[5]);
+                                //lineData.CheckSum = data[1];
+                                lineData.Date = header[4];
+                                lineData.Time = data[1];
+                                lineData.DateAndTime = DateTime.Parse(header[4] + "T" + data[1]);
+                                lineData.TMAlarms = "00000000";
+                                lineData.TMWarnings = "00000000";
+                                dataLine = true;
+                            }
+                        }
                         if (parseData.UseDateRange == true)
                         {
                             if (lineData.DateAndTime < parseData.StartDate || lineData.DateAndTime > parseData.EndDate)

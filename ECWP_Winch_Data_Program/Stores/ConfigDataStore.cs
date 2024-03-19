@@ -34,8 +34,8 @@
         [ObservableProperty]
         private List<string> availableDataBits = new List<string>
                                                             {
-                                                                "7",
                                                                 "8",
+                                                                "7",
                                                             };
 
         [ObservableProperty]
@@ -72,7 +72,8 @@
                 "SIO Traction Winch",
                 "Armstrong CAST 6",
                 "UNOLS String",
-                "Jay Jay"
+                "Jay Jay",
+                "Atlantis 3PS"
         };
 
         [ObservableProperty]
