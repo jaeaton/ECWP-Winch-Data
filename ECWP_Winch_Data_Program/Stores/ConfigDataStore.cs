@@ -80,6 +80,7 @@
         private List<string> availablePayouts = new()
         {
                 "-10",
+                "-5",
                 "0",
                 "1",
                 "5",

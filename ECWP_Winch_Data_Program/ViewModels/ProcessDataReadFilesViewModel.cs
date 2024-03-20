@@ -432,14 +432,18 @@
                                 lineData.Tension = float.Parse(data[1]);
                                 lineData.Speed = float.Parse(data[2]);
                                 lineData.Payout = float.Parse(data[3]);
+                                if (lineData.Payout < 0)
+                                {
+                                    lineData.Payout = -1 * lineData.Payout;
+                                }
+                                else if (lineData.Payout > 0) 
+                                { 
+                                    lineData.Payout = -1*lineData.Payout;
+                                }
                                 lineData.CheckSum = data[4];
                                 lineData.TMAlarms = "00000000";
                                 lineData.TMWarnings = "00000000";
-                                //foreach (var dat in data)
-                                //{
-                                //    stringData += dat + ',';
-
-                                //}
+                                
                                 flag = false;
                             }
                             else if (flag == true && data[0].Contains('/'))
@@ -606,21 +610,31 @@
                         }
                         else if (parseData.SelectedWinch == "Atlantis 3PS")
                         {
-                            string[] header = data[0].Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-                            if (header[3] == "3PS" && data[2] == parseData.WinchID)
+                            if (data.Length > 6)
                             {
-                                lineData.StringID = header[3];
-                                lineData.Tension = float.Parse(data[3]);
-                                lineData.Speed = float.Parse(data[7]);
-                                lineData.Payout = float.Parse(data[5]);
-                                //lineData.CheckSum = data[1];
-                                lineData.Date = header[4];
-                                lineData.Time = data[1];
-                                lineData.DateAndTime = DateTime.Parse(header[4] + "T" + data[1]);
-                                lineData.TMAlarms = "00000000";
-                                lineData.TMWarnings = "00000000";
-                                dataLine = true;
+                                string[] header = data[0].Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
+                                
+                                bool[] bools = new bool[4];
+                                if (header[3] == "3PS" && data[2] == parseData.WinchID)
+                                {
+                                    lineData.StringID = header[3];
+                                    bools[0] = float.TryParse(data[3],out lineData.Tension);
+                                    bools[1] = float.TryParse(data[7], out lineData.Speed);
+                                    bools[2] = float.TryParse(data[5], out lineData.Payout);
+                                    //lineData.CheckSum = data[1];
+                                    lineData.Date = header[4];
+                                    lineData.Time = data[1];
+                                    bools[3] = DateTime.TryParse(header[1] + "T" + data[1], out lineData.DateAndTime);
+                                    lineData.TMAlarms = "00000000";
+                                    lineData.TMWarnings = "00000000";
+                                    if (bools[0] == true && bools[1] == true && bools[2] == true && bools[3] == true) 
+                                    { 
+                                        dataLine = true;
+                                    }
+                                    
+                                }
                             }
+                            
                         }
                         if (parseData.UseDateRange == true)
                         {
@@ -679,7 +693,7 @@
                 processCastDataModel.CastNumber = cast;
                 
                 //detect start of cast (values above threshold with positive slope)
-                if (lineData.Tension > minTension && Math.Abs(lineData.Payout) > minPayout)
+                if (lineData.Tension > minTension && lineData.Payout > minPayout)
                 {
                     castActive = true;
                     //check for new maximum values (tension and payout) and store
@@ -700,7 +714,7 @@
                 }
                 //detect end of cast (values below threshold with negative slope)
                 //Write data point
-                if (/*lineData.Tension < minTension &&*/ Math.Abs(lineData.Payout) < minPayout && castActive == true)
+                if (/*lineData.Tension < minTension &&*/ lineData.Payout < minPayout && castActive == true)
                 {
                     float mTenSend = maxTensionCurrent;
                     float mTenPaySend = maxTensionPayoutCurrent;

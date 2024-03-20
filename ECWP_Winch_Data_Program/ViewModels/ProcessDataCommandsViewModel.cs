@@ -93,7 +93,11 @@
                 case "Stop Processing":
                     {
                         //Cancel Task
-                        ParseData.CancellationTokenSource.Cancel();
+                        if (ParseData.CancellationTokenSource.IsCancellationRequested)
+                        {
+                            ParseData.CancellationTokenSource.Cancel();
+                        }
+                        
                         //ParseData.CancellationTokenSource.Dispose();
                         ProcessButtonText = "Start Processing";
                         break;
