@@ -1,5 +1,4 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Syntax;
-
+﻿
 namespace Models
 {
     public partial class WinchModel : ObservableObject
