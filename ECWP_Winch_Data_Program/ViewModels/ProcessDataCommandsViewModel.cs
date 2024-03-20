@@ -110,6 +110,7 @@
                         ParseData.StartDate = _config.StartDate;
                         ParseData.EndDate = _config.EndDate;
                         ParseData.UseDateRange = _config.DateRangeCheckBox;
+                        ParseData.WinchID = _config.CurrentWinch.Atlantis3PSWinchID;
                         ExcelViewModel.SetWireLogFileName();
                         FindFiles();
                         ProcessDataReadFilesViewModel.ReadDataFiles();//ProcessDataViewModel.ParseData);
@@ -148,6 +149,9 @@
                     break;
                 case "Jay Jay":
                     extension = "*.CSV";
+                    break;
+                case "Atlantis 3PS":
+                    extension = "*.3PS_Winch";
                     break;
                 default:
                     extension = string.Empty;

@@ -607,7 +607,7 @@
                         else if (parseData.SelectedWinch == "Atlantis 3PS")
                         {
                             string[] header = data[0].Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-                            if (header[5] == "3PS" && data[2] == parseData.WinchID)
+                            if (header[3] == "3PS" && data[2] == parseData.WinchID)
                             {
                                 lineData.StringID = header[3];
                                 lineData.Tension = float.Parse(data[3]);
