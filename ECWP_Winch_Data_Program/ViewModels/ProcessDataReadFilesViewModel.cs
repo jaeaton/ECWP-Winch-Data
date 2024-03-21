@@ -429,30 +429,52 @@
                             //SIO Traction Winch Data Format: String ID, Tension, Speed, Payout, Checksum /r/n Date, Time /r/n
                             if (data[0] == "RD")
                             {
-                                lineData.StringID = data[0];
-                                lineData.Tension = float.Parse(data[1]);
-                                lineData.Speed = float.Parse(data[2]);
-                                lineData.Payout = float.Parse(data[3]);
-                                if (lineData.Payout < 0)
+                                bool LengthBool = false;
+                                bool TensionBool = false;
+                                bool SpeedBool = false;
+                                bool PayoutBool = false;
+                                float Tension = 0;
+                                float Speed = 0;
+                                float Payout = 0;
+
+                                if (data.Length > 5)
                                 {
-                                    lineData.Payout = -1 * lineData.Payout;
+                                    LengthBool = true;
+                                    TensionBool = float.TryParse(data[3], out Tension);
+                                    SpeedBool = float.TryParse(data[2], out Speed);
+                                    PayoutBool = float.TryParse(data[4], out Payout);
                                 }
-                                else if (lineData.Payout > 0) 
-                                { 
-                                    lineData.Payout = -1*lineData.Payout;
+                                if (LengthBool != false && TensionBool != false && SpeedBool != false && PayoutBool != false)//float.TryParse(data[2], out float Tension) != false)
+                                {
+                                    lineData.StringID = data[0];
+                                    lineData.Tension = Tension;
+                                    lineData.Speed = Speed;
+                                    lineData.Payout = Payout;
+                                    if (lineData.Payout < 0)
+                                    {
+                                        lineData.Payout = -1 * lineData.Payout;
+                                    }
+                                    else if (lineData.Payout > 0)
+                                    {
+                                        lineData.Payout = -1 * lineData.Payout;
+                                    }
+                                    lineData.CheckSum = data[4];
+                                    lineData.TMAlarms = "00000000";
+                                    lineData.TMWarnings = "00000000";
                                 }
-                                lineData.CheckSum = data[4];
-                                lineData.TMAlarms = "00000000";
-                                lineData.TMWarnings = "00000000";
                                 
-                                flag = false;
+                                flag = true;
                             }
                             else if (flag == true && data[0].Contains('/'))
                             {
                                 data = data.Take(data.Length - 1).ToArray();
-                                lineData.DateAndTime = DateTime.Parse(data[0] + "T" + data[1]);
-                                flag = false;
-                                dataLine = true;
+                                bool test = DateTime.TryParse(data[0] + "T" + data[1],out lineData.DateAndTime);
+                                if (test)
+                                {
+                                    flag = false;
+                                    dataLine = true;
+                                }
+                                
                             }
                             else
                             {
@@ -472,18 +494,36 @@
                             }
                             else
                             {
-                                string dataDateAndTime = data[0];
-                                string[] dataDate = dataDateAndTime.Split(' ');
-                                //stringData = "RD," + data[3] + "," + data[2] + "," + data[4] + "," + data[1] + "," + dataDate[0] + "," + dataDate[1];
-                                lineData.StringID = "RD";
-                                lineData.Tension = float.Parse(data[3]);
-                                lineData.Speed = float.Parse(data[2]);
-                                lineData.Payout = float.Parse(data[4]);
-                                lineData.CheckSum = data[1];
-                                lineData.DateAndTime = DateTime.Parse(dataDate[0] + "T" + dataDate[1]);
-                                lineData.TMAlarms = "00000000";
-                                lineData.TMWarnings = "00000000";
-                                dataLine = true;
+                                bool LengthBool = false;
+                                bool TensionBool = false;
+                                bool SpeedBool = false;
+                                bool PayoutBool = false;
+                                float Tension = 0;
+                                float Speed = 0;
+                                float Payout = 0;
+
+                                if (data.Length > 5)
+                                {
+                                    LengthBool = true;
+                                    TensionBool = float.TryParse(data[3], out Tension);
+                                    SpeedBool = float.TryParse(data[2], out Speed);
+                                    PayoutBool = float.TryParse(data[4], out Payout);
+                                }
+                                if (LengthBool != false && TensionBool != false && SpeedBool != false && PayoutBool != false)//float.TryParse(data[2], out float Tension) != false)
+                                {
+                                    string dataDateAndTime = data[0];
+                                    string[] dataDate = dataDateAndTime.Split(' ');
+                                    //stringData = "RD," + data[3] + "," + data[2] + "," + data[4] + "," + data[1] + "," + dataDate[0] + "," + dataDate[1];
+                                    lineData.StringID = "RD";
+                                    lineData.Tension = Tension;
+                                    lineData.Speed = Speed;
+                                    lineData.Payout = Payout;
+                                    lineData.CheckSum = data[1];
+                                    lineData.DateAndTime = DateTime.Parse(dataDate[0] + "T" + dataDate[1]);
+                                    lineData.TMAlarms = "00000000";
+                                    lineData.TMWarnings = "00000000";
+                                    dataLine = true;
+                                }
 
                             }
 
