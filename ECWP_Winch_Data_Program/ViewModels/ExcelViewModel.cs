@@ -66,6 +66,14 @@ namespace ViewModels
             //Maximum Wire Out
             ws.Cell($"I{CurrentRow}").Value = dataMaxPayout.Payout;
             //Notes
+            if (dataMaxTension.Tension > float.Parse(_config.CurrentWinch.TensionWarningLevel)) 
+            {
+                ws.Cell($"J{CurrentRow}").Value = "Tension Warning";
+            }
+            if (dataMaxTension.Tension > float.Parse(_config.CurrentWinch.TensionAlarmLevel))
+            {
+                ws.Cell($"J{CurrentRow}").Value = "Tension Alarm";
+            }
             //Borders
             ws.Range($"A{CurrentRow}:J{CurrentRow}").Style.Border.SetInsideBorder(XLBorderStyleValues.Thin);
             wb.Save();
