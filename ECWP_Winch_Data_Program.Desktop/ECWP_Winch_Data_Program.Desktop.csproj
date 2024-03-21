@@ -9,7 +9,18 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
 	  <Version>6.0.0</Version>
 	  <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+	  <ApplicationIcon>ECWP Icon.ico</ApplicationIcon>
+	  <PackageIcon>ECWPLogo.jpg</PackageIcon>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="ECWP Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\..\..\..\repos\ECWP_Winch_Data_Program\ECWP_Winch_Data_Program\Assets\ECWPLogo.jpg">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.10" />

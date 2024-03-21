@@ -426,6 +426,7 @@
 
                         if (parseData.SelectedWinch == "SIO Traction Winch")
                         {
+                            //SIO Traction Winch Data Format: String ID, Tension, Speed, Payout, Checksum /r/n Date, Time /r/n
                             if (data[0] == "RD")
                             {
                                 lineData.StringID = data[0];
@@ -459,9 +460,10 @@
                                 dataLine = false;
                                 //lineData = new Line_Data_Model();
                             }
-                        }
+                        }                        
                         else if (parseData.SelectedWinch == "MASH Winch")
                         {
+                            //MASH winch data format: date time, Checksum, Speed, Tension, Payout
                             if (data[0] == "[LOGGING]" ||
                                 data[0] == "DATETIME[YYYY/MM/DD hh:mm:ss.s]" ||
                                 data[0] == "TIME")
@@ -486,9 +488,9 @@
                             }
 
                         }
-                        else if (parseData.SelectedWinch == "Armstrong CAST 6")
+                        else if (parseData.SelectedWinch == "Armstrong CAST 6") //Winch DAC?
                         {
-
+                            //Winch DAC Log format: DateandTime, ?
                             //string dataDateAndTime = data[0];
                             //string[] dataDate = dataDateAndTime.Split(' ');
                             //stringData = line;//"RD," + data[3] + "," + data[2] + "," + data[4] + "," + data[1] + "," + dataDate[0] + "," + dataDate[1];
@@ -499,12 +501,13 @@
                             //writeCombined();
                             //MainProcessingViewModel.parseData.ReadingLine = stringData; //Updates Line being written to UI
                             //stringData = null;
-                            dataLine = true;
+                            //dataLine = true;
 
                         }
                         //Fix this section
                         else if (parseData.SelectedWinch == "UNOLS String")
                         {
+                            //UNOLS String data Format: String ID, Date, Time, Tension, Speed, Payout, Checksum?, TM Alarms, TM Warnings
                             if (data[0] == "$WIR")
                             {
                                 bool LengthBool = false;
@@ -528,9 +531,9 @@
 
                                     //Current UNOLS String
                                     lineData.StringID = data[0];
-                                    lineData.Tension = float.Parse(data[3]);
-                                    lineData.Speed = float.Parse(data[4]);
-                                    lineData.Payout = float.Parse(data[5]);
+                                    lineData.Tension = Tension;
+                                    lineData.Speed = Speed;
+                                    lineData.Payout = Payout;
                                     lineData.CheckSum = data[6];
                                     lineData.DateAndTime = DateTime.ParseExact($"{data[1]}T{data[2]}", "yyyyMMddTHH:mm:ss.fff", null);
                                     lineData.TMAlarms = data[7];
@@ -538,11 +541,8 @@
                                     /*
                                     //Gloria Early implementation
                                     lineData.StringID = data[0];
-                                    //lineData.Tension = float.Parse(data[3]);
                                     lineData.Tension = Tension;
-                                    //lineData.Speed = float.Parse(data[3]);
                                     lineData.Speed = Speed;
-                                    //lineData.Payout = float.Parse(data[4]);
                                     lineData.Payout = Payout;
                                     lineData.CheckSum = "no chk sum";
                                     lineData.DateAndTime = DateTime.Parse($"{data[1]}");//T{data[2]}");
@@ -558,6 +558,7 @@
                         }
                         else if (parseData.SelectedWinch == "Jay Jay")
                         {
+                            //Jay Jay data format: String ID, Date, Time, Tension, Speed, Payout, TM Alarm, TM Warning, Check Sum
                             if (data[0] == "$WIR")
                             {
                                 bool LengthBool = false;
@@ -577,25 +578,9 @@
                                 }
                                 if (LengthBool != false && TensionBool != false && SpeedBool != false && PayoutBool != false)//float.TryParse(data[2], out float Tension) != false)
                                 {
-
-
-                                    //Current UNOLS String
-                                    //lineData.StringID = data[0];
-                                    //lineData.Tension = float.Parse(data[3]);
-                                    //lineData.Speed = float.Parse(data[4]);
-                                    //lineData.Payout = float.Parse(data[5]);
-                                    //lineData.Checksum = data[6];
-                                    //lineData.DateAndTime = DateTime.Parse($"{data[1]}T{data[2]}");
-                                    //lineData.TMAlarms = data[7];
-                                    //lineData.TMWarnings = data[8];
-
-                                    //Gloria Early implementation
                                     lineData.StringID = data[0];
-                                    //lineData.Tension = float.Parse(data[3]);
                                     lineData.Tension = Tension;
-                                    //lineData.Speed = float.Parse(data[3]);
                                     lineData.Speed = Speed;
-                                    //lineData.Payout = float.Parse(data[4]);
                                     lineData.Payout = Payout;
                                     lineData.CheckSum = "no chk sum";
                                     lineData.DateAndTime = DateTime.ParseExact($"{data[1]} {data[2]}", "yyyyMMddTHH:mm:SS.fff", CultureInfo.InvariantCulture);
@@ -610,6 +595,7 @@
                         }
                         else if (parseData.SelectedWinch == "Atlantis 3PS")
                         {
+                            //Atlantis 3PS Data format: Winch Date Time 3PS Date,Time,WinchID,Tension,Tension Alarm, Speed, Speed Alarm, Payout, Payout Alarm,Maximum Tension
                             if (data.Length > 6)
                             {
                                 string[] header = data[0].Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
@@ -750,7 +736,7 @@
 
                 if (castActive)
                 {
-                    //parseData.DataToPlot.Add(lineData);
+                    parseData.DataToPlot.Add(lineData);
                 }
                 
 
@@ -760,7 +746,6 @@
             //{
             //    Dispatcher.UIThread.Post(() => parseData.ChartData.AddData(val));
             //}
-            //Dispatcher.UIThread.Post(() => parseData.ChartData.PlotData());
             parseData.ReadingLine = "Done!";
             parseData.MaxTensionCurrent = maxTensionCurrent;
             parseData.MaxTensionPayoutCurrent = maxTensionPayoutCurrent;

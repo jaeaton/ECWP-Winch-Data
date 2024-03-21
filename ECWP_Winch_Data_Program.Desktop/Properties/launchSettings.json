@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "ECWP_Winch_Data_Program.Desktop": {
+      "commandName": "Project"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    }
+  }
+}
