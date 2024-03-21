@@ -148,6 +148,9 @@
 
         [ObservableProperty]
         private string winchID = string.Empty;
+
+        [ObservableProperty]
+        private string processWinchDataButton = "Start Processing";
     }
     public class SortableObservableCollection<T> : ObservableCollection<T>
     {

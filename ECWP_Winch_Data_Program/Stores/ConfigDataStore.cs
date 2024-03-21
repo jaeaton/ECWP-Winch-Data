@@ -163,12 +163,14 @@
         private string selectWinch = string.Empty;// = new();
         partial void OnSelectWinchChanged(string value)
         {
+            ProcessDataViewModel.ParseData.WireLog.Clear();
             LoadWinch(value);
         }
         [ObservableProperty]
         private TabItemModel winchSelected;
         partial void OnWinchSelectedChanged(TabItemModel value)
         {
+            ProcessDataViewModel.ParseData.WireLog.Clear();
             if (value != null)
             {
                 LoadWinch(value.Header);

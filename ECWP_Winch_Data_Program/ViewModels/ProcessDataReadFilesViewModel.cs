@@ -393,7 +393,7 @@
                     parseData.CancellationTokenSource.Dispose();
                 }
             }
-            
+            Dispatcher.UIThread.Post(() => ProcessDataViewModel.ParseData.ProcessWinchDataButton = "Start Processing",DispatcherPriority.Input);
             parseData.ReadingLine = "Done!"; //Update UI with done
         }
         public static void ReadDataFromLogs(ParseDataStore parseData)
@@ -502,7 +502,7 @@
                                 float Speed = 0;
                                 float Payout = 0;
 
-                                if (data.Length > 5)
+                                if (data.Length > 4)
                                 {
                                     LengthBool = true;
                                     TensionBool = float.TryParse(data[3], out Tension);

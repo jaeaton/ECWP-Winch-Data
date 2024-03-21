@@ -2,10 +2,13 @@
 {
     public partial class ProcessDataCommandsViewModel : ViewModelBase
     {
+        
+       
+        ParseDataStore ParseData = ProcessDataViewModel.ParseData;
+
         [ObservableProperty]
-        private string processButtonText = "Start Processing";
-        [ObservableProperty]
-        private ParseDataStore parseData =ProcessDataViewModel.ParseData;
+        private string processButtonText = ProcessDataViewModel.ParseData.ProcessWinchDataButton;
+
         [RelayCommand]
         private async void File_Location()
         {
