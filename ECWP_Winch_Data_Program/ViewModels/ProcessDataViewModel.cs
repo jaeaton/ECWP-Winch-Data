@@ -37,7 +37,7 @@
                     case "MASH Winch":
                         extension = "*.CSV";
                         break;
-                    case "Armstrong CAST 6":
+                    case "WinchDAC": //Previously Armstrong Cast 6
                         extension = "*.MTN_WINCH";
                         break;
                     case "UNOLS String":

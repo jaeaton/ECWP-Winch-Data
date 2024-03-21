@@ -111,7 +111,7 @@
         {
                 "MASH Winch",
                 "SIO Traction Winch",
-                "Armstrong CAST 6",
+                "WinchDAC", //Previously Armstrong Cast 6
                 "UNOLS String",
                 "Jay Jay",
                 "Atlantis 3PS"

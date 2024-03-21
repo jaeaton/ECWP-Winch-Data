@@ -99,7 +99,7 @@
                                 }
 
                             }
-                            else if (parseData.SelectedWinch == "Armstrong CAST 6")
+                            else if (parseData.SelectedWinch == "WinchDAC") //Previously Armstrong Cast 6
                             {
 
                                 //string dataDateAndTime = data[0];
@@ -528,20 +528,37 @@
                             }
 
                         }
-                        else if (parseData.SelectedWinch == "Armstrong CAST 6") //Winch DAC?
+                        else if (parseData.SelectedWinch == "WinchDAC") //Previously Armstrong Cast 6
                         {
-                            //Winch DAC Log format: DateandTime, ?
-                            //string dataDateAndTime = data[0];
-                            //string[] dataDate = dataDateAndTime.Split(' ');
-                            //stringData = line;//"RD," + data[3] + "," + data[2] + "," + data[4] + "," + data[1] + "," + dataDate[0] + "," + dataDate[1];
-                            /*foreach (var dat in data)
+                            //Winch DAC Log format: Preamble (Winch Date Time MTN ID RD,Date and Time,Tension,Speed,Payout,Checksum 
+                                                        
+                            bool LengthBool = false;
+                            bool TensionBool = false;
+                            bool SpeedBool = false;
+                            bool PayoutBool = false;
+                            float Tension = 0;
+                            float Speed = 0;
+                            float Payout = 0;
+
+                            if (data.Length > 4)
                             {
-                                stringData += dat + ',';
-                            }*/
-                            //writeCombined();
-                            //MainProcessingViewModel.parseData.ReadingLine = stringData; //Updates Line being written to UI
-                            //stringData = null;
-                            //dataLine = true;
+                                LengthBool = true;
+                                TensionBool = float.TryParse(data[2], out Tension);
+                                SpeedBool = float.TryParse(data[3], out Speed);
+                                PayoutBool = float.TryParse(data[4], out Payout);
+                            }
+                            if (LengthBool != false && TensionBool != false && SpeedBool != false && PayoutBool != false)//float.TryParse(data[2], out float Tension) != false)
+                            {
+                                lineData.StringID = "RD";
+                                lineData.Tension = Tension;
+                                lineData.Speed = Speed;
+                                lineData.Payout = Payout;
+                                lineData.CheckSum = data[1];
+                                lineData.DateAndTime = DateTime.Parse(data[1]);
+                                lineData.TMAlarms = "00000000";
+                                lineData.TMWarnings = "00000000";
+                                dataLine = true;
+                            }
 
                         }
                         //Fix this section
@@ -813,7 +830,7 @@
             {
                 "MASH Winch",
                 "SIO Traction Winch",
-                "Armstrong CAST 6",
+                "WinchDAC", // Previously "Armstrong CAST 6", 
                 "UNOLS String",
                 "Jay Jay"
             };
