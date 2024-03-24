@@ -1,4 +1,5 @@
 ﻿using LiveChartsCore;
+using Store;
 
 namespace ViewModels
 {
@@ -196,81 +197,84 @@ namespace ViewModels
                 {
                     foreach (CommunicationModel com in  winch.AllOutputCommunication)
                     {
-                        if (com.CommunicationType == "Serial")
+                        if(com.DestinationName != string.Empty)
                         {
-                            lines.Add($"Transmit Communication Type,Serial");
-                            if (com.DestinationName != string.Empty)
+                            if (com.CommunicationType == "Serial")
                             {
-                                lines.Add($"Transmit Destination Name,{com.DestinationName}");
-                            }
-                            if (com.SerialPort != string.Empty)
-                            {
-                                lines.Add($"Transmit Serial Port Name,{com.SerialPort}");
-                            }
-                            if (com.BaudRate != string.Empty)
-                            {
-                                lines.Add($"Transmit Serial Baud Rate,{com.BaudRate}");
-                            }
-                            if (com.Parity != string.Empty)
-                            {
-                                lines.Add($"Transmit Parity,{com.Parity}");
-                            }
-                            if (com.StopBits != string.Empty)
-                            {
-                                lines.Add($"Transmit Stop Bits,{com.StopBits}");
-                            }
-                            if (com.DataBits  != string.Empty)
-                            {
-                                lines.Add($"Transmit Data Bits,{com.DataBits}");
-                            }
-                            if (com.DataProtocol != string.Empty)
-                            {
-                                lines.Add($"Transmit Data Protocol,{com.DataProtocol}");
-                            }
-                        }
-                        if (com.CommunicationType == "Network")
-                        {
-                            lines.Add($"Transmit Communication Type,Network");
-                            if (com.DestinationName != string.Empty)
-                            {
-                                lines.Add($"Transmit Destination Name,{com.DestinationName}");
-                            }
-                            if (com.TcpIpAddress != string.Empty)
-                            {
-                                bool valid = ValidateIPViewModel.ValidateIPFunction(com.TcpIpAddress);
-                                if (valid)
+                                lines.Add($"Transmit Communication Type,Serial");
+                                if (com.DestinationName != string.Empty)
                                 {
-                                    lines.Add($"Transmit IP,{com.TcpIpAddress}");
+                                    lines.Add($"Transmit Destination Name,{com.DestinationName}");
                                 }
-                                else
+                                if (com.SerialPort != string.Empty)
                                 {
-                                    await MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
-                                        $"Output IP Address not valid");
-                                    break;
+                                    lines.Add($"Transmit Serial Port Name,{com.SerialPort}");
                                 }
+                                if (com.BaudRate != string.Empty)
+                                {
+                                    lines.Add($"Transmit Serial Baud Rate,{com.BaudRate}");
+                                }
+                                if (com.Parity != string.Empty)
+                                {
+                                    lines.Add($"Transmit Parity,{com.Parity}");
+                                }
+                                if (com.StopBits != string.Empty)
+                                {
+                                    lines.Add($"Transmit Stop Bits,{com.StopBits}");
+                                }
+                                if (com.DataBits  != string.Empty)
+                                {
+                                    lines.Add($"Transmit Data Bits,{com.DataBits}");
+                                }
+                                if (com.DataProtocol != string.Empty)
+                                {
+                                    lines.Add($"Transmit Data Protocol,{com.DataProtocol}");
+                                }
+                            }
+                            if (com.CommunicationType == "Network")
+                            {
+                                lines.Add($"Transmit Communication Type,Network");
+                                if (com.DestinationName != string.Empty)
+                                {
+                                    lines.Add($"Transmit Destination Name,{com.DestinationName}");
+                                }
+                                if (com.TcpIpAddress != string.Empty)
+                                {
+                                    bool valid = ValidateIPViewModel.ValidateIPFunction(com.TcpIpAddress);
+                                    if (valid)
+                                    {
+                                        lines.Add($"Transmit IP,{com.TcpIpAddress}");
+                                    }
+                                    else
+                                    {
+                                        await MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
+                                            $"Output IP Address not valid");
+                                        break;
+                                    }
 
-                            }
-                            if (com.PortNumber != string.Empty)
-                            {
-                                bool valid = ValidateIPViewModel.ValidatePortFunction(com.PortNumber);
-                                if (valid)
-                                {
-                                    lines.Add($"Transmit Port,{com.PortNumber}");
                                 }
-                                else
+                                if (com.PortNumber != string.Empty)
                                 {
-                                    await MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
-                                        $"Output Port Number not Valid");
-                                    break;
+                                    bool valid = ValidateIPViewModel.ValidatePortFunction(com.PortNumber);
+                                    if (valid)
+                                    {
+                                        lines.Add($"Transmit Port,{com.PortNumber}");
+                                    }
+                                    else
+                                    {
+                                        await MessageBoxViewModel.DisplayMessage($"{winch.WinchName}\n" +
+                                            $"Output Port Number not Valid");
+                                        break;
+                                    }
                                 }
-                            }
-                            if (com.CommunicationProtocol != string.Empty)
-                            {
-                                lines.Add($"Transmit Communication Protocol,{com.CommunicationProtocol}");
-                            }
-                            if (com.DataProtocol != string.Empty)
-                            {
-                                lines.Add($"Transmit Data Protocol,{com.DataProtocol}");
+                                if (com.CommunicationProtocol != string.Empty)
+                                {
+                                    lines.Add($"Transmit Communication Protocol,{com.CommunicationProtocol}");
+                                }
+                                if (com.DataProtocol != string.Empty)
+                                {
+                                    lines.Add($"Transmit Data Protocol,{com.DataProtocol}");
+                                }
                             }
                         }
                     }
@@ -520,6 +524,10 @@ namespace ViewModels
                                     tempComms.IsSerial = true;
                                 }
                             }
+                            if (line.Substring(0, delim) == "Transmit Destination Name")
+                            {
+                                tempComms.DestinationName = line.Substring(delim + 1);
+                            }
                             if (line.Substring(0, delim) == "Transmit Communication Protocol")
                             {
                                 tempComms.CommunicationProtocol = line.Substring(delim + 1);
@@ -555,8 +563,13 @@ namespace ViewModels
                             if (line.Substring(0, delim) == "Transmit Data Protocol")
                             {
                                 tempComms.DataProtocol = line.Substring(delim + 1);
-                                winch = AddComms(tempComms, winch);
-                                tempComms = new();
+                                if (tempComms.DestinationName != string.Empty)
+                                {
+                                    winch = InsertOutputComms(tempComms, winch);
+                                    tempComms = new();
+                                }
+                                
+                                
                             }
 
                             if (line.Substring(0, delim) == "Cast Number")
@@ -708,6 +721,44 @@ namespace ViewModels
         public static WinchModel AddComms(CommunicationModel tempComms, WinchModel winch)
         {
             winch.AllOutputCommunication.Add(tempComms.ShallowCopy());
+            return winch;
+        }
+
+        public static WinchModel InsertOutputComms(CommunicationModel tempComms, WinchModel winch)
+        {
+            //ConfigDataStore _configDataStore = MainViewModel._configDataStore;
+            //See if Comm name is already used. If it is perform update on parameters. If not add it to the list
+            int index = -1;
+            for (int i = 0; i < winch.AllOutputCommunication.Count; i++)
+            {
+                CommunicationModel item = winch.AllOutputCommunication[i];
+                if (item.DestinationName == tempComms.DestinationName)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            if (index != -1)
+            {
+                winch.AllOutputCommunication[index] = tempComms.ShallowCopy();
+            }
+            else
+            {
+                winch.AllOutputCommunication.Add(tempComms.ShallowCopy());
+            }
+            //Clears the current list to make winch names as fresh as possible
+            //_configDataStore.CurrentWinch.AllOutputCommunication.Clear();
+            winch.TabItemsOutputComms.Clear();
+            winch.TabItemsOutputComms.Add(new TabItemModel("Add New", "Add New"));
+            //Loops through all winches and puts winch names in a list for selection process
+            if (winch.AllOutputCommunication.Count > 0)
+            {
+                foreach (var item in winch.AllOutputCommunication.ToList())
+                {
+                    TabItemModel tabItem = new TabItemModel(item.DestinationName, item.DestinationName);
+                    winch.TabItemsOutputComms.Add(tabItem);
+                }
+            }
             return winch;
         }
     }

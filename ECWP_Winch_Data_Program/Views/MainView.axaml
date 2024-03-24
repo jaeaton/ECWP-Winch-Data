@@ -12,7 +12,7 @@
 		<TabItem Header="Live Data" VerticalContentAlignment="Center">
 			<v:LiveDataView/>
 		</TabItem>
-		<TabItem Header="Winch Config" VerticalContentAlignment="Center">
+		<TabItem Header="Winches" VerticalContentAlignment="Center">
 			<v:WinchView />
 		</TabItem>
 		<!--

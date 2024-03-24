@@ -15,28 +15,35 @@ namespace Models
         private string communicationType = string.Empty;
         partial void OnCommunicationTypeChanged(string value)
         {
-            if (value == "Serial")
+            if (value == "Serial" && IsSerial == false)
             {
                 IsSerial = true;
                 IsNetwork = false;
             }
-            if (value == "Network")
+            if (value == "Network" && IsNetwork == false)
             {
                 IsNetwork = true;
                 IsSerial = false;
             }
         }
         [ObservableProperty]
-        private bool isSerial;// = new();
+        private bool isSerial = false;// = new();
         partial void OnIsSerialChanged(bool value)
         {
-            CommunicationType = "Serial";
+            if (value == true)
+            {
+                CommunicationType = "Serial";
+            }            
         }
         [ObservableProperty]
-        private bool isNetwork;// = new();
+        private bool isNetwork = true;// = new();
         partial void OnIsNetworkChanged(bool value)
         {
-            CommunicationType = "Network";
+            if (value == true)
+            {
+                CommunicationType = "Network";
+            }
+            
         }
 
         [ObservableProperty]
@@ -63,13 +70,13 @@ namespace Models
         private string dataProtocol = string.Empty;
         partial void OnDataProtocolChanged(string value)
         {
-            if (value == "UNOLS")
+            if (value == "UNOLS" && IsUNOLS != true)
             {
                 IsUNOLS = true;
                 IsMTNW = false;
             }
 
-            if (value == "MTNW")
+            if (value == "MTNW" && IsMTNW != true)
             {
                 IsUNOLS = false;
                 IsMTNW = true;
@@ -77,14 +84,14 @@ namespace Models
         }
 
         [ObservableProperty]
-        private bool isUNOLS;
+        private bool isUNOLS = true;
         partial void OnIsUNOLSChanged(bool value)
         {
             DataProtocol = "UNOLS";
         }
 
         [ObservableProperty]
-        private bool isMTNW;
+        private bool isMTNW = false;
         partial void OnIsMTNWChanged(bool value)
         {
             DataProtocol = "MTNW";

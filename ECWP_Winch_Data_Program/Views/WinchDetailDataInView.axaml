@@ -14,15 +14,15 @@
 			
 			<StackPanel IsVisible="{Binding ElementName=RadioButtonInputCommNetwork, Path=IsChecked}">
 				<StackPanel Orientation="Horizontal" Margin="5">
-					<TextBlock Text="IP Address" Width="90" VerticalAlignment="Center" />
+					<TextBlock Text="IP Address" Width="100" VerticalAlignment="Center" />
 					<TextBox Watermark="Ex: 192.168.103.217" Text="{ Binding CurrentWinch.InputCommunication.TcpIpAddress, Mode=TwoWay }" IsEnabled="{Binding Path=UserInputsEnable}" Width="130" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBox>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5">
-					<TextBlock Text="Port Number" Width="90" VerticalAlignment="Center" />
+					<TextBlock Text="Port Number" Width="100" VerticalAlignment="Center" />
 					<TextBox Watermark="Ex: 50505" x:Name="TextBoxSourcePort" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.InputCommunication.PortNumber, Mode=TwoWay }" Width="130" VerticalAlignment="Center"></TextBox>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5">
-					<TextBlock Text="Source Type" Width="90" VerticalAlignment="Center"/>
+					<TextBlock Text="Source Type" Width="100" VerticalAlignment="Center"/>
 					<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.InputCommunication.DataProtocol, Mode=TwoWay }" ItemsSource="{ Binding AvailableProtocols }" SelectedIndex="0"/>
 				</StackPanel>
 			</StackPanel>
@@ -51,7 +51,7 @@
 			</StackPanel>	
 			
 			<StackPanel Orientation="Horizontal" Margin="5">
-				<TextBlock Text="Protocol" Width="90" VerticalAlignment="Center"/>
+				<TextBlock Text="Protocol" Width="100" VerticalAlignment="Center"/>
 				<ComboBox MinWidth="210" SelectedItem="{ Binding CurrentWinch.InputCommunication.CommunicationProtocol, Mode=TwoWay }" ItemsSource="{ Binding Path=DataProtocolList }" SelectedIndex="0"/>
 			</StackPanel>
 			

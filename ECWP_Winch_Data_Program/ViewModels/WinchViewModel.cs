@@ -7,12 +7,20 @@
         /// Add Winch adds the data currently stored in current Winch as a new selectable winch 
         /// </summary>
         [RelayCommand]
-        public void AddWinch()
+        public async void AddWinch()
         {
-            //Send to generic method to add winch to the winch list
-            InsertWinch(_configDataStore.CurrentWinch);
-            //Write the config file 
-            FileOperationsViewModel.WriteConfig(_configDataStore);
+            if (_configDataStore.CurrentWinch.WinchName != string.Empty)
+            {
+                //Send to generic method to add winch to the winch list
+                InsertWinch(_configDataStore.CurrentWinch);
+                //Write the config file 
+                FileOperationsViewModel.WriteConfig(_configDataStore);
+            }
+            else
+            {
+                await MessageBoxViewModel.DisplayMessage(
+                           $"Winch Name must be entered. Configuration not saved/updated");
+            }
         }
         [RelayCommand]
         private void RemoveWinch()
@@ -113,59 +121,69 @@
         }
 
         public void InsertWinch(WinchModel Winch)
-        {
-            //Check to see if a cast number has been added. If not set to 1
-            if (Winch.CastNumber == null)
-            {
-                Winch.CastNumber = "1";
-            }
-            //Check to see if the start button has a name. If not set to "start log"
-            if (Winch.StartStopButtonText == null)
-            {
-                Winch.StartStopButtonText = "Start Log";
-            }
-            //See if winch name is already used. If it is perform update on parameters. If not add it to the list
-            int index = -1;
-            for (int i = 0; i < _configDataStore.AllWinches.Count; i++)
-            {
-                WinchModel item = _configDataStore.AllWinches[i];
-                if (item.WinchName == Winch.WinchName)
+        {  
+                //Check to see if a cast number has been added. If not set to 1
+                if (Winch.CastNumber == null)
                 {
-                    index = i;
-                    break;
+                    Winch.CastNumber = "1";
                 }
-            }
-            if (index != -1)
-            {
-                _configDataStore.AllWinches[index] = Winch.DeepCopy();
-            }
-            else
-            {
-                _configDataStore.AllWinches.Add(Winch.DeepCopy());
-            }
-            //Clears the current list to make winch names as fresh as possible
-            _configDataStore.WinchNames.Clear();
-            _configDataStore.TabItems.Clear();
+                //Check to see if the start button has a name. If not set to "start log"
+                if (Winch.StartStopButtonText == null)
+                {
+                    Winch.StartStopButtonText = "Start Log";
+                }
+                //See if winch name is already used. If it is perform update on parameters. If not add it to the list
+                int index = -1;
+                for (int i = 0; i < _configDataStore.AllWinches.Count; i++)
+                {
+                    WinchModel item = _configDataStore.AllWinches[i];
+                    if (item.WinchName == Winch.WinchName)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+                if (index != -1)
+                {
+                    _configDataStore.AllWinches[index] = Winch.DeepCopy();
+                }
+                else
+                {
+                    _configDataStore.AllWinches.Add(Winch.DeepCopy());
+                }
+                //Clears the current list to make winch names as fresh as possible
+                _configDataStore.WinchNames.Clear();
+                _configDataStore.TabItems.Clear();
 
-            _configDataStore.TabItems.Add(new TabItemModel("Add New", "Add New"));
-            //Loops through all winches and puts winch names in a list for selection process
-            if (_configDataStore.AllWinches.Count > 0)
-            {
-                foreach (var item in _configDataStore.AllWinches)
+                _configDataStore.TabItems.Add(new TabItemModel("Add New", "Add New"));
+                //Loops through all winches and puts winch names in a list for selection process
+                if (_configDataStore.AllWinches.Count > 0)
                 {
-                    
-                    TabItemModel tabItem = new TabItemModel(item.WinchName, item.WinchName);
-                    _configDataStore.WinchNames.Add(item.WinchName);
-                    _configDataStore.TabItems.Add(tabItem);
+                    foreach (var item in _configDataStore.AllWinches)
+                    {
+
+                        TabItemModel tabItem = new TabItemModel(item.WinchName, item.WinchName);
+                        _configDataStore.WinchNames.Add(item.WinchName);
+                        _configDataStore.TabItems.Add(tabItem);
+                    }
                 }
-            }
+            
 
         }
 
         [RelayCommand]
-        public void AddCommOut()
+        public async void AddCommOut()
         {
-            InsertCommOut();
+            if (_configDataStore.CurrentWinch.OutputCommunication.DestinationName != string.Empty)
+            {
+                InsertCommOut();
+            }
+            else
+            {
+                await MessageBoxViewModel.DisplayMessage(
+                           $"Data destination much be named.");
+            }
+            
         }
 
         [RelayCommand]
@@ -232,8 +250,11 @@
                 foreach (var item in _configDataStore.CurrentWinch.AllOutputCommunication.ToList())
                 {
                     TabItemModel tabItem = new TabItemModel(item.DestinationName, item.DestinationName);
-                    //_configDataStore.WinchNames.Add(item.WinchName);
-                    _configDataStore.CurrentWinch.TabItemsOutputComms.Add(tabItem);
+                    if (item.DestinationName != string.Empty)
+                    {
+                         _configDataStore.CurrentWinch.TabItemsOutputComms.Add(tabItem);
+                    }
+                   
                 }
             }
         }

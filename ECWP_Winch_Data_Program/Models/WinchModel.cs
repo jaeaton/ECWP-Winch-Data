@@ -316,7 +316,7 @@ namespace Models
                 int index = -1;
                 if (comm == "Add New")
                 {
-                    //OutputCommunication = new();
+                    OutputCommunication = new();
                 }
                 
                 else
