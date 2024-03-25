@@ -64,6 +64,8 @@
                                                                 "TCP Client",
                                                                 "UDP"
                                                             };
+        [ObservableProperty]
+        private List<string> availableProtocolsOutput = new List<string> { "UDP" };
 
         [ObservableProperty]
         private List<string> winchDataType = new()

@@ -8,30 +8,26 @@ namespace ViewModels
         ChartDataViewModel chartVM = new ChartDataViewModel();
         LiveDataHawboldtViewModel hawboldtProcessingVM = new LiveDataHawboldtViewModel();
         public int i = 0;
-        public SerialPort _serialPort = new SerialPort();
+        //public SerialPort _serialPort = new SerialPort();
+        public List<SerialPort> serialPorts = new List<SerialPort>();
+        public List<UdpClient> udpClients = new List<UdpClient>();
         public SerialPort InputSerialPort = new SerialPort();
         //Asynchronious method to allow application to still respond to user interaction
         public async void GetDataAsync(WinchModel winch)
         {
             string dataIn;
             //ChartDataViewModel chartVM = new ChartDataViewModel(winch);
-            //Need new data output
-            //if (winch.SerialOutput)
-            //{
-            //    int.TryParse(winch.BaudRateOutput, out int serialBaudRate);
-            //    //_serialPort = new SerialPort(globalConfig.SerialPortName,serialBaudRate,Parity.None,8,StopBits.One);
-            //    _serialPort.PortName = winch.SerialPortOutput;
-            //    _serialPort.BaudRate = serialBaudRate;
-            //    _serialPort.Parity = Parity.None;
-            //    _serialPort.DataBits = 8;
-            //    _serialPort.StopBits = StopBits.One;
-            //    _serialPort.Open();
-            //}
+            //Setup data outputs
+            if (winch.AllOutputCommunication.Count > 0)
+            {
+                SetupOutputs(winch);
+            }
             if (winch.InputCommunication.CommunicationType == "Serial")
             {
                 Parity InputParity = new Parity();
                 StopBits InputStopBits = new StopBits();
                 int.TryParse(winch.InputCommunication.BaudRate, out int serialBaudRate);
+                int.TryParse(winch.InputCommunication.DataBits, out int serialDataBits);
                 if (winch.InputCommunication.Parity == "N") { InputParity = Parity.None; }
                 else if (winch.InputCommunication.Parity == "E") { InputParity = Parity.Even; }
                 else if (winch.InputCommunication.Parity == "O") { InputParity = Parity.Odd; }
@@ -45,7 +41,7 @@ namespace ViewModels
                 InputSerialPort.PortName = winch.InputCommunication.SerialPort;
                 InputSerialPort.BaudRate = serialBaudRate;
                 InputSerialPort.Parity = InputParity;
-                InputSerialPort.DataBits = int.Parse(winch.InputCommunication.DataBits);
+                InputSerialPort.DataBits = serialDataBits;
                 InputSerialPort.StopBits = InputStopBits;
                 InputSerialPort.ReadTimeout = 500;
                 
@@ -270,11 +266,22 @@ namespace ViewModels
                 await MessageBoxViewModel.DisplayMessage("Input communication not set");
             }
 
-            if (_serialPort.IsOpen)
+            //Close Output communications
+            if (udpClients.Count > 0)
             {
-                _serialPort.Close();
-                _serialPort.Dispose();
+                foreach (UdpClient udpClient in udpClients)
+                {
+                    udpClient.Close();
+                }
             }
+            if (serialPorts.Count > 0)
+            {
+                foreach (SerialPort serialPort in serialPorts)
+                {
+                    serialPort.Close();
+                }
+            }
+
             //free up canceller resources
             winch.Canceller.Dispose();
             if (winch.LogMax == true)
@@ -525,13 +532,21 @@ namespace ViewModels
                             winch.Canceller.Cancel();
                         }
                     }
-                    if (winch.UdpOutput)
+                    if (udpClients.Count > 0)
                     {
-                        Send20HzData(latest, winch);
+                        foreach (var client in udpClients)
+                        {
+                            Send20HzData(latest, winch, client);
+                        }
+                        
                     }
-                    if (winch.SerialOutput)
+                    if (serialPorts.Count > 0)
                     {
-                        SendSerialData(latest, winch);
+                        foreach (var port in serialPorts)
+                        {
+                            SendSerialData(latest, winch, port);
+                        }
+                        
                     }
 
                     DisplayData(latest, winch);
@@ -603,7 +618,7 @@ namespace ViewModels
                 stream.WriteLine(line);
             }
         }
-        private void Send20HzData(DataPointModel data, WinchModel winch)
+        private void Send20HzData(DataPointModel data, WinchModel winch, UdpClient client)
         {
             //Format string based on format selection
             string line;
@@ -623,12 +638,11 @@ namespace ViewModels
             Array.ForEach(asciiBytes, delegate (byte i) { checkSum += i; });
             line = $"{line}{checkSum}";
             //Send UDP packet
-            UdpClient udpClient = new UdpClient();
-            udpClient.Connect(IPAddress.Parse(winch.OutputCommunication.TcpIpAddress), int.Parse(winch.OutputCommunication.PortNumber));
             byte[] sendBytes = Encoding.ASCII.GetBytes(line);
-            udpClient.Send(sendBytes, sendBytes.Length);
+            
+            client.Send(sendBytes, sendBytes.Length);
         }
-        private void SendSerialData(DataPointModel data, WinchModel winch)
+        private void SendSerialData(DataPointModel data, WinchModel winch, SerialPort _serialPort)
         {
             //Format string based on format selection
             string line;
@@ -676,6 +690,60 @@ namespace ViewModels
             ExcelViewModel.AddCastData(winch.MaxData.MaxTension, winch.MaxData.MaxPayout, int.Parse(winch.CastNumber));
             //Clear max data
             winch.MaxData.Clear();
+        }
+        public void SetupOutputs(WinchModel winch)
+        {
+            if (winch.AllOutputCommunication.Count > 0)
+            {
+                foreach (var output in winch.AllOutputCommunication)
+                {
+                    if (output.CommunicationType == "Network")
+                    {
+                        if (output.CommunicationProtocol == "UDP")
+                        {
+                            int i = udpClients.Count;
+                            if (IPAddress.TryParse(output.TcpIpAddress, out IPAddress ipAddress) &&  int.TryParse(output.PortNumber, out int portNumber))
+                            {
+                                IPEndPoint iPEndPoint = new IPEndPoint(ipAddress, portNumber);
+                                udpClients[i] = new UdpClient(iPEndPoint);
+                            }                
+
+                        }
+                        //else if (output.CommunicationProtocol == "TCP Server")
+                        //{
+
+                        //}
+                        //else if(output.CommunicationProtocol == "TCP Client")
+                        //{
+
+                        //}
+                    }
+                    else if (output.CommunicationType == "Serial")
+                    {
+                        int i = serialPorts.Count;
+                        int.TryParse(output.BaudRate, out int serialBaudRate);
+                        int.TryParse(output.DataBits, out int dataBits);
+                        Parity outParity = new Parity();
+                        StopBits outStopBits = new StopBits();
+                        if (output.Parity == "N") { outParity = Parity.None; }
+                        else if (output.Parity == "E") { outParity = Parity.Even; }
+                        else if (output.Parity == "O") { outParity = Parity.Odd; }
+                        else { outParity = Parity.None; }
+
+                        if (winch.InputCommunication.StopBits == "1") { outStopBits = StopBits.One; }
+                        else if (winch.InputCommunication.StopBits == "1.5") { outStopBits = StopBits.OnePointFive; }
+                        else if (winch.InputCommunication.StopBits == "2") { outStopBits = StopBits.Two; }
+                        else { outStopBits = StopBits.One; }
+                        
+                        serialPorts[i].PortName = output.SerialPort;
+                        serialPorts[i].BaudRate = serialBaudRate;
+                        serialPorts[i].Parity = outParity;
+                        serialPorts[i].DataBits = dataBits;
+                        serialPorts[i].StopBits = outStopBits;
+                        serialPorts[i].Open();
+                    }
+                }
+            }
         }
     }
 }
