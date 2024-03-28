@@ -2,6 +2,9 @@
 {
     internal class ProcessDataReadFilesViewModel
     {
+        //Old two step data processing
+        //Step one combine all log files into big log
+        //Remove soon
         public static async void CombineFiles(ParseDataStore parseData)
         {
             //ParseDataStore _settingsStore = parseData;
@@ -243,6 +246,9 @@
             }
             parseData.ReadingLine = "Done!"; //Update UI with done
         }
+        //Old two step data processing
+        //Step two to read big log and sort data
+        //Remove soon
         public static async void ParseFiles(ParseDataStore parseData)
         {
             // Read threshold values
@@ -366,6 +372,8 @@
                 //parseData.ReadingLine = "Done!";
             });
         }
+       
+        //Single command to both read and then sort the data step 1
         public static async void ReadDataFiles()//ParseDataStore parseData)
         {
             
@@ -393,9 +401,15 @@
                     parseData.CancellationTokenSource.Dispose();
                 }
             }
-            Dispatcher.UIThread.Post(() => ProcessDataViewModel.ParseData.ProcessWinchDataButton = "Start Processing",DispatcherPriority.Input);
-            parseData.ReadingLine = "Done!"; //Update UI with done
+            //Dispatcher.UIThread.Post(() => ProcessDataViewModel.ParseData.ProcessWinchDataButton = "Start Processing",DispatcherPriority.Input);
+            if (!parseData.CancellationTokenSource.IsCancellationRequested)
+            {
+                parseData.ReadingLine = "Done!"; //Update UI with done
+            }
+
+            parseData.ProcessWinchDataButton = "Start Processing";
         }
+        //step 2
         public static void ReadDataFromLogs(ParseDataStore parseData)
         {
             string filePath = parseData.Directory;
@@ -419,7 +433,7 @@
                 {
                     line = line.Replace("\n", String.Empty); //remove EOL Characters
                     line = line.Replace("\r", String.Empty);
-                    parseData.ReadingLine = line;
+                    //parseData.ReadingLine = line;
                     string[] data = line.Split(',');
                     if (data.Length > 2)
                     {
@@ -702,13 +716,17 @@
                 }
                 //Write data
                 ParseDataFromLogs(DataModels);
-
-
-
                 file.Close(); //Close the file
+
+                //Cancel task if cancellation requested
+                if (ProcessDataViewModel.ParseData.CancellationTokenSource.Token.IsCancellationRequested )
+                {
+                    ProcessDataViewModel.ParseData.CancellationTokenSource.Token.ThrowIfCancellationRequested();
+                }
             }
             
         }
+        //Step 3
         public static void ParseDataFromLogs(List<DataPointModel> dataPointModels)
         {
             // Read stored values
@@ -769,7 +787,7 @@
                     mPayDataPt = MaxPayoutDataPoint.DeepCopy();
                     //ProcessDataWriteFilesViewModel.WriteProcessed(maxTensionString, maxPayoutString, cast); //end cast, increment cast number, write processed data
                     ExcelViewModel.AddCastData(mTenDataPt, mPayDataPt, castSend);
-                    parseData.ReadingLine = maxTensionString;
+                    //parseData.ReadingLine = maxTensionString;
                     parseData.ProcessCasts.Add(processCastDataModel);
 
                     Dispatcher.UIThread.Post(() => AddData(lineData, castSend, mTenSend, mTenPaySend, mPaySend));
@@ -803,7 +821,6 @@
             //{
             //    Dispatcher.UIThread.Post(() => parseData.ChartData.AddData(val));
             //}
-            parseData.ReadingLine = "Done!";
             parseData.MaxTensionCurrent = maxTensionCurrent;
             parseData.MaxTensionPayoutCurrent = maxTensionPayoutCurrent;
             parseData.MaxPayoutCurrent = maxPayoutCurrent;

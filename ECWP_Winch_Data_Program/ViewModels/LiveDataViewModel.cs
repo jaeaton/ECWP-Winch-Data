@@ -59,6 +59,26 @@ namespace ViewModels
             {
                 MainViewModel._configDataStore.WinchesToPlot.Remove(WinchName);
             }
+            RefreshAvailablePlots();
+            //_configDataStore.PlottingWinches.Clear();
+            //if (_configDataStore.AllWinches != null && _configDataStore.WinchesToPlot != null)
+            //{
+            //    foreach (var winch in _configDataStore.WinchesToPlot)
+            //    {
+            //        for (int i = 0; i < _configDataStore.AllWinches.Count; i++)
+            //        {
+            //            if (_configDataStore.AllWinches[i].WinchName == winch)
+            //            {
+            //                _configDataStore.PlottingWinches.Add(_configDataStore.AllWinches[i]);//.DeepCopy());
+            //                break;
+            //            }
+            //        }
+
+            //    }
+            //}
+        }
+        public void RefreshAvailablePlots()
+        {
             _configDataStore.PlottingWinches.Clear();
             if (_configDataStore.AllWinches != null && _configDataStore.WinchesToPlot != null)
             {

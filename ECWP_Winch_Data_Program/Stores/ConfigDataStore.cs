@@ -228,6 +228,8 @@
         private int numberOfFiles = 0;
         [ObservableProperty]
         private int numberOfProcessedFiles = 0;
+        [ObservableProperty]
+        private string buttonText = "Start Processing";
         public void LoadWinch(string winch)
         {
             if ( winch == "Add New")

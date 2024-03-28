@@ -80,7 +80,7 @@
         private string readingLine = string.Empty   ;
         partial void OnReadingLineChanged(string value)
         {
-            //Dispatcher.UIThread.Post(() => MainViewModel._configDataStore.ReadingLine = value);
+            Dispatcher.UIThread.Post(() => MainViewModel._configDataStore.ReadingLine = value);
            
         }
 
@@ -151,6 +151,10 @@
 
         [ObservableProperty]
         private string processWinchDataButton = "Start Processing";
+        partial void OnProcessWinchDataButtonChanged(string value)
+        {
+            Dispatcher.UIThread.Post(() => MainViewModel._configDataStore.ButtonText = value);
+        }
     }
     public class SortableObservableCollection<T> : ObservableCollection<T>
     {

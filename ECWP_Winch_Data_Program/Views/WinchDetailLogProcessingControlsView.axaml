@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:ViewModels"
 			 mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
-			 x:CompileBindings="False"
+			x:CompileBindings="False"
              x:Class="Views.WinchDetailLogProcessingControlsView">
 	
 	<UserControl.Resources>
@@ -24,13 +24,13 @@
 			<TextBlock Text="Raw Log Location:" Width="160"/>
 			<TextBlock Text="{Binding CurrentWinch.RawLogDirectory}"/>
 			<TextBlock Text="\"/>
-			<TextBlock Text="{Binding parseData.ReadingFileName}" DataContext="{StaticResource ResourceKey=winch}"/>
+			<TextBlock Text="{Binding Path=ParseData.ReadingFileName}" DataContext="{StaticResource ResourceKey=winch}"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
-			<TextBlock Text="Progress:" Width="160"/>
-			<!--
+			<TextBlock Text="Progress:" Width="100"/>
+			
 			<TextBlock Text="{ Binding ReadingLine }" />
-			-->
+			
 			<TextBlock Text="{Binding NumberOfProcessedFiles}" Width="50" TextAlignment="Right"/>
 			<TextBlock Text="/"/>
 			<TextBlock Text="{Binding NumberOfFiles}" Width="50"/>
@@ -44,8 +44,9 @@
 			<CalendarDatePicker SelectedDate="{ Binding EndDate }" Margin="0,0,10,0"/>
 		</StackPanel>
 		<StackPanel>
-			<Button Content="{Binding ProcessButtonText}" Command="{ Binding SingleProcessFilesCommand }" Margin="5" DataContext="{ StaticResource ResourceKey=commands }"/>	
+			<Button  Content="{Binding #ButtonText.Text }" DataContext="{ StaticResource ResourceKey=commands }" Command="{ Binding SingleProcessFilesCommand }" Margin="5" />	
+			
 		</StackPanel>
-		
+		<TextBlock Text="{Binding ButtonText}" Name="ButtonText" IsVisible="False"/>
 	</StackPanel>
 </UserControl>

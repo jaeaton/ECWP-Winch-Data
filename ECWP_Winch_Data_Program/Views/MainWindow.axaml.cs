@@ -10,6 +10,7 @@ public partial class MainWindow : Window
         this.DataContext = MainViewModel._configDataStore;
         Instance = this;
         FileOperationsViewModel.ReadConfig(MainViewModel._configDataStore);
+        
     }
 
     public static MainWindow? Instance { get; private set; }
