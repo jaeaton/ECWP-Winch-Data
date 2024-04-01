@@ -10,6 +10,7 @@
 	<UserControl.Resources>
 		<vm:ProcessDataViewModel x:Key="winch"/>
 		<vm:ProcessDataCommandsViewModel x:Key="commands"/>
+		<vm:WinchViewModel x:Key="Save"/>
 	</UserControl.Resources>
 	
 
@@ -25,6 +26,11 @@
 			<TextBlock Text="{Binding CurrentWinch.RawLogDirectory}"/>
 			<TextBlock Text="\"/>
 			<TextBlock Text="{Binding Path=ParseData.ReadingFileName}" DataContext="{StaticResource ResourceKey=winch}"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
+			<TextBlock Text="Cruise Name:" Width="160" VerticalAlignment="Center"/>
+			<TextBox Width="160" Watermark="Enter Cruise Name" Text="{ Binding CuiseNameBox }"/>
+			<Button Content="Update" Margin="5,0,0,0" Command="{Binding AddWinchCommand}" DataContext="{StaticResource Save}"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<TextBlock Text="Progress:" Width="100"/>
