@@ -12,7 +12,7 @@ namespace Models
 
         //Serial Vs Network
         [ObservableProperty]
-        private string communicationType = string.Empty;
+        private string communicationType = "Network";
         partial void OnCommunicationTypeChanged(string value)
         {
             if (value == "Serial" && IsSerial == false)
@@ -67,7 +67,7 @@ namespace Models
         
         //Data string format, MTNW, UNOLS, Hawboldt, etc
         [ObservableProperty]
-        private string dataProtocol = string.Empty;
+        private string dataProtocol = "UNOLS";
         partial void OnDataProtocolChanged(string value)
         {
             if (value == "UNOLS" && IsUNOLS != true)
@@ -87,14 +87,22 @@ namespace Models
         private bool isUNOLS = true;
         partial void OnIsUNOLSChanged(bool value)
         {
-            DataProtocol = "UNOLS";
+            if (value == true)
+            {
+                DataProtocol = "UNOLS";
+            }
+
         }
 
         [ObservableProperty]
         private bool isMTNW = false;
         partial void OnIsMTNWChanged(bool value)
         {
-            DataProtocol = "MTNW";
+            if (value == true)
+            {
+                DataProtocol = "MTNW";
+            }
+
         }
 
         [ObservableProperty]
