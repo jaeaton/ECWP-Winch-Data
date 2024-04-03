@@ -22,6 +22,21 @@
                            $"Winch Name must be entered. Configuration not saved/updated");
             }
         }
+
+        [RelayCommand]
+        public async Task UpdateCruiseInfo()
+        {
+            if (_configDataStore.CruiseNameBox != string.Empty || _configDataStore.ShipName != string.Empty)
+            {
+                //Write the config file 
+                FileOperationsViewModel.WriteConfig(_configDataStore);
+            }
+            else
+            {
+                await MessageBoxViewModel.DisplayMessage(
+                           $"Ship or Cruise Name must be entered. Configuration not saved/updated");
+            }
+        }
         [RelayCommand]
         private void RemoveWinch()
         {

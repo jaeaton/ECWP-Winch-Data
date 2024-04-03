@@ -25,6 +25,7 @@
 			</Grid.RowDefinitions>
 			
 			<v:LiveDataPlotSelectionView Grid.Column="0" Margin="2"/>
+		
 			<ScrollViewer Grid.Column="1">
 				
 				<ItemsControl ItemsSource="{ Binding PlottingWinches}" >
