@@ -14,19 +14,19 @@
 		<StackPanel>
 			<StackPanel Orientation="Horizontal" Margin="2">
 				<TextBlock Text="Date:"  Width="120" VerticalAlignment="Center"  />
-				<CalendarDatePicker SelectedDate="{Binding WireLogEventDate}"  />
+				<CalendarDatePicker SelectedDate="{Binding WireLogEventDate}" ToolTip.Tip="Date of event." />
 			</StackPanel>
 			<StackPanel Orientation="Horizontal" Margin="2">
 				<TextBlock Text="Log Event Type:" Width="120" VerticalAlignment="Center"  />
-				<ComboBox ItemsSource="{Binding WireLogEventList}" SelectedItem="{Binding WireLogEventSelection}" Width="150"  />
+				<ComboBox ItemsSource="{Binding WireLogEventList}" SelectedItem="{Binding WireLogEventSelection}" Width="150" ToolTip.Tip="Select event type." />
 			</StackPanel>
 			<StackPanel Orientation="Horizontal" Margin="2">
 				<TextBlock Text="Cut Back Length:" VerticalAlignment="Center" Width="120"/>
-				<TextBox Text="{Binding WireLogEventCutBack}" Width="160"/>
+				<TextBox Text="{Binding WireLogEventCutBack}" Width="160" ToolTip.Tip="Enter cut back amount when cut back event is selected. This value updates current/available length."/>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal" Margin="2">
 				<TextBlock Text="Notes:" Width="120" VerticalAlignment="Center"/>
-				<TextBox Text="{Binding WireLogEventNotes}" Width="200" Height="200"/>
+				<TextBox Text="{Binding WireLogEventNotes}" Width="200" Height="200" ToolTip.Tip="Enter additional information here."/>
 			</StackPanel>
 			
 			<StackPanel Orientation="Horizontal" Margin="2" DataContext="{StaticResource winch}">

@@ -14,7 +14,7 @@
 	
 	<UserControl.DataTemplates>
 		<DataTemplate DataType="m:WinchModel">
-			<CheckBox Content="{ Binding WinchName }" IsChecked="{ Binding PlotSelected }" Margin="5"/>
+			<CheckBox Content="{ Binding WinchName }" IsChecked="{ Binding PlotSelected }" Margin="5" ToolTip.Tip="Display live winch data"/>
 		</DataTemplate>
 	</UserControl.DataTemplates>
 	<ScrollViewer>
@@ -23,7 +23,7 @@
 				<TextBlock Text="Cruise Name" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 				<TextBox x:Name="TextBoxCruiseName" Watermark="Ex: OC123" Text="{Binding CruiseNameBox,Mode=TwoWay}"  Width="120" VerticalAlignment="Center" />
 			</StackPanel>
-			<Button Content="Update Cruise Name" Command="{Binding UpdateCruiseInfoCommand}" DataContext="{StaticResource winch}" HorizontalAlignment="Center"/>
+			<Button Content="Update Cruise Name" Command="{Binding UpdateCruiseInfoCommand}" DataContext="{StaticResource winch}" HorizontalAlignment="Center" ToolTip.Tip="Saves cruise name."/>
 			<StackPanel Orientation="Vertical" Margin="5" >
 				<TextBlock Text="Select Winches" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 				<ItemsControl ItemsSource="{ Binding AllWinches}" BorderBrush="DimGray" BorderThickness="2" CornerRadius="5"/>

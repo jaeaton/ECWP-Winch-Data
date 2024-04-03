@@ -16,7 +16,7 @@
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<TextBlock Text="Winch Name" Width="160" VerticalAlignment="Center" />
-			<TextBox Watermark="Enter Name" Text="{ Binding CurrentWinch.WinchName, Mode=TwoWay }" Width="160"/>
+			<TextBox Watermark="Enter Name" Text="{ Binding CurrentWinch.WinchName, Mode=TwoWay }" Width="160" ToolTip.Tip="Enter the name or function of the winch."/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<TextBlock Text="Winch Manufacturer" Width="160" VerticalAlignment="Center" />
@@ -31,14 +31,14 @@
 			<TextBox Watermark="Enter Serial Number" Text="{ Binding CurrentWinch.WinchSerialNumber, Mode=TwoWay }" Width="160"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
-			<Button Content="Set Raw Path" Command="{Binding SetRawLogPathCommand}" Margin="0,0,5,0" Width="155" HorizontalContentAlignment="Center" DataContext="{StaticResource winch}"/>
+			<Button Content="Set Raw Path" Command="{Binding SetRawLogPathCommand}" Margin="0,0,5,0" Width="155" HorizontalContentAlignment="Center" DataContext="{StaticResource winch}" ToolTip.Tip="The raw path is either where to save live data to or where the log files are located."/>
 			<!--<TextBlock Text="Set Raw Path" Width="160" VerticalAlignment="Center" /> -->
 			<Border BorderBrush="DarkGray" BorderThickness="1" CornerRadius="3" Height="30">
 				<TextBlock Text="{ Binding CurrentWinch.RawLogDirectory, FallbackValue=Set Path}" Margin="2" VerticalAlignment="Center" MinWidth="160"/>
 			</Border>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
-			<Button Content="Set UNOLS Path" Command="{Binding SetUNOLSLogPathCommand}" Margin="0,0,5,0" Width="155" HorizontalContentAlignment="Center" DataContext="{StaticResource winch}"/>
+			<Button Content="Set UNOLS Path" Command="{Binding SetUNOLSLogPathCommand}" Margin="0,0,5,0" Width="155" HorizontalContentAlignment="Center" DataContext="{StaticResource winch}" ToolTip.Tip="The UNOLS Path is where the UNOLS Wire Pool log is saved."/>
 			<!--<TextBlock Text="UNOLS Log Path" Width="160" VerticalAlignment="Center" /> -->
 			<Border BorderBrush="DarkGray" BorderThickness="1" CornerRadius="3" Height="30">
 				<TextBlock Text="{ Binding CurrentWinch.WinchDirectory, FallbackValue=Set Path}" Margin="2" VerticalAlignment="Center" MinWidth="160"/>
@@ -46,8 +46,8 @@
 		</StackPanel>
 		<!--<Button Content="Set UNOLS Path" Command="{Binding SetWinchPathCommand}" Margin="5" Width="160" HorizontalContentAlignment="Center" DataContext="{StaticResource winch}"/>-->
 		<StackPanel Orientation="Horizontal" Margin="5" DataContext="{StaticResource winch}">
-			<Button Content="Add/Update Winch" Command="{Binding AddWinchCommand}" HorizontalContentAlignment="Center" Width="160" Margin="2"/>
-			<Button Content="Remove Winch" Command="{Binding RemoveWinchCommand}" HorizontalContentAlignment="Center" Width="160" Margin="2"/>
+			<Button Content="Add/Update Winch" Command="{Binding AddWinchCommand}" HorizontalContentAlignment="Center" Width="160" Margin="2" ToolTip.Tip="This adds or updates this named winch to the configuration file."/>
+			<Button Content="Remove Winch" Command="{Binding RemoveWinchCommand}" HorizontalContentAlignment="Center" Width="160" Margin="2" ToolTip.Tip="This removes the named winch from the configuration file."/>
 		</StackPanel>
 	</StackPanel>
 </UserControl>

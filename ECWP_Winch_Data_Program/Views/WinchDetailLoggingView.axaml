@@ -14,9 +14,9 @@
 		<StackPanel >
 			<StackPanel Margin="5">
 				<TextBlock Text="Live Data Parameters"/>
-				<CheckBox x:Name="CheckBoxLog20Hz" IsEnabled="{Binding Path=UserInputsEnable}" Content="Log 20Hz Data"  HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding CurrentWinch.Log20Hz,FallbackValue='False'}"/>
-				<RadioButton Content="MTNW Format"  IsEnabled="{Binding Path=UserInputsEnable}" HorizontalContentAlignment="Right" Margin="15,2,50,0" GroupName="logFormat" IsChecked="{Binding LogFormatMtnw, FallbackValue='False'}" IsVisible="{ Binding ElementName=CheckBoxLog20Hz,Path=IsChecked }"/>
-				<RadioButton Content="UNOLS Format" IsEnabled="{Binding Path=UserInputsEnable}" HorizontalContentAlignment="Right" Margin="15,2,50,0" GroupName="logFormat" IsChecked="{Binding LogFormatUnols, FallbackValue='True'}" IsVisible="{ Binding ElementName=CheckBoxLog20Hz,Path=IsChecked }"/>
+				<CheckBox x:Name="CheckBoxLog20Hz" IsEnabled="{Binding Path=UserInputsEnable}" Content="Log 20Hz Data"  HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding CurrentWinch.Log20Hz,FallbackValue='False'}" ToolTip.Tip="This saves the data at the input data rate when start log is selected on the live data view."/>
+				<RadioButton Content="MTNW Format"  IsEnabled="{Binding Path=UserInputsEnable}" HorizontalContentAlignment="Right" Margin="15,2,50,0" GroupName="logFormat" IsChecked="{Binding LogFormatMtnw, FallbackValue='False'}" IsVisible="{ Binding ElementName=CheckBoxLog20Hz,Path=IsChecked }" />
+				<RadioButton Content="UNOLS Format" IsEnabled="{Binding Path=UserInputsEnable}" HorizontalContentAlignment="Right" Margin="15,2,50,0" GroupName="logFormat" IsChecked="{Binding LogFormatUnols, FallbackValue='True'}" IsVisible="{ Binding ElementName=CheckBoxLog20Hz,Path=IsChecked }" />
 				<CheckBox x:Name="CheckBoxAutoLog" IsEnabled="{Binding Path=UserInputsEnable}" Content="Auto Log" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding CurrentWinch.AutoLog, FallbackValue='False'}" IsVisible="{ Binding ElementName=CheckBoxLog20Hz,Path=IsChecked }"/>
 				<StackPanel Orientation="Horizontal" Margin="2" IsVisible="{ Binding ElementName=CheckBoxAutoLog,Path=IsChecked }">
 					<TextBlock Text="Min Log Tension" Width="120" VerticalAlignment="Center" />
@@ -26,42 +26,42 @@
 					<TextBlock Text="Min Log Payout" Width="120" VerticalAlignment="Center" />
 					<TextBox Watermark="-1" x:Name="TextBoxMinPayout" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.StopLogPayout, Mode=TwoWay }" Width="90" VerticalAlignment="Center"></TextBox>
 				</StackPanel>
-				<CheckBox x:Name="CheckBoxLogMax" IsEnabled="{Binding Path=UserInputsEnable}" Content="Log Max Data" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding CurrentWinch.LogMax, FallbackValue='True'}"/>
-				<CheckBox x:Name="CheckBoxUseComputerTime" IsEnabled="{Binding Path=UserInputsEnable}" Content="Use Computer Time" HorizontalContentAlignment="Right" Margin="6,0,50,0" IsChecked="{Binding CurrentWinch.UseComputerTime,FallbackValue='False',Mode=TwoWay}"/>
+				<CheckBox x:Name="CheckBoxLogMax" IsEnabled="{Binding Path=UserInputsEnable}" Content="Log Max Data" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding CurrentWinch.LogMax, FallbackValue='True'}" ToolTip.Tip="This enables the saving of max data when stopping data collection on the live view."/>
+				<CheckBox x:Name="CheckBoxUseComputerTime" IsEnabled="{Binding Path=UserInputsEnable}" Content="Use Computer Time" HorizontalContentAlignment="Right" Margin="6,0,50,0" IsChecked="{Binding CurrentWinch.UseComputerTime,FallbackValue='False',Mode=TwoWay}" ToolTip.Tip="Select this to ignore time from the measurement system."/>
 				<StackPanel Orientation="Horizontal" Margin="2">
-					<TextBlock Text="Chart Time Span" VerticalAlignment="Center" Width="120"/>
-					<ComboBox SelectedItem="{ Binding CurrentWinch.ChartTimeSpan, Mode=TwoWay }" Width="90" ItemsSource="{ Binding ChartTimeSpanList }" SelectedIndex="2"/>
+					<TextBlock Text="Chart Time Span" VerticalAlignment="Center" Width="120" />
+					<ComboBox SelectedItem="{ Binding CurrentWinch.ChartTimeSpan, Mode=TwoWay }" Width="90" ItemsSource="{ Binding ChartTimeSpanList }" SelectedIndex="2" ToolTip.Tip="Sets the time data is displayed on the tension plot."/>
 					<TextBlock Text="s" VerticalAlignment="Center" Margin="2"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Speed Unit" VerticalAlignment="Center" Width="120"/>
-					<ComboBox SelectedItem="{ Binding CurrentWinch.SpeedUnit, Mode=TwoWay }" Width="90" ItemsSource="{ Binding SpeedUnitList }" SelectedIndex="0"/>
+					<ComboBox SelectedItem="{ Binding CurrentWinch.SpeedUnit, Mode=TwoWay }" Width="90" ItemsSource="{ Binding SpeedUnitList }" SelectedIndex="0" ToolTip.Tip="This sets what unit the measurement system is outputting data in. No conversions are done."/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Payout Unit" VerticalAlignment="Center" Width="120"/>
-					<ComboBox SelectedItem="{ Binding CurrentWinch.PayoutUnit, Mode=TwoWay }" Width="90" ItemsSource="{ Binding PayoutUnitList }" SelectedIndex="0"/>
+					<ComboBox SelectedItem="{ Binding CurrentWinch.PayoutUnit, Mode=TwoWay }" Width="90" ItemsSource="{ Binding PayoutUnitList }" SelectedIndex="0" ToolTip.Tip="This sets what unit the measurement system is outputting data in. No conversions are done."/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Tension Unit" VerticalAlignment="Center" Width="120"/>
-					<ComboBox SelectedItem="{ Binding CurrentWinch.TensionUnit, Mode=TwoWay }" Width="90" ItemsSource="{ Binding TensionUnitList }" SelectedIndex="1"/>
+					<ComboBox SelectedItem="{ Binding CurrentWinch.TensionUnit, Mode=TwoWay }" Width="90" ItemsSource="{ Binding TensionUnitList }" SelectedIndex="1" ToolTip.Tip="This sets what unit the measurement system is outputting data in. No conversions are done."/>
 				</StackPanel>
 				<TextBlock Text="Processing Parameters" Margin="0,30,0,2"/>
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Data Type" VerticalAlignment="Center" Width="120"/>
-					<ComboBox SelectedItem="{ Binding CurrentWinch.WinchLogType, Mode=TwoWay }" Width="180" ItemsSource="{ Binding WinchDataType }" SelectedIndex="0"/>
+					<ComboBox SelectedItem="{ Binding CurrentWinch.WinchLogType, Mode=TwoWay }" Width="180" ItemsSource="{ Binding WinchDataType }" SelectedIndex="0" ToolTip.Tip="This selects the interperter of log data for processing."/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="2" IsVisible="{Binding CurrentWinch.ThreePeeEssSelected}">
 					<TextBlock Text="3PS ID Number" VerticalAlignment="Center" Width="120"/>
-					<TextBox Watermark="Enter ID" Text="{Binding CurrentWinch.Atlantis3PSWinchID}" Width="90"/>
+					<TextBox Watermark="Enter ID" Text="{Binding CurrentWinch.Atlantis3PSWinchID}" Width="90" ToolTip.Tip="Enter the winch ID number. Atlantis only."/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Minimum Payout" VerticalAlignment="Center" Width="120"/>
-					<ComboBox SelectedItem="{ Binding CurrentWinch.MinimumPayout, Mode=TwoWay }" Width="90" ItemsSource="{ Binding AvailablePayouts }" SelectedIndex="0"/>
+					<ComboBox SelectedItem="{ Binding CurrentWinch.MinimumPayout, Mode=TwoWay }" Width="90" ItemsSource="{ Binding AvailablePayouts }" SelectedIndex="0" ToolTip.Tip="Minimum payout that should be considered part of a cast."/>
 					<TextBlock Text="{ Binding CurrentWinch.PayoutUnit }" VerticalAlignment="Center" Margin="2"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Minimum Tension" VerticalAlignment="Center" Width="120"/>
-					<ComboBox SelectedItem="{ Binding CurrentWinch.MinimumTension, Mode=TwoWay }"  Width="90" ItemsSource="{ Binding AvailableTensions }" SelectedIndex="0"/>
+					<ComboBox SelectedItem="{ Binding CurrentWinch.MinimumTension, Mode=TwoWay }"  Width="90" ItemsSource="{ Binding AvailableTensions }" SelectedIndex="0" ToolTip.Tip="Minimum tension to consider as part of a cast."/>
 					<TextBlock Text="{ Binding CurrentWinch.TensionUnit }" Margin="2" VerticalAlignment="Center"/>
 				</StackPanel>
 			</StackPanel>

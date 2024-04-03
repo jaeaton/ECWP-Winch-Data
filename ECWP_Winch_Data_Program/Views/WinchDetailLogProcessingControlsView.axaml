@@ -29,8 +29,8 @@
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<TextBlock Text="Cruise Name:" Width="160" VerticalAlignment="Center"/>
-			<TextBox Width="160" Watermark="Enter Cruise Name" Text="{ Binding CruiseNameBox }"/>
-			<Button Content="Update" Margin="5,0,0,0" Command="{Binding UpdateCruiseInfoCommand}" DataContext="{StaticResource Save}"/>
+			<TextBox Width="160" Watermark="Enter Cruise Name" Text="{ Binding CruiseNameBox }" ToolTip.Tip="Enter cruise name here"/>
+			<Button Content="Update" Margin="5,0,0,0" Command="{Binding UpdateCruiseInfoCommand}" DataContext="{StaticResource Save}" ToolTip.Tip="Saves cruise name"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<TextBlock Text="Progress:" Width="100"/>
@@ -42,7 +42,7 @@
 			<TextBlock Text="{Binding NumberOfFiles}" Width="50"/>
 			<ProgressBar Minimum="0" Maximum="{Binding NumberOfFiles}" Value="{Binding NumberOfProcessedFiles}"/>
 		</StackPanel>
-		<CheckBox Content="Use Date Ranges" IsChecked="{Binding DateRangeCheckBox}" Margin="5" x:Name="DateRangeCheckBox"/>
+		<CheckBox Content="Use Date Ranges" IsChecked="{Binding DateRangeCheckBox}" Margin="5" x:Name="DateRangeCheckBox" ToolTip.Tip="Select to process data between date ranges."/>
 		<StackPanel Orientation="Horizontal" Margin="5" IsVisible="{Binding ElementName=DateRangeCheckBox, Path=IsChecked}" >
 			<TextBlock Text="Start Date" VerticalAlignment="Center" Margin="0,0,5,0"/>
 			<CalendarDatePicker SelectedDate="{ Binding StartDate }"  Margin="0,0,20,0" />
@@ -53,6 +53,6 @@
 			<Button  Content="{Binding #ButtonText.Text }" DataContext="{ StaticResource ResourceKey=commands }" Command="{ Binding SingleProcessFilesCommand }" Margin="5" />	
 			
 		</StackPanel>
-		<TextBlock Text="{Binding ButtonText}" Name="ButtonText" IsVisible="False"/>
+		<TextBlock Text="{Binding ButtonText}" Name="ButtonText" IsVisible="False" ToolTip.Tip="Starts and stops data processing."/>
 	</StackPanel>
 </UserControl>
