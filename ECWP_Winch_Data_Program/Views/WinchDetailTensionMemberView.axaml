@@ -4,54 +4,66 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
              x:Class="Views.WinchDetailTensionMemberView">
-  
-  <StackPanel>
-	  <StackPanel Orientation="Horizontal" Margin="2">
-		  <TextBlock Text="Name:" Width="160" VerticalAlignment="Center" Margin="2"/>
-		  <TextBox Text="{Binding CurrentWinch.TensionMemberName}" Watermark="Tension Member" Width="150" Margin="2" ToolTip.Tip="Enter a reference name for the tension member."/>
-	  </StackPanel>
-	  <StackPanel Orientation="Horizontal" Margin="2">
-		  <TextBlock Text="Manufacturer:"  Width="160" VerticalAlignment="Center" Margin="2"/>
-		  <TextBox Text="{Binding CurrentWinch.TensionMemberManufacturer}" Watermark="Enter Manufacturer" Width="150" Margin="2"/>
-	  </StackPanel>
-	  <StackPanel Orientation="Horizontal" Margin="2">
-		  <TextBlock Text="Part Number:" Width="160" VerticalAlignment="Center" Margin="2"/>
-		  <TextBox Text="{Binding CurrentWinch.TensionMemberPartNumber}" Watermark="Part Number" Width="150" Margin="2"/>
-	  </StackPanel>
-	  <StackPanel Orientation="Horizontal" Margin="2">
-		  <TextBlock Text="NSF ID:"  Width="160" VerticalAlignment="Center" Margin="2"/>
-		  <TextBox Text="{Binding CurrentWinch.TensionMemberNSFID}" Watermark="NSF ID" Width="150" Margin="2"/>		  
-	  </StackPanel>
-	  <StackPanel Orientation="Horizontal" Margin="2">
-		  <TextBlock Text="Installed Length" Width="160" VerticalAlignment="Center" Margin="2"/>
-		  <TextBox Watermark="Ex: 6000" x:Name="TextBoxInstalledLength" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.InstalledLength, Mode=TwoWay }" Width="90" VerticalAlignment="Center" Margin="2" ToolTip.Tip="Changing this value will reset the current length to the value entered. Current length is updated via the cut back event."/>
-		  <TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.PayoutUnit }" VerticalAlignment="Center"/>
-	  </StackPanel>
-	  <StackPanel Orientation="Horizontal" Margin="2">
-		  <TextBlock Text="Current Length" Width="160" VerticalAlignment="Center" Margin="2"/>
-		  <TextBox Watermark="Ex: 6000" IsEnabled="False" Text="{Binding CurrentWinch.AvailableLength, Mode=TwoWay }" Width="90" VerticalAlignment="Center" Margin="2"/>
-		  <TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.PayoutUnit }" VerticalAlignment="Center"/>
-	  </StackPanel>
-	  <StackPanel Orientation="Horizontal" Margin="2">
-		  <TextBlock Text="Warning Tension" Width="160" VerticalAlignment="Center" Margin="2"/>
-		   <TextBox Text="{Binding CurrentWinch.TensionWarningLevel}" IsEnabled="False" Width="90" VerticalAlignment="Center" Margin="2"/>
-		  
-		  <TextBlock Margin="3" Text="{Binding CurrentWinch.TensionUnit}" VerticalAlignment="Center" />
-	  </StackPanel>
-	  <StackPanel Orientation="Horizontal" Margin="2">
-		  <TextBlock Text="Alarm Tension" Width="160" VerticalAlignment="Center" Margin="2"/>
-			  <TextBox  Text="{Binding CurrentWinch.TensionAlarmLevel, Mode=OneWay }" IsEnabled="False" Width="90" VerticalAlignment="Center"></TextBox>
-		  
-		  <TextBlock Margin="3" Text="{Binding CurrentWinch.TensionUnit}" VerticalAlignment="Center"/>
-	  </StackPanel>
-	  <StackPanel Orientation="Horizontal" Margin="2">
-		  <TextBlock Text="ABL" Width="160" VerticalAlignment="Center" Margin="2" />
-		  <TextBox Watermark="Ex: 10000" x:Name="TextBoxABL" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.AssignedBreakingLoad, Mode=TwoWay }" Width="90" VerticalAlignment="Center" Margin="2" ToolTip.Tip="Enter the Assigned Breaking Load via break tests or from manufacturer."/>
-		  <TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.TensionUnit }" VerticalAlignment="Center"/>
-	  </StackPanel>
-	  <StackPanel Orientation="Horizontal" Margin="2">
-		  <TextBlock Text="App A FoS" VerticalAlignment="Center" Width="160" Margin="2"/>
-		  <ComboBox SelectedItem="{ Binding CurrentWinch.FactorOfSafety, Mode=TwoWay }" Width="90" ItemsSource="{ Binding FactorOfSafetyList }" Margin="2" SelectedIndex="1" ToolTip.Tip="Select the UNOLS RVSS Appendix A Factor of Safety."/>
-	  </StackPanel>
-  </StackPanel>
+
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		<StackPanel Grid.Column="0">
+		  <StackPanel Orientation="Horizontal" Margin="2">
+			  <TextBlock Text="Name:" Width="160" VerticalAlignment="Center" Margin="2"/>
+			  <TextBox Text="{Binding CurrentWinch.TensionMemberName}" Watermark="Tension Member" Width="150" Margin="2" ToolTip.Tip="Enter a reference name for the tension member."/>
+		  </StackPanel>
+		  <StackPanel Orientation="Horizontal" Margin="2">
+			  <TextBlock Text="Manufacturer:"  Width="160" VerticalAlignment="Center" Margin="2"/>
+			  <TextBox Text="{Binding CurrentWinch.TensionMemberManufacturer}" Watermark="Enter Manufacturer" Width="150" Margin="2"/>
+		  </StackPanel>
+		  <StackPanel Orientation="Horizontal" Margin="2">
+			  <TextBlock Text="Part Number:" Width="160" VerticalAlignment="Center" Margin="2"/>
+			  <TextBox Text="{Binding CurrentWinch.TensionMemberPartNumber}" Watermark="Part Number" Width="150" Margin="2"/>
+		  </StackPanel>
+		  <StackPanel Orientation="Horizontal" Margin="2">
+			  <TextBlock Text="NSF ID:"  Width="160" VerticalAlignment="Center" Margin="2"/>
+			  <TextBox Text="{Binding CurrentWinch.TensionMemberNSFID}" Watermark="NSF ID" Width="150" Margin="2"/>		  
+		  </StackPanel>
+		  <StackPanel Orientation="Horizontal" Margin="2">
+			  <TextBlock Text="Installed Length" Width="160" VerticalAlignment="Center" Margin="2"/>
+			  <TextBox Watermark="Ex: 6000" x:Name="TextBoxInstalledLength" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.InstalledLength, Mode=TwoWay }" Width="90" VerticalAlignment="Center" Margin="2" ToolTip.Tip="Changing this value will reset the current length to the value entered. Current length is updated via the cut back event."/>
+			  <TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.PayoutUnit }" VerticalAlignment="Center"/>
+		  </StackPanel>
+		  <StackPanel Orientation="Horizontal" Margin="2">
+			  <TextBlock Text="Current Length" Width="160" VerticalAlignment="Center" Margin="2"/>
+			  <TextBox Watermark="Ex: 6000" IsEnabled="False" Text="{Binding CurrentWinch.AvailableLength, Mode=TwoWay }" Width="90" VerticalAlignment="Center" Margin="2"/>
+			  <TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.PayoutUnit }" VerticalAlignment="Center"/>
+		  </StackPanel>
+		  <StackPanel Orientation="Horizontal" Margin="2">
+			  <TextBlock Text="Warning Tension" Width="160" VerticalAlignment="Center" Margin="2"/>
+			   <TextBox Text="{Binding CurrentWinch.TensionWarningLevel}" IsEnabled="False" Width="90" VerticalAlignment="Center" Margin="2"/>
+			  
+			  <TextBlock Margin="3" Text="{Binding CurrentWinch.TensionUnit}" VerticalAlignment="Center" />
+		  </StackPanel>
+		  <StackPanel Orientation="Horizontal" Margin="2">
+			  <TextBlock Text="Alarm Tension" Width="160" VerticalAlignment="Center" Margin="2"/>
+				  <TextBox  Text="{Binding CurrentWinch.TensionAlarmLevel, Mode=OneWay }" IsEnabled="False" Width="90" VerticalAlignment="Center"></TextBox>
+			  
+			  <TextBlock Margin="3" Text="{Binding CurrentWinch.TensionUnit}" VerticalAlignment="Center"/>
+		  </StackPanel>
+		  <StackPanel Orientation="Horizontal" Margin="2">
+			  <TextBlock Text="ABL" Width="160" VerticalAlignment="Center" Margin="2" />
+			  <TextBox Watermark="Ex: 10000" x:Name="TextBoxABL" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.AssignedBreakingLoad, Mode=TwoWay }" Width="90" VerticalAlignment="Center" Margin="2" ToolTip.Tip="Enter the Assigned Breaking Load via break tests or from manufacturer."/>
+			  <TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.TensionUnit }" VerticalAlignment="Center"/>
+		  </StackPanel>
+		  <StackPanel Orientation="Horizontal" Margin="2">
+			  <TextBlock Text="App A FoS" VerticalAlignment="Center" Width="160" Margin="2"/>
+			  <ComboBox SelectedItem="{ Binding CurrentWinch.FactorOfSafety, Mode=TwoWay }" Width="90" ItemsSource="{ Binding FactorOfSafetyList }" Margin="2" SelectedIndex="1" ToolTip.Tip="Select the UNOLS RVSS Appendix A Factor of Safety."/>
+		  </StackPanel>
+			<Button Content="Select Sheave Train Image" HorizontalAlignment="Center" Margin="5"/>
+		</StackPanel>
+		<Panel Grid.Column="1">
+			<Border BorderThickness="2" BorderBrush="LightGray" VerticalAlignment="Center" HorizontalAlignment="Center">
+				<Image Stretch="Uniform" Margin="5"/>
+			</Border>
+		</Panel>
+	</Grid>
 </UserControl>
