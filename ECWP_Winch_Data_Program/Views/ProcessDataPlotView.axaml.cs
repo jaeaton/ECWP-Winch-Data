@@ -5,7 +5,7 @@ namespace Views
         public ProcessDataPlotView()
         {
             InitializeComponent();
-            DataContext = ViewModels.ProcessDataViewModel.ParseData;
+            DataContext = ProcessDataViewModel.ParseData;
         }
     }
 }

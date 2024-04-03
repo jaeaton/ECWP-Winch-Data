@@ -1,4 +1,6 @@
 ﻿
+using Store;
+
 namespace Models
 {
     public partial class WinchModel : ObservableObject
@@ -81,8 +83,14 @@ namespace Models
         private bool logFormatMtnw;
         partial void OnLogFormatMtnwChanged(bool value)
         {
-            WinchViewModel vm = new WinchViewModel();
-            vm.ChangeLogFormat(value);
+            if (value == true)
+            {
+                LogFormat = $"MTNW";
+            }
+            else
+            {
+               LogFormat = $"UNOLS";
+            }
         }
         [ObservableProperty]
         private string logFormat = string.Empty;
@@ -105,8 +113,16 @@ namespace Models
         private bool udpFormatMtnw;
         partial void OnUdpFormatMtnwChanged(bool value)
         {
-            WinchViewModel vm = new WinchViewModel();
-            vm.ChangeUDPFormat(value);
+            //WinchViewModel vm = new WinchViewModel();
+            //vm.ChangeUDPFormat(value);
+            if (value == true)
+            {
+                UdpFormat = $"MTNW";
+            }
+            else
+            {
+                UdpFormat = $"UNOLS";
+            }
         }
         [ObservableProperty]
         private string udpFormat = string.Empty;
@@ -122,8 +138,16 @@ namespace Models
         private bool serialFormatMtnw;
         partial void OnSerialFormatMtnwChanged(bool value)
         {
-            WinchViewModel vm = new WinchViewModel();
-            vm.ChangeSerialFormat(value);
+            //WinchViewModel vm = new WinchViewModel();
+            //vm.ChangeSerialFormat(value);
+            if (value == true)
+            {
+                SerialFormat = $"MTNW";
+            }
+            else
+            {
+                SerialFormat = $"UNOLS";
+            }
         }
         [ObservableProperty]
         private string serialFormat = string.Empty;

@@ -7,7 +7,7 @@
         /// Add Winch adds the data currently stored in current Winch as a new selectable winch 
         /// </summary>
         [RelayCommand]
-        public async void AddWinch()
+        public async Task AddWinch()
         {
             if (_configDataStore.CurrentWinch.WinchName != string.Empty)
             {
@@ -84,41 +84,41 @@
                 "Note: Adding/Updating or Removing a winch writes a configuration file to application directory.");
         }
 
-        public void ChangeSerialFormat(bool mtnw)
-        {
-            if (mtnw)
-            {
-                _configDataStore.CurrentWinch.SerialFormat = $"MTNW";
-            }
-            else
-            {
-                _configDataStore.CurrentWinch.SerialFormat = $"UNOLS";
-            }
-        }
+        //public void ChangeSerialFormat(bool mtnw)
+        //{
+        //    if (mtnw)
+        //    {
+        //        _configDataStore.CurrentWinch.SerialFormat = $"MTNW";
+        //    }
+        //    else
+        //    {
+        //        _configDataStore.CurrentWinch.SerialFormat = $"UNOLS";
+        //    }
+        //}
 
-        public void ChangeUDPFormat(bool mtnw)
-        {
-            if (mtnw)
-            {
-                _configDataStore.CurrentWinch.UdpFormat = $"MTNW";
-            }
-            else
-            {
-                _configDataStore.CurrentWinch.UdpFormat = $"UNOLS";
-            }
-        }
+        //public void ChangeUDPFormat(bool mtnw)
+        //{
+        //    if (mtnw)
+        //    {
+        //        _configDataStore.CurrentWinch.UdpFormat = $"MTNW";
+        //    }
+        //    else
+        //    {
+        //        _configDataStore.CurrentWinch.UdpFormat = $"UNOLS";
+        //    }
+        //}
 
-        public void ChangeLogFormat(bool mtnw)
-        {
-            if (mtnw)
-            {
-                _configDataStore.CurrentWinch.LogFormat = $"MTNW";
-            }
-            else
-            {
-                _configDataStore.CurrentWinch.LogFormat = $"UNOLS";
-            }
-        }
+        //public void ChangeLogFormat(bool mtnw)
+        //{
+        //    if (mtnw)
+        //    {
+        //        _configDataStore.CurrentWinch.LogFormat = $"MTNW";
+        //    }
+        //    else
+        //    {
+        //        _configDataStore.CurrentWinch.LogFormat = $"UNOLS";
+        //    }
+        //}
 
         public void InsertWinch(WinchModel Winch)
         {  
@@ -172,7 +172,7 @@
         }
 
         [RelayCommand]
-        public async void AddCommOut()
+        public async Task AddCommOut()
         {
             if (_configDataStore.CurrentWinch.OutputCommunication.DestinationName != string.Empty)
             {

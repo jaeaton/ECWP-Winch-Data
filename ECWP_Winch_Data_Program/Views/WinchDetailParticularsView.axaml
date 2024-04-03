@@ -11,6 +11,10 @@
 	</UserControl.Resources>
 	<StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
+			<TextBlock Text="Ship Name" Width="160" VerticalAlignment="Center" />
+			<TextBox Watermark="Enter Name" Text="{ Binding ShipName, Mode=TwoWay }" Width="160"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="5">
 			<TextBlock Text="Winch Name" Width="160" VerticalAlignment="Center" />
 			<TextBox Watermark="Enter Name" Text="{ Binding CurrentWinch.WinchName, Mode=TwoWay }" Width="160"/>
 		</StackPanel>
