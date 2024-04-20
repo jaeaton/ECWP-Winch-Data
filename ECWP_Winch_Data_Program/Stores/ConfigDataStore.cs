@@ -75,7 +75,8 @@
                 "WinchDAC", //Previously Armstrong Cast 6
                 "UNOLS String",
                 "Jay Jay",
-                "Atlantis 3PS"
+                "Atlantis 3PS",
+                "3PS"
         };
 
         [ObservableProperty]
@@ -144,6 +145,7 @@
                                                                 "MASH",
                                                                 "Jay Jay",
                                                                 "UNOLS String",
+                                                                "3PS",
                                                                 "MTNW 1",
                                                                 "MTNW Legacy",
                                                                 "Hawboldt SPRE-3464",

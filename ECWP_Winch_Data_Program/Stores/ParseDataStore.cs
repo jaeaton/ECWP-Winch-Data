@@ -114,7 +114,8 @@
                 "WinchDAC", //Previously Armstrong Cast 6
                 "UNOLS String",
                 "Jay Jay",
-                "Atlantis 3PS"
+                "Atlantis 3PS",
+                "3PS"
         };
 
         [ObservableProperty]

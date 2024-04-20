@@ -469,6 +469,11 @@ namespace ViewModels
                         break;
 
                     default:
+                        if (strIn.Length == 9 && winch.InputCommunication.CommunicationProtocol == "3PS") 
+                        {
+                            getTime = true;
+                            latest = new DataPointModel("$3PS", "", "", strIn[0], strIn[3], strIn[2],"");
+                        }
                         break;
                 }
 
