@@ -41,10 +41,12 @@ global using ClosedXML;
 global using ClosedXML.Excel;
 global using Mayerch1.GithubUpdateCheck;
 global using CloneExtensions;
+global using Microsoft.Extensions.DependencyInjection;
 
 
 global using Models;
 global using Views;
 global using ViewModels;
 global using Store;
+global using Services;
 

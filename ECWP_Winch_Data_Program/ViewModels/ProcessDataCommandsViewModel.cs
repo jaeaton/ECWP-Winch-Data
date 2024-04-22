@@ -6,10 +6,9 @@
        
         public ParseDataStore _parseData = ProcessDataViewModel.ParseData;
         //_parseData.ProcessWinchDataButton = "Stop Processing";
-        
+
         //[ObservableProperty]
         //private string processButtonText = ProcessDataViewModel.ParseData.ProcessWinchDataButton;
-            
 
         [RelayCommand]
         public void SingleProcessFiles() 

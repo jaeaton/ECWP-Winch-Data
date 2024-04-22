@@ -1,4 +1,7 @@
-﻿namespace ViewModels
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using ECWP_Winch_Data_Program;
+
+namespace ViewModels
 {
     internal partial class WinchViewModel : ViewModelBase
     {
@@ -303,6 +306,15 @@
             });
             _configDataStore.CurrentWinch.WinchDirectory = t.Result;
         }
+        [RelayCommand]
+        public void SelectImage()
+        {
+            Task<string> t = Task.Run<string>(() =>
+            {
+                return ImageSelect();
+            });
+            _configDataStore.CurrentWinch.WinchDirectory = t.Result;
+        }
         public async Task<string> SetWinchPath(string extension)
         {
             // Show the save file dialog
@@ -321,6 +333,41 @@
                 
             }
             return AppDomain.CurrentDomain.BaseDirectory;
+        }
+
+        public async Task<string> ImageSelect()
+        {
+            List<string> ErrorMessages = new List<string>();
+            ErrorMessages?.Clear();
+            try
+            {
+                var filesService = App.Current?.Services?.GetService<IFilesService>();
+                if (filesService is null) throw new NullReferenceException("Missing File Service instance.");
+
+                var file = await filesService.OpenFileAsync();
+                if (file is null) return string.Empty;
+                else
+                {
+                    return file.ToString();
+                }
+                // Limit the text file to 1MB so that the demo wont lag.
+                //if ((await file.GetBasicPropertiesAsync()).Size <= 1024 * 1024 * 1)
+                //{
+                //    await using var readStream = await file.OpenReadAsync();
+                //    using var reader = new StreamReader(readStream);
+                //    FileText = await reader.ReadToEndAsync(token);
+                //}
+                //else
+                //{
+                //    throw new Exception("File exceeded 1MB limit.");
+                //}
+            }
+            catch (Exception e)
+            {
+                ErrorMessages?.Add(e.Message);
+                return string.Empty;
+            }
+            
         }
 
        

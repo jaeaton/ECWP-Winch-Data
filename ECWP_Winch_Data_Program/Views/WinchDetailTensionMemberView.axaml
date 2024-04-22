@@ -2,9 +2,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="clr-namespace:ViewModels"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
              x:Class="Views.WinchDetailTensionMemberView">
 
+	<UserControl.Resources>
+		<vm:WinchViewModel x:Key="commands"/>
+	</UserControl.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto"/>
@@ -58,11 +62,11 @@
 			  <TextBlock Text="App A FoS" VerticalAlignment="Center" Width="160" Margin="2"/>
 			  <ComboBox SelectedItem="{ Binding CurrentWinch.FactorOfSafety, Mode=TwoWay }" Width="90" ItemsSource="{ Binding FactorOfSafetyList }" Margin="2" SelectedIndex="1" ToolTip.Tip="Select the UNOLS RVSS Appendix A Factor of Safety."/>
 		  </StackPanel>
-			<Button Content="Select Sheave Train Image" HorizontalAlignment="Center" Margin="5"/>
+			<Button Content="Select Sheave Train Image"  Command="{ Binding SelectImageCommand }" DataContext="{ StaticResource ResourceKey=commands }" HorizontalAlignment="Center" Margin="5"/>
 		</StackPanel>
 		<Panel Grid.Column="1">
 			<Border BorderThickness="2" BorderBrush="LightGray" VerticalAlignment="Center" HorizontalAlignment="Center">
-				<Image Stretch="Uniform" Margin="5"/>
+				<Image Stretch="Uniform" Margin="5" />
 			</Border>
 		</Panel>
 	</Grid>

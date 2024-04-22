@@ -5,6 +5,7 @@ using Avalonia.Markup.Xaml;
 
 using ViewModels;
 using Views;
+using Models;
 
 namespace ECWP_Winch_Data_Program;
 
@@ -27,6 +28,11 @@ public partial class App : Application
             {
                 DataContext = new MainViewModel()
             };
+            var services = new ServiceCollection();
+
+            services.AddSingleton<IFilesService>(x => new FilesService(desktop.MainWindow));
+
+            Services = services.BuildServiceProvider();
         }
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         {
@@ -38,4 +44,10 @@ public partial class App : Application
 
         base.OnFrameworkInitializationCompleted();
     }
+    public new static App? Current => Application.Current as App;
+
+    /// <summary>
+    /// Gets the <see cref="IServiceProvider"/> instance to resolve application services.
+    /// </summary>
+    public IServiceProvider? Services { get; private set; }
 }
