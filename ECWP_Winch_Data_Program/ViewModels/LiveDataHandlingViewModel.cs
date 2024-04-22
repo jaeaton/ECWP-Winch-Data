@@ -82,7 +82,7 @@ namespace ViewModels
                     InputSerialPort.Dispose();
                 }
             }
-            if (winch.InputCommunication.CommunicationType == "Network")
+            else if (winch.InputCommunication.CommunicationType == "Network")
             {
                 if (winch.InputCommunication.DataProtocol == "TCP Client")
                 {
@@ -217,7 +217,7 @@ namespace ViewModels
                     client.Close();
                     client.Dispose();
                 }
-                else if (winch.CommunicationType == "UDP")
+                else if (winch.InputCommunication.DataProtocol == "UDP")
                 {
                     // Set the TcpListener to selected port 
                     Int32 port = int.Parse(winch.InputCommunication.PortNumber);
