@@ -43,7 +43,7 @@ namespace ViewModels
                 InputSerialPort.Parity = InputParity;
                 InputSerialPort.DataBits = serialDataBits;
                 InputSerialPort.StopBits = InputStopBits;
-                InputSerialPort.ReadTimeout = 500;
+                InputSerialPort.ReadTimeout = 2000;
                 
                 InputSerialPort.Open();
                 //Task<string> t = new Task<string>(() => { ReadSerialData(InputSerialPort, winch); }, winch.Canceller.Token) ;

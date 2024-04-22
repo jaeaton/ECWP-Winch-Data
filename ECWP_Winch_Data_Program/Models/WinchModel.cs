@@ -281,7 +281,32 @@ namespace Models
         private string atlantis3PSWinchID = string.Empty ;
         [ObservableProperty]
         private bool threePeeEssSelected = false;
+        [ObservableProperty]
+        private bool convertSpeed = false ;
+        partial void OnConvertSpeedChanged(bool value)
+        {
+            if (!value) { SpeedConversionUnit = SpeedUnit; }
+        }
+        [ObservableProperty]
+        private string speedConversionUnit = string.Empty ;
+        [ObservableProperty]
+        private bool convertTension = false ;
+        partial void OnConvertTensionChanged(bool value)
+        {
+            if (!value) { TensionConversionUnit = TensionUnit; }
+        }
+        [ObservableProperty]
+        private string tensionConversionUnit = string.Empty;
+        [ObservableProperty]
+        private bool convertPayout = false ;
+        partial void OnConvertPayoutChanged(bool value)
+        {
+           if (!value) { PayoutConversionUnit = PayoutUnit; }
+        }
+        [ObservableProperty]
+        private string payoutConversionUnit = string.Empty;
         public object Sync { get; } = new object();
+
         public WinchModel() { }
         public WinchModel(string winchName, string fileExtension)
         {
