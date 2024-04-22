@@ -62,7 +62,7 @@
 			  <TextBlock Text="App A FoS" VerticalAlignment="Center" Width="160" Margin="2"/>
 			  <ComboBox SelectedItem="{ Binding CurrentWinch.FactorOfSafety, Mode=TwoWay }" Width="90" ItemsSource="{ Binding FactorOfSafetyList }" Margin="2" SelectedIndex="1" ToolTip.Tip="Select the UNOLS RVSS Appendix A Factor of Safety."/>
 		  </StackPanel>
-			<Button Content="Select Sheave Train Image"  Command="{ Binding SelectImageCommand }" DataContext="{ StaticResource ResourceKey=commands }" HorizontalAlignment="Center" Margin="5"/>
+			<Button Content="Select Sheave Train Image" IsEnabled="False"  Command="{ Binding SelectImageCommand }" DataContext="{ StaticResource ResourceKey=commands }" HorizontalAlignment="Center" Margin="5"/>
 		</StackPanel>
 		<Panel Grid.Column="1">
 			<Border BorderThickness="2" BorderBrush="LightGray" VerticalAlignment="Center" HorizontalAlignment="Center">
