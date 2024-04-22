@@ -87,182 +87,195 @@ namespace ViewModels
                     break;
                 case "Network":
                     {
-                        if (winch.InputCommunication.DataProtocol == "TCP Client")
+                        switch (winch.InputCommunication.DataProtocol)
                         {
-                            TcpListener server = null;
-                            TcpClient client = null;
-                            try
-                            {
-                                // Set the TcpListener to selected port 
-                                Int32 port = int.Parse(winch.InputCommunication.PortNumber);
-                                //should be look up local host
-                                //TODO change to look up local host
-                                IPAddress localAddr = IPAddress.Parse(winch.InputCommunication.TcpIpAddress);
-
-                                // TcpListener server = new TcpListener(port);
-                                server = new TcpListener(localAddr, port);
-
-                                // Start listening for client requests.
-                                server.Start();
-                                // Perform a blocking call to accept requests.
-                                // You could also use server.AcceptSocket() here.
-                                client = server.AcceptTcpClient();
-                                bool cancelled = false;
-                                // Enter the listening loop.
-                                while (cancelled == false)//!winch.Canceller.Token.IsCancellationRequested)
+                            case "TCP Client":
                                 {
-
+                                    TcpListener server = null;
+                                    TcpClient client = null;
                                     try
                                     {
-                                        //Asynchronious read of data to allow for other operations to occur
-                                        dataIn = await Task.Run(() => ReadTCPData(client, winch), winch.Canceller.Token);
-                                        //_liveData.RawWireData = dataIn;
-                                        //read data
-                                        ParseWinchData(dataIn, winch);
+                                        // Set the TcpListener to selected port 
+                                        Int32 port = int.Parse(winch.InputCommunication.PortNumber);
+                                        //should be look up local host
+                                        //TODO change to look up local host
+                                        IPAddress localAddr = IPAddress.Parse(winch.InputCommunication.TcpIpAddress);
+
+                                        // TcpListener server = new TcpListener(port);
+                                        server = new TcpListener(localAddr, port);
+
+                                        // Start listening for client requests.
+                                        server.Start();
+                                        // Perform a blocking call to accept requests.
+                                        // You could also use server.AcceptSocket() here.
+                                        client = server.AcceptTcpClient();
+                                        bool cancelled = false;
+                                        // Enter the listening loop.
+                                        while (cancelled == false)//!winch.Canceller.Token.IsCancellationRequested)
+                                        {
+
+                                            try
+                                            {
+                                                //Asynchronious read of data to allow for other operations to occur
+                                                dataIn = await Task.Run(() => ReadTCPData(client, winch), winch.Canceller.Token);
+                                                //_liveData.RawWireData = dataIn;
+                                                //read data
+                                                ParseWinchData(dataIn, winch);
+                                            }
+                                            catch (Exception ae)
+                                            {
+                                                if (ae is TaskCanceledException)
+                                                {
+                                                    cancelled = true;
+                                                    break;
+                                                }
+                                                else
+                                                {
+                                                    cancelled = true;
+                                                    break;
+                                                }
+                                            }
+
+
+                                        }
                                     }
-                                    catch (Exception ae)
+                                    catch (SocketException e)
                                     {
-                                        if (ae is TaskCanceledException)
-                                        {
-                                            cancelled = true;
-                                            break;
-                                        }
-                                        else
-                                        {
-                                            cancelled = true;
-                                            break;
-                                        }
+                                        string msg = $"SocketException: {e.Message}";
+                                        await MessageBoxViewModel.DisplayMessage(msg);
+                                    }
+                                    server.Stop();
+                                    if (client != null)
+                                    {
+                                        client.Close();
+                                        client.Dispose();
                                     }
 
 
                                 }
-                            }
-                            catch (SocketException e)
-                            {
-                                string msg = $"SocketException: {e.Message}";
-                                await MessageBoxViewModel.DisplayMessage(msg);
-                            }
-                            server.Stop();
-                            if (client != null)
-                            {
-                                client.Close();
-                                client.Dispose();
-                            }
-
-
-                        }
-                        else if (winch.InputCommunication.DataProtocol == "TCP Server")
-                        {
-                            TcpClient client = new TcpClient();
-                            //client.ReceiveTimeout = 20000;
-                            //Check to see if TCP client is connected and if not connect
-                            try
-                            {
-
-
-                                if (!client.Connected)
+                                break;
+                            case "TCP Server":
+                        
                                 {
-                                    if (!client.ConnectAsync(IPAddress.Parse(winch.InputCommunication.TcpIpAddress), int.Parse(winch.InputCommunication.PortNumber)).Wait(5000))
-                                    {
-                                        // connection failure
-                                        await MessageBoxViewModel.DisplayMessage("Failed to connect to TCP Server");
-                                    }
-                                    //client.Connect(IPAddress.Parse(globalConfig.ReceiveCommunication.IPAddress), int.Parse(globalConfig.ReceiveCommunication.PortNumber));
-                                }
-                            }
-                            //catch (IOException e)
-                            //{
-                            //    MessageBox.Show($"IOException: { e.Message }");
-                            //}
-                            catch (ArgumentNullException e)
-                            {
-                                await MessageBoxViewModel.DisplayMessage($"ArgumentNullException: {e.Message}");
-                            }
-                            catch (SocketException e)
-                            {
-                                await MessageBoxViewModel.DisplayMessage($"SocketException: {e.Message}");
-                            }
-                            catch (ObjectDisposedException e)
-                            {
-                                await MessageBoxViewModel.DisplayMessage($"ObjectDisposeException: {e.Message}");
-                            }
-                            //Looks for cancellation token to stop data collection
-                            if (client.Connected)
-                            {
-                                bool cancelled = false;
-                                while (cancelled == false)
-                                {
+                                    TcpClient client = new TcpClient();
+                                    //client.ReceiveTimeout = 20000;
+                                    //Check to see if TCP client is connected and if not connect
                                     try
                                     {
-                                        //Asynchronious read of data to allow for other operations to occur
-                                        dataIn = await Task.Run(() => ReadTCPData(client, winch), winch.Canceller.Token);
-                                        //_liveData.RawWireData = dataIn;
-                                        //read data
-                                        ParseWinchData(dataIn, winch);
-                                    }
-                                    catch (Exception ae)
-                                    {
-                                        if (ae is TaskCanceledException)
-                                        {
-                                            cancelled = true;
-                                            break;
-                                        }
-                                        else
-                                        {
-                                            cancelled = true;
-                                            break;
-                                        }
-                                    }
 
+
+                                        if (!client.Connected)
+                                        {
+                                            if (!client.ConnectAsync(IPAddress.Parse(winch.InputCommunication.TcpIpAddress), int.Parse(winch.InputCommunication.PortNumber)).Wait(5000))
+                                            {
+                                                // connection failure
+                                                await MessageBoxViewModel.DisplayMessage("Failed to connect to TCP Server");
+                                            }
+                                            //client.Connect(IPAddress.Parse(globalConfig.ReceiveCommunication.IPAddress), int.Parse(globalConfig.ReceiveCommunication.PortNumber));
+                                        }
+                                    }
+                                    //catch (IOException e)
+                                    //{
+                                    //    MessageBox.Show($"IOException: { e.Message }");
+                                    //}
+                                    catch (ArgumentNullException e)
+                                    {
+                                        await MessageBoxViewModel.DisplayMessage($"ArgumentNullException: {e.Message}");
+                                    }
+                                    catch (SocketException e)
+                                    {
+                                        await MessageBoxViewModel.DisplayMessage($"SocketException: {e.Message}");
+                                    }
+                                    catch (ObjectDisposedException e)
+                                    {
+                                        await MessageBoxViewModel.DisplayMessage($"ObjectDisposeException: {e.Message}");
+                                    }
+                                    //Looks for cancellation token to stop data collection
+                                    if (client.Connected)
+                                    {
+                                        bool cancelled = false;
+                                        while (cancelled == false)
+                                        {
+                                            try
+                                            {
+                                                //Asynchronious read of data to allow for other operations to occur
+                                                dataIn = await Task.Run(() => ReadTCPData(client, winch), winch.Canceller.Token);
+                                                //_liveData.RawWireData = dataIn;
+                                                //read data
+                                                ParseWinchData(dataIn, winch);
+                                            }
+                                            catch (Exception ae)
+                                            {
+                                                if (ae is TaskCanceledException)
+                                                {
+                                                    cancelled = true;
+                                                    break;
+                                                }
+                                                else
+                                                {
+                                                    cancelled = true;
+                                                    break;
+                                                }
+                                            }
+
+                                        }
+                                    }
+                                    //Close TCP client
+                                    client.Close();
+                                    client.Dispose();
                                 }
-                            }
-                            //Close TCP client
-                            client.Close();
-                            client.Dispose();
-                        }
-                        else if (winch.InputCommunication.DataProtocol == "UDP")
-                        {
-                            // Set the TcpListener to selected port 
-                            Int32 port = int.Parse(winch.InputCommunication.PortNumber);
-                            UdpClient client = new UdpClient(port);
-                            try
-                            {
-                                bool cancelled = false;
-                                // Enter the listening loop.
-                                while (cancelled == false)
+                                break;
+                            case "UDP":
+                       
                                 {
+                                    // Set the TcpListener to selected port 
+                                    Int32 port = int.Parse(winch.InputCommunication.PortNumber);
+                                    UdpClient client = new UdpClient(port);
                                     try
                                     {
-                                        //Asynchronious read of data to allow for other operations to occur
-                                        dataIn = await Task.Run(() => ReadUDPData(client, winch));
-                                        //winch.LiveData.RawWireData = dataIn;
-                                        //read data
-                                        ParseWinchData(dataIn, winch);
-                                    }
-                                    catch (Exception ae)
-                                    {
-                                        if (ae is TaskCanceledException)
+                                        bool cancelled = false;
+                                        // Enter the listening loop.
+                                        while (cancelled == false)
                                         {
-                                            cancelled = true;
-                                            break;
-                                        }
-                                        else
-                                        {
-                                            cancelled = true;
-                                            break;
-                                        }
-                                    }
+                                            try
+                                            {
+                                                //Asynchronious read of data to allow for other operations to occur
+                                                dataIn = await Task.Run(() => ReadUDPData(client, winch));
+                                                //winch.LiveData.RawWireData = dataIn;
+                                                //read data
+                                                ParseWinchData(dataIn, winch);
+                                            }
+                                            catch (Exception ae)
+                                            {
+                                                if (ae is TaskCanceledException)
+                                                {
+                                                    cancelled = true;
+                                                    break;
+                                                }
+                                                else
+                                                {
+                                                    cancelled = true;
+                                                    break;
+                                                }
+                                            }
 
+                                        }
+                                    }
+                                    catch (SocketException e)
+                                    {
+                                        string msg = $"SocketException: {e.Message}";
+                                        await MessageBoxViewModel.DisplayMessage(msg);
+                                    }
+                                    client.Close();
+                                    client.Dispose();
                                 }
-                            }
-                            catch (SocketException e)
-                            {
-                                string msg = $"SocketException: {e.Message}";
-                                await MessageBoxViewModel.DisplayMessage(msg);
-                            }
-                            client.Close();
-                            client.Dispose();
-                        }
+                                break;
+                            default:
+                                {
+                                    await MessageBoxViewModel.DisplayMessage("Input network communication selected with out a selected protocol");
+                                }
+                                break;
+                    }
                     }
                     break;
                 default:
