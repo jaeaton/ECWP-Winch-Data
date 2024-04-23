@@ -75,12 +75,12 @@
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Minimum Payout" VerticalAlignment="Center" Width="120"/>
 					<ComboBox SelectedItem="{ Binding CurrentWinch.MinimumPayout, Mode=TwoWay }" Width="90" ItemsSource="{ Binding AvailablePayouts }" SelectedIndex="0" ToolTip.Tip="Minimum payout that should be considered part of a cast."/>
-					<TextBlock Text="{ Binding CurrentWinch.PayoutUnit }" VerticalAlignment="Center" Margin="2"/>
+					<TextBlock Text="{ Binding CurrentWinch.PayoutConversionUnit }" VerticalAlignment="Center" Margin="2"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Minimum Tension" VerticalAlignment="Center" Width="120"/>
 					<ComboBox SelectedItem="{ Binding CurrentWinch.MinimumTension, Mode=TwoWay }"  Width="90" ItemsSource="{ Binding AvailableTensions }" SelectedIndex="0" ToolTip.Tip="Minimum tension to consider as part of a cast."/>
-					<TextBlock Text="{ Binding CurrentWinch.TensionUnit }" Margin="2" VerticalAlignment="Center"/>
+					<TextBlock Text="{ Binding CurrentWinch.TensionConversionUnit }" Margin="2" VerticalAlignment="Center"/>
 				</StackPanel>
 			</StackPanel>
 		</StackPanel>

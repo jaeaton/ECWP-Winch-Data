@@ -34,29 +34,29 @@
 		  <StackPanel Orientation="Horizontal" Margin="2">
 			  <TextBlock Text="Installed Length" Width="160" VerticalAlignment="Center" Margin="2"/>
 			  <TextBox Watermark="Ex: 6000" x:Name="TextBoxInstalledLength" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.InstalledLength, Mode=TwoWay }" Width="90" VerticalAlignment="Center" Margin="2" ToolTip.Tip="Changing this value will reset the current length to the value entered. Current length is updated via the cut back event."/>
-			  <TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.PayoutUnit }" VerticalAlignment="Center"/>
+			  <TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.PayoutConversionUnit }" VerticalAlignment="Center"/>
 		  </StackPanel>
 		  <StackPanel Orientation="Horizontal" Margin="2">
 			  <TextBlock Text="Current Length" Width="160" VerticalAlignment="Center" Margin="2"/>
 			  <TextBox Watermark="Ex: 6000" IsEnabled="False" Text="{Binding CurrentWinch.AvailableLength, Mode=TwoWay }" Width="90" VerticalAlignment="Center" Margin="2"/>
-			  <TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.PayoutUnit }" VerticalAlignment="Center"/>
+			  <TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.PayoutConversionUnit }" VerticalAlignment="Center"/>
 		  </StackPanel>
 		  <StackPanel Orientation="Horizontal" Margin="2">
 			  <TextBlock Text="Warning Tension" Width="160" VerticalAlignment="Center" Margin="2"/>
 			   <TextBox Text="{Binding CurrentWinch.TensionWarningLevel}" IsEnabled="False" Width="90" VerticalAlignment="Center" Margin="2"/>
 			  
-			  <TextBlock Margin="3" Text="{Binding CurrentWinch.TensionUnit}" VerticalAlignment="Center" />
+			  <TextBlock Margin="3" Text="{Binding CurrentWinch.TensionConversionUnit}" VerticalAlignment="Center" />
 		  </StackPanel>
 		  <StackPanel Orientation="Horizontal" Margin="2">
 			  <TextBlock Text="Alarm Tension" Width="160" VerticalAlignment="Center" Margin="2"/>
 				  <TextBox  Text="{Binding CurrentWinch.TensionAlarmLevel, Mode=OneWay }" IsEnabled="False" Width="90" VerticalAlignment="Center"></TextBox>
 			  
-			  <TextBlock Margin="3" Text="{Binding CurrentWinch.TensionUnit}" VerticalAlignment="Center"/>
+			  <TextBlock Margin="3" Text="{Binding CurrentWinch.TensionConversionUnit}" VerticalAlignment="Center"/>
 		  </StackPanel>
 		  <StackPanel Orientation="Horizontal" Margin="2">
 			  <TextBlock Text="ABL" Width="160" VerticalAlignment="Center" Margin="2" />
 			  <TextBox Watermark="Ex: 10000" x:Name="TextBoxABL" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.AssignedBreakingLoad, Mode=TwoWay }" Width="90" VerticalAlignment="Center" Margin="2" ToolTip.Tip="Enter the Assigned Breaking Load via break tests or from manufacturer."/>
-			  <TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.TensionUnit }" VerticalAlignment="Center"/>
+			  <TextBlock Margin="3" Text="{ Binding Path=CurrentWinch.TensionConversionUnit }" VerticalAlignment="Center"/>
 		  </StackPanel>
 		  <StackPanel Orientation="Horizontal" Margin="2">
 			  <TextBlock Text="App A FoS" VerticalAlignment="Center" Width="160" Margin="2"/>
