@@ -5,6 +5,7 @@ namespace ViewModels
 {
     internal partial class LiveDataHandlingViewModel : ViewModelBase
     {
+        UnitConversionViewModel ucVM = new();
         ChartDataViewModel chartVM = new ChartDataViewModel();
         LiveDataHawboldtViewModel hawboldtProcessingVM = new LiveDataHawboldtViewModel();
         public int i = 0;
@@ -569,8 +570,9 @@ namespace ViewModels
             winch.LiveData.Tension = latest.Tension.ToString();
             winch.LiveData.Payout = latest.Payout.ToString();
             winch.LiveData.Speed = latest.Speed.ToString();
-            //chartVM.AddData(latest, winch.LiveData);
+            //Write data to graphing view model
             winch.ChartData.AddData(latest, winch.LiveData, winch.ChartTimeSpan);
+            //Set text color based on tension thresholds
             if (latest.TMWarnings.IndexOf("1") > 0)
             {
                 winch.LiveData.TensionColor = "yellow";
@@ -735,7 +737,7 @@ namespace ViewModels
                         if (strIn.Length == 9 && winch.InputCommunication.CommunicationProtocol == "3PS") 
                         {
                             getTime = true;
-                            latest = new DataPointModel("$3PS", "", "", strIn[0], strIn[3], strIn[2],"");
+                            latest = new DataPointModel("$3PS", "", "", strIn[3], strIn[5], strIn[4],"");
                         }
                         break;
                 }
@@ -743,6 +745,10 @@ namespace ViewModels
 
                 if (latest.StringID != "empty")
                 {
+                    if (winch.ConvertTension)
+                    {
+                        latest.Tension = ucVM.ConvertTension(latest.Tension);
+                    }
                     //If needed changes data and time stamp to local machine
                     if (winch.UseComputerTime || getTime)
                     {

@@ -122,21 +122,29 @@
         private List<string> speedUnitList = new List<string>
                                                             {
                                                                 "m/min",
-                                                                "ft/min"
+                                                                "ft/min",
+                                                                "kph",
+                                                                "mph"
                                                             };
 
         [ObservableProperty]
         private List<string> tensionUnitList = new List<string>
                                                             {
+                                                                "lbf",
                                                                 "kg",
-                                                                "lbf"
+                                                                "kip",
+                                                                "N",
+                                                                "Short Ton",
+                                                                "Long Ton",
+                                                                "Tonne"
                                                             };
 
         [ObservableProperty]
         private List<string> payoutUnitList = new List<string>
                                                             {
                                                                 "m",
-                                                                "ft"
+                                                                "ft",
+                                                                "km"
                                                             };
 
         [ObservableProperty]

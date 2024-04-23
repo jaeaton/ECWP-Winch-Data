@@ -13,7 +13,8 @@
         {
             var files = await _target.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions()
             {
-                Title = "Open Text File",
+                Title = "Select Sheave Train",
+                FileTypeFilter = new[] { FilePickerFileTypes.ImageAll },
                 AllowMultiple = false
             });
 
