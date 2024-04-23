@@ -97,10 +97,22 @@ namespace Models
         
         [ObservableProperty]
         private string speedUnit = string.Empty;
+        partial void OnSpeedUnitChanged(string value)
+        {
+            SpeedConversionUnit = value;
+        }
         [ObservableProperty]
         private string payoutUnit = string.Empty;
+        partial void OnPayoutUnitChanged(string value)
+        {
+            PayoutConversionUnit = value;
+        }
         [ObservableProperty]
         private string tensionUnit = string.Empty;
+        partial void OnTensionUnitChanged(string value)
+        {
+            TensionConversionUnit = value;
+        }
         [ObservableProperty]
         private string stopLogTension = string.Empty;
         [ObservableProperty]
