@@ -665,8 +665,8 @@ namespace ViewModels
                 string data = line.Replace("\0", string.Empty);
                 data = ReplaceNonPrintableCharacters(data, ' ');
                 string[] strIn = data.Split(',', 'T');
-                strIn[0] = strIn[0].Replace("0", string.Empty);
-                strIn[0] = strIn[0].Replace(" ", string.Empty);
+                string strID = strIn[0].Replace("0", string.Empty);
+                strID = strID.Replace(" ", string.Empty);
                 DataPointModel latest = new DataPointModel();
                 //Uncomment to log all data coming in
                 //WriteRawLog(data, winch);
@@ -674,7 +674,7 @@ namespace ViewModels
                 latest.StringID = "empty";
 
                 //winch.LiveData.RawWireData = data;
-                switch (strIn[0])
+                switch (strID)
                 {
                     //Wire Log Header
                     case "%WIR":
@@ -696,7 +696,7 @@ namespace ViewModels
                     case "$WIR":
                         if (strIn.Length == 9)
                         {
-                            latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6], strIn[7], strIn[8]);
+                            latest = new DataPointModel(strID, strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6], strIn[7], strIn[8]);
                         }
                         break;
                     case "RD":
@@ -704,40 +704,40 @@ namespace ViewModels
                         if (strIn.Length == 5)
                         {
                             getTime = true;
-                            latest = new DataPointModel(strIn[0], "", "", strIn[1], strIn[2], strIn[3], strIn[4]);
+                            latest = new DataPointModel(strID, "", "", strIn[1], strIn[2], strIn[3], strIn[4]);
 
                         }
                         //MTNW 1 input  (Includes date and time)
                         else if (strIn.Length == 7)
                         {
 
-                            latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);
+                            latest = new DataPointModel(strID, strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);
                         }
                         break;
                     //Hawboldt SPRE-3648 UDP String
                     //Godzilla
                     case "$HWIR1":
-                        latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
+                        latest = new DataPointModel(strID, strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
                         break;
                     //Hawboldt PRE-2648RS UDP string
                     case "$HWIR2":
-                        latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
+                        latest = new DataPointModel(strID, strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
                         break;
                     //Hawboldt SPRE-2640RS UDP String
                     case "$HWIR3":
-                        latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
+                        latest = new DataPointModel(strID, strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
                         break;
                     //Hawboldt SPRE-2036S UDP String
                     //WCWP Hawboldt small winches
                     case "$HWIR4":
-                        latest = new DataPointModel(strIn[0], strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
+                        latest = new DataPointModel(strID, strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
                         break;
 
                     default:
                         if (strIn.Length == 9 && winch.InputCommunication.CommunicationProtocol == "3PS") 
                         {
                             getTime = true;
-                            latest = new DataPointModel("$3PS", "", "", strIn[3], strIn[5], strIn[4],"");
+                            latest = new DataPointModel("$3PS", "", "", strIn[0], strIn[2], strIn[1],"");
                         }
                         break;
                 }
