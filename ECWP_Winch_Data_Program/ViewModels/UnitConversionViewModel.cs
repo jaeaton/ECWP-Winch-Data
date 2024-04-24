@@ -261,8 +261,187 @@
         }
         
         //Payout Conversion
-        
+        public float ConvertPayout(float payout)
+        {
+            float converted;
+            switch (MainViewModel._configDataStore.CurrentWinch.PayoutUnit)
+            {
+                case "m":
+                    converted = ConvertFromKMeters(payout);
+                    break;
+                case "ft":
+                    converted = ConvertFromFeet(payout);
+                    break;
+                case "km":
+                    converted = ConvertFromKMeters(payout);
+                    break;
+                default:
+                    converted = payout;
+                    break;
+            }
+            return converted;
+        }
+
+        public float ConvertFromMeters(float payout)
+        {
+            float converted;
+            switch (MainViewModel._configDataStore.CurrentWinch.PayoutConversionUnit)
+            {
+                case "km":
+                    converted = payout / 1000;
+                    break;
+                case "ft":
+                    converted = (payout) / ((float)0.0254 * 12);
+                    break;
+                default:
+                    converted = payout;
+                    break;
+            }
+
+            return converted;
+        }
+
+        public float ConvertFromFeet(float payout)
+        {
+            float converted;
+            switch (MainViewModel._configDataStore.CurrentWinch.PayoutConversionUnit)
+            {
+                case "m":
+                    converted = payout * 12 * (float)0.0254;
+                    break;
+                case "km":
+                    converted = payout * 12 * (float)0.0000254;
+                    break;
+                default:
+                    converted = payout;
+                    break;
+            }
+
+            return converted;
+        }
+
+        public float ConvertFromKMeters(float payout)
+        {
+            float converted;
+            switch (MainViewModel._configDataStore.CurrentWinch.PayoutConversionUnit)
+            {
+                case "m":
+                    converted = payout * 1000;
+                    break;
+                case "ft":
+                    converted = payout / ((float)0.0000254 * 12);
+                    break;
+                default:
+                    converted = payout;
+                    break;
+            }
+
+            return converted;
+        }
         
         //Speed Conversion
+        public float ConvertSpeed(float speed)
+        {
+            float converted;
+            switch (MainViewModel._configDataStore.CurrentWinch.SpeedUnit)
+            {
+                case "m/min":
+                    break;
+                case "ft/min":
+                    break;
+                case "kph":
+                    break;
+                case "mph":
+                    break;
+                default: 
+                    converted = speed;
+                    break;
+            }
+            return converted;
+        }
+
+        public float ConvertFromMeterperMin(float speed)
+        {
+            float converted;
+            switch (MainViewModel._configDataStore.CurrentWinch.SpeedConversionUnit)
+            {
+                case "ft/min":
+                    converted = speed / ((float)0.0254 * 12);
+                    break;
+                case "kph":
+                    converted = (speed * 60) / 1000; 
+                    break;
+                case "mph":
+                    converted = (speed * 60) / ((float)0.0254 * 12 * 5280);
+                    break;
+                default:
+                    converted = speed;
+                    break;
+            }
+            return converted;
+        }
+
+        public float ConvertFromFeetperMin(float speed)
+        {
+            float converted;
+            switch (MainViewModel._configDataStore.CurrentWinch.SpeedConversionUnit)
+            {
+                case "m/min":
+                    converted = speed * 12 * (float)0.0254;
+                    break;
+                case "kph":
+                    converted = speed * 12 * (float)0.0000254 * 60;
+                    break;
+                case "mph":
+                    converted = (speed * 60) / 5280; 
+                    break;
+                default:
+                    converted = speed;
+                    break;
+            }
+            return converted;
+        }
+
+        public float ConvertFromKPH(float speed)
+        {
+            float converted;
+            switch (MainViewModel._configDataStore.CurrentWinch.SpeedConversionUnit)
+            {
+                case "m/min":
+                    converted = (speed * 1000) / 60;
+                    break;
+                case "ft/min":
+                    converted = speed / ((float)0.0000254 * 60 * 12);
+                    break;
+                case "mph":
+                    converted = speed / ((float)0.0000254 * 60 * 12 * 5280);
+                    break;
+                default:
+                    converted = speed;
+                    break;
+            }
+            return converted;
+        }
+
+        public float ConvertFromMPH(float speed)
+        {
+            float converted;
+            switch (MainViewModel._configDataStore.CurrentWinch.SpeedConversionUnit)
+            {
+                case "m/min":
+                    converted = (speed * 5280 * 12 * (float)0.0254) / 60;
+                    break;
+                case "ft/min":
+                    converted = (speed * 5280) / 60;
+                    break;
+                case "kph":
+                    converted = (speed * 5280 * 12 * (float)0.0000254);
+                    break;
+                default:
+                    converted = speed;
+                    break;
+            }
+            return converted;
+        }
     }
 }

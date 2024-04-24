@@ -745,10 +745,22 @@ namespace ViewModels
 
                 if (latest.StringID != "empty")
                 {
+                    //Convert tension if needed
                     if (winch.ConvertTension)
                     {
                         latest.Tension = ucVM.ConvertTension(latest.Tension);
                     }
+                    //Convert Payout if needed
+                    if (winch.ConvertPayout)
+                    {
+                        latest.Payout = ucVM.ConvertPayout(latest.Payout);
+                    }
+                    //Convert Speed if needed
+                    if (winch.ConvertSpeed)
+                    {
+                        latest.Speed = ucVM.ConvertSpeed(latest.Speed);
+                    }
+
                     //If needed changes data and time stamp to local machine
                     if (winch.UseComputerTime || getTime)
                     {
