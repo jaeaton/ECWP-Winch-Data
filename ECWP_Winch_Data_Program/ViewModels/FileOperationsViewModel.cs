@@ -322,6 +322,18 @@ namespace ViewModels
                 {
                     lines.Add($"Speed Units,{  winch.SpeedUnit }");
                 }
+                if (winch.ConvertTension)
+                {
+                    lines.Add($"Tension Conversion Units,{winch.TensionConversionUnit}");
+                }
+                if (winch.ConvertPayout)
+                {
+                    lines.Add($"Payout Conversion Units,{winch.PayoutConversionUnit}");
+                }
+                if (winch.ConvertSpeed)
+                {
+                    lines.Add($"Speed Conversion Units,{winch.SpeedConversionUnit}");
+                }
                 if (winch.WinchLogType != string.Empty)
                 {
                     lines.Add($"Winch Log Type,{winch.WinchLogType}");
@@ -628,6 +640,21 @@ namespace ViewModels
                             if (line.Substring(0, delim) == "Speed Units")
                             {
                                 winch.SpeedUnit = line.Substring(delim + 1);
+                            }
+                            if (line.Substring(0, delim) == "Tension Conversion Units")
+                            {
+                                winch.TensionConversionUnit = line.Substring(delim + 1);
+                                winch.ConvertTension = true;
+                            }
+                            if (line.Substring(0, delim) == "Payout Conversion Units")
+                            {
+                                winch.PayoutConversionUnit = line.Substring(delim + 1);
+                                winch.ConvertPayout = true;
+                            }
+                            if (line.Substring(0, delim) == "Speed Conversion Units")
+                            {
+                                winch.SpeedConversionUnit = line.Substring(delim + 1);
+                                winch.ConvertSpeed = true;
                             }
                             if (line.Substring(0, delim) == "Winch Log Type")
                             {
