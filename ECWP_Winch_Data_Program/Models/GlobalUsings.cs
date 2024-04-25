@@ -33,6 +33,7 @@ global using Avalonia.Controls.ApplicationLifetimes;
 global using Avalonia.Platform.Storage;
 global using Avalonia.Layout;
 global using Avalonia.Media;
+global using Avalonia.Media.Imaging;
 global using Avalonia.Threading;
 global using MsBox.Avalonia;
 global using MsBox.Avalonia.Dto;

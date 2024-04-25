@@ -65,9 +65,12 @@
 			<Button Content="Select Sheave Train Image" IsEnabled="True"  Command="{ Binding SelectImageCommand }" DataContext="{ StaticResource ResourceKey=commands }" HorizontalAlignment="Center" Margin="5"/>
 		</StackPanel>
 		<Panel Grid.Column="1">
-			<Border BorderThickness="2" BorderBrush="LightGray" VerticalAlignment="Center" HorizontalAlignment="Center">
-				<Image Stretch="Uniform" Margin="5" />
-			</Border>
+			<StackPanel VerticalAlignment="Center">
+				<Border BorderThickness="2" BorderBrush="LightGray" VerticalAlignment="Center" HorizontalAlignment="Center">
+					<Image Source="{Binding CurrentWinch.SheaveTrainPath}" Stretch="Uniform" Margin="5" />
+				</Border>
+				<TextBlock Text="{Binding CurrentWinch.SheaveTrainPath}"/>
+			</StackPanel>
 		</Panel>
 	</Grid>
 </UserControl>

@@ -396,6 +396,10 @@ namespace ViewModels
                     lines.Add($"Chart Time Span,{winch.ChartTimeSpan}");
                 }
                 lines.Add($"Plot Winch,{winch.PlotSelected}");
+                if (winch.SheaveTrainPath != string.Empty)
+                {
+                    lines.Add($"Sheave Train Image Path,{winch.SheaveTrainPath}");
+                }
                 
                 //Write each line of array using stream writer
                 using (StreamWriter stream = new StreamWriter(destPath, true))
@@ -727,7 +731,14 @@ namespace ViewModels
                             {
                                 winch.PlotSelected = bool.Parse(line.Substring(delim + 1));
                             }
-                            
+                            if (line.Substring(0, delim) == "Sheave Train Image Path")
+                            {
+                                winch.SheaveTrainPath = line.Substring(delim + 1);
+
+                            }
+
+
+
                         }
                         
 

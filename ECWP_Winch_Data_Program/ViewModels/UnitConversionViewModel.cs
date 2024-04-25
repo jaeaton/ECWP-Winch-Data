@@ -346,12 +346,16 @@
             switch (MainViewModel._configDataStore.CurrentWinch.SpeedUnit)
             {
                 case "m/min":
+                    converted = ConvertFromMeterperMin(speed);
                     break;
                 case "ft/min":
+                    converted = ConvertFromFeetperMin(speed);
                     break;
                 case "kph":
+                    converted = ConvertFromKPH(speed);
                     break;
                 case "mph":
+                    converted = ConvertFromMPH(speed);
                     break;
                 default: 
                     converted = speed;

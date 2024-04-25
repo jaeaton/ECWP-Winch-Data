@@ -317,6 +317,8 @@ namespace Models
         }
         [ObservableProperty]
         private string payoutConversionUnit = string.Empty;
+        [ObservableProperty]
+        private string sheaveTrainPath = string.Empty;
         public object Sync { get; } = new object();
 
         public WinchModel() { }

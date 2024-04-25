@@ -313,7 +313,7 @@ namespace ViewModels
             {
                 return ImageSelect();
             });
-            _configDataStore.CurrentWinch.WinchDirectory = t.Result;
+            _configDataStore.CurrentWinch.SheaveTrainPath = t.Result;
         }
         public async Task<string> SetWinchPath(string extension)
         {
@@ -348,7 +348,8 @@ namespace ViewModels
                 if (file is null) return string.Empty;
                 else
                 {
-                    return file.ToString();
+
+                    return file.TryGetLocalPath().ToString();
                 }
                 // Limit the text file to 1MB so that the demo wont lag.
                 //if ((await file.GetBasicPropertiesAsync()).Size <= 1024 * 1024 * 1)

@@ -188,7 +188,8 @@ namespace ViewModels
 
             //Merge Image Cell
             ws.Range("B6:I20").Merge();
-            ws.Cell("B6").Value = "Insert Sheave Train Diagram";
+            //ws.Cell("B6").Value = "Insert Sheave Train Diagram";
+            ws.AddPicture(_config.CurrentWinch.SheaveTrainPath).MoveTo(ws.Cell("B6"),ws.Cell("I20"));
             ws.Cell("B6").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
             ws.Cell("B6").Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center);
 
