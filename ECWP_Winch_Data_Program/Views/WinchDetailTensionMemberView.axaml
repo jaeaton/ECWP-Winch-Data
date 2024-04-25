@@ -67,9 +67,9 @@
 		<Panel Grid.Column="1">
 			<StackPanel VerticalAlignment="Center">
 				<Border BorderThickness="2" BorderBrush="LightGray" VerticalAlignment="Center" HorizontalAlignment="Center">
-					<Image Source="{Binding CurrentWinch.SheaveTrainPath}" Stretch="Uniform" Margin="5" />
+					<Image Source="{Binding CurrentWinch.SheaveTrainImage}" Stretch="Uniform" Margin="5" />
 				</Border>
-				<TextBlock Text="{Binding CurrentWinch.SheaveTrainPath}"/>
+				<TextBlock Text="{Binding CurrentWinch.SheaveTrainPath}" HorizontalAlignment="Center"/>
 			</StackPanel>
 		</Panel>
 	</Grid>

@@ -319,6 +319,12 @@ namespace Models
         private string payoutConversionUnit = string.Empty;
         [ObservableProperty]
         private string sheaveTrainPath = string.Empty;
+        partial void OnSheaveTrainPathChanged(string value)
+        {
+            SheaveTrainImage = new Avalonia.Media.Imaging.Bitmap(value);
+        }
+        [ObservableProperty]
+        private Bitmap? sheaveTrainImage;
         public object Sync { get; } = new object();
 
         public WinchModel() { }
