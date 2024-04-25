@@ -9,15 +9,15 @@ The latest version can process winch log files to get cast information and place
 To Do:
 - [ ] Migrate to TopLevel.StorageProvider API from SaveFileDialog (obsolete)
 - [ ] Generate new wire path diagram
-- [ ] Insert wire path diagram (existing)
 - [ ] Display UNOLS Winch string statuses
 - [ ] Start casts (and log files) based on payout and tension
-- [ ] Add unit conversion
 - [ ] Add Graph view to data processing
-- [ ] Add 3PS Data reception
 - [ ] Add Mermac Reception (MacArtney)
 - [ ] Add Odim Reception
 - [ ] Record Hawboldt winch statuses
+- [x] ~~Insert wire path diagram (existing)~~
+- [x] ~~Add unit conversion~~
+- [x] ~~Add 3PS Data reception~~
 - [x] ~~Record Tension Member Alarms and Warnings in Wire Pool Log~~
 - [x] ~~UNOLS Wire Pool Excel Format~~
 - [x] ~~Add in detection and themeing for darkmode~~
