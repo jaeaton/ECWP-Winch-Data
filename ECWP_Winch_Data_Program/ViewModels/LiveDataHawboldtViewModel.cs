@@ -4,6 +4,7 @@
     {
         public string HawboldtProcess(byte[] byteArray, string HawboldtModel)
         {
+            
             string ResponseData = string.Empty;
             switch (HawboldtModel)
             {
@@ -226,7 +227,7 @@
         }
         private string TwoByteInt(byte[] bytes)
         {
-            if (BitConverter.IsLittleEndian)
+            //if (BitConverter.IsLittleEndian)
             {
                 Array.Reverse(bytes);
             }
@@ -235,21 +236,21 @@
         }
         private string RealByteInt(byte[] bytes)
         {
-            if (BitConverter.IsLittleEndian)
+            //if (BitConverter.IsLittleEndian)
             {
                 Array.Reverse(bytes);
             }
             float Float = BitConverter.ToSingle(bytes);
-            return Float.ToString("N1");
+            return Float.ToString("F1");
         }
         private string TimeRealByteInt(byte[] bytes)
         {
-            if (BitConverter.IsLittleEndian)
+            //if (BitConverter.IsLittleEndian)
             {
                 Array.Reverse(bytes);
             }
             float Float = BitConverter.ToSingle(bytes);
-            return Float.ToString("N3");
+            return Float.ToString("F3");
         }
     }
 }

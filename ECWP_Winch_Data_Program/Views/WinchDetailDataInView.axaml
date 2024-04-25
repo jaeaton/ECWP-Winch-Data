@@ -23,7 +23,7 @@
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5">
 					<TextBlock Text="Source Type" Width="100" VerticalAlignment="Center"/>
-					<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.InputCommunication.DataProtocol, Mode=TwoWay }" ItemsSource="{ Binding AvailableProtocols }" SelectedIndex="0" ToolTip.Tip="Select input protocol"/>
+					<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.InputCommunication.CommunicationProtocol, Mode=TwoWay }" ItemsSource="{ Binding AvailableProtocols }" SelectedIndex="0" ToolTip.Tip="Select input protocol"/>
 				</StackPanel>
 			</StackPanel>
 			
@@ -52,7 +52,7 @@
 			
 			<StackPanel Orientation="Horizontal" Margin="5">
 				<TextBlock Text="Protocol" Width="100" VerticalAlignment="Center"/>
-				<ComboBox MinWidth="210" SelectedItem="{ Binding CurrentWinch.InputCommunication.CommunicationProtocol, Mode=TwoWay }" ItemsSource="{ Binding Path=DataProtocolList }" SelectedIndex="0" ToolTip.Tip="Select the interperter for the incoming live data."/>
+				<ComboBox MinWidth="210" SelectedItem="{ Binding CurrentWinch.InputCommunication.DataProtocol, Mode=TwoWay }" ItemsSource="{ Binding Path=DataProtocolList }" SelectedIndex="0" ToolTip.Tip="Select the interperter for the incoming live data."/>
 			</StackPanel>
 			
 		</StackPanel>

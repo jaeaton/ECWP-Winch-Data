@@ -88,7 +88,7 @@ namespace ViewModels
                     break;
                 case "Network":
                     {
-                        switch (winch.InputCommunication.DataProtocol)
+                        switch (winch.InputCommunication.CommunicationProtocol)
                         {
                             case "TCP Client":
                                 {
@@ -601,9 +601,9 @@ namespace ViewModels
 
             // Blocks until a message returns on this socket from a remote host.
             Byte[] receiveBytes = udpClient.Receive(ref RemoteIpEndPoint);
-            if (winch.ProtocolHawboldt)
+            if (winch.InputCommunication.IsHawboldt)
             {
-                responseData = hawboldtProcessingVM.HawboldtProcess(receiveBytes, winch.HawboldtModel);
+                responseData = hawboldtProcessingVM.HawboldtProcess(receiveBytes, winch.InputCommunication.HawboldtModel);
             }
             else
             {
@@ -734,7 +734,7 @@ namespace ViewModels
                         break;
 
                     default:
-                        if (strIn.Length == 9 && winch.InputCommunication.CommunicationProtocol == "3PS") 
+                        if (strIn.Length == 9 && winch.InputCommunication.DataProtocol == "3PS") 
                         {
                             getTime = true;
                             latest = new DataPointModel("$3PS", "", "", strIn[0], strIn[2], strIn[1],"");
