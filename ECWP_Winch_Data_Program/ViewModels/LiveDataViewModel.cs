@@ -22,27 +22,27 @@ namespace ViewModels
                 "Step 9. Log max logs the maximum data strings, increases the cast number, and resets the maximum values.\n\n" +
                 $"{viewModel.RunningVersion}");
         }
-        [RelayCommand]
-        private async Task SaveLocation()
-        {
-            // Show the save file dialog
-            SaveFileDialog saveFileDialog = new();
-            //Set the dummy filename
-            saveFileDialog.InitialFileName = "Date_Cruise_Winch.log";
+        //[RelayCommand]
+        //private async Task SaveLocation()
+        //{
+        //    // Show the save file dialog
+        //    SaveFileDialog saveFileDialog = new();
+        //    //Set the dummy filename
+        //    saveFileDialog.InitialFileName = "Date_Cruise_Winch.log";
 
-            string saveFileName = await saveFileDialog.ShowAsync(MainWindow.Instance);
-            //var topLevel = TopLevel.GetTopLevel(this);
-            //var storage = topLevel.StorageProvider;
-            if (saveFileName != null)
-            {
-                //DirectoryLabel.Content = saveFileDialog.InitialFileName;
-                FileInfo fileInfo = new(saveFileName);
-                _configDataStore.DirectoryLabel = (string)fileInfo.DirectoryName;
-                _configDataStore.DirectorySet = true;
-                FileOperationsViewModel.WriteConfig(_configDataStore);
-            }
+        //    string saveFileName = await saveFileDialog.ShowAsync(MainWindow.Instance);
+        //    //var topLevel = TopLevel.GetTopLevel(this);
+        //    //var storage = topLevel.StorageProvider;
+        //    if (saveFileName != null)
+        //    {
+        //        //DirectoryLabel.Content = saveFileDialog.InitialFileName;
+        //        FileInfo fileInfo = new(saveFileName);
+        //        _configDataStore.DirectoryLabel = (string)fileInfo.DirectoryName;
+        //        _configDataStore.DirectorySet = true;
+        //        FileOperationsViewModel.WriteConfig(_configDataStore);
+        //    }
 
-        }
+        //}
         [RelayCommand]
         private void ConfigUpdate()
         {
