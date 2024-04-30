@@ -102,42 +102,6 @@ namespace ViewModels
                 "Note: Adding/Updating or Removing a winch writes a configuration file to application directory.");
         }
 
-        //public void ChangeSerialFormat(bool mtnw)
-        //{
-        //    if (mtnw)
-        //    {
-        //        _configDataStore.CurrentWinch.SerialFormat = $"MTNW";
-        //    }
-        //    else
-        //    {
-        //        _configDataStore.CurrentWinch.SerialFormat = $"UNOLS";
-        //    }
-        //}
-
-        //public void ChangeUDPFormat(bool mtnw)
-        //{
-        //    if (mtnw)
-        //    {
-        //        _configDataStore.CurrentWinch.UdpFormat = $"MTNW";
-        //    }
-        //    else
-        //    {
-        //        _configDataStore.CurrentWinch.UdpFormat = $"UNOLS";
-        //    }
-        //}
-
-        //public void ChangeLogFormat(bool mtnw)
-        //{
-        //    if (mtnw)
-        //    {
-        //        _configDataStore.CurrentWinch.LogFormat = $"MTNW";
-        //    }
-        //    else
-        //    {
-        //        _configDataStore.CurrentWinch.LogFormat = $"UNOLS";
-        //    }
-        //}
-
         public void InsertWinch(WinchModel Winch)
         {  
                 //Check to see if a cast number has been added. If not set to 1
@@ -318,23 +282,6 @@ namespace ViewModels
         }
         public async Task<string> SetWinchPath(string extension, string windowTitle)
         {
-            //Original Save File Method
-            // Show the save file dialog
-            //SaveFileDialog saveFileDialog = new();
-            ////build the save file name
-            //saveFileDialog.InitialFileName = _configDataStore.CurrentWinch.WinchName + extension;
-            //string saveFileName = await saveFileDialog.ShowAsync(MainWindow.Instance);
-            //if (saveFileName != null)
-            //{
-            //    //DirectoryLabel.Content = saveFileDialog.InitialFileName;
-            //    FileInfo fileInfo = new(saveFileName);
-            //    if (fileInfo.DirectoryName != null)
-            //    {
-            //        return fileInfo.DirectoryName;
-            //    }
-
-            //}
-
             //New Save file method
             List<string> ErrorMessages = new List<string>();
             ErrorMessages?.Clear();
@@ -354,14 +301,12 @@ namespace ViewModels
                         return fileInfo.DirectoryName;
                     }
                 }
-
             }
             catch (Exception e)
             {
                 ErrorMessages?.Add(e.Message);
                 return AppDomain.CurrentDomain.BaseDirectory;
             }
-            //return AppDomain.CurrentDomain.BaseDirectory;
         }
 
         public async Task<string> ImageSelect()
@@ -389,36 +334,6 @@ namespace ViewModels
             }
             
         }
-        //[RelayCommand]
-        //private async Task SaveFile()
-        //{
-        //    ErrorMessages?.Clear();
-        //    try
-        //    {
-        //        var filesService = App.Current?.Services?.GetService<IFilesService>();
-        //        if (filesService is null) throw new NullReferenceException("Missing File Service instance.");
-
-        //        var file = await filesService.SaveFileAsync();
-        //        if (file is null) return;
-
-
-        //        // Limit the text file to 1MB so that the demo wont lag.
-        //        if (FileText?.Length <= 1024 * 1024 * 1)
-        //        {
-        //            var stream = new MemoryStream(Encoding.Default.GetBytes((string)FileText));
-        //            await using var writeStream = await file.OpenWriteAsync();
-        //            await stream.CopyToAsync(writeStream);
-        //        }
-        //        else
-        //        {
-        //            throw new Exception("File exceeded 1MB limit.");
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        ErrorMessages?.Add(e.Message);
-        //    }
-        //}
-
+        
     }
 }
