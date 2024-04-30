@@ -21,11 +21,14 @@
             return files.Count >= 1 ? files[0] : null;
         }
 
-        public async Task<IStorageFile?> SaveFileAsync()
+        public async Task<IStorageFile?> SaveFileAsync(string extension, string windowTitle, string fileName)
         {
             return await _target.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions()
             {
-                Title = "Save Text File"
+                Title = windowTitle,
+                DefaultExtension = extension,
+                SuggestedFileName = fileName
+                
             });
         }
     }

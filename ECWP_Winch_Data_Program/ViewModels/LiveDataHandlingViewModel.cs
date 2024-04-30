@@ -94,6 +94,7 @@ namespace ViewModels
                                 {
                                     TcpListener server = null;
                                     TcpClient client = null;
+                                    
                                     try
                                     {
                                         // Set the TcpListener to selected port 

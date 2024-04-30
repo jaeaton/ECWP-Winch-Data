@@ -179,7 +179,7 @@
             LoadWinch(value);
         }
         [ObservableProperty]
-        private TabItemModel winchSelected;
+        private TabItemModel winchSelected = new();
         partial void OnWinchSelectedChanged(TabItemModel value)
         {
             ProcessDataViewModel.ParseData.WireLog.Clear();

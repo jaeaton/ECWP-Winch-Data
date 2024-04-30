@@ -294,7 +294,8 @@ namespace ViewModels
         {
             Task<string> t = Task.Run<string>(() =>
             {
-                return SetWinchPath(".log");         });
+                return SetWinchPath(".log", "Raw Data Log Path");         
+            });
             _configDataStore.CurrentWinch.RawLogDirectory = t.Result;
         }
         [RelayCommand]
@@ -302,7 +303,7 @@ namespace ViewModels
         {
             Task<string> t = Task.Run<string>(() =>
             {
-                return SetWinchPath(".xlsx");
+                return SetWinchPath(".xlsx","UNOLS Wire Log Path");
             });
             _configDataStore.CurrentWinch.WinchDirectory = t.Result;
         }
@@ -315,24 +316,52 @@ namespace ViewModels
             });
             _configDataStore.CurrentWinch.SheaveTrainPath = t.Result;
         }
-        public async Task<string> SetWinchPath(string extension)
+        public async Task<string> SetWinchPath(string extension, string windowTitle)
         {
+            //Original Save File Method
             // Show the save file dialog
-            SaveFileDialog saveFileDialog = new();
-            //build the save file name
-            saveFileDialog.InitialFileName = _configDataStore.CurrentWinch.WinchName + extension;
-            string saveFileName = await saveFileDialog.ShowAsync(MainWindow.Instance);
-            if (saveFileName != null)
+            //SaveFileDialog saveFileDialog = new();
+            ////build the save file name
+            //saveFileDialog.InitialFileName = _configDataStore.CurrentWinch.WinchName + extension;
+            //string saveFileName = await saveFileDialog.ShowAsync(MainWindow.Instance);
+            //if (saveFileName != null)
+            //{
+            //    //DirectoryLabel.Content = saveFileDialog.InitialFileName;
+            //    FileInfo fileInfo = new(saveFileName);
+            //    if (fileInfo.DirectoryName != null)
+            //    {
+            //        return fileInfo.DirectoryName;
+            //    }
+
+            //}
+
+            //New Save file method
+            List<string> ErrorMessages = new List<string>();
+            ErrorMessages?.Clear();
+            try
             {
-                //DirectoryLabel.Content = saveFileDialog.InitialFileName;
-                FileInfo fileInfo = new(saveFileName);
-                if (fileInfo.DirectoryName != null)
-                {
-                    return fileInfo.DirectoryName;
-                }
+                var filesService = App.Current?.Services?.GetService<IFilesService>();
+                if (filesService is null) throw new NullReferenceException("Missing File Service instance.");
                 
+                var file = await filesService.SaveFileAsync(extension, windowTitle, _configDataStore.CurrentWinch.WinchName + extension) ;
+                if (file is null) return AppDomain.CurrentDomain.BaseDirectory;
+                else
+                {
+                    FileInfo fileInfo = new(file.TryGetLocalPath().ToString());
+                    if (fileInfo.DirectoryName == null) return AppDomain.CurrentDomain.BaseDirectory;
+                    else
+                    {
+                        return fileInfo.DirectoryName;
+                    }
+                }
+
             }
-            return AppDomain.CurrentDomain.BaseDirectory;
+            catch (Exception e)
+            {
+                ErrorMessages?.Add(e.Message);
+                return AppDomain.CurrentDomain.BaseDirectory;
+            }
+            //return AppDomain.CurrentDomain.BaseDirectory;
         }
 
         public async Task<string> ImageSelect()
@@ -351,17 +380,7 @@ namespace ViewModels
 
                     return file.TryGetLocalPath().ToString();
                 }
-                // Limit the text file to 1MB so that the demo wont lag.
-                //if ((await file.GetBasicPropertiesAsync()).Size <= 1024 * 1024 * 1)
-                //{
-                //    await using var readStream = await file.OpenReadAsync();
-                //    using var reader = new StreamReader(readStream);
-                //    FileText = await reader.ReadToEndAsync(token);
-                //}
-                //else
-                //{
-                //    throw new Exception("File exceeded 1MB limit.");
-                //}
+                
             }
             catch (Exception e)
             {
