@@ -7,7 +7,6 @@ The current version can communicate with ECWP winches: Gloria, Jay Jay, Godzilla
 The latest version can process winch log files to get cast information and place the data in a UNOLS Wire Log format. Winch logs that this can process are: All ECWP Winches, RV Atlantis, WinchDAC, WCWP Traction Winch.
 
 To Do:
-- [ ] Migrate to TopLevel.StorageProvider API from SaveFileDialog (obsolete)
 - [ ] Generate new wire path diagram
 - [ ] Display UNOLS Winch string statuses
 - [ ] Start casts (and log files) based on payout and tension
@@ -15,6 +14,7 @@ To Do:
 - [ ] Add Mermac Reception (MacArtney)
 - [ ] Add Odim Reception
 - [ ] Record Hawboldt winch statuses
+- [x] ~~Migrate to TopLevel.StorageProvider API from SaveFileDialog (obsolete)~~
 - [x] ~~Insert wire path diagram (existing)~~
 - [x] ~~Add unit conversion~~
 - [x] ~~Add 3PS Data reception~~
