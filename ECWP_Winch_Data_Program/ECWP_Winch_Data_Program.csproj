@@ -5,7 +5,7 @@
     <LangVersion>latest</LangVersion>
     <ApplicationIcon>Assets\ECWP Icon.ico</ApplicationIcon>
 	  <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-	  <Version>6.0.4</Version>
+	  <Version>6.0.5</Version>
   </PropertyGroup>
 
   
@@ -30,7 +30,6 @@
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.10" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10" />
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.10" />
-    <PackageReference Include="CloneExtensions" Version="1.4.2" />
     <PackageReference Include="ClosedXML" Version="0.104.0-preview2" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 

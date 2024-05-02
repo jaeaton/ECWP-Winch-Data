@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-	  <Version>6.0.4</Version>
+	  <Version>6.0.5</Version>
 	  <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
 	  <ApplicationIcon>ECWP Icon.ico</ApplicationIcon>
 	  <PackageIcon>ECWPLogo.jpg</PackageIcon>
@@ -25,7 +25,6 @@
   <ItemGroup>
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.10" />
     <PackageReference Include="Avalonia.Desktop" Version="11.0.10" />
-    <PackageReference Include="CloneExtensions" Version="1.4.2" />
     <PackageReference Include="ClosedXML" Version="0.104.0-preview2" />
     <PackageReference Include="LiveChartsCore" Version="2.0.0-rc2" />
     <PackageReference Include="LiveChartsCore.SkiaSharpView" Version="2.0.0-rc2" />

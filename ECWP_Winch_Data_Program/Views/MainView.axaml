@@ -19,5 +19,8 @@
 		<TabItem Header="Update Check" VerticalContentAlignment="Center">
 			<v:VersionCheckView />
 		</TabItem>
+		<TabItem Header="About" VerticalContentAlignment="Center">
+			<v:AboutView />
+		</TabItem>
 	</TabControl>
   </UserControl>
