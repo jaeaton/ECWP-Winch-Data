@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
+             x:Class="Views.AboutSoftwareView">
+	<StackPanel>
+		<TextBlock Text="This software uses the following technologies and makes no claim to them." Margin="5" TextWrapping="Wrap"/>
+		<TextBlock Text="This application is written in C# using the .net framework." Margin="5" TextWrapping="Wrap"/>
+		<TextBlock Text="User Interface: Avalonia UI" Margin="5" TextWrapping="Wrap"/>
+		<TextBlock Text="Graphing: Plots are done via LiveCharts2 Library" Margin="5" TextWrapping="Wrap"/>
+		<TextBlock Text="Excel is interfaced using the ClosedXML Library" Margin="5" TextWrapping="Wrap"/>
+		<TextBlock Text="Updates are checked via the GithubUpdateCheck Library" Margin="5" TextWrapping="Wrap"/>
+		<TextBlock Text="Message boxes are produced by MessageBox.Avalonia" Margin="5" TextWrapping="Wrap"/>
+	</StackPanel>
+	
+</UserControl>
