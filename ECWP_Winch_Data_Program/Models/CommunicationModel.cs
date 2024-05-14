@@ -64,38 +64,69 @@ namespace Models
         //TCP/IP, UDP, etc
         [ObservableProperty]
         private string communicationProtocol = string.Empty;
-        
+
+        //[ObservableProperty]
+        //private string dataSpec = "UNOLS";
+        //partial void OnDataSpecChanged(string value)
+        //{
+        //    if (value.Contains("Hawboldt"))
+        //    {
+        //        IsHawboldt = true;
+        //        if (value.Contains("3464"))
+        //        {
+        //            HawboldtModel = "SPRE-3464";
+        //        }
+        //        else if (value.Contains("2648"))
+        //        {
+        //            HawboldtModel = "SPRE-2648RS";
+        //        }
+        //        else if (value.Contains("2640"))
+        //        {
+        //            HawboldtModel = "SPRE-2640";
+        //        }
+        //        else if (value.Contains("2036"))
+        //        {
+        //            HawboldtModel = "SPRE-2036S";
+        //        }
+        //    }
+        //    else
+        //    {
+        //        IsHawboldt = false;
+        //    }
+        //    DataProtocol = value;
+        //}
+
         //Data string format, MTNW, UNOLS, Hawboldt, etc
         [ObservableProperty]
         private string dataProtocol = "UNOLS";
-        partial void OnDataProtocolChanged(string? oldValue, string newValue)
-        {
-            if (newValue.Contains("Hawboldt"))
-            {
-                IsHawboldt = true;
-                if (newValue.Contains("3464"))
-                {
-                    HawboldtModel = "SPRE-3464";
-                }
-                else if (newValue.Contains("2648"))
-                {
-                    HawboldtModel = "SPRE-2648RS";
-                }
-                else if (newValue.Contains("2640"))
-                {
-                    HawboldtModel = "SPRE-2640";
-                }
-                else if (newValue.Contains("2036"))
-                {
-                    HawboldtModel = "SPRE-2036S";
-                }
-            }
-            else
-            {
-                IsHawboldt = false;
-            }
-                
-        }
+        //partial void OnDataProtocolChanged(string? oldValue, string newValue)
+        //{
+        //    if (newValue.Contains("Hawboldt"))
+        //    {
+        //        IsHawboldt = true;
+        //        if (newValue.Contains("3464"))
+        //        {
+        //            HawboldtModel = "SPRE-3464";
+        //        }
+        //        else if (newValue.Contains("2648"))
+        //        {
+        //            HawboldtModel = "SPRE-2648RS";
+        //        }
+        //        else if (newValue.Contains("2640"))
+        //        {
+        //            HawboldtModel = "SPRE-2640";
+        //        }
+        //        else if (newValue.Contains("2036"))
+        //        {
+        //            HawboldtModel = "SPRE-2036S";
+        //        }
+        //    }
+        //    else
+        //    {
+        //        IsHawboldt = false;
+        //    }
+
+        //}
         partial void OnDataProtocolChanged(string value)
         {
             if (value == "UNOLS" && IsUNOLS != true)
@@ -108,6 +139,30 @@ namespace Models
             {
                 IsUNOLS = false;
                 IsMTNW = true;
+            }
+            if (value != null && value.Contains("Hawboldt"))
+            {
+                IsHawboldt = true;
+                if (value.Contains("3464"))
+                {
+                    HawboldtModel = "SPRE-3464";
+                }
+                else if (value.Contains("2648"))
+                {
+                    HawboldtModel = "SPRE-2648RS";
+                }
+                else if (value.Contains("2640"))
+                {
+                    HawboldtModel = "SPRE-2640";
+                }
+                else if (value.Contains("2036"))
+                {
+                    HawboldtModel = "SPRE-2036S";
+                }
+            }
+            else
+            {
+                IsHawboldt = false;
             }
         }
 

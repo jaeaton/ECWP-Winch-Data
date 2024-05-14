@@ -247,7 +247,7 @@
                 CurrentWinch = new WinchModel();
                 return;
             }
-            if (winch != null && AllWinches != null)
+            if (winch != string.Empty && AllWinches != null)
             {
                 int index = 0;
 

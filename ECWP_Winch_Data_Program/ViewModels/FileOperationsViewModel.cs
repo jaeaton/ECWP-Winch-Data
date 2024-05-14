@@ -184,7 +184,7 @@ namespace ViewModels
                         {
                             await MessageBoxViewModel.DisplayMessage(
                                     $"{winch.WinchName}\n" +
-                                    $"Input data procol required");
+                                    $"Input data protocol required");
                         }
                     }
                 }
