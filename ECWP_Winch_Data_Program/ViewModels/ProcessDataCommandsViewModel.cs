@@ -41,7 +41,7 @@
                         _parseData.EndDate = _config.EndDate;
                         _parseData.UseDateRange = _config.DateRangeCheckBox;
                         _parseData.WinchID = _config.CurrentWinch.Atlantis3PSWinchID;
-                        ExcelViewModel.SetWireLogFileName();
+                        ExcelViewModel.SetWireLogFileName(_config.CurrentWinch);
                         FindFiles();
                         ProcessDataReadFilesViewModel.ReadDataFiles();//ProcessDataViewModel.ParseData);
                         break;

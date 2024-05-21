@@ -415,7 +415,7 @@
                     DataPointModel mPayDataPt = new();
                     mPayDataPt = MaxPayoutDataPoint.DeepCopy();
                     //ProcessDataWriteFilesViewModel.WriteProcessed(maxTensionString, maxPayoutString, cast); //end cast, increment cast number, write processed data
-                    ExcelViewModel.AddCastData(mTenDataPt, mPayDataPt, castSend);
+                    ExcelViewModel.AddCastData(mTenDataPt, mPayDataPt, castSend, MainViewModel._configDataStore.CurrentWinch);
                     //parseData.ReadingLine = maxTensionString;
                     parseData.ProcessCasts.Add(processCastDataModel);
 
