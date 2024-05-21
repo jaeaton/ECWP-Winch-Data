@@ -58,7 +58,7 @@ namespace ViewModels
                             {
                                 //Asynchronious read of data to allow for other operations to occur
                                 dataIn = await Task.Run(() => ReadSerialData(InputSerialPort, winch), winch.Canceller.Token);
-                                //_liveData.RawWireData = dataIn;
+                                //winch.LiveData.RawWireData = dataIn;
                                 ParseWinchData(dataIn, winch);
                             }
                             catch (Exception ae)
@@ -118,9 +118,9 @@ namespace ViewModels
 
                                             try
                                             {
-                                                //Asynchronious read of data to allow for other operations to occur
+                                                //Asynchronous read of data to allow for other operations to occur
                                                 dataIn = await Task.Run(() => ReadTCPData(client, winch), winch.Canceller.Token);
-                                                //_liveData.RawWireData = dataIn;
+                                                //winch.LiveData.RawWireData = dataIn;
                                                 //read data
                                                 ParseWinchData(dataIn, winch);
                                             }
@@ -202,7 +202,7 @@ namespace ViewModels
                                             {
                                                 //Asynchronious read of data to allow for other operations to occur
                                                 dataIn = await Task.Run(() => ReadTCPData(client, winch), winch.Canceller.Token);
-                                                //_liveData.RawWireData = dataIn;
+                                                //winch.LiveData.RawWireData = dataIn;
                                                 //read data
                                                 ParseWinchData(dataIn, winch);
                                             }
