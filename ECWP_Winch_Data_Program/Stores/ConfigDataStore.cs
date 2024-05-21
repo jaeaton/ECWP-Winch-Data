@@ -5,6 +5,10 @@
     {
         [ObservableProperty]
         private string cruiseNameBox = string.Empty;
+        partial void OnCruiseNameBoxChanged(string value)
+        {
+            ResetCasts();
+        }
 
         [ObservableProperty]
         private string shipName = string.Empty;
@@ -22,7 +26,7 @@
         private List<string> availableSerialPorts = GetSerialPorts.FindSerialPorts();
 
         [ObservableProperty]
-        private List<string> availableBaudRates= new List<string>
+        private List<string> availableBaudRates = new List<string>
                                                             {
                                                                 "57600",
                                                                 "38400",
@@ -111,7 +115,7 @@
 
         [ObservableProperty]
         private ObservableCollection<WinchModel> allWinches = new();
-        
+
         [ObservableProperty]
         private ObservableCollection<string> winchesToPlot = new();
 
@@ -187,11 +191,11 @@
             {
                 LoadWinch(value.Header);
             }
-            
+
         }
         [ObservableProperty]
         private ObservableCollection<string> winchNames = new();
-        
+
         [ObservableProperty]
         private List<string> chartTimeSpanList = new List<string>
                                                             {
@@ -206,10 +210,10 @@
         {
             new TabItemModel("Add New", "Add New")
         };
-        
+
         [ObservableProperty]
-        private List<string> wireLogEventList = new List<string> 
-                                                            { 
+        private List<string> wireLogEventList = new List<string>
+                                                            {
                                                                 "Cut Back",
                                                                 "Lubrication",
                                                                 "Installation",
@@ -242,7 +246,7 @@
         private string buttonText = "Start Processing";
         public void LoadWinch(string winch)
         {
-            if ( winch == "Add New")
+            if (winch == "Add New")
             {
                 CurrentWinch = new WinchModel();
                 return;
@@ -266,14 +270,21 @@
         }
         public void RefreshWinches(ObservableCollection<WinchModel> winches)
         {
-            
+
             TabItems.Clear();
             TabItems.Add(new TabItemModel("Add New", "Add New"));
             foreach (var winch in winches)
             {
-                
+
                 TabItemModel tabitem = new TabItemModel(winch.WinchName, winch.WinchName);
                 TabItems.Add(tabitem);
+            }
+        }
+        public void ResetCasts()
+        {
+            foreach (var winch in AllWinches)
+            {
+                winch.CastNumber = "0";
             }
         }
     }
