@@ -58,7 +58,11 @@ namespace ViewModels
                             {
                                 //Asynchronious read of data to allow for other operations to occur
                                 dataIn = await Task.Run(() => ReadSerialData(InputSerialPort, winch), winch.Canceller.Token);
-                                //winch.LiveData.RawWireData = dataIn;
+                                //Show raw input data if selected
+                                if (winch.ShowRawInput == true)
+                                {
+                                    winch.LiveData.RawWireData = dataIn;
+                                }
                                 ParseWinchData(dataIn, winch);
                             }
                             catch (Exception ae)
@@ -120,7 +124,11 @@ namespace ViewModels
                                             {
                                                 //Asynchronous read of data to allow for other operations to occur
                                                 dataIn = await Task.Run(() => ReadTCPData(client, winch), winch.Canceller.Token);
-                                                //winch.LiveData.RawWireData = dataIn;
+                                                //Show raw input data if selected
+                                                if (winch.ShowRawInput == true)
+                                                {
+                                                    winch.LiveData.RawWireData = dataIn;
+                                                }
                                                 //read data
                                                 ParseWinchData(dataIn, winch);
                                             }
@@ -202,7 +210,13 @@ namespace ViewModels
                                             {
                                                 //Asynchronious read of data to allow for other operations to occur
                                                 dataIn = await Task.Run(() => ReadTCPData(client, winch), winch.Canceller.Token);
-                                                //winch.LiveData.RawWireData = dataIn;
+
+                                                //Show raw input data if selected
+                                                if (winch.ShowRawInput == true)
+                                                {
+                                                    winch.LiveData.RawWireData = dataIn;
+                                                }
+
                                                 //read data
                                                 ParseWinchData(dataIn, winch);
                                             }
@@ -243,7 +257,11 @@ namespace ViewModels
                                             {
                                                 //Asynchronious read of data to allow for other operations to occur
                                                 dataIn = await Task.Run(() => ReadUDPData(client, winch));
-                                                //winch.LiveData.RawWireData = dataIn;
+                                                //Show raw input data if selected
+                                                if (winch.ShowRawInput == true)
+                                                {
+                                                    winch.LiveData.RawWireData = dataIn;
+                                                }
                                                 //read data
                                                 ParseWinchData(dataIn, winch);
                                             }

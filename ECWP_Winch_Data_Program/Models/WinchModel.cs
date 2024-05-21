@@ -318,6 +318,8 @@ namespace Models
         [ObservableProperty]
         private string payoutConversionUnit = string.Empty;
         [ObservableProperty]
+        private bool showRawInput = false;
+        [ObservableProperty]
         private string sheaveTrainPath = string.Empty;
         partial void OnSheaveTrainPathChanged(string value)
         {

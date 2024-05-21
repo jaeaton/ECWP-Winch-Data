@@ -51,6 +51,6 @@
 				</StackPanel>
 			</Viewbox>
 		</Grid>
-		<Label Grid.Row="4" Content="{Binding LiveData.RawWireData, FallbackValue='Received String'}" HorizontalAlignment="Center"/>
+		<TextBlock Grid.Row="4" Text="{Binding LiveData.RawWireData, FallbackValue='Received String'}" HorizontalAlignment="Center"/>
 	</Grid>
 </UserControl>
