@@ -13,6 +13,7 @@ To Do:
 - [ ] Add Graph view to data processing
 - [ ] Add Mermac Reception (MacArtney)
 - [ ] Add Odim Reception
+- [ ] Add Dillon Dynomometer Reception
 - [ ] Record Hawboldt winch statuses
 - [x] ~~Migrate to TopLevel.StorageProvider API from SaveFileDialog (obsolete)~~
 - [x] ~~Insert wire path diagram (existing)~~
