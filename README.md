@@ -17,6 +17,7 @@ To Do:
 - [ ] Add Odim Reception
 - [ ] Add Dillon Dynomometer Reception
 - [ ] Record Hawboldt winch statuses
+- [ ] Create string builder to allow users to enter their string
 - [x] ~~Migrate to TopLevel.StorageProvider API from SaveFileDialog (obsolete)~~
 - [x] ~~Insert wire path diagram (existing)~~
 - [x] ~~Add unit conversion~~
