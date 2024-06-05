@@ -11,6 +11,8 @@ To Do:
 - [ ] Display UNOLS Winch string statuses
 - [ ] Start casts (and log files) based on payout and tension
 - [ ] Add Graph view to data processing
+- [ ] Select data from graphview for closer examination
+- [ ] Combine Tow-yos to a single cast
 - [ ] Add Mermac Reception (MacArtney)
 - [ ] Add Odim Reception
 - [ ] Add Dillon Dynomometer Reception
