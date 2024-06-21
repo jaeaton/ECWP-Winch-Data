@@ -474,6 +474,12 @@ namespace ViewModels
                             latest = new DataPointModel(strID, strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6], strIn[7], strIn[8]);
                         }
                         break;
+                    case "NULL":
+                        if (strIn.Length == 9)
+                        {
+                            latest = new DataPointModel("$WIR", strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6], strIn[7], strIn[8]);
+                        }
+                        break;
                     case "RD":
                         //MTNW Legacy input (does not include date and time)
                         if (strIn.Length == 5)

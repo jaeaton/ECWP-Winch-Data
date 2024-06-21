@@ -278,7 +278,16 @@ namespace ViewModels
             {
                 return ImageSelect();
             });
+            if (t.Result == null || t.Result == string.Empty)
+            {
+                return;
+            }
             _configDataStore.CurrentWinch.SheaveTrainPath = t.Result;
+        }
+        [RelayCommand]
+        public void RemoveImage()
+        {
+            _configDataStore.CurrentWinch.SheaveTrainPath = "none";
         }
         public async Task<string> SetWinchPath(string extension, string windowTitle)
         {

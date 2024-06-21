@@ -323,6 +323,11 @@ namespace Models
         private string sheaveTrainPath = string.Empty;
         partial void OnSheaveTrainPathChanged(string value)
         {
+            if (value == "none")
+            {
+                SheaveTrainImage = null ;
+            }
+            else
             SheaveTrainImage = new Avalonia.Media.Imaging.Bitmap(value);
         }
         [ObservableProperty]
