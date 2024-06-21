@@ -44,10 +44,10 @@
 				<TextBlock Text="{ Binding CurrentWinch.WinchDirectory, FallbackValue=Set Path}" Margin="2" VerticalAlignment="Center" MinWidth="160"/>
 			</Border>
 		</StackPanel>
-		<!--<Button Content="Set UNOLS Path" Command="{Binding SetWinchPathCommand}" Margin="5" Width="160" HorizontalContentAlignment="Center" DataContext="{StaticResource winch}"/>-->
+		<!--<Button Content="Set UNOLS Path" Command="{Binding SetWinchPathCommand}" Margin="5" Width="160" HorizontalContentAlignment="Center" DataContext="{StaticResource winch}"/>
 		<StackPanel Orientation="Horizontal" Margin="5" DataContext="{StaticResource winch}">
 			<Button Content="Add/Update Winch" Command="{Binding AddWinchCommand}" HorizontalContentAlignment="Center" Width="160" Margin="2" ToolTip.Tip="This adds or updates this named winch to the configuration file."/>
 			<Button Content="Remove Winch" Command="{Binding RemoveWinchCommand}" HorizontalContentAlignment="Center" Width="160" Margin="2" ToolTip.Tip="This removes the named winch from the configuration file."/>
-		</StackPanel>
+		</StackPanel>-->
 	</StackPanel>
 </UserControl>
