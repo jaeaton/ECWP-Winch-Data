@@ -3,8 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:v="clr-namespace:Views"
+			 xmlns:vm="clr-namespace:ViewModels"
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Views.WinchDetailView">
+	
+	<UserControl.Resources>
+		<vm:WinchViewModel x:Key="winch"/>
+	</UserControl.Resources>
+	
+	<StackPanel Orientation="Vertical">
 	<TabControl TabStripPlacement="Left" >
 		<TabItem Header="Winch Information" VerticalContentAlignment="Center" >
 			<v:WinchDetailParticularsView />
@@ -28,4 +35,10 @@
 			<v:WinchDetailLogProcessingView/>
 		</TabItem>
 	</TabControl>
+		<StackPanel Orientation="Vertical" DataContext="{StaticResource winch}">
+			<Button Content="Add/Update Winch" Command="{Binding AddWinchCommand}" HorizontalContentAlignment="Center" Width="160" Margin="20,2,2,2" ToolTip.Tip="This adds or updates this named winch to the configuration file."/>
+			<Button Content="Remove Winch" Command="{Binding RemoveWinchCommand}" HorizontalContentAlignment="Center" Width="160" Margin="20,2,2,2" ToolTip.Tip="This removes the named winch from the configuration file."/>	
+		</StackPanel>
+		
+	</StackPanel>
 </UserControl>
