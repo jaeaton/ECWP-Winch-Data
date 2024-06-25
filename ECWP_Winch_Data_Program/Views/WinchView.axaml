@@ -21,4 +21,5 @@
 			</DataTemplate>
 		</TabControl.ContentTemplate>
 	</TabControl>
+	
 </UserControl>

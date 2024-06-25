@@ -11,22 +11,42 @@
 		<vm:WinchViewModel x:Key="winch"/>
 	</UserControl.Resources>
 	
-	<StackPanel Orientation="Vertical">
+	
 	<TabControl TabStripPlacement="Left" >
+		
 		<TabItem Header="Winch Information" VerticalContentAlignment="Center" >
-			<v:WinchDetailParticularsView />
+			<StackPanel>
+				<v:WinchDetailParticularsView />
+				<v:WinchDetailAddRemoveView/>
+			</StackPanel>
+			
 		</TabItem>
 		<TabItem Header="Tension Member" VerticalContentAlignment="Center">
-			<v:WinchDetailTensionMemberView/>
+			<StackPanel>
+				<v:WinchDetailTensionMemberView/>
+				<v:WinchDetailAddRemoveView/>
+			</StackPanel>
+			
 		</TabItem>
 		<TabItem Header="Logging Parameters" VerticalContentAlignment="Center">
-			<v:WinchDetailLoggingView/>
+			<StackPanel>
+				<v:WinchDetailLoggingView/>
+				<v:WinchDetailAddRemoveView/>
+			</StackPanel>
 		</TabItem>
 		<TabItem Header="Incoming Data" VerticalContentAlignment="Center">
-			<v:WinchDetailDataInView/>
+			<StackPanel>
+				<v:WinchDetailDataInView/>
+				<v:WinchDetailAddRemoveView/>
+			</StackPanel>
+			
 		</TabItem>
 		<TabItem Header="Outgoing Data" VerticalContentAlignment="Center">
-			<v:WinchDetailDataOutTabView/>
+			<StackPanel>
+				<v:WinchDetailDataOutTabView/>
+				<v:WinchDetailAddRemoveView/>
+			</StackPanel>
+			
 		</TabItem>
 		<TabItem Header="UNOLS Event Log" VerticalContentAlignment="Center">
 			<v:WinchDetailWireLogView/>
@@ -35,10 +55,5 @@
 			<v:WinchDetailLogProcessingView/>
 		</TabItem>
 	</TabControl>
-		<StackPanel Orientation="Vertical" DataContext="{StaticResource winch}" VerticalAlignment="Bottom">
-			<Button Content="Add/Update Winch" Command="{Binding AddWinchCommand}" HorizontalContentAlignment="Center" Width="160" Margin="20,2,2,2" ToolTip.Tip="This adds or updates this named winch to the configuration file."/>
-			<Button Content="Remove Winch" Command="{Binding RemoveWinchCommand}" HorizontalContentAlignment="Center" Width="160" Margin="20,2,2,2" ToolTip.Tip="This removes the named winch from the configuration file."/>	
-		</StackPanel>
 		
-	</StackPanel>
 </UserControl>

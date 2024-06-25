@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:vm="clr-namespace:ViewModels"
+			 x:Class="Views.WinchDetailAddRemoveView">
+	
+	<UserControl.Resources>
+		<vm:WinchViewModel x:Key="winch"/>
+	</UserControl.Resources>
+	<StackPanel Orientation="Horizontal" DataContext="{StaticResource winch}">
+		<Button Content="Add/Update Winch" Command="{Binding AddWinchCommand}" HorizontalContentAlignment="Center" Width="160" Margin="2,6,2,2" ToolTip.Tip="This adds or updates this named winch to the configuration file."/>
+		<Button Content="Remove Winch" Command="{Binding RemoveWinchCommand}" HorizontalContentAlignment="Center" Width="160" Margin="6,6,2,2" ToolTip.Tip="This removes the named winch from the configuration file."/>
+	</StackPanel>
+	
+</UserControl>
