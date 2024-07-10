@@ -297,10 +297,10 @@ namespace ViewModels
                 lines.Add($"Save 20Hz Data,{ winch.Log20Hz }");
                 lines.Add($"Save Max Values,{ winch.LogMax }");
                 lines.Add($"Use Computer Time,{ winch.UseComputerTime }");
-                if (winch.LogFormat != null)
-                {
-                    lines.Add($"20Hz File Format,{ winch.LogFormat }");
-                }
+                //if (winch.LogFormat != null)
+                //{
+                //    lines.Add($"20Hz File Format,{ winch.LogFormat }");
+                //}
                 if (winch.WinchDirectory != string.Empty)
                 {
                     lines.Add($"UNOLS Log Location,{ winch.WinchDirectory }");
@@ -596,7 +596,7 @@ namespace ViewModels
                                 }
                                     
                             }                            
-                            if (line.Substring(0, delim) == "Save 20 Hz Data")
+                            if (line.Substring(0, delim) == "Save 20Hz Data")
                             {
                                 winch.Log20Hz = bool.Parse(line.Substring(delim + 1));
                             }
@@ -618,20 +618,22 @@ namespace ViewModels
                                 winch.RawLogDirectory = line.Substring(delim + 1);
                                 
                             }
-                            if (line.Substring(0, delim) == "20Hz File Format")
-                            {
-                                winch.LogFormat = line.Substring(delim + 1);
-                                if (winch.LogFormat == "UNOLS")
-                                {
-                                    winch.LogFormatUnols = true;
-                                    winch.LogFormatMtnw = false;
-                                }
-                                else
-                                {
-                                    winch.LogFormatUnols = false;
-                                    winch.LogFormatMtnw = true;
-                                }
-                            }
+                            //if (line.Substring(0, delim) == "20Hz File Format")
+                            //{
+                            //    winch.LogFormat = line.Substring(delim + 1);
+                            //    if (winch.LogFormat == "UNOLS")
+                            //    {
+                            //        winch.LogFormatUnols = true;
+                            //        winch.LogFormatMtnw = false;
+                            //        winch.Log20Hz = true;
+                            //    }
+                            //    else
+                            //    {
+                            //        winch.LogFormatUnols = false;
+                            //        winch.LogFormatMtnw = true;
+                            //        winch.Log20Hz = true;
+                            //    }
+                            //}
                             
                             if (line.Substring(0, delim) == "Tension Units")
                             {

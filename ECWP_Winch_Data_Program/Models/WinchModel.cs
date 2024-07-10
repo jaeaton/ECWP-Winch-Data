@@ -77,21 +77,25 @@ namespace Models
         private bool log20Hz ;
         [ObservableProperty]
         private bool logMax ;
-        [ObservableProperty]
-        private bool logFormatUnols ;
-        [ObservableProperty]
-        private bool logFormatMtnw;
-        partial void OnLogFormatMtnwChanged(bool value)
-        {
-            if (value == true)
-            {
-                LogFormat = $"MTNW";
-            }
-            else
-            {
-               LogFormat = $"UNOLS";
-            }
-        }
+        //[ObservableProperty]
+        //private bool logFormatUnols;
+        //partial void OnLogFormatUnolsChanged(bool value)
+        //{
+        //    if (value == true)
+        //    {
+        //        LogFormat = $"UNOLS";
+        //    }
+        //}
+        //[ObservableProperty]
+        //private bool logFormatMtnw ;
+        //partial void OnLogFormatMtnwChanged(bool value)
+        //{
+        //    if (value == true)
+        //    {
+        //        LogFormat = $"MTNW";
+        //    }
+            
+        //}
         [ObservableProperty]
         private string logFormat = string.Empty;
         

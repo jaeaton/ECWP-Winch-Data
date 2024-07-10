@@ -629,18 +629,10 @@ namespace ViewModels
             string destPath;
             string fileName;
             
-            if (!winch.LogFormatUnols)
-            {
-                fileName = winch.MtnwWireLogName;
-                destPath = System.IO.Path.Combine(winch.RawLogDirectory, fileName);
-                line = $"RD,{data.Date}T{data.Time},{data.Tension},{data.Speed},{data.Payout}";
-            }
-            else
-            {
                 fileName = winch.UnolsWireLogName;
                 destPath = System.IO.Path.Combine(winch.RawLogDirectory, fileName);
                 line = $"{data.StringID},{data.Date},{data.Time},{data.Tension},{data.Speed},{data.Payout},{data.TMWarnings},{data.TMAlarms},{data.CheckSum}";
-            }
+            
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
             {
                 stream.WriteLine(line);
