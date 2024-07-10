@@ -204,6 +204,39 @@
                             }
 
                         }
+                        else if (parseData.SelectedWinch == "ECWP MTNW")
+                        {
+                            bool LengthBool = false;
+                            bool TensionBool = false;
+                            bool SpeedBool = false;
+                            bool PayoutBool = false;
+                            float Tension = 0;
+                            float Speed = 0;
+                            float Payout = 0;
+
+                            if (data.Length > 5)
+                            {
+                                LengthBool = true;
+                                TensionBool = float.TryParse(data[3], out Tension);
+                                SpeedBool = float.TryParse(data[4], out Speed);
+                                PayoutBool = float.TryParse(data[5], out Payout);
+                            }
+                            if (LengthBool != false && TensionBool != false && SpeedBool != false && PayoutBool != false)//float.TryParse(data[2], out float Tension) != false)
+                            {
+                                string dataDateAndTime = data[1];
+                                string[] dataDate = dataDateAndTime.Split('T');
+                                //stringData = "RD," + data[3] + "," + data[2] + "," + data[4] + "," + data[1] + "," + dataDate[0] + "," + dataDate[1];
+                                lineData.StringID = data[0];
+                                lineData.Tension = Tension;
+                                lineData.Speed = Speed;
+                                lineData.Payout = Payout;
+                                lineData.CheckSum = string.Empty;
+                                lineData.DateAndTime = DateTime.Parse(dataDate[0] + "T" + dataDate[1]);
+                                lineData.TMAlarms = "00000000";
+                                lineData.TMWarnings = "00000000";
+                                dataLine = true;
+                            }
+                        }
                         //Fix this section
                         else if (parseData.SelectedWinch == "UNOLS String")
                         {

@@ -75,13 +75,16 @@
                     extension = "*.MTN_WINCH";
                     break;
                 case "UNOLS String":
-                    extension = "*.wire.Log";
+                    extension = "*wire.Log";
                     break;
                 case "Jay Jay":
                     extension = "*.CSV";
                     break;
                 case "Atlantis 3PS":
                     extension = "*.3PS_Winch";
+                    break;
+                case "ECWP MTNW":
+                    extension = "*short.log";
                     break;
                 default:
                     extension = string.Empty;

@@ -75,6 +75,7 @@
         private List<string> winchDataType = new()
         {
                 "MASH Winch",
+                "ECWP MTNW",
                 "SIO Traction Winch",
                 "WinchDAC", //Previously Armstrong Cast 6
                 "UNOLS String",
