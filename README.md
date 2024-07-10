@@ -4,16 +4,20 @@ This program was written to move data between and ECWP winch with a Remote VPN r
 The current configuration can read MTNW Legacy, MTNW 1, the UNOLS Wire String.
 The current version can communicate with ECWP winches: Gloria, Jay Jay, Godzilla, Moe, Larry, Curly, and Shemp (0.322 Hawboldt Winch, IOS Clean Winch, Hawboldt SPRE-3464 and ECWP MASH winches). In addition it can receive TCP data from LCI-90i. Hawboldt winches SPRE-2640RS and SPRE-2648RS also work. The Small Hawboldt winches, SPRE-2036S, from the WCWP should also work. It is possible that other MASH and Hawboldt winches will work.
 
-The latest version can process winch log files to get cast information and place the data in a UNOLS Wire Log format. Winch logs that this can process are: All ECWP Winches, RV Atlantis, WinchDAC, WCWP Traction Winch.
+The latest version can process winch log files to get cast information and place the data in a UNOLS Wire Log format. Winch logs that this can process are: All ECWP Winches, Winches logged with ECWP Winch Data Program, RV Atlantis, WinchDAC, WCWP Traction Winch.
 
 To Do:
 - [ ] Generate new wire path diagram
 - [ ] Display UNOLS Winch string statuses
 - [ ] Start casts (and log files) based on payout and tension
 - [ ] Add Graph view to data processing
+- [ ] Select data from graphview for closer examination
+- [ ] Combine Tow-yos to a single cast
 - [ ] Add Mermac Reception (MacArtney)
 - [ ] Add Odim Reception
+- [ ] Add Dillon Dynomometer Reception
 - [ ] Record Hawboldt winch statuses
+- [ ] Create string builder to allow users to enter their string
 - [x] ~~Migrate to TopLevel.StorageProvider API from SaveFileDialog (obsolete)~~
 - [x] ~~Insert wire path diagram (existing)~~
 - [x] ~~Add unit conversion~~
