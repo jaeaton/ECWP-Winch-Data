@@ -3,14 +3,14 @@
     <OutputType>WinExe</OutputType>
     <!--If you are willing to use Windows/MacOS native APIs you will need to create 3 projects.
     One for Windows with net7.0-windows TFM, one for MacOS with net7.0-macos and one with net7.0 TFM for Linux.-->
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-	  <Version>6.2.0</Version>
-	  <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-	  <ApplicationIcon>ECWP Icon.ico</ApplicationIcon>
-	  <PackageIcon>ECWPLogo.jpg</PackageIcon>
+    <Version>6.2.0</Version>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <ApplicationIcon>ECWP Icon.ico</ApplicationIcon>
+    <PackageIcon>ECWPLogo.jpg</PackageIcon>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="ECWP Icon.ico" />
@@ -21,7 +21,6 @@
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.11" />
     <PackageReference Include="Avalonia.Desktop" Version="11.0.11" />
@@ -34,7 +33,6 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
     <PackageReference Include="System.IO.Ports" Version="8.0.0" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\ECWP_Winch_Data_Program\ECWP_Winch_Data_Program.csproj" />
   </ItemGroup>

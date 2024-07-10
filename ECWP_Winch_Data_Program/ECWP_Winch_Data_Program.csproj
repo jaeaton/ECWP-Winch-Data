@@ -1,30 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <ApplicationIcon>Assets\ECWP Icon.ico</ApplicationIcon>
-	  <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-	  <Version>6.2.0</Version>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <Version>6.2.0</Version>
   </PropertyGroup>
-
-  
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
-
-  
   <ItemGroup>
     <None Remove="Assets\ECWP Icon.ico" />
     <None Remove="Assets\ECWPLogo.jpg" />
     <None Remove="Assets\up_down.png" />
   </ItemGroup>
-
-  
   <ItemGroup>
     <Content Include="Assets\ECWP Icon.ico" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.0.11" />
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.0.11" />
@@ -32,7 +25,6 @@
     <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.11" />
     <PackageReference Include="ClosedXML" Version="0.104.0-preview2" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
-
     <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.11" />
     <PackageReference Include="LiveChartsCore" Version="2.0.0-rc2" />
