@@ -257,5 +257,35 @@ namespace ViewModels
                                     $"{winch.WinchName}\n" +
                                     $"Log directory is not set. \nSet in the winch configuration");
         }
+
+        public async static void ReadLog(WinchModel winch)
+        {
+            
+            if (winch.WinchDirectory == string.Empty || winch.WirePoolWireLogName == string.Empty)
+            {
+                return;
+            }
+            string fileName = $"{winch.WirePoolWireLogName}";
+            if (!File.Exists($"{winch.WinchDirectory}\\{fileName}"))
+            {
+                return;
+            }
+            
+            // Opening workbook
+            var wb = new XLWorkbook($"{winch.WinchDirectory}\\{fileName}");
+
+            //Selecting a worksheet
+            var ws = wb.Worksheets.Worksheet("Log");
+
+            //Get last row
+            int LastRow = ws.LastRowUsed().RowNumber();
+
+            //Start at row 23 and read through last row
+            for (int i = 23; i <= LastRow; i++)
+            {
+                //Write data to data table
+            }
+
+        }
     }
 }
