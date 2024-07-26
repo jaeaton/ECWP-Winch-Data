@@ -216,10 +216,11 @@
         private List<string> wireLogEventList = new List<string>
                                                             {
                                                                 "Cut Back",
-                                                                "Lubrication",
                                                                 "Installation",
+                                                                "Lubrication",
+                                                                "Other",
                                                                 "Removal",
-                                                                "Other"
+                                                                "Termination"
                                                             };
         [ObservableProperty]
         private string wireLogEventSelection = string.Empty;
