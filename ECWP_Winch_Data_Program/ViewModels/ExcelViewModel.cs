@@ -1,4 +1,6 @@
 ﻿using DocumentFormat.OpenXml.Drawing.Charts;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ViewModels
 {
@@ -260,7 +262,7 @@ namespace ViewModels
 
         public async static void ReadLog(WinchModel winch)
         {
-            
+            winch = (WinchModel)SetWireLogFileName(winch);
             if (winch.WinchDirectory == string.Empty || winch.WirePoolWireLogName == string.Empty)
             {
                 return;
@@ -271,6 +273,7 @@ namespace ViewModels
                 return;
             }
             
+
             // Opening workbook
             var wb = new XLWorkbook($"{winch.WinchDirectory}\\{fileName}");
 
@@ -280,10 +283,82 @@ namespace ViewModels
             //Get last row
             int LastRow = ws.LastRowUsed().RowNumber();
 
+            //WireLogModel wireLog = new WireLogModel();
+            ParseDataStore dataStore = ProcessDataViewModel.ParseData;
+            //Clear current data
+            dataStore.WireLog.Clear();
             //Start at row 23 and read through last row
             for (int i = 23; i <= LastRow; i++)
             {
-                //Write data to data table
+                WireLogModel wireLog = new WireLogModel();
+                string sVal = string.Empty;
+                float fVal = 0;
+                DateTime dtVal = new();
+                int iVal = 0;
+                //Write data to data array ParseDataStore.WireLog
+                //Event Type
+                if(ws.Cell($"A{i}").TryGetValue<string>(out sVal))
+                {
+                    wireLog.EventType = sVal;
+                }
+                
+                //Cruise Number
+                if(ws.Cell($"B{i}").TryGetValue<string>(out sVal))
+                {
+                    wireLog.CruiseNumber = sVal;
+                }
+                //Date
+                if(ws.Cell($"C{i}").TryGetValue<string>(out sVal))
+                {
+                    wireLog.EventDate = sVal;
+                }
+                //Cast number
+                if(ws.Cell($"D{i}").TryGetValue<int>(out iVal))
+                {
+                    wireLog.CastNumber = iVal.ToString();
+                }
+                //Total Length of Cable
+                if(ws.Cell($"E{i}").TryGetValue<float>(out fVal))
+                {
+                    wireLog.InstalledTensionMemberLength = fVal.ToString();
+                }
+                //Maximum Tension
+                if(ws.Cell($"F{i}").TryGetValue<float>(out fVal))
+                {
+                    wireLog.MaxTension = fVal.ToString();
+                }
+                //Wire Out at Max Tension
+                if(ws.Cell($"G{i}").TryGetValue<float>(out fVal))
+                {
+                    wireLog.MaxTensionWireOut = fVal.ToString();
+                }
+                //Wire on drum at Max Tension
+                if(ws.Cell($"H{i}").TryGetValue<float>(out fVal))
+                {
+                    wireLog.MaxTensionWireIn = fVal.ToString();
+                }
+                //Cut back amount
+                if (wireLog.EventType == "Cut Back")
+                {
+                    if(ws.Cell($"I{i}").TryGetValue<string>(out sVal))
+                    {
+                        wireLog.CutBackAmount = sVal;
+                    }
+                }
+                else
+                {
+                    //Maximum Wire Out
+                    if(ws.Cell($"I{i}").TryGetValue<float>(out fVal))
+                    {
+                        wireLog.MaxWireOut = fVal.ToString();
+                    }
+                }
+                //Notes
+                if(ws.Cell($"J{i}").TryGetValue<string>(out sVal))
+                {
+                    wireLog.Notes = sVal;
+                }
+                dataStore.WireLog.Add(wireLog.ShallowCopy());
             }
 
         }

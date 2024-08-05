@@ -12,9 +12,11 @@ To Do:
 - [ ] Start casts (and log files) based on payout and tension
 - [ ] Add Graph view to data processing
 - [ ] Select data from graphview for closer examination
-- [ ] Combine or seperate data from casts
 - [ ] Put UNOLS Wire Log in date order
+- [ ] Combine or seperate data from casts
 - [ ] Load existing UNOLS Wire Log
+- [ ] Add new data to existing wire log
+- [ ] Option for Time Series database for data storage
 - [ ] Combine Tow-yos to a single cast
 - [ ] Add Mermac Reception (MacArtney)
 - [ ] Add Odim Reception

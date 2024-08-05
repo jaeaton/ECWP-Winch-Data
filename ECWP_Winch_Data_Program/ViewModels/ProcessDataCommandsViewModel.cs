@@ -101,5 +101,10 @@
                 //ParseData.FileList;//Sort();
             }
         }
+        [RelayCommand]
+        public static void ReadLog()
+        {
+            ExcelViewModel.ReadLog(MainViewModel._configDataStore.CurrentWinch);
+        }
     }
 }

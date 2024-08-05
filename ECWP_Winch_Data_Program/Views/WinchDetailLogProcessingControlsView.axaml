@@ -51,8 +51,9 @@
 		</StackPanel>
 		<StackPanel>
 			<Button  Content="{Binding #ButtonText.Text }" DataContext="{ StaticResource ResourceKey=commands }" Command="{ Binding SingleProcessFilesCommand }" Margin="5" />	
-			
+			<Button Content="Read Log" Command="{Binding ReadLogCommand}" DataContext="{ StaticResource ResourceKey=commands }" Margin="5"/>
 		</StackPanel>
 		<TextBlock Text="{Binding ButtonText}" Name="ButtonText" IsVisible="False" ToolTip.Tip="Starts and stops data processing."/>
+	
 	</StackPanel>
 </UserControl>

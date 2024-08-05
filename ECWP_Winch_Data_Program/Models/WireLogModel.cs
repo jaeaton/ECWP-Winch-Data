@@ -59,5 +59,11 @@
             CruiseNumber = cruiseNumber;
            
         }
+
+        public WireLogModel ShallowCopy()
+        {
+            WireLogModel copy = (WireLogModel)this.MemberwiseClone();
+            return copy;
+        }
     }
 }
