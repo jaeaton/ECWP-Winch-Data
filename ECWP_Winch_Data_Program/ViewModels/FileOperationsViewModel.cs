@@ -1,7 +1,4 @@
-﻿using LiveChartsCore;
-using Store;
-
-namespace ViewModels
+﻿namespace ViewModels
 {
     internal class FileOperationsViewModel
     {

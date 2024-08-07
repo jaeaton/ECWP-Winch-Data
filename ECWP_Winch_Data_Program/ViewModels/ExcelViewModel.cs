@@ -1,8 +1,4 @@
-﻿using DocumentFormat.OpenXml.Drawing.Charts;
-using DocumentFormat.OpenXml.Drawing.Diagrams;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace ViewModels
+﻿namespace ViewModels
 {
     public class ExcelViewModel 
     {
