@@ -9,7 +9,8 @@ The latest version can process winch log files to get cast information and place
 To Do:
 - [ ] Generate new wire path diagram
 - [ ] Display UNOLS Winch string statuses
-- [ ] Start casts (and log files) based on payout and tension
+- [ ] Start/Stop casts (and log files) based on payout and tension
+- [ ] Add a log buffer to record before/after automatic start/stop
 - [ ] Add Graph view to data processing
 - [ ] Select data from graphview for closer examination
 - [ ] Put UNOLS Wire Log in date order
