@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:ViewModels"
+			 xmlns:v="clr-namespace:Views"
 			 mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="450"
 			x:CompileBindings="False"
              x:Class="Views.WinchDetailLogProcessingControlsView">
@@ -52,7 +53,13 @@
 		<StackPanel Orientation="Horizontal">
 			<Button  Content="{Binding #ButtonText.Text }" DataContext="{ StaticResource ResourceKey=commands }" Command="{ Binding SingleProcessFilesCommand }" Margin="5" ToolTip.Tip="Starts and Stops Data Processing"/>	
 			<Button Content="Read Log" Command="{Binding ReadLogCommand}" DataContext="{ StaticResource ResourceKey=commands }" Margin="5" ToolTip.Tip="Read Existing Log File"/>
-			<Button Content="Add Event" Margin="5" ToolTip.Tip="Add event to wire log"/>
+			<Button Content="Add Event" Margin="5" ToolTip.Tip="Add event to wire log">
+				<Button.Flyout>
+					<Flyout>
+						<v:WinchDetailWireLogView/>
+					</Flyout>
+				</Button.Flyout>
+			</Button>
 			<Button Content="Write Log" Margin="5" ToolTip.Tip="Writes event log to Excel file"/>
 		</StackPanel>
 		<TextBlock Text="{Binding ButtonText}" Name="ButtonText" IsVisible="False" ToolTip.Tip="Starts and stops data processing."/>
