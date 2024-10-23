@@ -448,7 +448,8 @@
                     DataPointModel mPayDataPt = new();
                     mPayDataPt = MaxPayoutDataPoint.DeepCopy();
                     //ProcessDataWriteFilesViewModel.WriteProcessed(maxTensionString, maxPayoutString, cast); //end cast, increment cast number, write processed data
-                    ExcelViewModel.AddCastData(mTenDataPt, mPayDataPt, castSend, MainViewModel._configDataStore.CurrentWinch);
+                    //Insert data directly into excel sheet
+                    //ExcelViewModel.AddCastData(mTenDataPt, mPayDataPt, castSend, MainViewModel._configDataStore.CurrentWinch);
                     //parseData.ReadingLine = maxTensionString;
                     parseData.ProcessCasts.Add(processCastDataModel);
 
@@ -498,7 +499,17 @@
         {
             WinchModel winch = MainViewModel._configDataStore.CurrentWinch;
             //ProcessDataViewModel.ParseData.WireLog.Add(new WireLogModel(lineData.DateAndTime, "Cast Data" ,cast, maxTenCurrent, maxTenPayCurrent, maxPayCurrent));
-            ProcessDataViewModel.ParseData.WireLog.Add(new WireLogModel(lineData.DateAndTime, "Cast Data", winch.InstalledLength, cast, maxTenCurrent, maxTenPayCurrent,maxPayCurrent,string.Empty, MainViewModel._configDataStore.CruiseNameBox));
+            //Search backwards for date
+            foreach (var model in ProcessDataViewModel.ParseData.WireLog.Select((value, i) => new { i, value }).Reverse())
+            {
+                //Compare dates
+                if (lineData.DateAndTime > model.value.EventDate)
+                {
+                    ProcessDataViewModel.ParseData.WireLog.Insert(model.i, new WireLogModel(lineData.DateAndTime, "Cast Data", winch.InstalledLength, cast, maxTenCurrent, maxTenPayCurrent, maxPayCurrent, string.Empty, MainViewModel._configDataStore.CruiseNameBox));
+                    break;
+                }
+            }
+            //ProcessDataViewModel.ParseData.WireLog.Add(new WireLogModel(lineData.DateAndTime, "Cast Data", winch.InstalledLength, cast, maxTenCurrent, maxTenPayCurrent,maxPayCurrent,string.Empty, MainViewModel._configDataStore.CruiseNameBox));
         }
         public static object ReadProcessConfig()
         {

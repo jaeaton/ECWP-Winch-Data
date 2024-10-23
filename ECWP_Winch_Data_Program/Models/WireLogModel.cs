@@ -3,7 +3,7 @@
     public partial class WireLogModel : ObservableObject
     {
         [ObservableProperty]
-        private string eventDate = string.Empty;
+        private DateTime eventDate = DateTime.Now;
         [ObservableProperty]
         private string eventType = string.Empty;
         [ObservableProperty]
@@ -35,7 +35,7 @@
 
         public WireLogModel(DateTime _date, string _eventType, int _castNumber, float _maxTension, float _maxTensionWireOut, float _maxWireOut)
         {
-            EventDate = _date.ToString("yyyy-MM-dd");
+            EventDate = _date;//.ToString("yyyy-MM-dd");
             EventType = _eventType;
             CastNumber = _castNumber.ToString();
             MaxTension = _maxTension.ToString();
@@ -45,7 +45,7 @@
 
         public WireLogModel(DateTime eventDate, string eventType, float installedTensionMemberLength, int castNumber, float maxTension, float maxTensionWireOut, float maxWireOut, string notes, string cruiseNumber)
         {
-            EventDate = eventDate.ToString("yyyy-MM-dd");
+            EventDate = eventDate;//.ToString("yyyy-MM-dd");
             EventType = eventType;
             InstalledTensionMemberLength = installedTensionMemberLength.ToString();
             //CutBackAmount = cutBackAmount;

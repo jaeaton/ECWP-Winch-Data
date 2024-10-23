@@ -49,9 +49,11 @@
 			<TextBlock Text="End Date" VerticalAlignment="Center" Margin="0,0,5,0"/>
 			<CalendarDatePicker SelectedDate="{ Binding EndDate }" Margin="0,0,10,0"/>
 		</StackPanel>
-		<StackPanel>
-			<Button  Content="{Binding #ButtonText.Text }" DataContext="{ StaticResource ResourceKey=commands }" Command="{ Binding SingleProcessFilesCommand }" Margin="5" />	
-			<Button Content="Read Log" Command="{Binding ReadLogCommand}" DataContext="{ StaticResource ResourceKey=commands }" Margin="5"/>
+		<StackPanel Orientation="Horizontal">
+			<Button  Content="{Binding #ButtonText.Text }" DataContext="{ StaticResource ResourceKey=commands }" Command="{ Binding SingleProcessFilesCommand }" Margin="5" ToolTip.Tip="Starts and Stops Data Processing"/>	
+			<Button Content="Read Log" Command="{Binding ReadLogCommand}" DataContext="{ StaticResource ResourceKey=commands }" Margin="5" ToolTip.Tip="Read Existing Log File"/>
+			<Button Content="Add Event" Margin="5" ToolTip.Tip="Add event to wire log"/>
+			<Button Content="Write Log" Margin="5" ToolTip.Tip="Writes event log to Excel file"/>
 		</StackPanel>
 		<TextBlock Text="{Binding ButtonText}" Name="ButtonText" IsVisible="False" ToolTip.Tip="Starts and stops data processing."/>
 	

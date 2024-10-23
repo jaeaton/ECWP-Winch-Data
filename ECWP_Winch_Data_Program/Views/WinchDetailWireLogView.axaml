@@ -33,6 +33,10 @@
 				<TextBlock Width="120"/>
 				<Button Content="Add Log Event" Command="{Binding AddWireLogEventCommand}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Width="160"  />
 			</StackPanel>
+			<StackPanel Orientation="Horizontal" Margin="2" DataContext="{StaticResource winch}">
+				<TextBlock Width="120"/>
+				<Button Content="Write Log" Command="{Binding WriteWireLogEventCommand}" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Width="160"  />
+			</StackPanel>
 		</StackPanel>
 		
 	</Grid> 

@@ -1,8 +1,10 @@
-﻿namespace ViewModels
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+
+namespace ViewModels
 {
     public class ExcelViewModel 
     {
-        
+       //Direct write method -- old 
         public static void AddCastData( DataPointModel dataMaxTension, DataPointModel dataMaxPayout, int cast, WinchModel winch)
         {
             //Check Date for data point
@@ -77,7 +79,66 @@
             wb.Save();
         }
 
-        public static void AddEvent()
+        public static void AddCast(WireLogModel dataPoint)
+        {
+            ConfigDataStore _config = MainViewModel._configDataStore;
+            _config.CurrentWinch = (WinchModel)SetWireLogFileName(_config.CurrentWinch);
+            //Set filename
+            string fileName = $"{_config.CurrentWinch.WirePoolWireLogName}";
+            if (_config.CurrentWinch.WinchDirectory == string.Empty)
+            {
+                NoDirectory(_config.CurrentWinch);
+                return;
+            }
+            //Check for file
+            if (!File.Exists($"{_config.CurrentWinch.WinchDirectory}\\{fileName}"))
+            {
+                NewWorkbook(fileName, _config.CurrentWinch);
+            }
+            // Opening workbook
+            var wb = new XLWorkbook($"{_config.CurrentWinch.WinchDirectory}\\{fileName}");
+            //Selecting a worksheet
+            var ws = wb.Worksheets.Worksheet("Log");
+
+            //Get last row
+            int LastRow = ws.LastRowUsed().RowNumber();
+            //Set Current Row
+            int CurrentRow = LastRow + 1;
+            //Event Type
+            ws.Cell($"A{CurrentRow}").Value = $"Cast";
+            //Cruise Number
+            ws.Cell($"B{CurrentRow}").Value = $"{_config.CruiseNameBox}";
+            //Date
+            ws.Cell($"C{CurrentRow}").Value = dataPoint.EventDate;
+            //Cast number
+            ws.Cell($"D{CurrentRow}").Value = dataPoint.CastNumber;
+            //Total Length of Cable
+            ws.Cell($"E{CurrentRow}").Value = dataPoint.InstalledTensionMemberLength;
+            //Maximum Tension
+            ws.Cell($"F{CurrentRow}").Value = dataPoint.MaxTension;
+            //Wire Out at Max Tension
+            ws.Cell($"G{CurrentRow}").Value = dataPoint.MaxTensionWireOut;
+            //Wire on drum at Max Tension
+            //float WireIn = winch.InstalledLength - dataMaxTension.Payout;
+            ws.Cell($"H{CurrentRow}").Value = dataPoint.MaxTensionWireIn;
+            //ws.Cell($"H{CurrentRow}").Style.NumberFormat.Format = ;
+            //Maximum Wire Out
+            ws.Cell($"I{CurrentRow}").Value = dataPoint.MaxWireOut; 
+            //Notes
+            if (float.Parse(dataPoint.MaxTension) > float.Parse(_config.CurrentWinch.TensionWarningLevel))
+            {
+                ws.Cell($"J{CurrentRow}").Value = "Tension Warning";
+            }
+            else if (float.Parse(dataPoint.MaxTension) > float.Parse(_config.CurrentWinch.TensionAlarmLevel))
+            {
+                ws.Cell($"J{CurrentRow}").Value = "Tension Alarm";
+            }
+            //Borders
+            ws.Range($"A{CurrentRow}:J{CurrentRow}").Style.Border.SetInsideBorder(XLBorderStyleValues.Thin);
+            wb.Save();
+        }
+
+        public static void AddEvent(WireLogModel dataPoint)
         {
             ConfigDataStore _config = MainViewModel._configDataStore;
             _config.CurrentWinch = (WinchModel)SetWireLogFileName(_config.CurrentWinch);
@@ -104,19 +165,19 @@
             int CurrentRow = LastRow + 1;
 
             //Event Type
-            ws.Cell($"A{CurrentRow}").Value = MainViewModel._configDataStore.WireLogEventSelection;
+            ws.Cell($"A{CurrentRow}").Value = dataPoint.EventType; //MainViewModel._configDataStore.WireLogEventSelection;
             //Date
-            ws.Cell($"C{CurrentRow}").Value = MainViewModel._configDataStore.WireLogEventDate.ToString("yyyy/MM/dd");
+            ws.Cell($"C{CurrentRow}").Value = dataPoint.EventDate.ToString("yyyy/MM/dd");//MainViewModel._configDataStore.WireLogEventDate.ToString("yyyy/MM/dd");
             //Wire Length
-            ws.Cell($"E{CurrentRow}").Value = MainViewModel._configDataStore.CurrentWinch.AvailableLength;
+            ws.Cell($"E{CurrentRow}").Value = dataPoint.InstalledTensionMemberLength;//MainViewModel._configDataStore.CurrentWinch.AvailableLength;
             //Cutback Length
-            if (MainViewModel._configDataStore.WireLogEventSelection == "Cut Back")
+            if (dataPoint.EventType == "Cut Back")
             {
-                ws.Cell($"I{CurrentRow}").Value = float.Parse(MainViewModel._configDataStore.WireLogEventCutBack);
+                ws.Cell($"I{CurrentRow}").Value = dataPoint.CutBackAmount; //float.Parse(MainViewModel._configDataStore.WireLogEventCutBack);
             }
-            
+
             //Notes
-            ws.Cell($"J{CurrentRow}").Value = MainViewModel._configDataStore.WireLogEventNotes;
+            ws.Cell($"J{CurrentRow}").Value = dataPoint.Notes;//MainViewModel._configDataStore.WireLogEventNotes;
             ws.Range($"J{CurrentRow}:M{CurrentRow}").Merge();
             //Borders
             ws.Range($"A{CurrentRow}:J{CurrentRow}").Style.Border.SetInsideBorder(XLBorderStyleValues.Thin);
@@ -306,7 +367,7 @@
                 //Date
                 if(ws.Cell($"C{i}").TryGetValue<string>(out sVal))
                 {
-                    wireLog.EventDate = sVal;
+                    wireLog.EventDate = DateTime.Parse(sVal);
                 }
                 //Cast number
                 if(ws.Cell($"D{i}").TryGetValue<int>(out iVal))

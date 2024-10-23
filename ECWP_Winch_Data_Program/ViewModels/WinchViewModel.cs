@@ -249,9 +249,15 @@ namespace ViewModels
                 _configDataStore.CurrentWinch.AvailableLength -= result;
                 FileOperationsViewModel.WriteConfig(MainViewModel._configDataStore);
             }
-                
 
-            ExcelViewModel.AddEvent();
+            ProcessDataWireHistoryViewModel.InsertEvent(MainViewModel._configDataStore);
+
+            //ExcelViewModel.AddEvent();
+        }
+        [RelayCommand]
+        public void WriteWireLogEvent()
+        {
+            ProcessDataWireHistoryViewModel.WriteData();
         }
         [RelayCommand]
         public void SetRawLogPath()
