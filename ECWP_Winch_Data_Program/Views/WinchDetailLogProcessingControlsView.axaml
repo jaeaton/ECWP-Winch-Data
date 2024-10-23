@@ -60,7 +60,7 @@
 					</Flyout>
 				</Button.Flyout>
 			</Button>
-			<Button Content="Write Log" Margin="5" ToolTip.Tip="Writes event log to Excel file"/>
+			<Button Content="Write Log" Margin="5" Command="{Binding WriteWireLogEventCommand}" DataContext="{ StaticResource ResourceKey=Save }" ToolTip.Tip="Writes event log to Excel file"/>
 		</StackPanel>
 		<TextBlock Text="{Binding ButtonText}" Name="ButtonText" IsVisible="False" ToolTip.Tip="Starts and stops data processing."/>
 	

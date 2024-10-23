@@ -78,7 +78,38 @@ namespace ViewModels
             ws.Range($"A{CurrentRow}:J{CurrentRow}").Style.Border.SetInsideBorder(XLBorderStyleValues.Thin);
             wb.Save();
         }
+        //Clear data
+        public static void ClearData()
+        {
+            ConfigDataStore _config = MainViewModel._configDataStore;
+            _config.CurrentWinch = (WinchModel)SetWireLogFileName(_config.CurrentWinch);
+            //Set filename
+            string fileName = $"{_config.CurrentWinch.WirePoolWireLogName}";
+            if (_config.CurrentWinch.WinchDirectory == string.Empty)
+            {
+                NoDirectory(_config.CurrentWinch);
+                return;
+            }
+            //Check for file
+            if (!File.Exists($"{_config.CurrentWinch.WinchDirectory}\\{fileName}"))
+            {
+                NewWorkbook(fileName, _config.CurrentWinch);
+            }
+            // Opening workbook
+            var wb = new XLWorkbook($"{_config.CurrentWinch.WinchDirectory}\\{fileName}");
+            //Selecting a worksheet
+            var ws = wb.Worksheets.Worksheet("Log");
 
+            //Get last row
+            int LastRow = ws.LastRowUsed().RowNumber();
+
+            while (LastRow > 22) 
+            { 
+                ws.Row(LastRow).Delete();
+                LastRow--;
+            }
+        }
+        //New data write method
         public static void AddCast(WireLogModel dataPoint)
         {
             ConfigDataStore _config = MainViewModel._configDataStore;

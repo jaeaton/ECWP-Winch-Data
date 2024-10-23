@@ -34,9 +34,10 @@
         {
             ConfigDataStore _config = MainViewModel._configDataStore;
             ExcelViewModel.SetWireLogFileName(_config.CurrentWinch);
+            ExcelViewModel.ClearData();
             foreach(WireLogModel _dataPoint in ProcessDataViewModel.ParseData.WireLog)
             {
-                if (_dataPoint.EventType != "cast")
+                if (_dataPoint.EventType != "Cast")
                 {
                     ExcelViewModel.AddEvent(_dataPoint);
                 }

@@ -16,6 +16,7 @@
 				<DataGrid.Columns>
 					<DataGridTextColumn Header="Cruise Number" Binding="{ Binding CruiseNumber }"/>
 					<DataGridTextColumn Header="Date" Binding="{ Binding EventDate }"/>
+					<DataGridTextColumn Header="Event" Binding="{ Binding EventType }"/>
 					<DataGridTextColumn Header="Cast Number" Binding="{ Binding CastNumber }"/>
 					<DataGridTextColumn Header="Cable Length" Binding="{ Binding InstalledTensionMemberLength }"/>
 					<DataGridTextColumn Header="Maximum Tension" Binding="{ Binding MaxTension }"/>
