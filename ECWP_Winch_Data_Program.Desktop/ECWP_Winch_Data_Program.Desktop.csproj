@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Version>6.2.0</Version>
+    <Version>6.3.0</Version>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
     <ApplicationIcon>ECWP Icon.ico</ApplicationIcon>
     <PackageIcon>ECWPLogo.jpg</PackageIcon>
