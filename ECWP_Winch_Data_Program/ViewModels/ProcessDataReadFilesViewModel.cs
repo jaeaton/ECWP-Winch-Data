@@ -1,4 +1,6 @@
-﻿namespace ViewModels
+﻿using DocumentFormat.OpenXml.EMMA;
+
+namespace ViewModels
 {
     internal class ProcessDataReadFilesViewModel
     {
@@ -452,7 +454,7 @@
                     //ExcelViewModel.AddCastData(mTenDataPt, mPayDataPt, castSend, MainViewModel._configDataStore.CurrentWinch);
                     //parseData.ReadingLine = maxTensionString;
                     parseData.ProcessCasts.Add(processCastDataModel);
-
+                    //parseData.WireLog.Add(new WireLogModel(lineData.DateAndTime, "Cast Data", cast, maxTensionCurrent, maxPayoutCurrent))
                     Dispatcher.UIThread.Post(() => AddData(lineData, castSend, mTenSend, mTenPaySend, mPaySend));
                     //parseData.WireLog.Add(new WireLogModel(lineData.DateAndTime, "Cast Data", cast, maxTensionCurrent, maxPayoutCurrent)) ;
                     //parseData.DataToPlot.Add(lineData);
@@ -505,9 +507,14 @@
                 //Compare dates
                 if (lineData.DateAndTime > model.value.EventDate)
                 {
-                    ProcessDataViewModel.ParseData.WireLog.Insert(model.i, new WireLogModel(lineData.DateAndTime, "Cast Data", winch.InstalledLength, cast, maxTenCurrent, maxTenPayCurrent, maxPayCurrent, string.Empty, MainViewModel._configDataStore.CruiseNameBox));
+                    ProcessDataViewModel.ParseData.WireLog.Insert(model.i+1, new WireLogModel(lineData.DateAndTime, "Cast", winch.InstalledLength, cast, maxTenCurrent, maxTenPayCurrent, maxPayCurrent, string.Empty, MainViewModel._configDataStore.CruiseNameBox));
                     break;
                 }
+            }
+            if (ProcessDataViewModel.ParseData.WireLog.Count == 0)
+            {
+                ProcessDataViewModel.ParseData.WireLog.Add( new WireLogModel(lineData.DateAndTime, "Cast", winch.InstalledLength, cast, maxTenCurrent, maxTenPayCurrent, maxPayCurrent, string.Empty, MainViewModel._configDataStore.CruiseNameBox));
+
             }
             //ProcessDataViewModel.ParseData.WireLog.Add(new WireLogModel(lineData.DateAndTime, "Cast Data", winch.InstalledLength, cast, maxTenCurrent, maxTenPayCurrent,maxPayCurrent,string.Empty, MainViewModel._configDataStore.CruiseNameBox));
         }
