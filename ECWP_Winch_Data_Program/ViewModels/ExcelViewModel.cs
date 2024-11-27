@@ -39,9 +39,16 @@ namespace ViewModels
 
             //Selecting a worksheet
             var ws = wb.Worksheets.Worksheet("Log");
-
+            int LastRow;
             //Get last row
-            int LastRow = ws.LastRowUsed().RowNumber();
+            if (ws.LastRowUsed() != null)
+            {
+                LastRow = ws.LastRowUsed().RowNumber();
+            }
+            else
+            {
+                LastRow = 12;
+            }
             //Set Current Row
             int CurrentRow = LastRow + 1;
 

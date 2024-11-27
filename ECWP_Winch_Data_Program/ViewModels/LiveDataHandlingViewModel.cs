@@ -269,17 +269,20 @@ namespace ViewModels
                                             {
                                                 if (ae is TaskCanceledException)
                                                 {
+                                                    //await MessageBoxViewModel.DisplayMessage("cancelled?");
                                                     cancelled = true;
                                                     break;
                                                 }
                                                 else
                                                 {
+                                                    await MessageBoxViewModel.DisplayMessage(ae.ToString());
                                                     cancelled = true;
                                                     break;
                                                 }
                                             }
 
                                         }
+                                        
                                     }
                                     catch (SocketException e)
                                     {
@@ -571,7 +574,7 @@ namespace ViewModels
                         MaxValues(winch);
                     }
                     //Look for TM warnings and alarms and set valvues
-                    if (winch.TensionWarningLevel != null && winch.TensionAlarmLevel != null)
+                    if (winch.TensionWarningLevel != string.Empty && winch.TensionAlarmLevel != string.Empty)
                     {
                         if (latest.Tension > float.Parse(winch.TensionWarningLevel))
                         {
