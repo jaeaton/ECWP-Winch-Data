@@ -516,7 +516,11 @@ namespace ViewModels
                     case "$HWIR4":
                         latest = new DataPointModel(strID, strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
                         break;
-
+                    //Mermac R30 string
+                    case "$R30C":
+                        latest = new DataPointModel(strID, strIn[2], strIn[3], strIn[4]);
+                        getTime = true;
+                            break;
                     default:
                         if (strIn.Length == 9 && winch.InputCommunication.DataProtocol == "3PS") 
                         {

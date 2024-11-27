@@ -86,6 +86,9 @@
                 case "ECWP MTNW":
                     extension = "*short.log";
                     break;
+                //case "Mermac R30":
+                //    extension = ".csv";
+                //    break;
                 default:
                     extension = string.Empty;
                     break;

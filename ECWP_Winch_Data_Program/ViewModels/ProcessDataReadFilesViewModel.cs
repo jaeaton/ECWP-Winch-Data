@@ -107,19 +107,19 @@ namespace ViewModels
                                     lineData.TMAlarms = "00000000";
                                     lineData.TMWarnings = "00000000";
                                 }
-                                
+
                                 flag = true;
                             }
                             else if (flag == true && data[0].Contains('/'))
                             {
                                 data = data.Take(data.Length - 1).ToArray();
-                                bool test = DateTime.TryParse(data[0] + "T" + data[1],out lineData.DateAndTime);
+                                bool test = DateTime.TryParse(data[0] + "T" + data[1], out lineData.DateAndTime);
                                 if (test)
                                 {
                                     flag = false;
                                     dataLine = true;
                                 }
-                                
+
                             }
                             else
                             {
@@ -127,7 +127,7 @@ namespace ViewModels
                                 dataLine = false;
                                 //lineData = new Line_Data_Model();
                             }
-                        }                        
+                        }
                         else if (parseData.SelectedWinch == "MASH Winch")
                         {
                             //MASH winch data format: date time, Checksum, Speed, Tension, Payout
@@ -176,7 +176,7 @@ namespace ViewModels
                         else if (parseData.SelectedWinch == "WinchDAC") //Previously Armstrong Cast 6
                         {
                             //Winch DAC Log format: Preamble (Winch Date Time MTN ID RD,Date and Time,Tension,Speed,Payout,Checksum 
-                                                        
+
                             bool LengthBool = false;
                             bool TensionBool = false;
                             bool SpeedBool = false;
@@ -239,6 +239,7 @@ namespace ViewModels
                                 dataLine = true;
                             }
                         }
+                       
                         //Fix this section
                         else if (parseData.SelectedWinch == "UNOLS String")
                         {
@@ -334,12 +335,12 @@ namespace ViewModels
                             if (data.Length > 6)
                             {
                                 string[] header = data[0].Split(new char[0], StringSplitOptions.RemoveEmptyEntries);
-                                
+
                                 bool[] bools = new bool[4];
                                 if (header[3] == "3PS" && data[2] == parseData.WinchID)
                                 {
                                     lineData.StringID = header[3];
-                                    bools[0] = float.TryParse(data[3],out lineData.Tension);
+                                    bools[0] = float.TryParse(data[3], out lineData.Tension);
                                     bools[1] = float.TryParse(data[7], out lineData.Speed);
                                     bools[2] = float.TryParse(data[5], out lineData.Payout);
                                     //lineData.CheckSum = data[1];
@@ -348,14 +349,14 @@ namespace ViewModels
                                     bools[3] = DateTime.TryParse(header[1] + "T" + data[1], out lineData.DateAndTime);
                                     lineData.TMAlarms = "00000000";
                                     lineData.TMWarnings = "00000000";
-                                    if (bools[0] == true && bools[1] == true && bools[2] == true && bools[3] == true) 
-                                    { 
+                                    if (bools[0] == true && bools[1] == true && bools[2] == true && bools[3] == true)
+                                    {
                                         dataLine = true;
                                     }
-                                    
+
                                 }
                             }
-                            
+
                         }
                         if (parseData.UseDateRange == true)
                         {
