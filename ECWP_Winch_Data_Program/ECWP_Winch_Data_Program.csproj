@@ -5,7 +5,7 @@
     <LangVersion>latest</LangVersion>
     <ApplicationIcon>Assets\ECWP Icon.ico</ApplicationIcon>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
-    <Version>6.3.1</Version>
+    <Version>6.3.2</Version>
   </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
