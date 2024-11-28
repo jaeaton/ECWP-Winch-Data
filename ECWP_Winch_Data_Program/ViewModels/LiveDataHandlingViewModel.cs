@@ -442,7 +442,7 @@ namespace ViewModels
             {
                 string data = line.Replace("\0", string.Empty);
                 data = ReplaceNonPrintableCharacters(data, ' ');
-                string[] strIn = data.Split(',', 'T');
+                string[] strIn = data.Split(',', 'T', '*');
                 string strID = strIn[0].Replace("0", string.Empty);
                 strID = strID.Replace(" ", string.Empty);
                 DataPointModel latest = new DataPointModel();
