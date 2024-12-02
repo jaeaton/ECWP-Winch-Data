@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Drawing;
+using DocumentFormat.OpenXml.Wordprocessing;
 using LiveChartsCore.SkiaSharpView.Drawing.Geometries;
 
 namespace ViewModels
@@ -443,8 +444,18 @@ namespace ViewModels
                 string data = line.Replace("\0", string.Empty);
                 data = ReplaceNonPrintableCharacters(data, ' ');
                 string[] strIn = data.Split(',', 'T', '*');
-                string strID = strIn[0].Replace("0", string.Empty);
-                strID = strID.Replace(" ", string.Empty);
+                string strID = string.Empty;
+                
+                //Keep the '0' in R30
+                if (strIn[0] == "$R30C")
+                {
+                    strID = strIn[0];
+                }
+                else
+                {
+                    strID = strIn[0].Replace("0", string.Empty);
+                    strID = strID.Replace(" ", string.Empty);
+                }
                 DataPointModel latest = new DataPointModel();
                 //Uncomment to log all data coming in
                 //WriteRawLog(data, winch);

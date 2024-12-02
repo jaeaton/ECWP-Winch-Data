@@ -30,7 +30,9 @@
 				</StackPanel>
 				<CheckBox x:Name="CheckBoxLogMax" IsEnabled="{Binding Path=UserInputsEnable}" Content="Log Max Data" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding CurrentWinch.LogMax, FallbackValue='True'}" ToolTip.Tip="This enables the saving of max data when stopping data collection on the live view."/>
 				<CheckBox x:Name="CheckBoxUseComputerTime" IsEnabled="{Binding Path=UserInputsEnable}" Content="Use Computer Time" HorizontalContentAlignment="Right" Margin="6,0,50,0" IsChecked="{Binding CurrentWinch.UseComputerTime,FallbackValue='False',Mode=TwoWay}" ToolTip.Tip="Select this to ignore time from the measurement system."/>
-				<CheckBox Content="Show Raw Input Data" Margin="6,0,50,0" IsChecked="{Binding CurrentWinch.ShowRawInput}" ToolTip.Tip="Select this option to display the raw incoming data."/>
+				<!--
+				<CheckBox Content="Show Raw Input Data" Margin="6,0,50,0" IsChecked="{Binding CurrentWinch.ShowRawInput, Mode=TwoWay}" ToolTip.Tip="Select this option to display the raw incoming data."/>
+				-->
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Chart Time Span" VerticalAlignment="Center" Width="120" />
 					<ComboBox SelectedItem="{ Binding CurrentWinch.ChartTimeSpan, Mode=TwoWay }" Width="90" ItemsSource="{ Binding ChartTimeSpanList }" SelectedIndex="2" ToolTip.Tip="Sets the time data is displayed on the tension plot."/>
