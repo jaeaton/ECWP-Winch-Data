@@ -10,20 +10,21 @@ To Do:
 - [ ] Generate new wire path diagram
 - [ ] Display UNOLS Winch string statuses
 - [ ] Start/Stop casts (and log files) based on payout and tension
+	-[ ] 10 (or variable) minute pre and post buffer to account for launch and recovery
 - [ ] Add a log buffer to record before/after automatic start/stop
 - [ ] Add Graph view to data processing
 - [ ] Select data from graphview for closer examination
-- [ ] Put UNOLS Wire Log in date order
 - [ ] Combine or seperate data from casts
-- [ ] Load existing UNOLS Wire Log
-- [ ] Add new data to existing wire log
 - [ ] Option for Time Series database for data storage
 - [ ] Combine Tow-yos to a single cast
 - [ ] Add Odim Reception
 - [ ] Add Dillon Dynomometer Reception
 - [ ] Record Hawboldt winch statuses
 - [ ] Create string builder to allow users to enter their string
-- [x] ~~Add Mermac Reception (MacArtney)~~
+- [x] ~~Put UNOLS Wire Log in date order~~
+- [x] ~~Load existing UNOLS Wire Log~~
+- [x] ~~Add new data to existing wire log~~
+- [x] ~~Add Mermac Reception (MacArtney R30C)~~
 - [x] ~~Migrate to TopLevel.StorageProvider API from SaveFileDialog (obsolete)~~
 - [x] ~~Insert wire path diagram (existing)~~
 - [x] ~~Add unit conversion~~
