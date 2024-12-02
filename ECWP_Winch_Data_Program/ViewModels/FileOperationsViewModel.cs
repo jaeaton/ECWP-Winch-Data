@@ -392,7 +392,7 @@
                 {
                     lines.Add($"Chart Time Span,{winch.ChartTimeSpan}");
                 }
-                lines.Add($"Plot Winch,{winch.PlotSelected}");
+                //lines.Add($"Plot Winch,{winch.PlotSelected}");
                 if (winch.SheaveTrainPath != string.Empty)
                 {
                     lines.Add($"Sheave Train Image Path,{winch.SheaveTrainPath}");
@@ -726,9 +726,9 @@
                             {
                                 winch.ChartTimeSpan = line.Substring(delim + 1);
                             }
-                            if (line.Substring(0, delim) == "Plot Winch")
-                            {
-                                winch.PlotSelected = bool.Parse(line.Substring(delim + 1));
+                            //if (line.Substring(0, delim) == "Plot Winch")
+                            //{
+                            //    winch.PlotSelected = bool.Parse(line.Substring(delim + 1));
                             }
                             if (line.Substring(0, delim) == "Sheave Train Image Path")
                             {
