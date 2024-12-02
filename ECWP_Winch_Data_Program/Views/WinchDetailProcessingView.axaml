@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:v="clr-namespace:Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Views.WinchDetailProcessingView">
+	<StackPanel>
+	<TextBlock Text="Processing Parameters" Margin="0,30,0,2"/>
+	<StackPanel Orientation="Horizontal" Margin="2">
+		<TextBlock Text="Data Type" VerticalAlignment="Center" Width="120"/>
+		<ComboBox SelectedItem="{ Binding CurrentWinch.WinchLogType, Mode=TwoWay }" Width="180" ItemsSource="{ Binding WinchDataType }" SelectedIndex="0" ToolTip.Tip="This selects the interperter of log data for processing."/>
+	</StackPanel>
+	<StackPanel Orientation="Horizontal" Margin="2" IsVisible="{Binding CurrentWinch.ThreePeeEssSelected}">
+		<TextBlock Text="3PS ID Number" VerticalAlignment="Center" Width="120"/>
+		<TextBox Watermark="Enter ID" Text="{Binding CurrentWinch.Atlantis3PSWinchID}" Width="90" ToolTip.Tip="Enter the winch ID number. Atlantis only."/>
+	</StackPanel>
+	<StackPanel Orientation="Horizontal" Margin="2">
+		<TextBlock Text="Minimum Payout" VerticalAlignment="Center" Width="120"/>
+		<ComboBox SelectedItem="{ Binding CurrentWinch.MinimumPayout, Mode=TwoWay }" Width="90" ItemsSource="{ Binding AvailablePayouts }" SelectedIndex="0" ToolTip.Tip="Minimum payout that should be considered part of a cast."/>
+		<TextBlock Text="{ Binding CurrentWinch.PayoutConversionUnit }" VerticalAlignment="Center" Margin="2"/>
+	</StackPanel>
+	<StackPanel Orientation="Horizontal" Margin="2">
+		<TextBlock Text="Minimum Tension" VerticalAlignment="Center" Width="120"/>
+		<ComboBox SelectedItem="{ Binding CurrentWinch.MinimumTension, Mode=TwoWay }"  Width="90" ItemsSource="{ Binding AvailableTensions }" SelectedIndex="0" ToolTip.Tip="Minimum tension to consider as part of a cast."/>
+		<TextBlock Text="{ Binding CurrentWinch.TensionConversionUnit }" Margin="2" VerticalAlignment="Center"/>
+	</StackPanel>
+		</StackPanel>
+</UserControl>

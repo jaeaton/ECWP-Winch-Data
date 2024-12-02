@@ -48,11 +48,13 @@
 			</StackPanel>
 			
 		</TabItem>
-		<!--
-		<TabItem Header="UNOLS Event Log" VerticalContentAlignment="Center">
-			<v:WinchDetailWireLogView/>
+		<TabItem Header="Processing Options" VerticalContentAlignment="Center">
+			<StackPanel>
+				<v:WinchDetailWireLogView/>
+				<v:WinchDetailAddRemoveView/>
+			</StackPanel>
+			
 		</TabItem>
-		-->
 		<TabItem Header="UNOLS Log" VerticalContentAlignment="Center">
 			<v:WinchDetailLogProcessingView/>
 		</TabItem>

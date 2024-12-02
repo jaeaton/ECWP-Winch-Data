@@ -67,7 +67,7 @@
 						<ComboBox SelectedItem="{ Binding CurrentWinch.TensionConversionUnit, Mode=TwoWay }" Width="90" ItemsSource="{ Binding TensionUnitList }" SelectedIndex="1" ToolTip.Tip="This sets what unit the tension is converted to."/>
 					</StackPanel>
 				</StackPanel>
-				
+				<!--
 				<TextBlock Text="Processing Parameters" Margin="0,30,0,2"/>
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Data Type" VerticalAlignment="Center" Width="120"/>
@@ -87,6 +87,7 @@
 					<ComboBox SelectedItem="{ Binding CurrentWinch.MinimumTension, Mode=TwoWay }"  Width="90" ItemsSource="{ Binding AvailableTensions }" SelectedIndex="0" ToolTip.Tip="Minimum tension to consider as part of a cast."/>
 					<TextBlock Text="{ Binding CurrentWinch.TensionConversionUnit }" Margin="2" VerticalAlignment="Center"/>
 				</StackPanel>
+				-->
 			</StackPanel>
 		</StackPanel>
 	</Panel>
