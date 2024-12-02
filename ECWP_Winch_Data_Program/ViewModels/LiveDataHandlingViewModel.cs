@@ -269,17 +269,20 @@ namespace ViewModels
                                             {
                                                 if (ae is TaskCanceledException)
                                                 {
+                                                    //await MessageBoxViewModel.DisplayMessage("cancelled?");
                                                     cancelled = true;
                                                     break;
                                                 }
                                                 else
                                                 {
+                                                    await MessageBoxViewModel.DisplayMessage(ae.ToString());
                                                     cancelled = true;
                                                     break;
                                                 }
                                             }
 
                                         }
+                                        
                                     }
                                     catch (SocketException e)
                                     {
@@ -439,7 +442,7 @@ namespace ViewModels
             {
                 string data = line.Replace("\0", string.Empty);
                 data = ReplaceNonPrintableCharacters(data, ' ');
-                string[] strIn = data.Split(',', 'T');
+                string[] strIn = data.Split(',', 'T', '*');
                 string strID = strIn[0].Replace("0", string.Empty);
                 strID = strID.Replace(" ", string.Empty);
                 DataPointModel latest = new DataPointModel();
@@ -513,7 +516,11 @@ namespace ViewModels
                     case "$HWIR4":
                         latest = new DataPointModel(strID, strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
                         break;
-
+                    //Mermac R30 string
+                    case "$R30C":
+                        latest = new DataPointModel(strID, strIn[2], strIn[3], strIn[4]);
+                        getTime = true;
+                            break;
                     default:
                         if (strIn.Length == 9 && winch.InputCommunication.DataProtocol == "3PS") 
                         {
@@ -571,7 +578,7 @@ namespace ViewModels
                         MaxValues(winch);
                     }
                     //Look for TM warnings and alarms and set valvues
-                    if (winch.TensionWarningLevel != null && winch.TensionAlarmLevel != null)
+                    if (winch.TensionWarningLevel != string.Empty && winch.TensionAlarmLevel != string.Empty)
                     {
                         if (latest.Tension > float.Parse(winch.TensionWarningLevel))
                         {

@@ -116,6 +116,7 @@
                 "Jay Jay",
                 "Atlantis 3PS",
                 "3PS"
+                //"Mermac R30"
         };
 
         [ObservableProperty]

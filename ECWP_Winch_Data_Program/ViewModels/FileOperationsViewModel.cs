@@ -729,7 +729,7 @@
                             //if (line.Substring(0, delim) == "Plot Winch")
                             //{
                             //    winch.PlotSelected = bool.Parse(line.Substring(delim + 1));
-                            }
+                            //}
                             if (line.Substring(0, delim) == "Sheave Train Image Path")
                             {
                                 winch.SheaveTrainPath = line.Substring(delim + 1);
