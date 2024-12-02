@@ -10,7 +10,6 @@ To Do:
 - [ ] Generate new wire path diagram
 - [ ] Display UNOLS Winch string statuses
 - [ ] Start/Stop casts (and log files) based on payout and tension
--[ ] 10 (or variable) minute pre and post buffer to account for launch and recovery
 - [ ] Add a log buffer to record before/after automatic start/stop
 - [ ] Add Graph view to data processing
 - [ ] Select data from graphview for closer examination
