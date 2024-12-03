@@ -12,6 +12,12 @@
     <ApplicationIcon>ECWP Icon.ico</ApplicationIcon>
     <PackageIcon>ECWPLogo.jpg</PackageIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
   <ItemGroup>
     <Content Include="ECWP Icon.ico" />
   </ItemGroup>
