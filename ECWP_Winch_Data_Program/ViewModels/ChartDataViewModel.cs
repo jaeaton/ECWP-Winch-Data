@@ -1,16 +1,18 @@
 ﻿namespace ViewModels
 {
-
     public partial class ChartDataViewModel : ObservableObject
     {
         public ObservableCollection<DateTimePoint> _observableValues = new ObservableCollection<DateTimePoint>();
         public ObservableCollection<ISeries> Series { get; set; }
+
         //Uncomment to allow for windowing of plot
         public ObservableCollection<DateTimePoint> _observableValuesZero = new ObservableCollection<DateTimePoint>();
+
         public ObservableCollection<DateTimePoint> _observableValuesMax = new ObservableCollection<DateTimePoint>();
         public IEnumerable<ICartesianAxis> XAxes { get; set; }
         public IEnumerable<ICartesianAxis> YAxes { get; set; }
         public RectangularSection[] Sections { get; set; } = new RectangularSection[2];
+
         public ChartDataViewModel(WinchModel winchModel)
         {
             //Color bars for warnings and alarms
@@ -44,7 +46,7 @@
                     GeometrySize = 0,
                     LineSmoothness = 0,
                     Stroke = new SolidColorPaint(SKColors.CornflowerBlue, 1)
-                },                
+                },
                 //Uncomment to add invisible series for windowing plot
                 new LineSeries<DateTimePoint>
                 {
@@ -62,22 +64,16 @@
                     LineSmoothness = 0,
                     Stroke = new SolidColorPaint(SKColors.Red, 1),
                 }
-
             };
 
             XAxes = new List<Axis>
             {
-
                 new Axis
                 {
-
                     Labeler = value => new DateTime((long) value).ToString("HH:mm:ss"),
                     LabelsRotation = -30,
                     TextSize = 14,
-
                 }
-
-
             };
             YAxes = new List<Axis>
             {
@@ -94,7 +90,7 @@
 
         //public  int  i = 0;
 
-        public ChartDataViewModel(ObservableCollection<DateTimePoint> _observableVals, ObservableCollection<ISeries> series, RectangularSection[] sections ,ObservableCollection<DateTimePoint> _observableValsZero, ObservableCollection<DateTimePoint> _observableValsMax, IEnumerable<ICartesianAxis> xAxes, IEnumerable<ICartesianAxis> yAxes)
+        public ChartDataViewModel(ObservableCollection<DateTimePoint> _observableVals, ObservableCollection<ISeries> series, RectangularSection[] sections, ObservableCollection<DateTimePoint> _observableValsZero, ObservableCollection<DateTimePoint> _observableValsMax, IEnumerable<ICartesianAxis> xAxes, IEnumerable<ICartesianAxis> yAxes)
         {
             _observableValues = _observableVals;
             Series = series;
@@ -104,9 +100,9 @@
             _observableValuesZero = _observableValsZero;
             Sections = sections;
         }
+
         public ChartDataViewModel()
         {
-
             Sections = new RectangularSection[]
             {
                  new RectangularSection
@@ -135,7 +131,7 @@
                     GeometrySize = 0,
                     LineSmoothness = 0,
                     Stroke = new SolidColorPaint(SKColors.CornflowerBlue, 1)
-                },                
+                },
                 //Uncomment to add invisible series for windowing plot
                 new LineSeries<DateTimePoint>
                 {
@@ -158,22 +154,16 @@
                     LineSmoothness = 0,
                     Stroke = new SolidColorPaint(SKColors.Red, 1),
                 }
-               
             };
 
             XAxes = new List<Axis>
             {
-
                 new Axis
                 {
-                    
                     Labeler = value => new DateTime((long) value).ToString("HH:mm:ss"),
                     LabelsRotation = -30,
                     TextSize = 14,
-
                 }
-                
-
             };
             YAxes = new List<Axis>
             {
@@ -187,18 +177,17 @@
                 }
             };
         }
+
         public void AddData(DataPointModel latest, LiveDataDataStore live, string? chartLength)
         {
-            
             System.Globalization.CultureInfo provider = System.Globalization.CultureInfo.InvariantCulture;
             DateTimeStyles styles = DateTimeStyles.AssumeLocal;
-            if (latest.Date == null || latest.Time == null )
+            if (latest.Date == null || latest.Time == null)
             {
                 return;
             }
             if (DateTime.TryParseExact($"{latest.Date} {latest.Time}", "yyyyMMdd HH:mm:ss.fff", provider, styles, out DateTime dateTime))
             {
-                
                 //double.TryParse(latest.Tension, out double Tension);
                 _observableValues.Add(new DateTimePoint { DateTime = dateTime, Value = latest.Tension });
                 //uncomment for windowing of plot
@@ -211,8 +200,8 @@
                 {
                     _observableValuesMax.Add(new DateTimePoint { DateTime = dateTime, Value = 0 });
                 }
-               TimeSpan span = _observableValues.Last().DateTime - _observableValues.First().DateTime;
-               if (TimeSpan.TryParse($"00:00:{chartLength}", out TimeSpan chartTime))
+                TimeSpan span = _observableValues.Last().DateTime - _observableValues.First().DateTime;
+                if (TimeSpan.TryParse($"00:00:{chartLength}", out TimeSpan chartTime))
                 {
                     //_observableValues.Add(new ObservablePoint { X = i++, Y = latest.Tension });
                     if (span.TotalSeconds > chartTime.Seconds)
@@ -220,7 +209,7 @@
                         _observableValues.RemoveAt(0);
                         _observableValuesMax.RemoveAt(0);
                     }
-                }                
+                }
                 else if (_observableValues.Count > 500)
                 {
                     _observableValues.RemoveAt(0);
@@ -231,18 +220,18 @@
                 {
                     _observableValuesZero.RemoveAt(0);
                     //_observableValuesMax.RemoveAt(0);
-
                 }
             }
         }
+
         public void ResetData()
         {
             //if( _observableValues.Count != 0)
             //{
             //    _observableValues.Clear();
             //}
-            
         }
+
         //public static DateTime AxisGenerator()
         //{
         //    string value;
@@ -251,9 +240,7 @@
         //        new DateTime((long)value).ToString("HH:mm:ss")
 
         //    }
-            
 
         //}
-        
     }
 }

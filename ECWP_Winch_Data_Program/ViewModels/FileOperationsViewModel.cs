@@ -10,14 +10,15 @@
             //string stringDateTime = dateTime.ToString("yyyyMMddTHHmmssfff");
             string dateAndHour = dateTime.ToString("yyyyMMddHH");
             string dateOnly = dateTime.ToString("yyyyMM");
-            winch.MtnwWireLogName = $"{ dateAndHour }_{ _confDataStore.CruiseNameBox }_cast_{winch.CastNumber }_{winch.WinchName}_short.log";
-            winch.UnolsWireLogName = $"{ dateAndHour }_{ _confDataStore.CruiseNameBox }_cast_{ winch.CastNumber }_{winch.WinchName}_UNOLS.log";
-            winch.WinchLogName = $"{ dateOnly }_{ winch.WinchName }_Winch.log";
-            winch.MaxWireLogName = $"{ dateTime.ToString("yyyyMM") }_{ _confDataStore.CruiseNameBox }_{winch.WinchName}.log";
+            winch.MtnwWireLogName = $"{dateAndHour}_{_confDataStore.CruiseNameBox}_cast_{winch.CastNumber}_{winch.WinchName}_short.log";
+            winch.UnolsWireLogName = $"{dateAndHour}_{_confDataStore.CruiseNameBox}_cast_{winch.CastNumber}_{winch.WinchName}_UNOLS.log";
+            winch.WinchLogName = $"{dateOnly}_{winch.WinchName}_Winch.log";
+            winch.MaxWireLogName = $"{dateTime.ToString("yyyyMM")}_{_confDataStore.CruiseNameBox}_{winch.WinchName}.log";
             winch.WirePoolWireLogName = $"{dateTime.ToString("yyyy")}_{winch.WinchName}_Wire_Log";
             return winch;
         }
-        public async static void WriteConfig(ConfigDataStore _configDataStore)
+
+        public static async void WriteConfig(ConfigDataStore _configDataStore)
         {
             //Logic to save new parameters to config file
             //Set filname
@@ -38,7 +39,6 @@
             else
             {
                 await MessageBoxViewModel.DisplayMessage("Ship name not valid.");
-
             }
             if (_configDataStore.CruiseNameBox != string.Empty)
             {
@@ -50,7 +50,6 @@
                 else
                 {
                     await MessageBoxViewModel.DisplayMessage("Cruise name not valid.");
-                    
                 }
             }
             lines.Add("-----");
@@ -61,7 +60,7 @@
                     break;
                 }
                 //Populate array with winch configuartion values
-                
+
                 if (winch.WinchName != string.Empty)
                 {
                     lines.Add($"Winch Name,{winch.WinchName}");
@@ -155,7 +154,6 @@
                                     $"Input Port number not valid");
                                 break;
                             }
-
                         }
                         else
                         {
@@ -192,9 +190,9 @@
                 }
                 if (winch.AllOutputCommunication != null)
                 {
-                    foreach (CommunicationModel com in  winch.AllOutputCommunication)
+                    foreach (CommunicationModel com in winch.AllOutputCommunication)
                     {
-                        if(com.DestinationName != string.Empty)
+                        if (com.DestinationName != string.Empty)
                         {
                             if (com.CommunicationType == "Serial")
                             {
@@ -219,7 +217,7 @@
                                 {
                                     lines.Add($"Transmit Stop Bits,{com.StopBits}");
                                 }
-                                if (com.DataBits  != string.Empty)
+                                if (com.DataBits != string.Empty)
                                 {
                                     lines.Add($"Transmit Data Bits,{com.DataBits}");
                                 }
@@ -248,7 +246,6 @@
                                             $"Output IP Address not valid");
                                         break;
                                     }
-
                                 }
                                 if (com.PortNumber != string.Empty)
                                 {
@@ -291,16 +288,16 @@
                         break;
                     }
                 }
-                lines.Add($"Save 20Hz Data,{ winch.Log20Hz }");
-                lines.Add($"Save Max Values,{ winch.LogMax }");
-                lines.Add($"Use Computer Time,{ winch.UseComputerTime }");
+                lines.Add($"Save 20Hz Data,{winch.Log20Hz}");
+                lines.Add($"Save Max Values,{winch.LogMax}");
+                lines.Add($"Use Computer Time,{winch.UseComputerTime}");
                 //if (winch.LogFormat != null)
                 //{
                 //    lines.Add($"20Hz File Format,{ winch.LogFormat }");
                 //}
                 if (winch.WinchDirectory != string.Empty)
                 {
-                    lines.Add($"UNOLS Log Location,{ winch.WinchDirectory }");
+                    lines.Add($"UNOLS Log Location,{winch.WinchDirectory}");
                 }
                 if (winch.RawLogDirectory != string.Empty)
                 {
@@ -309,15 +306,15 @@
 
                 if (winch.TensionUnit != string.Empty)
                 {
-                    lines.Add($"Tension Units,{ winch.TensionUnit }");
+                    lines.Add($"Tension Units,{winch.TensionUnit}");
                 }
                 if (winch.PayoutUnit != string.Empty)
                 {
-                    lines.Add($"Payout Units,{ winch.PayoutUnit }");
+                    lines.Add($"Payout Units,{winch.PayoutUnit}");
                 }
                 if (winch.SpeedUnit != string.Empty)
                 {
-                    lines.Add($"Speed Units,{  winch.SpeedUnit }");
+                    lines.Add($"Speed Units,{winch.SpeedUnit}");
                 }
                 if (winch.ConvertTension)
                 {
@@ -344,14 +341,14 @@
                     lines.Add($"Minimum Logging Tension,{winch.MinimumTension}");
                 }
 
-                lines.Add($"Auto Log,{ winch.AutoLog}");
+                lines.Add($"Auto Log,{winch.AutoLog}");
                 if (winch.StopLogPayout != string.Empty)
                 {
-                    lines.Add($"Auto Log Stop Payout,{winch.StopLogPayout }");
+                    lines.Add($"Auto Log Stop Payout,{winch.StopLogPayout}");
                 }
                 if (winch.StopLogTension != string.Empty)
                 {
-                    lines.Add($"Auto Log Stop Tension,{ winch.StopLogTension }");
+                    lines.Add($"Auto Log Stop Tension,{winch.StopLogTension}");
                 }
 
                 if (winch.TensionMemberName != string.Empty)
@@ -361,7 +358,6 @@
                 if (winch.TensionMemberManufacturer != string.Empty)
                 {
                     lines.Add($"Tension Member Manufacturer,{winch.TensionMemberManufacturer}");
-
                 }
                 if (winch.TensionMemberPartNumber != string.Empty)
                 {
@@ -373,15 +369,15 @@
                 }
                 if (winch.InstalledLength != default)
                 {
-                    lines.Add($"Installed Length,{ winch.InstalledLength }");
-                }  
+                    lines.Add($"Installed Length,{winch.InstalledLength}");
+                }
                 if (winch.AvailableLength != default)
                 {
                     lines.Add($"Available Length,{winch.AvailableLength}");
                 }
                 if (winch.AssignedBreakingLoad != string.Empty)
                 {
-                    lines.Add($"Assigned Breaking Load,{ winch.AssignedBreakingLoad }");
+                    lines.Add($"Assigned Breaking Load,{winch.AssignedBreakingLoad}");
                 }
                 if (winch.FactorOfSafety != default)
                 {
@@ -397,20 +393,20 @@
                 {
                     lines.Add($"Sheave Train Image Path,{winch.SheaveTrainPath}");
                 }
-                
+
                 //Write each line of array using stream writer
                 using (StreamWriter stream = new StreamWriter(destPath, true))
                 {
                     lines.Add("-----");
-                    foreach (string line in lines) 
-                    { 
+                    foreach (string line in lines)
+                    {
                         stream.WriteLine(line);
-                    }     
+                    }
                 }
                 lines.Clear();
             }
-            
         }
+
         public static void ReadConfig(ConfigDataStore _configDataStore)
         {
             //Logic to read config file for initial setup based on previous saved data
@@ -447,13 +443,12 @@
                             }
                             if (line.Substring(0, delim) == "Winch Name")
                             {
-                                if ( winch.WinchName != string.Empty)
+                                if (winch.WinchName != string.Empty)
                                 {
                                     winchViewModel.InsertWinch(winch);
                                     winch = new();
                                 }
                                 winch.WinchName = line.Substring(delim + 1);
-                              
                             }
                             if (line.Substring(0, delim) == "Winch Manufacturer")
                             {
@@ -496,7 +491,6 @@
                             if (line.Substring(0, delim) == "Receive Communication Protocol")
                             {
                                 winch.InputCommunication.CommunicationProtocol = line.Substring(delim + 1);
-                                
                             }
                             if (line.Substring(0, delim) == "Receive Data Protocol")
                             {
@@ -522,7 +516,7 @@
                             {
                                 winch.InputCommunication.DataBits = line.Substring(delim + 1);
                             }
-                            
+
                             if (line.Substring(0, delim) == "Transmit Communication Type")
                             {
                                 tempComms.CommunicationType = line.Substring(delim + 1);
@@ -581,18 +575,15 @@
                                     winch = InsertOutputComms(tempComms, winch);
                                     tempComms = new();
                                 }
-                                
-                                
                             }
 
                             if (line.Substring(0, delim) == "Cast Number")
                             {
-                                if( int.TryParse(line.Substring(delim + 1), out int castCount))// + 1;
+                                if (int.TryParse(line.Substring(delim + 1), out int castCount))// + 1;
                                 {
                                     winch.CastNumber = castCount.ToString();
                                 }
-                                    
-                            }                            
+                            }
                             if (line.Substring(0, delim) == "Save 20Hz Data")
                             {
                                 winch.Log20Hz = bool.Parse(line.Substring(delim + 1));
@@ -608,12 +599,10 @@
                             if (line.Substring(0, delim) == "UNOLS Log Location")
                             {
                                 winch.WinchDirectory = line.Substring(delim + 1);
-                                
                             }
                             if (line.Substring(0, delim) == "Raw Log Location")
                             {
                                 winch.RawLogDirectory = line.Substring(delim + 1);
-                                
                             }
                             //if (line.Substring(0, delim) == "20Hz File Format")
                             //{
@@ -631,7 +620,7 @@
                             //        winch.Log20Hz = true;
                             //    }
                             //}
-                            
+
                             if (line.Substring(0, delim) == "Tension Units")
                             {
                                 winch.TensionUnit = line.Substring(delim + 1);
@@ -733,28 +722,18 @@
                             if (line.Substring(0, delim) == "Sheave Train Image Path")
                             {
                                 winch.SheaveTrainPath = line.Substring(delim + 1);
-
                             }
-
-
-
                         }
-                        
-
-
                     }
-                    
-                    winchViewModel.InsertWinch(winch);
 
+                    winchViewModel.InsertWinch(winch);
                 }
-                
             }
             catch
             {
-               
             }
         }
-        
+
         public static WinchModel AddComms(CommunicationModel tempComms, WinchModel winch)
         {
             winch.AllOutputCommunication.Add(tempComms.ShallowCopy());

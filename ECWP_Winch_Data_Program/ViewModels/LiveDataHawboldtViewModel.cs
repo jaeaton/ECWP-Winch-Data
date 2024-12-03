@@ -4,28 +4,31 @@
     {
         public string HawboldtProcess(byte[] byteArray, string HawboldtModel)
         {
-            
             string ResponseData = string.Empty;
             switch (HawboldtModel)
             {
                 case "SPRE-3464":
                     ResponseData = SPRE_3464(byteArray);
                     return ResponseData;
+
                 case "SPRE-2648RS":
                     ResponseData = SPRE_2648RS(byteArray);
                     return ResponseData;
+
                 case "SPRE-2640":
                     ResponseData = SPRE_2640(byteArray);
                     return ResponseData;
+
                 case "SPRE-2036S":
                     ResponseData = SPRE_2036S(byteArray);
                     return ResponseData;
+
                 default:
                     return ResponseData;
                     //break;
             }
-
         }
+
         private string SPRE_3464(byte[] byteArray)
         {
             string ResponseData = string.Empty;
@@ -74,6 +77,7 @@
             ResponseData = $"$HWIR1,{year}-{month}-{day},{hour}:{minute}:{second},{tension},{speed},{payout}";
             return ResponseData;
         }
+
         private string SPRE_2648RS(byte[] byteArray)
         {
             string ResponseData = string.Empty;
@@ -122,6 +126,7 @@
             ResponseData = $"$HWIR2,{year}-{month}-{day},{hour}:{minute}:{second},{tension},{speed},{payout}";
             return ResponseData;
         }
+
         private string SPRE_2640(byte[] byteArray)
         {
             string ResponseData = string.Empty;
@@ -170,6 +175,7 @@
             ResponseData = $"$HWIR3,{year}-{month}-{day},{hour}:{minute}:{second},{tension},{speed},{payout}";
             return ResponseData;
         }
+
         private string SPRE_2036S(byte[] byteArray)
         {
             string ResponseData = string.Empty;
@@ -225,6 +231,7 @@
             int Int = (int)bytes1[0];
             return Int.ToString();
         }
+
         private string TwoByteInt(byte[] bytes)
         {
             //if (BitConverter.IsLittleEndian)
@@ -234,6 +241,7 @@
             int Int = BitConverter.ToInt16(bytes);
             return Int.ToString();
         }
+
         private string RealByteInt(byte[] bytes)
         {
             //if (BitConverter.IsLittleEndian)
@@ -243,6 +251,7 @@
             float Float = BitConverter.ToSingle(bytes);
             return Float.ToString("F1");
         }
+
         private string TimeRealByteInt(byte[] bytes)
         {
             //if (BitConverter.IsLittleEndian)

@@ -14,6 +14,7 @@
             }
             return output;
         }
+
         public static bool ValidateCruiseName(string cruiseName)
         {
             bool output = true;

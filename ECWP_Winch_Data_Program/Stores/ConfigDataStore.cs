@@ -4,26 +4,7 @@
     public partial class ConfigDataStore : ObservableObject
     {
         [ObservableProperty]
-        private string cruiseNameBox = string.Empty;
-        partial void OnCruiseNameBoxChanged(string value)
-        {
-            ResetCasts();
-        }
-
-        [ObservableProperty]
-        private string shipName = string.Empty;
-
-        [ObservableProperty]
-        private string directoryLabel = string.Empty;
-
-        [ObservableProperty]
-        private bool directorySet;
-
-        [ObservableProperty]
-        private bool userInputsEnable = true;
-
-        [ObservableProperty]
-        private List<string> availableSerialPorts = GetSerialPorts.FindSerialPorts();
+        private ObservableCollection<WinchModel> allWinches = new();
 
         [ObservableProperty]
         private List<string> availableBaudRates = new List<string>
@@ -51,41 +32,6 @@
                                                             };
 
         [ObservableProperty]
-        private List<string> availableStopBits = new List<string>
-                                                            {
-                                                                "1",
-                                                                "1.5",
-                                                                "2",
-                                                            };
-
-        [ObservableProperty]
-        private string winchSelection = string.Empty;
-
-        [ObservableProperty]
-        private List<string> availableProtocols = new List<string>
-                                                            {
-                                                                "TCP Server",
-                                                                "TCP Client",
-                                                                "UDP"
-                                                            };
-        [ObservableProperty]
-        private List<string> availableProtocolsOutput = new List<string> { "UDP" };
-
-        [ObservableProperty]
-        private List<string> winchDataType = new()
-        {
-                "MASH Winch",
-                "ECWP MTNW",
-                "SIO Traction Winch",
-                "WinchDAC", //Previously Armstrong Cast 6
-                "UNOLS String",
-                "Jay Jay",
-                "Atlantis 3PS",
-                "3PS",
-                //"Mermac R30"
-        };
-
-        [ObservableProperty]
         private List<string> availablePayouts = new()
         {
                 "-10",
@@ -100,6 +46,28 @@
         };
 
         [ObservableProperty]
+        private List<string> availableProtocols = new List<string>
+                                                            {
+                                                                "TCP Server",
+                                                                "TCP Client",
+                                                                "UDP"
+                                                            };
+
+        [ObservableProperty]
+        private List<string> availableProtocolsOutput = new List<string> { "UDP" };
+
+        [ObservableProperty]
+        private List<string> availableSerialPorts = GetSerialPorts.FindSerialPorts();
+
+        [ObservableProperty]
+        private List<string> availableStopBits = new List<string>
+                                                            {
+                                                                "1",
+                                                                "1.5",
+                                                                "2",
+                                                            };
+
+        [ObservableProperty]
         private List<string> availableTensions = new()
         {
                 "-100",
@@ -110,48 +78,22 @@
         };
 
         [ObservableProperty]
-        private string selectedProtocol = string.Empty;
+        private string buttonText = "Start Processing";
+
+        [ObservableProperty]
+        private List<string> chartTimeSpanList = new List<string>
+                                                            {
+                                                                "10",
+                                                                "20",
+                                                                "30",
+                                                                "45"
+                                                            };
+
+        [ObservableProperty]
+        private string cruiseNameBox = string.Empty;
 
         [ObservableProperty]
         private WinchModel currentWinch = new();
-
-        [ObservableProperty]
-        private ObservableCollection<WinchModel> allWinches = new();
-
-        [ObservableProperty]
-        private ObservableCollection<string> winchesToPlot = new();
-
-        [ObservableProperty]
-        private ObservableCollection<WinchModel> plottingWinches = new();
-
-        [ObservableProperty]
-        private List<string> speedUnitList = new List<string>
-                                                            {
-                                                                "m/min",
-                                                                "ft/min",
-                                                                "kph",
-                                                                "mph"
-                                                            };
-
-        [ObservableProperty]
-        private List<string> tensionUnitList = new List<string>
-                                                            {
-                                                                "lbf",
-                                                                "kg",
-                                                                "kip",
-                                                                "N",
-                                                                "Short Ton",
-                                                                "Long Ton",
-                                                                "Tonne"
-                                                            };
-
-        [ObservableProperty]
-        private List<string> payoutUnitList = new List<string>
-                                                            {
-                                                                "m",
-                                                                "ft",
-                                                                "km"
-                                                            };
 
         [ObservableProperty]
         private List<string> dataProtocolList = new List<string>
@@ -170,6 +112,18 @@
                                                             };
 
         [ObservableProperty]
+        private bool dateRangeCheckBox = false;
+
+        [ObservableProperty]
+        private string directoryLabel = string.Empty;
+
+        [ObservableProperty]
+        private bool directorySet;
+
+        [ObservableProperty]
+        private DateTime endDate = DateTime.Today;
+
+        [ObservableProperty]
         private List<double> factorOfSafetyList = new List<double>
                                                             {
                                                                 5.0,
@@ -179,40 +133,98 @@
                                                             };
 
         [ObservableProperty]
-        private string selectWinch = string.Empty;// = new();
-        partial void OnSelectWinchChanged(string value)
-        {
-            ProcessDataViewModel.ParseData.WireLog.Clear();
-            LoadWinch(value);
-        }
-        [ObservableProperty]
-        private TabItemModel winchSelected = new();
-        partial void OnWinchSelectedChanged(TabItemModel value)
-        {
-            ProcessDataViewModel.ParseData.WireLog.Clear();
-            if (value != null)
-            {
-                LoadWinch(value.Header);
-            }
-
-        }
-        [ObservableProperty]
-        private ObservableCollection<string> winchNames = new();
+        private int numberOfFiles = 0;
 
         [ObservableProperty]
-        private List<string> chartTimeSpanList = new List<string>
+        private int numberOfProcessedFiles = 0;
+
+        [ObservableProperty]
+        private List<string> payoutUnitList = new List<string>
                                                             {
-                                                                "10",
-                                                                "20",
-                                                                "30",
-                                                                "45"
+                                                                "m",
+                                                                "ft",
+                                                                "km"
                                                             };
+
+        [ObservableProperty]
+        private ObservableCollection<WinchModel> plottingWinches = new();
+
+        [ObservableProperty]
+        private string readingLine = string.Empty;
+
+        [ObservableProperty]
+        private string selectedProtocol = string.Empty;
+
+        [ObservableProperty]
+        private string selectWinch = string.Empty;
+
+        [ObservableProperty]
+        private string shipName = string.Empty;
+
+        [ObservableProperty]
+        private List<string> speedUnitList = new List<string>
+                                                            {
+                                                                "m/min",
+                                                                "ft/min",
+                                                                "kph",
+                                                                "mph"
+                                                            };
+
+        [ObservableProperty]
+        private DateTime startDate = DateTime.Today;
 
         [ObservableProperty]
         private ObservableCollection<TabItemModel> tabItems = new()
         {
             new TabItemModel("Add New", "Add New")
         };
+
+        [ObservableProperty]
+        private List<string> tensionUnitList = new List<string>
+                                                            {
+                                                                "lbf",
+                                                                "kg",
+                                                                "kip",
+                                                                "N",
+                                                                "Short Ton",
+                                                                "Long Ton",
+                                                                "Tonne"
+                                                            };
+
+        [ObservableProperty]
+        private bool userInputsEnable = true;
+
+        [ObservableProperty]
+        private List<string> winchDataType = new()
+        {
+                "MASH Winch",
+                "ECWP MTNW",
+                "SIO Traction Winch",
+                "WinchDAC", //Previously Armstrong Cast 6
+                "UNOLS String",
+                "Jay Jay",
+                "Atlantis 3PS",
+                "3PS",
+                //"Mermac R30"
+        };
+
+        [ObservableProperty]
+        private ObservableCollection<string> winchesToPlot = new();
+
+        [ObservableProperty]
+        private ObservableCollection<string> winchNames = new();
+
+        [ObservableProperty]
+        private TabItemModel winchSelected = new();
+
+        [ObservableProperty]
+        private string winchSelection = string.Empty;
+
+        [ObservableProperty]
+        private string wireLogEventCutBack = string.Empty;
+
+        [ObservableProperty]
+        private DateTime wireLogEventDate = DateTime.Now;
 
         [ObservableProperty]
         private List<string> wireLogEventList = new List<string>
@@ -224,30 +236,13 @@
                                                                 "Removal",
                                                                 "Termination"
                                                             };
-        [ObservableProperty]
-        private string wireLogEventSelection = string.Empty;
-        [ObservableProperty]
-        private string wireLogEventCutBack = string.Empty;
-        [ObservableProperty]
-        private DateTime wireLogEventDate = DateTime.Now;
+
         [ObservableProperty]
         private string wireLogEventNotes = string.Empty;
 
         [ObservableProperty]
-        private DateTime startDate = DateTime.Today;
+        private string wireLogEventSelection = string.Empty;
 
-        [ObservableProperty]
-        private DateTime endDate = DateTime.Today;
-        [ObservableProperty]
-        private bool dateRangeCheckBox = false;
-        [ObservableProperty]
-        private string readingLine = string.Empty;
-        [ObservableProperty]
-        private int numberOfFiles = 0;
-        [ObservableProperty]
-        private int numberOfProcessedFiles = 0;
-        [ObservableProperty]
-        private string buttonText = "Start Processing";
         public void LoadWinch(string winch)
         {
             if (winch == "Add New")
@@ -272,18 +267,18 @@
                 CurrentWinch = AllWinches[index].DeepCopy();
             }
         }
+
         public void RefreshWinches(ObservableCollection<WinchModel> winches)
         {
-
             TabItems.Clear();
             TabItems.Add(new TabItemModel("Add New", "Add New"));
             foreach (var winch in winches)
             {
-
                 TabItemModel tabitem = new TabItemModel(winch.WinchName, winch.WinchName);
                 TabItems.Add(tabitem);
             }
         }
+
         public void ResetCasts()
         {
             foreach (var winch in AllWinches)
@@ -291,6 +286,26 @@
                 winch.CastNumber = "1";
             }
         }
-    }
 
+        partial void OnCruiseNameBoxChanged(string value)
+        {
+            ResetCasts();
+        }
+
+        // = new();
+        partial void OnSelectWinchChanged(string value)
+        {
+            ProcessDataViewModel.ParseData.WireLog.Clear();
+            LoadWinch(value);
+        }
+
+        partial void OnWinchSelectedChanged(TabItemModel value)
+        {
+            ProcessDataViewModel.ParseData.WireLog.Clear();
+            if (value != null)
+            {
+                LoadWinch(value.Header);
+            }
+        }
+    }
 }

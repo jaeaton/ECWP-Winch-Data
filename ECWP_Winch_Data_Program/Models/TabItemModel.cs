@@ -3,12 +3,12 @@
     public partial class TabItemModel : ObservableObject
     {
         [ObservableProperty]
-        private string header = string.Empty;
-
-        [ObservableProperty]
         private string content = string.Empty;
 
-        public TabItemModel() 
+        [ObservableProperty]
+        private string header = string.Empty;
+
+        public TabItemModel()
         {
             Header = string.Empty;
             Content = string.Empty;
@@ -19,11 +19,10 @@
             Header = _header;
             Content = _content;
         }
+
         public override string ToString()
         {
             return Header;
         }
     }
-
-
 }

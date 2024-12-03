@@ -3,8 +3,9 @@
     internal partial class LiveDataPlottingViewModel : ViewModelBase
     {
         //public CancellationTokenSource? _canceller;
-        LiveDataHandlingViewModel dh = new LiveDataHandlingViewModel();
-        ConfigDataStore _configDataStore = MainViewModel._configDataStore;
+        private LiveDataHandlingViewModel dh = new LiveDataHandlingViewModel();
+
+        private ConfigDataStore _configDataStore = MainViewModel._configDataStore;
 
         private WinchModel GetWinch(string winchname)
         {
@@ -33,7 +34,6 @@
             //Increase the cast count
             winch.CastNumber = (int.Parse(winch.CastNumber) + 1).ToString();
             //UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
-
         }
 
         [RelayCommand]
@@ -52,9 +52,7 @@
                         }
                         catch (ObjectDisposedException ex)
                         {
-
                         }
-
 
                         //Change button text
                         winch.StartStopButtonText = "Start Log";
@@ -71,7 +69,6 @@
                                 await MessageBoxViewModel.DisplayMessage("Set save location before colecting data");
                                 break;
                             }
-
                         }
                         if (winch.CastNumber == string.Empty)
                         {
@@ -85,7 +82,7 @@
                         winch.StartStopButtonText = "Stop Log";
                         dh.GetDataAsync(winch);
                         //change button text
-                        
+
                         //MainViewModel._configDataStore.UserInputsEnable = false;
 
                         break;

@@ -6,8 +6,9 @@ namespace ViewModels
     internal partial class WinchViewModel : ViewModelBase
     {
         public ConfigDataStore _configDataStore = MainViewModel._configDataStore;
+
         /// <summary>
-        /// Add Winch adds the data currently stored in current Winch as a new selectable winch 
+        /// Add Winch adds the data currently stored in current Winch as a new selectable winch
         /// </summary>
         [RelayCommand]
         public async Task AddWinch()
@@ -16,7 +17,7 @@ namespace ViewModels
             {
                 //Send to generic method to add winch to the winch list
                 InsertWinch(_configDataStore.CurrentWinch);
-                //Write the config file 
+                //Write the config file
                 FileOperationsViewModel.WriteConfig(_configDataStore);
             }
             else
@@ -31,7 +32,7 @@ namespace ViewModels
         {
             if (_configDataStore.CruiseNameBox != string.Empty || _configDataStore.ShipName != string.Empty)
             {
-                //Write the config file 
+                //Write the config file
                 FileOperationsViewModel.WriteConfig(_configDataStore);
             }
             else
@@ -40,6 +41,7 @@ namespace ViewModels
                            $"Ship or Cruise Name must be entered. Configuration not saved/updated");
             }
         }
+
         [RelayCommand]
         private void RemoveWinch()
         {
@@ -73,6 +75,7 @@ namespace ViewModels
             //Write the config file with updated list of winches
             FileOperationsViewModel.WriteConfig(_configDataStore);
         }
+
         [RelayCommand]
         public async Task ConfigHelp()
         {
@@ -103,54 +106,51 @@ namespace ViewModels
         }
 
         public void InsertWinch(WinchModel Winch)
-        {  
-                //Check to see if a cast number has been added. If not set to 1
-                if (Winch.CastNumber == null)
+        {
+            //Check to see if a cast number has been added. If not set to 1
+            if (Winch.CastNumber == null)
+            {
+                Winch.CastNumber = "1";
+            }
+            //Check to see if the start button has a name. If not set to "start log"
+            if (Winch.StartStopButtonText == null)
+            {
+                Winch.StartStopButtonText = "Start Log";
+            }
+            //See if winch name is already used. If it is perform update on parameters. If not add it to the list
+            int index = -1;
+            for (int i = 0; i < _configDataStore.AllWinches.Count; i++)
+            {
+                WinchModel item = _configDataStore.AllWinches[i];
+                if (item.WinchName == Winch.WinchName)
                 {
-                    Winch.CastNumber = "1";
+                    index = i;
+                    break;
                 }
-                //Check to see if the start button has a name. If not set to "start log"
-                if (Winch.StartStopButtonText == null)
-                {
-                    Winch.StartStopButtonText = "Start Log";
-                }
-                //See if winch name is already used. If it is perform update on parameters. If not add it to the list
-                int index = -1;
-                for (int i = 0; i < _configDataStore.AllWinches.Count; i++)
-                {
-                    WinchModel item = _configDataStore.AllWinches[i];
-                    if (item.WinchName == Winch.WinchName)
-                    {
-                        index = i;
-                        break;
-                    }
-                }
-                if (index != -1)
-                {
-                    _configDataStore.AllWinches[index] = Winch.DeepCopy();
-                }
-                else
-                {
-                    _configDataStore.AllWinches.Add(Winch.DeepCopy());
-                }
-                //Clears the current list to make winch names as fresh as possible
-                _configDataStore.WinchNames.Clear();
-                _configDataStore.TabItems.Clear();
+            }
+            if (index != -1)
+            {
+                _configDataStore.AllWinches[index] = Winch.DeepCopy();
+            }
+            else
+            {
+                _configDataStore.AllWinches.Add(Winch.DeepCopy());
+            }
+            //Clears the current list to make winch names as fresh as possible
+            _configDataStore.WinchNames.Clear();
+            _configDataStore.TabItems.Clear();
 
-                _configDataStore.TabItems.Add(new TabItemModel("Add New", "Add New"));
-                //Loops through all winches and puts winch names in a list for selection process
-                if (_configDataStore.AllWinches.Count > 0)
+            _configDataStore.TabItems.Add(new TabItemModel("Add New", "Add New"));
+            //Loops through all winches and puts winch names in a list for selection process
+            if (_configDataStore.AllWinches.Count > 0)
+            {
+                foreach (var item in _configDataStore.AllWinches)
                 {
-                    foreach (var item in _configDataStore.AllWinches)
-                    {
-
-                        TabItemModel tabItem = new TabItemModel(item.WinchName, item.WinchName);
-                        _configDataStore.WinchNames.Add(item.WinchName);
-                        _configDataStore.TabItems.Add(tabItem);
-                    }
+                    TabItemModel tabItem = new TabItemModel(item.WinchName, item.WinchName);
+                    _configDataStore.WinchNames.Add(item.WinchName);
+                    _configDataStore.TabItems.Add(tabItem);
                 }
-            
-
+            }
         }
 
         [RelayCommand]
@@ -165,7 +165,6 @@ namespace ViewModels
                 await MessageBoxViewModel.DisplayMessage(
                            $"Data destination much be named.");
             }
-            
         }
 
         [RelayCommand]
@@ -198,7 +197,6 @@ namespace ViewModels
                 //_configDataStore.WinchNames.Add(item.DestinationName);
                 _configDataStore.CurrentWinch.TabItemsOutputComms.Add(tabItem);
             }
-            
         }
 
         public void InsertCommOut()
@@ -225,7 +223,7 @@ namespace ViewModels
             //Clears the current list to make winch names as fresh as possible
             //_configDataStore.CurrentWinch.AllOutputCommunication.Clear();
             _configDataStore.CurrentWinch.TabItemsOutputComms.Clear();
-            _configDataStore.CurrentWinch.TabItemsOutputComms.Add( new TabItemModel("Add New", "Add New"));
+            _configDataStore.CurrentWinch.TabItemsOutputComms.Add(new TabItemModel("Add New", "Add New"));
             //Loops through all winches and puts winch names in a list for selection process
             if (_configDataStore.CurrentWinch.AllOutputCommunication.Count > 0)
             {
@@ -234,9 +232,8 @@ namespace ViewModels
                     TabItemModel tabItem = new TabItemModel(item.DestinationName, item.DestinationName);
                     if (item.DestinationName != string.Empty)
                     {
-                         _configDataStore.CurrentWinch.TabItemsOutputComms.Add(tabItem);
+                        _configDataStore.CurrentWinch.TabItemsOutputComms.Add(tabItem);
                     }
-                   
                 }
             }
         }
@@ -254,29 +251,33 @@ namespace ViewModels
 
             //ExcelViewModel.AddEvent();
         }
+
         [RelayCommand]
         public void WriteWireLogEvent()
         {
             ProcessDataWireHistoryViewModel.WriteData();
         }
+
         [RelayCommand]
         public void SetRawLogPath()
         {
             Task<string> t = Task.Run<string>(() =>
             {
-                return SetWinchPath(".log", "Raw Data Log Path");         
+                return SetWinchPath(".log", "Raw Data Log Path");
             });
             _configDataStore.CurrentWinch.RawLogDirectory = t.Result;
         }
+
         [RelayCommand]
-        public void SetUNOLSLogPath() 
+        public void SetUNOLSLogPath()
         {
             Task<string> t = Task.Run<string>(() =>
             {
-                return SetWinchPath(".xlsx","UNOLS Wire Log Path");
+                return SetWinchPath(".xlsx", "UNOLS Wire Log Path");
             });
             _configDataStore.CurrentWinch.WinchDirectory = t.Result;
         }
+
         [RelayCommand]
         public void SelectImage()
         {
@@ -290,11 +291,13 @@ namespace ViewModels
             }
             _configDataStore.CurrentWinch.SheaveTrainPath = t.Result;
         }
+
         [RelayCommand]
         public void RemoveImage()
         {
             _configDataStore.CurrentWinch.SheaveTrainPath = "none";
         }
+
         public async Task<string> SetWinchPath(string extension, string windowTitle)
         {
             //New Save file method
@@ -304,8 +307,8 @@ namespace ViewModels
             {
                 var filesService = App.Current?.Services?.GetService<IFilesService>();
                 if (filesService is null) throw new NullReferenceException("Missing File Service instance.");
-                
-                var file = await filesService.SaveFileAsync(extension, windowTitle, _configDataStore.CurrentWinch.WinchName + extension) ;
+
+                var file = await filesService.SaveFileAsync(extension, windowTitle, _configDataStore.CurrentWinch.WinchName + extension);
                 if (file is null) return AppDomain.CurrentDomain.BaseDirectory;
                 else
                 {
@@ -337,18 +340,14 @@ namespace ViewModels
                 if (file is null) return string.Empty;
                 else
                 {
-
                     return file.TryGetLocalPath().ToString();
                 }
-                
             }
             catch (Exception e)
             {
                 ErrorMessages?.Add(e.Message);
                 return string.Empty;
             }
-            
         }
-        
     }
 }

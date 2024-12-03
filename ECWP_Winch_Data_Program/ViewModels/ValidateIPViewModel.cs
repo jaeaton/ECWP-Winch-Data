@@ -30,9 +30,10 @@
                     }
                 }
             }
-           
+
             return output;
         }
+
         public static bool ValidatePortFunction(string portNum)
         {
             bool output = true;

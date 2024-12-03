@@ -1,50 +1,58 @@
 ﻿namespace Models
 {
-    public struct DataPointModel 
+    public struct DataPointModel
     {
+        /// <summary>
+        /// Check Sum Value
+        /// </summary>
+        public string CheckSum = string.Empty;
 
-        public string StringID  = string.Empty;
         /// <summary>
         /// Date value from data source
         /// </summary>
-        public string Date   = string.Empty;
-        /// <summary>
-        /// Time from data source
-        /// </summary>
-        public string Time   = string.Empty;
+        public string Date = string.Empty;
+
         /// <summary>
         /// Combined Date and Time
         /// </summary>
-        public DateTime DateAndTime   = new();
-        /// <summary>
-        /// Tension value
-        /// </summary>
-        public float Tension;
+        public DateTime DateAndTime = new();
+
         /// <summary>
         /// Payout value
         /// </summary>
         public float Payout;
+
         /// <summary>
         /// Speed value
         /// </summary>
         public float Speed;
+
+        public string StringID = string.Empty;
+
         /// <summary>
-        /// Check Sum Value
+        /// Tension value
         /// </summary>
-        public string CheckSum   = string.Empty;
+        public float Tension;
+
         /// <summary>
-        /// Tension Member Warning (8 bits)
+        /// Time from data source
         /// </summary>
-        public string TMWarnings   = string.Empty;
+        public string Time = string.Empty;
+
         /// <summary>
         /// Tension member alarms(8 bits)
         /// </summary>
-        public string TMAlarms   = string.Empty;    
-        
+        public string TMAlarms = string.Empty;
+
+        /// <summary>
+        /// Tension Member Warning (8 bits)
+        /// </summary>
+        public string TMWarnings = string.Empty;
+
         public DataPointModel()
         {
-
         }
+
         /// <summary>
         /// Approx MTNW String overloads
         /// </summary>
@@ -78,6 +86,7 @@
             TMAlarms = "00000000";
             TMWarnings = "00000000";
         }
+
         /// <summary>
         /// UNOLS String, Overloads include Tension member warnings and alarms
         /// </summary>
@@ -112,8 +121,8 @@
             CheckSum = inCheckSum;
             TMWarnings = tMWarnings;
             TMAlarms = tMAlarms;
-
         }
+
         /// <summary>
         /// Hawboldt string in
         /// </summary>
@@ -144,11 +153,10 @@
             float.TryParse(inSpeed, out float speed);
             Speed = speed;
 
-            
             TMWarnings = tMWarnings;
             TMAlarms = tMAlarms;
-
         }
+
         public DataPointModel(string SID, string Ten, string Sp, string Pay)
         {
             StringID = SID;
@@ -159,12 +167,6 @@
             TMAlarms = "00000000";
         }
 
-      public DataPointModel ShallowCopy()
-        {
-            DataPointModel copy = (DataPointModel)this.MemberwiseClone();
-            return copy;
-        }
-
         public DataPointModel DeepCopy()
         {
             DataPointModel copy = new();
@@ -173,5 +175,10 @@
             return copy;
         }
 
+        public DataPointModel ShallowCopy()
+        {
+            DataPointModel copy = (DataPointModel)this.MemberwiseClone();
+            return copy;
+        }
     }
 }

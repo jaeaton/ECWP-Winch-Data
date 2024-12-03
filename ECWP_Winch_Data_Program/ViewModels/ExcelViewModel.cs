@@ -2,10 +2,10 @@
 
 namespace ViewModels
 {
-    public class ExcelViewModel 
+    public class ExcelViewModel
     {
-       //Direct write method -- old 
-        public static void AddCastData( DataPointModel dataMaxTension, DataPointModel dataMaxPayout, int cast, WinchModel winch)
+        //Direct write method -- old
+        public static void AddCastData(DataPointModel dataMaxTension, DataPointModel dataMaxPayout, int cast, WinchModel winch)
         {
             //Check Date for data point
             string date = string.Empty;
@@ -22,7 +22,7 @@ namespace ViewModels
             winch = (WinchModel)SetWireLogFileName(winch);
             //Load Filename
             string fileName = $"{winch.WirePoolWireLogName}";
-            
+
             if (winch.WinchDirectory == string.Empty)
             {
                 NoDirectory(winch);
@@ -73,7 +73,7 @@ namespace ViewModels
             //Maximum Wire Out
             ws.Cell($"I{CurrentRow}").Value = dataMaxPayout.Payout;
             //Notes
-            if (dataMaxTension.Tension > float.Parse(winch.TensionWarningLevel)) 
+            if (dataMaxTension.Tension > float.Parse(winch.TensionWarningLevel))
             {
                 ws.Cell($"J{CurrentRow}").Value = "Tension Warning";
             }
@@ -85,6 +85,7 @@ namespace ViewModels
             ws.Range($"A{CurrentRow}:J{CurrentRow}").Style.Border.SetInsideBorder(XLBorderStyleValues.Thin);
             wb.Save();
         }
+
         //Clear data
         public static void ClearData()
         {
@@ -110,12 +111,13 @@ namespace ViewModels
             //Get last row
             int LastRow = ws.LastRowUsed().RowNumber();
 
-            while (LastRow > 22) 
-            { 
+            while (LastRow > 22)
+            {
                 ws.Row(LastRow).Delete();
                 LastRow--;
             }
         }
+
         //New data write method
         public static void AddCast(WireLogModel dataPoint)
         {
@@ -161,7 +163,7 @@ namespace ViewModels
             ws.Cell($"H{CurrentRow}").Value = dataPoint.MaxTensionWireIn;
             //ws.Cell($"H{CurrentRow}").Style.NumberFormat.Format = ;
             //Maximum Wire Out
-            ws.Cell($"I{CurrentRow}").Value = dataPoint.MaxWireOut; 
+            ws.Cell($"I{CurrentRow}").Value = dataPoint.MaxWireOut;
             //Notes
             if (float.Parse(dataPoint.MaxTension) > float.Parse(_config.CurrentWinch.TensionWarningLevel))
             {
@@ -222,14 +224,14 @@ namespace ViewModels
             wb.Save();
         }
 
-        public static void NewWorkbook(string fileName ,WinchModel winch)
+        public static void NewWorkbook(string fileName, WinchModel winch)
         {
             ConfigDataStore _config = MainViewModel._configDataStore;
             // Creating a new workbook
             var wb = new XLWorkbook();
             //Adding a worksheet
             var ws = wb.Worksheets.Add("Log");
-            
+
             //Set sheet to landscape
             ws.PageSetup.PageOrientation = XLPageOrientation.Landscape;
             //Set Margins
@@ -258,10 +260,9 @@ namespace ViewModels
             ws.Cell("F3").Value = "Winch Model";
             ws.Cell("H3").Value = $"{winch.WinchModelName}";
             ws.Cell("F4").Value = "Winch Manufacturer";
-            ws.Cell("H4").Value = $"{winch.WinchManufacturer}"; 
+            ws.Cell("H4").Value = $"{winch.WinchManufacturer}";
             ws.Cell("F5").Value = "Serial Number";
             ws.Cell("H5").Value = $"{winch.WinchSerialNumber}";
-            
 
             //Merge Header Cells
             ws.Range("A1:C1").Merge();
@@ -273,7 +274,7 @@ namespace ViewModels
             ws.Range("C3:E3").Merge();
             ws.Range("C4:E4").Merge();
             ws.Range("C5:E5").Merge();
-            
+
             ws.Range("F2:G2").Merge();
             ws.Range("F3:G3").Merge();
             ws.Range("F4:G4").Merge();
@@ -291,9 +292,9 @@ namespace ViewModels
             }
             else
             {
-                ws.AddPicture(winch.SheaveTrainPath).MoveTo(ws.Cell("B6"),ws.Cell("I20"));
+                ws.AddPicture(winch.SheaveTrainPath).MoveTo(ws.Cell("B6"), ws.Cell("I20"));
             }
-            
+
             ws.Cell("B6").Style.Alignment.SetHorizontal(XLAlignmentHorizontalValues.Center);
             ws.Cell("B6").Style.Alignment.SetVertical(XLAlignmentVerticalValues.Center);
 
@@ -331,7 +332,7 @@ namespace ViewModels
             ws.Cell("J22").Value = "Notes";
             ws.Range("J22:M22").Merge();
             ws.Range("A22:J22").Style.Border.SetBottomBorder(XLBorderStyleValues.Double);
-            
+
             //Freeze the headings in place
             ws.SheetView.FreezeRows(22);
 
@@ -342,20 +343,19 @@ namespace ViewModels
 
         public static object SetWireLogFileName(WinchModel winch)
         {
-            
             DateTime dateTime = DateTime.Now;
             winch.WirePoolWireLogName = $"{dateTime.ToString("yyyy")}_{winch.WinchName}_Wire_Log.xlsx";
             return winch;
         }
 
-        public async static void NoDirectory(WinchModel winch)
+        public static async void NoDirectory(WinchModel winch)
         {
             await MessageBoxViewModel.DisplayMessage(
                                     $"{winch.WinchName}\n" +
                                     $"Log directory is not set. \nSet in the winch configuration");
         }
 
-        public async static void ReadLog(WinchModel winch)
+        public static async void ReadLog(WinchModel winch)
         {
             winch = (WinchModel)SetWireLogFileName(winch);
             if (winch.WinchDirectory == string.Empty || winch.WirePoolWireLogName == string.Empty)
@@ -367,7 +367,6 @@ namespace ViewModels
             {
                 return;
             }
-            
 
             // Opening workbook
             var wb = new XLWorkbook($"{winch.WinchDirectory}\\{fileName}");
@@ -392,50 +391,50 @@ namespace ViewModels
                 int iVal = 0;
                 //Write data to data array ParseDataStore.WireLog
                 //Event Type
-                if(ws.Cell($"A{i}").TryGetValue<string>(out sVal))
+                if (ws.Cell($"A{i}").TryGetValue<string>(out sVal))
                 {
                     wireLog.EventType = sVal;
                 }
-                
+
                 //Cruise Number
-                if(ws.Cell($"B{i}").TryGetValue<string>(out sVal))
+                if (ws.Cell($"B{i}").TryGetValue<string>(out sVal))
                 {
                     wireLog.CruiseNumber = sVal;
                 }
                 //Date
-                if(ws.Cell($"C{i}").TryGetValue<string>(out sVal))
+                if (ws.Cell($"C{i}").TryGetValue<string>(out sVal))
                 {
                     wireLog.EventDate = DateTime.Parse(sVal);
                 }
                 //Cast number
-                if(ws.Cell($"D{i}").TryGetValue<int>(out iVal))
+                if (ws.Cell($"D{i}").TryGetValue<int>(out iVal))
                 {
                     wireLog.CastNumber = iVal.ToString();
                 }
                 //Total Length of Cable
-                if(ws.Cell($"E{i}").TryGetValue<float>(out fVal))
+                if (ws.Cell($"E{i}").TryGetValue<float>(out fVal))
                 {
                     wireLog.InstalledTensionMemberLength = fVal.ToString();
                 }
                 //Maximum Tension
-                if(ws.Cell($"F{i}").TryGetValue<float>(out fVal))
+                if (ws.Cell($"F{i}").TryGetValue<float>(out fVal))
                 {
                     wireLog.MaxTension = fVal.ToString();
                 }
                 //Wire Out at Max Tension
-                if(ws.Cell($"G{i}").TryGetValue<float>(out fVal))
+                if (ws.Cell($"G{i}").TryGetValue<float>(out fVal))
                 {
                     wireLog.MaxTensionWireOut = fVal.ToString();
                 }
                 //Wire on drum at Max Tension
-                if(ws.Cell($"H{i}").TryGetValue<float>(out fVal))
+                if (ws.Cell($"H{i}").TryGetValue<float>(out fVal))
                 {
                     wireLog.MaxTensionWireIn = fVal.ToString();
                 }
                 //Cut back amount
                 if (wireLog.EventType == "Cut Back")
                 {
-                    if(ws.Cell($"I{i}").TryGetValue<string>(out sVal))
+                    if (ws.Cell($"I{i}").TryGetValue<string>(out sVal))
                     {
                         wireLog.CutBackAmount = sVal;
                     }
@@ -443,19 +442,18 @@ namespace ViewModels
                 else
                 {
                     //Maximum Wire Out
-                    if(ws.Cell($"I{i}").TryGetValue<float>(out fVal))
+                    if (ws.Cell($"I{i}").TryGetValue<float>(out fVal))
                     {
                         wireLog.MaxWireOut = fVal.ToString();
                     }
                 }
                 //Notes
-                if(ws.Cell($"J{i}").TryGetValue<string>(out sVal))
+                if (ws.Cell($"J{i}").TryGetValue<string>(out sVal))
                 {
                     wireLog.Notes = sVal;
                 }
                 dataStore.WireLog.Add(wireLog.ShallowCopy());
             }
-
         }
     }
 }

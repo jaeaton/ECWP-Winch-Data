@@ -6,14 +6,17 @@ namespace ViewModels
 {
     internal partial class LiveDataHandlingViewModel : ViewModelBase
     {
-        UnitConversionViewModel ucVM = new();
-        ChartDataViewModel chartVM = new ChartDataViewModel();
-        LiveDataHawboldtViewModel hawboldtProcessingVM = new LiveDataHawboldtViewModel();
+        private UnitConversionViewModel ucVM = new();
+        private ChartDataViewModel chartVM = new ChartDataViewModel();
+        private LiveDataHawboldtViewModel hawboldtProcessingVM = new LiveDataHawboldtViewModel();
         public int i = 0;
+
         //public SerialPort _serialPort = new SerialPort();
         public List<SerialPort> serialPorts = new List<SerialPort>();
+
         public List<UdpClient> udpClients = new List<UdpClient>();
         public SerialPort InputSerialPort = new SerialPort();
+
         //Asynchronious method to allow application to still respond to user interaction
         public async void GetDataAsync(WinchModel winch)
         {
@@ -54,7 +57,6 @@ namespace ViewModels
                         bool cancelled = false;
                         while (cancelled == false) //!winch.Canceller.Token.IsCancellationRequested)
                         {
-
                             try
                             {
                                 //Asynchronious read of data to allow for other operations to occur
@@ -79,9 +81,6 @@ namespace ViewModels
                                     break;
                                 }
                             }
-
-
-
                         }
 
                         if (InputSerialPort.IsOpen)
@@ -91,6 +90,7 @@ namespace ViewModels
                         }
                     }
                     break;
+
                 case "Network":
                     {
                         switch (winch.InputCommunication.CommunicationProtocol)
@@ -99,10 +99,10 @@ namespace ViewModels
                                 {
                                     TcpListener server = null;
                                     TcpClient client = null;
-                                    
+
                                     try
                                     {
-                                        // Set the TcpListener to selected port 
+                                        // Set the TcpListener to selected port
                                         Int32 port = int.Parse(winch.InputCommunication.PortNumber);
                                         //should be look up local host
                                         //TODO change to look up local host
@@ -120,7 +120,6 @@ namespace ViewModels
                                         // Enter the listening loop.
                                         while (cancelled == false)//!winch.Canceller.Token.IsCancellationRequested)
                                         {
-
                                             try
                                             {
                                                 //Asynchronous read of data to allow for other operations to occur
@@ -146,8 +145,6 @@ namespace ViewModels
                                                     break;
                                                 }
                                             }
-
-
                                         }
                                     }
                                     catch (SocketException e)
@@ -161,20 +158,17 @@ namespace ViewModels
                                         client.Close();
                                         client.Dispose();
                                     }
-
-
                                 }
                                 break;
+
                             case "TCP Server":
-                        
+
                                 {
                                     TcpClient client = new TcpClient();
                                     //client.ReceiveTimeout = 20000;
                                     //Check to see if TCP client is connected and if not connect
                                     try
                                     {
-
-
                                         if (!client.Connected)
                                         {
                                             if (!client.ConnectAsync(IPAddress.Parse(winch.InputCommunication.TcpIpAddress), int.Parse(winch.InputCommunication.PortNumber)).Wait(5000))
@@ -234,7 +228,6 @@ namespace ViewModels
                                                     break;
                                                 }
                                             }
-
                                         }
                                     }
                                     //Close TCP client
@@ -242,10 +235,11 @@ namespace ViewModels
                                     client.Dispose();
                                 }
                                 break;
+
                             case "UDP":
-                       
+
                                 {
-                                    // Set the TcpListener to selected port 
+                                    // Set the TcpListener to selected port
                                     Int32 port = int.Parse(winch.InputCommunication.PortNumber);
                                     UdpClient client = new UdpClient(port);
                                     try
@@ -281,9 +275,7 @@ namespace ViewModels
                                                     break;
                                                 }
                                             }
-
                                         }
-                                        
                                     }
                                     catch (SocketException e)
                                     {
@@ -294,21 +286,23 @@ namespace ViewModels
                                     client.Dispose();
                                 }
                                 break;
+
                             default:
                                 {
                                     await MessageBoxViewModel.DisplayMessage("Input network communication selected with out a selected protocol");
                                 }
                                 break;
-                    }
+                        }
                     }
                     break;
+
                 default:
                     {
                         await MessageBoxViewModel.DisplayMessage("Input communication not set");
                     }
                     break;
             }
-            
+
             //Close Output communications
             if (udpClients.Count > 0)
             {
@@ -336,13 +330,11 @@ namespace ViewModels
                 //Increase the cast count
                 winch.CastNumber = (int.Parse(winch.CastNumber) + 1).ToString();
                 //UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
-
             }
             winch.StartStopButtonText = "Start Log";
             MainViewModel._configDataStore.UserInputsEnable = true;
-
-
         }
+
         public void DisplayData(DataPointModel latest, WinchModel winch)
         {
             //Write data to bound variables to display on UI
@@ -365,6 +357,7 @@ namespace ViewModels
                 winch.LiveData.TensionColor = "";
             }
         }
+
         private void MaxValues(WinchModel winch)
         {
             //Write max data to bound variables to display on UI
@@ -372,6 +365,7 @@ namespace ViewModels
             winch.LiveData.MaxPayout = winch.MaxData.MaxPayout.Payout.ToString();
             winch.LiveData.MaxTension = winch.MaxData.MaxTension.Tension.ToString();
         }
+
         private string ReadUDPData(UdpClient udpClient, WinchModel winch)
         {
             string responseData = string.Empty;
@@ -391,15 +385,15 @@ namespace ViewModels
 
             return responseData;
         }
+
         private string ReadSerialData(SerialPort serial, WinchModel winch)
         {
-            
             string responseData = serial.ReadLine();
             return responseData;
         }
+
         private string ReadTCPData(TcpClient client, WinchModel winch)//object tcpCom)
         {
-
             Byte[] data; //= System.Text.Encoding.ASCII.GetBytes(message);
             NetworkStream stream = client.GetStream();
             data = new Byte[256];
@@ -414,8 +408,8 @@ namespace ViewModels
             //winch.LiveData.RawWireData = responseData;
 
             return responseData;
-
         }
+
         private string ReplaceNonPrintableCharacters(string s, char replaceWith)
         {
             StringBuilder result = new StringBuilder();
@@ -430,6 +424,7 @@ namespace ViewModels
             }
             return result.ToString();
         }
+
         private void ParseWinchData(string lines, WinchModel winch)
         {
             //Parse incoming data function and store in DataPointModel
@@ -445,7 +440,7 @@ namespace ViewModels
                 data = ReplaceNonPrintableCharacters(data, ' ');
                 string[] strIn = data.Split(',', 'T', '*');
                 string strID = string.Empty;
-                
+
                 //Keep the '0' in R30
                 if (strIn[0] == "$R30C")
                 {
@@ -488,24 +483,24 @@ namespace ViewModels
                             latest = new DataPointModel(strID, strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6], strIn[7], strIn[8]);
                         }
                         break;
+
                     case "NULL":
                         if (strIn.Length == 9)
                         {
                             latest = new DataPointModel("$WIR", strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6], strIn[7], strIn[8]);
                         }
                         break;
+
                     case "RD":
                         //MTNW Legacy input (does not include date and time)
                         if (strIn.Length == 5)
                         {
                             getTime = true;
                             latest = new DataPointModel(strID, "", "", strIn[1], strIn[2], strIn[3], strIn[4]);
-
                         }
                         //MTNW 1 input  (Includes date and time)
                         else if (strIn.Length == 7)
                         {
-
                             latest = new DataPointModel(strID, strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], strIn[6]);
                         }
                         break;
@@ -531,16 +526,16 @@ namespace ViewModels
                     case "$R30C":
                         latest = new DataPointModel(strID, strIn[2], strIn[3], strIn[4]);
                         getTime = true;
-                            break;
+                        break;
+
                     default:
-                        if (strIn.Length == 9 && winch.InputCommunication.DataProtocol == "3PS") 
+                        if (strIn.Length == 9 && winch.InputCommunication.DataProtocol == "3PS")
                         {
                             getTime = true;
-                            latest = new DataPointModel("$3PS", "", "", strIn[0], strIn[2], strIn[1],"");
+                            latest = new DataPointModel("$3PS", "", "", strIn[0], strIn[2], strIn[1], "");
                         }
                         break;
                 }
-
 
                 if (latest.StringID != "empty")
                 {
@@ -623,7 +618,6 @@ namespace ViewModels
                         {
                             Send20HzData(latest, winch, client);
                         }
-                        
                     }
                     if (serialPorts.Count > 0)
                     {
@@ -631,7 +625,6 @@ namespace ViewModels
                         {
                             SendSerialData(latest, winch, port);
                         }
-                        
                     }
 
                     DisplayData(latest, winch);
@@ -640,23 +633,24 @@ namespace ViewModels
                 //}
             }
         }
+
         private void Write20HzData(DataPointModel data, WinchModel winch)
         {
             // Write Data to files
             string line;
             string destPath;
             string fileName;
-            
-                fileName = winch.UnolsWireLogName;
-                destPath = System.IO.Path.Combine(winch.RawLogDirectory, fileName);
-                line = $"{data.StringID},{data.Date},{data.Time},{data.Tension},{data.Speed},{data.Payout},{data.TMWarnings},{data.TMAlarms},{data.CheckSum}";
-            
+
+            fileName = winch.UnolsWireLogName;
+            destPath = System.IO.Path.Combine(winch.RawLogDirectory, fileName);
+            line = $"{data.StringID},{data.Date},{data.Time},{data.Tension},{data.Speed},{data.Payout},{data.TMWarnings},{data.TMAlarms},{data.CheckSum}";
+
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
             {
                 stream.WriteLine(line);
             }
-
         }
+
         private void Write20HzDataHeader(string data, WinchModel winch)
         {
             // Write Data to files
@@ -671,8 +665,8 @@ namespace ViewModels
             {
                 stream.WriteLine(line);
             }
-
         }
+
         private void WriteWinchLog(string data, WinchModel winch)
         {
             //Write Data to files
@@ -684,6 +678,7 @@ namespace ViewModels
                 stream.WriteLine(line);
             }
         }
+
         private void WriteRawLog(string data, WinchModel winch)
         {
             //Write Data to files
@@ -695,6 +690,7 @@ namespace ViewModels
                 stream.WriteLine(line);
             }
         }
+
         private void Send20HzData(DataPointModel data, WinchModel winch, UdpClient client)
         {
             //Format string based on format selection
@@ -716,9 +712,10 @@ namespace ViewModels
             line = $"{line}{checkSum}";
             //Send UDP packet
             byte[] sendBytes = Encoding.ASCII.GetBytes(line);
-            
+
             client.Send(sendBytes, sendBytes.Length);
         }
+
         private void SendSerialData(DataPointModel data, WinchModel winch, SerialPort _serialPort)
         {
             //Format string based on format selection
@@ -742,6 +739,7 @@ namespace ViewModels
             //Serial Port Transmit
             _serialPort.WriteLine(line);
         }
+
         public void WriteMaxData(WinchModel winch)
         {
             //Write Max data to file
@@ -768,6 +766,7 @@ namespace ViewModels
             //Clear max data
             winch.MaxData.Clear();
         }
+
         public void SetupOutputs(WinchModel winch)
         {
             if (winch.AllOutputCommunication.Count > 0)
@@ -779,20 +778,17 @@ namespace ViewModels
                         if (output.CommunicationProtocol == "UDP")
                         {
                             int i = udpClients.Count;
-                            if (IPAddress.TryParse(output.TcpIpAddress, out IPAddress ipAddress) &&  int.TryParse(output.PortNumber, out int portNumber))
+                            if (IPAddress.TryParse(output.TcpIpAddress, out IPAddress ipAddress) && int.TryParse(output.PortNumber, out int portNumber))
                             {
                                 IPEndPoint iPEndPoint = new IPEndPoint(ipAddress, portNumber);
                                 udpClients[i] = new UdpClient(iPEndPoint);
-                            }                
-
+                            }
                         }
                         //else if (output.CommunicationProtocol == "TCP Server")
                         //{
-
                         //}
                         //else if(output.CommunicationProtocol == "TCP Client")
                         //{
-
                         //}
                     }
                     else if (output.CommunicationType == "Serial")
@@ -811,7 +807,7 @@ namespace ViewModels
                         else if (winch.InputCommunication.StopBits == "1.5") { outStopBits = StopBits.OnePointFive; }
                         else if (winch.InputCommunication.StopBits == "2") { outStopBits = StopBits.Two; }
                         else { outStopBits = StopBits.One; }
-                        
+
                         serialPorts[i].PortName = output.SerialPort;
                         serialPorts[i].BaudRate = serialBaudRate;
                         serialPorts[i].Parity = outParity;

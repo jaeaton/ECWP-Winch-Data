@@ -5,16 +5,17 @@
         public ObservableCollection<DateTimePoint> _observableValues = new ObservableCollection<DateTimePoint>();
         public ObservableCollection<DateTimePoint> _observableStore = new ObservableCollection<DateTimePoint>();
         public ObservableCollection<ISeries> Series { get; set; } = new();
+
         //Uncomment to allow for windowing of plot
         //public ObservableCollection<DateTimePoint> _observableValuesZero = new ObservableCollection<DateTimePoint>();
         //public ObservableCollection<DateTimePoint> _observableValuesMax = new ObservableCollection<DateTimePoint>();
-        public IEnumerable<ICartesianAxis> XAxes { get; set; } 
+        public IEnumerable<ICartesianAxis> XAxes { get; set; }
+
         public IEnumerable<ICartesianAxis> YAxes { get; set; }
-       // public RectangularSection[]? Sections { get; set; }
+
+        // public RectangularSection[]? Sections { get; set; }
         public ProcessDataChartViewModel(WinchModel winchModel)
         {
-
-            
             Series = new ObservableCollection<ISeries>
             {
                 new LineSeries<DateTimePoint>
@@ -24,7 +25,7 @@
                     GeometrySize = 0,
                     LineSmoothness = 0,
                     Stroke = new SolidColorPaint(SKColors.CornflowerBlue, 1)
-                }//,                
+                }//,
                 //Uncomment to add invisible series for windowing plot
                 //new LineSeries<DateTimePoint>
                 //{
@@ -42,23 +43,16 @@
                 //    LineSmoothness = 0,
                 //    Stroke = new SolidColorPaint(SKColors.Red, 1),
                 //}
-
             };
 
             XAxes = new List<Axis>
             {
-
                 new Axis
                 {
-
                     Labeler = value => new DateTime((long) value).ToString("HH:mm:ss"),
                     LabelsRotation = -30,
                     TextSize = 14,
-
-
                 }
-
-
             };
             YAxes = new List<Axis>
             {
@@ -85,9 +79,9 @@
             //_observableValuesZero = _observableValsZero;
             //Sections = sections;
         }
+
         public ProcessDataChartViewModel()
         {
-
             //Sections = new RectangularSection[]
             //{
             //     new RectangularSection
@@ -116,7 +110,7 @@
                     GeometrySize = 0,
                     LineSmoothness = 0,
                     Stroke = new SolidColorPaint(SKColors.CornflowerBlue, 1)
-                },                
+                },
                 //Uncomment to add invisible series for windowing plot
                 //new LineSeries<DateTimePoint>
                 //{
@@ -139,22 +133,16 @@
                 //    LineSmoothness = 0,
                 //    Stroke = new SolidColorPaint(SKColors.Red, 1),
                 //}
-
             };
 
             XAxes = new List<Axis>
             {
-
                 new Axis
                 {
-
                     Labeler = value => new DateTime((long) value).ToString("yy/MM/dd HH:mm:ss"),
                     LabelsRotation = -30,
                     TextSize = 14,
-
                 }
-
-
             };
             YAxes = new List<Axis>
             {
@@ -168,14 +156,15 @@
                 }
             };
         }
+
         public void PlotData()
         {
             lock (ProcessDataViewModel.ParseData.Sync)
             {
                 _observableValues = _observableStore;
-                
             }
         }
+
         public void AddData(DataPointModel latest)
         {
             bool dateTimeSet = false;
@@ -192,24 +181,21 @@
                 return;
             }
             else if (DateTime.TryParseExact($"{latest.Date} {latest.Time}", "yyyy/MM/dd HH:mm:ss.fff", provider, styles, out dateTime))
-            { 
+            {
                 dateTimeSet = true;
             }
             if (dateTimeSet)
             {
-
-                if (double.TryParse(latest.Payout.ToString(), out double Tension)) 
+                if (double.TryParse(latest.Payout.ToString(), out double Tension))
                 {
                     DateTimePoint point = new DateTimePoint { DateTime = dateTime, Value = Tension };
                     //_observableStore.Add(point);
                     lock (ProcessDataViewModel.ParseData.Sync)
                     {
                         _observableValues.Add(point);
-
                     }
-
                 };
-                
+
                 //uncomment for windowing of plot
                 //_observableValuesZero.Add(new DateTimePoint { DateTime = dateTime, Value = 0 });
                 //if (Double.TryParse(live.MaxTension, out double result))
@@ -244,6 +230,5 @@
                 //}
             }
         }
-
     }
 }

@@ -7,7 +7,6 @@ namespace ViewModels
         //Single command to both read and then sort the data step 1
         public static async void ReadDataFiles()//ParseDataStore parseData)
         {
-            
             ParseDataStore parseData = ProcessDataViewModel.ParseData;
             CancellationToken token = ProcessDataViewModel.ParseData.CancellationTokenSource.Token;
             ProcessDataViewModel.ParseData.ReadingLine = "Reading!"; //Update UI with reading
@@ -16,7 +15,7 @@ namespace ViewModels
             //Makes reading the file Asynchronous leaving the UI responsive
             try
             {
-                await Task.Run( () =>  ReadDataFromLogs(parseData), ProcessDataViewModel.ParseData.CancellationTokenSource.Token);
+                await Task.Run(() => ReadDataFromLogs(parseData), ProcessDataViewModel.ParseData.CancellationTokenSource.Token);
             }
             catch (Exception ae)
             {
@@ -40,6 +39,7 @@ namespace ViewModels
 
             parseData.ProcessWinchDataButton = "Start Processing";
         }
+
         //step 2
         public static void ReadDataFromLogs(ParseDataStore parseData)
         {
@@ -58,7 +58,6 @@ namespace ViewModels
                 List<DataPointModel> DataModels = new();
                 //Dispatcher.UIThread.Post(() => parseData.ReadingFileName = fileRead);
 
-
                 DataModels.Clear();
                 while ((line = file.ReadLine()) != null)
                 {
@@ -68,7 +67,6 @@ namespace ViewModels
                     string[] data = line.Split(',');
                     if (data.Length > 2)
                     {
-
                         if (parseData.SelectedWinch == "SIO Traction Winch")
                         {
                             //SIO Traction Winch Data Format: String ID, Tension, Speed, Payout, Checksum /r/n Date, Time /r/n
@@ -119,7 +117,6 @@ namespace ViewModels
                                     flag = false;
                                     dataLine = true;
                                 }
-
                             }
                             else
                             {
@@ -169,13 +166,11 @@ namespace ViewModels
                                     lineData.TMWarnings = "00000000";
                                     dataLine = true;
                                 }
-
                             }
-
                         }
                         else if (parseData.SelectedWinch == "WinchDAC") //Previously Armstrong Cast 6
                         {
-                            //Winch DAC Log format: Preamble (Winch Date Time MTN ID RD,Date and Time,Tension,Speed,Payout,Checksum 
+                            //Winch DAC Log format: Preamble (Winch Date Time MTN ID RD,Date and Time,Tension,Speed,Payout,Checksum
 
                             bool LengthBool = false;
                             bool TensionBool = false;
@@ -204,7 +199,6 @@ namespace ViewModels
                                 lineData.TMWarnings = "00000000";
                                 dataLine = true;
                             }
-
                         }
                         else if (parseData.SelectedWinch == "ECWP MTNW")
                         {
@@ -239,7 +233,7 @@ namespace ViewModels
                                 dataLine = true;
                             }
                         }
-                       
+
                         //Fix this section
                         else if (parseData.SelectedWinch == "UNOLS String")
                         {
@@ -263,8 +257,6 @@ namespace ViewModels
                                 }
                                 if (LengthBool != false && TensionBool != false && SpeedBool != false && PayoutBool != false)//float.TryParse(data[2], out float Tension) != false)
                                 {
-
-
                                     //Current UNOLS String
                                     lineData.StringID = data[0];
                                     lineData.Tension = Tension;
@@ -289,7 +281,6 @@ namespace ViewModels
                                     */
                                     dataLine = true;
                                 }
-
                             }
                         }
                         else if (parseData.SelectedWinch == "Jay Jay")
@@ -353,10 +344,8 @@ namespace ViewModels
                                     {
                                         dataLine = true;
                                     }
-
                                 }
                             }
-
                         }
                         if (parseData.UseDateRange == true)
                         {
@@ -375,22 +364,20 @@ namespace ViewModels
                             lineData = new DataPointModel();
                             dataLine = false;
                         }
-
                     }
-
                 }
                 //Write data
                 ParseDataFromLogs(DataModels);
                 file.Close(); //Close the file
 
                 //Cancel task if cancellation requested
-                if (ProcessDataViewModel.ParseData.CancellationTokenSource.Token.IsCancellationRequested )
+                if (ProcessDataViewModel.ParseData.CancellationTokenSource.Token.IsCancellationRequested)
                 {
                     ProcessDataViewModel.ParseData.CancellationTokenSource.Token.ThrowIfCancellationRequested();
                 }
             }
-            
         }
+
         //Step 3
         public static void ParseDataFromLogs(List<DataPointModel> dataPointModels)
         {
@@ -410,14 +397,14 @@ namespace ViewModels
             bool castActive = parseData.CastActive;
             //float temp;
             string input = string.Empty;
-            
-            ProcessPointDataModel processPointDataModel = new();
+
+            //ProcessPointDataModel processPointDataModel = new();
             ProcessCastDataModel processCastDataModel = new();
-            
+
             foreach (DataPointModel lineData in dataPointModels)
             {
                 processCastDataModel.CastNumber = cast;
-                
+
                 //detect start of cast (values above threshold with positive slope)
                 if (lineData.Tension > minTension && lineData.Payout > minPayout)
                 {
@@ -436,7 +423,6 @@ namespace ViewModels
                         //maxPayoutString = input;
                         MaxPayoutDataPoint = lineData.DeepCopy();
                     }
-
                 }
                 //detect end of cast (values below threshold with negative slope)
                 //Write data point
@@ -472,15 +458,12 @@ namespace ViewModels
                     parseData.MaxPayoutDataPoint = MaxPayoutDataPoint;
                     parseData.MaxTensionDataPoint = MaxTensionDataPoint;
                     //i = 0;
-
                 }
 
                 if (castActive)
                 {
                     parseData.DataToPlot.Add(lineData);
                 }
-                
-
             }
             //Live Charts 2 final may make this possible
             //foreach (var val in parseData.DataToPlot)
@@ -496,8 +479,8 @@ namespace ViewModels
             parseData.MaxPayoutDataPoint = MaxPayoutDataPoint;
             parseData.MaxTensionDataPoint = MaxTensionDataPoint;
             //parseData.DataToPlot.Clear();
-
         }
+
         private static void AddData(DataPointModel lineData, int cast, float maxTenCurrent, float maxTenPayCurrent, float maxPayCurrent)
         {
             WinchModel winch = MainViewModel._configDataStore.CurrentWinch;
@@ -508,17 +491,17 @@ namespace ViewModels
                 //Compare dates
                 if (lineData.DateAndTime > model.value.EventDate)
                 {
-                    ProcessDataViewModel.ParseData.WireLog.Insert(model.i+1, new WireLogModel(lineData.DateAndTime, "Cast", winch.InstalledLength, cast, maxTenCurrent, maxTenPayCurrent, maxPayCurrent, string.Empty, MainViewModel._configDataStore.CruiseNameBox));
+                    ProcessDataViewModel.ParseData.WireLog.Insert(model.i + 1, new WireLogModel(lineData.DateAndTime, "Cast", winch.InstalledLength, cast, maxTenCurrent, maxTenPayCurrent, maxPayCurrent, string.Empty, MainViewModel._configDataStore.CruiseNameBox));
                     break;
                 }
             }
             if (ProcessDataViewModel.ParseData.WireLog.Count == 0)
             {
-                ProcessDataViewModel.ParseData.WireLog.Add( new WireLogModel(lineData.DateAndTime, "Cast", winch.InstalledLength, cast, maxTenCurrent, maxTenPayCurrent, maxPayCurrent, string.Empty, MainViewModel._configDataStore.CruiseNameBox));
-
+                ProcessDataViewModel.ParseData.WireLog.Add(new WireLogModel(lineData.DateAndTime, "Cast", winch.InstalledLength, cast, maxTenCurrent, maxTenPayCurrent, maxPayCurrent, string.Empty, MainViewModel._configDataStore.CruiseNameBox));
             }
             //ProcessDataViewModel.ParseData.WireLog.Add(new WireLogModel(lineData.DateAndTime, "Cast Data", winch.InstalledLength, cast, maxTenCurrent, maxTenPayCurrent,maxPayCurrent,string.Empty, MainViewModel._configDataStore.CruiseNameBox));
         }
+
         public static object ReadProcessConfig()
         {
             //Logic to read config file for initial setup based on previous saved data
@@ -528,7 +511,7 @@ namespace ViewModels
             {
                 "MASH Winch",
                 "SIO Traction Winch",
-                "WinchDAC", // Previously "Armstrong CAST 6", 
+                "WinchDAC", // Previously "Armstrong CAST 6",
                 "UNOLS String",
                 "Jay Jay"
             };

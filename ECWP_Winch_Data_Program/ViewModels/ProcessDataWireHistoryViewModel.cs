@@ -6,11 +6,10 @@
         //Insert data by date
         //public static void InsertData(ConfigDataStore _config)
         //{
-
         //}
         //Insert Event
-        public static void InsertEvent(ConfigDataStore _config) 
-        { 
+        public static void InsertEvent(ConfigDataStore _config)
+        {
             WireLogModel _event = new WireLogModel();
             _event.EventDate = _config.WireLogEventDate;//.ToString("yyyy/MM/dd");
             _event.EventType = _config.WireLogEventSelection;
@@ -18,7 +17,7 @@
             _event.CutBackAmount = _config.WireLogEventCutBack;
             _event.Notes = _config.WireLogEventNotes;
 
-            foreach(var model in ProcessDataViewModel.ParseData.WireLog.Select((value, i) => new { i, value }))
+            foreach (var model in ProcessDataViewModel.ParseData.WireLog.Select((value, i) => new { i, value }))
             {
                 //Compare dates
                 if (_event.EventDate < model.value.EventDate)
@@ -28,14 +27,14 @@
                 }
             }
         }
-        
+
         //Send history data to excel viewmodel
         public static void WriteData()
         {
             ConfigDataStore _config = MainViewModel._configDataStore;
             ExcelViewModel.SetWireLogFileName(_config.CurrentWinch);
             ExcelViewModel.ClearData();
-            foreach(WireLogModel _dataPoint in ProcessDataViewModel.ParseData.WireLog)
+            foreach (WireLogModel _dataPoint in ProcessDataViewModel.ParseData.WireLog)
             {
                 if (_dataPoint.EventType != "Cast")
                 {

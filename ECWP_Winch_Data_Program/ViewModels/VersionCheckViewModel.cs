@@ -4,13 +4,17 @@
     {
         [ObservableProperty]
         private string runningVersion = string.Empty;
+
         [ObservableProperty]
         private string gitVersion = string.Empty;
+
         [ObservableProperty]
         private bool isAsyncUpdate;
-        string url = "https://github.com/jaeaton/ECWP-Winch-Data/releases";
+
+        private string url = "https://github.com/jaeaton/ECWP-Winch-Data/releases";
+
         [ObservableProperty]
-        Uri? uri = new Uri("https://github.com/jaeaton/ECWP-Winch-Data/releases");
+        private Uri? uri = new Uri("https://github.com/jaeaton/ECWP-Winch-Data/releases");
 
         [RelayCommand]
         public async Task CheckForUpdate()

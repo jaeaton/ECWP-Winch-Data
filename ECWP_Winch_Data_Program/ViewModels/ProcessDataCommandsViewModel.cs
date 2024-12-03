@@ -2,8 +2,6 @@
 {
     public partial class ProcessDataCommandsViewModel : ViewModelBase
     {
-        
-       
         public ParseDataStore _parseData = ProcessDataViewModel.ParseData;
         //_parseData.ProcessWinchDataButton = "Stop Processing";
 
@@ -11,14 +9,12 @@
         //private string processButtonText = ProcessDataViewModel.ParseData.ProcessWinchDataButton;
 
         [RelayCommand]
-        public void SingleProcessFiles() 
+        public void SingleProcessFiles()
         {
-            
             switch (_parseData.ProcessWinchDataButton)
             {
                 case "Stop Processing":
                     {
-                        
                         _parseData.CancellationTokenSource.Cancel();
                         //_parseData.CancellationTokenSource.Dispose();
                         _parseData.ProcessWinchDataButton = "Start Processing";
@@ -46,10 +42,7 @@
                         ProcessDataReadFilesViewModel.ReadDataFiles();//ProcessDataViewModel.ParseData);
                         break;
                     }
-
             }
-            
-        
         }
 
         public void FindFiles()
@@ -68,21 +61,27 @@
                 case "SIO Traction Winch":
                     extension = "*.Raw";
                     break;
+
                 case "MASH Winch":
                     extension = "*.CSV";
                     break;
+
                 case "WinchDAC": //Previously Armstrong Cast 6
                     extension = "*.MTN_WINCH";
                     break;
+
                 case "UNOLS String":
                     extension = "*wire.Log";
                     break;
+
                 case "Jay Jay":
                     extension = "*.CSV";
                     break;
+
                 case "Atlantis 3PS":
                     extension = "*.3PS_Winch";
                     break;
+
                 case "ECWP MTNW":
                     extension = "*short.log";
                     break;
@@ -104,6 +103,7 @@
                 //ParseData.FileList;//Sort();
             }
         }
+
         [RelayCommand]
         public static void ReadLog()
         {
