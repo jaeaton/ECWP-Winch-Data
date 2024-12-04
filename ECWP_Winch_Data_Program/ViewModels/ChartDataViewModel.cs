@@ -79,7 +79,7 @@
             {
                 new Axis
                 {
-                    IsVisible = true,
+                    
                     SeparatorsPaint = new SolidColorPaint(SKColors.LightSlateGray),
                     //Comment out for Auto Scaling of lowest value shown
                     MinLimit = 0,
@@ -87,6 +87,7 @@
                     //MaxLimit = 6000
                 }
             };
+
         }
 
         //public  int  i = 0;
@@ -95,11 +96,30 @@
         {
             _observableValues = _observableVals;
             Series = series;
-            XAxes = xAxes;
-            YAxes = yAxes;
+            //XAxes = xAxes;
+            //YAxes = yAxes;
             _observableValuesMax = _observableValsMax;
             _observableValuesZero = _observableValsZero;
             Sections = sections;
+            //DateTimePoint max = _observableValsMax.Last();
+            XAxes = new List<Axis>
+            {
+                new Axis
+                {
+                    Labeler = value => new DateTime((long) value).ToString("HH:mm:ss"),
+                    LabelsRotation = -30,
+                    TextSize = 14,
+                }
+            };
+            YAxes = new List<Axis>
+            {
+                new Axis
+                {
+                    //MinLimit = 0,
+                    //MaxLimit= max.Value*1.1
+                }
+            };
+
         }
 
         public ChartDataViewModel()
@@ -170,6 +190,7 @@
             {
                 new Axis
                 {
+                    
                     SeparatorsPaint = new SolidColorPaint(SKColors.LightSlateGray),
                     //Comment out for Auto Scaling of lowest value shown
                     MinLimit = 0,
