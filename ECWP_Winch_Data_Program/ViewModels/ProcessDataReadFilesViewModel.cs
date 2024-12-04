@@ -4,7 +4,8 @@ namespace ViewModels
 {
     internal class ProcessDataReadFilesViewModel
     {
-        //Single command to both read and then sort the data step 1
+        //Single command to both read and then sort the data
+        //step 1
         public static async void ReadDataFiles()//ParseDataStore parseData)
         {
             ParseDataStore parseData = ProcessDataViewModel.ParseData;

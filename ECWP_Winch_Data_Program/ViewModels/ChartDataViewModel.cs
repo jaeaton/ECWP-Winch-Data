@@ -16,7 +16,7 @@
         public ChartDataViewModel(WinchModel winchModel)
         {
             //Color bars for warnings and alarms
-            if (winchModel.TensionWarningLevel != null && winchModel.TensionAlarmLevel != null && winchModel.AssignedBreakingLoad != null)
+            if (winchModel.TensionWarningLevel != string.Empty && winchModel.TensionAlarmLevel != string.Empty && winchModel.AssignedBreakingLoad != string.Empty)
             {
                 if (Sections == null)
                 {
@@ -79,6 +79,7 @@
             {
                 new Axis
                 {
+                    IsVisible = true,
                     SeparatorsPaint = new SolidColorPaint(SKColors.LightSlateGray),
                     //Comment out for Auto Scaling of lowest value shown
                     MinLimit = 0,
@@ -182,7 +183,7 @@
         {
             System.Globalization.CultureInfo provider = System.Globalization.CultureInfo.InvariantCulture;
             DateTimeStyles styles = DateTimeStyles.AssumeLocal;
-            if (latest.Date == null || latest.Time == null)
+            if (latest.Date == string.Empty || latest.Time == string.Empty)
             {
                 return;
             }

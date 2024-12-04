@@ -251,7 +251,7 @@ namespace ViewModels
                                             try
                                             {
                                                 //Asynchronious read of data to allow for other operations to occur
-                                                dataIn = await Task.Run(() => ReadUDPData(client, winch));
+                                                dataIn = await Task.Run(() => ReadUDPData(client, winch), winch.Canceller.Token);
                                                 //Show raw input data if selected
                                                 if (winch.ShowRawInput == true)
                                                 {

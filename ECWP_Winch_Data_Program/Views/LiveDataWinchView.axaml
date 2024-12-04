@@ -14,7 +14,7 @@
 			<RowDefinition Height="60"/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
-		<v:LiveDataPlotControlsView/>
+		<v:LiveDataPlotControlsView Grid.Row="0"/>
 		<v:LiveDataPlotView Grid.Row="1"/>
 		<GridSplitter Grid.Row="2" Background="Crimson" />
 
