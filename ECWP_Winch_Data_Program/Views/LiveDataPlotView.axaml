@@ -13,7 +13,8 @@
 							  Sections	="{ Binding ChartData.Sections }"
 							  XAxes="{Binding ChartData.XAxes}"
 							  YAxes="{Binding ChartData.YAxes}"
-							  EasingFunction="{x:Null}"/>
+							  EasingFunction="{x:Null}"
+						      ZoomMode="ZoomY"/>
 		<!--YAxes="{Binding ChartData.YAxes}"-->
 	</Panel>
 	
