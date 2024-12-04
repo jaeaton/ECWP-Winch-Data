@@ -26,6 +26,10 @@
 
 		<Button Content="{ Binding StartStopButtonText, FallbackValue='Start Log' }" Command="{ Binding Source={ StaticResource ResourceKey=commands }, Path=StartStopCommand }" CommandParameter="{ Binding WinchName }" Margin="5" MinWidth="100" HorizontalContentAlignment="Center" ToolTip.Tip="Starts and stops the receipt of live data. This also logs the incoming data if selected in the winch setup."/>
 		<Button Content="Log Max" Command="{ Binding Source={ StaticResource ResourceKey=commands }, Path=ButtonLogMaxCommand }" CommandParameter="{ Binding WinchName }" Margin="5" MinWidth="100" HorizontalContentAlignment="Center" ToolTip.Tip="This logs the max data as a cast in the UNOLS Wire Log. It also resets the maximum cast values and increments the cast number."/>
+		<!--
+		<Button Content="Reset Plot" Command="{ Binding Source={ StaticResource ResourceKey=commands }, Path=ResetPlotViewCommand }" CommandParameter="{ Binding WinchName }" Margin="5"/>
+		-->
+		
 		<CheckBox Content="Show Raw Input" IsChecked="{Binding ShowRawInput, Mode=TwoWay}" />
 	</WrapPanel>
 

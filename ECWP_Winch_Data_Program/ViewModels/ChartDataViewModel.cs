@@ -115,7 +115,8 @@
             {
                 new Axis
                 {
-                    Name = "Tension"
+                    Name = "Tension",
+                    Labeler = value => value.ToString(),
                     //MinLimit = 0,
                     //MaxLimit= max.Value*1.1
                 }

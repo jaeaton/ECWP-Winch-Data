@@ -89,5 +89,12 @@
                     }
             }
         }
+        //For future plot reset
+        //[RelayCommand]
+        //private void ResetPlotView(string winchname)
+        //{
+        //    WinchModel winch = GetWinch(winchname);
+            
+        //}
     }
 }
