@@ -79,7 +79,7 @@
             {
                 new Axis
                 {
-                    
+                    Name = "Tension",
                     SeparatorsPaint = new SolidColorPaint(SKColors.LightSlateGray),
                     //Comment out for Auto Scaling of lowest value shown
                     MinLimit = 0,
@@ -115,6 +115,7 @@
             {
                 new Axis
                 {
+                    Name = "Tension"
                     //MinLimit = 0,
                     //MaxLimit= max.Value*1.1
                 }
@@ -190,7 +191,7 @@
             {
                 new Axis
                 {
-                    
+                    Name = "Tension",
                     SeparatorsPaint = new SolidColorPaint(SKColors.LightSlateGray),
                     //Comment out for Auto Scaling of lowest value shown
                     MinLimit = 0,
