@@ -679,17 +679,18 @@ namespace ViewModels
             }
         }
 
-        private void WriteRawLog(string data, WinchModel winch)
-        {
-            //Write Data to files
-            string fileName = $"raw_{winch.WinchName}.log";
-            string destPath = System.IO.Path.Combine(winch.RawLogDirectory, fileName);
-            string line = $"{data}";
-            using (StreamWriter stream = new StreamWriter(destPath, append: true))
-            {
-                stream.WriteLine(line);
-            }
-        }
+        //Currently not used. Could be desirable to write a file as it comes from the instrument
+        //private void WriteRawLog(string data, WinchModel winch)
+        //{
+        //    //Write Data to files
+        //    string fileName = $"raw_{winch.WinchName}.log";
+        //    string destPath = System.IO.Path.Combine(winch.RawLogDirectory, fileName);
+        //    string line = $"{data}";
+        //    using (StreamWriter stream = new StreamWriter(destPath, append: true))
+        //    {
+        //        stream.WriteLine(line);
+        //    }
+        //}
 
         private void Send20HzData(DataPointModel data, WinchModel winch, UdpClient client)
         {
