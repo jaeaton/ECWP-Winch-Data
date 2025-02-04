@@ -24,10 +24,10 @@
 			<ComboBox SelectedItem="{ Binding CurrentWinch.MinimumTension, Mode=TwoWay }"  Width="90" ItemsSource="{ Binding AvailableTensions }" SelectedIndex="0" ToolTip.Tip="Minimum tension to consider as part of a cast."/>
 			<TextBlock Text="{ Binding CurrentWinch.TensionConversionUnit }" Margin="2" VerticalAlignment="Center"/>
 		</StackPanel>
-		<CheckBox Content="To-Yo's?" Margin="2"/>
-		<StackPanel Orientation="Horizontal" Margin="2" >
-			<TextBlock Text="To-Yo Time" Width="120" VerticalAlignment="Center"/>
-			<ComboBox/>
+		<CheckBox Content="Tow-Yo's?" Margin="2" x:Name="TowYoCheckBox" IsChecked="{Binding CurrentWinch.TowYoTimeEnable}"/>
+		<StackPanel Orientation="Horizontal" Margin="2" IsVisible="{Binding ElementName=TowYoCheckBox, Path=IsChecked}">
+			<TextBlock Text="Tow-Yo Time" Width="120" VerticalAlignment="Center"/>
+			<ComboBox SelectedItem="{Binding CurrentWinch.TowYoTimeSelected}" ItemsSource="{Binding TowYoTimeList}"/>
 			<TextBlock Text="min" VerticalAlignment="Center" Margin="2"/>
 		</StackPanel>
 	</StackPanel>

@@ -243,6 +243,19 @@
         [ObservableProperty]
         private string wireLogEventSelection = string.Empty;
 
+        [ObservableProperty]
+        private List<string> towYoTimeList = new List<string> 
+                                                            { 
+                                                                "5",
+                                                                "10",
+                                                                "15",
+                                                                "20"
+                                                            };
+        [ObservableProperty]
+        private string towYoTimeSelected = string.Empty;
+
+        [ObservableProperty]
+        private bool towYoChecked = false;
         public void LoadWinch(string winch)
         {
             if (winch == "Add New")

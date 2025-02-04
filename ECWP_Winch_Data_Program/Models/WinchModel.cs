@@ -228,6 +228,12 @@ namespace Models
         [ObservableProperty]
         private string wirePoolWireLogName = string.Empty;
 
+        [ObservableProperty]
+        private string towYoTime = string.Empty;
+
+        [ObservableProperty]
+        private bool towYoTimeEnable = false;
+
         public WinchModel()
         { }
 
