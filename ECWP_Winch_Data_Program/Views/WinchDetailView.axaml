@@ -50,7 +50,7 @@
 		</TabItem>
 		<TabItem Header="Processing Options" VerticalContentAlignment="Center">
 			<StackPanel>
-				<v:WinchDetailWireLogView/>
+				<v:WinchDetailProcessingView/>
 				<v:WinchDetailAddRemoveView/>
 			</StackPanel>
 			
