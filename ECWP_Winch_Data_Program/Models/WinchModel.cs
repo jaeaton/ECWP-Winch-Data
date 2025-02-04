@@ -229,7 +229,7 @@ namespace Models
         private string wirePoolWireLogName = string.Empty;
 
         [ObservableProperty]
-        private string towYoTime = string.Empty;
+        private string towYoTimeSelected = string.Empty;
 
         [ObservableProperty]
         private bool towYoTimeEnable = false;

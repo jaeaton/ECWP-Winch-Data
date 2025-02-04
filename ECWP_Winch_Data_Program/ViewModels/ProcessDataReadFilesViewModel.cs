@@ -384,6 +384,7 @@ namespace ViewModels
         {
             // Read stored values
             ParseDataStore parseData = ProcessDataViewModel.ParseData;
+            WinchModel winchModel = MainViewModel._configDataStore.CurrentWinch;
             float minPayout = float.Parse(parseData.MinPayout);
             float minTension = float.Parse(parseData.MinTension);
             float maxTensionCurrent = parseData.MaxTensionCurrent;
@@ -392,10 +393,14 @@ namespace ViewModels
             string maxTensionString = parseData.MaxTensionString;
             string maxPayoutString = parseData.MaxPayoutString;
             int cast = parseData.Cast;
+            DateTime currentLineTime = DateTime.Now;
+            DateTime lastLineTime = DateTime.Now;
+            TimeSpan timeBetweenPoints = TimeSpan.Zero;
             DataPointModel MaxTensionDataPoint = parseData.MaxTensionDataPoint;
             DataPointModel MaxPayoutDataPoint = parseData.MaxPayoutDataPoint;
             //int i = 0;
             bool castActive = parseData.CastActive;
+            bool deltaTime = false;
             //float temp;
             string input = string.Empty;
 
@@ -425,9 +430,22 @@ namespace ViewModels
                         MaxPayoutDataPoint = lineData.DeepCopy();
                     }
                 }
+                //Detect time elapsed from last line value
+                if (winchModel.TowYoTimeEnable)
+                {
+                    lastLineTime = currentLineTime;
+                    currentLineTime = lineData.DateAndTime;
+                    timeBetweenPoints = currentLineTime - lastLineTime;
+                    if (timeBetweenPoints > TimeSpan.Parse($"0:{winchModel.TowYoTimeSelected}:00"))
+                    {
+                        deltaTime = true;
+                    }
+                }
+                else { deltaTime = true; }
+                
                 //detect end of cast (values below threshold with negative slope)
                 //Write data point
-                if (/*lineData.Tension < minTension &&*/ lineData.Payout < minPayout && castActive == true)
+                if (/*lineData.Tension < minTension &&*/ lineData.Payout < minPayout && castActive == true && deltaTime == true)
                 {
                     float mTenSend = maxTensionCurrent;
                     float mTenPaySend = maxTensionPayoutCurrent;
@@ -448,6 +466,7 @@ namespace ViewModels
                     //parseData.DataToPlot.Add(lineData);
                     cast++;
                     castActive = false;
+                    deltaTime = false;
                     maxPayoutCurrent = 0;
                     maxTensionCurrent = 0;
                     maxTensionPayoutCurrent = 0;

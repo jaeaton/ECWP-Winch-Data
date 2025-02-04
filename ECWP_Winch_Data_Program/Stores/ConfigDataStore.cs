@@ -246,10 +246,13 @@
         [ObservableProperty]
         private List<string> towYoTimeList = new List<string> 
                                                             { 
+                                                                "1",
+                                                                "2",
+                                                                "3",
+                                                                "4",
                                                                 "5",
                                                                 "10",
-                                                                "15",
-                                                                "20"
+                                                                "15"
                                                             };
         [ObservableProperty]
         private string towYoTimeSelected = string.Empty;
