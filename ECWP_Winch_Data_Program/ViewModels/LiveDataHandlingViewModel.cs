@@ -171,7 +171,7 @@ namespace ViewModels
                                     {
                                         if (!client.Connected)
                                         {
-                                            if (!client.ConnectAsync(IPAddress.Parse(winch.InputCommunication.TcpIpAddress), int.Parse(winch.InputCommunication.PortNumber)).Wait(5000))
+                                            if (!client.ConnectAsync(IPAddress.Parse(winch.InputCommunication.TcpIpAddress), int.Parse(winch.InputCommunication.PortNumber)).Wait(10000))
                                             {
                                                 // connection failure
                                                 await MessageBoxViewModel.DisplayMessage("Failed to connect to TCP Server");
