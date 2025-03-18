@@ -355,7 +355,7 @@ namespace ViewModels
                                     $"Log directory is not set. \nSet in the winch configuration");
         }
 
-        public static async void ReadLog(WinchModel winch)
+        public static void ReadLog(WinchModel winch)
         {
             winch = (WinchModel)SetWireLogFileName(winch);
             if (winch.WinchDirectory == string.Empty || winch.WirePoolWireLogName == string.Empty)
@@ -387,8 +387,8 @@ namespace ViewModels
                 WireLogModel wireLog = new WireLogModel();
                 string sVal = string.Empty;
                 float fVal = 0;
-                DateTime dtVal = new();
-                int iVal = 0;
+                //DateTime dtVal = new(); //Not used
+                //int iVal = 0; //Moved to inline
                 //Write data to data array ParseDataStore.WireLog
                 //Event Type
                 if (ws.Cell($"A{i}").TryGetValue<string>(out sVal))
@@ -407,7 +407,7 @@ namespace ViewModels
                     wireLog.EventDate = DateTime.Parse(sVal);
                 }
                 //Cast number
-                if (ws.Cell($"D{i}").TryGetValue<int>(out iVal))
+                if (ws.Cell($"D{i}").TryGetValue<int>(out int iVal))
                 {
                     wireLog.CastNumber = iVal.ToString();
                 }

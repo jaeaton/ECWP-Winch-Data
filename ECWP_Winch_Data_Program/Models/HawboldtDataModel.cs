@@ -1,4 +1,4 @@
-﻿namespace ECWP_Winch_Data.Models
+﻿namespace Models
 {
     internal class HawboldtDataModel
     {

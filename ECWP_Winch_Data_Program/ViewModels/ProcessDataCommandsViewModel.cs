@@ -107,7 +107,7 @@
         [RelayCommand]
         public static void ReadLog()
         {
-            ExcelViewModel.ReadLog(MainViewModel._configDataStore.CurrentWinch);
+            Task.Run(() => ExcelViewModel.ReadLog(MainViewModel._configDataStore.CurrentWinch));
         }
     }
 }

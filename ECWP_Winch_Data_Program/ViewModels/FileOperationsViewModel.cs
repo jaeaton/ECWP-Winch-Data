@@ -13,7 +13,7 @@
             winch.MtnwWireLogName = $"{dateAndHour}_{_confDataStore.CruiseNameBox}_cast_{winch.CastNumber}_{winch.WinchName}_short.log";
             winch.UnolsWireLogName = $"{dateAndHour}_{_confDataStore.CruiseNameBox}_cast_{winch.CastNumber}_{winch.WinchName}_UNOLS.log";
             winch.WinchLogName = $"{dateOnly}_{winch.WinchName}_Winch.log";
-            winch.MaxWireLogName = $"{dateTime.ToString("yyyyMM")}_{_confDataStore.CruiseNameBox}_{winch.WinchName}.log";
+            winch.MaxWireLogName = $"{dateTime:yyyyMM}_{_confDataStore.CruiseNameBox}_{winch.WinchName}.log";
             winch.WirePoolWireLogName = $"{dateTime.ToString("yyyy")}_{winch.WinchName}_Wire_Log";
             return winch;
         }
@@ -31,7 +31,7 @@
             {
                 File.Delete(destPath);
             }
-            List<string> lines = new();
+            List<string> lines = [];
             if (_configDataStore.ShipName != string.Empty)
             {
                 lines.Add($"Ship Name,{_configDataStore.ShipName}");
@@ -410,7 +410,7 @@
         public static void ReadConfig(ConfigDataStore _configDataStore)
         {
             //Logic to read config file for initial setup based on previous saved data
-            List<string> lines = new List<string>();
+            List<string> lines = [];
             //set the name of the config file
             string fileName = "ecwp_dataconf.txt";
             //set the path to application directory
@@ -430,9 +430,9 @@
                     }
                     foreach (var line in lines)
                     {
-                        if (line.Contains(","))
+                        if (line.Contains(','))
                         {
-                            int delim = line.IndexOf(",");
+                            int delim = line.IndexOf(',');
                             if (line.Substring(0, delim) == "Ship Name")
                             {
                                 _configDataStore.ShipName = line.Substring(delim + 1);
