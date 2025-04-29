@@ -701,11 +701,17 @@ namespace ViewModels
             {
                 line = $"$WIR,{data.Date},{data.Time},{data.Tension},{data.Speed},{data.Payout},{data.TMWarnings},{data.TMAlarms},{data.CheckSum}";
             }
-            //Not UNOLS Format (MTNW 1)
+            //MTNW 1 Format
             else
             {
                 line = $"RD,{data.Date}T{data.Time},{data.Tension},{data.Speed},{data.Payout},";
             }
+            //MTNW Legacy
+            //else
+            //{
+            //    line = $"RD,{data.Tension},{data.Speed},{data.Payout},";
+            //}
+
             //Add checksum
             int checkSum = 0;
             byte[] asciiBytes = Encoding.ASCII.GetBytes(line);
