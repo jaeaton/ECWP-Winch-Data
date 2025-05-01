@@ -66,12 +66,16 @@ namespace ViewModels
             _configDataStore.TabItems.Clear();
             new TabItemModel("Add New", "Add New");
             //Loops through all winches and puts winch names in a list for selection process
-            foreach (var item in _configDataStore.AllWinches)
+            if (_configDataStore.AllWinches != null)
             {
-                TabItemModel tabItem = new TabItemModel(item.WinchName, item.WinchName);
-                _configDataStore.WinchNames.Add(item.WinchName);
-                _configDataStore.TabItems.Add(tabItem);
+                foreach (var item in _configDataStore.AllWinches)
+                {
+                    TabItemModel tabItem = new TabItemModel(item.WinchName, item.WinchName);
+                    _configDataStore.WinchNames.Add(item.WinchName);
+                    _configDataStore.TabItems.Add(tabItem);
+                }
             }
+            
             //Write the config file with updated list of winches
             FileOperationsViewModel.WriteConfig(_configDataStore);
         }
@@ -191,12 +195,16 @@ namespace ViewModels
             _configDataStore.CurrentWinch.TabItemsOutputComms.Clear();
             new TabItemModel("Add New", "Add New");
             //Loops through all winches and puts winch names in a list for selection process
-            foreach (var item in _configDataStore.CurrentWinch.AllOutputCommunication)
+            if (_configDataStore.CurrentWinch.AllOutputCommunication != null)
             {
-                TabItemModel tabItem = new TabItemModel(item.DestinationName, item.DestinationName);
-                //_configDataStore.WinchNames.Add(item.DestinationName);
-                _configDataStore.CurrentWinch.TabItemsOutputComms.Add(tabItem);
+                foreach (var item in _configDataStore.CurrentWinch.AllOutputCommunication)
+                {
+                    TabItemModel tabItem = new TabItemModel(item.DestinationName, item.DestinationName);
+                    //_configDataStore.WinchNames.Add(item.DestinationName);
+                    _configDataStore.CurrentWinch.TabItemsOutputComms.Add(tabItem);
+                }
             }
+            
         }
 
         public void InsertCommOut()
@@ -312,7 +320,7 @@ namespace ViewModels
                 if (file is null) return AppDomain.CurrentDomain.BaseDirectory;
                 else
                 {
-                    FileInfo fileInfo = new(file.TryGetLocalPath().ToString());
+                    FileInfo fileInfo = new(file.TryGetLocalPath()!.ToString());
                     if (fileInfo.DirectoryName == null) return AppDomain.CurrentDomain.BaseDirectory;
                     else
                     {
@@ -340,7 +348,7 @@ namespace ViewModels
                 if (file is null) return string.Empty;
                 else
                 {
-                    return file.TryGetLocalPath().ToString();
+                    return file.TryGetLocalPath()!.ToString();
                 }
             }
             catch (Exception e)

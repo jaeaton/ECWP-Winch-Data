@@ -43,7 +43,7 @@ namespace ViewModels
             //Get last row
             if (ws.LastRowUsed() != null)
             {
-                LastRow = ws.LastRowUsed().RowNumber();
+                LastRow = ws.LastRowUsed()!.RowNumber();
             }
             else
             {
@@ -107,15 +107,17 @@ namespace ViewModels
             var wb = new XLWorkbook($"{_config.CurrentWinch.WinchDirectory}\\{fileName}");
             //Selecting a worksheet
             var ws = wb.Worksheets.Worksheet("Log");
-
+            int LastRow = 22;
             //Get last row
-            int LastRow = ws.LastRowUsed().RowNumber();
-
-            while (LastRow > 22)
+            if (ws.LastRowUsed() != null)
             {
-                ws.Row(LastRow).Delete();
-                LastRow--;
+                LastRow = ws.LastRowUsed()!.RowNumber();
             }
+            while (LastRow > 22)
+                {
+                    ws.Row(LastRow).Delete();
+                    LastRow--;
+                }
         }
 
         //New data write method
@@ -139,9 +141,13 @@ namespace ViewModels
             var wb = new XLWorkbook($"{_config.CurrentWinch.WinchDirectory}\\{fileName}");
             //Selecting a worksheet
             var ws = wb.Worksheets.Worksheet("Log");
+            int LastRow = 22;
 
             //Get last row
-            int LastRow = ws.LastRowUsed().RowNumber();
+            if (ws.LastRowUsed() != null)
+            {
+                LastRow = ws.LastRowUsed()!.RowNumber();
+            }
             //Set Current Row
             int CurrentRow = LastRow + 1;
             //Event Type
@@ -198,9 +204,13 @@ namespace ViewModels
             var wb = new XLWorkbook($"{_config.CurrentWinch.WinchDirectory}\\{fileName}");
             //Selecting a worksheet
             var ws = wb.Worksheets.Worksheet("Log");
+            int LastRow = 22;
 
             //Get last row
-            int LastRow = ws.LastRowUsed().RowNumber();
+            if (ws.LastRowUsed() != null)
+            {
+                LastRow = ws.LastRowUsed()!.RowNumber();
+            }
             //Set Current Row
             int CurrentRow = LastRow + 1;
 
@@ -374,9 +384,13 @@ namespace ViewModels
             //Selecting a worksheet
             var ws = wb.Worksheets.Worksheet("Log");
 
-            //Get last row
-            int LastRow = ws.LastRowUsed().RowNumber();
+            int LastRow = 22;
 
+            //Get last row
+            if (ws.LastRowUsed() != null)
+            {
+                LastRow = ws.LastRowUsed()!.RowNumber();
+            }
             //WireLogModel wireLog = new WireLogModel();
             ParseDataStore dataStore = ProcessDataViewModel.ParseData;
             //Clear current data
