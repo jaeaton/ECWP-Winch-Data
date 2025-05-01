@@ -424,7 +424,7 @@
                 using (StreamReader stream = new StreamReader(destPath))
                 {
                     string text;
-                    while ((text = stream.ReadLine()) != null)
+                    while ((text = stream.ReadLine()!) != null)
                     {
                         lines.Add(text);
                     }

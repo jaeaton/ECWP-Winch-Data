@@ -60,7 +60,7 @@ namespace ViewModels
                 //Dispatcher.UIThread.Post(() => parseData.ReadingFileName = fileRead);
 
                 DataModels.Clear();
-                while ((line = file.ReadLine()) != null)
+                while ((line = file.ReadLine()!) != null)
                 {
                     line = line.Replace("\n", String.Empty); //remove EOL Characters
                     line = line.Replace("\r", String.Empty);
@@ -565,7 +565,7 @@ namespace ViewModels
                 using (StreamReader stream = new StreamReader(destPath))
                 {
                     string text;
-                    while ((text = stream.ReadLine()) != null)
+                    while ((text = stream.ReadLine()!) != null)
                     {
                         lines.Add(text);
                     }

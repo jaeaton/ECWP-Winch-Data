@@ -52,6 +52,7 @@
                         }
                         catch (ObjectDisposedException ex)
                         {
+                            await MessageBoxViewModel.DisplayMessage($"ObjectDisposeException: {ex}");
                         }
 
                         //Change button text
