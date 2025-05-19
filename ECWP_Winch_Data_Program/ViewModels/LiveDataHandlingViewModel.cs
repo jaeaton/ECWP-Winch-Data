@@ -446,7 +446,7 @@ namespace ViewModels
                 {
                     strID = strIn[0];
                 }
-               if (strIn[0].Contains("RD"))
+               else if (strIn[0].Contains("RD"))
                 {
                     strID = "RD";
                 }
