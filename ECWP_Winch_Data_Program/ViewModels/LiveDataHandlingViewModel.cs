@@ -446,6 +446,10 @@ namespace ViewModels
                 {
                     strID = strIn[0];
                 }
+               if (strIn[0].Contains("RD"))
+                {
+                    strID = "RD";
+                }
                 else
                 {
                     strID = strIn[0].Replace("0", string.Empty);
