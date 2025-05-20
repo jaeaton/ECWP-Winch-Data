@@ -26,7 +26,9 @@
 			<TextBlock Text="Raw Log Location:" Width="160"/>
 			<TextBlock Text="{Binding CurrentWinch.RawLogDirectory}"/>
 			<TextBlock Text="\"/>
-			<TextBlock Text="{Binding Path=ParseData.ReadingFileName}" DataContext="{StaticResource ResourceKey=winch}"/>
+			<!--
+			<TextBlock Text="{Binding ParseData.ReadingFileName}" DataContext="{StaticResource ResourceKey=winch}"/>
+		-->
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<TextBlock Text="Cruise Name:" Width="160" VerticalAlignment="Center"/>
