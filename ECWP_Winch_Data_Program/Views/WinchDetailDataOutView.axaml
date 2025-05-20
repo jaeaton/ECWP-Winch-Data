@@ -27,7 +27,7 @@
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5"  >
 					<TextBlock Text="IP Address" Width="90" VerticalAlignment="Center" />
-					<TextBox x:Name="TextBoxDestinationIPAdress" Watermark="192.168.1.121" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.TcpIpAddress,Mode=TwoWay}" Width="130" VerticalAlignment="Center"/>
+					<TextBox x:Name="TextBoxDestinationIPAdress" Watermark="192.168.1.121" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.TcpIpAddress,Mode=TwoWay}" Width="130" VerticalAlignment="Center" ToolTip.Tip="Destination IP Address."/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5"  >
 					<TextBlock Text="Port Number" Width="90" VerticalAlignment="Center" />

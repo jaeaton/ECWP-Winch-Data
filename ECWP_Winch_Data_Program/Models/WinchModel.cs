@@ -47,7 +47,7 @@ namespace Models
         private bool convertTension = false;
 
         [ObservableProperty]
-        private double factorOfSafety = default;
+        private double factorOfSafety = 5;
 
         [ObservableProperty]
         private string fileExtension = string.Empty;
