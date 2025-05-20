@@ -15,26 +15,26 @@
 			<StackPanel IsVisible="{Binding ElementName=RadioButtonInputCommNetwork, Path=IsChecked}">
 				<StackPanel Orientation="Horizontal" Margin="5">
 					<TextBlock Text="IP Address" Width="100" VerticalAlignment="Center" />
-					<TextBox Watermark="Ex: 192.168.103.217" Text="{ Binding CurrentWinch.InputCommunication.TcpIpAddress, Mode=TwoWay }" IsEnabled="{Binding Path=UserInputsEnable}" Width="130" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBox>
+					<TextBox Watermark="Ex: 192.168.103.217" Text="{ Binding CurrentWinch.InputCommunication.TcpIpAddress, Mode=TwoWay }" IsEnabled="{Binding Path=UserInputsEnable}" Width="130" VerticalAlignment="Center" HorizontalAlignment="Right" ToolTip.Tip="For UDP and TCP Server set to device address. For TCP Client set to host address."></TextBox>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5">
 					<TextBlock Text="Port Number" Width="100" VerticalAlignment="Center" />
-					<TextBox Watermark="Ex: 50505" x:Name="TextBoxSourcePort" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.InputCommunication.PortNumber, Mode=TwoWay }" Width="130" VerticalAlignment="Center"></TextBox>
+					<TextBox Watermark="Ex: 50505" x:Name="TextBoxSourcePort" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.InputCommunication.PortNumber, Mode=TwoWay }" Width="130" VerticalAlignment="Center" ToolTip.Tip="Set to match device port number."></TextBox>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5">
 					<TextBlock Text="Source Type" Width="100" VerticalAlignment="Center"/>
-					<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.InputCommunication.CommunicationProtocol, Mode=TwoWay }" ItemsSource="{ Binding AvailableProtocols }" SelectedIndex="0" ToolTip.Tip="Select input protocol"/>
+					<ComboBox MinWidth="130" SelectedItem="{ Binding CurrentWinch.InputCommunication.CommunicationProtocol, Mode=TwoWay }" ItemsSource="{ Binding AvailableProtocols }" SelectedIndex="0" ToolTip.Tip="Select input protocol. TCP Server: ECWP Winches, TCP Client: LCI/RPC-90, UDP"/>
 				</StackPanel>
 			</StackPanel>
 			
 			<StackPanel IsVisible="{Binding ElementName=RadioButtonInputCommSerial, Path=IsChecked}">
 				<StackPanel  Margin="5" Orientation="Horizontal">
 					<TextBlock Text="Serial Port" Width="100" VerticalAlignment="Center"/>
-					<ComboBox Name="serialPorts" Width="100" SelectedItem="{Binding CurrentWinch.InputCommunication.SerialPort,Mode=TwoWay}" ItemsSource="{ Binding Path=AvailableSerialPorts }" />
+					<ComboBox Name="serialPorts" Width="100" SelectedItem="{Binding CurrentWinch.InputCommunication.SerialPort,Mode=TwoWay}" ItemsSource="{ Binding Path=AvailableSerialPorts }" ToolTip.Tip="Select from available ports." />
 				</StackPanel>
 				<StackPanel  Margin="5" Orientation="Horizontal">
 					<TextBlock Text="Baud Rate" Width="100" VerticalAlignment="Center" />
-					<ComboBox Width="100" SelectedItem="{ Binding CurrentWinch.InputCommunication.BaudRate,Mode=TwoWay }" ItemsSource="{ Binding Path=AvailableBaudRates }" SelectedIndex="0"/>
+					<ComboBox Width="100" SelectedItem="{ Binding CurrentWinch.InputCommunication.BaudRate,Mode=TwoWay }" ItemsSource="{ Binding Path=AvailableBaudRates }" SelectedIndex="0" ToolTip.Tip="Select device baud rate."/>
 				</StackPanel>
 				<StackPanel  Margin="5" Orientation="Horizontal">
 					<TextBlock Text="Data Bits" Width="100" VerticalAlignment="Center"/>

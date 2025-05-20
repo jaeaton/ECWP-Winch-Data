@@ -56,7 +56,7 @@
                         }
 
                         //Change button text
-                        winch.StartStopButtonText = "Start Log";
+                        winch.StartStopButtonText = "Start";
                         //MainViewModel._configDataStore.UserInputsEnable = true;
                         break;
                     }
@@ -80,7 +80,7 @@
                         //Create new cancellation token at start of data collection
                         winch.Canceller = new CancellationTokenSource();
                         //Starts Data collection on first press
-                        winch.StartStopButtonText = "Stop Log";
+                        winch.StartStopButtonText = "Stop";
                         dh.GetDataAsync(winch);
                         //change button text
 
