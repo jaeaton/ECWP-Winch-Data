@@ -43,7 +43,7 @@
             FileOperationsViewModel.SetFileNames(winch);
             switch (winch.StartStopButtonText)
             {
-                case "Stop Log":
+                case "Stop":
                     {
                         try
                         {
