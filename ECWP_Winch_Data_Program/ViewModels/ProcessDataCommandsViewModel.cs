@@ -43,6 +43,11 @@
                         break;
                     }
             }
+            //Plot Data
+            //foreach (var val in _parseData.DataToPlot)
+            //{
+            //    _parseData.ChartData.AddData(val);
+            //}
         }
 
         public void FindFiles()

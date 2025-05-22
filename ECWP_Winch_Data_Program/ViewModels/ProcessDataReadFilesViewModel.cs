@@ -486,6 +486,11 @@ namespace ViewModels
                     parseData.DataToPlot.Add(lineData);
                 }
             }
+            //Plot Data
+            //foreach (var val in parseData.DataToPlot)
+            //{
+            //    parseData.ChartData.AddData(val);
+            //}
             //Live Charts 2 final may make this possible
             //foreach (var val in parseData.DataToPlot)
             //{
