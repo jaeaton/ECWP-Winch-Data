@@ -13,6 +13,7 @@ namespace ViewModels
         [RelayCommand]
         public async Task AddWinch()
         {
+            //Check for a winch name
             if (_configDataStore.CurrentWinch.WinchName != string.Empty)
             {
                 //Send to generic method to add winch to the winch list
@@ -20,6 +21,7 @@ namespace ViewModels
                 //Write the config file
                 FileOperationsViewModel.WriteConfig(_configDataStore);
             }
+            //If there isn't a winch name display a message to the user
             else
             {
                 await MessageBoxViewModel.DisplayMessage(
@@ -30,11 +32,13 @@ namespace ViewModels
         [RelayCommand]
         public async Task UpdateCruiseInfo()
         {
+            //Check for data in either Cruise Name of Ship Name
             if (_configDataStore.CruiseNameBox != string.Empty || _configDataStore.ShipName != string.Empty)
             {
                 //Write the config file
                 FileOperationsViewModel.WriteConfig(_configDataStore);
             }
+            //If no cruise name or ship name display message for user
             else
             {
                 await MessageBoxViewModel.DisplayMessage(
@@ -50,16 +54,22 @@ namespace ViewModels
             {
                 int index = -1;
                 string name = _configDataStore.CurrentWinch.WinchName;
+                //Cycle through all winches
                 for (int i = 0; i < _configDataStore.AllWinches.Count; i++)
                 {
                     WinchModel item = _configDataStore.AllWinches[i];
+                    //If winch name is found save index
                     if (item.WinchName == name)
                     {
                         index = i;
                         break;
                     }
                 }
-                _configDataStore.AllWinches.RemoveAt(index);
+                // Clear data at the found index
+                if (index != -1)
+                {
+                    _configDataStore.AllWinches.RemoveAt(index);
+                }
             }
             //Clears the current list to make winch names as fresh as possible
             _configDataStore.WinchNames.Clear();
@@ -160,10 +170,12 @@ namespace ViewModels
         [RelayCommand]
         public async Task AddCommOut()
         {
+            //Check for a name for the data destination
             if (_configDataStore.CurrentWinch.OutputCommunication.DestinationName != string.Empty)
             {
                 InsertCommOut();
             }
+           //If no name display message to user
             else
             {
                 await MessageBoxViewModel.DisplayMessage(
@@ -188,7 +200,10 @@ namespace ViewModels
                         break;
                     }
                 }
-                _configDataStore.CurrentWinch.AllOutputCommunication.RemoveAt(index);
+                if (index != -1)
+                {
+                    _configDataStore.CurrentWinch.AllOutputCommunication.RemoveAt(index);
+                }
             }
             //Clears the current list to make Comm names as fresh as possible
             //_configDataStore.WinchNames.Clear();

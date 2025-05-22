@@ -26,7 +26,7 @@
             //Set path to save config file (Application directory)
             string destPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, fileName);
             ConfigDataStore conf = _configDataStore;
-            //Remove old file
+            //Check for old file and remove old file
             if (File.Exists(destPath))
             {
                 File.Delete(destPath);

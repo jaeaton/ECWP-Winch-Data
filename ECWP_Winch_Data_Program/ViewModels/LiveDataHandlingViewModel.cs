@@ -8,7 +8,7 @@ namespace ViewModels
     {
         private UnitConversionViewModel ucVM = new();
         private ChartDataViewModel chartVM = new ChartDataViewModel();
-        private LiveDataHawboldtViewModel hawboldtProcessingVM = new LiveDataHawboldtViewModel();
+        //private LiveDataHawboldtViewModel hawboldtProcessingVM = new LiveDataHawboldtViewModel();
         public int i = 0;
 
         //public SerialPort _serialPort = new SerialPort();
@@ -376,6 +376,7 @@ namespace ViewModels
             Byte[] receiveBytes = udpClient.Receive(ref RemoteIpEndPoint);
             if (winch.InputCommunication.IsHawboldt)
             {
+                LiveDataHawboldtViewModel hawboldtProcessingVM = new LiveDataHawboldtViewModel();
                 responseData = hawboldtProcessingVM.HawboldtProcess(receiveBytes, winch.InputCommunication.HawboldtModel);
             }
             else
