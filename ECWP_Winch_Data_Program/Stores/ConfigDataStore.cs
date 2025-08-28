@@ -103,7 +103,7 @@
                                                                 "UNOLS String",
                                                                 "3PS",
                                                                 "Mermac R30",
-                                                                //"Odim",
+                                                                "Odim",
                                                                 "MTNW 1",
                                                                 "MTNW Legacy",
                                                                 "Hawboldt SPRE-3464",
