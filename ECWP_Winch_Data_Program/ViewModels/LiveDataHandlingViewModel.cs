@@ -239,7 +239,7 @@ namespace ViewModels
                             case "UDP":
 
                                 {
-                                    // Set the TcpListener to selected port
+                                    // Set the UDPClient to selected port
                                     Int32 port = int.Parse(winch.InputCommunication.PortNumber);
                                     UdpClient client = new UdpClient(port);
                                     try
@@ -439,7 +439,8 @@ namespace ViewModels
             {
                 string data = line.Replace("\0", string.Empty);
                 data = ReplaceNonPrintableCharacters(data, ' ');
-                string[] strIn = data.Split(',', 'T', '*');
+                //Splits the string into an array when character is found
+                string[] strIn = data.Split(',', 'T', '*',':');
                 string strID = string.Empty;
 
                 //Keep the '0' in R30
@@ -450,6 +451,10 @@ namespace ViewModels
                else if (strIn[0].Contains("RD"))
                 {
                     strID = "RD";
+                }
+                else if (strIn[0].Contains("Cable Length"))
+                {
+                    strID = "Odim";
                 }
                 else
                 {
@@ -531,6 +536,11 @@ namespace ViewModels
                     case "$R30C":
                         latest = new DataPointModel(strID, strIn[2], strIn[3], strIn[4]);
                         getTime = true;
+                        break;
+                    //ODIM
+                    case "ODIM":
+                        getTime = true;
+                        latest = new DataPointModel("RD", strIn[6], strIn[4], strIn[2]);
                         break;
 
                     default:

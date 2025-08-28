@@ -103,6 +103,7 @@
                                                                 "UNOLS String",
                                                                 "3PS",
                                                                 "Mermac R30",
+                                                                //"Odim",
                                                                 "MTNW 1",
                                                                 "MTNW Legacy",
                                                                 "Hawboldt SPRE-3464",
@@ -205,7 +206,8 @@
                 "Jay Jay",
                 "Atlantis 3PS",
                 "3PS",
-                //"Mermac R30"
+                //"Mermac R30",
+                //"Odim"
         };
 
         [ObservableProperty]
