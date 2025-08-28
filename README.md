@@ -16,10 +16,10 @@ To Do:
 - [ ] Combine or seperate data from casts
 - [ ] Option for Time Series database for data storage
 - [ ] Combine Tow-yos to a single cast
-- [ ] Add Odim Reception
 - [ ] Add Dillon Dynomometer Reception
 - [ ] Record Hawboldt winch statuses
 - [ ] Create string builder to allow users to enter their string
+- [x] ~~Add Odim Reception~~
 - [x] ~~Put UNOLS Wire Log in date order~~
 - [x] ~~Load existing UNOLS Wire Log~~
 - [x] ~~Add new data to existing wire log~~
