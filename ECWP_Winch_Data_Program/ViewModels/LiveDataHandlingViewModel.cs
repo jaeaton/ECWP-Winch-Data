@@ -540,6 +540,11 @@ namespace ViewModels
                         break;
                     //ODIM
                     case "ODIM":
+                        if (strIn.Length == 6)
+                        {
+                            getTime = true;
+                            latest = new DataPointModel("RD", strIn[6], strIn[4], strIn[2]);
+                        }
                         getTime = true;
                         latest = new DataPointModel("RD", strIn[6], strIn[4], strIn[2]);
                         break;
