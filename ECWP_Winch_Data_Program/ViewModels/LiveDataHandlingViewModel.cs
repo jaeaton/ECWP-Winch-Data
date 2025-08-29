@@ -433,6 +433,7 @@ namespace ViewModels
             bool getTime = false;
 
             lines = lines.Replace("$WIR", Environment.NewLine + "$WIR");
+            lines = lines.Replace("Cable Length", Environment.NewLine + "Cable Length");
             string[] strings = lines.Split(Environment.NewLine,
                             StringSplitOptions.RemoveEmptyEntries);
             foreach (var line in strings)
