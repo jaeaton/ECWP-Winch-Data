@@ -441,7 +441,7 @@ namespace ViewModels
                 string data = line.Replace("\0", string.Empty);
                 data = ReplaceNonPrintableCharacters(data, ' ');
                 //Splits the string into an array when character is found
-                string[] strIn = data.Split(',', 'T', '*',':');
+                string[] strIn = data.Split(',', 'T', '*');
                 string strID = string.Empty;
 
                 //Keep the '0' in R30
@@ -455,7 +455,7 @@ namespace ViewModels
                 }
                 else if (strIn[0].Contains("Cable Length"))
                 {
-                    strID = "Odim";
+                    strID = "ODIM";
                 }
                 else
                 {
@@ -540,14 +540,22 @@ namespace ViewModels
                         break;
                     //ODIM
                     case "ODIM":
-                        if (strIn.Length == 6)
+                        string[] values = new string[6];
+                        i = 0;
+                        if (strIn.Length == 3)
                         {
+                            foreach (var val in strIn)
+                            {
+                                string[] value = val.Split(':');
+                                values[i] = value[0];
+                                i++;
+                                values[i] = value[1];
+                                i++;
+                            }
                             getTime = true;
-                            latest = new DataPointModel("RD", strIn[6], strIn[4], strIn[2]);
+                            latest = new DataPointModel("RD", values[5], values[3], values[1]);                            
                         }
-                        getTime = true;
-                        latest = new DataPointModel("RD", strIn[6], strIn[4], strIn[2]);
-                        break;
+                        break;                       
 
                     default:
                         if (strIn.Length == 9 && winch.InputCommunication.DataProtocol == "3PS")
