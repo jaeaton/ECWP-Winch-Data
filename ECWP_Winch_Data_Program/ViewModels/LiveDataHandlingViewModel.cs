@@ -1,6 +1,7 @@
 ﻿using DocumentFormat.OpenXml.Drawing;
 using DocumentFormat.OpenXml.Wordprocessing;
 using LiveChartsCore.SkiaSharpView.Drawing.Geometries;
+using System.Text.RegularExpressions;
 
 namespace ViewModels
 {
@@ -433,9 +434,12 @@ namespace ViewModels
             bool getTime = false;
 
             lines = lines.Replace("$WIR", Environment.NewLine + "$WIR");
-            lines = lines.Replace("Cable Length", Environment.NewLine + "Cable Length");
+            //lines = lines.Replace("Cable Length", Environment.NewLine + "Cable Length");
+            string pattern = "(?= Cable Length)";
+            lines = Regex.Replace(lines, pattern, Environment.NewLine);
             string[] strings = lines.Split(Environment.NewLine,
                             StringSplitOptions.RemoveEmptyEntries);
+            winch.LiveData.SplitWireData = strings[0];
             foreach (var line in strings)
             {
                 string data = line.Replace("\0", string.Empty);

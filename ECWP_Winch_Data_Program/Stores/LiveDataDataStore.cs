@@ -21,6 +21,9 @@
         private string rawWireData = string.Empty;
 
         [ObservableProperty]
+        private string splitWireData = string.Empty;
+
+        [ObservableProperty]
         private string speed = string.Empty;
 
         [ObservableProperty]

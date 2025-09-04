@@ -52,6 +52,9 @@
 				</StackPanel>
 			</Viewbox>
 		</Grid>
-		<TextBlock Grid.Row="4" Text="{Binding LiveData.RawWireData, FallbackValue='Received String'}" HorizontalAlignment="Center"/>
+		<StackPanel Grid.Row="4">
+			<TextBlock Text="{Binding LiveData.RawWireData, FallbackValue='Received String'}" HorizontalAlignment="Center"/>
+			<TextBlock Text="{Binding LiveData.SplitWireData, FallbackValue='Split String'}" HorizontalAlignment="Center"/>
+		</StackPanel>
 	</Grid>
 </UserControl>
