@@ -435,8 +435,9 @@ namespace ViewModels
 
             lines = lines.Replace("$WIR", Environment.NewLine + "$WIR");
             //lines = lines.Replace("Cable Length", Environment.NewLine + "Cable Length");
-            string pattern = "(?= Cable Length)";
-            lines = Regex.Replace(lines, pattern, Environment.NewLine);
+            string pattern = "(Cable Length)";
+            string replacement = Environment.NewLine + pattern;
+            lines = Regex.Replace(lines, pattern, replacement);
             string[] strings = lines.Split(Environment.NewLine,
                             StringSplitOptions.RemoveEmptyEntries);
             winch.LiveData.SplitWireData = strings[0];
