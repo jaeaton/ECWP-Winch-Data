@@ -446,7 +446,7 @@ namespace ViewModels
                 string data = line.Replace("\0", string.Empty);
                 data = ReplaceNonPrintableCharacters(data, ' ');
                 //Splits the string into an array when character is found
-                string[] strIn = data.Split(',', 'T', '*');
+                string[] strIn = data.Split(',', 'T', '*',':');
                 string strID = string.Empty;
 
                 //Keep the '0' in R30
@@ -545,21 +545,21 @@ namespace ViewModels
                         break;
                     //ODIM
                     case "ODIM":
-                        string[] values = new string[6];
-                        i = 0;
-                        if (strIn.Length == 3)
-                        {
-                            foreach (var val in strIn)
-                            {
-                                string[] value = val.Split(':');
-                                values[i] = value[0];
-                                i++;
-                                values[i] = value[1];
-                                i++;
-                            }
+                        //string[] values = new string[6];
+                        //i = 0;
+                        //if (strIn.Length == 3)
+                        //{
+                        //    foreach (var val in strIn)
+                        //    {
+                        //        string[] value = val.Split(':');
+                        //        values[i] = value[0];
+                        //        i++;
+                        //        values[i] = value[1];
+                        //        i++;
+                        //    }
                             getTime = true;
-                            latest = new DataPointModel("RD", values[5], values[3], values[1]);                            
-                        }
+                            latest = new DataPointModel("RD", strIn[5], strIn[3], strIn[1]);                            
+                        //}
                         break;                       
 
                     default:
