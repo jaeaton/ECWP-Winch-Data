@@ -14,7 +14,7 @@
 							  XAxes="{Binding ChartData.XAxes}"
 							  YAxes="{Binding ChartData.YAxes}"
 							  EasingFunction="{x:Null}"
-						      ZoomMode="ZoomY"/>
+						      ZoomMode="Y"/>
 		<!--YAxes="{Binding ChartData.YAxes}"-->
 	</Panel>
 	
