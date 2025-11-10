@@ -435,7 +435,7 @@ namespace ViewModels
 
             lines = lines.Replace("$WIR", Environment.NewLine + "$WIR");
             //lines = lines.Replace("Cable Length", Environment.NewLine + "Cable Length");
-            string pattern = "Cable Length";
+            string pattern = "@\"Cable Length\"";
             string replacement = Environment.NewLine + pattern;
             lines = Regex.Replace(lines, pattern, replacement);
             string[] strings = lines.Split(Environment.NewLine,
