@@ -11,8 +11,8 @@
 	</UserControl.Resources>
 	
 	<StackPanel Margin="10">
-		<RadioButton Content="Network" x:Name="RadioButtonSendUDP" GroupName="OutputType" IsChecked="{Binding CurrentWinch.OutputCommunication.IsNetwork}" ToolTip.Tip="Select type of data to send."/>
-		<RadioButton Content="Serial" x:Name="RadioButtonSendSerial" GroupName="OutputType" IsChecked="{Binding CurrentWinch.OutputCommunication.IsSerial}" ToolTip.Tip="Select type of data to send."/>
+		<RadioButton Content="Network" x:Name="RadioButtonSendUDP" GroupName="OutputType" IsChecked="{Binding CurrentWinch.OutputCommunication.IsNetwork, Mode=TwoWay}" ToolTip.Tip="Select type of data to send."/>
+		<RadioButton Content="Serial" x:Name="RadioButtonSendSerial" GroupName="OutputType" IsChecked="{Binding CurrentWinch.OutputCommunication.IsSerial, Mode=TwoWay}" ToolTip.Tip="Select type of data to send."/>
 		
 		<Border BorderThickness="1" BorderBrush="Gray" IsVisible="{Binding ElementName=RadioButtonSendUDP, Path=IsChecked}">
 			
@@ -22,8 +22,8 @@
 					<TextBox Watermark="Identifier" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.DestinationName,Mode=TwoWay}" Width="130" VerticalAlignment="Center" ToolTip.Tip="Enter the function or hostname of the data being sent"/>
 				</StackPanel>
 				<StackPanel>
-					<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" GroupName="udpRadioButtons" IsChecked="{Binding CurrentWinch.OutputCommunication.IsMTNW}"/>
-					<RadioButton Content="UNOLS Format" HorizontalContentAlignment="Right" GroupName="udpRadioButtons" IsChecked="{Binding CurrentWinch.OutputCommunication.IsUNOLS}"/>
+					<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" GroupName="udpRadioButtons" IsChecked="{Binding CurrentWinch.OutputCommunication.IsMTNW, Mode=TwoWay}"/>
+					<RadioButton Content="UNOLS Format" HorizontalContentAlignment="Right" GroupName="udpRadioButtons" IsChecked="{Binding CurrentWinch.OutputCommunication.IsUNOLS, Mode=TwoWay}"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5"  >
 					<TextBlock Text="IP Address" Width="90" VerticalAlignment="Center" />
@@ -52,7 +52,7 @@
 				</StackPanel>
 				<StackPanel>
 					<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" GroupName="serialRadioButtons"  IsChecked="{Binding CurrentWinch.OutputCommunication.IsMTNW,Mode=TwoWay}" />
-					<RadioButton Content="UNOLS Format" HorizontalContentAlignment="Right" GroupName="serialRadioButtons" IsChecked="{Binding CurrentWinch.OutputCommunication.IsUNOLS,FallbackValue=True }" />
+					<RadioButton Content="UNOLS Format" HorizontalContentAlignment="Right" GroupName="serialRadioButtons" IsChecked="{Binding CurrentWinch.OutputCommunication.IsUNOLS, Mode=TwoWay,FallbackValue=True }" />
 				</StackPanel>
 				<StackPanel  Margin="5" Orientation="Horizontal">
 					<TextBlock Text="Serial Port" Width="100" VerticalAlignment="Center"/>
