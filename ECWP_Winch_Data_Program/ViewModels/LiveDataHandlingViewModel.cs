@@ -15,7 +15,7 @@ namespace ViewModels
         //public SerialPort _serialPort = new SerialPort();
         public List<SerialPort> serialPorts = new List<SerialPort>();
 
-        public List<UdpClient> udpClients = new List<UdpClient>();
+        public List<(UdpClient client, IPEndPoint endpoint)> udpClients = new List<(UdpClient,IPEndPoint)>();
         public SerialPort InputSerialPort = new SerialPort();
 
         //Asynchronious method to allow application to still respond to user interaction
@@ -307,9 +307,9 @@ namespace ViewModels
             //Close Output communications
             if (udpClients.Count > 0)
             {
-                foreach (UdpClient udpClient in udpClients)
+                foreach (var udpClient in udpClients)
                 {
-                    udpClient.Close();
+                    udpClient.client.Close();
                 }
             }
             if (serialPorts.Count > 0)
@@ -650,7 +650,7 @@ namespace ViewModels
                     {
                         foreach (var client in udpClients)
                         {
-                            Send20HzData(latest, winch, client);
+                            Send20HzData(latest, winch, client.client, client.endpoint);
                         }
                     }
                     if (serialPorts.Count > 0)
@@ -726,7 +726,7 @@ namespace ViewModels
         //    }
         //}
 
-        private void Send20HzData(DataPointModel data, WinchModel winch, UdpClient client)
+        private void Send20HzData(DataPointModel data, WinchModel winch, UdpClient client, IPEndPoint endpoint)
         {
             //Format string based on format selection
             string line;
@@ -754,7 +754,7 @@ namespace ViewModels
             //Send UDP packet
             byte[] sendBytes = Encoding.ASCII.GetBytes(line);
 
-            client.Send(sendBytes, sendBytes.Length);
+            client.SendAsync(sendBytes, sendBytes.Length,endpoint);
         }
 
         private void SendSerialData(DataPointModel data, WinchModel winch, SerialPort _serialPort)
@@ -820,9 +820,11 @@ namespace ViewModels
                         {
                             int i = udpClients.Count;
                             if (IPAddress.TryParse(output.TcpIpAddress, out IPAddress ipAddress) && int.TryParse(output.PortNumber, out int portNumber))
-                            {
-                                IPEndPoint iPEndPoint = new IPEndPoint(ipAddress, portNumber);
-                                udpClients[i] = new UdpClient(iPEndPoint);
+                            { 
+                                UdpClient client = new UdpClient(portNumber);
+                                IPEndPoint iPEndPoint = new(ipAddress, portNumber);
+                                Tuple<UdpClient, IPEndPoint> add = new(client, iPEndPoint);
+                                udpClients.Add((client, iPEndPoint));
                             }
                         }
                         //else if (output.CommunicationProtocol == "TCP Server")
