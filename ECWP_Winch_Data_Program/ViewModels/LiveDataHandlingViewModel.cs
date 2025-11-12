@@ -852,9 +852,9 @@ namespace ViewModels
                         else if (output.Parity == "O") { outParity = Parity.Odd; }
                         else { outParity = Parity.None; }
 
-                        if (winch.InputCommunication.StopBits == "1") { outStopBits = StopBits.One; }
-                        else if (winch.InputCommunication.StopBits == "1.5") { outStopBits = StopBits.OnePointFive; }
-                        else if (winch.InputCommunication.StopBits == "2") { outStopBits = StopBits.Two; }
+                        if (output.StopBits == "1") { outStopBits = StopBits.One; }
+                        else if (output.StopBits == "1.5") { outStopBits = StopBits.OnePointFive; }
+                        else if (output.StopBits == "2") { outStopBits = StopBits.Two; }
                         else { outStopBits = StopBits.One; }
 
                         serialPorts[i].PortName = output.SerialPort;
