@@ -15,7 +15,7 @@ namespace ViewModels
         //public SerialPort _serialPort = new SerialPort();
         public List<SerialPort> serialPorts = new List<SerialPort>();
 
-        public List<(UdpClient client, IPEndPoint endpoint)> udpClients = new List<(UdpClient,IPEndPoint)>();
+        public List<UdpClient> udpClients = new List<UdpClient>();
         public SerialPort InputSerialPort = new SerialPort();
 
         //Asynchronious method to allow application to still respond to user interaction
@@ -650,7 +650,7 @@ namespace ViewModels
                     {
                         foreach (var client in udpClients)
                         {
-                            Send20HzData(latest, winch, client.client, client.endpoint);
+                            Send20HzData(latest, winch, client);
                         }
                     }
                     if (serialPorts.Count > 0)
@@ -726,7 +726,7 @@ namespace ViewModels
         //    }
         //}
 
-        private void Send20HzData(DataPointModel data, WinchModel winch, UdpClient client, IPEndPoint endpoint)
+        private void Send20HzData(DataPointModel data, WinchModel winch, UdpClient client)
         {
             //Format string based on format selection
             string line;
@@ -754,7 +754,7 @@ namespace ViewModels
             //Send UDP packet
             byte[] sendBytes = Encoding.ASCII.GetBytes(line);
 
-            client.SendAsync(sendBytes, sendBytes.Length,endpoint);
+            client.SendAsync(sendBytes, sendBytes.Length);
         }
 
         private void SendSerialData(DataPointModel data, WinchModel winch, SerialPort _serialPort)
@@ -823,8 +823,9 @@ namespace ViewModels
                             { 
                                 UdpClient client = new UdpClient(portNumber);
                                 IPEndPoint iPEndPoint = new(ipAddress, portNumber);
-                                Tuple<UdpClient, IPEndPoint> add = new(client, iPEndPoint);
-                                udpClients.Add((client, iPEndPoint));
+                                //Tuple<UdpClient, IPEndPoint> add = new(client, iPEndPoint);
+                                //udpClients.Add((client, iPEndPoint));
+                                client.Connect(iPEndPoint);
                             }
                         }
                         //else if (output.CommunicationProtocol == "TCP Server")
