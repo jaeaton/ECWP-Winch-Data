@@ -750,7 +750,7 @@ namespace ViewModels
             int checkSum = 0;
             byte[] asciiBytes = Encoding.ASCII.GetBytes(line);
             Array.ForEach(asciiBytes, delegate (byte i) { checkSum += i; });
-            line = $"{line}{checkSum}" +Environment.NewLine;
+            line = $"{line}{checkSum}" + Environment.NewLine;
             //Send UDP packet
             byte[] sendBytes = Encoding.ASCII.GetBytes(line);
 
