@@ -557,7 +557,7 @@ namespace ViewModels
                         //        values[i] = value[1];
                         //        i++;
                         //    }
-                        if (strIn.Length == 6)
+                        if (strIn.Length == 6 && strIn[0].Contains("Tension"))
                         {
                             getTime = true;
                             latest = new DataPointModel("RD", strIn[5], strIn[3], strIn[1]);                            
