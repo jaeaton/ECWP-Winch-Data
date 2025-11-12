@@ -1,9 +1,4 @@
-﻿using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Wordprocessing;
-using LiveChartsCore.SkiaSharpView.Drawing.Geometries;
-using System.Text.RegularExpressions;
-
-namespace ViewModels
+﻿namespace ViewModels
 {
     internal partial class LiveDataHandlingViewModel : ViewModelBase
     {
@@ -810,58 +805,135 @@ namespace ViewModels
             winch.MaxData.Clear();
         }
 
+        private async Task<UdpClient?> CreateUdpOutputAsync(CommunicationModel output)
+        {
+            if (!IPAddress.TryParse(output.TcpIpAddress, out IPAddress remoteIp) ||
+       !int.TryParse(output.PortNumber, out int remotePort))
+            {
+                await MessageBoxViewModel.DisplayMessage("Invalid UDP output address/port.");
+                return null;
+            }
+
+            try
+            {
+                // Do not bind to the remote address. Create an unbound client and connect to the remote.
+                var udp = new UdpClient();
+                udp.Connect(remoteIp, remotePort);
+                return udp;
+            }
+            catch (Exception ex)
+            {
+                await MessageBoxViewModel.DisplayMessage($"Failed to create UDP output: {ex.Message}");
+                return null;
+            }
+        }
+        private async Task<SerialPort?> CreateSerialPortAsync(CommunicationModel output)
+        {
+            if (string.IsNullOrWhiteSpace(output.SerialPort))
+            {
+                await MessageBoxViewModel.DisplayMessage("Serial port name is empty for output.");
+                return null;
+            }
+
+            if (!int.TryParse(output.BaudRate, out int baudRate))
+            {
+                await MessageBoxViewModel.DisplayMessage($"Invalid baud rate for serial output: {output.BaudRate}");
+                return null;
+            }
+
+            if (!int.TryParse(output.DataBits, out int dataBits))
+            {
+                await MessageBoxViewModel.DisplayMessage($"Invalid data bits for serial output: {output.DataBits}");
+                return null;
+            }
+
+            Parity parity = Parity.None;
+            if (output.Parity == "E") parity = Parity.Even;
+            else if (output.Parity == "O") parity = Parity.Odd;
+
+            StopBits stopBits = StopBits.One;
+            if (output.StopBits == "1.5") stopBits = StopBits.OnePointFive;
+            else if (output.StopBits == "2") stopBits = StopBits.Two;
+
+            try
+            {
+                var sp = new SerialPort(output.SerialPort, baudRate, parity, dataBits, stopBits);
+                sp.Open();
+                return sp;
+            }
+            catch (Exception ex)
+            {
+                await MessageBoxViewModel.DisplayMessage($"Failed to open serial output {output.SerialPort}: {ex.Message}");
+                return null;
+            }
+        }
         public async Task SetupOutputs(WinchModel winch)
         {
             if (winch.AllOutputCommunication.Count > 0)
             {
                 foreach (var output in winch.AllOutputCommunication)
                 {
+                    if (output == null) continue;
                     if (output.CommunicationType == "Network" && output.CommunicationProtocol == "UDP")
 
                     {
-                        int i = udpClients.Count;
-                        if (IPAddress.TryParse(output.TcpIpAddress, out IPAddress ipAddress) && int.TryParse(output.PortNumber, out int portNumber))
-                        {
-                            //Initial setup of UDP client
-                            UdpClient client = new UdpClient(portNumber);
-                            //Format IPEndPoint
-                            IPEndPoint iPEndPoint = new(ipAddress, portNumber);
-                            //Connect sets the UDP destination to the specified endpoint
-                            client.Connect(iPEndPoint);
-                            //Add to list of UDP clients
-                            udpClients[i] = client;
-                        }
-                    
+                        //int i = udpClients.Count;
+                        //if (IPAddress.TryParse(output.TcpIpAddress, out IPAddress ipAddress) && int.TryParse(output.PortNumber, out int portNumber))
+                        //{
+                        //    //Initial setup of UDP client
+                        //    UdpClient client = new UdpClient(portNumber);
+                        //    //Format IPEndPoint
+                        //    IPEndPoint iPEndPoint = new(ipAddress, portNumber);
+                        //    //Connect sets the UDP destination to the specified endpoint
+                        //    client.Connect(iPEndPoint);
+                        //    //Add to list of UDP clients
+                        //    udpClients[i] = client;
+                        //}
+
                         //else if (output.CommunicationProtocol == "TCP Server")
                         //{
                         //}
                         //else if(output.CommunicationProtocol == "TCP Client")
                         //{
                         //}
+
+                        var udp = await CreateUdpOutputAsync(output);
+                        if (udp != null)
+                        {
+                            udpClients.Add(udp);
+                        }
+                            
                     }
                     else if (output.CommunicationType == "Serial")
                     {
-                        int i = serialPorts.Count;
-                        int.TryParse(output.BaudRate, out int serialBaudRate);
-                        int.TryParse(output.DataBits, out int dataBits);
-                        Parity outParity = new Parity();
-                        StopBits outStopBits = new StopBits();
-                        if (output.Parity == "N") { outParity = Parity.None; }
-                        else if (output.Parity == "E") { outParity = Parity.Even; }
-                        else if (output.Parity == "O") { outParity = Parity.Odd; }
-                        else { outParity = Parity.None; }
+                        //int i = serialPorts.Count;
+                        //int.TryParse(output.BaudRate, out int serialBaudRate);
+                        //int.TryParse(output.DataBits, out int dataBits);
+                        //Parity outParity = new Parity();
+                        //StopBits outStopBits = new StopBits();
+                        //if (output.Parity == "N") { outParity = Parity.None; }
+                        //else if (output.Parity == "E") { outParity = Parity.Even; }
+                        //else if (output.Parity == "O") { outParity = Parity.Odd; }
+                        //else { outParity = Parity.None; }
 
-                        if (output.StopBits == "1") { outStopBits = StopBits.One; }
-                        else if (output.StopBits == "1.5") { outStopBits = StopBits.OnePointFive; }
-                        else if (output.StopBits == "2") { outStopBits = StopBits.Two; }
-                        else { outStopBits = StopBits.One; }
+                        //if (output.StopBits == "1") { outStopBits = StopBits.One; }
+                        //else if (output.StopBits == "1.5") { outStopBits = StopBits.OnePointFive; }
+                        //else if (output.StopBits == "2") { outStopBits = StopBits.Two; }
+                        //else { outStopBits = StopBits.One; }
 
-                        serialPorts[i].PortName = output.SerialPort;
-                        serialPorts[i].BaudRate = serialBaudRate;
-                        serialPorts[i].Parity = outParity;
-                        serialPorts[i].DataBits = dataBits;
-                        serialPorts[i].StopBits = outStopBits;
-                        serialPorts[i].Open();
+                        //serialPorts[i].PortName = output.SerialPort;
+                        //serialPorts[i].BaudRate = serialBaudRate;
+                        //serialPorts[i].Parity = outParity;
+                        //serialPorts[i].DataBits = dataBits;
+                        //serialPorts[i].StopBits = outStopBits;
+                        //serialPorts[i].Open();
+
+                        var sp = await CreateSerialPortAsync(output);
+                        if (sp != null)
+                        {
+                            serialPorts.Add(sp);
+                        }
+                            
                     }
                 }
             }

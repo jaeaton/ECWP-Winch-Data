@@ -42,6 +42,7 @@ global using ClosedXML;
 global using ClosedXML.Excel;
 global using Mayerch1.GithubUpdateCheck;
 global using Microsoft.Extensions.DependencyInjection;
+global using System.Text.RegularExpressions;
 
 global using Models;
 global using Views;
