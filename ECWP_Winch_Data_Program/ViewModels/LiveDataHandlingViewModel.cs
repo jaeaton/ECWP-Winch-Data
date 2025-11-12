@@ -309,7 +309,7 @@ namespace ViewModels
             {
                 foreach (var udpClient in udpClients)
                 {
-                    udpClient.client.Close();
+                    udpClient.Close();
                 }
             }
             if (serialPorts.Count > 0)
@@ -820,12 +820,15 @@ namespace ViewModels
                         {
                             int i = udpClients.Count;
                             if (IPAddress.TryParse(output.TcpIpAddress, out IPAddress ipAddress) && int.TryParse(output.PortNumber, out int portNumber))
-                            { 
+                            {
+                                //Initial setup of UDP client
                                 UdpClient client = new UdpClient(portNumber);
+                                //Format IPEndPoint
                                 IPEndPoint iPEndPoint = new(ipAddress, portNumber);
-                                //Tuple<UdpClient, IPEndPoint> add = new(client, iPEndPoint);
-                                //udpClients.Add((client, iPEndPoint));
+                                //Connect sets the UDP destination to the specified endpoint
                                 client.Connect(iPEndPoint);
+                                //Add to list of UDP clients
+                                udpClients[i]= client;
                             }
                         }
                         //else if (output.CommunicationProtocol == "TCP Server")
