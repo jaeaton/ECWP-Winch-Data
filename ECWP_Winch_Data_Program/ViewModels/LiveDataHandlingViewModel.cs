@@ -733,12 +733,12 @@ namespace ViewModels
             //If UNOLS Format
             if (winch.UdpFormatUnols)
             {
-                line = $"$WIR,{data.Date},{data.Time},{data.Tension},{data.Speed},{data.Payout},{data.TMWarnings},{data.TMAlarms},{data.CheckSum}" + Environment.NewLine;
+                line = $"$WIR,{data.Date},{data.Time},{data.Tension},{data.Speed},{data.Payout},{data.TMWarnings},{data.TMAlarms},{data.CheckSum}";
             }
             //MTNW 1 Format
             else
             {
-                line = $"RD,{data.Date}T{data.Time},{data.Tension},{data.Speed},{data.Payout}," + Environment.NewLine;
+                line = $"RD,{data.Date}T{data.Time},{data.Tension},{data.Speed},{data.Payout},";
             }
             //MTNW Legacy
             //else
@@ -750,7 +750,7 @@ namespace ViewModels
             int checkSum = 0;
             byte[] asciiBytes = Encoding.ASCII.GetBytes(line);
             Array.ForEach(asciiBytes, delegate (byte i) { checkSum += i; });
-            line = $"{line}{checkSum}";
+            line = $"{line}{checkSum}" +Environment.NewLine;
             //Send UDP packet
             byte[] sendBytes = Encoding.ASCII.GetBytes(line);
 
