@@ -26,7 +26,7 @@ namespace ViewModels
             //Setup data outputs
             if (winch.AllOutputCommunication.Count > 0)
             {
-                SetupOutputs(winch);
+                await SetupOutputs(winch);
             }
             switch (winch.InputCommunication.CommunicationType)
             {
@@ -810,29 +810,28 @@ namespace ViewModels
             winch.MaxData.Clear();
         }
 
-        public void SetupOutputs(WinchModel winch)
+        public async Task SetupOutputs(WinchModel winch)
         {
             if (winch.AllOutputCommunication.Count > 0)
             {
                 foreach (var output in winch.AllOutputCommunication)
                 {
-                    if (output.CommunicationType == "Network")
+                    if (output.CommunicationType == "Network" && output.CommunicationProtocol == "UDP")
+
                     {
-                        if (output.CommunicationProtocol == "UDP")
+                        int i = udpClients.Count;
+                        if (IPAddress.TryParse(output.TcpIpAddress, out IPAddress ipAddress) && int.TryParse(output.PortNumber, out int portNumber))
                         {
-                            int i = udpClients.Count;
-                            if (IPAddress.TryParse(output.TcpIpAddress, out IPAddress ipAddress) && int.TryParse(output.PortNumber, out int portNumber))
-                            {
-                                //Initial setup of UDP client
-                                UdpClient client = new UdpClient(portNumber);
-                                //Format IPEndPoint
-                                IPEndPoint iPEndPoint = new(ipAddress, portNumber);
-                                //Connect sets the UDP destination to the specified endpoint
-                                client.Connect(iPEndPoint);
-                                //Add to list of UDP clients
-                                udpClients[i]= client;
-                            }
+                            //Initial setup of UDP client
+                            UdpClient client = new UdpClient(portNumber);
+                            //Format IPEndPoint
+                            IPEndPoint iPEndPoint = new(ipAddress, portNumber);
+                            //Connect sets the UDP destination to the specified endpoint
+                            client.Connect(iPEndPoint);
+                            //Add to list of UDP clients
+                            udpClients[i] = client;
                         }
+                    
                         //else if (output.CommunicationProtocol == "TCP Server")
                         //{
                         //}
