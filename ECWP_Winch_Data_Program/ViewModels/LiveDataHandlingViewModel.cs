@@ -733,12 +733,12 @@ namespace ViewModels
             //If UNOLS Format
             if (winch.UdpFormatUnols)
             {
-                line = $"$WIR,{data.Date},{data.Time},{data.Tension},{data.Speed},{data.Payout},{data.TMWarnings},{data.TMAlarms},{data.CheckSum}";
+                line = $"$WIR,{data.Date},{data.Time},{data.Tension},{data.Speed},{data.Payout},{data.TMWarnings},{data.TMAlarms},{data.CheckSum}" + Environment.NewLine;
             }
             //MTNW 1 Format
             else
             {
-                line = $"RD,{data.Date}T{data.Time},{data.Tension},{data.Speed},{data.Payout},";
+                line = $"RD,{data.Date}T{data.Time},{data.Tension},{data.Speed},{data.Payout}," + Environment.NewLine;
             }
             //MTNW Legacy
             //else
