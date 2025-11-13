@@ -262,12 +262,14 @@
                                                 {
                                                     //await MessageBoxViewModel.DisplayMessage("cancelled?");
                                                     cancelled = true;
+                                                    client.Close();
                                                     break;
                                                 }
                                                 else
                                                 {
                                                     await MessageBoxViewModel.DisplayMessage(ae.ToString());
                                                     cancelled = true;
+                                                    client.Close();
                                                     break;
                                                 }
                                             }
@@ -277,9 +279,12 @@
                                     {
                                         string msg = $"SocketException: {e.Message}";
                                         await MessageBoxViewModel.DisplayMessage(msg);
+                                        client.Close();
                                     }
                                     client.Close();
-                                    client.Dispose();
+
+
+
                                 }
                                 break;
 
@@ -287,9 +292,11 @@
                                 {
                                     await MessageBoxViewModel.DisplayMessage("Input network communication selected with out a selected protocol");
                                 }
+
                                 break;
                         }
                     }
+
                     break;
 
                 default:
@@ -305,6 +312,7 @@
                 foreach (var udpClient in udpClients)
                 {
                     udpClient.Close();
+                    //udpClient.Dispose();
                 }
             }
             if (serialPorts.Count > 0)
@@ -552,10 +560,10 @@
                         //        values[i] = value[1];
                         //        i++;
                         //    }
-                        if (strIn.Length == 6 && strIn[0].Contains("Tension"))
+                        if (strIn.Length == 6 && strIn[0].Contains("Length"))
                         {
                             getTime = true;
-                            latest = new DataPointModel("RD", strIn[5], strIn[3], strIn[1]);                            
+                            latest = new DataPointModel("RD","","", strIn[5], strIn[3], strIn[1],"");                            
                         }
                         break;                       
 
