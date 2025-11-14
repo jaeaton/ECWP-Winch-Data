@@ -274,6 +274,7 @@
                                                 }
                                             }
                                         }
+                                        client.Close();
                                     }
                                     catch (SocketException e)
                                     {
@@ -286,6 +287,7 @@
 
 
                                 }
+                                
                                 break;
 
                             default:
@@ -762,7 +764,7 @@
             //Send UDP packet
             byte[] sendBytes = Encoding.ASCII.GetBytes(line);
 
-            client.SendAsync(sendBytes, sendBytes.Length);
+            client.Send(sendBytes, sendBytes.Length);
         }
 
         private void SendSerialData(DataPointModel data, WinchModel winch, SerialPort _serialPort)
