@@ -449,7 +449,7 @@
                 string data = line.Replace("\0", string.Empty);
                 data = ReplaceNonPrintableCharacters(data, ' ');
                 //Splits the string into an array when character is found
-                string[] strIn = data.Split(',', 'T', '*',':');
+                string[] strIn = data.Split(',', 'T', '*');
                 string strID = string.Empty;
 
                 //Keep the '0' in R30
@@ -560,10 +560,13 @@
                         //        values[i] = value[1];
                         //        i++;
                         //    }
-                        if (strIn.Length == 6 && strIn[0].Contains("Length"))
+                        if (strIn.Length == 5 && strIn[0].Contains("Length"))
                         {
+                            string[] payout = strIn[0].Split(':');
+                            string[] speed = strIn[1].Split(":");
+                            string[] tension = strIn[4].Split(":");
                             getTime = true;
-                            latest = new DataPointModel("RD","","", strIn[5], strIn[3], strIn[1],"");                            
+                            latest = new DataPointModel("ODIM","","", tension[1], speed[1], payout[1],"");                            
                         }
                         break;                       
 
