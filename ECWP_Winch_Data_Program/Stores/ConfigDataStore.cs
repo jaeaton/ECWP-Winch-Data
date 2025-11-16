@@ -168,7 +168,8 @@
                                                                 "m/min",
                                                                 "ft/min",
                                                                 "kph",
-                                                                "mph"
+                                                                "mph",
+                                                                "m/sec"
                                                             };
 
         [ObservableProperty]

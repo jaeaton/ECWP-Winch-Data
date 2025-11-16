@@ -418,6 +418,9 @@
                 case "mph":
                     converted = ConvertFromMPH(speed);
                     break;
+                case "m/sec":
+                    converted = ConvertFromMPS(speed);
+                    break;
 
                 default:
                     converted = speed;
@@ -441,6 +444,10 @@
 
                 case "mph":
                     converted = (speed * 60) / ((float)0.0254 * 12 * 5280);
+                    break;
+
+                case "m/sec":
+                    converted = speed / 60;
                     break;
 
                 default:
@@ -467,6 +474,10 @@
                     converted = (speed * 60) / 5280;
                     break;
 
+                case "m/sec":
+                    converted = speed * 12 * (float)0.0254/60;
+                    break;
+
                 default:
                     converted = speed;
                     break;
@@ -489,6 +500,10 @@
 
                 case "mph":
                     converted = speed / ((float)0.0000254 * 60 * 12 * 5280);
+                    break;
+
+                case "m/sec":
+                    converted = (speed * 1000) / 3600;
                     break;
 
                 default:
@@ -515,11 +530,44 @@
                     converted = (speed * 5280 * 12 * (float)0.0000254);
                     break;
 
+                case "m/sec":
+                    converted = (speed * 5280 * 12 * (float)0.0254) / 3600;
+                    break;
+
                 default:
                     converted = speed;
                     break;
             }
             return converted;
         }
+        //Meters per second
+        public float ConvertFromMPS(float speed)
+        {
+            float converted;
+            switch (MainViewModel._configDataStore.CurrentWinch.SpeedConversionUnit)
+            {
+                case "ft/min":
+                    converted = (speed * 60) / ((float)0.0254 * 12);
+                    break;
+
+                case "kph":
+                    converted = (speed * 60) / 1000;
+                    break;
+
+                case "mph":
+                    converted = (speed * 60) / ((float)0.0254 * 12 * 5280);
+                    break;
+
+                case "m/min":
+                    converted = (speed * 60);
+                    break;
+
+                default:
+                    converted = speed;
+                    break;
+            }
+            return converted;
+        }
+
     }
 }
