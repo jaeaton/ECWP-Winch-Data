@@ -586,17 +586,17 @@
                     //Convert tension if needed
                     if (winch.ConvertTension)
                     {
-                        latest.Tension = ucVM.ConvertTension(latest.Tension);
+                        latest.Tension = ucVM.ConvertTension(latest.Tension, winch);
                     }
                     //Convert Payout if needed
                     if (winch.ConvertPayout)
                     {
-                        latest.Payout = ucVM.ConvertPayout(latest.Payout);
+                        latest.Payout = ucVM.ConvertPayout(latest.Payout, winch);
                     }
                     //Convert Speed if needed
                     if (winch.ConvertSpeed)
                     {
-                        latest.Speed = ucVM.ConvertSpeed(latest.Speed);
+                        latest.Speed = ucVM.ConvertSpeed(latest.Speed, winch);
                     }
 
                     //If needed changes data and time stamp to local machine

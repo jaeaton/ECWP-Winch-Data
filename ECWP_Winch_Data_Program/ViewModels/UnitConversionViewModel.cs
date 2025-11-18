@@ -3,37 +3,37 @@
     internal class UnitConversionViewModel
     {
         //Tension Conversion
-        public float ConvertTension(float tension)
+        public float ConvertTension(float tension, WinchModel winch)
         {
             float converted;
-            switch (MainViewModel._configDataStore.CurrentWinch.TensionUnit)
+            switch (winch.TensionUnit)
             {
                 case "lbf":
-                    converted = ConvertFromPound(tension);
+                    converted = ConvertFromPound(tension, winch.TensionConversionUnit);
                     break;
 
                 case "kg":
-                    converted = ConvertFromKg(tension);
+                    converted = ConvertFromKg(tension, winch.TensionConversionUnit);
                     break;
 
                 case "kip":
-                    converted = ConvertFromKip(tension);
+                    converted = ConvertFromKip(tension, winch.TensionConversionUnit);
                     break;
 
                 case "N":
-                    converted = ConvertFromNewton(tension);
+                    converted = ConvertFromNewton(tension, winch.TensionConversionUnit);
                     break;
 
                 case "Short Ton":
-                    converted = ConvertFromShortTon(tension);
+                    converted = ConvertFromShortTon(tension, winch.TensionConversionUnit);
                     break;
 
                 case "Long Ton":
-                    converted = ConvertFromLongTon(tension);
+                    converted = ConvertFromLongTon(tension, winch.TensionConversionUnit);
                     break;
 
                 case "Tonne":
-                    converted = ConvertFromTonne(tension);
+                    converted = ConvertFromTonne(tension, winch.TensionConversionUnit);
                     break;
 
                 default:
@@ -43,12 +43,12 @@
             return converted;
         }
 
-        public float ConvertFromPound(float tension)
+        public float ConvertFromPound(float tension, string TensionConversionUnit)
         {
             float input = tension;
             float converted;
 
-            switch (MainViewModel._configDataStore.CurrentWinch.TensionConversionUnit)
+            switch (TensionConversionUnit)
             {
                 case "kg":
                     converted = (input / (float)2.2);
@@ -81,12 +81,12 @@
             return converted;
         }
 
-        public float ConvertFromKip(float tension)
+        public float ConvertFromKip(float tension, string TensionConversionUnit)
         {
             float input = tension;
             float converted;
 
-            switch (MainViewModel._configDataStore.CurrentWinch.TensionConversionUnit)
+            switch (TensionConversionUnit)
             {
                 case "kg":
                     converted = ((1000 * input) / (float)2.2);
@@ -119,12 +119,12 @@
             return converted;
         }
 
-        public float ConvertFromKg(float tension)
+        public float ConvertFromKg(float tension, string TensionConversionUnit)
         {
             float input = tension;
             float converted;
 
-            switch (MainViewModel._configDataStore.CurrentWinch.TensionConversionUnit)
+            switch (TensionConversionUnit)
             {
                 case "lbf":
                     converted = (input * (float)2.2);
@@ -157,12 +157,12 @@
             return converted;
         }
 
-        public float ConvertFromShortTon(float tension)
+        public float ConvertFromShortTon(float tension, string TensionConversionUnit)
         {
             float input = tension;
             float converted;
 
-            switch (MainViewModel._configDataStore.CurrentWinch.TensionConversionUnit)
+            switch (TensionConversionUnit)
             {
                 case "kg":
                     converted = ((2000 * input) / (float)2.2);
@@ -195,12 +195,12 @@
             return converted;
         }
 
-        public float ConvertFromLongTon(float tension)
+        public float ConvertFromLongTon(float tension, string TensionConversionUnit)
         {
             float input = tension;
             float converted;
 
-            switch (MainViewModel._configDataStore.CurrentWinch.TensionConversionUnit)
+            switch (TensionConversionUnit)
             {
                 case "kg":
                     converted = ((2240 * input) / (float)2.2);
@@ -233,12 +233,12 @@
             return converted;
         }
 
-        public float ConvertFromTonne(float tension)
+        public float ConvertFromTonne(float tension, string TensionConversionUnit)
         {
             float input = tension;
             float converted;
 
-            switch (MainViewModel._configDataStore.CurrentWinch.TensionConversionUnit)
+            switch (TensionConversionUnit)
             {
                 case "kg":
                     converted = (input * 1000);
@@ -271,12 +271,12 @@
             return converted;
         }
 
-        public float ConvertFromNewton(float tension)
+        public float ConvertFromNewton(float tension, string TensionConversionUnit)
         {
             float input = tension;
             float converted;
 
-            switch (MainViewModel._configDataStore.CurrentWinch.TensionConversionUnit)
+            switch (TensionConversionUnit)
             {
                 case "kg":
                     converted = ((float)2.2 * input);
@@ -310,21 +310,21 @@
         }
 
         //Payout Conversion
-        public float ConvertPayout(float payout)
+        public float ConvertPayout(float payout, WinchModel winch)
         {
             float converted;
-            switch (MainViewModel._configDataStore.CurrentWinch.PayoutUnit)
+            switch (winch.PayoutUnit)
             {
                 case "m":
-                    converted = ConvertFromKMeters(payout);
+                    converted = ConvertFromKMeters(payout, winch.PayoutConversionUnit);
                     break;
 
                 case "ft":
-                    converted = ConvertFromFeet(payout);
+                    converted = ConvertFromFeet(payout, winch.PayoutConversionUnit);
                     break;
 
                 case "km":
-                    converted = ConvertFromKMeters(payout);
+                    converted = ConvertFromKMeters(payout, winch.PayoutConversionUnit);
                     break;
 
                 default:
@@ -334,10 +334,10 @@
             return converted;
         }
 
-        public float ConvertFromMeters(float payout)
+        public float ConvertFromMeters(float payout, string PayoutConversionUnit)
         {
             float converted;
-            switch (MainViewModel._configDataStore.CurrentWinch.PayoutConversionUnit)
+            switch (PayoutConversionUnit)
             {
                 case "km":
                     converted = payout / 1000;
@@ -355,10 +355,10 @@
             return converted;
         }
 
-        public float ConvertFromFeet(float payout)
+        public float ConvertFromFeet(float payout, string PayoutConversionUnit)
         {
             float converted;
-            switch (MainViewModel._configDataStore.CurrentWinch.PayoutConversionUnit)
+            switch (PayoutConversionUnit)
             {
                 case "m":
                     converted = payout * 12 * (float)0.0254;
@@ -376,10 +376,10 @@
             return converted;
         }
 
-        public float ConvertFromKMeters(float payout)
+        public float ConvertFromKMeters(float payout, string PayoutConversionUnit)
         {
             float converted;
-            switch (MainViewModel._configDataStore.CurrentWinch.PayoutConversionUnit)
+            switch (PayoutConversionUnit)
             {
                 case "m":
                     converted = payout * 1000;
@@ -398,28 +398,28 @@
         }
 
         //Speed Conversion
-        public float ConvertSpeed(float speed)
+        public float ConvertSpeed(float speed, WinchModel winch)
         {
             float converted;
-            switch (MainViewModel._configDataStore.CurrentWinch.SpeedUnit)
-            {
+            switch (winch.SpeedUnit)
+            {   
                 case "m/min":
-                    converted = ConvertFromMeterperMin(speed);
+                    converted = ConvertFromMeterperMin(speed, winch.SpeedConversionUnit);
                     break;
 
                 case "ft/min":
-                    converted = ConvertFromFeetperMin(speed);
+                    converted = ConvertFromFeetperMin(speed, winch.SpeedConversionUnit);
                     break;
 
                 case "kph":
-                    converted = ConvertFromKPH(speed);
+                    converted = ConvertFromKPH(speed, winch.SpeedConversionUnit);
                     break;
 
                 case "mph":
-                    converted = ConvertFromMPH(speed);
+                    converted = ConvertFromMPH(speed, winch.SpeedConversionUnit);
                     break;
                 case "m/sec":
-                    converted = ConvertFromMPS(speed);
+                    converted = ConvertFromMPS(speed, winch.SpeedConversionUnit);
                     break;
 
                 default:
@@ -429,10 +429,10 @@
             return converted;
         }
 
-        public float ConvertFromMeterperMin(float speed)
+        public float ConvertFromMeterperMin(float speed, string SpeedConversionUnit)
         {
             float converted;
-            switch (MainViewModel._configDataStore.CurrentWinch.SpeedConversionUnit)
+            switch (SpeedConversionUnit)
             {
                 case "ft/min":
                     converted = speed / ((float)0.0254 * 12);
@@ -457,10 +457,10 @@
             return converted;
         }
 
-        public float ConvertFromFeetperMin(float speed)
+        public float ConvertFromFeetperMin(float speed, string SpeedConversionUnit)
         {
             float converted;
-            switch (MainViewModel._configDataStore.CurrentWinch.SpeedConversionUnit)
+            switch (SpeedConversionUnit)
             {
                 case "m/min":
                     converted = speed * 12 * (float)0.0254;
@@ -485,10 +485,10 @@
             return converted;
         }
 
-        public float ConvertFromKPH(float speed)
+        public float ConvertFromKPH(float speed, string SpeedConversionUnit)
         {
             float converted;
-            switch (MainViewModel._configDataStore.CurrentWinch.SpeedConversionUnit)
+            switch (SpeedConversionUnit)
             {
                 case "m/min":
                     converted = (speed * 1000) / 60;
@@ -513,10 +513,10 @@
             return converted;
         }
 
-        public float ConvertFromMPH(float speed)
+        public float ConvertFromMPH(float speed, string SpeedConversionUnit)
         {
             float converted;
-            switch (MainViewModel._configDataStore.CurrentWinch.SpeedConversionUnit)
+            switch (SpeedConversionUnit)
             {
                 case "m/min":
                     converted = (speed * 5280 * 12 * (float)0.0254) / 60;
@@ -541,10 +541,10 @@
             return converted;
         }
         //Meters per second
-        public float ConvertFromMPS(float speed)
+        public float ConvertFromMPS(float speed, string SpeedConversionUnit)
         {
             float converted;
-            switch (MainViewModel._configDataStore.CurrentWinch.SpeedConversionUnit)
+            switch (SpeedConversionUnit)
             {
                 case "ft/min":
                     converted = (speed * 60) / ((float)0.0254 * 12);
