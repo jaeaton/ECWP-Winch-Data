@@ -764,7 +764,7 @@
             //Send UDP packet
             byte[] sendBytes = Encoding.ASCII.GetBytes(line);
 
-            client.Send(sendBytes, sendBytes.Length);
+            client.SendAsync(sendBytes, sendBytes.Length);
         }
 
         private void SendSerialData(DataPointModel data, WinchModel winch, SerialPort _serialPort)
