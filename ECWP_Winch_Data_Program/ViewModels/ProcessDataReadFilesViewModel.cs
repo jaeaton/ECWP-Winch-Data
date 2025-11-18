@@ -481,10 +481,10 @@ namespace ViewModels
                     //i = 0;
                 }
 
-                if (castActive)
-                {
-                    parseData.DataToPlot.Add(lineData);
-                }
+                //if (castActive)
+                //{
+                //    parseData.DataToPlot.Add(lineData);
+                //}
             }
             //Plot Data
             //foreach (var val in parseData.DataToPlot)

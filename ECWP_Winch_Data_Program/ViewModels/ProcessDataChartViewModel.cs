@@ -139,7 +139,7 @@
             {
                 new Axis
                 {
-                    Labeler = value => new DateTime((long) value).ToString("yy/MM/dd HH:mm:ss"),
+                    Labeler = value => new DateTime((long) value).ToString("yyyy/MM/dd HH:mm:ss.fff"),
                     LabelsRotation = -30,
                     TextSize = 14,
                 }

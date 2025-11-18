@@ -16,9 +16,9 @@
 		<v:WinchDetailLogProcessingControlsView Grid.Row="0"/>
 		<v:ProcessDataDataGridView Grid.Row="1"/>
 
-		<!--
-		<v:ProcessDataPlotView Grid.Row="2"/>
-	-->
+
+		<!-->v:ProcessDataPlotView Grid.Row="2"/-->
+	
 		
 		
 		
