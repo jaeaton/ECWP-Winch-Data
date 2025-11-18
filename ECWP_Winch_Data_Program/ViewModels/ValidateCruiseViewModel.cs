@@ -1,14 +1,16 @@
-﻿namespace ViewModels
+﻿using DocumentFormat.OpenXml.Bibliography;
+
+namespace ViewModels
 {
     public class ValidateCruiseViewModel
     {
-        public static bool ValidateCastNumber(string castNumber)
+        public static bool ValidateCastNumber(int castNumber)
         {
             bool output = true;
             //Check to see if a number is provided for casts
             int castNum;
-            bool validCast = int.TryParse(castNumber, out castNum);
-            if (validCast == false || castNum < 1)
+            //bool validCast = int.TryParse(castNumber, out castNum);
+            if (castNumber  < 1)
             {
                 output = false;
             }

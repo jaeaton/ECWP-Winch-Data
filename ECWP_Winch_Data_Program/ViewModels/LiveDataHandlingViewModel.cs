@@ -334,7 +334,7 @@
                 ExcelViewModel.AddCastData(winch.MaxData.MaxTension, winch.MaxData.MaxPayout, winch.CastNumber, winch);
                 winch.MaxData.Clear();
                 //Increase the cast count
-                winch.CastNumber = (int.Parse(winch.CastNumber) + 1).ToString();
+                winch.CastNumber = winch.CastNumber + 1;
                 //UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
             }
             winch.StartStopButtonText = "Start Log";

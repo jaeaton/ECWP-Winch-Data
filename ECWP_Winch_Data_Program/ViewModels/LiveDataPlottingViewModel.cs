@@ -32,7 +32,7 @@
             //Write the max data for the cast
             dh.WriteMaxData(winch);
             //Increase the cast count
-            winch.CastNumber = (int.Parse(winch.CastNumber) + 1).ToString();
+            winch.CastNumber = winch.CastNumber + 1;
             //UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
         }
 
@@ -71,9 +71,9 @@
                                 break;
                             }
                         }
-                        if (winch.CastNumber == string.Empty)
+                        if (winch.CastNumber < 1)
                         {
-                            winch.CastNumber = "1";
+                            winch.CastNumber = 1;
                         }
 
                         //ChartDataViewModel.ResetData();

@@ -302,7 +302,7 @@
         {
             foreach (var winch in AllWinches)
             {
-                winch.CastNumber = "1";
+                winch.CastNumber = 1;
             }
         }
 

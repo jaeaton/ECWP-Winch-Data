@@ -124,7 +124,7 @@ namespace ViewModels
             //Check to see if a cast number has been added. If not set to 1
             if (Winch.CastNumber == null)
             {
-                Winch.CastNumber = "1";
+                Winch.CastNumber = 1;
             }
             //Check to see if the start button has a name. If not set to "start log"
             if (Winch.StartStopButtonText == null)

@@ -5,7 +5,7 @@ namespace ViewModels
     public class ExcelViewModel
     {
         //Direct write method -- old
-        public static void AddCastData(DataPointModel dataMaxTension, DataPointModel dataMaxPayout, string cast, WinchModel winch)
+        public static void AddCastData(DataPointModel dataMaxTension, DataPointModel dataMaxPayout, int cast, WinchModel winch)
         {
             //Check Date for data point
             string date = string.Empty;
@@ -423,7 +423,7 @@ namespace ViewModels
                 //Cast number
                 if (ws.Cell($"D{i}").TryGetValue<int>(out int iVal))
                 {
-                    wireLog.CastNumber = iVal.ToString();
+                    wireLog.CastNumber = iVal;
                 }
                 //Total Length of Cable
                 if (ws.Cell($"E{i}").TryGetValue<float>(out fVal))

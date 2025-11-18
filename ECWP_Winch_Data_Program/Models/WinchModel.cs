@@ -26,7 +26,7 @@ namespace Models
         private CancellationTokenSource canceller = new();
 
         [ObservableProperty]
-        private string castNumber = string.Empty;
+        private int castNumber = new();
 
         [ObservableProperty]
         private ChartDataViewModel chartData = new();

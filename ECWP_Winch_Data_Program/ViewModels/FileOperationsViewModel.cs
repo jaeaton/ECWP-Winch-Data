@@ -10,8 +10,8 @@
             //string stringDateTime = dateTime.ToString("yyyyMMddTHHmmssfff");
             string dateAndHour = dateTime.ToString("yyyyMMddHH");
             string dateOnly = dateTime.ToString("yyyyMM");
-            winch.MtnwWireLogName = $"{dateAndHour}_{_confDataStore.CruiseNameBox}_cast_{winch.CastNumber}_{winch.WinchName}_short.log";
-            winch.UnolsWireLogName = $"{dateAndHour}_{_confDataStore.CruiseNameBox}_cast_{winch.CastNumber}_{winch.WinchName}_UNOLS.log";
+            winch.MtnwWireLogName = $"{dateAndHour}_{_confDataStore.CruiseNameBox}_cast_{winch.CastNumber.ToString()}_{winch.WinchName}_short.log";
+            winch.UnolsWireLogName = $"{dateAndHour}_{_confDataStore.CruiseNameBox}_cast_{winch.CastNumber.ToString()}_{winch.WinchName}_UNOLS.log";
             winch.WinchLogName = $"{dateOnly}_{winch.WinchName}_Winch.log";
             winch.MaxWireLogName = $"{dateTime:yyyyMM}_{_confDataStore.CruiseNameBox}_{winch.WinchName}.log";
             winch.WirePoolWireLogName = $"{dateTime.ToString("yyyy")}_{winch.WinchName}_Wire_Log";
@@ -274,12 +274,12 @@
                     }
                 }
 
-                if (winch.CastNumber != string.Empty)
+                if (winch.CastNumber >0)
                 {
                     bool valid = ValidateCruiseViewModel.ValidateCastNumber(winch.CastNumber);
                     if (valid)
                     {
-                        lines.Add($"Cast Number,{winch.CastNumber}");
+                        lines.Add($"Cast Number,{winch.CastNumber.ToString()}");
                     }
                     else
                     {
@@ -581,7 +581,7 @@
                             {
                                 if (int.TryParse(line.Substring(delim + 1), out int castCount))// + 1;
                                 {
-                                    winch.CastNumber = castCount.ToString();
+                                    winch.CastNumber = castCount;
                                 }
                             }
                             if (line.Substring(0, delim) == "Save 20Hz Data")

@@ -5,7 +5,7 @@
              xmlns:v="clr-namespace:Views"
 			 xmlns:vm="clr-namespace:ViewModels"
 			 xmlns:m="clr-namespace:Models"
-			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 mc:Ignorable="d" d:DesignWidth="900" d:DesignHeight="450"
              x:Class="Views.LiveDataPlotControlsView"
 			 x:DataType="m:WinchModel">
 	
@@ -21,7 +21,8 @@
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<TextBlock Text="Cast Number"  Width="100" VerticalAlignment="Center"/>
-			<TextBox x:Name="TextBoxCastNumber"  Text="{Binding CastNumber,Mode=TwoWay, FallbackValue='1'}" Width="10" VerticalAlignment="Center" />
+			<NumericUpDown Value="{Binding CastNumber, Mode=TwoWay}" ParsingNumberStyle="Integer" FormatString="N0" Width="120"/>
+			<!--TextBox x:Name="TextBoxCastNumber"  Text="{Binding CastNumber,Mode=TwoWay, FallbackValue='1'}" Width="10" VerticalAlignment="Center" /-->
 		</StackPanel>
 
 		<Button Content="{ Binding StartStopButtonText, FallbackValue='Start' }" Command="{ Binding Source={ StaticResource ResourceKey=commands }, Path=StartStopCommand }" CommandParameter="{ Binding WinchName }" Margin="5" MinWidth="100" HorizontalContentAlignment="Center" ToolTip.Tip="Starts and stops the receipt of live data. This also logs the incoming data if selected in the winch setup."/>
