@@ -8,22 +8,20 @@
              x:Class="Views.LiveDataPlotView">
 
 	<Panel Margin="2">
-		<lc:CartesianChart x:Name="Chart" ZoomMode="Y" EasingFunction="{x:Null}">
+		<lc:CartesianChart x:Name="Chart"
+							  
+							  Sections	="{ Binding ChartData.Sections }"
+							  XAxes="{Binding ChartData.XAxes}"
+							  YAxes="{Binding ChartData.YAxes}"
+							  EasingFunction="{x:Null}"
+						      ZoomMode="Y">
 			<lc:CartesianChart.Series>
-				<lc:XamlLineSeries Values="{Binding ChartData.Series}" />
+				<lc:XamlLineSeries Values="{ Binding ChartData.LineSeriesValues }"
+								 
+								 IsVisible="{ Binding ChartData.LineSeriesIsVisible }"/>
 			</lc:CartesianChart.Series>
-			<lc:CartesianChart.Sections>
-				<lc:XamlSection Values="{Binding ChartData.Sections}" />
-			</lc:CartesianChart.Sections>
-			<lc:CartesianChart.XAxes>
-				<lc:XamlAxis Values="{Binding ChartData.XAxes}" />
-			</lc:CartesianChart.XAxes>
-			<lc:CartesianChart.YAxes>
-				<lc:XamlAxis Values="{Binding ChartData.YAxes}" />
-			</lc:CartesianChart.YAxes>
 		</lc:CartesianChart>
 							 
-		<!--YAxes="{Binding ChartData.YAxes}"-->
 	</Panel>
 	
 </UserControl>
