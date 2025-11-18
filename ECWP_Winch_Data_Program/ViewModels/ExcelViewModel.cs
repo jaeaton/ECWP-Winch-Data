@@ -5,7 +5,7 @@ namespace ViewModels
     public class ExcelViewModel
     {
         //Direct write method -- old
-        public static void AddCastData(DataPointModel dataMaxTension, DataPointModel dataMaxPayout, int cast, WinchModel winch)
+        public static void AddCastData(DataPointModel dataMaxTension, DataPointModel dataMaxPayout, string cast, WinchModel winch)
         {
             //Check Date for data point
             string date = string.Empty;

@@ -331,7 +331,7 @@
             {
                 //Write the max data for the cast
                 //WriteMaxData(winch);
-                ExcelViewModel.AddCastData(winch.MaxData.MaxTension, winch.MaxData.MaxPayout, int.Parse(winch.CastNumber), winch);
+                ExcelViewModel.AddCastData(winch.MaxData.MaxTension, winch.MaxData.MaxPayout, winch.CastNumber, winch);
                 winch.MaxData.Clear();
                 //Increase the cast count
                 winch.CastNumber = (int.Parse(winch.CastNumber) + 1).ToString();
@@ -813,7 +813,7 @@
             //    foreach (string line in lines)
             //        stream.WriteLine(line);
             //}
-            ExcelViewModel.AddCastData(winch.MaxData.MaxTension, winch.MaxData.MaxPayout, int.Parse(winch.CastNumber), winch);
+            ExcelViewModel.AddCastData(winch.MaxData.MaxTension, winch.MaxData.MaxPayout, winch.CastNumber, winch);
             //Clear max data
             winch.MaxData.Clear();
         }
