@@ -248,6 +248,10 @@
                                             {
                                                 //Asynchronious read of data to allow for other operations to occur
                                                 dataIn = await Task.Run(() => ReadUDPData(client, winch), winch.Canceller.Token);
+                                                if (dataIn == "cancelled")
+                                                {
+                                                    return;
+                                                }
                                                 //Show raw input data if selected
                                                 if (winch.ShowRawInput == true)
                                                 {
@@ -372,25 +376,64 @@
             winch.LiveData.MaxTension = winch.MaxData.MaxTension.Tension.ToString();
         }
 
-        private string ReadUDPData(UdpClient udpClient, WinchModel winch)
+        private async Task<string> ReadUDPData(UdpClient udpClient, WinchModel winch)
         {
             string responseData = string.Empty;
             //IPEndPoint object will allow us to read datagrams sent from any source.
             IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
 
             // Blocks until a message returns on this socket from a remote host.
-            Byte[] receiveBytes = udpClient.Receive(ref RemoteIpEndPoint);
-            if (winch.InputCommunication.IsHawboldt)
+            //Byte[] receiveBytes = udpClient.Receive(ref RemoteIpEndPoint);
+            
+            try
             {
-                LiveDataHawboldtViewModel hawboldtProcessingVM = new LiveDataHawboldtViewModel();
-                responseData = hawboldtProcessingVM.HawboldtProcess(receiveBytes, winch.InputCommunication.HawboldtModel);
+                // Pass the cancellation token to the ReceiveAsync method
+                UdpReceiveResult result = await udpClient.ReceiveAsync(winch.Canceller.Token);
+
+                Byte[] receiveBytes = result.Buffer;
+
+                if (winch.InputCommunication.IsHawboldt)
+                {
+                    LiveDataHawboldtViewModel hawboldtProcessingVM = new LiveDataHawboldtViewModel();
+                    responseData = hawboldtProcessingVM.HawboldtProcess(receiveBytes, winch.InputCommunication.HawboldtModel);
+                }
+                else
+                {
+                    responseData = Encoding.ASCII.GetString(receiveBytes);
+                }
+
+                return responseData;
             }
-            else
+            catch (OperationCanceledException)
             {
-                responseData = Encoding.ASCII.GetString(receiveBytes);
+                // This exception is expected when the token is cancelled
+                udpClient.Close();
+            }
+            catch (SocketException ex)
+            {
+                //Console.WriteLine($"Socket error: {ex.Message}");
+                udpClient.Close();
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+                udpClient.Close();
             }
 
-            return responseData;
+            //Byte[] receiveBytes = result.Buffer;
+
+            //if (winch.InputCommunication.IsHawboldt)
+            //{
+            //    LiveDataHawboldtViewModel hawboldtProcessingVM = new LiveDataHawboldtViewModel();
+            //    responseData = hawboldtProcessingVM.HawboldtProcess(receiveBytes, winch.InputCommunication.HawboldtModel);
+            //}
+            //else
+            //{
+            //    responseData = Encoding.ASCII.GetString(receiveBytes);
+            //}
+
+            //return responseData;
+            return "cancelled";
         }
 
         private string ReadSerialData(SerialPort serial, WinchModel winch)
