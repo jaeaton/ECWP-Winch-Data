@@ -9,18 +9,13 @@
 
 	<Panel Margin="2">
 		<lc:CartesianChart x:Name="Chart"
-							  
+							  Series="{ Binding ChartData.Series }"
 							  Sections	="{ Binding ChartData.Sections }"
 							  XAxes="{Binding ChartData.XAxes}"
 							  YAxes="{Binding ChartData.YAxes}"
 							  EasingFunction="{x:Null}"
-						      ZoomMode="Y">
-			<lc:CartesianChart.Series>
-				<lc:XamlLineSeries Values="{ Binding ChartData.LineSeriesValues }"
-								 
-								 IsVisible="{ Binding ChartData.LineSeriesIsVisible }"/>
-			</lc:CartesianChart.Series>
-		</lc:CartesianChart>
+						      ZoomMode="Y"/>
+		
 							 
 	</Panel>
 	
