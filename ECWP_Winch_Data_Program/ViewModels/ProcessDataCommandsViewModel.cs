@@ -3,6 +3,8 @@
     public partial class ProcessDataCommandsViewModel : ViewModelBase
     {
         public ParseDataStore _parseData = ProcessDataViewModel.ParseData;
+        public ProcessDataChartControlsViewModel _chartControlsViewModel = new();
+
         //_parseData.ProcessWinchDataButton = "Stop Processing";
 
         //[ObservableProperty]
@@ -40,6 +42,8 @@
                         ExcelViewModel.SetWireLogFileName(_config.CurrentWinch);
                         FindFiles();
                         ProcessDataReadFilesViewModel.ReadDataFiles();//ProcessDataViewModel.ParseData);
+                        _chartControlsViewModel.Values = _parseData.PlotData;
+
                         break;
                     }
             }

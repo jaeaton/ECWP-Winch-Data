@@ -1,4 +1,6 @@
-﻿using DocumentFormat.OpenXml.EMMA;
+﻿using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.EMMA;
+using LiveChartsCore.Defaults;
 
 namespace ViewModels
 {
@@ -266,7 +268,7 @@ namespace ViewModels
                                     lineData.Payout = Payout;
                                     lineData.CheckSum = data[6];
                                     //lineData.DateAndTime = DateTime.ParseExact($"{data[1]}T{data[2]}", "yyyy-MM-ddTHH:mm:ss.fff", null);
-                                    lineData.DateAndTime = DateTime.Parse( data[1] + "T" + data[2]);
+                                    lineData.DateAndTime = DateTime.Parse(data[1] + "T" + data[2]);
                                     lineData.TMAlarms = data[7];
                                     lineData.TMWarnings = data[8];
                                     /*
@@ -380,11 +382,15 @@ namespace ViewModels
                 }
             }
             //Plot Data
-            while (parseData.DataToPlot.Count > 0)
-            {
-                parseData.ChartData.AddData(parseData.DataToPlot[0]);
-                parseData.DataToPlot.RemoveAt(0);
-            }
+            //while (parseData.DataToPlot.Count > 0)
+            //{
+            //    parseData.ChartData.AddData(parseData.DataToPlot[0]);
+            //    parseData.DataToPlot.RemoveAt(0);
+            //}
+
+            //Plot Data
+            //ProcessDataChartControlsViewModel.Fetch();
+            //ProcessDataCommandsViewModel._chartControlsViewModel.Values = parseData.ChartData;
         }
 
         //Step 3
@@ -450,7 +456,7 @@ namespace ViewModels
                     }
                 }
                 else { deltaTime = true; }
-                
+
                 //detect end of cast (values below threshold with negative slope)
                 //Write data point
                 if (/*lineData.Tension < minTension &&*/ lineData.Payout < minPayout && castActive == true && deltaTime == true)
@@ -490,7 +496,8 @@ namespace ViewModels
 
                 if (castActive)
                 {
-                    parseData.DataToPlot.Add(lineData);
+                    AddDataPointToPlot(lineData);
+                    //parseData.DataToPlot.Add(lineData);
                 }
             }
             //Plot Data
@@ -512,6 +519,7 @@ namespace ViewModels
             parseData.MaxPayoutDataPoint = MaxPayoutDataPoint;
             parseData.MaxTensionDataPoint = MaxTensionDataPoint;
             //parseData.DataToPlot.Clear();
+            ProcessDataChartControlsViewModel.Fetch();
         }
 
         private static void AddData(DataPointModel lineData, int cast, float maxTenCurrent, float maxTenPayCurrent, float maxPayCurrent)
@@ -605,6 +613,39 @@ namespace ViewModels
             catch
             {
                 return string.Empty;
+            }
+        }
+
+        public static void AddDataPointToPlot(DataPointModel latest)
+        {
+            bool dateTimeSet = false;
+            DateTime dateTime = new DateTime();
+            System.Globalization.CultureInfo provider = System.Globalization.CultureInfo.InvariantCulture;
+            DateTimeStyles styles = DateTimeStyles.AssumeLocal;
+            if (latest.DateAndTime != new DateTime())
+            {
+                dateTime = latest.DateAndTime;
+                dateTimeSet = true;
+            }
+            else if (latest.Date == string.Empty || latest.Time == string.Empty || latest.Tension < 0)
+            {
+                return;
+            }
+            else if (DateTime.TryParseExact($"{latest.Date} {latest.Time}", "yyyy/MM/dd HH:mm:ss.fff", provider, styles, out dateTime))
+            {
+                dateTimeSet = true;
+            }
+            if (dateTimeSet)
+            {
+                if (double.TryParse(latest.Payout.ToString(), out double Tension))
+                {
+                    DateTimePoint point = new DateTimePoint { DateTime = dateTime, Value = Tension };
+                    //_observableStore.Add(point);
+                    lock (ProcessDataViewModel.ParseData.Sync)
+                    {
+                        ProcessDataViewModel.ParseData.PlotData.Add(point);
+                    }
+                }
             }
         }
     }

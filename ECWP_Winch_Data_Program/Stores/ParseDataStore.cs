@@ -138,6 +138,9 @@
         [ObservableProperty]
         private ObservableCollection<WireLogModel> wireLog = new ObservableCollection<WireLogModel>();
 
+        [ObservableProperty]
+        private ObservableCollection<DateTimePoint> plotData = new();
+
         //[ObservableProperty]
         //private object Sync { get; }  = new object();
         public object Sync { get; } = new object();

@@ -2,20 +2,85 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:lc="clr-namespace:LiveChartsCore.SkiaSharpView.Avalonia;assembly=LiveChartsCore.SkiaSharpView.Avalonia"
+             xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.Avalonia;assembly=LiveChartsCore.SkiaSharpView.Avalonia"
 			 xmlns:vm="clr-namespace:ViewModels"
 			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Views.ProcessDataPlotView">
-	
-	<Panel Background="LightGray">
+
+	<UserControl.DataContext>
+		<vm:ProcessDataChartControlsViewModel/>
+	</UserControl.DataContext>
+
+	<!--<Panel Background="LightGray">
 		<lc:CartesianChart x:Name="Plot"
 						   SyncContext="{Binding Sync}"
 						   Series="{ Binding ChartData.Series }"
 						   XAxes="{Binding ChartData.XAxes}"
 							  YAxes="{Binding ChartData.YAxes}"
 							  EasingFunction="{x:Null}"
-						   ZoomMode="X"/>
-	</Panel>
+						   ZoomMode="X"/-->
+		<Grid RowDefinitions="*, 100" Margin="5">
+
+			<!--
+        We use the DrawMargin property to align both charts,
+        both charts have a left margin of 100 and a right margin of 50
+        -->
+
+			<lvc:CartesianChart
+				Grid.Row="0"
+				DrawMargin="{lvc:Margin '100, Auto, 50, Auto'}"
+				ZoomMode="X"
+				UpdateStartedCommand="{Binding ChartUpdatedCommand}">
+
+				<lvc:CartesianChart.Series>
+					<lvc:XamlLineSeries
+						Values="{Binding Values}"
+						GeometryStroke="{x:Null}"
+						GeometryFill="{x:Null}"
+						DataPadding="{lvc:Point '0,1'}"/>
+				</lvc:CartesianChart.Series>
+
+				<lvc:CartesianChart.XAxes>
+					<lvc:XamlAxis
+						MinLimit="{Binding MinX}"
+						MaxLimit="{Binding MaxX}"/>
+				</lvc:CartesianChart.XAxes>
+
+			</lvc:CartesianChart>
+
+			<lvc:CartesianChart
+				Grid.Row="1"
+				DrawMargin="{lvc:Margin '100, Auto, 50, Auto'}"
+				PointerPressedCommand="{Binding PointerDownCommand}"
+				PointerMoveCommand="{Binding PointerMoveCommand}"
+				PointerReleasedCommand="{Binding PointerUpCommand}"
+				TooltipPosition="Hidden">
+
+				<lvc:CartesianChart.Series>
+					<lvc:XamlLineSeries
+						Values="{Binding Values}"
+						GeometryStroke="{x:Null}"
+						GeometryFill="{x:Null}"
+						DataPadding="{lvc:Point '0,1'}"/>
+				</lvc:CartesianChart.Series>
+
+				<lvc:CartesianChart.XAxes>
+					<lvc:XamlAxis IsVisible="False"/>
+				</lvc:CartesianChart.XAxes>
+
+				<lvc:CartesianChart.YAxes>
+					<lvc:XamlAxis IsVisible="False"/>
+				</lvc:CartesianChart.YAxes>
+
+				<lvc:CartesianChart.Sections>
+					<lvc:XamlRectangularSection
+						Xi="{Binding MinXThumb}"
+						Xj="{Binding MaxXThumb}"
+						Fill="{lvc:SolidColorPaint Color='#64FFCDD2'}"/>
+				</lvc:CartesianChart.Sections>
+			</lvc:CartesianChart>
+		</Grid>
+	
 	
 	
 	
