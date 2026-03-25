@@ -334,11 +334,11 @@
             if (winch.LogMax == true)
             {
                 //Write the max data for the cast
-                //WriteMaxData(winch);
-                ExcelViewModel.AddCastData(winch.MaxData.MaxTension, winch.MaxData.MaxPayout, winch.CastNumber, winch);
-                winch.MaxData.Clear();
+                WriteMaxData(winch);
+                //ExcelViewModel.AddCastData(winch.MaxData.MaxTension, winch.MaxData.MaxPayout, winch.CastNumber, winch);
+                //winch.MaxData.Clear();
                 //Increase the cast count
-                winch.CastNumber = winch.CastNumber + 1;
+                //winch.CastNumber = winch.CastNumber + 1;
                 //UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
             }
             winch.StartStopButtonText = "Start Log";
@@ -859,6 +859,7 @@
             ExcelViewModel.AddCastData(winch.MaxData.MaxTension, winch.MaxData.MaxPayout, winch.CastNumber, winch);
             //Clear max data
             winch.MaxData.Clear();
+            winch.CastNumber = winch.CastNumber + 1;
         }
 
         private async Task<UdpClient?> CreateUdpOutputAsync(CommunicationModel output)
