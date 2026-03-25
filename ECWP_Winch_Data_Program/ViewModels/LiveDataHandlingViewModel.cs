@@ -730,7 +730,7 @@
 
             fileName = winch.UnolsWireLogName;
             destPath = System.IO.Path.Combine(winch.RawLogDirectory, fileName);
-            line = $"{data.StringID},{data.Date},{data.Time},{data.Tension},{data.Speed},{data.Payout},{data.TMWarnings},{data.TMAlarms},{data.CheckSum}";
+            line = $"$WIR,{data.Date},{data.Time},{data.Tension},{data.Speed},{data.Payout},{data.TMWarnings},{data.TMAlarms},{data.CheckSum}";
 
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
             {

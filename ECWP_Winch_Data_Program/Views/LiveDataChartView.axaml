@@ -1,0 +1,42 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:lc="using:LiveChartsCore.SkiaSharpView.Avalonia" 
+			 xmlns:vms="using:ViewModels"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Views.LiveDataChartView">
+
+	<UserControl.DataContext>
+	
+	</UserControl.DataContext>
+
+	<!--lc:CartesianChart x:Name="LiveDataChart"
+					  SyncContext="{Binding Sync}"
+					  Series="{ Binding ChartData.Series }"
+					  XAxes="{Binding ChartData.XAxes}"
+					  YAxes="{Binding ChartData.YAxes}"
+					  EasingFunction="{x:Null}"
+					  ZoomMode="Y"/-->
+
+
+	<lc:CartesianChart
+		SyncContext="{Binding Sync}">
+		<lc:CartesianChart.Series>
+			<lc:XamlLineSeries
+                Values="{Binding Values}"
+                Fill="{x:Null}"
+                GeometryFill="{x:Null}"
+                GeometryStroke="{x:Null}"/>
+		</lc:CartesianChart.Series>
+		<lc:CartesianChart.XAxes>
+			<lc:XamlDateTimeAxis
+                Interval="0:0:1"
+                DateFormatter="{Binding LabelsFormatter}"
+                AnimationsSpeed="0"
+                SeparatorsPaint="{lc:SolidColorPaint Color='64B4B4B4'}"
+                />
+		</lc:CartesianChart.XAxes>
+	</lc:CartesianChart>
+	
+</UserControl>
