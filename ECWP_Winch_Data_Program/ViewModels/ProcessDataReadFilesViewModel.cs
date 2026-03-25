@@ -239,7 +239,7 @@ namespace ViewModels
                         else if (parseData.SelectedWinch == "UNOLS String")
                         {
                             //UNOLS String data Format: String ID, Date, Time, Tension, Speed, Payout, Checksum?, TM Alarms, TM Warnings
-                            if (data[0] == "$WIR")
+                            if (data[0] == "$WIR" || data[0] == "RD")
                             {
                                 bool LengthBool = false;
                                 bool TensionBool = false;
