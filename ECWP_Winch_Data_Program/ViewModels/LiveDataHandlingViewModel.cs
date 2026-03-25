@@ -330,7 +330,7 @@
             }
 
             //free up canceller resources
-            winch.Canceller.Dispose();
+            //winch.Canceller.Dispose();
             if (winch.LogMax == true)
             {
                 //Write the max data for the cast
@@ -343,6 +343,8 @@
             }
             winch.StartStopButtonText = "Start Log";
             MainViewModel._configDataStore.UserInputsEnable = true;
+            //Free up resources used by cancellation token
+            winch.Canceller.Dispose();
         }
 
         public void DisplayData(DataPointModel latest, WinchModel winch)
