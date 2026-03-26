@@ -122,7 +122,7 @@ namespace ViewModels
         public void InsertWinch(WinchModel Winch)
         {
             //Check to see if a cast number has been added. If not set to 1
-            if (Winch.CastNumber == null)
+            if (Winch.CastNumber !> 0)
             {
                 Winch.CastNumber = 1;
             }
