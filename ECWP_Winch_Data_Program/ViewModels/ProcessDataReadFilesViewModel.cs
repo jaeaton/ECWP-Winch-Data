@@ -264,8 +264,15 @@ namespace ViewModels
                                     lineData.Speed = Speed;
                                     lineData.Payout = Payout;
                                     lineData.CheckSum = data[6];
-                                    //lineData.DateAndTime = DateTime.ParseExact($"{data[1]}T{data[2]}", "yyyy-MM-ddTHH:mm:ss.fff", null);
-                                    lineData.DateAndTime = DateTime.Parse( data[1] + "T" + data[2]);
+                                    lineData.DateAndTime = DateTime.ParseExact($"{data[1]}T{data[2]}", "yyyyMMddTHH:mm:ss.fff", null);
+                                    //if (DateOnly.TryParse(data[1], out DateOnly date) && TimeOnly.TryParse(data[2], out TimeOnly time))
+                                    //{
+                                    //    lineData.DateAndTime = date.ToDateTime(time);
+                                    //}
+                                    //else
+                                    //{ 
+                                    //    lineData.DateAndTime = DateTime.Parse(data[1] + "T" + data[2]);
+                                    //}
                                     lineData.TMAlarms = data[7];
                                     lineData.TMWarnings = data[8];
                                     /*
