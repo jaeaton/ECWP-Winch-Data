@@ -1,4 +1,6 @@
-﻿namespace Services
+﻿using DocumentFormat.OpenXml.Office2010.CustomUI;
+
+namespace Services
 {
     public class FilesService : IFilesService
     {
@@ -7,10 +9,12 @@
         public FilesService(Window target)
         {
             _target = target;
+
         }
 
         public async Task<IStorageFile?> OpenFileAsync()
         {
+            
             var files = await _target.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions()
             {
                 Title = "Select Sheave Train",
@@ -23,7 +27,7 @@
 
         public async Task<IStorageFile?> SaveFileAsync(string extension, string windowTitle, string fileName)
         {
-            return await _target.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions()
+            return await _target.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
             {
                 Title = windowTitle,
                 DefaultExtension = extension,

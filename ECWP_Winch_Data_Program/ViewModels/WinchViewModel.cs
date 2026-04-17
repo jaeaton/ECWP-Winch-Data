@@ -346,7 +346,7 @@ namespace ViewModels
             catch (Exception e)
             {
                 ErrorMessages?.Add(e.Message);
-                await MessageBoxViewModel.DisplayMessage($"Failed to create UDP output: {e.Message}");
+                //await MessageBoxViewModel.DisplayMessage($"File error: {e.Message}");
                 return AppDomain.CurrentDomain.BaseDirectory;
             }
         }
