@@ -1,12 +1,26 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using ClosedXML.Graphics;
+using DocumentFormat.OpenXml.CustomProperties;
+using DocumentFormat.OpenXml.Presentation;
+using System.ComponentModel.DataAnnotations;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+//byte[] fontBytes = ECWP_Winch_Data_Program.Properties.Resources.CarlitoRegular;
+
+
+//using (var fallbackFontStream = new MemoryStream(fontBytes))
+//{
+//    LoadOptions.DefaultGraphicEngine = DefaultGraphicEngine.CreateWithFontsAndSystemFonts(fallbackFontStream);
+//}
 
 namespace ViewModels
 {
     public class ExcelViewModel
     {
+
         //Direct write method -- old
         public static void AddCastData(DataPointModel dataMaxTension, DataPointModel dataMaxPayout, int cast, WinchModel winch)
         {
+            BackupFont();
+
             //Check Date for data point
             string date = string.Empty;
             if (dataMaxTension.Date != string.Empty)
@@ -123,6 +137,7 @@ namespace ViewModels
         //New data write method
         public static void AddCast(WireLogModel dataPoint)
         {
+            BackupFont();
             ConfigDataStore _config = MainViewModel._configDataStore;
             _config.CurrentWinch = (WinchModel)SetWireLogFileName(_config.CurrentWinch);
             //Set filename
@@ -186,6 +201,7 @@ namespace ViewModels
 
         public static void AddEvent(WireLogModel dataPoint)
         {
+            BackupFont();
             ConfigDataStore _config = MainViewModel._configDataStore;
             _config.CurrentWinch = (WinchModel)SetWireLogFileName(_config.CurrentWinch);
             //Set filename
@@ -236,6 +252,7 @@ namespace ViewModels
 
         public static void NewWorkbook(string fileName, WinchModel winch)
         {
+            BackupFont();
             ConfigDataStore _config = MainViewModel._configDataStore;
             // Creating a new workbook
             var wb = new XLWorkbook();
@@ -467,6 +484,16 @@ namespace ViewModels
                     wireLog.Notes = sVal;
                 }
                 dataStore.WireLog.Add(wireLog.ShallowCopy());
+            }
+        }
+        public static void BackupFont()
+        {
+            byte[] fontBytes = ECWP_Winch_Data_Program.Properties.Resources.CarlitoRegular;
+
+
+            using (var fallbackFontStream = new MemoryStream(fontBytes))
+            {
+                LoadOptions.DefaultGraphicEngine = DefaultGraphicEngine.CreateWithFontsAndSystemFonts(fallbackFontStream);
             }
         }
     }

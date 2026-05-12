@@ -343,19 +343,21 @@
             }
 
             //free up canceller resources
-            winch.Canceller.Dispose();
+            //winch.Canceller.Dispose();
             if (winch.LogMax == true)
             {
                 //Write the max data for the cast
-                //WriteMaxData(winch);
-                ExcelViewModel.AddCastData(winch.MaxData.MaxTension, winch.MaxData.MaxPayout, winch.CastNumber, winch);
-                winch.MaxData.Clear();
+                WriteMaxData(winch);
+                //ExcelViewModel.AddCastData(winch.MaxData.MaxTension, winch.MaxData.MaxPayout, winch.CastNumber, winch);
+                //winch.MaxData.Clear();
                 //Increase the cast count
-                winch.CastNumber = winch.CastNumber + 1;
+                //winch.CastNumber = winch.CastNumber + 1;
                 //UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
             }
             winch.StartStopButtonText = "Start Log";
             MainViewModel._configDataStore.UserInputsEnable = true;
+            //Free up resources used by cancellation token
+            winch.Canceller.Dispose();
         }
 
         public void DisplayData(DataPointModel latest, WinchModel winch)
@@ -760,7 +762,7 @@
 
             fileName = winch.UnolsWireLogName;
             destPath = System.IO.Path.Combine(winch.RawLogDirectory, fileName);
-            line = $"{data.StringID},{data.Date},{data.Time},{data.Tension},{data.Speed},{data.Payout},{data.TMWarnings},{data.TMAlarms},{data.CheckSum}";
+            line = $"$WIR,{data.Date},{data.Time},{data.Tension},{data.Speed},{data.Payout},{data.TMWarnings},{data.TMAlarms},{data.CheckSum}";
 
             using (StreamWriter stream = new StreamWriter(destPath, append: true))
             {
@@ -889,6 +891,7 @@
             ExcelViewModel.AddCastData(winch.MaxData.MaxTension, winch.MaxData.MaxPayout, winch.CastNumber, winch);
             //Clear max data
             winch.MaxData.Clear();
+            winch.CastNumber = winch.CastNumber + 1;
         }
 
         private async Task<UdpClient?> CreateUdpOutputAsync(CommunicationModel output)

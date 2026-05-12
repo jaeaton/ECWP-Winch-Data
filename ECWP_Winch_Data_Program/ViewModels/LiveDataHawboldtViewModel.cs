@@ -22,6 +22,9 @@
                 case "SPRE-2036S":
                     ResponseData = SPRE_2036S(byteArray);
                     return ResponseData;
+                case "OS-30":
+                    ResponseData = OS_30(byteArray);
+                    return ResponseData;
 
                 default:
                     return ResponseData;
@@ -222,6 +225,47 @@
 
             //Form data into string
             ResponseData = $"$HWIR4,{year}-{month}-{day},{hour}:{minute}:{second},{tension},{speed},{payout}";
+            return ResponseData;
+        }
+        private string OS_30(byte[] byteArray)
+        {
+            string ResponseData = string.Empty;
+            byte[] bytes1 = new byte[1];
+            byte[] bytes2 = new byte[2];
+            byte[] bytes4 = new byte[4];
+            //Process Date
+            //Process Year
+            Array.Copy(byteArray, 0, bytes2, 0, 2);
+            string year = TwoByteInt(bytes2);
+            //process Month
+            Array.Copy(byteArray, 2, bytes1, 0, 1);
+            string month = OneByteInt(bytes1);
+            //Process Day
+            Array.Copy(byteArray, 3, bytes1, 0, 1);
+            string day = OneByteInt(bytes1);
+            //Process Time
+            //Process Hour
+            Array.Copy(byteArray, 4, bytes1, 0, 1);
+            string hour = OneByteInt(bytes1);
+            //Process Minute
+            Array.Copy(byteArray, 5, bytes1, 0, 1);
+            string minute = OneByteInt(bytes1);
+            //Process Seconds
+            Array.Copy(byteArray, 6, bytes4, 0, 4);
+            string second = TimeRealByteInt(bytes4);
+            //Process Tension
+            Array.Copy(byteArray, 30, bytes4, 0, 4);
+            string tension = RealByteInt(bytes4);
+
+            //Process Payout
+            Array.Copy(byteArray, 34, bytes4, 0, 4);
+            string payout = RealByteInt(bytes4);
+
+            //Process Speed
+            Array.Copy(byteArray, 38, bytes4, 0, 4);
+            string speed = RealByteInt(bytes4);
+            //Form data into string
+            ResponseData = $"$HWIR5,{year}-{month}-{day},{hour}:{minute}:{second},{tension},{speed},{payout}";
             return ResponseData;
         }
 

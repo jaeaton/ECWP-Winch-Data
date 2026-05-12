@@ -32,7 +32,7 @@
             //Write the max data for the cast
             dh.WriteMaxData(winch);
             //Increase the cast count
-            winch.CastNumber = winch.CastNumber + 1;
+            //winch.CastNumber = winch.CastNumber + 1;
             //UserInputsView.globalConfig = (GlobalConfigModel)AppConfigViewModel.GetConfig(MainWindowViewModel._configDataStore);
         }
 

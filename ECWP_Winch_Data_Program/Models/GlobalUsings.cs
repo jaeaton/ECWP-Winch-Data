@@ -40,6 +40,7 @@ global using MsBox.Avalonia.Dto;
 global using MsBox.Avalonia.Enums;
 global using ClosedXML;
 global using ClosedXML.Excel;
+global using SixLabors.Fonts;
 global using Mayerch1.GithubUpdateCheck;
 global using Microsoft.Extensions.DependencyInjection;
 global using System.Text.RegularExpressions;

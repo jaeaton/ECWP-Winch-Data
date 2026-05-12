@@ -36,8 +36,15 @@
         {
                 "-10",
                 "-5",
+                "-4",
+                "-3",
+                "-2",
+                "-1",
                 "0",
                 "1",
+                "2",
+                "3",
+                "4",
                 "5",
                 "10",
                 "12",
@@ -86,7 +93,8 @@
                                                                 "10",
                                                                 "20",
                                                                 "30",
-                                                                "45"
+                                                                "45",
+                                                                "60"
                                                             };
 
         [ObservableProperty]
@@ -109,7 +117,8 @@
                                                                 "Hawboldt SPRE-3464",
                                                                 "Hawboldt SPRE-2648RS",
                                                                 "Hawboldt SPRE-2640",
-                                                                "Hawboldt SPRE-2036S"
+                                                                "Hawboldt SPRE-2036S",
+                                                                "Hawboldt OS-30"
                                                             };
 
         [ObservableProperty]

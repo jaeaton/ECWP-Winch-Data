@@ -173,6 +173,14 @@
                 {
                     HawboldtModel = "SPRE-2036S";
                 }
+                else if (value.Contains("OS-30"))
+                {
+                    HawboldtModel = "OS-30";
+                }
+                else
+                {
+                    HawboldtModel = "Unknown Hawboldt Model";
+                }
             }
             else
             {
