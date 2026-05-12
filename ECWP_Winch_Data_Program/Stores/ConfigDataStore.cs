@@ -117,7 +117,8 @@
                                                                 "Hawboldt SPRE-3464",
                                                                 "Hawboldt SPRE-2648RS",
                                                                 "Hawboldt SPRE-2640",
-                                                                "Hawboldt SPRE-2036S"
+                                                                "Hawboldt SPRE-2036S",
+                                                                "Hawboldt OS-30"
                                                             };
 
         [ObservableProperty]
