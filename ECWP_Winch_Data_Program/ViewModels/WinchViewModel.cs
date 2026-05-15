@@ -127,7 +127,7 @@ namespace ViewModels
                 Winch.CastNumber = 1;
             }
             //Check to see if the start button has a name. If not set to "start log"
-            if (Winch.StartStopButtonText == null)
+            if (Winch.StartStopButtonText == null || Winch.StartStopButtonText == string.Empty)
             {
                 Winch.StartStopButtonText = "Start Log";
             }
