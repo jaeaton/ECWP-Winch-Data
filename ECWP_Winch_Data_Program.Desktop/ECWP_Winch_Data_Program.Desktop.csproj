@@ -31,9 +31,9 @@
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="12.0.0" />
     <PackageReference Include="Avalonia.Desktop" Version="12.0.3" />
     <PackageReference Include="ClosedXML" Version="0.105.0" />
-    <PackageReference Include="LiveChartsCore" Version="2.0.2" />
-    <PackageReference Include="LiveChartsCore.SkiaSharpView" Version="2.0.2" />
-    <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.0.2" />
+    <PackageReference Include="LiveChartsCore" Version="2.1.0-dev-365" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView" Version="2.1.0-dev-365" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.1.0-dev-365" />
     <PackageReference Include="Mayerch1.GithubUpdateCheck" Version="1.2.1" />
     <PackageReference Include="MessageBox.Avalonia" Version="12.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.8" />
