@@ -588,6 +588,10 @@
                     case "$HWIR4":
                         latest = new DataPointModel(strID, strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
                         break;
+                        //OS-30 Russ Hopcroft
+                    case "$HWIR5":
+                        latest = new DataPointModel(strID, strIn[1], strIn[2], strIn[3], strIn[4], strIn[5], " ");
+                        break;
                     //Mermac R30 string
                     case "$R30C":
                         latest = new DataPointModel(strID, strIn[2], strIn[3], strIn[4]);
