@@ -414,11 +414,13 @@
             catch (SocketException ex)
             {
                 //Console.WriteLine($"Socket error: {ex.Message}");
+                await MessageBoxViewModel.DisplayMessage($"Error Message: {ex.Message}");
                 udpClient.Close();
             }
             catch (Exception ex)
             {
                 //Console.WriteLine($"An unexpected error occurred: {ex.Message}");
+                await MessageBoxViewModel.DisplayMessage($"Error Message: {ex.Message}");
                 udpClient.Close();
             }
 

@@ -19,7 +19,7 @@
 			<StackPanel Margin="10" IsVisible="{Binding ElementName=RadioButtonSendUDP, Path=IsChecked}">
 				<StackPanel Orientation="Horizontal" >
 					<TextBlock Text="Destination" Width="90" VerticalAlignment="Center" />
-					<TextBox Watermark="Identifier" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.DestinationName,Mode=TwoWay}" Width="130" VerticalAlignment="Center" ToolTip.Tip="Enter the function or hostname of the data being sent"/>
+					<TextBox PlaceholderText="Identifier" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.DestinationName,Mode=TwoWay}" Width="130" VerticalAlignment="Center" ToolTip.Tip="Enter the function or hostname of the data being sent"/>
 				</StackPanel>
 				<StackPanel>
 					<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" GroupName="udpRadioButtons" IsChecked="{Binding CurrentWinch.OutputCommunication.IsMTNW, Mode=TwoWay}"/>
@@ -27,11 +27,11 @@
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5"  >
 					<TextBlock Text="IP Address" Width="90" VerticalAlignment="Center" />
-					<TextBox x:Name="TextBoxDestinationIPAdress" Watermark="192.168.1.121" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.TcpIpAddress,Mode=TwoWay}" Width="130" VerticalAlignment="Center" ToolTip.Tip="Destination IP Address."/>
+					<TextBox x:Name="TextBoxDestinationIPAdress" PlaceholderText="192.168.1.121" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.TcpIpAddress,Mode=TwoWay}" Width="130" VerticalAlignment="Center" ToolTip.Tip="Destination IP Address."/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5"  >
 					<TextBlock Text="Port Number" Width="90" VerticalAlignment="Center" />
-					<TextBox x:Name="TextBoxDestinationPort" Watermark="50000" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.PortNumber,Mode=TwoWay}" Width="130" VerticalAlignment="Center" />
+					<TextBox x:Name="TextBoxDestinationPort" PlaceholderText="50000" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.PortNumber,Mode=TwoWay}" Width="130" VerticalAlignment="Center" />
 				</StackPanel>				
 				<StackPanel Orientation="Horizontal" Margin="5">
 					<TextBlock Text="Source Type" Width="90" VerticalAlignment="Center"/>
@@ -48,7 +48,7 @@
 			<StackPanel Margin="10" IsVisible="{ Binding ElementName=RadioButtonSendSerial,Path=IsChecked }">
 				<StackPanel Orientation="Horizontal" >
 					<TextBlock Text="Destination" Width="90" VerticalAlignment="Center" />
-					<TextBox Watermark="Identifier" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.DestinationName,Mode=TwoWay}" Width="130" VerticalAlignment="Center" ToolTip.Tip="Enter the function or hostname of the data being sent"/>
+					<TextBox PlaceholderText="Identifier" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.OutputCommunication.DestinationName,Mode=TwoWay}" Width="130" VerticalAlignment="Center" ToolTip.Tip="Enter the function or hostname of the data being sent"/>
 				</StackPanel>
 				<StackPanel>
 					<RadioButton Content="MTNW Format"  HorizontalContentAlignment="Right" GroupName="serialRadioButtons"  IsChecked="{Binding CurrentWinch.OutputCommunication.IsMTNW,Mode=TwoWay}" />

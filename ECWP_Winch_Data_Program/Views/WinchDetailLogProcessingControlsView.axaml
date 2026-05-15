@@ -32,7 +32,7 @@
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">
 			<TextBlock Text="Cruise Name:" Width="160" VerticalAlignment="Center"/>
-			<TextBox Width="160" Watermark="Enter Cruise Name" Text="{ Binding CruiseNameBox }" ToolTip.Tip="Enter cruise name here"/>
+			<TextBox Width="160" PlaceholderText="Enter Cruise Name" Text="{ Binding CruiseNameBox }" ToolTip.Tip="Enter cruise name here"/>
 			<Button Content="Update" Margin="5,0,0,0" Command="{Binding UpdateCruiseInfoCommand}" DataContext="{StaticResource Save}" ToolTip.Tip="Saves cruise name"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5">

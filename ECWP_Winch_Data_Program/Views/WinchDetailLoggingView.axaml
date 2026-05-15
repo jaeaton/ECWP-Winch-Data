@@ -22,11 +22,11 @@
 				<CheckBox x:Name="CheckBoxAutoLog" IsEnabled="{Binding Path=UserInputsEnable}" Content="Auto Log" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding CurrentWinch.AutoLog, FallbackValue='False'}" IsVisible="{ Binding ElementName=CheckBoxLog20Hz,Path=IsChecked }"/>
 				<StackPanel Orientation="Horizontal" Margin="2" IsVisible="{ Binding ElementName=CheckBoxAutoLog,Path=IsChecked }">
 					<TextBlock Text="Min Log Tension" Width="120" VerticalAlignment="Center" />
-					<TextBox Watermark="100" x:Name="TextBoxMinTension" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.StopLogTension, Mode=TwoWay }" Width="90" VerticalAlignment="Center"></TextBox>
+					<TextBox PlaceholderText="100" x:Name="TextBoxMinTension" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.StopLogTension, Mode=TwoWay }" Width="90" VerticalAlignment="Center"></TextBox>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="2" IsVisible="{ Binding ElementName=CheckBoxAutoLog,Path=IsChecked }">
 					<TextBlock Text="Min Log Payout" Width="120" VerticalAlignment="Center" />
-					<TextBox Watermark="-1" x:Name="TextBoxMinPayout" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.StopLogPayout, Mode=TwoWay }" Width="90" VerticalAlignment="Center"></TextBox>
+					<TextBox PlaceholderText="-1" x:Name="TextBoxMinPayout" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.StopLogPayout, Mode=TwoWay }" Width="90" VerticalAlignment="Center"></TextBox>
 				</StackPanel>
 				<CheckBox x:Name="CheckBoxLogMax" IsEnabled="{Binding Path=UserInputsEnable}" Content="Log Max Data" HorizontalContentAlignment="Right" Margin="6,2,50,0" IsChecked="{Binding CurrentWinch.LogMax, FallbackValue='True'}" ToolTip.Tip="This enables the saving of max data when stopping data collection on the live view."/>
 				<CheckBox x:Name="CheckBoxUseComputerTime" IsEnabled="{Binding Path=UserInputsEnable}" Content="Use Computer Time" HorizontalContentAlignment="Right" Margin="6,0,50,0" IsChecked="{Binding CurrentWinch.UseComputerTime,FallbackValue='False',Mode=TwoWay}" ToolTip.Tip="Select this to ignore time from the measurement system."/>
@@ -75,7 +75,7 @@
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="2" IsVisible="{Binding CurrentWinch.ThreePeeEssSelected}">
 					<TextBlock Text="3PS ID Number" VerticalAlignment="Center" Width="120"/>
-					<TextBox Watermark="Enter ID" Text="{Binding CurrentWinch.Atlantis3PSWinchID}" Width="90" ToolTip.Tip="Enter the winch ID number. Atlantis only."/>
+					<TextBox PlaceholderText="Enter ID" Text="{Binding CurrentWinch.Atlantis3PSWinchID}" Width="90" ToolTip.Tip="Enter the winch ID number. Atlantis only."/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Minimum Payout" VerticalAlignment="Center" Width="120"/>

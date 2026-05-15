@@ -8,7 +8,7 @@ namespace ViewModels
         {
             bool output = true;
             //Check to see if a number is provided for casts
-            int castNum;
+            //int castNum;
             //bool validCast = int.TryParse(castNumber, out castNum);
             if (castNumber  < 1)
             {
@@ -22,7 +22,7 @@ namespace ViewModels
             bool output = true;
             //Validate fields for cruise info
             //Check to see if a name is provided for the cruise
-            if (cruiseName == null)
+            if (cruiseName == string.Empty)
             {
                 output = false;
             }

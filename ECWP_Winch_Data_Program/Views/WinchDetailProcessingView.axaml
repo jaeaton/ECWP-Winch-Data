@@ -12,7 +12,7 @@
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="2" IsVisible="{Binding CurrentWinch.ThreePeeEssSelected}">
 			<TextBlock Text="3PS ID Number" VerticalAlignment="Center" Width="120"/>
-			<TextBox Watermark="Enter ID" Text="{Binding CurrentWinch.Atlantis3PSWinchID}" Width="90" ToolTip.Tip="Enter the winch ID number. Atlantis only."/>
+			<TextBox PlaceholderText="Enter ID" Text="{Binding CurrentWinch.Atlantis3PSWinchID}" Width="90" ToolTip.Tip="Enter the winch ID number. Atlantis only."/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="2">
 			<TextBlock Text="Minimum Payout" VerticalAlignment="Center" Width="120"/>

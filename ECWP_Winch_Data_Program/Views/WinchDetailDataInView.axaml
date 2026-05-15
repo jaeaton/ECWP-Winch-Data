@@ -15,11 +15,11 @@
 			<StackPanel IsVisible="{Binding ElementName=RadioButtonInputCommNetwork, Path=IsChecked}">
 				<StackPanel Orientation="Horizontal" Margin="5">
 					<TextBlock Text="IP Address" Width="100" VerticalAlignment="Center" />
-					<TextBox Watermark="Ex: 192.168.103.217" Text="{ Binding CurrentWinch.InputCommunication.TcpIpAddress, Mode=TwoWay }" IsEnabled="{Binding Path=UserInputsEnable}" Width="130" VerticalAlignment="Center" HorizontalAlignment="Right" ToolTip.Tip="For UDP and TCP Server set to device address. For TCP Client set to host address."></TextBox>
+					<TextBox PlaceholderText="Ex: 192.168.103.217" Text="{ Binding CurrentWinch.InputCommunication.TcpIpAddress, Mode=TwoWay }" IsEnabled="{Binding Path=UserInputsEnable}" Width="130" VerticalAlignment="Center" HorizontalAlignment="Right" ToolTip.Tip="For UDP and TCP Server set to device address. For TCP Client set to host address."></TextBox>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5">
 					<TextBlock Text="Port Number" Width="100" VerticalAlignment="Center" />
-					<TextBox Watermark="Ex: 50505" x:Name="TextBoxSourcePort" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.InputCommunication.PortNumber, Mode=TwoWay }" Width="130" VerticalAlignment="Center" ToolTip.Tip="Set to match device port number."></TextBox>
+					<TextBox PlaceholderText="Ex: 50505" x:Name="TextBoxSourcePort" IsEnabled="{Binding Path=UserInputsEnable}" Text="{Binding CurrentWinch.InputCommunication.PortNumber, Mode=TwoWay }" Width="130" VerticalAlignment="Center" ToolTip.Tip="Set to match device port number."></TextBox>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5">
 					<TextBlock Text="Source Type" Width="100" VerticalAlignment="Center"/>
