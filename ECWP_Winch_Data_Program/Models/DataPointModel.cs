@@ -73,14 +73,23 @@
             //DateTime.TryParse(inTime, out DateTime HMS);
             Time = inTime;
 
-            float.TryParse(inTension, out float tension);
-            Tension = tension;
+            if(float.TryParse(inTension, out float tension))
+            {
+                Tension = tension;
+            }
+            
 
-            float.TryParse(inPayout, out float payout);
-            Payout = payout;
+            if(float.TryParse(inPayout, out float payout))
+            {
+                Payout = payout;
+            }
+            
 
-            float.TryParse(inSpeed, out float speed);
-            Speed = speed;
+            if(float.TryParse(inSpeed, out float speed))
+            {
+                Speed = speed;
+            }
+            
 
             CheckSum = inCheckSum;
             TMAlarms = "00000000";
@@ -109,14 +118,22 @@
             //DateTime.TryParse(inTime, out DateTime HMS);
             Time = inTime;
 
-            float.TryParse(inTension, out float tension);
-            Tension = tension;
+            if (float.TryParse(inTension, out float tension))
+            {
+                Tension = tension;
+            }
 
-            float.TryParse(inPayout, out float payout);
-            Payout = payout;
 
-            float.TryParse(inSpeed, out float speed);
-            Speed = speed;
+            if (float.TryParse(inPayout, out float payout))
+            {
+                Payout = payout;
+            }
+
+
+            if (float.TryParse(inSpeed, out float speed))
+            {
+                Speed = speed;
+            }
 
             CheckSum = inCheckSum;
             TMWarnings = tMWarnings;
@@ -144,14 +161,22 @@
             //DateTime.TryParse(inTime, out DateTime HMS);
             Time = inTime;
 
-            float.TryParse(inTension, out float tension);
-            Tension = tension;
+            if (float.TryParse(inTension, out float tension))
+            {
+                Tension = tension;
+            }
 
-            float.TryParse(inPayout, out float payout);
-            Payout = payout;
 
-            float.TryParse(inSpeed, out float speed);
-            Speed = speed;
+            if (float.TryParse(inPayout, out float payout))
+            {
+                Payout = payout;
+            }
+
+
+            if (float.TryParse(inSpeed, out float speed))
+            {
+                Speed = speed;
+            }
 
             TMWarnings = tMWarnings;
             TMAlarms = tMAlarms;
@@ -160,9 +185,22 @@
         public DataPointModel(string SID, string Ten, string Sp, string Pay)
         {
             StringID = SID;
-            Tension = float.Parse(Ten);
-            Speed = float.Parse(Sp);
-            Payout = float.Parse(Pay);
+            if (float.TryParse(Ten, out float tension))
+            {
+                Tension = tension;
+            }
+
+
+            if (float.TryParse(Pay, out float payout))
+            {
+                Payout = payout;
+            }
+
+
+            if (float.TryParse(Sp, out float speed))
+            {
+                Speed = speed;
+            }
             TMWarnings = "00000000";
             TMAlarms = "00000000";
         }

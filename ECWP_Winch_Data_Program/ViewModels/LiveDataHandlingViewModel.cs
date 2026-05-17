@@ -484,12 +484,19 @@
             //Parse incoming data function and store in DataPointModel
             bool maxChange = false;
             bool getTime = false;
-
-            lines = lines.Replace("$WIR", Environment.NewLine + "$WIR");
+            if (lines.Contains("$WIR")) 
+            {
+                lines = lines.Replace("$WIR", Environment.NewLine + "$WIR");   
+            }
+            
             //lines = lines.Replace("Cable Length", Environment.NewLine + "Cable Length");
             string pattern = @"Cable Length";
             string replacement = Environment.NewLine + pattern;
-            lines = Regex.Replace(lines, pattern, replacement);
+            if (lines.Contains("Cable Length"))
+            {
+                lines = Regex.Replace(lines, pattern, replacement);
+            }
+
             string[] strings = lines.Split(Environment.NewLine,
                             StringSplitOptions.RemoveEmptyEntries);
             winch.LiveData.SplitWireData = strings[0];
@@ -506,7 +513,7 @@
                 {
                     strID = strIn[0];
                 }
-               else if (strIn[0].Contains("RD"))
+                else if (strIn[0].Contains("RD"))
                 {
                     strID = "RD";
                 }
@@ -681,14 +688,21 @@
                     //Look for TM warnings and alarms and set valvues
                     if (winch.TensionWarningLevel != string.Empty && winch.TensionAlarmLevel != string.Empty)
                     {
-                        if (latest.Tension > float.Parse(winch.TensionWarningLevel))
+                        if (float.TryParse(winch.TensionWarningLevel, out float TensionWarning))
                         {
-                            latest.TMAlarms = "00000001";
+                            if (latest.Tension > TensionWarning)
+                            {
+                                latest.TMAlarms = "00000001";
+                            }
                         }
-                        if (latest.Tension > float.Parse(winch.TensionAlarmLevel))
-                        {
-                            latest.TMAlarms = "00000001";
+                        if (float.TryParse(winch.TensionAlarmLevel, out float TensionAlarm)) 
+                        { 
+                           if (latest.Tension > TensionAlarm)
+                           {
+                               latest.TMAlarms = "00000001";
+                           }     
                         }
+
                     }
 
                     //Write data to logfile
