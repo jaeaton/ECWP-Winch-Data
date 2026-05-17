@@ -45,6 +45,7 @@ namespace ViewModels
         public static void ReadDataFromLogs(ParseDataStore parseData)
         {
             string filePath = parseData.Directory;
+            parseData.DataToPlot.Clear();
             foreach (var fin in parseData.FileList)
             {
                 ProcessDataViewModel.ParseData.NumberOfProcessedFiles++;
@@ -386,6 +387,12 @@ namespace ViewModels
                     ProcessDataViewModel.ParseData.CancellationTokenSource.Token.ThrowIfCancellationRequested();
                 }
             }
+            //Plot Data
+            while (parseData.DataToPlot.Count > 0)
+            {
+                parseData.ChartData.AddData(parseData.DataToPlot[0]);
+                parseData.DataToPlot.RemoveAt(0);
+            }
         }
 
         //Step 3
@@ -489,10 +496,10 @@ namespace ViewModels
                     //i = 0;
                 }
 
-                //if (castActive)
-                //{
-                //    parseData.DataToPlot.Add(lineData);
-                //}
+                if (castActive)
+                {
+                    parseData.DataToPlot.Add(lineData);
+                }
             }
             //Plot Data
             //foreach (var val in parseData.DataToPlot)

@@ -268,6 +268,14 @@
             ResponseData = $"$HWIR5,{year}-{month}-{day},{hour}:{minute}:{second},{tension},{speed},{payout}";
             return ResponseData;
         }
+
+            //Process Speed
+            Array.Copy(byteArray, 38, bytes4, 0, 4);
+            string speed = RealByteInt(bytes4);
+            //Form data into string
+            ResponseData = $"$HWIR5,{year}-{month}-{day},{hour}:{minute}:{second},{tension},{speed},{payout}";
+            return ResponseData;
+        }
         private string OneByteInt(byte[] bytes1)
         {
             //int Int = BitConverter.ToInt16(bytes1);

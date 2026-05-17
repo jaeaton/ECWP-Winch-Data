@@ -122,7 +122,7 @@ namespace ViewModels
         public void InsertWinch(WinchModel Winch)
         {
             //Check to see if a cast number has been added. If not set to 1
-            if (Winch.CastNumber == null)
+            if (Winch.CastNumber !> 0)
             {
                 Winch.CastNumber = 1;
             }
@@ -346,6 +346,7 @@ namespace ViewModels
             catch (Exception e)
             {
                 ErrorMessages?.Add(e.Message);
+                //await MessageBoxViewModel.DisplayMessage($"File error: {e.Message}");
                 return AppDomain.CurrentDomain.BaseDirectory;
             }
         }

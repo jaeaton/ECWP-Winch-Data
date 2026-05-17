@@ -21,6 +21,9 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
+    <AvaloniaResource Remove="Assets\Carlito-Regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Assets\ECWP Icon.ico" />
     <None Remove="Assets\ECWPLogo.jpg" />
     <None Remove="Assets\up_down.png" />

@@ -17,7 +17,7 @@
 		<v:ProcessDataDataGridView Grid.Row="1"/>
 
 
-		<!-->v:ProcessDataPlotView Grid.Row="2"/-->
+		<v:ProcessDataPlotView Grid.Row="2"/>
 	
 		
 		

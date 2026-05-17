@@ -120,13 +120,19 @@
                                             {
                                                 //Asynchronous read of data to allow for other operations to occur
                                                 dataIn = await Task.Run(() => ReadTCPData(client, winch), winch.Canceller.Token);
+                                                if (dataIn == string.Empty)
+                                                {
+                                                    return;
+                                                }
                                                 //Show raw input data if selected
                                                 if (winch.ShowRawInput == true)
                                                 {
                                                     winch.LiveData.RawWireData = dataIn;
                                                 }
-                                                //read data
-                                                ParseWinchData(dataIn, winch);
+                                                
+                                                    //read data
+                                                    ParseWinchData(dataIn, winch);
+                                                
                                             }
                                             catch (Exception ae)
                                             {
@@ -201,15 +207,22 @@
                                             {
                                                 //Asynchronious read of data to allow for other operations to occur
                                                 dataIn = await Task.Run(() => ReadTCPData(client, winch), winch.Canceller.Token);
-
+                                                if (dataIn == string.Empty)
+                                                {
+                                                    return;
+                                                }
                                                 //Show raw input data if selected
                                                 if (winch.ShowRawInput == true)
                                                 {
                                                     winch.LiveData.RawWireData = dataIn;
                                                 }
-
-                                                //read data
-                                                ParseWinchData(dataIn, winch);
+                                                
+                                                
+                                                    //read data
+                                                    ParseWinchData(dataIn, winch);
+                                                
+                                                
+                                                
                                             }
                                             catch (Exception ae)
                                             {
@@ -248,7 +261,7 @@
                                             {
                                                 //Asynchronious read of data to allow for other operations to occur
                                                 dataIn = await Task.Run(() => ReadUDPData(client, winch), winch.Canceller.Token);
-                                                if (dataIn == "cancelled")
+                                                if (dataIn == string.Empty)
                                                 {
                                                     return;
                                                 }
@@ -446,22 +459,39 @@
             return responseData;
         }
 
-        private string ReadTCPData(TcpClient client, WinchModel winch)//object tcpCom)
+        private async Task<string> ReadTCPData(TcpClient client, WinchModel winch)//object tcpCom)
         {
             Byte[] data; //= System.Text.Encoding.ASCII.GetBytes(message);
             NetworkStream stream = client.GetStream();
             data = new Byte[256];
-
+            Int32 bytes = 0;
             // String to store the response ASCII representation.
-            string responseData;
+            string responseData = string.Empty;
 
             // Read the first batch of the TcpServer response bytes.
-            Int32 bytes = stream.Read(data, 0, data.Length);
-            responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
-            //Uncomment to show all data in Wire Data Field
-            //winch.LiveData.RawWireData = responseData;
+            //Int32 bytes = await stream.ReadAsync(data, 0, data.Length, winch.Canceller.Token).Result;
+            try
+            {
+                bytes = await stream.ReadAsync(data.AsMemory(0, data.Length), winch.Canceller.Token);
+                
+                responseData = System.Text.Encoding.ASCII.GetString(data, 0, bytes);
 
-            return responseData;
+                return responseData;
+            }
+            catch (OperationCanceledException)
+            {
+                // This exception is expected when the token is cancelled
+                client.Close();
+            } 
+            catch (SocketException ex) {
+                client.Close();
+            } 
+            catch (Exception ex)
+            {
+                client.Close();
+            }
+
+            return string.Empty;
         }
 
         private string ReplaceNonPrintableCharacters(string s, char replaceWith)

@@ -76,7 +76,7 @@
                     break;
 
                 case "UNOLS String":
-                    extension = "*UNOLS.Log";
+                    extension = "*UNOLS.log";
                     break;
 
                 case "Jay Jay":
