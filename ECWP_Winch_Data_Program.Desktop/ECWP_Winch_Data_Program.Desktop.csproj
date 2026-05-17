@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-    <Version>6.3.15</Version>
+    <Version>6.3.16</Version>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
     <ApplicationIcon>ECWP Icon.ico</ApplicationIcon>
     <PackageIcon>ECWPLogo.jpg</PackageIcon>
@@ -31,9 +31,9 @@
     <PackageReference Include="Avalonia.Controls.DataGrid" Version="12.0.0" />
     <PackageReference Include="Avalonia.Desktop" Version="12.0.3" />
     <PackageReference Include="ClosedXML" Version="0.105.0" />
-    <PackageReference Include="LiveChartsCore" Version="2.1.0-dev-365" />
-    <PackageReference Include="LiveChartsCore.SkiaSharpView" Version="2.1.0-dev-365" />
-    <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.1.0-dev-365" />
+    <PackageReference Include="LiveChartsCore" Version="2.1.0-dev-570" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView" Version="2.1.0-dev-570" />
+    <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.1.0-dev-570" />
     <PackageReference Include="Mayerch1.GithubUpdateCheck" Version="1.2.1" />
     <PackageReference Include="MessageBox.Avalonia" Version="12.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.8" />
