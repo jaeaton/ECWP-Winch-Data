@@ -42,14 +42,14 @@ namespace ViewModels
                 NoDirectory(winch);
                 return;
             }
-
+            string fullPath = Path.Combine(winch.WinchDirectory, fileName);
             //Check for file
-            if (!File.Exists($"{winch.WinchDirectory}\\{fileName}"))
+            if (!File.Exists(fullPath))
             {
                 NewWorkbook(fileName, winch);
             }
             // Opening workbook
-            var wb = new XLWorkbook($"{winch.WinchDirectory}\\{fileName}");
+            var wb = new XLWorkbook(fullPath);
 
             //Selecting a worksheet
             var ws = wb.Worksheets.Worksheet("Log");
@@ -112,13 +112,14 @@ namespace ViewModels
                 NoDirectory(_config.CurrentWinch);
                 return;
             }
+            string fullPath = Path.Combine(_config.CurrentWinch.WinchDirectory, fileName);
             //Check for file
-            if (!File.Exists($"{_config.CurrentWinch.WinchDirectory}\\{fileName}"))
+            if (!File.Exists(fullPath))
             {
                 NewWorkbook(fileName, _config.CurrentWinch);
             }
             // Opening workbook
-            var wb = new XLWorkbook($"{_config.CurrentWinch.WinchDirectory}\\{fileName}");
+            var wb = new XLWorkbook(fullPath);
             //Selecting a worksheet
             var ws = wb.Worksheets.Worksheet("Log");
             int LastRow = 22;
@@ -142,18 +143,20 @@ namespace ViewModels
             _config.CurrentWinch = (WinchModel)SetWireLogFileName(_config.CurrentWinch);
             //Set filename
             string fileName = $"{_config.CurrentWinch.WirePoolWireLogName}";
+            
             if (_config.CurrentWinch.WinchDirectory == string.Empty)
             {
                 NoDirectory(_config.CurrentWinch);
                 return;
             }
+            string fullPath = Path.Combine(_config.CurrentWinch.WinchDirectory, fileName);
             //Check for file
-            if (!File.Exists($"{_config.CurrentWinch.WinchDirectory}\\{fileName}"))
+            if (!File.Exists(fullPath))
             {
                 NewWorkbook(fileName, _config.CurrentWinch);
             }
             // Opening workbook
-            var wb = new XLWorkbook($"{_config.CurrentWinch.WinchDirectory}\\{fileName}");
+            var wb = new XLWorkbook(fullPath);
             //Selecting a worksheet
             var ws = wb.Worksheets.Worksheet("Log");
             int LastRow = 22;
@@ -211,13 +214,14 @@ namespace ViewModels
                 NoDirectory(_config.CurrentWinch);
                 return;
             }
+            var fullPath = Path.Combine(_config.CurrentWinch.WinchDirectory, fileName); 
             //Check for file
-            if (!File.Exists($"{_config.CurrentWinch.WinchDirectory}\\{fileName}"))
+            if (!File.Exists(fullPath))
             {
                 NewWorkbook(fileName, _config.CurrentWinch);
             }
             // Opening workbook
-            var wb = new XLWorkbook($"{_config.CurrentWinch.WinchDirectory}\\{fileName}");
+            var wb = new XLWorkbook(fullPath);
             //Selecting a worksheet
             var ws = wb.Worksheets.Worksheet("Log");
             int LastRow = 22;
@@ -364,7 +368,7 @@ namespace ViewModels
             ws.SheetView.FreezeRows(22);
 
             //Save File Cruise Name + Winch Name
-            var path = $"{winch.WinchDirectory}\\{fileName}";
+            var path = Path.Combine(winch.WinchDirectory, fileName);
             wb.SaveAs(path);
         }
 
@@ -385,18 +389,22 @@ namespace ViewModels
         public static void ReadLog(WinchModel winch)
         {
             winch = (WinchModel)SetWireLogFileName(winch);
+                        
             if (winch.WinchDirectory == string.Empty || winch.WirePoolWireLogName == string.Empty)
             {
                 return;
             }
+
             string fileName = $"{winch.WirePoolWireLogName}";
-            if (!File.Exists($"{winch.WinchDirectory}\\{fileName}"))
+            string fullPath =Path.Combine(winch.WinchDirectory, fileName);
+
+            if (!File.Exists(fullPath))
             {
                 return;
             }
 
             // Opening workbook
-            var wb = new XLWorkbook($"{winch.WinchDirectory}\\{fileName}");
+            var wb = new XLWorkbook(fullPath);
 
             //Selecting a worksheet
             var ws = wb.Worksheets.Worksheet("Log");
