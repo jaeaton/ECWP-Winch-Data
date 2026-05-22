@@ -102,7 +102,8 @@
             {
                 foreach (var fi in di.GetFiles(extension, SearchOption.AllDirectories))
                 {
-                    _parseData.FileList.Add($"{fi.DirectoryName}\\{fi.Name}");//fi.Name);
+                    var fullPath = Path.Combine(fi.DirectoryName, fi.Name);
+                    _parseData.FileList.Add(fullPath);
                 }
                 _parseData.NumberOfFiles = _parseData.FileList.Count;
                 //ParseData.FileList;//Sort();

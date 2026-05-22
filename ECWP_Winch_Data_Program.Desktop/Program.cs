@@ -26,6 +26,11 @@ class Program
     public static AppBuilder BuildAvaloniaApp()
         => AppBuilder.Configure<App>()
             .UsePlatformDetect()
+         .With(new X11PlatformOptions
+         {
+             // Set your X11 options here
+             UseDBusFilePicker = false
+         })
             .WithInterFont()
             .LogToTrace();
 
