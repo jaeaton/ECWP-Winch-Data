@@ -90,11 +90,15 @@
         [ObservableProperty]
         private List<string> chartTimeSpanList = new List<string>
                                                             {
-                                                                "10",
-                                                                "20",
-                                                                "30",
-                                                                "45",
-                                                                "59"
+                                                                "00:10",
+                                                                "00:20",
+                                                                "00:30",
+                                                                "00:45",
+                                                                "01:00",
+                                                                "10:00",
+                                                                "20:00",
+                                                                "30:00",
+                                                                "45:00"
                                                             };
 
         [ObservableProperty]
