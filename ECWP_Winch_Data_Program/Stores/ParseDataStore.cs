@@ -67,7 +67,8 @@
         private DateTime endDate = DateTime.Today;
 
         [ObservableProperty]
-        private SortableObservableCollection<string> fileList = new();
+        //private SortableObservableCollection<string> fileList = new();
+        private ObservableCollection<string> fileList = new();
 
         [ObservableProperty]
         private float maxPayoutCurrent = 0;

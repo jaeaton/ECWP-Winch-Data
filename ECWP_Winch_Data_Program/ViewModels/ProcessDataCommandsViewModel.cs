@@ -55,10 +55,12 @@
             ConfigDataStore _config = MainViewModel._configDataStore;
             //ParseDataStore ParseData = ProcessDataViewModel.ParseData;
             _parseData.FileList.Clear();
-            _parseData.FileList = new Store.SortableObservableCollection<string>();//SortableObservableCollection<string>();
+            //_parseData.FileList = new Store.SortableObservableCollection<string>();//SortableObservableCollection<string>();
+            _parseData.FileList = new ObservableCollection<string>();
+            List<string> files = new List<string>();
             DirectoryInfo di = new DirectoryInfo(_config.CurrentWinch.RawLogDirectory);
 
-            _parseData.FileList.Clear();
+            //_parseData.FileList.Clear();
             string extension;
             //Set File extension
             switch (_config.CurrentWinch.WinchLogType)
@@ -105,9 +107,11 @@
                     if (fi.DirectoryName != null)
                     {
                         string fullPath = Path.Combine(fi.DirectoryName, fi.Name);
-                        _parseData.FileList.Add(fullPath);
+                        files.Add(fullPath);
                     }
                 }
+                files.Sort();
+                _parseData.FileList = new ObservableCollection<string>(files);
                 _parseData.NumberOfFiles = _parseData.FileList.Count;
                 //ParseData.FileList;//Sort();
             }
