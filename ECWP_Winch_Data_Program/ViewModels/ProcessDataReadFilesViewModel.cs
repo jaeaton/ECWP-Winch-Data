@@ -274,7 +274,7 @@ namespace ViewModels
                                     //{ 
                                     //    lineData.DateAndTime = DateTime.Parse(data[1] + "T" + data[2]);
                                     //}
-                                    lineData.DateAndTime = DateTime.Parse( data[1] + "T" + data[2]);
+                                    //lineData.DateAndTime = DateTime.Parse( data[1] + "T" + data[2]);
                                     lineData.TMAlarms = data[7];
                                     lineData.TMWarnings = data[8];
                                     /*
