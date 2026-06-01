@@ -388,11 +388,11 @@ namespace ViewModels
                 }
             }
             //Plot Data
-            while (parseData.DataToPlot.Count > 0)
-            {
-                parseData.ChartData.AddData(parseData.DataToPlot[0]);
-                parseData.DataToPlot.RemoveAt(0);
-            }
+            //while (parseData.DataToPlot.Count > 0)
+            //{
+            //    parseData.ChartData.AddData(parseData.DataToPlot[0]);
+            //    parseData.DataToPlot.RemoveAt(0);
+            //}
         }
 
         //Step 3
