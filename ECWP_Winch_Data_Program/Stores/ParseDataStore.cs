@@ -164,31 +164,31 @@
         }
     }
 
-    public class SortableObservableCollection<T> : ObservableCollection<T>
-    {
-        public bool Descending { get; set; }
-        public Func<T, object> SortingSelector { get; set; }
+    //public class SortableObservableCollection<T> : ObservableCollection<T>
+    //{
+    //    public bool Descending { get; set; }
+    //    public Func<T, object> SortingSelector { get; set; }
 
-        protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
-        {
-            base.OnCollectionChanged(e);
-            if (SortingSelector == null
-                || e.Action == NotifyCollectionChangedAction.Remove
-                || e.Action == NotifyCollectionChangedAction.Reset)
-                return;
+    //    protected override void OnCollectionChanged(NotifyCollectionChangedEventArgs e)
+    //    {
+    //        base.OnCollectionChanged(e);
+    //        if (SortingSelector == null
+    //            || e.Action == NotifyCollectionChangedAction.Remove
+    //            || e.Action == NotifyCollectionChangedAction.Reset)
+    //            return;
 
-            var query = this
-              .Select((item, index) => (new { Index = index, Item = item }));
-            query = Descending
-              ? query.OrderByDescending(tuple => SortingSelector(tuple.Item))
-              : query.OrderBy(tuple => SortingSelector(tuple.Item));
+    //        var query = this
+    //          .Select((item, index) => (new { Index = index, Item = item }));
+    //        query = Descending
+    //          ? query.OrderByDescending(tuple => SortingSelector(tuple.Item))
+    //          : query.OrderBy(tuple => SortingSelector(tuple.Item));
 
-            var map = query.Select((tuple, index) => (new { OldIndex = tuple.Index, NewIndex = index }))
-             .Where(o => o.OldIndex != o.NewIndex);
+    //        var map = query.Select((tuple, index) => (new { OldIndex = tuple.Index, NewIndex = index }))
+    //         .Where(o => o.OldIndex != o.NewIndex);
 
-            using (var enumerator = map.GetEnumerator())
-                if (enumerator.MoveNext())
-                    Move(enumerator.Current.OldIndex, enumerator.Current.NewIndex);
-        }
-    }
+    //        using (var enumerator = map.GetEnumerator())
+    //            if (enumerator.MoveNext())
+    //                Move(enumerator.Current.OldIndex, enumerator.Current.NewIndex);
+    //    }
+    //}
 }
