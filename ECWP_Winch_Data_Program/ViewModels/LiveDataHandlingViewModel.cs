@@ -489,7 +489,7 @@
             } 
             catch (Exception ex)
             {
-                await MessageBoxViewModel.DisplayMessage($"Socket Exception: {ex.Message}");
+                await MessageBoxViewModel.DisplayMessage($"Exception: {ex.Message}");
                 client.Close();
             }
 
