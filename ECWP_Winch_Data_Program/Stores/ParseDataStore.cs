@@ -4,7 +4,7 @@
     public partial class ParseDataStore : ObservableObject
     {
         [ObservableProperty]
-        private static readonly List<string> availablePayouts = new()
+        private List<string> availablePayouts = new()
         {
                 "-10",
                 "0",
@@ -17,7 +17,7 @@
         };
 
         [ObservableProperty]
-        private static readonly List<string> availableTensions = new()
+        private List<string> availableTensions = new()
         {
                 "-100",
                 "0",
