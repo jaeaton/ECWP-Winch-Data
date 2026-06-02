@@ -713,7 +713,16 @@
                             //}
                             if (line.Substring(0, delim) == "Chart Time Span")
                             {
-                                winch.ChartTimeSpan = line.Substring(delim + 1);
+                                //winch.ChartTimeSpan = line.Substring(delim + 1);
+                                string timeSpan = line.Substring(delim + 1);
+                                if (timeSpan.Contains(':'))
+                                {
+                                    winch.ChartTimeSpan = timeSpan;
+                                }
+                                else
+                                {
+                                    winch.ChartTimeSpan =$"00:{timeSpan}";
+                                }
                             }
                             //if (line.Substring(0, delim) == "Plot Winch")
                             //{
