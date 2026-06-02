@@ -484,10 +484,12 @@
                 client.Close();
             } 
             catch (SocketException ex) {
+                await MessageBoxViewModel.DisplayMessage($"Socket Exception: {ex.Message}");
                 client.Close();
             } 
             catch (Exception ex)
             {
+                await MessageBoxViewModel.DisplayMessage($"Socket Exception: {ex.Message}");
                 client.Close();
             }
 
