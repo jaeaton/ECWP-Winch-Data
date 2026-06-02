@@ -4,7 +4,7 @@
     public partial class ParseDataStore : ObservableObject
     {
         [ObservableProperty]
-        private List<string> availablePayouts = new()
+        private static readonly List<string> availablePayouts = new()
         {
                 "-10",
                 "0",
@@ -17,7 +17,7 @@
         };
 
         [ObservableProperty]
-        private List<string> availableTensions = new()
+        private static readonly List<string> availableTensions = new()
         {
                 "-100",
                 "0",
@@ -137,7 +137,7 @@
         private string winchSelection = string.Empty;
 
         [ObservableProperty]
-        private ObservableCollection<WireLogModel> wireLog = new ObservableCollection<WireLogModel>();
+        private ObservableCollection<WireLogModel> wireLog = new();// ObservableCollection<WireLogModel>();
 
         //[ObservableProperty]
         //private object Sync { get; }  = new object();

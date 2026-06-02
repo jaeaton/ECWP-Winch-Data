@@ -93,8 +93,8 @@
                         {
                             case "TCP Client":
                                 {
-                                    TcpListener server = null;
-                                    TcpClient client = null;
+                                    TcpListener? server = null;
+                                    TcpClient? client = null;
 
                                     try
                                     {
@@ -154,7 +154,7 @@
                                         string msg = $"SocketException: {e.Message}";
                                         await MessageBoxViewModel.DisplayMessage(msg);
                                     }
-                                    server.Stop();
+                                    server?.Stop();
                                     if (client != null)
                                     {
                                         client.Close();
@@ -369,10 +369,10 @@
             //Write data to graphing view model
             winch.ChartData.AddData(latest, winch.LiveData, winch.ChartTimeSpan);
             //Set text color based on tension thresholds
-            if (latest.TMWarnings.IndexOf("1") > 0)
+            if (latest.TMWarnings.IndexOf('1') > 0)
             {
                 winch.LiveData.TensionColor = "yellow";
-                if (latest.TMAlarms.IndexOf("1") > 0)
+                if (latest.TMAlarms.IndexOf('1') > 0)
                 {
                     winch.LiveData.TensionColor = "red";
                 }
