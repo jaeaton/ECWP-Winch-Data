@@ -28,17 +28,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="12.0.1" />
-    <PackageReference Include="Avalonia.Desktop" Version="12.0.5" />
+    <PackageReference Include="Avalonia.Controls.DataGrid" Version="12.1.0" />
+    <PackageReference Include="Avalonia.Desktop" Version="12.1.0" />
+    <PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.2.3" />
     <PackageReference Include="ClosedXML" Version="0.105.0" />
     <PackageReference Include="LiveChartsCore" Version="2.1.0-dev-798" />
     <PackageReference Include="LiveChartsCore.SkiaSharpView" Version="2.1.0-dev-798" />
     <PackageReference Include="LiveChartsCore.SkiaSharpView.Avalonia" Version="2.1.0-dev-798" />
     <PackageReference Include="Mayerch1.GithubUpdateCheck" Version="1.2.1" />
     <PackageReference Include="MessageBox.Avalonia" Version="12.0.0" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.9" />
-    <PackageReference Include="System.IO.Packaging" Version="10.0.9" />
-    <PackageReference Include="System.IO.Ports" Version="10.0.9" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.10" />
+    <PackageReference Include="System.IO.Packaging" Version="10.0.10" />
+    <PackageReference Include="System.IO.Ports" Version="10.0.10" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ECWP_Winch_Data_Program\ECWP_Winch_Data_Program.csproj" />

@@ -73,7 +73,7 @@
             string payout = RealByteInt(bytes4);
 
             //Process Speed
-            Array.Copy(byteArray, 34, bytes4, 0, 4);
+            Array.Copy(byteArray, 36, bytes4, 0, 4);
             string speed = RealByteInt(bytes4);
 
             //Form data into string
