@@ -36,7 +36,7 @@
 				<StackPanel Orientation="Horizontal" Margin="2">
 					<TextBlock Text="Chart Time Span" VerticalAlignment="Center" Width="120" />
 					<ComboBox SelectedItem="{ Binding CurrentWinch.ChartTimeSpan, Mode=TwoWay }" Width="90" ItemsSource="{ Binding ChartTimeSpanList }" SelectedIndex="2" ToolTip.Tip="Sets the time data is displayed on the tension plot."/>
-					<TextBlock Text="s" VerticalAlignment="Center" Margin="2"/>
+					<TextBlock Text="mm:ss" VerticalAlignment="Center" Margin="5"/>
 				</StackPanel>
 				
 				<TextBlock Text="Units Parameters" Margin="0,30,0,2"/>
