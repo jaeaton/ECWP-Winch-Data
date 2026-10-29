@@ -1,0 +1,33 @@
+{
+    "GeneralSettings": {
+        "NetProjectPath": "ECWP_Winch_Data_Program.Desktop.csproj",
+        "PackageName": {
+            "$type": "msbuild",
+            "property": "ECWP-Data-Collection"
+        },
+        "AssemblyName": {
+            "$type": "msbuild",
+            "property": "AssemblyName"
+        },
+        "ApplicationName": "ECWP_Winch_Data_Program",
+        "Icon": "ECWP Icon.ico",
+        "Company": "ECWP"
+    },
+    "LinuxSettings": {
+        "CreateBinSymlink": "True"
+    },
+    "Win32Settings": {
+        "IncludeUninstaller": "True",
+        "SigningType": "LocalCertificate"
+    },
+    "MacOsSettings": {
+        "CreateBundle": true,
+        "BundleIdentifier": "com.CompanyName.ECWP-Winch-Data-Program-Desktop",
+        "SigningCredentialsType": "AdHoc",
+        "InstallerSigningCredentialsType": "AdHoc"
+    },
+    "PublishSettings": {
+        "PublishSingleFile": "True",
+        "ExtraBuildProperties": {}
+    }
+}
