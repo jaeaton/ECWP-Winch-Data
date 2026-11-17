@@ -14,16 +14,19 @@
         "Company": "ECWP"
     },
     "LinuxSettings": {
+        "AppIcon": "ECWP Icon.ico",
         "CreateBinSymlink": "True"
     },
     "Win32Settings": {
+        "InstallerIcon": "ECWP Icon.ico",
         "IncludeUninstaller": "True",
         "SigningType": "LocalCertificate"
     },
     "MacOsSettings": {
         "CreateBundle": true,
         "BundleIdentifier": "com.CompanyName.ECWP-Winch-Data-Program-Desktop",
-        "SigningCredentialsType": "AdHoc",
+        "AppIcon": "ECWP Icon.ico",
+        "SigningCredentialsType": "KeyChainIdentity",
         "InstallerSigningCredentialsType": "AdHoc"
     },
     "PublishSettings": {
